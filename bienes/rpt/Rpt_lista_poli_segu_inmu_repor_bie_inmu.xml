@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>LISTADO DE POLIZA DE SEGUROS DE BIEN INMUEBLES</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+      <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="5" WIDTH="500">        
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="7" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>LISTADO DE POLIZA DE SEGUROS DE BIEN INMUEBLES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	  <ROW>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Código del Bien</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Numero Poliza</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Rif Proveedor</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Nombre</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Poliza</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Desde</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Hasta</COL>
+          </ROW>
+	  <ROW>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Denominacion</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR"></COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Direccion</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto Cobertura</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tasa</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto Poliza</COL>
+          </ROW>
+	  <ROW>
+	   <COL ALIGN="LEFT" COLSPAN="7" TYPE="EXPRESSION"  TEXTCLASS="BOLD">"_______________________________________________________________________________________________________________________"</COL>
+	  </ROW>	
+	</HEADER>
+      </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles">
+         	<HEADER>
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cod_bien_inm</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">numero_poliza</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">ced_rif_proveedor</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">nombre</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fechap</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fechad</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fechah</COL>
+                     </ROW>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">denominacion</COL>
+                       <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="2"></COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">direccion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">monto_cobertura</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">tasa_cobertura</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">mono_poliza</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

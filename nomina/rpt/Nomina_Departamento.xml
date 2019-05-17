@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO DE NÓMINA POR DEPARTAMENTO</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>SIA.css</CSS>
+
+        <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="930">
+        <HEADER>
+         <ROW>
+                <COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                                </TD>
+                                        </TR>
+                                        </TABLE>
+                        </XHTML>
+                </COL>
+        </ROW>
+
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"
+         COLSPAN="6">$this->getParameter("criterio1")</COL>
+        </ROW>
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"
+         COLSPAN="6">$this->getParameter("criterio2")</COL>
+        </ROW>
+   </HEADER>
+
+   </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                         <ROW>
+                            <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="6">CATALOGO DE NÓMINA POR DEPARTAMENTO</COL>
+              </ROW>
+                          <ROW>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Código</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Denominación del Cargo</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Grado</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Paso</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Nro. Cargo</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Asignados</COL>
+                          </ROW>
+            </HEADER>
+                        <FIELDS>
+                             <ROW>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">codigo_cargo</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">denominacion</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">nro_cargos</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">asignados</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">grado</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">paso</COL>
+                             </ROW>
+                       </FIELDS>
+                </GROUP>
+        </GROUPS>
+</REPORT>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>CATALOGO DE BENEFICIARIOS</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+      <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="5" WIDTH="500">        
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="30" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	  <ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	 </ROW>
+      <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CATALOGO DE BENEFICIARIOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	
+	  <ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	</ROW>
+	</HEADER>
+   <FOOTER>
+           
+   </FOOTER>
+      </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                     <ROW>
+                        <COL CELLCLASS="BOLD" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Ced/Rif</COL>
+                        <COL CELLCLASS="BOLD" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Nombre</COL>
+                        <COL CELLCLASS="BOLD" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Cedula</COL>
+						<COL CELLCLASS="BOLD" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Rif</COL>
+						<COL CELLCLASS="BOLD" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo Benef.</COL>
+						<COL CELLCLASS="" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Clasificacion</COL>						
+                     </ROW>
+					 <ROW>
+	   			        <COL ALIGN="LEFT" COLSPAN="6" HEIGHT="10" TYPE="EXPRESSION" TEXTCLASS="REGULAR">"___________________________________________________________________________________________________________________________"</COL>
+			         </ROW>					  
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">ced_rif</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">nombre</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cedula</COL>
+						<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">rif</COL>
+						<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">tipo_benef</COL>
+						<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">clasificacion</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

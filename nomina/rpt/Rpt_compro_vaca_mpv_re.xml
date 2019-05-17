@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>COMPROBANTE DE VACACIONES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="24" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="6" HEIGHT="40" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>LIQUIDACIÓN  DE  VACACIONES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleados" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Apellidos y Nombre:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT"  TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("nombre")</COL>
+     		 </ROW>	
+			 <ROW>
+			 	<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Cedula:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2">$this->getValue("cedula")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha Ingreso:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fecha_ingreso")</COL> 
+			 </ROW>
+			 <ROW>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Cargo:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT"  TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("des_cargo")</COL>
+     		 </ROW>
+			 <ROW>
+			 	<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Sueldo:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="2">$this->getValue("sueldo")+$this->getValue("compensacion")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Disfrute Desde:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fecha_caus_desde")</COL> 
+			 </ROW>
+			 <ROW>
+			 	<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha Desde:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fecha_desde")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Hasta:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fecha_hasta")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha a Reincorporarse:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fecha_reincorp")</COL>  
+			 </ROW>
+			 <ROW>
+			 	<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Días Vacaciones  (Art. 129 LOT):</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getParameter("criterio1")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Días Adicionales Vacaciones  (Art. 129 LOT) : </COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("dias_habiles")-$this->getParameter("criterio1")</COL> 
+			 </ROW>
+			  <ROW>
+			 	<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Días Feriados, Sabados y Domingos:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" NUMBERFORMATEX="0"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("dias_no_habiles")</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Días Bono Vacacional:</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" NUMBERFORMATEX="0"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("dias_bono_vaca")</COL> 
+			 </ROW>
+			 <ROW>	
+	   			<COL CELLCLASS="HEADER" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="2">Descripción de Concepto</COL>	
+				<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Dias</COL>	
+				<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Sueldo Diario</COL>	
+				<COL CELLCLASS="HEADER" ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Asignaciones</COL>	
+				<COL CELLCLASS="HEADER" ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Deducciones</COL>						    
+    		</ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="4"></COL>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto")</COL>
+			 </ROW>
+			 <ROW>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="6"></COL>
+			 </ROW>
+			 <ROW>	
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="6"> "NETO A COBRAR:    ".$this->getSum("monto")</COL>							    
+    		</ROW>
+			<ROW>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="6"></COL>
+			 </ROW>
+			 <ROW>	
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="6"> "Declaro que recibo en este acto el pago de mis vacaciones Vencidas Correspondiente al periodo  ".$this->getParameter("criterio1").",    como lo estipula la Vigente Ley del Trabajo"</COL>							    
+    		</ROW>
+			<ROW>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="6"></COL>
+			 </ROW>
+			 <ROW>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Elaborado:</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Revisado:</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Firma del Trabajador:</COL>
+			</ROW>
+			<ROW>
+			  <COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" HEIGHT="85" COLSPAN="2">_____________________________</COL>
+			  <COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" HEIGHT="85" COLSPAN="2">_____________________________</COL>
+			  <COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" HEIGHT="85" COLSPAN="2">_____________________________</COL>
+			</ROW>
+			<ROW>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR"></COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR"></COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">C.I.No. :</COL>
+			</ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_conceptos" EXPRESSION="cod_concepto">
+		   <HEADER>
+		     <ROW>
+			 </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" NUMBERFORMATEX="0"  TEXTCLASS="MEDIA" COLSPAN="2">$this->getValue("denominacion")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" NUMBERFORMATEX="0" TEXTCLASS="MEDIA" COLSPAN="1">$this->getSum("cantidad")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" NUMBERFORMATEX="2"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("sueldo")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1">$this->getSum("monto")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1">$this->getSum("monto")</COL> 
+			 </ROW>
+           </FOOTER>
+	    </GROUP>
+	  </GROUP>
+	</GROUPS>
+</REPORT>

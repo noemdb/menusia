@@ -1,0 +1,5 @@
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $codigo_mov=$_GET["codigo_mov"]; $cod_banco=$_GET["cod_banco"];$password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $ult_ref="00000000"; $StrSQL="select num_cheque from ban002 where cod_banco='$cod_banco'";
+$resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);if($filas>0){$registro=pg_fetch_array($resultado); $ult_ref=$registro["num_cheque"]+1; $len=strlen($ult_ref); $ult_ref=substr("00000000",0,8-$len).$ult_ref;}
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_BAN030(5,'$codigo_mov','$cod_banco','$ult_ref','00001','2014-01-01','2014-01-01','2014-01-01','N','N','')");
+pg_close();?><input class="Estilo10" name="txtnro_cheque" type="text" id="txtnro_cheque" size="10" maxlength="8"  value="<?echo $ult_ref?>" onFocus="encender(this)" onBlur="apaga_numchq(this)" onchange="chequea_numchq(this.form);" onkeypress="return stabular(event,this)">

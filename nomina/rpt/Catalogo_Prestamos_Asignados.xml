@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>PRESTAMOS ASIGNADOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+         <ROW>
+		 	<COL ALIGN="LEFT" TYPE="EXPRESSION"  TEXTCLASS="MEDIABOLD" COLSPAN="10">"TOTAL CONCEPTOS ASIGNADOS:  ".$this->getRowCount("cod_concepto")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="45" CELLSPACING="0" CELLPADDING="2" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="10" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="11" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="11" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>PRESTAMOS ASIGNADOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>		   	
+	<ROW>
+	   <COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="10">"TIPO DE NOMINA:   ".$this->getValue("descripcion")</COL>
+	</ROW>
+	<ROW>
+                <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cod</COL>
+	        <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nombre</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Fecha_Ini</COL>
+	        <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Fecha_Exp</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nro Cuotas</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cuotas Canc</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Monto Cuota</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Prestamo</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Acumulado</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Saldo</COL>
+            </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_concep" EXPRESSION="cod_concepto">
+		   <HEADER>
+		     <ROW>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="10">"________________________________________________________________________________________________________"</COL>  
+             </ROW>
+   			 <ROW>
+               <COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="10">"CONCEPTO:   ".$this->getValue("cod_concepto")."       ".$this->getValue("denominacion")</COL>               
+             </ROW>			 
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="6"></COL>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="6">"________"</COL>  
+             </ROW>
+			 <ROW>
+				<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="6">"Nro. Trabajadores:  ".$this->getRowCount("cod_empleado")</COL>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="CENTER" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("monto")</COL>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="3"></COL> 
+             </ROW>
+           </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" TYPE="FIELD">cod_empleado</COL>
+				<COL TEXTCLASS="MEDIA" TYPE="FIELD">nombre</COL>	
+            	<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">fechai</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">fechae</COL>
+				<COL TEXTCLASS="MEDIA" NUMBERFORMATEX="2" ALIGN="CENTER" TYPE="FIELD">nro_cuotas</COL>
+				<COL TEXTCLASS="MEDIA" NUMBERFORMATEX="2" ALIGN="CENTER" TYPE="FIELD">nro_cuotas_c</COL>	
+            	<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="FIELD">monto</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="FIELD">monto_prestamo</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">acumulado</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="FIELD">saldo</COL>
+			  </ROW>
+			</FIELDS>	
+		</GROUP>
+	</GROUPS>
+</REPORT>
+
+

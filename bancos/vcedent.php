@@ -1,0 +1,4 @@
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $ced_rif=$_GET["ced_rif"]; $password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $StrSQL="select nombre from pre099 where ced_rif='$ced_rif'"; $resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);
+if($filas==0){ $nombre_recib="";  $StrSQL="select nombre_recib from ban006 where ced_rif_recib='$ced_rif'"; $resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado); if($filas>0){$registro=pg_fetch_array($resultado,0); $nombre_recib=$registro["nombre_recib"];} }
+else{$registro=pg_fetch_array($resultado,0); $nombre_recib=$registro["nombre"]; } pg_close();?><input name="txtnombre_recib" type="text"  id="txtnombre_recib"  value="<?echo $nombre_recib?>" size="85" maxlength="85" onFocus="encender(this)" onBlur="apagar(this)">

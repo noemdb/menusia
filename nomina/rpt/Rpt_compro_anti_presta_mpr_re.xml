@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>COMPROBANTE ANTICIPO DE PRESTACIONES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+		 </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>COMPROBANTE ANTICIPO DE PRESTACIONES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>		   	
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleado" EXPRESSION="cod_empleado">
+		   <HEADER>
+   			 <ROW>
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="fecha_adelanto" EXPRESSION="fecha_adelanto">
+		   <HEADER>
+   			 <ROW>
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 	<COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">RECIBE CONFORME</COL>
+			 </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Detalles" EXPRESSION="detalles">
+			 <HEADER> 
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Código Trabajador:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("cod_empleado")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Nombre:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("nombre")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cedula:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("cedula")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha de Anticipo:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("fecha_adelanto")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Prestaciones:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("total_prestaciones")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Monto Anticipado</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("total_adelanto")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Saldo de Prestaciones:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("saldo_prestaciones")</COL> 
+			   </ROW>
+			   <ROW>
+			     <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Monto del Anticipo:</COL>
+			 	 <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("monto_adelanto")</COL> 
+			   </ROW>
+			 </HEADER>
+			 <FOOTER> </FOOTER>
+		  </GROUP>   
+		</GROUP>
+	   </GROUP>
+	</GROUPS>
+</REPORT>

@@ -1,0 +1,5 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php"); $cod_concepto=$_GET["cod_concepto"]; $tipo_nomina=$_GET["tipo_nomina"];  $cod_empleado=$_GET["cod_empleado"];  $cod_retencion="000";  $cod_partida=""; $cod_categoria=""; $cod_presup="";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $StrSQL="Select * from NOM002 WHERE tipo_nomina='$tipo_nomina' and cod_concepto='$cod_concepto'";
+$resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);if($filas>0){$registro=pg_fetch_array($resultado); $cod_retencion=$registro["cod_retencion"]; $cod_partida=$registro["cod_partida"]; }
+$sSQL="Select nombre,cedula,cod_cargo,cod_departam,cod_categoria from NOM006 WHERE cod_empleado='$cod_empleado'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas>0){$registro=pg_fetch_array($resultado); $cod_categoria=$registro["cod_categoria"]; }
+pg_close(); $cod_presup=$cod_categoria.'-'.$cod_partida;?> <input name="txtcod_presup" type="text" id="txtcod_presup" size="30" maxlength="30" value="<?echo $cod_presup?>"  onFocus="encender(this)" onBlur="apagar(this)">

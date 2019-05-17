@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE RELACION CHEQUES / ORDENES DE PAGO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>SIA.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="7" WIDTH="500">
+	         <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="6" TYPE="EXPRESSION"></COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"____________"</COL>
+             </ROW>
+	   		<ROW>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="6" TYPE="EXPRESSION">"TOTAL GENERAL:   "</COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_orden")</COL>
+             </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="7" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="7" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bancos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">RELACION CHEQUES / ORDENES DE PAGO</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>
+   </HEADER>
+   <FOOTER>
+   	   <ROW>
+		  <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="6">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+	   </ROW>  
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="codigo_banco" EXPRESSION="cod_banco">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION" TEXTCLASS="REGULAR" COLSPAN="7">$this->getValue("cod_banco")."    ".$this->getValue("nombre_banco")."    ".$this->getValue("nro_cuenta")</COL>               
+             </ROW>
+			 <ROW>
+          		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Cheque Nro</COL>
+		  		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Ced/Rif</COL>  
+		  		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Nombre</COL>
+				<COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Fecha Emision</COL>
+				<COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Fecha Entregado</COL>
+				<COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Monto Cheque</COL>
+				<COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Estado</COL>
+   			 </ROW>
+           </HEADER>
+		   <FOOTER>
+		      <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="6" TYPE="EXPRESSION"></COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"____________"</COL>
+             </ROW>
+             <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="6" TYPE="EXPRESSION">"Total Banco:   ".$this->getValue("cod_banco")."    ".$this->getValue("nombre_banco")."    ".$this->getValue("nro_cuenta")</COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_orden")</COL>
+             </ROW>
+           </FOOTER>
+		   <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="numero_cheque" EXPRESSION="num_cheque">
+		   <HEADER>
+			 <ROW>
+          		<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">num_cheque</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">ced_rif</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">nombre</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">fecha_mov_libro</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">fecha_entregado</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">monto_cheque</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" TYPE="FIELD">entregado</COL>
+				<!--<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" TYPE="EXPRESSION">$this->getParameter("criterio1")</COL>-->
+   			 </ROW>
+			 <ROW>
+          		<COL  ALIGN="RIGHT"  TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Nro Orden</COL>
+		  		<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Orden</COL>  
+		  		<COL  ALIGN="LEFT"  TEXTCLASS="BOLD" COLSPAN="4" TYPE="REGULAR">Concepto</COL>
+				<COL  ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>
+   			 </ROW>
+			 <ROW>
+          		<COL  ALIGN="RIGHT"  TEXTCLASS="REGULAR" COLSPAN="7" TYPE="EXPRESSION">"____________________________________________________________________________________________________________________"</COL>
+   			 </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="1" TYPE="FIELD">nro_orden</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">fecha</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="4" TYPE="FIELD">concepto</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">monto_orden</COL>
+			  </ROW>
+			  
+			</FIELDS>
+			</GROUP>
+			</GROUP>
+			</GROUP>
+	</GROUPS>
+</REPORT>	

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>INFORMACION CURRICULAR</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="18" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>	
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>INFORMACION CURRICULAR</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   	
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleados" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>
+         		        <COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Código</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Nombre</COL>
+		 		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cedula</COL>
+         		        <COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Estatus</COL>
+     		 </ROW>	
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_empleado")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="2">$this->getValue("nombre")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cedula")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("status")</COL> 
+			 </ROW>
+			 <ROW>
+         		<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="5" TYPE="REGULAR">DETALLE</COL>
+     		 </ROW>
+			 <ROW>
+         			<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Titulo</COL>
+		 		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Instituto</COL>
+         			<COL  ALIGN="LEFT"   TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Descripcion</COL>
+     		 </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 </ROW>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">fecha</COL>	
+                		<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="2" TYPE="FIELD">titulo</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">instituto</COL>
+                		<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">descripcion</COL>
+			  </ROW>
+			</FIELDS>   
+		</GROUP> 
+	    </GROUP>
+	</GROUPS>
+</REPORT>

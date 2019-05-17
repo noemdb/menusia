@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO RELACIÓN DIAS DE VACACIONES</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>sia.css</CSS>
+
+        <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="930">
+        <HEADER>
+         <ROW>
+                <COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                                </TD>
+                                        </TR>
+                                        </TABLE>
+                        </XHTML>
+                </COL>
+        </ROW>
+
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"
+         COLSPAN="6">$this->getParameter("criterio1")</COL>
+        </ROW>
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"
+         COLSPAN="6">$this->getParameter("criterio2")</COL>
+        </ROW>
+   </HEADER>
+
+   </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                         <ROW>
+                            <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="6">CATALOGO RELACIÓN DIAS DE VACACIONES</COL>
+              </ROW>
+                          <ROW>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Código Trabajador</COL>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nombre Trabajador</COL>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Dias Pendiente</COL>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Dias Adelantado</COL>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Desde</COL>
+                           <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Hasta</COL>
+                          </ROW>
+            </HEADER>
+                        <FIELDS>
+                             <ROW>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">cod_empleado</COL>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">nombre</COL>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">dias_adelantado</COL>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">dias_pendientes</COL>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">fecha_desde</COL>
+                                       <COL TEXTCLASS="MEDIA" TYPE="FIELD">fecha_hasta</COL>
+                             </ROW>
+                       </FIELDS>
+                </GROUP>
+        </GROUPS>
+</REPORT>

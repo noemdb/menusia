@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE ORDENES DE PAGO POR BENEFICIARIO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="5" WIDTH="500">
+	     <ROW>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="3" TYPE="EXPRESSION"></COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"============="</COL>
+		     <COL ALIGN="LEFT"  TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" ></COL>
+		 </ROW> 
+		 <ROW>
+            <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="2" TYPE="EXPRESSION">"CANTIDAD ORDEN: ".$this->getRowCount("nro_orden")</COL>
+		 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"TOTAL GENERAL:   "</COL>
+		 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_orden")</COL>
+			<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="1"></COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="28" CELLSPACING="0" CELLPADDING="5" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_pagos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">ORDENES DE PAGO POR BENEFICIARIO</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	
+	<ROW>
+	   <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="BOLD"    COLSPAN="5">$this->getParameter("criterio1")</COL>
+	</ROW>
+	<ROW>
+		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="5">"_______________________________________________________________________________________________________________________________________"</COL> 
+     </ROW>
+	<ROW>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Orden</COL>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Fecha</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Concepto</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Monto</COL>  
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Estatus</COL>
+    </ROW>
+	<ROW>
+		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="5">"_______________________________________________________________________________________________________________________________________"</COL> 
+     </ROW>
+   </HEADER>
+   <FOOTER>    	     
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Cedula_Com" EXPRESSION="ced_rif">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">"Ced/Rif:  "</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("ced_rif")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" TEXTCLASS="REGULAR" COLSPAN="1">"Nombre:  ".$this->getValue("nombre")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1"></COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1"></COL>              
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+		     <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="4">"___________"</COL> 
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1"></COL> 
+             </ROW>
+             <ROW>
+			   <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="3" TYPE="EXPRESSION">"TOTAL BENEFICIARIO:   "</COL>
+			   <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_orden")</COL>
+			   <COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1"></COL> 
+             </ROW>
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="5"></COL> 
+             </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="nro_orden" EXPRESSION="nro_orden">   
+           <HEADER>
+           </HEADER>
+           <FOOTER>
+            </FOOTER> 
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Tipo_Comprobante" EXPRESSION="tipo_comp">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT"  TYPE="FIELD">nro_orden</COL>	
+            	<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fechae</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="EXPRESSION">($this->getParameter("detallado")=="S"?$this->getValue("concepto").", TIPO DOCUMENTO:".$this->getValue("tipo_documento")." NRO:".$this->getValue("nro_documento"):$this->getValue("concepto"))</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">monto_orden</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="RAW_EXPRESSION">muestra_st_orden($this->getValue("status"),$this->getValue("anulado"),$this->getValue("fecha_anulado"),$this->getValue("fecha_cheque"))</COL>
+			  </ROW>
+			  <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="2">""</COL> 
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1">"CANCELADA CON : ".$this->getValue("tipo_pago")." REFERENCIA: ".$this->getValue("nro_cheque")." FECHA: ".$this->getValue("fechachq")." BANCO: ".$this->getValue("cod_banco")</COL> 
+             </ROW>
+			</FIELDS>   
+			</GROUP> 
+			</GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

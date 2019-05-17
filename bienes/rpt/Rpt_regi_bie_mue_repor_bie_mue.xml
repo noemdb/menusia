@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE LISTADOS DE BIENES INMUEBLES</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="11" WIDTH="500">
+
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="7" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>LISTADOS DE BIENES INMUEBLES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	    
+	</HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_bien_mue" EXPRESSION="cod_bien_mue">
+                   <HEADER>
+                        <ROW>
+                            <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="7">"Codigo del Bien: "."  ".$this->getValue("cod_bien_mue")."     ".$this->getValue("denominacion")</COL>
+                        </ROW>	
+                  </HEADER>
+
+                 <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+                   <HEADER>
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="6">"Dependencia: "."  ".$this->getValue("cod_dependencia")."     ".$this->getValue("denominacion_dep")</COL>
+                       <COL TYPE="EXPRESSION" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1">"Fecha Ultima Actualizacion: "."  ".$this->getValue("fecha_actualizacion")</COL>
+                      </ROW>
+                     <ROW>
+                       <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="7">"Responsable: "."  ".$this->getValue("ced_responsable")."     ".$this->getValue("nombre_res_uso")</COL>
+                      </ROW>
+
+                   </FIELDS>
+              </GROUP>
+            </GROUP>
+       </GROUPS>
+</REPORT>

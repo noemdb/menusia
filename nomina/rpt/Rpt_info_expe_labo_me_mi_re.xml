@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>INFORMACION EXPERENCIA LABORAL</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="18" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="6" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>INFORMACION EXPERENCIA LABORAL</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>		   		
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleados" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>
+         		<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Cedula</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="4" TYPE="REGULAR">Nombre</COL>
+     		 </ROW>	
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="2">$this->getValue("cedula")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="4">$this->getValue("nombre_e")</COL> 
+			 </ROW>
+			 <ROW>
+         		<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="6" TYPE="REGULAR">DETALLE</COL>
+     		 </ROW>
+			 <ROW>
+         			<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Desde</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha Hasta</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Empresa</COL>
+		 		<COL  ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Departamento</COL>
+         			<COL  ALIGN="LEFT"   TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Cargo</COL>
+				<COL  ALIGN="LEFT"   TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Sueldo</COL>
+     		 </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 </ROW>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fecha_desde_le</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fecha_hasta_le</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">empresa_le</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">departamento_le</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cargo_le</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">sueldo_le</COL>
+			  </ROW>
+			</FIELDS>   
+		</GROUP> 
+	    </GROUP>
+	</GROUPS>
+</REPORT>

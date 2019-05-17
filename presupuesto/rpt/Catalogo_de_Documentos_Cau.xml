@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO DOCUMENTOS CAUSADO</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>sia.css</CSS>
+   <DOCUMENT>
+   </DOCUMENT>
+  <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="4" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CATALOGO DOCUMENTOS CAUSADOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	</HEADER>
+      </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+			<ROW>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tipo</COL>
+	     			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Nombre Documento</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Refiere Compromiso</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Afecta Presupuesto</COL>
+          		</ROW>
+			<ROW>
+	   			<COL ALIGN="LEFT" COLSPAN="4" TYPE="EXPRESSION" TEXTCLASS="BOLD">"___________________________________________________________________________________________________________________________"</COL>
+			</ROW>	
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">tipo_causado</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">nombre_tipo_caus</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">ref_compromiso</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">afecta_presup</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

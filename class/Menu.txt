@@ -1,0 +1,6 @@
+Archivos del Menu:
+===================
+sdtree.js    = Funccion Javascript del menu.
+default.ccs  = archivo de estilo del menu.
+structure.js = archivo de estructura del menu(donde se definen la opciones).
+

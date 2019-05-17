@@ -1,0 +1,5 @@
+<? include ("../class/conect.php"); $ano=$_GET["ano"];$mes=$_GET["mes"];$corr_iva_ano=$_GET["corr_iva_mes"];$password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $ult_ref="00000000";
+if($corr_iva_ano=="N"){$StrSQL="select max(nro_comprobante) as ref from ban027 where ano_fiscal='$ano' and mes_fiscal='$mes'";} else{$StrSQL="select max(nro_comprobante) as ref from ban027 where ano_fiscal='$ano'";}
+$resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);if($filas>0){$registro=pg_fetch_array($resultado); $ult_ref=$registro["ref"]+1; $len=strlen($ult_ref); $ult_ref=substr("00000000",0,8-$len).$ult_ref;}
+pg_close();?><input class="Estilo10" name="txtnro_comprobante" type="text" id="txtnro_comprobante"  size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" value="<? echo $ult_ref ?>">

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE LISTADO DE BIENES MUEBLES POR PROVEEDOR</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+        <ROW>
+		 	<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="3"></COL>
+		 	<COL ALIGN="CENTER" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="1">"============"</COL>
+        </ROW>	
+        <ROW>
+		     <COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="3">"TOTAL :"</COL>
+		     <COL ALIGN="CENTER" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("valor_incorporacion")</COL>
+        </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="2" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="6" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>REPORTE LISTADO DE BIENES MUEBLES POR PROVEEDOR</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+          <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod. Bien</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Denominacion</COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Fecha Incorporacion</COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Valor Incorporacion</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Codigo</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Denominacion Dependencia</COL>
+          </ROW>
+	<ROW>
+	   <COL ALIGN="LEFT" COLSPAN="6" TYPE="EXPRESSION"  TEXTCLASS="BOLD">"___________________________________________________________________________________________________________________________________________"</COL>
+	</ROW>	    
+	</HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="ced_rif_proveedores" EXPRESSION="ced_rif_proveedor">
+                   <HEADER>
+                        <ROW>
+                            <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("ced_rif_proveedor")</COL>
+                            <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="5">$this->getValue("nom_proveedor")</COL>
+                        </ROW>	
+                  </HEADER>
+                   <FOOTER>
+                  </FOOTER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">cod_bien_mue</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">denominacion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD" COLSPAN="1">fechai</COL>
+                       <COL TEXTCLASS="REGULAR" NUMBERFORMATEX="2" ALIGN="RIGHT" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">cod_dependencia</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">denominacion_dep</COL>
+                       </ROW>
+                   </FIELDS>
+               </GROUP>
+       </GROUPS>
+</REPORT>

@@ -1,0 +1,10 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php"); $equipo = getenv("COMPUTERNAME"); $minf_usuario=$usuario_sia." ".$equipo." ".date("d/m/y H:i a");   $fecha_hoy=asigna_fecha_hoy();
+$tipo_desde=$_POST["txttipo_desde"]; $tipo_hasta=$_POST["txttipo_hasta"]; $cod_desde=$_POST["txtcod_desde"]; $cod_hasta=$_POST["txtcod_hasta"]; $cuenta=$_POST["txtcuenta"];
+$cod_new=$_POST["txtcod_new"];  $nombre_banco=$_POST["txtnombre_banco"]; $cuenta_new=$_POST["txtcuenta_new"];   echo "ESPERE POR FAVOR ACTUALIZANDO....","<br>";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");  $error=0;
+if (pg_ErrorMessage($conn)){$error=1; ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+ else{  $sSQL="SELECT CAMBIA_CUENTA_EMPRESA('$cod_desde','$cod_hasta','$tipo_desde','$tipo_hasta','$cuenta','$cod_new','$nombre_banco','$cuenta_new')"; echo $sSQL; $resultado=pg_exec($conn,$sSQL); $merror=pg_errormessage($conn);
+    $merror="ACTUALIZANDO: ".substr($merror, 0, 91); if (!$resultado){$error=1; ?><script language="JavaScript">muestra('<? echo $merror; ?>');</script><?}else{?><script language="JavaScript">  muestra('CAMBIO HECHO SATISFACTORIAMENTE,'); </script><?     $sfecha=formato_aaaammdd($fecha_hoy);
+    $desc_doc="CAMBIO CUENTA DE EMPRESA, CUENTA ANTERIOR :".$cuenta.", CODIGO NUEVO:".$cod_new.", NOMBRE NUEVO:".$nombre_banco.", CUENTA NUEVA:".$cuenta_new; $resultado=pg_exec($conn,"SELECT INCLUYE_SIA004('04','$usuario_sia','$usuario_sia','$equipo','Modifico','$sfecha','$desc_doc')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){?><script language="JavaScript">muestra('<?echo $error;?>');</script><? }}
+}
+pg_close(); if($error==0){?><script language="JavaScript">window.close(); window.opener.location.reload(); </script> <?}else{?><script language="JavaScript">history.back();</script><?}?> 

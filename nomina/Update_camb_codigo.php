@@ -1,0 +1,17 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php"); $equipo = getenv("COMPUTERNAME"); $minf_usuario=$usuario_sia." ".$equipo." ".date("d/m/y H:i a"); $fecha_hoy=asigna_fecha_hoy();
+$cod_empleado=$_POST["txtcod_empleado"]; $cod_new=$_POST["txtcod_new"];  echo "ESPERE POR FAVOR ACTUALIZANDO....","<br>";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");  $error=0;
+if (pg_ErrorMessage($conn)){$error=1; ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+ else{$error=0; $sSQL="Select * from NOM006 WHERE  cod_empleado='$cod_empleado'";  $resultado=pg_query($sSQL);  $filas=pg_num_rows($resultado);
+  if ($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE TRABAJADOR NO EXISTE');</script><? }
+   else{ $registro=pg_fetch_array($resultado,0);  $tipo_nomina=$registro["tipo_nomina"]; $nombre=$registro["nombre"]; $cod_categoria=$registro["cod_categoria"];  $fecha_ing=$registro["fecha_ingreso"];      $calculo_grupos=$registro["calculo_grupos"];}
+  if($error==0){$sSQL="Select tipo_nomina from NOM017 WHERE tipo_nomina='$tipo_nomina' and cod_empleado='$cod_empleado'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas>=1){$error=1; ?> <script language="JavaScript"> muestra('TRABAJADOR TIENE NOMINA CALCULADA');</script><?} }
+  if($error==0){$sSQL="Select nombre,cedula,cod_cargo,cod_departam from NOM006 WHERE cod_empleado='$cod_new'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas>=1){$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE TRABAJADOR NUEVO YA EXISTE');</script><?} }
+  if($error==0){$formato_trab="XXXXXXXXXX";$sql="Select * from SIA005 where campo501='04'";$resultado=pg_query($sql);if($registro=pg_fetch_array($resultado,0)){$formato_trab=$registro["campo504"];$formato_cargo=$registro["campo505"];$formato_dep=$registro["campo506"];}}
+  if($error==0){if(strlen($cod_empleado)==strlen($formato_trab)){$error=0;} else{$error=1; ?> <script language="JavaScript"> muestra('LONGITUD CODIGO DE TRABAJADOR INVALIDA');</script><?} }
+  if($error==0){$sSQL="SELECT CAMBIA_COD_EMPLEADO('$cod_empleado','$cod_new')"; $resultado=pg_exec($conn,$sSQL); $error=pg_errormessage($conn);
+    $error="ACTUALIZANDO: ".substr($error, 0, 61); if (!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><?}else{?><script language="JavaScript">  muestra('CAMBIO HECHO SATISFACTORIAMENTE, DEBE VERIFICAR LA ASIGNACIÓN DE CONCEPTOS'); </script><?  $sfecha=formato_aaaammdd($fecha_hoy);
+    $desc_doc="CAMBIO CODIGO DEL TRABAJADOR, NOMBRE:".$nombre.", CODIGO ANTERIOR:".$cod_empleado.", CODIGO NUEVO:".$cod_new; $resultado=pg_exec($conn,"SELECT INCLUYE_SIA004('04','$usuario_sia','$usuario_sia','$equipo','Modifico','$sfecha','$desc_doc')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){?><script language="JavaScript">muestra('<?echo $error;?>');</script><? }}
+  }
+}
+pg_close();  if($error==0){?><script language="JavaScript">window.close(); window.opener.location.reload(); </script> <?}else{?><script language="JavaScript">history.back();</script><?}?>

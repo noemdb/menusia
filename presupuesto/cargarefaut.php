@@ -1,0 +1,7 @@
+<?php  include ("../class/conect.php"); include ("../class/funciones.php"); $password=$_GET["password"]; $user=$_GET["user"]; $dbname=$_GET["dbname"];  $nro_aut=$_GET["nro_aut"]; $ult_ref="00000001"; $tipo_comp=$_GET["tipo_comp"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
+$StrSQL="select max(referencia_comp) as referencia from pre006 where tipo_compromiso='$tipo_comp' and referencia_comp<='99999999'  and (referencia_comp ~ '^[0-9]+$')";$resultado=pg_query($StrSQL); $filas=pg_num_rows($resultado);
+if($filas>0){$registro=pg_fetch_array($resultado); $ult_ref=$registro["referencia"]+1; $len=strlen($ult_ref); $ult_ref=substr("00000000",0,8-$len).$ult_ref;}
+if($nro_aut=='S'){?><input name="txtreferencia_comp" type="text"  id="txtreferencia_comp" size="12" maxlength="8" value="<?php echo $ult_ref ?>"" readonly onkeypress="return stabular(event,this)"></div></td>
+<? }else{?><input name="txtreferencia_comp" type="text"  id="txtreferencia_comp" size="12" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkreferencia(this.form);" value="<?php echo $ult_ref ?>" onkeypress="return stabular(event,this)" >
+<?}pg_close();?>

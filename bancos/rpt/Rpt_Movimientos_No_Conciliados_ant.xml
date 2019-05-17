@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE MOVIMIENTOS A CONCILIAR</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>      
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="2" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bancos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLDBIG">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">MOVIMIENTOS A CONCILIAR</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	
+	
+	 	
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+	    <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="codigo_banco" PAGEBREAK="TRUE" EXPRESSION="cod_banco">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="6">$this->getValue("cod_banco")."    ".$this->getValue("nombre_banco")."    ".$this->getValue("nro_cuenta")</COL>               
+             </ROW>		            
+			 <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Fecha</COL> 
+			   <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Referencia</COL> 
+			   <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo</COL> 
+			   <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Monto</COL> 
+			   <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Estado</COL> 
+			   <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Fecha</COL>              
+            </ROW>
+			<ROW>
+		        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="6">"_________________________________________________________________________________________________________________"</COL> 
+             </ROW>
+            </HEADER> 
+			 <FOOTER> </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="fecha" EXPRESSION="fecha">
+		    <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+			<FIELDS>
+				<ROW>
+				    <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">fecham</COL>
+					<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">referencia</COL>
+					<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">tipo_mov</COL>					
+					<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">monto</COL>
+					<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="EXPRESSION">($this->getValue("anulado")=="S"?"ANULADO":"ACTIVO")</COL>		
+					<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="EXPRESSION">($this->getValue("anulado")=="S"?$this->getValue("fecha_anulado"):"")</COL>
+				</ROW>
+			</FIELDS>
+			</GROUP>
+		</GROUP>
+	</GROUPS>
+</REPORT>
+

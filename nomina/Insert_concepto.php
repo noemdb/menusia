@@ -1,0 +1,32 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php");
+$tipo_nomina=$_POST["txttipo_nomina"]; $cod_concepto=$_POST["txtcod_concepto"]; $denominacion=$_POST["txtdenominacion"]; $cod_partida=$_POST["txtcod_partida"];
+$cod_cat_alter=$_POST["txtcod_cat_alter"]; $tipo_concepto=$_POST["txttipo_concepto"]; $tipo_asigna=$_POST["txttipo_asigna"]; $fuente=$_POST["txtfuente"];
+$afecta_presup=$_POST["txtafecta_presup"]; $cod_retencion=$_POST["txtcod_retencion"]; $activo=$_POST["txtactivo"]; $oculto=$_POST["txtoculto"];  $cod_aporte=$_POST["txtcod_aporte"];
+$inicializable=$_POST["txtinicializable"]; $inicializable_c=$_POST["txtinicializable_c"]; $acumula=$_POST["txtacumula"];  $cal_vac=$_POST["txtcal_vac"];
+$tipo_grupo=$_POST["txttipo_grupo"]; $frec=$_POST["txtfrecuencia"]; $prestamo=$_POST["txtprestamo"]; $cod_orden=$_POST["txtcod_orden"];  $frecuencia="1";
+if($frec=="PRIMERA QUINCENA"){$frecuencia="1";} if($frec=="SEGUNDA QUINCENA"){$frecuencia="2";} if($frec=="PRIMERA Y SEGUNDA QUINCENA"){$frecuencia="3";}
+if($frec=="PRIMERA SEMANA"){$frecuencia="4";} if($frec=="SEGUNDA SEMANA"){$frecuencia="5";} if($frec=="TERCERA SEMANA"){$frecuencia="6";}
+if($frec=="CUARTA SEMANA"){$frecuencia="7";} if($frec=="QUINTA SEMANA"){$frecuencia="8";} if($frec=="TODAS LAS SEMANAS"){$frecuencia="9";} if($frec=="ULTIMA SEMANA"){$frecuencia="0";}
+$tipo_c="D"; $asignacion="NO";  if($tipo_concepto=="ASIGNACION"){$tipo_c="A";$asignacion="SI"; $cod_retencion="000";} if($tipo_concepto=="DEDUCCION"){$tipo_c="D";}else{$cod_aporte="000";} if($tipo_concepto=="APORTE"){$tipo_c="P";}
+$prestamo=substr($prestamo,0,1); $asig_ded_apo=substr($tipo_c,0,1);  $tipo_asigna=substr($tipo_asigna,0,1); $fecha_hoy=asigna_fecha_hoy(); $status=substr($cal_vac,0,1);
+$equipo = getenv("COMPUTERNAME"); $minf_usuario=$usuario_sia." ".$equipo." ".date("d/m/y H:i a");echo "ESPERE POR FAVOR INCLUYENDO....","<br>";
+$url="Act_concep_ar.php?Gcodigo=C".$tipo_nomina.$cod_concepto; $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");  $error=0;
+if (pg_ErrorMessage($conn)){$error=1; ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+ else{ $sSQL="Select * from NOM002 WHERE tipo_nomina='$tipo_nomina' and cod_concepto='$cod_concepto'"; $resultado=pg_query($sSQL);  $filas=pg_num_rows($resultado);
+   if($filas>=1){$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE CONCEPTO YA EXISTE');</script><? }  $formato_presup="XX-XX-XX-XXX-XX-XX-XX";  $formato_categoria="XX-XX-XX";  $formato_partida="XXX-XX-XX-XX";
+   $sql="Select * from SIA005 where campo501='05'";  $resultado=pg_query($sql); if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_categoria=$registro["campo526"];$formato_partida=$registro["campo527"];} $long_c=strlen($formato_presup); $c=strlen($formato_categoria)+2; $p=strlen($formato_partida);
+   if($error==0){ if ($gnomina=="00"){$error=0;} else {  if($tipo_nomina<>$gnomina) {$error=1; ?> <script language="JavaScript"> muestra('TIPO DE NOMINA NO ACTIVA PARA EL USUARIO');</script><?}  } } 
+   if($error==0){if(strlen($cod_concepto)==3){$error=0;} else{$error=1; ?> <script language="JavaScript"> muestra('LONGITUD DE CONCEPTO INVALIDA');</script><? } }
+   if($error==0){if($denominacion==""){$error=1; ?> <script language="JavaScript"> muestra('DENOMINACION INVALIDA');</script><? } }
+   if($error==0){$sSQL="Select tipo_nomina,descripcion,con_sue_bas,con_compen,g_orden_pago,frecuencia from NOM001 WHERE tipo_nomina='$tipo_nomina'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas==0){$error=1;?><script language="JavaScript">muestra('TIPO DE NOMINA NO EXISTE');</script><?}else{$registro=pg_fetch_array($resultado); $g_orden_pago=$registro["g_orden_pago"]; $frec_nom=$registro["frecuencia"]; $cod_conc_s=$registro["con_sue_bas"]; $cod_conc_c=$registro["con_compen"];}}
+   if($error==0){if($frec_nom=="Q"){ if(($frecuencia=="1")or($frecuencia=="2")or($frecuencia=="3")){$error=0;}else{$error=1;?><script language="JavaScript">muestra('FRECUENCIA NO VALIDA PARA ESTE TIPO DE NOMINA');</script><?}}}
+   if($error==0){if($frec_nom=="M"){ if(($frecuencia=="1")or($frecuencia=="2")or($frecuencia=="3")){$error=0;}else{$error=1;?><script language="JavaScript">muestra('FRECUENCIA NO VALIDA PARA ESTE TIPO DE NOMINA');</script><?}}}
+   if($error==0){if($frec_nom=="S"){ if(($frecuencia=="4")or($frecuencia=="5")or($frecuencia=="6")or($frecuencia=="7")or($frecuencia=="8")or($frecuencia=="9")or($frecuencia=="0")){$error=0;}else{$error=1;?><script language="JavaScript">muestra('FRECUENCIA NO VALIDA PARA ESTE TIPO DE NOMINA');</script><?}}}
+   if(($error==0)and($afecta_presup=="SI")and($cod_retencion!="000")and($g_orden_pago=="S")){$sSQL="Select cod_contable from PAG003 WHERE tipo_retencion='$cod_retencion'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas==0){$error=1; ?> <script language="JavaScript"> muestra('TIPO DE RETENCION NO EXISTE');</script><? }}
+   if(($error==0)and($afecta_presup=="SI")and($g_orden_pago=="S")and($cod_partida=="")){$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE PARTIDA INVALIDA');</script><? }
+   if(($error==0)and($afecta_presup=="SI")and($g_orden_pago=="S")){$sSQL="Select cod_presup,denominacion from pre001 WHERE substring(cod_presup from ".$c." for ".$p.")='$cod_partida'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE PARTIDA NO EXISTE');</script><? }}
+   if($error==0){$sfecha=formato_aaaammdd($fecha_hoy);
+    $sSQL="SELECT ACTUALIZA_NOM002(1,'$tipo_nomina','$cod_concepto','$denominacion','$cod_partida','$cod_cat_alter','$fuente','$asignacion','$tipo_asigna','$asig_ded_apo','$activo','$inicializable','$inicializable_c','$oculto','$acumula','$tipo_grupo','$frecuencia','$afecta_presup','$cod_retencion','00','$prestamo','$status','$cod_orden','$cod_aporte','$minf_usuario')";
+    $resultado=pg_exec($conn,$sSQL); $error=pg_errormessage($conn); $error="ERROR GRABANDO: ".substr($error, 0, 61); if (!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><?}else{$error=0;?><script language="JavaScript">muestra('INCLUYO EXITOSAMENTE');</script><?}
+  }
+}pg_close();if($error==0){?><script language="JavaScript">document.location ='<? echo $url; ?>';</script><?}else{?><script language="JavaScript">history.back();</script><?}?>

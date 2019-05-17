@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE RELACION ESTRUCTURA DE CODIGOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+	      <ROW>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="4" TYPE="EXPRESSION"></COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"============="</COL>
+         </ROW>
+		 <ROW>
+		 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="4" TYPE="EXPRESSION">"TOTAL GENERAL:   "</COL>
+		 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_est")</COL>
+		 </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="2" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_pagos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>	
+	<ROW>
+		  <COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">REPORTE RELACION ESTRUCTURA DE CODIGOS</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	   
+	<ROW>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD"  COLSPAN="2" TYPE="REGULAR">Cod.Presupuestario</COL>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD"  COLSPAN="2" TYPE="REGULAR">Denominacion</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD"  COLSPAN="1" TYPE="REGULAR">Monto</COL>
+    </ROW>
+   </HEADER>
+   <FOOTER>
+   	   <ROW>
+		  <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="4">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+	   </ROW>         
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="estructura" EXPRESSION="cod_estructura">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION"  TEXTCLASS="REGULAR" COLSPAN="5">"Estructura Codigo: ".$this->getValue("cod_estructura")."  ".$this->getValue("descripcion_est") </COL>               
+             </ROW>
+			 <ROW>
+        		<COL TYPE="EXPRESSION"  TEXTCLASS="REGULAR" COLSPAN="5">"Concepto: ".$this->getValue("concepto_est") </COL>               
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+		     <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="4" TYPE="EXPRESSION"></COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"____________"</COL>
+             </ROW>
+             <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="4" TYPE="EXPRESSION">"TOTAL ESTRUCTURA:   "</COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_est")</COL>
+             </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="nro_orden" EXPRESSION="nro_orden">   
+           <HEADER> 
+           </HEADER>
+           <FOOTER>
+            </FOOTER> 
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Tipo_Comprobante" EXPRESSION="tipo_comp">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="2" TYPE="FIELD">cod_presup_est</COL>	
+            	<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="2" TYPE="FIELD">denominacion</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">monto_est</COL>
+			  </ROW>
+			</FIELDS>   
+			</GROUP> 
+			</GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

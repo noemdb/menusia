@@ -1,0 +1,5 @@
+<?php include ("../class/conect.php");  include ("../class/funciones.php");  $codigo=$_GET["codigo"];$password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $ult_ref="00000000";
+$StrSQL="select max(nro_planilla) as referencia from ban012 where tipo_planilla='$codigo'"; $resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);
+if($filas>0){$registro=pg_fetch_array($resultado); $ult_ref=$registro["referencia"]+1; $len=strlen($ult_ref); $ult_ref=substr("00000000",0,8-$len).$ult_ref;}
+pg_close();?><input name="txtnro_planilla" type="text" id="txtnro_planilla"  size="10" maxlength="8"  onFocus="encender(this)" onBlur="apaga_referencia(this)" value="<? echo $ult_ref ?>">

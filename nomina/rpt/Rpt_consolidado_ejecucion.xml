@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>CONSOLIDADO DE EJECUCION</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3">
+		      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="30" CELLSPACING="0" CELLPADDING="3" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="11" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+
+					    <TD width="1100" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="900" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				      </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="11" HEIGHT="30" TEXTCLASS="BOLD"></COL>
+	</ROW> 
+	<ROW>
+		<COL COLSPAN="11" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CONSOLIDADO DE EJECUCION</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	<ROW>
+	   <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="BOLD"  COLSPAN="5">$this->getParameter("criterio1")</COL> 
+	</ROW>			
+ </HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_presup" PAGEBREAK="TRUE" EXPRESSION="cod_presup,fuente_financ">
+                   <HEADER>
+				     <ROW>
+                        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1">$this->getValue("cod_presup_cat")</COL>
+                        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="4">$this->getValue("denominacion_cat")</COL>
+						<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Asignacion Inicial :</COL>
+                        <COL TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="2" NUMBERFORMATEX="2" TYPE="FIELD">asignado</COL>
+                     </ROW> 
+                     <ROW>
+						<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" COLSPAN="1" NUMBERFORMATEX="2" TEXTCLASS="BOLD">$this->getValue("cod_part")</COL>
+						<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" COLSPAN="4" NUMBERFORMATEX="2" TEXTCLASS="BOLD">$this->getValue("denominacion")</COL>
+						<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Asignacion Actualizada :</COL>
+						<COL TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="2" NUMBERFORMATEX="2" TYPE="FIELD">asig_actualizada</COL>                       
+                     </ROW>
+					 <ROW>
+                        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1">$this->getValue("fuente_financ")</COL>
+                        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="4">$this->getValue("des_fuente_financ")</COL>
+						<COL ALIGN="RIGHT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"  COLSPAN="5">$this->getParameter("criterio2")</COL> 
+					</ROW> 
+					 <ROW>           
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Tipo</COL>
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Referencia</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Descripcion</COL>
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Beneficiario</COL>
+	     <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Modificaciones</COL>
+         <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Comprometido</COL>
+	     <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Causado</COL>
+         <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Pagado</COL>
+		 <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Disponible</COL>
+     </ROW>
+	 <ROW>
+	   <COL ALIGN="LEFT" COLSPAN="10" TYPE="EXPRESSION"  TEXTCLASS="MEDIABOLD">"_________________________________________________________________________________________________________________________________________________________________________"</COL>
+	
+	 </ROW>	
+     </HEADER>
+                  <FOOTER>
+                     <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="5"></COL>
+			<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="5">"__________________________________________________________________"</COL>
+ 		</ROW>
+		 <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="5"> "TOTAL :"</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("modificaciones")</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("comprometido")</COL>
+            <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("causado")</COL>
+            <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("pagado")</COL>
+         </ROW>
+                   </FOOTER>                 
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">fechad</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">nombre_abrev_doc</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">referencia_doc</COL>
+                       <COL TEXTCLASS="SMALL" ALIGN="LEFT" TYPE="FIELD">descripcion_doc</COL>
+                       <COL TEXTCLASS="SMALL" ALIGN="LEFT" TYPE="FIELD">nombre</COL>
+					   <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">modificaciones</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">comprometido</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">causado</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">pagado</COL>
+					   <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">disponible</COL>
+                       
+                   </ROW>
+                   </FIELDS>
+            </GROUP>
+       </GROUPS>
+</REPORT>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>RENDICION DE CREDITO ADICIONAL</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+   <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+		
+		 <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="4">"TOTAL GENERAL :"</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">$this->getSum("monto")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="1" SIZE="30" CELLSPACING="1" CELLPADDING="3" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="1200" rowspan="4">
+						<IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	 <ROW>
+	   <COL TYPE="EXPRESSION" TEXTCLASS="BOLDBIG " ALIGN="CENTER"  COLSPAN="5">$this->getParameter("criterio1")</COL>
+	</ROW> 
+	<ROW>
+	   <COL TYPE="EXPRESSION" TEXTCLASS="BOLDBIG " ALIGN="CENTER"  COLSPAN="5">$this->getParameter("criterio2")</COL>
+	</ROW> 
+	<ROW>
+             <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Nro Cheque o Cta</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Nro Orden Pago</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Beneficiario</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Concepto</COL>
+	     <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>
+          </ROW>
+		   
+	</HEADER>
+
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_presupu" EXPRESSION="cod_presup">
+                   <HEADER>
+                        <ROW>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="5">$this->getValue("cod_presup")."      ".$this->getValue("denominacion")</COL>
+                        </ROW>	
+                  </HEADER>
+                  <FOOTER>
+                    
+				    <ROW>
+					  <COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="4">"SUB-TOTAL :"."    ".$this->getValue("cod_presup")</COL>
+					  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">$this->getSum("monto")</COL>
+					</ROW>
+                   </FOOTER>               
+                 <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+                   <HEADER>
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+					   <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("referencia_doc")</COL>
+					   <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("referencia_caus")</COL>
+					   <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("nombre")</COL>
+					   <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("descripcion_doc")</COL>
+                       <COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">monto</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+           </GROUP>
+       </GROUPS>
+</REPORT>

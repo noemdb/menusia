@@ -1,0 +1,8 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php");  $cod_banco=$_GET["cod_banco"]; $nro_orden=$_GET["orden"]; $cod_contable_o=$_GET["mcuen"]; $codigo_mov=$_GET["codigo_mov"];$monto=$_GET["monto"];  $monto=formato_numero($monto); if(is_numeric($monto)){$monto=$monto;} else{$monto=0;}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $codc_banco="";
+echo $nro_orden.' '.$codc_banco.' '.$cod_contable_o.' '.$monto;
+$Ssql="SELECT cod_banco,nombre_banco,nro_cuenta,descripcion_banco,tipo_cuenta,cod_contable FROM ban002 where cod_banco='".$cod_banco."'";  $resultado=pg_query($Ssql);  $filas=pg_num_rows($resultado);if ($filas>0){ $registro=pg_fetch_array($resultado,0); $codc_banco=$registro["cod_contable"]; }
+$resultado=pg_exec($conn,"SELECT ELIMINA_CON010('$codigo_mov')"); $merror=pg_errormessage($conn); $merror=substr($merror,0,91); 
+$resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','D','$cod_contable_o','00000','',$monto,'D','B','N','02','0','')"); $merror=pg_errormessage($conn);  $merror="ERROR GRABANDO: ".substr($merror,0,91); if(!$resultado){echo $merror; $error=1; }
+$resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','C','$codc_banco','00000','',$monto,'D','B','N','02','0','')"); $merror=pg_errormessage($conn);  $merror="ERROR GRABANDO: ".substr($merror,0,91); if(!$resultado){echo $merror; $error=1; }
+?><iframe src="Det_inc_comp_chqp.php?codigo_mov=<?echo $codigo_mov?>" width="846" height="290" scrolling="auto" frameborder="0"></iframe>

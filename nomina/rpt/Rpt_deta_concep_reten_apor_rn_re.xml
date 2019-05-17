@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>RELACION DE CONCEPTOS DETALLE RETENCION/APORTE</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	 <ROW>
+		    <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="3">""</COL>  
+		    <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="CENTER" COLSPAN="1">"___________"</COL>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="CENTER" COLSPAN="1">"___________"</COL>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="CENTER" COLSPAN="1">"___________"</COL> 
+         </ROW>
+		 <ROW>
+			<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIABOLD" COLSPAN="1">"No. Trab:              ".$this->getRowCount("cod_empleado")</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIABOLD" COLSPAN="2">"Total:              "</COL>
+			<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_deduccion")</COL>
+			<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_aporte")</COL>
+			<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_deduccion")+$this->getSum("monto_aporte")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>	
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="6" HEIGHT="40" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>	
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>RELACION DE CONCEPTOS DETALLE RETENCION/APORTE</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   
+   </HEADER>
+   </PAGE>
+   <GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_nomi" EXPRESSION="tipo_nomina">
+		   <HEADER>
+		   <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6">"Nomina:   ".$this->getValue("tipo_nomina")."     ".$this->getValue("des_nomina")</COL>               
+    	   </ROW>
+		   <ROW>
+                 <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6">
+                   "Fecha:   ".$this->getValue("fecha_desde")."     "."al "."        ".$this->getValue("fecha_p_hasta")</COL>            
+           </ROW>
+		   <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6">$this->getValue("denominacion")</COL>               
+    	   </ROW>
+	       <ROW>
+                 <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cod. Trabajador</COL>
+		         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Nombre</COL>
+                 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cedula</COL>
+				 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Retencion</COL>
+                 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Aporte</COL>
+				 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Total</COL>
+           </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_emple" EXPRESSION="cod_empleado">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_empleado")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("nombre")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cedula")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("monto_deduccion")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("monto_aporte")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("monto_deduccion")+$this->getValue("monto_aporte")</COL>
+			 </ROW>
+           </FOOTER>
+	     </GROUP>
+		</GROUP>
+	</GROUPS>
+</REPORT>

@@ -1,0 +1,21 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php"); $fecha_hoy=asigna_fecha_hoy();   $error=0;
+$cod_arch_banco=$_POST["txtcod_arch_banco"]; $tipo_arch_banco=$_POST["txttipo_arch_banco"];  $pos_campo=$_POST["txtpos_campo"]; $tipo_campo=$_POST["txttipo_campo"];
+$cod_campo=$_POST["txtcod_campo"]; $car_especial=$_POST["txtcar_especial"]; $longitud_campo=$_POST["txtlongitud_campo"];$decimales_campo=$_POST["txtdecimales_campo"]; $pos_comienza=$_POST["txtpos_comienza"];$pos_fin=$_POST["txtpos_finaliza"];
+$rellena_ceros_izq=substr($_POST["txtrellena_ceros_izq"],0,1); $rellena_ceros_der=substr($_POST["txtrellena_ceros_der"],0,1); $rellena_espacios_i=substr($_POST["txtrellena_espacios_i"],0,1); $rellena_espacios_d=substr($_POST["txtrellena_espacios_d"],0,1);
+$elimina_ceros_izq=substr($_POST["txtelimina_ceros_izq"],0,1); $elimina_ceros_der=substr($_POST["txtelimina_ceros_der"],0,1); $elimina_espacios_i=substr($_POST["txtelimina_espacios_i"],0,1); $elimina_espacios_d=substr($_POST["txtelimina_espacios_d"],0,1);
+$elimina_comas=substr($_POST["txtelimina_comas"],0,1); $elimina_puntos=substr($_POST["txtelimina_puntos"],0,1); $status2_campo=substr($_POST["txtstatus2_campo"],0,1); $status1_campo="N"; $status3_campo=substr($_POST["txtstatus3_campo"],0,1); $status4_campo="N";
+$equipo = getenv("COMPUTERNAME"); $minf_usuario=$usuario_sia." ".$equipo." ".date("d/m/y H:i a");echo "ESPERE POR FAVOR INCLUYENDO....","<br>";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");  $url="Det_inc_archivo_banco.php?criterio=".$tipo_arch_banco.$cod_arch_banco;
+if (pg_ErrorMessage($conn)){$error=1; ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+ else{ $sSQL="Select cod_arch_banco from NOM052 WHERE cod_arch_banco='$cod_arch_banco' and tipo_arch_banco='$tipo_arch_banco' and pos_campo='$pos_campo'"; $resultado=pg_query($sSQL);  $filas=pg_num_rows($resultado);
+  if($filas>=1){$error=1; ?> <script language="JavaScript"> muestra('LINEA DE ARCHIVO YA EXISTE');</script><? }
+  if($error==0){if(is_numeric($longitud_campo)){$longitud_campo=$longitud_campo;}else{$longitud_campo=0;}  if(is_numeric($decimales_campo)){$decimales_campo=$decimales_campo;}else{$decimales_campo=0;} }
+  if($error==0){if(strlen($cod_arch_banco)==6){$error=0;} else{$error=1; ?> <script language="JavaScript"> muestra('LONGITUD CODIGO DE ARCHIVO INVALIDA');</script><?} }
+  if($error==0){if(strlen($pos_campo)==3){$error=0;} else{$error=1; ?> <script language="JavaScript"> muestra('LONGITUD POSICION DE CAMPO INVALIDA');</script><?} }
+  if($error==0){$sSQL="Select cod_arch,cod_campo,tipo_campo,nombre_campo from NOM051 WHERE cod_arch='$tipo_arch_banco' and cod_campo='$cod_campo'"; $resultado=pg_query($sSQL);$filas=pg_num_rows($resultado);
+    if($filas>0){$registro=pg_fetch_array($resultado); $tipo_campo=$registro["tipo_campo"]; if($cod_campo!='999'){$car_especial=$registro["nombre_campo"];} }  else{$error=1; ?> <script language="JavaScript"> muestra('CODIGO DE CAMPO NO EXISTE');</script><? } }
+  if($error==0){$sSQL="SELECT ACTUALIZA_NOM052(1,'$cod_arch_banco','$tipo_arch_banco','$pos_campo','$cod_campo','$tipo_campo',$longitud_campo,$decimales_campo,$pos_comienza,$pos_fin,'$rellena_ceros_izq','$rellena_ceros_der','$rellena_espacios_i','$rellena_espacios_d','$elimina_ceros_izq','$elimina_ceros_der','$elimina_espacios_i','$elimina_espacios_d','$elimina_comas','$elimina_puntos','$status1_campo','$status2_campo','$status3_campo','$status4_campo','$car_especial')";
+    $resultado=pg_exec($conn,$sSQL); $error=pg_errormessage($conn); $error="ERROR GRABANDO: ".substr($error, 0, 61); if (!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><?}else{$error=0;?><script language="JavaScript">muestra('INCLUYO EXITOSAMENTE');</script><?}
+  }
+}pg_close();
+if($error==0){?><script language="JavaScript">document.location ='<? echo $url; ?>';</script><?}else{?><script language="JavaScript">history.back();</script><?}?>

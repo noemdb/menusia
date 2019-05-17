@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>LISTADO ORDENES DE PAGO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>  
+   	  <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="950">
+         <ROW>
+             <COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION"></COL>
+             <COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION"></COL>
+             <COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION"></COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD"  COLSPAN="3" NUMBERFORMATEX="2" TYPE="EXPRESSION">"================================"</COL>
+
+        </ROW>
+        <ROW>
+             <COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">"CANTIDAD"</COL>
+             <COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">"ORDENES : ".$this->getParameter("cant_orden")</COL>
+             <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">"TOTAL : "</COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("total_causado")</COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("total_retencion")</COL>
+			 <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("monto_orden")</COL>
+		 </ROW>
+
+      </FOOTER>     
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="20" CELLSPACING="0" CELLPADDING="3" WIDTH="950">
+   <xi:include href="header.xml"/>
+   <xi:include href="footer.xml"/>
+   </PAGE>
+    <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                     <ROW>
+                            <COL ALIGN="CENTER" TEXTCLASS="BIGBOLD" TYPE="REGULAR" COLSPAN="7">LISTADO ORDENES DE PAGO PERIODO ANTERIOR</COL>
+                     </ROW>
+					 
+                     <ROW>
+						<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+						<XHTML>
+						<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="40">
+							<TR>
+								<TD width="200" rowspan="4" ALIGN="LEFT"  TEXTCLASS="BOLD">Orden</TD>
+								<TD width="1000" rowspan="4" ALIGN="LEFT"  TEXTCLASS="BOLD">Nombre</TD>
+								<TD width="3300" rowspan="4" ALIGN="LEFT"  TEXTCLASS="BOLD">Concepto</TD>
+								<TD width="200" rowspan="4" ALIGN="RIGHT"  TEXTCLASS="BOLD">Monto Bruto</TD>
+								<TD width="200" rowspan="4" ALIGN="RIGHT"  TEXTCLASS="BOLD">Retenciones</TD>
+								<TD width="200" rowspan="4" ALIGN="RIGHT"  TEXTCLASS="BOLD">Monto Neto</TD>
+								<TD width="100" rowspan="4" ALIGN="RIGHT"  TEXTCLASS="BOLD">Estatus</TD>
+							 </TR>		
+						</TABLE>				
+						</XHTML>
+						</COL>	
+					 </ROW>		
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD">nro_orden</COL>
+               		   <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD">nombre</COL>
+                	   <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD">concepto</COL>
+					   <COL ALIGN="RIGHT" TEXTCLASS="REGULAR" NUMBERFORMATEX="2" TYPE="FIELD">total_causado</COL>
+					   <COL ALIGN="RIGHT" TEXTCLASS="REGULAR" NUMBERFORMATEX="2" TYPE="FIELD">total_retencion</COL>
+					   <COL ALIGN="RIGHT" TEXTCLASS="REGULAR" NUMBERFORMATEX="2" TYPE="FIELD">monto_orden</COL>
+					   <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="EXPRESSION">($this->getParameter("status_orden")=="N"?"PENDIENTE":($this->getValue("status")=="I"?"CANCELADA":"PENDIENTE"))</COL> 
+					</ROW>
+                   </FIELDS>
+             </GROUP>
+    </GROUPS>
+   
+</REPORT>
+

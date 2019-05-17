@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>CAUSADO (DETALLE)</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>SIA.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="11" WIDTH="500">
+
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="9" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="9" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="9" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CAUSADO (DETALLE)</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	<ROW>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Referencia</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Tipo</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">St</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Compromiso</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tipo</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Descripcion</COL>
+          </ROW>
+	<ROW>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="3" TYPE="REGULAR">Cedula/Rif</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="6" TYPE="REGULAR">Nombre</COL>
+          </ROW>
+	<ROW>
+	   <COL ALIGN="LEFT" COLSPAN="9" TYPE="EXPRESSION"  TEXTCLASS="BOLD">"__________________________________________________________________________________________________________"</COL>
+	</ROW>	    
+	</HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_causado" EXPRESSION="tipo_causado">
+                   <HEADER>
+                        <ROW>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("referencia_caus")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("fecha_doc")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("tipo_causado")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("nombre_abrev_caus")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("anulado")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("referencia_comp")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("nombre_abrev_comp")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="2">$this->getValue("descripcion_doc")</COL>
+                        </ROW>
+                        <ROW>	
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="3">$this->getValue("ced_rif")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="6">$this->getValue("nombre_benef")</COL>
+                        </ROW>
+			<ROW>
+				<COL COLSPAN="9" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+					<XHTML>
+						<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+							<TR>
+								<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>PAGOS</b></font></TD>
+							</TR>
+				   		</TABLE>				
+					</XHTML>
+				</COL>	
+	  		</ROW>
+			<ROW>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Referencia</COL>
+	     			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Tipo</COL>
+            			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+	     			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="5" TYPE="REGULAR">Descripcion</COL>
+          		</ROW>
+                  </HEADER>
+                  <FOOTER>
+                   </FOOTER>
+                 <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+                   <HEADER>
+                        <ROW>
+                        </ROW>	
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">referencia_pago</COL>                       
+		       <COL TEXTCLASS="REGULAR" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">tipo_pago</COL>
+                       <COL TEXTCLASS="REGULAR" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">nombre_abrev_pago</COL>                       
+		       <COL TEXTCLASS="REGULAR" COLSPAN="6" ALIGN="LEFT" TYPE="FIELD">descripcion_pago</COL>
+                   </ROW>
+                   </FIELDS>
+             </GROUP>
+            </GROUP>
+       </GROUPS>
+</REPORT>

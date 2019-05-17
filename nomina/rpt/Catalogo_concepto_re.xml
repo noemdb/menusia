@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO DE CONCEPTOS</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>SIA.css</CSS>
+
+        <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="930">
+        <HEADER>
+         <ROW>
+                <COL COLSPAN="10" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                                </TD>
+                                        </TR>
+                                        </TABLE>
+                        </XHTML>
+                </COL>
+        </ROW>
+
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"
+         COLSPAN="10">$this->getParameter("criterio1")</COL>
+        </ROW>
+        <ROW>
+           <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"
+         COLSPAN="10">$this->getParameter("criterio2")</COL>
+        </ROW>
+   </HEADER>
+
+   </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                         <ROW>
+                            <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="10">CATALOGO DE CONCEPTOS</COL>
+              			</ROW>
+                          <ROW>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Código</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Denominación</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Código Partida</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Asig.</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Act.</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Inic.</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo G.</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Oculto</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Acum.</COL>
+                           <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">F</COL>
+
+                          </ROW>
+            </HEADER>
+                        <FIELDS>
+                             <ROW>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">cod_concepto</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">denominacion</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">cod_partida</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">asignacion</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">activo</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">inicializable</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">tipo_grupo</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">oculto</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">acumula</COL>
+                                       <COL TEXTCLASS="REGULAR" TYPE="FIELD">frecuencia</COL>
+                             </ROW>
+                       </FIELDS>
+                </GROUP>
+        </GROUPS>
+</REPORT>

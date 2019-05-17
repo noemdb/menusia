@@ -1,0 +1,146 @@
+BODY {
+	margin:0px;
+}
+
+A {
+	font-family:"verdana","arial","courier";
+	font-size:12px;
+	font-weight:bold;
+	color:#137BF9;
+}
+
+.PAGE_LAYER {
+	background: #FFFFFF;;
+	font-family:"verdana","arial","courier";
+	font-size:12px;
+	font-weight:normal;
+	color:#000000;
+}
+
+.HEADER {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #505050;
+	background: #DDDDDD;
+}
+
+.FOOTER {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #505050;
+	background: #DDDDDD;
+}
+
+.FIELDS {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #505050;
+	background: #DDDDDD;
+}
+
+.EVEN {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #000000;
+	background: #95CDED;
+}
+
+.ODD {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #000000;
+	background: #BDDFF3;
+}
+
+.BOLDRED {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.PHPREPORTS_PAGE_CELL {
+	font-family:"verdana","arial";
+	font-size:12px;
+	color:#000000;
+}
+
+.PHPREPORTS_PAGE_LINK {
+	font-family:"verdana","arial";
+	font-size:12px;
+	color:#000000;
+}
+
+.PHPREPORTS_PAGE_LINK_BOLD {
+	font-size:16px;
+	font-weight:bold;
+}
+
+.REGULAR {
+	font-family:"verdana","arial","courier";
+	font-size:12px;
+	font-weight:normal;
+	color:#000000;
+}
+
+.MEDIA {
+	font-family:"verdana","arial","courier";
+	font-size:10px;
+	font-weight:normal;
+	color:#000000;
+}
+.SSMALL {
+	font-family:"verdana","arial","courier";
+	font-size:6px;
+	font-weight:normal;
+	color:#000000;
+}
+.SMALL {
+	font-family:"verdana","arial","courier";
+	font-size:8px;
+	font-weight:normal;
+	color:#000000;
+}
+.MEDIABOLD {
+	font-family:"verdana","arial","courier";
+	font-size:10px;
+	font-weight:bold;
+	color:#000000;
+}
+.SMALLBOLD {
+	font-family:"verdana","arial","courier";
+	font-size:8px;
+	font-weight:bold;
+	color:#000000;
+}
+.BOLD {
+	font-family:"verdana","arial","courier";
+	font-size:12px;
+	font-weight:bold;
+	color:#000000;
+}
+.GBOLD {
+	font-family:"verdana","arial","courier";
+	font-size:14px;
+	font-weight:bold;
+	color:#000000;
+}
+.BOLDBIG {
+	font-family:"verdana","arial","courier";
+	font-size:14px;
+	font-weight:bold;
+	color:#000000;
+}
+.TITLE {
+	font-family:"verdana","arial","courier";
+	font-size:20px;
+	font-weight:bold;
+	color:#000000;
+	text-decoration:none;
+}
+
+.GROUP_LAYER {
+	background: #7CD2F4;
+	font-family:"verdana","arial","courier";
+	font-size:12px;
+	font-weight:normal;
+	color:#000000;
+}

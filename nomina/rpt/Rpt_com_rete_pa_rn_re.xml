@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE COMPROBANTE DE RETENCION Y PAGO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+		 </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="8" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>REPORTE COMPROBANTE DE RETENCION Y PAGO</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>		   
+	<ROW>
+		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="EXPRESSION">"CONTRIBUYENTE :   "."     ".$this->getValue("nombre")</COL>
+		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6" TYPE="EXPRESSION">"CEDULA / RIF :   "."     ".$this->getValue("cedula")</COL>
+    </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cedula" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>        		
+         		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="8">INFORMACION LABORAL</COL>       
+            </ROW>
+   			 <ROW>        		
+        
+            </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+		 <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="meses" EXPRESSION="mes">
+		   <HEADER>
+		     <ROW>        		
+         		<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="8">"Mes.   ".$this->getParameter("mes")</COL>      
+            </ROW>
+   			 <ROW>        		
+        
+            </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+		</GROUP>
+		</GROUP>
+	</GROUPS>
+</REPORT>

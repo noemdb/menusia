@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>FORMATO DE COMPROBANTE</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>	
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="4" WIDTH="500">
+       </FOOTER>   
+   </DOCUMENT>   
+	<PAGE BORDER="1" SIZE="35" CELLSPACING="0" CELLPADDING="4" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>						   
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>					 
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">FORMATO DE COMPROBANTE CONTABLE</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>			   
+   </HEADER>
+   <FOOTER> 
+      	
+   </FOOTER>
+   </PAGE>   
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Fecha_Comprob" EXPRESSION="fecha">
+		   <HEADER> </HEADER>
+		   <FOOTER> </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Ref_Comprob" EXPRESSION="referencia">   
+           <HEADER> </HEADER>
+           <FOOTER> </FOOTER> 
+			<GROUP PAGEBREAK="TRUE" REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Tipo_Comprobante" EXPRESSION="tipo_comp">
+			 <HEADER>
+			    <ROW>
+                  <COL  ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" WIDTH="200">FECHA DE EMISION</COL>
+			      <COL  ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" WIDTH="800">REFERENCIA</COL>
+			      <COL  ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="0" WIDTH="300">TIPO DE ASIENTO</COL>
+                </ROW>
+			    <ROW>
+                  <COL TYPE="EXPRESSION"  ALIGN="CENTER"  TEXTCLASS="REGULAR" COLSPAN="1" WIDTH="200">
+                       $this->getValue("fechaf")</COL>                               
+                  <COL  TEXTCLASS="REGULAR" ALIGN="CENTER"  TYPE="EXPRESSION" COLSPAN="1" WIDTH="800">
+                       $this->getValue("referencia")</COL>
+                  <COL  TEXTCLASS="REGULAR" ALIGN="CENTER"  TYPE="EXPRESSION" COLSPAN="0" WIDTH="300">
+                       $this->getValue("tipo_asiento")</COL>	 
+			    </ROW>		 
+			    <ROW>
+			      <COL  ALIGN="CENTER" VALIGN="TOP" TEXTCLASS="BOLD" WIDTH="50">CONCEPTO:</COL>
+				  <COL  TEXTCLASS="REGULAR" TYPE="EXPRESSION" COLSPAN="3">$this->getValue("descripcion")</COL>	                 
+                </ROW>
+				<ROW>
+			      <COL  ALIGN="CENTER" VALIGN="TOP" TEXTCLASS="BOLD" WIDTH="50">BENEFICIARIO:</COL>
+				  <COL  TEXTCLASS="REGULAR" TYPE="EXPRESSION" COLSPAN="3">$this->getValue("codigo_cuenta2").' '.$this->getValue("nombre")</COL>	                 
+                </ROW>
+			    <ROW>
+                  <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Codigo Cuenta</COL>
+                  <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Nombre Cuenta</COL>
+			      <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGTH" TEXTCLASS="BOLD" TYPE="REGULAR">Debe</COL>  
+			      <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGTH" TEXTCLASS="BOLD" TYPE="REGULAR">Haber</COL>
+                </ROW>			 
+			 </HEADER>
+			 <FOOTER> 
+                <ROW>
+				  <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">TOTALES:</COL> 
+                  <COL TYPE="EXPRESSION"  TEXTCLASS="BOLD" ALIGN="RIGHT"
+                     NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("columna1")</COL>
+			      <COL TYPE="EXPRESSION"  TEXTCLASS="BOLD" ALIGN="RIGHT"
+                     NUMBERFORMATEX="2">$this->getSum("columna2")</COL>	   
+                </ROW>
+			 </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" TYPE="FIELD">cod_cuenta</COL>	
+            	<COL TEXTCLASS="REGULAR" TYPE="FIELD">nombre_cuenta</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna1</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna2</COL>						
+			  </ROW>
+			</FIELDS>   </GROUP> </GROUP>	
+		</GROUP>
+	</GROUPS> 	 		
+</REPORT>

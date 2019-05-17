@@ -1,0 +1,4 @@
+<?php include ("../class/conect.php"); include ("../class/funciones.php"); $tipo_nomina=$_GET["tipo_nomina"]; $tp_calculo=$_GET["tp_calculo"]; $num_periodo=$_GET["num_periodos"];  $codigo_mov=$_GET["codigo_mov"]; $password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");$SQL="SELECT CARGA_NOM066_EXT('$codigo_mov','$tipo_nomina',$num_periodo)";
+$resultado=pg_exec($conn,$SQL); $error=pg_errormessage($conn);?>
+<iframe src="Det_conc_nom_ext.php?codigo_mov=<?echo $codigo_mov?>" width="925" height="350" scrolling="auto" frameborder="0"></iframe>

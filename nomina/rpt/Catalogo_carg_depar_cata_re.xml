@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>CATALOGOS DE CARGOS POR DEPARTAMENTO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>  
+	<PAGE BORDER="0" SIZE="28" CELLSPACING="0" CELLPADDING="3" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>CATALOGOS DE CARGOS POR DEPARTAMENTO</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>		   	
+	<ROW>
+        	<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Codigo</COL>
+		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Denominacion del Cargo</COL>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nro. Cargo</COL>
+		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Asignado</COL>
+   </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="descripcion" EXPRESSION="descripcion_dep">
+		   <HEADER>
+   			 <ROW>
+               <COL TEXTCLASS="MEDIABOLD" TYPE="FIELD" COLSPAN="4">descripcion_dep</COL>             
+             </ROW>	
+           </HEADER>
+		   <FOOTER>
+			 <ROW>
+				<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="4">"CANTIDAD CARGOS:  ".$this->getRowCount("codigo_cargo")</COL>
+             </ROW>
+           </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" TYPE="FIELD">codigo_cargo</COL>
+				<COL TEXTCLASS="MEDIA" TYPE="FIELD">denominacion</COL>	
+            	<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">nro_cargos</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">asignados</COL>
+			  </ROW>
+			</FIELDS>  
+			</GROUP>	
+	</GROUPS>
+</REPORT>
+
+
+
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>ESTADO DE RESULTADO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>      
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="40" CELLSPACING="0" CELLPADDING="3" WIDTH="930">
+        <HEADER>
+         <ROW>
+                <COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                            </TD>
+                                        </TR>
+                                 </TABLE>
+                        </XHTML>
+                </COL>
+         </ROW>
+       </HEADER>
+       <FOOTER>
+   	  		 <ROW>
+		  		<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="5">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  		<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+			</ROW>       
+      </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+		   <HEADER>             
+			 <ROW>	
+			    <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="4">ESTADO DE RESULTADO</COL>							    
+              </ROW>
+            </HEADER> 
+			<FIELDS>
+				<ROW>
+					<COL TEXTCLASS="REGULAR" TYPE="FIELD">nombre_cuenta</COL>
+					<COL TEXTCLASS="REGULAR" TYPE="FIELD">columna1</COL>
+					<COL TEXTCLASS="REGULAR" TYPE="FIELD">columna1</COL>
+				</ROW>
+			</FIELDS>
+			
+		</GROUP>
+	</GROUPS>
+</REPORT>
+

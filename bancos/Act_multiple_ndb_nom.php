@@ -1,0 +1,5 @@
+<?include ("../class/conect.php"); include ("../class/funciones.php"); error_reporting(E_ALL); $codigo_mov=$_GET["codigo_mov"]; $tipo_ord_nom=$_GET["tipo_ord_nom"];  $multiple=$_GET["multiple"];   $fecha_hoy=asigna_fecha_hoy(); $afecha=formato_aaaammdd($fecha_hoy);
+$url="Det_ord_canc_nomina.php?codigo_mov=".$codigo_mov."&tipo_ord_nom=".$tipo_ord_nom."&mostrar=S&orden="; echo "CARGANDO ORDENES....","<br>"; $error=0; if($multiple=="S"){$multiple="N";$url=$url."N";}else{$multiple="S";$url=$url."R";}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");$resultado=pg_exec($conn,"SELECT ELIM_SEL_PAG027('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_BAN030(4,'$codigo_mov','0000','00000000','0001','$afecha','$afecha','$afecha','$multiple','N','')");
+pg_close();  error_reporting(E_ALL ^ E_WARNING);?> <script language="JavaScript">  document.location ='<? echo $url; ?>' </script>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO DE DEPENDENCIAS</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>sia.css</CSS>
+		 <DOCUMENT> 
+		  <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="5" WIDTH="500">
+		  	<ROW>
+		 	</ROW>
+		 </FOOTER>    
+  		 </DOCUMENT>
+        <PAGE BORDER="0" SIZE="28" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+        <ROW>
+          <COL COLSPAN="10" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		   </COL>
+        </ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="10" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="10" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CATALOGO DE DEPENDENCIAS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+   </HEADER>
+   </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+                        <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod.</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Dependencia</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod. Postal</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Telefonos</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Nombre de Contacto</COL>
+                        </ROW>
+                        <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod.</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Region</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod.</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Estado</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod.</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Municipio</COL>
+                        </ROW>
+                        <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Cod.</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Ciudad</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="7">Direccion</COL>
+                        </ROW>
+                        <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="EXPRESSION" COLSPAN="10">"___________________________________________________________________________________________________________________________________________________________"</COL>
+                        </ROW>
+            		</HEADER>
+                        <FIELDS>
+                         <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_dependencia</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="3">denominacion_dep</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_postal_dep</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="3">telefonos_dep</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="2">nombre_contacto</COL>
+                         </ROW>
+                         <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_region</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="2">nombre_region</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_estado</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="2">estado</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_municipio</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="3">nombre_municipio</COL>
+                         </ROW>
+                         <ROW>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="1">cod_ciudad</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="2">nombre_ciudad</COL>
+                           <COL ALIGN="LEFT" TEXTCLASS="REGULAR" TYPE="FIELD" COLSPAN="7">direccion_dep</COL>
+                         </ROW>
+                       </FIELDS>
+                </GROUP>
+        </GROUPS>
+</REPORT>

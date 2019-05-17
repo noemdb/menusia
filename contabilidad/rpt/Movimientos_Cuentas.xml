@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>MOVIMIENTOS DE CUENTAS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	 <ROW>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="3"></COL> 
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"============="</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"============="</COL>
+		 </ROW>
+         <ROW>
+            <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" COLSPAN="2" WIDTH="430">TOTAL GENERAL</COL>
+            <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="2" TYPE="EXPRESSION">$this->getSum("columna1")</COL>
+			<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="2" TYPE="EXPRESSION">$this->getSum("columna2")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="30" CELLSPACING="0" CELLPADDING="3" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>				
+					</TR>					
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>	
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">MOVIMIENTOS DE CUENTAS</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	   	
+	<ROW>
+	   <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"   COLSPAN="5">$this->getParameter("criterio1")</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"  COLSPAN="5">$this->getParameter("criterio2")</COL>
+	</ROW>
+   </HEADER>
+   <FOOTER> 
+   	      
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Fecha_Comprob" EXPRESSION="fecha">
+		   <HEADER>   			 
+           </HEADER>
+		   <FOOTER>            
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Ref_Comprob" EXPRESSION="referencia">   
+           <HEADER>
+		     <ROW>
+               <COL ALIGN="LEFT"  TEXTCLASS="BOLD" WIDTH="50">Fecha:</COL>
+               <COL TYPE="EXPRESSION"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("fechaf")</COL>  
+               <COL  ALIGN="LEFT" TEXTCLASS="BOLD" WIDTH="50">Orden:</COL>
+               <COL  TEXTCLASS="MEDIA" TYPE="EXPRESSION"  COLSPAN="1">$this->getValue("referencia")</COL>							   
+             </ROW>
+             <ROW>
+			   <COL  ALIGN="LEFT" TEXTCLASS="BOLD" WIDTH="50">Nombre:</COL>
+			   <COL  ALIGN="LEFT" TEXTCLASS="MEDIA" TYPE="EXPRESSION"  COLSPAN="4">$this->getValue("nombre")</COL>
+			 </ROW>	
+             <ROW>
+               <COL ALIGN="LEFT"  TEXTCLASS="BOLD" WIDTH="50">Compromiso:</COL>
+               <COL TYPE="EXPRESSION"  TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("tipo_compromiso")." ".$this->getValue("nombre_abrev_comp")." ".$this->getValue("nombre_tipo_comp")</COL>  
+               <COL  ALIGN="LEFT" TEXTCLASS="BOLD" WIDTH="50">Referencia:</COL>
+               <COL  TEXTCLASS="MEDIA" TYPE="EXPRESSION"  COLSPAN="1">$this->getValue("referencia_comp")</COL>							   
+             </ROW> 
+			 <ROW>
+			    <COL  ALIGN="LEFT" TEXTCLASS="BOLD" WIDTH="50">Categoria:</COL> 
+                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("unidad_sol")." ".$this->getValue("denominacion_cat")</COL>
+			</ROW>
+             <ROW>
+			    <COL TEXTCLASS="BOLD" ALIGN="LEFT" TYPE="EXPRESSION">($this->getValue("status")=="N"?"":($this->getValue("tipo_pago")=="CHQ"?"Cheque:":($this->getValue("tipo_pago")=="NDB"?"Nota":"Pago:")))</COL>
+			    <COL TEXTCLASS="MEDIA" ALIGN="LEFT"  COLSPAN="4" TYPE="EXPRESSION">($this->getValue("status")=="I"?$this->getValue("nro_cheque")." ".$this->getValue("nombre_banco")." ".$this->getValue("nro_cuenta"):"")</COL> 
+			</ROW>			 
+			 <ROW>
+			    <COL ALIGN="LEFT" TEXTCLASS="BOLD" WIDTH="50">Descripcion:</COL>
+				<COL TEXTCLASS="MEDIA" TYPE="EXPRESSION" COLSPAN="5">$this->getValue("descripcion")</COL>	                 
+             </ROW>
+			 <ROW>
+               <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Codigo Cuenta</COL>
+               <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Nombre Cuenta</COL>
+			   <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo</COL>
+			   <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Debe</COL>  
+			   <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Haber</COL>
+            </ROW>
+           </HEADER>
+           <FOOTER>
+		   	 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="3"></COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"________"</COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"________"</COL>
+			 </ROW>
+             <ROW>
+               <COL ALIGN="RIGHT" TYPE="EXPRESSION" COLSPAN="2">"TOTAL ..."</COL>
+               <COL TYPE="EXPRESSION"  TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" COLSPAN="2">$this->getSum("columna1")</COL>
+			   <COL TYPE="EXPRESSION"  TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" COLSPAN="2">$this->getSum("columna2")</COL>	   
+             </ROW>
+			 <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="SMALL" TYPE="EXPRESSION" COLSPAN="6">"."</COL>
+            </ROW>
+            </FOOTER> 
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Tipo_Comprobante" EXPRESSION="tipo_comp">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cod_cuenta</COL>	
+            	<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">nombre_cuenta</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">tipo_asiento</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="EXPRESSION">($this->getValue("columna1")==0?"":$this->getValue("columna1"))</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="EXPRESSION">($this->getValue("columna2")==0?"":$this->getValue("columna2"))</COL>
+			
+			  </ROW>
+			</FIELDS>   </GROUP> </GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

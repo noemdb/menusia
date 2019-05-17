@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>CONTROL DE VACACIONES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	 
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="55" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="8"  TYPE="EXPRESSION" TEXTCLASS="GBOLD">"CONTROL INDIVIDUAL DE VACACIONES"</COL>
+	</ROW>
+	 <ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="SMALL" COLSPAN="7">"."</COL>               
+    </ROW>	
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="8">"Trabajador : ".$this->getValue("cod_empleado")."   ".$this->getValue("nombre")</COL>               
+    </ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2">"Cedula : ".$this->getValue("cedula")</COL> 
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6">"Fecha Ingreso : ".$this->getValue("fechai")</COL> 		
+    </ROW>
+	
+	<ROW>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Fecha Causacion</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Fecha Disfrute</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1"  TYPE="REGULAR">Fecha</COL>         
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1"  TYPE="REGULAR">Dias</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1"  TYPE="REGULAR">Dias</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Dias Bono</COL>
+     </ROW>		
+	
+	 <ROW>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Desde</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Hasta</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Desde</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Hasta</COL>		 
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Regreso</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Disfrutado</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Vacaciones</COL>		 
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Vacacional</COL>
+     </ROW>	
+    <ROW>
+        <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="8">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+	</ROW>		 
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" PAGEBREAK="TRUE" NAME="cod_empleado" EXPRESSION="cod_empleado">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 </ROW>
+           </FOOTER>
+		   <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER"  COLSPAN="1" TYPE="FIELD">fechacd</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER"  COLSPAN="1" TYPE="FIELD">fechach</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER"  COLSPAN="1" TYPE="FIELD">fechadd</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER"  COLSPAN="1" TYPE="FIELD">fechadh</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER"  COLSPAN="1" TYPE="FIELD">fechar</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">dias_disfrutados</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">dias_vac</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1"  NUMBERFORMATEX="2" TYPE="FIELD">dias_bono_vac</COL>
+              </ROW>
+			</FIELDS>  
+		
+	    </GROUP>
+	</GROUPS>
+</REPORT>

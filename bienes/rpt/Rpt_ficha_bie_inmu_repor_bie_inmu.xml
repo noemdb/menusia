@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE FICHA DE BIENES INMUEBLES </TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="11" WIDTH="500">
+            <ROW>
+		<COL TYPE="EXPRESSION"  COLSPAN="6"></COL>
+                <COL TEXTCLASS="BOLD" ALIGN="RIGHT" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+             </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="7" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>BIENES NACIONALES - INMUEBLES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	  <ROW>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Clasificacion</COL>
+	       <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1"></COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Identificacion</COL>
+	       <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2"></COL>					    
+          </ROW>
+          <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Grupo</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Sub-Grupo</COL>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Numero</COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Inmueble</COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Dependencia</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Valor</COL>
+               <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Sub Totales y Total</COL>
+          </ROW>
+   
+	</HEADER>
+	<FOOTER> 
+              <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Jefe Oficina de Bienes</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Director de Administracion</COL>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Sello</COL>
+              </ROW>
+              <ROW>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" HEIGHT="100" TYPE="REGULAR" COLSPAN="3">_________________________</COL>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">_________________________</COL>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2"></COL>
+              </ROW>
+       </FOOTER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_bien_inmueble" EXPRESSION="subgrupo">
+                   <HEADER>
+                  </HEADER>
+	          <FOOTER> 
+                     <ROW>
+			<COL TYPE="EXPRESSION"  COLSPAN="6"></COL>
+                       <COL TEXTCLASS="BOLD" ALIGN="RIGHT" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+                    </ROW>
+                  </FOOTER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">grupo</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">subgrupo</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">num_bien</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">denominacion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">denominacion_dep</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+                       </ROW>
+                   </FIELDS>
+                </GROUP>
+       </GROUPS>
+</REPORT>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>MAYOR ANALITICO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="900">
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="20" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLDBIG">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLDBIG">MAYOR ANALITICO</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"  COLSPAN="8">$this->getParameter("criterio1")</COL> 
+	</ROW>	
+	<ROW>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Fecha</COL>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Referencia</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Tipo</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="2">Decripcion</COL>  
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Debe</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Haber</COL>  
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="MEDIA" COLSPAN="1">Saldo</COL>
+    </ROW>
+	<ROW>
+		        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="8">"______________________________________________________________________________________________________________________"</COL> 
+             </ROW>
+   </HEADER>
+   <FOOTER> 
+   	   	     
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP PAGEBREAK="TRUE" REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="codigo_cuenta" EXPRESSION="codigo_cuenta">
+		   <HEADER>
+   			  <ROW>
+                 <COL TYPE="EXPRESSION"  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2">$this->getValue("codigo_cuenta")</COL>       
+			     <COL TYPE="EXPRESSION"  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="3">$this->getValue("nombre_cuenta")</COL> 
+		         <COL TYPE="EXPRESSION"  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2">"Saldo Anterior:"</COL> 
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="EXPRESSION">
+				     ($this->getValue("columna10")==0?((($this->getValue("tsaldo")=="Acreedor")and($this->getParameter("criterio1")=="S"))?$this->getValue("columna6"):$this->getValue("columna3")):((($this->getValue("tsaldo")=="Acreedor")and($this->getParameter("criterio1")=="S"))?$this->getValue("columna5"):$this->getValue("columna4"))) 
+				 </COL> 
+			  </ROW>
+          </HEADER>
+		  <FOOTER>
+		  	<ROW>
+			 	<COL TYPE="EXPRESSION"  ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="5"></COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1">"____________"</COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1">"____________"</COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1"></COL>  
+            </ROW>
+		   	<ROW>
+			 	<COL TYPE="EXPRESSION"  ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="5">"Totales..."</COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD"  NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("columna1")</COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD"  NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("columna2")</COL>
+			 	<COL TYPE="EXPRESSION"  ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1"></COL>  
+           </ROW>		  
+          </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" TYPE="FIELD" COLSPAN="1">fechaf</COL>
+                <COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="EXPRESSION">(($this->getValue("referencia")=="00000000")?"":$this->getValue("referencia"))</COL>
+		        <COL TEXTCLASS="MEDIA" TYPE="FIELD" COLSPAN="1">tipo_asiento</COL>                
+				<COL TYPE="EXPRESSION"  ALIGN="LEFT" TEXTCLASS="SMALL" COLSPAN="2">$this->getValue("descripcion")."; BENEFICIARIO: ".$this->getValue("nombre")</COL> 
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">columna1</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">columna2</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="RIGHT" NUMBERFORMATEX="2"  TYPE="EXPRESSION">((($this->getValue("tsaldo")=="Acreedor")and($this->getParameter("criterio1")=="S"))?$this->getValue("columna5"):$this->getValue("columna4")) </COL>
+			  </ROW>
+			</FIELDS>   
+			</GROUP> 
+		   </GROUP>
+	</GROUPS>
+</REPORT>
+
+  
+			    
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>RESUMEN DE COMPROBANTES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	 <ROW>
+			 <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="3"></COL> 
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"_____________"</COL>
+		 </ROW>
+         <ROW>
+            <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD"  COLSPAN="3" WIDTH="430">TOTAL COMPROBANTES</COL>
+            <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="0" TYPE="EXPRESSION">$this->getSum("columna1")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="25" CELLSPACING="0" CELLPADDING="3" WIDTH="930"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">RESUMEN DE COMPROBANTES</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	 		   
+	<ROW>
+	   <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"    COLSPAN="4">$this->getParameter("criterio1")</COL>
+	</ROW>
+	<ROW>
+         <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Referencia</COL>
+         <COL CELLCLASS="GROUP_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo Asiento</COL>
+		 <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Descripcion</COL>
+		 <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR">Monto</COL>  
+    </ROW>
+	<ROW>
+		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="4">"_________________________________________________________________________________________________________________________________"</COL> 
+     </ROW>
+   </HEADER>
+   <FOOTER> 
+      	<ROW>
+		  <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="3">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+		</ROW>      
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="Fecha_Comprob" EXPRESSION="fecha">
+		   <HEADER>
+   			 <ROW>
+               <COL ALIGN="LEFT"  TEXTCLASS="BOLD" WIDTH="50">Fecha:</COL>
+               <COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="0">$this->getValue("fechaf")</COL>               
+             </ROW>			 
+           </HEADER>
+		   
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">referencia</COL>	
+            	<COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">tipo_asiento</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">descripcion</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna1</COL>
+			  </ROW>
+			</FIELDS>	
+			<FOOTER>
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="3"></COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"__________"</COL>
+			 </ROW>
+             <ROW>
+               <COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD"  COLSPAN="3">"TOTAL ".$this->getValue("fechaf")</COL>
+               <COL TYPE="EXPRESSION" TEXTCLASS="BOLD" ALIGN="RIGHT"   NUMBERFORMATEX="2" COLSPAN="0">$this->getSum("columna1")</COL>
+             </ROW>
+           </FOOTER>
+		</GROUP>
+	</GROUPS>
+</REPORT>

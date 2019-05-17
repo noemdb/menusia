@@ -1,0 +1,19 @@
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $codigo_mov=$_GET["codigo_mov"];$password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"];
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $ult_ref="00000000";  $concepto=""; $total=0; $cant=0; $chq_desde="00000000";  $chq_hasta="00000000";  $cod_banco="0000"; $num_cheque="00000000"; $fecha=asigna_fecha_hoy();
+$StrSQL="select * from ban030 where codigo_mov='$codigo_mov'"; $resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado);
+if($filas>=1){$registro=pg_fetch_array($resultado,0); $multiple=$registro["status_1"]; $cod_banco=$registro["cod_banco"]; $num_cheque=$registro["num_cheque"]; $chq_desde=$registro["num_cheque"]; $chq_hasta=$registro["num_cheque"]; $fecha=$registro["fecha"];}
+$sql="SELECT * FROM pag027 where codigo_mov='$codigo_mov' and seleccionada='S' order by nro_orden,tipo_causado"; $res=pg_query($sql); $total=0; $cant=0;
+while($registro=pg_fetch_array($res)) { $monto=$registro["monto_orden"]; if($registro["seleccionada"]=='S'){ $total=$total+$registro["monto_orden"]; $cant=$cant+1; $concepto=$registro["concepto"]; }}
+if($cant>0){if($multiple=="S"){$chq_hasta=$chq_hasta; }else{$chq_hasta=$chq_hasta+$cant-1;} $len=strlen($chq_hasta); $chq_hasta=substr("00000000",0,8-$len).$chq_hasta;} $total=formato_monto($total);
+pg_close();?>
+<table width="957"  border="1"> <tr> <td> <table width="956"> <tr> <td><table width="940" border="0" align="center">
+<?if ($multiple=="N"){?> <tr><td width="100"><input name="txtconcepto" type="hidden" id="txtconcepto" value=""></td></tr> <?}else{?> <tr> <td width="88"><span class="Estilo5">CONCEPTO : </span></td><td width="823"><span class="Estilo5"><textarea name="txtconcepto" cols="95" rows="1" onFocus="encender(this)" onBlur="apagar(this)" id="txtconcepto"><? echo $concepto ?></textarea></span></td></tr><?}?>
+</table></td> </tr>  <tr> <td><table width="940" border="0" align="center"><tr>
+<td width="175"><span class="Estilo5">EMISION NOTA DEBITO DESDE : </span></td> <td width="85"><table width="65" border="1" cellspacing="0" cellpadding="0">  <tr> <td width="63" align="right" class="Estilo5"><? echo $chq_desde; ?></td> </tr>   </table></td>
+<td width="70"><span class="Estilo5">HASTA :</span></td> <td width="105"><table width="65" border="1" cellspacing="0" cellpadding="0">  <tr> <td width="63" align="right" class="Estilo5"><? echo $chq_hasta; ?></td> </tr>   </table></td>
+<td width="150"><span class="Estilo5">CANTIDAD DE ORDENES : </span></td>  <td width="95"><table width="65" border="1" cellspacing="0" cellpadding="0">  <tr> <td width="63" align="right" class="Estilo5"><? echo $cant; ?></td> </tr>   </table></td>
+<td width="95"><span class="Estilo5">TOTAL : </span></td> <td width="125"><table width="120" border="1" cellspacing="0" cellpadding="0">  <tr> <td width="123" align="right" class="Estilo5"><? echo $total; ?></td> </tr>   </table></td></tr>
+</table></td></tr> <tr> <td><table width="941" border="0" align="center"> <tr> <td width="50"><input name="txtmultiple" type="hidden" id="txtmultiple" value="<?echo $multiple?>"></td> <td width="100"><input name="txtcant_ord" type="hidden" id="txtcant_ord" value="<?echo $cant?>"></td>
+<td width="100"><input name="txtmonto_ndb" type="hidden" id="txtmonto_ndb" value="<?echo $total?>"></td> <td width="250"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+<td width="200"  align="center"><input name="Grabar" type="submit" id="Grabar"  value="Grabar Nota Debito"></td> <td width="200"  align="center"><input name="Atras" type="button" id="Atras" value="Cancelar" onClick="JavaScript:cancela_emit_ndb()"></td></tr>
+</table></td> </tr> </table> </td> </tr></table>

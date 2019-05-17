@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+        <TITLE>CATALOGO DE DEPARTAMENTOS</TITLE>
+        <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+        <CSS>sia.css</CSS>
+		<DOCUMENT>   
+       	<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+		 <ROW>
+            <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="2" TYPE="EXPRESSION">"DEPARTAMENTOS:   ".$this->getRowCount("codigo_departamento")</COL>
+         </ROW>
+      	</FOOTER>   
+   		</DOCUMENT>
+        <PAGE BORDER="0" SIZE="48" CELLSPACING="0" CELLPADDING="2" WIDTH="930">
+        <HEADER>
+         <ROW>
+                <COL COLSPAN="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                            </TD>
+                                        </TR>
+                                </TABLE>
+                        </XHTML>
+                </COL>
+        </ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="2" HEIGHT="30" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>CATALOGO DE DEPARTAMENTOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	</ROW>
+	<ROW>
+	   <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Codigo</COL>
+	   <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Descripcion del Departamento</COL>
+	</ROW>  
+	<ROW>
+	    <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2">"__________________________________________________________________________________________________________________"</COL> 
+	</ROW>  
+   </HEADER>
+      </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>                          
+                   </HEADER>
+                        <FIELDS>
+                             <ROW>
+                                <COL ALIGN="LEFT" TEXTCLASS="MEDIA" TYPE="FIELD">codigo_departamento</COL>
+                                <COL ALIGN="LEFT" TEXTCLASS="MEDIA" TYPE="FIELD">descripcion_dep</COL>
+                             </ROW>
+                       </FIELDS>
+                </GROUP>
+        </GROUPS>
+</REPORT>

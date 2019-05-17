@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE CONCILIACION BANCARIA</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+		  <ROW>
+
+          </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="50" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bancos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLD">CONCILIACION BANCARIA</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>			   
+	<ROW>
+          <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="5" TYPE="EXPRESSION">"Banco:  ".$this->getValue("nombre_banco")</COL>
+		<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="2" TYPE="EXPRESSION">"Cuenta:  ".$this->getValue("nro_cuenta")</COL>
+   	</ROW>
+	<ROW>
+          <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="7" TYPE="EXPRESSION">"Mes:  ".$this->getParameter("dperiodod")</COL>
+   	</ROW>
+	<ROW>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Documento</COL>
+          <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Referencia</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>  
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR"></COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">SubTotales</COL>
+		  <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR"></COL>
+   	</ROW>	
+   </HEADER>
+   <FOOTER> 
+           
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE"  PAGEBREAK="TRUE" NAME="cod_banco" EXPRESSION="cod_banco">
+		   <HEADER>
+		   	 <ROW>
+			 	<COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="6" TYPE="EXPRESSION">"Saldo Segun Libros:  "</COL>
+				<COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna4</COL>
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+		     <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="8" TYPE="EXPRESSION">" "</COL>
+			 </ROW>
+             <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="6" TYPE="EXPRESSION">"Saldo en Bancos Segun Conciliacion:  "</COL>
+				<COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna2</COL>
+             </ROW>
+			 <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="6" TYPE="EXPRESSION">"Saldo Actual en Bancos:  "</COL>
+				<COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna5</COL>
+             </ROW>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_registro" EXPRESSION="tipo_registro">
+		   <HEADER>		   	 
+           </HEADER>
+		   <FOOTER>             
+           </FOOTER>
+		   <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo" EXPRESSION="tipo">
+		   <HEADER>
+		   	  <ROW>
+				<COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="7" TYPE="EXPRESSION">$this->getValue("titulo_tipo_mov")</COL>
+			</ROW>
+           </HEADER>
+		   <FOOTER>
+              <ROW>
+			 	<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="5" TYPE="EXPRESSION">"Sub Total:  "</COL>
+                <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD">columna2</COL> 
+			 </ROW>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_mov_trans" EXPRESSION="tipo_mov_trans">
+		   <HEADER>
+		   	 <ROW>
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+		    <ROW>
+			 	<COL ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="3" TYPE="EXPRESSION"></COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="1"  TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":"_________")</COL>
+			    
+             </ROW>
+		   	 <ROW>
+			    <COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="REGULAR" COLSPAN="3"  TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":"Total:  ".$this->getValue("descrip_tipo_mov"))</COL>
+			    <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":$this->getSum("monto_mov_trans"))</COL>
+             </ROW>
+           </FOOTER>		  
+             <FIELDS>
+   			  <ROW>
+			    <COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":$this->getValue("tipo_mov_trans"))</COL>
+			    <COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":$this->getValue("referencia"))</COL>			    
+			  	<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":$this->getValue("fecham"))</COL>			    
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="2" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("tipo_registro")=="0"?"":$this->getValue("monto_mov_trans"))</COL>
+			    <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="2" TYPE="EXPRESSION"></COL>
+			  </ROW>
+			</FIELDS>			
+			</GROUP>
+			</GROUP>
+			</GROUP>
+			</GROUP>
+	</GROUPS>
+</REPORT>

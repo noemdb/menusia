@@ -1,0 +1,3 @@
+yurikalugo@hotmail.com
+
+http://localhost/sia/nomina/rpt/Recibosnomina.php?&cedula=20068484&tipo_calculo=N&fecha_nom=15/10/2015

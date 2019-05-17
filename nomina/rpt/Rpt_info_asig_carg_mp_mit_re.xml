@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>INFORMACION DE ASIGNACION DE CARGOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="50" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="40" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		   
+			   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>INFORMACION ASIGNACION DE CARGOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="FALSE" NAME="cod_empleados" EXPRESSION="cod_empleado">
+		   <HEADER>
+		      <ROW>
+                <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="6">"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+			 </ROW>
+		     <ROW>
+			 	<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Codigo</COL>
+				<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="3" TYPE="REGULAR">Nombre</COL>
+				<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cedula</COL>
+				<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Estatus</COL>
+     		 </ROW>	
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_empleado")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="3">$this->getValue("nombre")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cedula")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("status")</COL> 
+			 </ROW>
+			 <ROW>
+         		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="6" TYPE="REGULAR">DETALLE</COL>
+     		 </ROW>
+			 <ROW>
+         		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cod. Cargo</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Descripcion</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cod. Dpto</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Departamento</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha Asig.</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Sueldo Cargo</COL>
+     		 </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">cod_cargo</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">des_cargo</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">cod_departamento</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">des_departamento</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">fechaa</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">sueldo</COL>
+			  </ROW>
+			</FIELDS>   
+		</GROUP> 
+	    </GROUP>
+	</GROUPS>
+</REPORT>

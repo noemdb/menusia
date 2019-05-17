@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE MAESTRO DE TRABAJADORES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="55" CELLSPACING="0" CELLPADDING="2" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="45" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>	
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="8" HEIGHT="30" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>REPORTE MAESTRO DE TRABAJADORES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleado" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>
+                <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="8">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+			 </ROW>
+   			 <ROW>        		
+         		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Codigo</COL>
+         		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="4" TYPE="REGULAR">Nombre Trabajador</COL>
+		  		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cedula</COL>
+		  		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Estatus</COL>  
+		  		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha Ingreso</COL>          
+            </ROW>
+			<ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">cod_empleado</COL>	
+            			<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="4" TYPE="FIELD">nombre</COL>
+                		<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1" TYPE="FIELD">cedula</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1" TYPE="FIELD">status</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1" TYPE="FIELD">fecha_ingreso</COL>
+			  </ROW>
+			  <ROW>        		
+         			<COL ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Tipo</COL>
+         			<COL ALIGN="LEFT" COLSPAN="2" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Descripcion</COL>
+		  		<COL ALIGN="CENTER" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cod. Categoria</COL>
+		  		<COL ALIGN="CENTER" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Tipo Pago</COL>  
+		  		<COL ALIGN="LEFT" COLSPAN="3" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cuenta Empleado</COL>          
+            </ROW>
+			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">tipo_nomina</COL>	
+            			<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="2" TYPE="FIELD">descripcion</COL>
+                		<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1" TYPE="FIELD">cod_categoria</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" COLSPAN="1" TYPE="FIELD">tipo_pago</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="3" TYPE="FIELD">cta_empleado</COL>
+			  </ROW>
+			  <ROW>
+			    	<COL  ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nacionalidad:</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">nacionalidad</COL>	
+		  		<COL  ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Codigo:</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">cod_banco</COL>	
+		  		<COL  ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cuenta Empresa:</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">cta_empresa</COL>	      
+				<COL  ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Nombre del Banco:</COL>      
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">nombre_banco</COL>
+			  </ROW>
+			  <ROW>        		
+         			<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Sexo</COL>
+         			<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Edo. Civil</COL>
+		  		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="2" TYPE="REGULAR">Fecha Nac.</COL>
+		  		<COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Edad</COL>  
+		  		<COL ALIGN="RIGTH" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cod. Postal</COL>          
+            </ROW>
+			<ROW>
+				<COL TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">sexo</COL>	
+            			<COL TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">edo_civil</COL>
+                		<COL TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">fecha_nacimiento</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">edad</COL>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">cod_postal</COL>
+			  </ROW>
+			<ROW>
+			  <COL ALIGN="LEFT" COLSPAN="2" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Lugar de Nac:</COL> 
+			  <COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">lugar_nacimiento</COL>
+			  <COL ALIGN="LEFT" COLSPAN="2" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Email:</COL>    
+			  <COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">correo</COL>  
+			 </ROW>
+			 <ROW>
+			 	<COL ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Direccion:</COL> 
+			  	<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="7" TYPE="FIELD">direccion</COL>
+			 </ROW> 
+			 <ROW>
+			 	<COL ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Ciudad:</COL> 
+			  	<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="3" TYPE="FIELD">ciudad</COL>
+				<COL ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Estado:</COL> 
+			  	<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">estado</COL>
+				<COL ALIGN="LEFT" COLSPAN="1" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Telefono:</COL> 
+			  	<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">telefono</COL>
+			 </ROW>
+			 
+			 <ROW>        		
+         		<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="8">ASIGNACION DE CARGOS</COL>       
+             </ROW>
+             <ROW>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Codigo</COL>
+         		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="2">Descripcion Cargo</COL>
+				<COL ALIGN="LEFT"  TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="3">Departamento</COL> 
+		  		<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Fecha</COL>
+		  		<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR" COLSPAN="1">Sueldo Cargo</COL>  
+			  </ROW> 			 
+           </HEADER>
+		   <FOOTER>
+		     <ROW>
+                <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="8">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+			 </ROW>
+			 <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="SSMALL" COLSPAN="8">"."</COL>               
+             </ROW>
+           </FOOTER>			
+           <FIELDS>
+			  <ROW>
+				<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">cod_cargo</COL>	
+            	<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="2" TYPE="FIELD">des_cargo</COL>
+				<COL ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="3" TYPE="FIELD">des_departamento</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIA" COLSPAN="1" TYPE="FIELD">fecha_asigna</COL>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD" COLSPAN="1">sueldo</COL>
+			  </ROW>			 
+			</FIELDS>  
+		</GROUP>
+	</GROUPS>
+</REPORT>

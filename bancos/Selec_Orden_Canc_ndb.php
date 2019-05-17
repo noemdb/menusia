@@ -1,0 +1,6 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php");
+error_reporting(E_ALL); $codigo_mov=$_GET["codigo_mov"]; $tipo_ord_nom=$_GET["tipo_ord_nom"];  $ced_rif=$_GET["ced_rif"]; $nro_orden=$_GET["nro_orden"]; $tipo_causado=$_GET["tipo"]; $selec=$_GET["selec"]; $orden=$_GET["orden"]; $multiple=$_GET["multiple"];  $mostrar=$_GET["mostrar"];
+$url="Det_ord_canc_nomina.php?codigo_mov=".$codigo_mov."&tipo_ord_nom=".$tipo_ord_nom."&orden=".$orden."&mostrar=".$mostrar;  $error=0; if ($selec=="S") { $selec="N"; } else { $selec="S"; }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $error=0;
+if($error==0){$resultado=pg_exec($conn,"SELECT SELECCIONA_PAG027('$codigo_mov','$nro_orden','$tipo_causado','$selec')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <?}}
+pg_close();  error_reporting(E_ALL ^ E_WARNING);?> <script language="JavaScript">  document.location ='<? echo $url; ?>' </script>

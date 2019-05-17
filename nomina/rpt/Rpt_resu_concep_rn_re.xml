@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>RESUMEN DE CONCEPTOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	 <ROW>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="3">""</COL>  
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"==========="</COL>
+         </ROW>
+		 <ROW>
+			<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="MEDIABOLD" COLSPAN="3">"TOTAL GENERAL:              ".$this->getParameter("criterio1")</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto")</COL>  
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="4"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD">$this->getParameter("criterio1")</COL>
+	</ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="4">"Nomina:   ".$this->getValue("tipo_nomina")."     ".$this->getValue("des_nomina")</COL>               
+    </ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="4">
+                   "Fecha:   ".$this->getValue("fecha_desde")."     "."al "."        ".$this->getValue("fecha_p_hasta")</COL>            
+    </ROW>
+	 <ROW>
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Código</COL>
+		 <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Descripcion</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cant. Beneficiarios</COL>
+         <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>
+     </ROW>		
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_nomin" EXPRESSION="tipo_nomina">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_conceptos" EXPRESSION="cod_concepto">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_concepto")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("denominacion")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="0" TEXTCLASS="MEDIA" COLSPAN="1">$this->getRowCount("cod_empleado")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1">$this->getSum("monto")</COL> 
+			 </ROW>
+           </FOOTER>
+		</GROUP>
+	    </GROUP>
+	</GROUPS>
+</REPORT>

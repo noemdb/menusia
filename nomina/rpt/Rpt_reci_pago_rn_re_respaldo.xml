@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>RECIBOS DE PAGO</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>SIA.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="2" SIZE="18" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="940" rowspan="4">
+						  <IMG SRC="/sia/imagenes/Encabezado_rpt_contab_deta.png" WIDTH="930" HEIGHT="55" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		   
+	<ROW>	
+	   <COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="HEADER" COLSPAN="5">"RECIBOS DE PAGO NRO"</COL>						    
+    </ROW>
+   </HEADER>
+   <FOOTER> 
+  		 <ROW>
+			<COL ALIGN="LEFT"  CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" HEIGHT="50" NUMBERFORMATEX="2" COLSPAN="5" TYPE="EXPRESSION"></COL>
+		</ROW>
+   		<ROW>
+			<COL ALIGN="LEFT"  CELLCLASS="HEADER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="5" TYPE="EXPRESSION">"Calle Ppal. Urb. Mirabel, Sector Plata I; Sede No. 2005. Valera Edo. Trujillo"</COL>
+		</ROW> 
+   		 <ROW>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="5">"Pag.   ".$this->getPageNum()</COL>
+		</ROW>    
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_empleados" EXPRESSION="cod_empleado">
+		   <HEADER>
+		     <ROW>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" HEIGHT="65" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="5">"He recibido del SERVICIO AUTÓNOMO ESTADAL PARA EL POGRAMA DE ALIMENTACIÒN ESCOLAR (PAE ESTADAL), la Cantidad de  @Cantidad_Letra (Bs.".$this->getSum("monto_asignacion")."-".$this->getSum("monto_deduccion")."), por concepto de  pago de retroactivo de sueldo correspondiente al aumento salarial decretado a partir del 01 de Mayo 2007 por los servicios prestados como,"."     ".$this->getValue("des_cargo")."   "." , adscrito a"."   ".$this->getValue("des_departam")."    ".", durante el lapso comprendido  desde la 1era  quincena del Mes de  Mayo hasta la 1era Quincena de Octubre de 2007."</COL> 
+			 </ROW>
+			 <ROW>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="5">"De igual forma manifiesto estar de acuerdo con las deducciones aplicadas a mi remuneración de conformidad con el ordenamiento juridico vigente, así:"</COL> 
+			 </ROW>
+			 <ROW>
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="5">"Asignación Mensual Bs.:"."   ".$this->getValue("sueldo_cargo")</COL> 
+			 </ROW>
+			 <ROW>
+			 	<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Descripción Concepto</COL>
+         		<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Asignaciones</COL>
+				<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">Deducciones</COL>
+         		<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR">NETO</COL>
+			</ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" COLSPAN="1">"Total:"</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("monto_asignacion")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("monto_deduccion")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("monto_asignacion")-$this->getSum("monto_deduccion")</COL> 
+			 </ROW>
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="3">"TOTAL  Bs F.:"</COL>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1"></COL>  
+			</ROW>
+			<ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" HEIGHT="70" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="4">"En Valera a los @Dia_Pago (@Dia) días del mes de @Mes_Pago de @Ano_Pago (@ANO)"</COL>
+			</ROW>
+			<ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="4">$this->getValue("nombre")</COL>
+			</ROW>
+			<ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER"  TEXTCLASS="BOLD" COLSPAN="4">$this->getValue("cedula")</COL>
+			</ROW>
+			<ROW>
+			</ROW>
+           </FOOTER>
+		   <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_conceptos" EXPRESSION="cod_concepto">
+			 <HEADER> 
+			 	<ROW>
+			 		<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("denominacion")</COL>
+					<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">$this->getSum("monto_asignacion")</COL> 
+					<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">$this->getSum("monto_deduccion")</COL>
+					<COL TYPE="EXPRESSION" ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1"></COL>  
+				</ROW>
+			 </HEADER>
+			 <FOOTER> </FOOTER>
+		  </GROUP>
+	    </GROUP>
+	</GROUPS>
+</REPORT>

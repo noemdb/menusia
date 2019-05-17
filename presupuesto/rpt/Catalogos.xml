@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "/sia/class/phpreports/PHPReport.dtd">
+<REPORT MARGINWIDTH="5" MARGINHEIGHT="5">
+	<TITLE><REPLACE_WITH_TITLE/></TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <!--
+    <CSS>pre002.css</CSS> 
+	<CSS>/sia/class/phpreports/css/phpreports.css</CSS>	
+    -->	
+	<CSS>pre002.css</CSS>
+	<NO_DATA_MSG>Datos no Localizados, chequee su consulta</NO_DATA_MSG>
+	<REPLACE_WITH_DOCUMENT_INFO/>
+   <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="800">
+		<HEADER>
+		   <ROW>
+            <COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+               <XHTML>
+			      <TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">     
+				  <TR>
+						<TD CLASS="HEADER">
+							<b>JOHN DOE ENTERPRISES</b>
+						</TD>
+						<TD ROWSPAN="2" CLASS="HEADER" style="background:#A0A0A0;color:#FFFFFF;" ALIGN="CENTER">
+								powered by<br/><b>phpreports</b>
+						</TD>
+					</TR>
+					<TR>
+						<TD CLASS="HEADER">
+							<b>SALES REPORT</b>
+						</TD>
+					</TR>
+					<TR>
+						<TD COLSPAN="3"><HR/></TD>
+					</TR>
+				  
+				  
+				               
+				      <TR>						
+						<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="100" ROWSPAN="2">
+							<IMG SRC="/phpreports/img/Logo_ceinco.png" BORDER="0"/>
+						</TD>
+					   </TR>   
+                      <TR>
+                        <TD CLASS="TITLE" ALIGN="LEFT" VALIGN="TOP" COLSPAN="2">
+                           Republica Bolivariana de Venezuela
+						   SIA Contablidad Presupuestaria
+                        </TD>
+				      </TR>
+					  <TR>		
+   				        <TD CLASS="TITLE" ALIGN="LEFT" VALIGN="TOP" COLSPAN="2">
+						   SIA Contablidad Presupuestaria							   
+                        </TD>
+					  </TR>	
+					  <TR>
+                        <TD CLASS="REGULAR" ALIGN="LEFT" VALIGN="TOP" ROWSPAN="2">
+                           Nombre de Empresa
+                        </TD>
+					  </TR>						  
+                     <TR>                        
+                        <TD ALIGN="CENTER" VALIGN="CENTER" CLASS="DOCUMENT_LAYER">
+                           Catalogo de Documentos Compromisos
+                        </TD>
+                     </TR>
+                  </TABLE>
+               </XHTML>
+            </COL>
+         </ROW>
+      </HEADER>
+	  
+	  
+			<ROW BORDER="1">
+			<COL>
+			   <table>
+          <tr>
+            <td> 
+			   <IMG WIDTH="52" HEIGHT="32" BORDER="0">/sia/imagenes/Logo_ceinco.png</IMG>
+			   </tr>
+			   </td>
+			   </table>
+			</COL>
+			<COL ALIGN="LEFT" COLSPAN="5" TYPE="EXPRESSION">insert_Nom_Emp()</COL>			
+			</ROW>
+			<ROW BORDER="0">
+			<COL ALIGN="LEFT" COLSPAN="3" TYPE="REGULAR">SIA Contablidad Presupuestaria</COL>
+			</ROW>
+			<ROW BORDER="0">
+			<COL CLASS="TITLE" ALIGN="CENTER" VALIGN="TOP" ROWSPAN="2" COLSPAN="3" TYPE="REGULAR">Catalogo de Documentos Compromisos</COL>
+			</ROW>
+			
+			
+			
+		 <ROW>
+		<!--  <COL ALIGN="RIGHT" COLSPAN="3" TYPE="EXPRESSION"  CELLCLASS="HEADER">insert_Nom_Emp()</COL> -->
+		 </ROW> 
+			<REPLACE_WITH_PARAMETERS/>
+		</HEADER>
+		<FOOTER>
+			<ROW>
+				<COL ALIGN="RIGHT" COLSPAN="50" TYPE="EXPRESSION" CELLCLASS="FOOTER">"pag. ".$this->getPageNum()</COL>
+			</ROW>
+		</FOOTER>
+	</PAGE>
+	<GROUPS>
+		<REPLACE_WITH_GROUP_INFO/>
+	</GROUPS>
+</REPORT>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE LISTADO DE TRABAJADORES</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER>
+	      <ROW>           
+            <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="SMALL"  COLSPAN="2">"."</COL> 
+           </ROW>
+	      <ROW>           
+            <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"  COLSPAN="2">"CANTIDAD DE TRABAJADORES: ".$this->getParameter("cant")</COL> 
+           </ROW> 
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="53" CELLSPACING="0" CELLPADDING="2" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="45" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>	
+			   
+	<ROW>
+		<COL COLSPAN="8" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>REPORTE LISTADO DE TRABAJADORES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	</ROW>
+	<ROW>           
+          <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"  COLSPAN="2">$this->getParameter("criterio1")</COL> 
+     </ROW> 
+     <ROW>           
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">CEDULA</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="3" TYPE="REGULAR">NOMBRE TRABAJADOR</COL>
+		 <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"  COLSPAN="2">$this->getParameter("enc1")</COL> 
+		 <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD"  COLSPAN="2">$this->getParameter("enc2")</COL> 
+     </ROW> 
+    <ROW>
+         <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="8">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+	</ROW>	 
+   </HEADER>
+   </PAGE>
+	<GROUPS>		
+          <GROUP REPRINT_HEADER_ON_PAGEBREAK="FALSE" NAME="cod_empleado" EXPRESSION="cod_empleado">
+			 <HEADER> 			
+			 </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">cedula</COL>	
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="3" TYPE="FIELD">nombre</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="2" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getParameter("c1")=="N"?"":$this->getValue("col1"))</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" COLSPAN="2" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getParameter("c2")=="N"?"":$this->getValue("col2"))</COL>
+			  </ROW>
+			</FIELDS>     
+           
+		</GROUP>
+	</GROUPS>
+</REPORT>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE LISTADO DE ACTIVOS FIJOS Y DEPRECIACIÓN ACUMULADA </TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+      <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="5" WIDTH="500">    
+              <ROW>
+		<COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="8">"TOTALES:  "</COL>
+		<COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("valor_incorporacion")</COL>
+		<COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("saldo_dep")</COL>
+		<COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("monto_dep")</COL>
+		<COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("saldo_dep")+$this->getSum("monto_dep")</COL>
+               </ROW>    
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="12" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="12" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="12" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>LISTADO DE ACTIVOS FIJOS Y DEPRECIACIÓN ACUMULADA </b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+          <ROW>
+               <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="12">"AL : ".$this->getParameter("fecha_d")</COL>
+           </ROW>
+	   <ROW>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Item</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Codigo del Bien</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Denominacion</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Marca</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Modelo</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Serial</COL>
+             	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">N° Cheque</COL>
+	     	<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+             	<COL ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Valor Incorporacion</COL>
+             	<COL ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Depreciacion Mes Anterior</COL>
+	     	<COL ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Depreciacion del Mes</COL>
+             	<COL ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Depreciacion Acumulada</COL>
+          </ROW>
+	</HEADER>
+      </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles">
+         	  <HEADER>
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+		       <COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="1"></COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">cod_bien_mue</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">caracteristicas</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">marca</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">modelo</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">serial1</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">nro_doc_cancela</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">fecha_doc_cancela</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD" COLSPAN="1">saldo_dep</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD" COLSPAN="1">monto_dep</COL>
+		       <COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getValue("saldo_dep")+$this->getValue("monto_dep")</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

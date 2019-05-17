@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>REPORTE CHEQUES NO CONCILIADOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>SIA.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="7" WIDTH="500">
+
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="55" CELLSPACING="0" CELLPADDING="4" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bancos.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="GBOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="GBOLD">CHEQUES NO CONCILIADOS</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	</ROW>	  		   
+	<ROW>
+        <COL TYPE="EXPRESSION" TEXTCLASS="REGULAR" COLSPAN="5">"Banco:  "."    ".$this->getValue("nombre_banco")."    "."Numero Cuenta:  ".$this->getValue("nro_cuenta")</COL>               
+    </ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" TEXTCLASS="REGULAR" COLSPAN="5">"Fecha Hasta:  ".$this->getParameter("criterio1")</COL>               
+    </ROW>
+	 <ROW>
+          		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Cheque Nro</COL>
+          		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+		  		<COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Beneficiario</COL>
+		  		<COL CELLCLASS="GROUP_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>  
+   	</ROW>
+   </HEADER>
+   <FOOTER>
+   	   <ROW>
+		  <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="4">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+	   </ROW>          
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="codigo_banco" EXPRESSION="cod_banco">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+		    <ROW>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="4" TYPE="EXPRESSION"></COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">"___________"</COL>
+             </ROW>
+             <ROW>
+				<COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD"  COLSPAN="2" TYPE="EXPRESSION">"Cantidad de Cheques:   ".$this->getRowCount("num_cheque")</COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="2" TYPE="EXPRESSION">"Total:   "</COL>
+				<COL ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1" TYPE="EXPRESSION">$this->getSum("monto_mov_trans")</COL>
+             </ROW>
+           </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">referencia</COL>
+			    <COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="1" TYPE="FIELD">fecham</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="LEFT" COLSPAN="2" TYPE="FIELD">beneficiario</COL>
+				<COL TEXTCLASS="REGULAR" ALIGN="RIGHT" COLSPAN="1" NUMBERFORMATEX="2" TYPE="FIELD">monto_mov_trans</COL>
+			  </ROW>
+			</FIELDS>
+			</GROUP>
+			</GROUP>
+	</GROUPS>
+</REPORT>

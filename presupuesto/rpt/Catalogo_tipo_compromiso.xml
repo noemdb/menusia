@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>CATALOGO TIPOS DE COMPROMISOS</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+      <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="5" WIDTH="500">        
+      </FOOTER> 
+   </DOCUMENT>
+    <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="6" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CATALOGO TIPOS DE COMPROMISO</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	
+	</HEADER>
+   </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+                   <HEADER>
+			<ROW>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tipo</COL>
+	     			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Nombre Tipo</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Cod. Contable</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Partida Iva</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tipo Gasto</COL>
+             			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Partida Iva Fija</COL>
+          		</ROW>
+			<ROW>
+	   			<COL ALIGN="LEFT" COLSPAN="6" TYPE="EXPRESSION"  TEXTCLASS="BOLD">"___________________________________________________________________________________________________________________________"</COL>
+			</ROW>	
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">tipo_comp</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">des_tipo_comp</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cod_contable</COL>
+		       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">cod_part_iva</COL>
+		       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">func_inv_tpcomp</COL>
+		       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">c_imp_unico</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

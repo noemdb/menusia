@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>CATALOGO DE FORMULA DE CONCEPTOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+            <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="5" TYPE="EXPRESSION">"TOTAL FORMULAS:   ".$this->getRowCount("cod_concepto")</COL>
+         </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="28" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>CATALOGO DE FORMULA DE CONCEPTOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   
+	 <ROW>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Consec.</COL>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Acción</COL>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Rango Inicial</COL>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Rango Final</COL>
+        	<COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Resultado 1</COL>
+         </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_nomina" EXPRESSION="tipo_nomina">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getValue("tipo_nomina")</COL>   
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("descripcion")</COL>            
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="5" TYPE="EXPRESSION">"FORMULAS DE:   ".$this->getValue("descripcion")."  :"."     ".$this->getRowCount("cod_concepto")</COL> 
+             </ROW>
+           </FOOTER>
+		   <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="concepto" EXPRESSION="cod_concepto">
+		   <HEADER>
+   			 <ROW>
+				<COL TYPE="EXPRESSION" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getValue("cod_concepto")</COL>   
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("denominacion")</COL>                 
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+           </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalle" EXPRESSION="detalles">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD">consecutivo</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD">accion</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD">rango_inicial</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD">rango_final</COL>
+                <COL ALIGN="CENTER" TEXTCLASS="MEDIA" TYPE="FIELD">calculo1</COL>
+			  </ROW>
+			  <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" COLSPAN="4">"Resultado 2"</COL>
+				<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("calculo2")</COL>               
+             </ROW>
+			 <ROW>
+        		<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" COLSPAN="4">"Resultado Final"</COL>
+				<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("calculofinal")</COL>               
+             </ROW>
+			</FIELDS>   
+			</GROUP>
+			</GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

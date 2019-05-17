@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE DEPRECIACION DE BIENES MUEBLES</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="11" WIDTH="500">
+                 <ROW>
+                </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="7" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>DEPRECIACION DE BIENES MUEBLES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>   
+	</HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_bien_inmu" EXPRESSION="cod_bien_inm">
+                   <HEADER>
+          		<ROW>
+               			<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="7">"Cod. Bien   "."    ".$this->getValue("cod_bien_inm")."     ".$this->getValue("denominacion")</COL>
+          		</ROW> 
+                        <ROW>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Cod. Dependencia</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("denominacion_dep")</COL>
+               			<COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Valor Incorporacion</COL>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Valor Residual</COL>
+ 
+                        </ROW>
+                        <ROW>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Referencia</COL>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Fecha</COL>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Descripcion</COL>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Calculo</COL>
+               			<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Saldo Anterior</COL>
+               			<COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Monto Depreciacion</COL>
+               			<COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Valor Actual</COL>
+ 
+                        </ROW>		
+                  </HEADER>
+		  <FOOTER>
+                         <ROW>
+               		     <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="5">TOTAL</COL>
+                             <COL TYPE="EXPRESSION" NUMBERFORMATEX="2" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getSum("valor_incorporacion")-$this->getSum("saldo_dep")</COL>
+                             <COL TYPE="EXPRESSION" NUMBERFORMATEX="2" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getSum("valor_incorporacion")-$this->getSum("saldo_dep")</COL>
+                         </ROW>
+                  </FOOTER>
+                 <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+                   <HEADER>
+                  </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">referencia_dep</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">fechad</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">descripcion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">status</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">saldo_dep</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" TYPE="FIELD" COLSPAN="1">monto_dep</COL>
+                       <COL TYPE="EXPRESSION" NUMBERFORMATEX="2" ALIGN="RIGHT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("valor_incorporacion")-$this->getValue("saldo_dep")</COL>
+                       </ROW>
+                   </FIELDS>
+              </GROUP>
+            </GROUP>
+       </GROUPS>
+</REPORT>

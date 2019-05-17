@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE DE MODIFICACIONES AL PRESUPUESTO</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+                                    <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="4"></COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"=========="</COL>
+                </ROW>
+		 <ROW>
+<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="4">"TOTAL GENERAL : "</COL>
+<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="1">$this->getSum("ajustado")</COL>
+                </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="25" CELLSPACING="0" CELLPADDING="2" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>MODIFICACIONES</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+          <ROW>
+               <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="3">$this->getParameter("criterio1")</COL>
+	       <COL ALIGN="RIGHT"  TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="2">$this->getParameter("criterio2")</COL>
+          </ROW>
+	<ROW>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Referencia</COL>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fecha</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="3" TYPE="REGULAR">Descripcion</COL>
+
+          </ROW>
+	<ROW>
+             <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Codigo Presupuestario</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="2" TYPE="REGULAR">Denominacion</COL>
+             <COL ALIGN="RIGHT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Monto</COL>
+          </ROW>
+	<ROW>
+	   <COL ALIGN="LEFT" COLSPAN="5" TYPE="EXPRESSION"  TEXTCLASS="BOLD">"_________________________________________________________________________________________________________________________________________"</COL>
+	</ROW>	    
+	</HEADER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_compromiso" EXPRESSION="fecha_doc,tipo_compromiso,referencia_comp">
+                   <HEADER>
+                        <ROW>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("referencia_comp")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="1">$this->getValue("fechad")</COL>
+                                <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="REGULAR" COLSPAN="3">$this->getValue("descripcion_doc")</COL>
+                        </ROW>	
+                  </HEADER>
+                  <FOOTER>
+                     <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="4"></COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="BOLD" COLSPAN="1">"=========="</COL>
+                </ROW>
+		 <ROW>
+		 	<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="CENTER" TEXTCLASS="BOLD" COLSPAN="4"></COL>
+<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="1">$this->getSum("ajustado")</COL>
+                </ROW>
+                   </FOOTER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">cod_presup</COL>
+					    <COL TEXTCLASS="REGULAR" COLSPAN="1" ALIGN="LEFT" TYPE="FIELD">fuente_financ</COL>
+                       <COL TEXTCLASS="REGULAR" COLSPAN="2" ALIGN="LEFT" TYPE="FIELD">den_corta</COL>
+<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="REGULAR" COLSPAN="1">($this->getValue("func_inv")=="+"?$this->getValue("monto"):$this->getValue("comprometido"))</COL>
+                   </ROW>
+                   </FIELDS>
+            </GROUP>
+       </GROUPS>
+</REPORT>

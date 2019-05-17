@@ -1,0 +1,14 @@
+<?include ("../class/conect.php");  include ("../class/funciones.php");   error_reporting(E_ALL);
+$tipo_planilla=$_POST["txtplanilla"]; $nro_planilla=$_POST["txtnro_planilla"];  $pdesde=$_POST["txtpdesde"]; $phasta=$_POST["txtphasta"]; $fdesde=$_POST["txtfdesde"]; $fhasta=$_POST["txtfhasta"];
+$cod_retencion=$_POST["txtcod_ret"]; $fecha_enterado=$_POST["txtfecha_ent"]; $nro_deposito=$_POST["txtnro_deposito"];  $nombre_banco_ent=$_POST["txtnomb_banco"];
+$equipo=getenv("COMPUTERNAME");$MInf_Usuario=$equipo." ".date("d/m/y H:i a"); echo "ESPERE POR FAVOR MODIFICANDO....","<br>";
+$url="Det_ent_planillas.php?tipo_planilla=".$tipo_planilla."&plan_desde=".$pdesde."&plan_hasta=".$phasta."&fecha_desde=".$fdesde."&fecha_hasta=".$fhasta;
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $error=0;
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+ else{$sSQL="SELECT codigo FROM BAN011 WHERE codigo='$tipo_planilla'";  $resultado=pg_query($sSQL);  $filas=pg_num_rows($resultado); if($filas==0){$error=1; ?> <script language="JavaScript"> muestra('TIPO DE PLANILLA NO EXISTE');</script><? }
+    if($error==0){if(checkData($fecha_enterado)=='1'){$error=0;}else{$error=1; ?> <script language="JavaScript">muestra('FECHA ENTERAR NO ES VALIDA');</script><? } }
+    if($error==0){$sSQL="SELECT nro_planilla FROM BAN012 WHERE tipo_planilla='$tipo_planilla' and nro_planilla='$nro_planilla'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas==0){$error=1;?><script language="JavaScript"> muestra('NÚMERO PLANILLA DE RETENCIÓN NO EXISTE');</script><?}}
+    if($error==0){$sSQL="SELECT nro_planilla FROM BAN013 WHERE tipo_planilla='$tipo_planilla' and nro_planilla='$nro_planilla'"; $resultado=pg_query($sSQL); $filas=pg_num_rows($resultado); if($filas>=1){$error=1;?><script language="JavaScript"> muestra('NÚMERO PLANILLA DE RETENCIÓN YA ENTERADA');</script><?}}
+    if($error==0){$sfechaf=formato_aaaammdd($fecha_enterado); $sSQL="SELECT ACTUALIZA_BAN013(1,'$tipo_planilla','$nro_planilla','$cod_retencion','$sfechaf','$nombre_banco_ent','$nro_deposito','','')";
+      $resultado=pg_exec($conn,$sSQL); $error=pg_errormessage($conn); $error="ERROR GRABANDO: ".substr($error, 0, 61);  if (!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><?}}
+}pg_close(); error_reporting(E_ALL ^ E_WARNING); if($error==0){?><script language="JavaScript">document.location ='<? echo $url; ?>';</script><?} else{?><script language="JavaScript">history.back();</script><?}?>

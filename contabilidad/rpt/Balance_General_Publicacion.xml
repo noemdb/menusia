@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>BALANCE FISCAL </TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="0" TYPE="EXPRESSION">
+   	  <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="1" WIDTH="500">
+      </FOOTER>        
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="120" CELLSPACING="0" CELLPADDING="1" WIDTH="930"> 
+	<HEADER>
+         <ROW>
+                <COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+                        <XHTML>
+                                <TABLE BORDER="0" CELLPADDING="6" CELLSPACING="0" WIDTH="100%">
+                                        <TR>
+                                            <TD width="930" rowspan="4">
+                                                  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>
+                                             </TD>
+                                        </TR>
+                                 </TABLE>
+                        </XHTML>
+                </COL>
+        </ROW>
+		<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLDBIG">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="1" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+					<TR>
+					   	<TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLDBIG">BALANCE GENERAL</TD>
+				    </TR>	
+				</TABLE>				
+			</XHTML>
+		  </COL>	
+	    </ROW>
+		<ROW>
+	      <COL ALIGN="CENTER"  TYPE="EXPRESSION" TEXTCLASS="BOLD"   COLSPAN="6">$this->getParameter("criterio1")</COL>
+	    </ROW>
+   </HEADER>
+   <FOOTER>      
+   </FOOTER>
+   </PAGE>
+	<GROUPS>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalle" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+				<ROW>
+					<COL TEXTCLASS="BOLD" ALIGN="CENTER" COLSPAN="6" TYPE="EXPRESSION">($this->getValue("status")=="A"?$this->getValue("nombre_cuenta"):"")</COL>
+				</ROW>
+				<ROW>
+					<COL TEXTCLASS="BOLD" ALIGN="CENTER" COLSPAN="3" TYPE="EXPRESSION">($this->getValue("status")=="B"?$this->getValue("nombre_cuenta"):"")</COL>
+				    <COL TEXTCLASS="BOLD" ALIGN="CENTER" COLSPAN="3" TYPE="EXPRESSION">($this->getValue("status")=="B"?$this->getValue("nombre_cuenta2"):"")</COL>
+			
+				</ROW>
+				<ROW>
+				    <COL TEXTCLASS="REGULAR" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="C"?$this->getValue("codigo_cuenta"):"")</COL>
+                    <COL TEXTCLASS="REGULAR" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="C"?$this->getValue("nombre_cuenta"):"")</COL>
+				    <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="C"?($this->getValue("columna1")==0?"":$this->getValue("columna1")):"")</COL>
+				   	<COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="EXPRESSION">($this->getValue("status")=="C"?$this->getValue("codigo_cuenta2"):"")</COL>
+                    <COL TEXTCLASS="REGULAR" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="C"?$this->getValue("nombre_cuenta2"):"")</COL>
+				    <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="C"?($this->getValue("columna2")==0?"":$this->getValue("columna2")):"")</COL>
+				</ROW>
+				<ROW>
+				    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?$this->getValue("codigo_cuenta"):"")</COL>
+                    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+				    <COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="D"?"==============":"")</COL>
+				   	<COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+                    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+				    <COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="D"?"==============":"")</COL>
+				 </ROW>
+				<ROW>
+				    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?$this->getValue("codigo_cuenta"):"")</COL>
+                    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+				    <COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="D"?$this->getValue("columna1"):"")</COL>
+				   	<COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+                    <COL TEXTCLASS="BOLD" ALIGN="LEFT"  TYPE="EXPRESSION">($this->getValue("status")=="D"?"":"")</COL>
+				    <COL TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="EXPRESSION">($this->getValue("status")=="D"?$this->getValue("columna2"):"")</COL>
+				 </ROW>
+			</FIELDS>
+	   </GROUP> 
+	</GROUPS>
+</REPORT>

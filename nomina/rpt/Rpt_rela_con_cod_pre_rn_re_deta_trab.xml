@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>RELACION CONCEPTOS / CODIGOS PRESUPUESTARIOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+	   	  <ROW>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="2">""</COL>  
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"==========="</COL>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"==========="</COL>
+			<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"==========="</COL>
+         </ROW>	   
+		 <ROW>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="2">"TOTAL GENERAL"</COL>
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_asignacion")</COL> 
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_deduccion")</COL> 
+			<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_asignacion")-$this->getSum("monto_deduccion")</COL>
+         </ROW>		 
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="60" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="39" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>RELACION CONCEPTOS / CODIGOS PRESUPUESTARIOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="5">"Nomina:   ".$this->getValue("tipo_nomina")."     ".$this->getValue("des_nomina")</COL>               
+    </ROW>
+	<ROW>
+        <COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="6">"Fecha:   ".$this->getValue("fechad")."     "."al "."        ".$this->getValue("fechah")</COL>            
+    </ROW>
+	<ROW>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cod. Presupuestario</COL>
+	     <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Denominación</COL>
+         <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Asignación</COL>
+	    <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Deducción</COL>
+	    <COL ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR"></COL>
+   </ROW>
+   <ROW>
+        <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="5">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+	</ROW>
+   </HEADER>   
+   </PAGE>
+   <GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_presupuesta" EXPRESSION="cod_presup">
+		   <HEADER>
+           </HEADER>
+		   <FOOTER>
+		     <ROW>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="2">""</COL>  
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"_________"</COL>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"_________"</COL>
+				<COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="RIGHT" COLSPAN="1">"_________"</COL>
+             </ROW>
+		   	 <ROW>
+		   		<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getValue("cod_presup")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getValue("denominacion_p")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_asignacion")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_deduccion")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIABOLD" COLSPAN="1">$this->getSum("monto_asignacion")-$this->getSum("monto_deduccion")</COL>
+           	 </ROW>
+			  <ROW>
+				<COL TYPE="EXPRESSION" TEXTCLASS="SMALL" ALIGN="LEFT" COLSPAN="5">"."</COL>  
+             </ROW>
+		   </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_conceptos" EXPRESSION="cod_concepto">
+		   <HEADER>
+		   		<ROW>
+			 		<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="CENTER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_concepto")</COL>
+			 		<COL TYPE="EXPRESSION" CELLCLASS="DOCUMENT_LAYER" ALIGN="LEFT" TEXTCLASS="MEDIA" COLSPAN="4">$this->getValue("denominacion")</COL>
+		   		</ROW>
+           </HEADER>
+		   <FOOTER>
+		   	  <ROW>
+			  </ROW>
+           </FOOTER>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalle" EXPRESSION="detalles">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" COLSPAN="1" ALIGN="RIGHT"  TYPE="FIELD">cod_empleado</COL>	
+            	<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">nombre</COL>
+                <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("monto_asignacion")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("monto_deduccion")</COL>
+				<COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="DOCUMENT_LAYER" NUMBERFORMATEX="2" TEXTCLASS="MEDIA" COLSPAN="1"></COL>
+			  </ROW>
+			</FIELDS>
+		  </GROUP>   
+		</GROUP>
+	  </GROUP>
+	</GROUPS>
+</REPORT>

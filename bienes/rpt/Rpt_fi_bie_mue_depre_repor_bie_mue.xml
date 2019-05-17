@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>REPORTE FICHA DE BIENES MUEBLES DEPRECIADOS</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+<FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="11" WIDTH="500">
+            <ROW>
+		<COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="6">TOTAL...</COL>
+	        <COL ALIGN="RIGHT" TYPE="EXPRESSION" TEXTCLASS="BOLD" NUMBERFORMATEX="2" COLSPAN="1">$this->getSum("valor_incorporacion")</COL>
+             </ROW>
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="2" SIZE="35" CELLSPACING="0" CELLPADDING="5" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_bienes.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>		   
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="7" HEIGHT="40" TEXTCLASS="BOLD"></COL>
+	</ROW> 		   
+	<ROW>
+		<COL COLSPAN="7" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>BIENES NACIONALES - MUEBLES DEPRECIADOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+          <ROW>
+               <COL ALIGN="RIGHT"  TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="7">"Fecha : ".$this->getParameter("date")</COL>
+           </ROW>
+	  <ROW>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="7">Denominacion</COL>				    
+          </ROW>
+	  <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="5">Dependencia o Unidad de Trabajo</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Codigo</COL>				    
+          </ROW>
+          <ROW>
+		<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="5">$this->getValue("denominacion_dep")</COL>
+		<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="2">$this->getValue("cod_dependencia")</COL>
+           </ROW>
+	  <ROW>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="7">Ubicacion</COL>				    
+          </ROW>
+	  <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Administrativa</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="5">Geografica</COL>				    
+          </ROW>
+          <ROW>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2"></COL>
+		<COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="5">$this->getValue("direccion_dep")</COL>
+           </ROW>
+          <ROW>
+               <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="3">Clasificacion</COL>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="4"></COL>
+          </ROW>
+          <ROW>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Grupo</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Sub-Grupo</COL>
+	       <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Seccion</COL>
+               <COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Nro. Identificacion</COL>
+	       <COL ALIGN="CENTER" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Nombre y Desripcion de los Bienes</COL>
+	       <COL ALIGN="RIGHT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Valor Unitario</COL>
+
+          </ROW>
+	</HEADER>
+	<FOOTER> 
+              <ROW>
+               	<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="4">Observacion</COL>
+	       	<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1">Elaborado por:</COL>
+               	<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2">Conformado por:</COL>
+              </ROW>
+              <ROW>
+               	<COL ALIGN="LEFT" TEXTCLASS="BOLD" HEIGHT="80" TYPE="REGULAR" COLSPAN="4"></COL>
+               	<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="1"></COL>
+               	<COL ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR" COLSPAN="2"></COL>               	
+              </ROW>
+
+       </FOOTER>
+ </PAGE>
+        <GROUPS>
+                <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="cod_dependencias" EXPRESSION="cod_dependencia">
+                   <HEADER>
+                  </HEADER>
+	          <FOOTER> 
+                  </FOOTER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">grupo</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">subgrupo</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">seccion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD" COLSPAN="1">num_bien</COL>
+		       <COL ALIGN="LEFT" TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" COLSPAN="2">"Caracteristicas: ".$this->getValue("caracteristicas")."    "."Marca: ".$this->getValue("marca")."    "."Modelo: ".$this->getValue("modelo")."    "."Serial: ".$this->getValue("serial1")."    "."Material: ".$this->getValue("material")."    "."Color: ".$this->getValue("color")</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="RIGHT" NUMBERFORMATEX="2" TYPE="FIELD" COLSPAN="1">valor_incorporacion</COL>
+                       </ROW>
+                   </FIELDS>
+                </GROUP>
+       </GROUPS>
+</REPORT>

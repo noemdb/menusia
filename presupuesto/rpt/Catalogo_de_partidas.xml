@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+   <TITLE>CATALOGO PARTIDAS PRESUPUESTARIAS</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+   <CSS>sia.css</CSS>
+   <DOCUMENT>
+      <FOOTER BORDER="1" CELLSPACING="0" CELLPADDING="2" WIDTH="500">        
+      </FOOTER>   
+   </DOCUMENT>
+   <PAGE BORDER="0" SIZE="40" CELLSPACING="0" CELLPADDING="2" WIDTH="930">
+   <HEADER>
+	 <ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_presupuesto.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="BOLD"><font color="Navy"><b>CATALOGO PARTIDAS PRESUPUESTARIAS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>
+	   
+	  <ROW>
+	   <COL ALIGN="CENTER" COLSPAN="5" HEIGHT="20" TEXTCLASS="REGULAR"></COL>
+	</ROW>
+	<ROW>
+        <COL ALIGN="LEFT"  TYPE="EXPRESSION" TEXTCLASS="BOLD" COLSPAN="4">$this->getParameter("criterio1")</COL>
+    </ROW>
+	</HEADER>
+      </PAGE>
+        <GROUPS>
+            <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="maingroup">
+         	<HEADER>
+				<ROW>
+             		<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Codigo</COL>
+	     			<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Denominacion</COL>
+             		<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Fuente Financ.</COL>
+             		<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Tipo Gasto</COL>
+             		<COL ALIGN="LEFT" TEXTCLASS="BOLD" COLSPAN="1" TYPE="REGULAR">Cod. Contable</COL>
+          		</ROW>
+				<ROW>
+					<COL ALIGN="LEFT" COLSPAN="5" TYPE="EXPRESSION" TEXTCLASS="BOLD">"___________________________________________________________________________________________________________________________"</COL>
+				</ROW>	
+            </HEADER>
+                  <FIELDS>
+                     <ROW>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cod_presup</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">denominacion</COL>
+                       <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="FIELD">cod_fuente</COL>
+					   <COL TEXTCLASS="REGULAR" ALIGN="CENTER" TYPE="EXPRESSION">($this->getValue("func_inv")=="I"?"INVERSION":($this->getValue("func_inv")=="C"?"CORRIENTE":""))</COL>
+					   <COL TEXTCLASS="REGULAR" ALIGN="LEFT" TYPE="FIELD">cod_contable</COL>
+                     </ROW>
+                   </FIELDS>
+             </GROUP>
+       </GROUPS>
+</REPORT>

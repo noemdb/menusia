@@ -1,0 +1,3 @@
+<?php $tipo_nomina=$_GET["tipo_nomina"];$fdesde=$_GET["fdesde"];$fhasta=$_GET["fhasta"]; $num_semana=$_GET["num_semana"]; $n_periodos=$_GET["n_periodos"]; $codigo_mov=$_GET["codigo_mov"];
+$conc_ord=$_GET["conc_ord"]; $trab_esp=$_GET["trab_esp"];  $u_semana=$_GET["u_semana"]; $criterio=$tipo_nomina.$fdesde.$fhasta.$num_semana.$conc_ord.$trab_esp.$u_semana.$n_periodos.$codigo_mov;?>
+<iframe src="Calcula_nomina_ext.php?criterio=<?echo $criterio?>" width="925" height="350" scrolling="auto" frameborder="1"></iframe>

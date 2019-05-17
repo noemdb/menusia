@@ -1,0 +1,21 @@
+<?include ("../class/conect.php"); include ("../class/funciones.php"); $tipo_nomina=$_GET["tipo_nomina"];$ope=$_GET["ope"]; $codigo_mov=$_GET["codigo_mov"]; $password=$_GET["password"]; $user=$_GET["user"];$dbname=$_GET["dbname"]; $fecha_desde=""; $fecha_hasta=""; $nro_semanas="";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");  $campo502="NNNNNNNNNNNNNNNNNNN"; $num_periodo=$_GET["num_periodos"];
+if($ope=="E"){$sql="Select campo502 from SIA005 where campo501='04'";$resultado=pg_query($sql);if($registro=pg_fetch_array($resultado,0)){$campo502=$registro["campo502"];}
+$StrSQL="select frecuencia,ultima_fecha,proxima_fecha,nro_semana from nom001 where tipo_nomina='$tipo_nomina'";$resultado=pg_query($StrSQL); $filas=pg_num_rows($resultado);
+if($filas>0){$registro=pg_fetch_array($resultado); $frec=$registro["frecuencia"]; $ultima_fecha=$registro["ultima_fecha"]; $proxima_fecha=$registro["proxima_fecha"]; $num_semana=$registro["nro_semana"]; $fecha_desde=formato_ddmmaaaa($ultima_fecha); $fecha_hasta=formato_ddmmaaaa($proxima_fecha); $nro_semanas=0;
+  $fecha_desde=nextDate($fecha_desde,1);  if($frec=="M"){$fecha_hasta=colocar_udiames($fecha_desde);} if($frec=="S"){$fecha_hasta=nextDate($fecha_desde,6);$nro_semanas=$num_semana+1;} if($frec=="Q"){$dia=substr($fecha_desde,0,2); $fecha_hasta=colocar_udiames($fecha_desde); if($dia=='01'){$fecha_hasta=nextDate($fecha_desde,14);}} }
+if(substr($campo502,13,1)=="S"){$fhasta=colocar_udiames($fecha_hasta);}else{$fhasta=$fecha_hasta;}  if($frec=="S"){$nro_semanas=Asigna_Nro_Semanas($fecha_desde,$fecha_hasta);}else{$nro_semanas=Asigna_Nro_Semanas($fecha_desde,$fhasta);} }
+
+$StrSQL="Select fecha_p_desde,fecha_p_hasta,fecha_desde,fecha_hasta,nro_semana,num_periodos from NOM017 where (tipo_nomina='$tipo_nomina') and (tp_calculo='E') and (num_periodos=$num_periodo)"; $resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado); 
+if($filas==0){$StrSQL="Select fecha_p_desde,fecha_p_hasta,fecha_desde,fecha_hasta,nro_semana,num_periodos from NOM017 where (tipo_nomina='$tipo_nomina') and (tp_calculo='E') order by num_periodos";$resultado=pg_query($StrSQL);$filas=pg_num_rows($resultado); }
+if($filas>0){$registro=pg_fetch_array($resultado); $num_periodo=$registro["num_periodos"]; $fecha_desde=$registro["fecha_p_desde"]; $fecha_hasta=$registro["fecha_p_hasta"]; $fecha_desde=formato_ddmmaaaa($fecha_desde); $fecha_hasta=formato_ddmmaaaa($fecha_hasta);} 
+$sfecha=formato_aaaammdd($fecha_desde);  $resultado=pg_exec($conn,"SELECT ACTUALIZA_NOM071(4,'$codigo_mov','','$sfecha','')"); $error=pg_errormessage($conn);
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_NOM071(1,'$codigo_mov','$tipo_nomina','$sfecha','T')"); $error=pg_errormessage($conn);
+pg_close();      ?>
+<table width="946"><tr>
+<td width="100"><span class="Estilo5">FECHA DESDE : </span></td> <td width="110"><span class="Estilo5"><input name="txtfecha_desde" type="text" id="txtfecha_desde"  size="10" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_desde?>" onkeyup="mascara(this,'/',patronfecha,true)"> </span></td>
+<td width="100"><span class="Estilo5">FECHA HASTA : </span></td>  <td width="110"><span class="Estilo5"> <input name="txtfecha_hasta" type="text" id="txtfecha_hasta"  size="10" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_hasta?>" onkeyup="mascara(this,'/',patronfecha,true)"> </span></td>
+<td width="100"><span class="Estilo5">NUM. CALCULO : </span></td><td width="60"><span class="Estilo5"><input name="txtnum_periodos" type="text" id="txtnum_periodos" size="1" maxlength="1" value="<?echo $num_periodo?>" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)"> </span></td>
+<td width="140"><span class="Estilo5">NUMERO DE SEMANAS : </span></td>  <td width="60"><span class="Estilo5"><input name="txtnro_semana" type="text" id="txtnro_semana" size="4" maxlength="2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $nro_semanas?>"> </span></td>
+<td width="110"><span class="Estilo5">ULTIMA SEMANA : </span></td> <td width="56"><span class="Estilo5"><select class="Estilo10" name="txtu_semana" size="1" id="txtu_semana" onFocus="encender(this)" onBlur="apagar(this)"><option>NO</option> <option>SI</option></select>  </span></td>
+</tr> </table>

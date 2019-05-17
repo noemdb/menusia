@@ -1,0 +1,15 @@
+<?include ("../class/conect.php"); include ("../class/funciones.php");
+$campo501=$_POST["txtcod_modulo"]; $campo502=""; $campo503=$_POST["txtperiodo"]; $campo504=$_POST["txtdoc_ord"];$campo505=$_POST["txtdoc_ordd"]; $campo506=$_POST["txtdoc_ordf"]; $campo507=""; $campo508=$_POST["txtdoc_orda"]; $campo509=$_POST["txtdoc_aju"];
+$campo=$_POST["txtord_ret"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtcomp_ret"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtret_presup"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtsolo_num"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtnum_aut"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtfec_aut"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtforma_can"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtforma_anu"];$campo=substr($campo,0,1);$campo502=$campo502.$campo;
+$campo=$_POST["txtban_tipo"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo="NO";$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtini_pant"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtcomp_iva"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtmod_cta"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtret_imp"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtamort_pre"];$campo=substr($campo,0,1);$campo502=$campo502.$campo;  $campo=$_POST["txtorden_ret_comp"];$campo=substr($campo,0,1);$campo502=$campo502.$campo;
+$url="Act_Conf_Pagos.php"; echo "ESPERE POR FAVOR MODIFICANDO....","<br>"; $error=0; $fecha=asigna_fecha_hoy(); if($fecha==""){$sfecha="2007-01-01";}else{$sfecha=formato_aaaammdd($fecha);}
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
+if (pg_ErrorMessage($conn)) { ?> <script language="JavaScript">   muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');  </script> <?}
+ else{ $error=0;
+  if($error==0){$sSQL="Select * from SIA005 where campo501='$campo501'";  $resultado=pg_exec($conn,$sSQL);  $filas=pg_numrows($resultado);
+  if ($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CONFIGURACIÓN NO EXISTE');</script> <? }
+   else{$error=0;
+     $sql="SELECT MODIFICA_SIA005('$campo501','$campo502','$campo503','$campo504','$campo505','$campo506','$campo507','$campo508','$campo509','','','','','','','','','','','','','','','','','','','','','','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','','','','','')"; $resultado=pg_exec($conn,$sql);$error=pg_errormessage($conn); $error=substr($error, 0, 61);
+     if (!$resultado){?> <script language="JavaScript"> muestra('<? echo $error; ?>'); </script> <? } else{ ?> <script language="JavaScript"> muestra('MODIFICO EXITOSAMENTE'); </script><? $error=0; }
+  }}
+}pg_close();?> <script language="JavaScript"> LlamarURL('<?echo $url;?>'); </script>

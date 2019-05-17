@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>INFORMACION FAMILIAR</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="3" WIDTH="500">
+		 <ROW>
+		    <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD"  COLSPAN="2">$this->getParameter("criterio2")</COL>			 	
+			<COL  ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="3" TYPE="REGULAR">Total Cantidad Familiares:</COL>
+			<COL ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="0" COLSPAN="7" TYPE="EXPRESSION">$this->getRowCount("ci_partida")</COL>
+		</ROW>
+      </FOOTER>   
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="50" CELLSPACING="0" CELLPADDING="3" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="40" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>			   
+	<ROW>
+		<COL COLSPAN="6" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>INFORMACION FAMILIAR</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="FALSE" NAME="cod_emple" EXPRESSION="cod_empleado">
+		   <HEADER>
+		      <ROW>
+                <COL TYPE="EXPRESSION" TEXTCLASS="MEDIABOLD" ALIGN="LEFT" COLSPAN="6">"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"</COL> 
+			 </ROW>
+		     <ROW>
+         		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Codigo</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Cedula</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="4" TYPE="REGULAR">Nombre</COL>
+     		 </ROW>	
+			 <ROW>
+			 	<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cod_empleado")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="1">$this->getValue("cedula")</COL> 
+				<COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIA" COLSPAN="5">$this->getValue("nombre")</COL> 
+			 </ROW>	
+			 <ROW>
+         		<COL CELLCLASS="HEADER" ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="6" TYPE="REGULAR">FAMILIARES</COL>
+     		 </ROW>
+			 <ROW>
+         		<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">CI/Partida</COL>
+				<COL  ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Nombre</COL>
+		 		<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Sexo</COL>
+         		<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Fecha Nac.</COL>
+				<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Edad</COL>
+				<COL  ALIGN="CENTER" TEXTCLASS="MEDIABOLD" COLSPAN="1" TYPE="REGULAR">Parentesco</COL>
+     		 </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			    <COL  ALIGN="RIGHT" TEXTCLASS="MEDIABOLD" COLSPAN="5" TYPE="REGULAR">Cantidad Familiares:</COL>
+				<COL ALIGN="CENTER" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="0" COLSPAN="7" TYPE="EXPRESSION">$this->getRowCount("ci_partida")</COL>
+			 </ROW>
+           </FOOTER>
+		  <GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalles" EXPRESSION="detalle">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">ci_partida</COL>	
+                <COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">nomb_fam</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">sexo</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">fechan</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" NUMBERFORMATEX="0" TYPE="FIELD">edad</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">parentesco</COL>
+			  </ROW>
+			</FIELDS>   
+		</GROUP> 
+	    </GROUP>
+	</GROUPS>
+</REPORT>

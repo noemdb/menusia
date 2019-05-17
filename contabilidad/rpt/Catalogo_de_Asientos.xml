@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>CATALOGO DE TIPOS DE ASIENTOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>      
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="35" CELLSPACING="0" CELLPADDING="4" WIDTH="800"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="3" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_contab.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+				</TABLE>				
+			</XHTML>
+		</COL>
+	 </ROW>		  
+   </HEADER>
+   <FOOTER> 
+   	   <ROW>
+		  <COL TYPE="EXPRESSION" ALIGN="LEFT" CELLCLASS="HEADER" COLSPAN="2">"Fecha: ".$this->getParameter("date")."   "."Hora: ".$this->getParameter("hora")</COL>
+		  <COL TYPE="EXPRESSION" ALIGN="RIGHT" CELLCLASS="HEADER" COLSPAN="1">"Pag.   ".$this->getPageNum()</COL>
+		</ROW>       
+   </FOOTER>
+
+   </PAGE>
+	<GROUPS>
+		<GROUP NAME="maingroup">
+		   <HEADER>  
+             <ROW>
+		 		<COL COLSPAN="3" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLDBIG">
+					<XHTML>
+						<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%"  HEIGHT="35">
+							<TR>
+					   		 <TD width="930" rowspan="4" ALIGN="CENTER"  TEXTCLASS="BOLDBIG">CATALOGO TIPOS DE ASIENTOS</TD>
+				    		</TR>		
+						</TABLE>				
+					</XHTML>
+		  		</COL>	
+			  </ROW>
+			  <ROW>
+               <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Tipo</COL>
+               <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR">Descripcion</COL> 
+			   <COL CELLCLASS="GROUP_LAYER" ALIGN="LEFT" TEXTCLASS="BOLD" TYPE="REGULAR"></COL>              
+            </ROW>
+            </HEADER> 
+			<FIELDS>
+				<ROW>
+					<COL TEXTCLASS="REGULAR" TYPE="FIELD">tipo_asiento</COL>
+					<COL TEXTCLASS="REGULAR" TYPE="FIELD">descrip_tipo_asiento</COL>					
+				</ROW>
+			</FIELDS>
+		</GROUP>
+	</GROUPS>
+</REPORT>
+

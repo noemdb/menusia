@@ -1,0 +1,2 @@
+<?php $tipo_nomina=$_GET["tipo_nomina"]; $tp_calculo=$_GET["tp_calculo"]; $num_periodo=$_GET["num_periodos"]; ?>
+<iframe src="Det_cal_nomina.php?criterio=<?echo $tipo_nomina.$tp_calculo.$num_periodo?>" width="925" height="350" scrolling="auto" frameborder="0"></iframe>

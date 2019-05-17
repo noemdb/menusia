@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
+<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+	<TITLE>CATALOGO DE CONCEPTOS</TITLE>
+	<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sia.css</CSS>
+   <DOCUMENT>   
+       <FOOTER BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="500">
+		 <ROW>
+            <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="10" TYPE="EXPRESSION">"TOTAL CONCEPTOS:   ".$this->getRowCount("cod_concepto")</COL>
+         </ROW>
+      </FOOTER>
+   </DOCUMENT>
+	<PAGE BORDER="0" SIZE="45" CELLSPACING="0" CELLPADDING="2" WIDTH="940"> 
+	<HEADER>
+	 <ROW>
+		<COL COLSPAN="10" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+					    <TD width="930" rowspan="4">
+						  <IMG SRC="../../imagenes/Encabezado_rpt_nomina.png" WIDTH="930" HEIGHT="49" BORDER="0"/>						  
+						</TD>
+				    </TR>		
+					</TABLE>				
+			</XHTML>
+		</COL>
+	</ROW>	
+	<ROW>
+	   <COL ALIGN="CENTER" COLSPAN="11" HEIGHT="30" TEXTCLASS="MEDIABOLD"></COL>
+	</ROW>			   
+	<ROW>
+		<COL COLSPAN="11" CELLCLASS="PAGE_LAYER" TEXTCLASS="MEDIABOLD">
+			<XHTML>
+				<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD ALIGN="CENTER" TEXTCLASS="MEDIABOLD"><font color="Navy"><b>CATALOGO DE CONCEPTOS</b></font></TD>
+					</TR>
+				   </TABLE>				
+			</XHTML>
+		</COL>	
+	  </ROW>	   	
+	<ROW>
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Codigo</COL>
+         <COL ALIGN="LEFT" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Denominacion</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Codigo Partida</COL>
+		 <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Cod. Ret.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Asig.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Act.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Inic.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Tipo G.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Oculto</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Acum.</COL>
+         <COL ALIGN="CENTER" TEXTCLASS="MEDIABOLD" TYPE="REGULAR">Frec</COL>
+		 
+     </ROW>
+	 <ROW>
+		<COL TYPE="EXPRESSION" ALIGN="LEFT" TEXTCLASS="MEDIABOLD" COLSPAN="11">"___________________________________________________________________________________________________________________________"</COL> 
+     </ROW>
+   </HEADER>
+   </PAGE>
+	<GROUPS>
+		<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="tipo_nomina" EXPRESSION="tipo_nomina">
+		   <HEADER>
+   			 <ROW>
+        		<COL TYPE="EXPRESSION"  TEXTCLASS="MEDIABOLD" COLSPAN="11"> $this->getValue("tipo_nomina")."     ".$this->getValue("descripcion")</COL>               
+             </ROW>
+           </HEADER>
+		   <FOOTER>
+             <ROW>
+			 <COL ALIGN="LEFT" CELLCLASS="DOCUMENT_LAYER" TEXTCLASS="MEDIABOLD" NUMBERFORMATEX="2" COLSPAN="10" TYPE="EXPRESSION">"CONCEPTOS DE:   ".$this->getValue("descripcion")."  :"."     ".$this->getRowCount("cod_concepto")</COL> 
+             </ROW>
+           </FOOTER>
+			<GROUP REPRINT_HEADER_ON_PAGEBREAK="TRUE" NAME="detalle" EXPRESSION="detalles">
+			 <HEADER> </HEADER>
+			 <FOOTER> </FOOTER>
+             <FIELDS>
+   			  <ROW>
+				<COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">cod_concepto</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="LEFT" TYPE="FIELD">denominacion</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">cod_partida</COL>
+				<COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">cod_retencion</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">asignacion</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">activo</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">inicializable</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">tipo_grupo</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">oculto</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">acumula</COL>
+                <COL TEXTCLASS="MEDIA" ALIGN="CENTER" TYPE="FIELD">frecuencia</COL>
+			  </ROW>
+			</FIELDS>   
+			</GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

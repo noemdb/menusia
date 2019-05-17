@@ -1,0 +1,131 @@
+.Estilo5 {font-size: 10px}
+.Estilo2 {color: #FFFFFF}
+.Estilo3 {font-size: 15pt; font-weight: bold;}
+.Estilo6 {font-size: 15pt; font-weight: bold; }
+.Estilo9 {font-size: 8pt}
+.Estilo10 {font-size: 12px}
+.Estilo11{font-size: 10pt; color: #0000FF;  font-weight: bold;}  
+.Estilo13 {font-size: 10pt; color: #000000; font-weight: bold; }
+.Estilo14 {color: #0000FF; font-size: 10pt; font-weight: bold;}
+.Estilo15 {font-size: 8pt; font-weight: bold; }
+
+.Estilo8 {font-size: 11px; FONT-FAMILY: Verdana, Arial, sans-serif;}
+
+.formfield {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 12px; BORDER-LEFT-COLOR: #666699; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #666699; COLOR: black; BORDER-TOP-COLOR: #666699; HEIGHT: 19px; BACKGROUND-COLOR: #99ccff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #666699
+}
+.button {
+	FONT-SIZE: 12px; COLOR: black; HEIGHT: 19px; BACKGROUND-COLOR: #f5fffa
+}
+BODY {
+	FONT-SIZE: 8pt; COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}
+A {
+	COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+
+
+.Estiloanu{font-size: 10pt; color: red;  font-weight: bold;}  
+
+.menu {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+.menu:link {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+.menu:hover {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+.menu:visited {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+.navigation {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif
+}
+.navigation:link {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}
+.navigation:hover {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}
+.navigation:visited {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}
+.autolink:link {
+	FONT-SIZE: 9pt; COLOR: #004080; FONT-FAMILY: Courier New, Verdana, Arial, sans-serif; TEXT-DECORATION: underline
+}
+.autolink:hover {
+	FONT-SIZE: 9pt; COLOR: #004080; FONT-FAMILY: Courier New, Verdana, Arial, sans-serif; TEXT-DECORATION: underline
+}
+.autolink:visited {
+	FONT-SIZE: 9pt; COLOR: #004080; FONT-FAMILY: Courier New, Verdana, Arial, sans-serif; TEXT-DECORATION: underline
+}
+TD.rempli {
+	FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #66cc99
+}
+TD.memo {
+	FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #e8e8e8
+}
+TD.cent {
+	FONT-SIZE: 8pt; COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #e8e8e8; TEXT-ALIGN: center
+}
+TD.right {
+	FONT-SIZE: 8pt; COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #e8e8e8; TEXT-ALIGN: right
+}
+TD.headers {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #cfcfcf; TEXT-ALIGN: center
+}
+TD.default {
+	FONT-SIZE: 8pt; COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #e8e8e8
+}
+TD.default9 {
+	FONT-SIZE: 9pt; COLOR: black; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #e8e8e8
+}
+TD.title {
+	FONT-SIZE: 8pt; COLOR: #191970; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #b0c4de; TEXT-ALIGN: center
+}
+TD.headerright {
+	FONT-SIZE: 8pt; COLOR: #004080; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #cfcfcf; TEXT-ALIGN: right
+}
+SELECT {
+	FONT-SIZE: 8pt
+}
+.Estilo1 {        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 24pt;
+}
+a.p:link {
+        color: #0066FF;
+        text-decoration: none;
+}
+a.p:visited {
+        color: #0066FF;
+        text-decoration: none;
+}
+a.p:active {
+        color: #0066FF;
+        text-decoration: none;
+}
+a.p:hover {
+        color: #0066FF;
+        text-decoration: underline;
+}
+a.ord:link {
+        color: #000000;
+        text-decoration: none;
+}
+a.ord:visited {
+        color: #000000;
+        text-decoration: none;
+}
+a.ord:active {
+        color: #000000;
+        text-decoration: none;
+}
+a.ord:hover {
+        color: #000000;
+        text-decoration: underline;
+}
