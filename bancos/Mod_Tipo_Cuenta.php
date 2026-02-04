@@ -1,6 +1,6 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); 
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){$tipo_cuenta=''; $sql="SELECT * FROM ban001 ORDER BY tipo_cuenta";} else{$tipo_cuenta=$_GET["Gtipo_cuenta"]; $sql="Select * from ban001 where tipo_cuenta='$tipo_cuenta'";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,7 +8,7 @@ if (!$_GET){$tipo_cuenta=''; $sql="SELECT * FROM ban001 ORDER BY tipo_cuenta";} 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipos de Cuenta)</title>
+<title>SIPAP CONTROL BANCARIO (Tipos de Cuenta)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language=JavaScript src="../class/sia.js"  type=text/javascript></SCRIPT>
@@ -26,12 +26,12 @@ MM_reloadPage(true);
 function revisar(){
 var f=document.form1;
   if(f.txttipo_cuenta.value==""){alert("Tipo de Cuenta no puede estar Vacio");return false;}else{f.txttipo_cuenta.value=f.txttipo_cuenta.value.toUpperCase();}
-  if(f.txtdescripcion_tipo.value==""){alert("Descripción no puede estar Vacia"); return false; } else{f.txtdescripcion_tipo.value=f.txtdescripcion_tipo.value.toUpperCase();}
+  if(f.txtdescripcion_tipo.value==""){alert("Descripciï¿½n no puede estar Vacia"); return false; } else{f.txtdescripcion_tipo.value=f.txtdescripcion_tipo.value.toUpperCase();}
   document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $des_tipo_cuenta="";$conciliable="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cuenta"]; $des_tipo_cuenta=$registro["descripcion_tipo"];$conciliable=$registro["conciliable"];}
 ?>
@@ -47,8 +47,8 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cue
   <tr>
     <td><table width="92" height="354" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_Tipos_Cuentas.php?Gtipo_cuenta=C<?echo $tipo_cuenta?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_Tipos_Cuentas.php?Gtipo_cuenta=C<?echo $tipo_cuenta?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_Tipos_Cuentas.php?Gtipo_cuenta=C<?php echo $tipo_cuenta?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_Tipos_Cuentas.php?Gtipo_cuenta=C<?php echo $tipo_cuenta?>">Atras</A></td>
       </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -67,7 +67,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cue
                   <td width="830" height="24"><table width="830" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td width="200"><span class="Estilo5">TIPO CUENTA :</span></td>
-                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txttipo_cuenta" type="text"  id="txttipo_cuenta"  readonly value="<?echo $tipo_cuenta?>"  size="5" maxlength="3">
+                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txttipo_cuenta" type="text"  id="txttipo_cuenta"  readonly value="<?php echo $tipo_cuenta?>"  size="5" maxlength="3">
                         </span></td>
                       </tr>
                   </table></td>
@@ -77,7 +77,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cue
                   <td><table width="830" border="0" cellpadding="0" cellspacing="0" dwcopytype="CopyTableColumn">
                     <tr>
                       <td width="200"><span class="Estilo5">DESCRIPCI&Oacute;N TIPO CUENTA : </span></td>
-                      <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_tipo" type="text"  id="txtdescripcion_tipo"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $des_tipo_cuenta?>"  size="80" maxlength="100">
+                      <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_tipo" type="text"  id="txtdescripcion_tipo"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $des_tipo_cuenta?>"  size="80" maxlength="100">
                       </span></td>
                     </tr>
                   </table></td>
@@ -87,7 +87,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cue
                   <td><table width="830" border="0" cellpadding="0" cellspacing="0" dwcopytype="CopyTableColumn">
                     <tr>
                       <td width="200" height="22"><span class="Estilo5">CONCILIABLE :</span></td>
-                      <td width="630"><div align="left"><span class="Estilo5"><select class="Estilo10" name="txtconciliable" size="1"> <?if(substr($conciliable,0,1)=="N"){ ?><option>SI</option> <option selected>NO</option> </select><?}else{?><option selected>SI</option> <option>NO</option> </select> <?}?>
+                      <td width="630"><div align="left"><span class="Estilo5"><select class="Estilo10" name="txtconciliable" size="1"> <?php if(substr($conciliable,0,1)=="N"){ ?><option>SI</option> <option selected>NO</option> </select><?php }else{?><option selected>SI</option> <option>NO</option> </select> <?php }?>
                        </select>  </span></td>
                     </tr>
                   </table></td>
@@ -112,4 +112,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cue
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

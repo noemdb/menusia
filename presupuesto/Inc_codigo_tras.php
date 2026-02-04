@@ -1,11 +1,11 @@
-<?include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME"); $grupo="01";
+<?php include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME"); $grupo="01";
 if (!$_GET){$mcod_m="INGRE007".$equipo;$codigo_mov=substr($mcod_m,0,49);}else{$codigo_mov=$_GET["codigo_mov"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Incluir Códigos en el Traspaso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Incluir Cï¿½digos en el Traspaso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -22,7 +22,7 @@ return str2;}
 function encender_monto(mthis){var mmonto; encender(mthis); 
   mmonto=mthis.value; mmonto=eliminapunto(mmonto);  mthis.value=mmonto; 
 }
-function llamar_anterior(){ document.location ='Det_inc_traspasos.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_traspasos.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function apaga_monto(mthis){var mmonto;
  apagar(mthis); mmonto=document.form1.txtmonto.value;  mmonto=camb_punto_coma(mmonto);document.form1.txtmonto.value=mmonto;} 
 function revisar(){var f=document.form1; var Valido=true;
@@ -46,10 +46,10 @@ return true;}
           <td><table width="640" border="0">
               <tr>
                 <td width="70"><span class="Estilo5">GRUPO :</span></td>
-                <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtgrupo" type="text" id="txtgrupo" size="4" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $grupo?>" onkeypress="return stabular(event,this)">  </span></td>
+                <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtgrupo" type="text" id="txtgrupo" size="4" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $grupo?>" onkeypress="return stabular(event,this)">  </span></td>
                 <td width="200"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
                 <td width="180"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo del TRaspaso"  size="34" maxlength="34" onFocus="encender(this); " onBlur="apagar(this);" onKeypress="return stabular(event,this)"> </span></td>
-                <td width="60"><input class="Estilo10" name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup_comp.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+                <td width="60"><input class="Estilo10" name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup_comp.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
               </tr>
           </table></td>
         </tr>
@@ -58,7 +58,7 @@ return true;}
             <tr>
               <td width="206"><span class="Estilo5">FUENTE DE FINANCIAMIENTO : </span></td>
               <td width="36"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);" onkeypress="return stabular(event,this)">    </span></td>
-              <td width="28"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td> 
+              <td width="28"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td> 
 			  <td width="351"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="50" readonly onkeypress="return stabular(event,this)"></span></td>
             </tr>
           </table></td>
@@ -101,7 +101,7 @@ return true;}
       </table>
         <table width="594" align="center">
           <tr>
-            <td width="18"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="18"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="52"><input name="txtcod_contable" type="hidden" id="txtcod_contable"></td>
             <td width="69"><input name="txtdes_contable" type="hidden" id="txtdes_contable2"></td>
             <td width="95" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>

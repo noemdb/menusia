@@ -1,12 +1,12 @@
-<? include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php");include ("../class/configura.inc");
+<?php  include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php");include ("../class/configura.inc");
 $equipo=getenv("COMPUTERNAME"); $mcod_m="COMP008".$usuario_sia.$equipo; $fecha_hoy=asigna_fecha_hoy();
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103, campo104 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; $modulo="09";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $Nom_usuario=$registro["campo104"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="09"; $opcion="02-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){ $p_letra='';$criterio=''; $tipo_compromiso=''; $nro_orden=''; $sql="SELECT * FROM ORD_COMPRA ORDER BY nro_orden desc,tipo_compromiso desc";  $codigo_mov=substr($mcod_m,0,49);}
  else {   $codigo_mov="";  $criterio = $_GET["Gcriterio"];   $p_letra=substr($criterio, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")||($p_letra=="C")){ $nro_orden=substr($criterio,1,8);  $tipo_compromiso=substr($criterio,9,4);}
@@ -25,7 +25,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_compromiso=''; $nro_orden=''; $sql=
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Ordenes de Compras)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Ordenes de Compras)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -89,11 +89,11 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<? 
+<?php  
 if ($codigo_mov==""){$codigo_mov="";}else{
- $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $res=pg_exec($conn,"SELECT BORRAR_COMP042('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $res=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+ $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $res=pg_exec($conn,"SELECT BORRAR_COMP042('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $res=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 }$mconf="";$Ssql="Select * from SIA005 where campo501='05'";$resultado=pg_query($Ssql);
 if($registro=pg_fetch_array($resultado,0)){$mconf=$registro["campo502"];}$nro_aut=substr($mconf,1,1); $fecha_aut=substr($mconf,2,1); $aprueba_comp=substr($mconf,15,1);
 $mconf="";$tipo_ordc="0001"; $cod_tipoc="000001"; $nomb_a_ordc="O/C"; $cod_imp_unico="S"; $cod_imp_part="S"; $cod_part_iva="403-18-01-00"; $mconf73="";
@@ -143,12 +143,12 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
         <td width="86">
             <td>
               <table width="92" height="522" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-			    <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+			    <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
                 <tr>
                   <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_Orden('D')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_Orden('D')">Incluir</A></td>
                 </tr>
-                <?} if ($Mcamino{2}=="S"){?>   
+                <?php } if ($Mcamino{2}=="S"){?>   
                 <tr>
                   <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -168,37 +168,37 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_orden_compra.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_orden_compra.php" class="menu">Catalogo</a></td>
         </tr>
-		<?} if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
+		<?php } if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Anular('<?echo $anulado?>');" class="menu">Anular</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Anular('<?php echo $anulado?>');" class="menu">Anular</a></td>
         </tr>
-		<?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+		<?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?echo $anulado?>');" class="menu">Eliminar</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?php echo $anulado?>');" class="menu">Eliminar</a></td>
         </tr>
-		<?} if ($Mcamino{4}=="S"){?>
+		<?php } if ($Mcamino{4}=="S"){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato('<?echo $aprobado?>','<?echo $aprueba_comp?>','<?echo $anulado?>');" class="menu">Formato Orden</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato('<?php echo $aprobado?>','<?php echo $aprueba_comp?>','<?php echo $anulado?>');" class="menu">Formato Orden</a></td>
         </tr>
 		<tr>
            <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llamar_Anexo_pre();" class="menu">Anexos Cod. Presupuestarios</a></div></td>
         </tr>
-        <? if(($aprueba_comp=="S")and($SIA_Cierre=="N")){?>
+        <?php  if(($aprueba_comp=="S")and($SIA_Cierre=="N")){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:LlamarURL('List_orden_comp_aprob.php');" class="menu">Ordenes por Aprobar</a></td>
         </tr>
-         <? } }
+         <?php } }
 		if ($Mcamino{2}=="S"){?>
 		<tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Copiar();" class="menu">Copiar</a></td>
         </tr>
-        <? } ?>		
+        <?php } ?>		
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="menu.php" class="menu">Menu</a></td>
@@ -217,16 +217,16 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                   <td width="861"><table width="861">
                       <tr>
                         <td width="100"><p><span class="Estilo5">N&Uacute;MERO ORDEN:</span></p></td>
-                        <td width="110"><input name="txtnro_orden" type="text"  id="txtnro_orden" value="<?echo $nro_orden?>" size="10" readonly></td>
+                        <td width="110"><input name="txtnro_orden" type="text"  id="txtnro_orden" value="<?php echo $nro_orden?>" size="10" readonly></td>
                         <td width="168"><span class="Estilo5">DOCUMENTO COMPROMISO: </span></td>
-                        <td width="48"><span class="Estilo5"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?echo $tipo_compromiso?>" size="4" readonly></span> </td>
-                        <td width="66"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" value="<?echo $nombre_abrev_comp?>" size="4" readonly></span></td>
-                        <? if($anulado=='S'){?> <td width="109"><span class="Estilo15">ANULADO</span></td>
-                        <? }else{if($cancelada=='S'){?> <td width="109"><a class="Estilo11" href="javascript:alert('<?echo $inf_canc?>');">CANCELADA</a>
-                         <? }else{?> <td width="109"><span class="Estilo11"><? echo $msta ?></span></td><? }}?>
+                        <td width="48"><span class="Estilo5"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?php echo $tipo_compromiso?>" size="4" readonly></span> </td>
+                        <td width="66"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" value="<?php echo $nombre_abrev_comp?>" size="4" readonly></span></td>
+                        <?php  if($anulado=='S'){?> <td width="109"><span class="Estilo15">ANULADO</span></td>
+                        <?php }else{if($cancelada=='S'){?> <td width="109"><a class="Estilo11" href="javascript:alert('<?php echo $inf_canc?>');">CANCELADA</a>
+                         <?php }else{?> <td width="109"><span class="Estilo11"><?php  echo $msta ?></span></td><?php } }?>
                         <td width="49"><span class="Estilo5">FECHA :</span> </td>
-                        <td width="78"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" value="<?echo $fecha_orden?>" size="12" readonly> </span></td>
-                        <td width="30"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                        <td width="78"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" value="<?php echo $fecha_orden?>" size="12" readonly> </span></td>
+                        <td width="30"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                        </tr>
                   </table></td>
                 </tr>
@@ -234,21 +234,21 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                   <td><table width="861">
                     <tr>
                       <td width="140"><span class="Estilo5">REQUISICI&Oacute;N NRO. :</span></td>
-                      <td width="100"><span class="Estilo5"><input name="txtnro_requisicion" type="text" id="txtnro_requisicion" size="8" value="<?echo $nro_requisicion?>" readonly> </span></td>
+                      <td width="100"><span class="Estilo5"><input name="txtnro_requisicion" type="text" id="txtnro_requisicion" size="8" value="<?php echo $nro_requisicion?>" readonly> </span></td>
                       <td width="145"><span class="Estilo5">FECHA REQUISICI&Oacute;N :</span></td>
-                      <td width="120"><span class="Estilo5"><input name="txtfecha_requisicion" type="text" id="txtfecha_requisicion" value="<?echo $fecha_requisicion?>" size="10" readonly>  </span></td>
+                      <td width="120"><span class="Estilo5"><input name="txtfecha_requisicion" type="text" id="txtfecha_requisicion" value="<?php echo $fecha_requisicion?>" size="10" readonly>  </span></td>
                       <td width="115"><span class="Estilo5">TIPO OPERACI&Oacute;N : </span></td>
-                      <td width="130"><span class="Estilo5"><input name="txtoperacion" type="text" id="txtoperacion" value="<?echo $operacion?>" size="12" readonly>  </span></td>
+                      <td width="130"><span class="Estilo5"><input name="txtoperacion" type="text" id="txtoperacion" value="<?php echo $operacion?>" size="12" readonly>  </span></td>
                       <td width="40"><span class="Estilo5">DIAS : </span></td>
-                      <td width="66"><span class="Estilo5"><input name="txtdias_credito" type="text" id="txtdias_credito" size="4" value="<?echo $dias_credito?>" readonly>  </span></td>
+                      <td width="66"><span class="Estilo5"><input name="txtdias_credito" type="text" id="txtdias_credito" size="4" value="<?php echo $dias_credito?>" readonly>  </span></td>
                     </tr>
                   </table></td>
                 </tr>
                 <tr><td><table width="861">
                         <tr>
                           <td width="183"><p><span class="Estilo5">CATEGORIA PRESUPUESTARIA:</span></p> </td>
-                          <td width="136"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?echo $unidad_solicitante?>" size="20" readonly></td>
-                          <td width="480"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" value="<?echo $des_unidad_sol?>" size="70" readonly></td>
+                          <td width="136"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?php echo $unidad_solicitante?>" size="20" readonly></td>
+                          <td width="480"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" value="<?php echo $des_unidad_sol?>" size="70" readonly></td>
                         </tr>
                       </table></td>
                 </tr>
@@ -256,7 +256,7 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                   <td><table width="861">
                     <tr>
                       <td width="160"><span class="Estilo5">UNIDAD SOLICITANTE :</span></td>
-                      <td width="700"><span class="Estilo5"><input name="txtlugar_entrega" type="text" id="txtlugar_entrega" size="98" readonly  value="<?echo $lugar_entrega?>">
+                      <td width="700"><span class="Estilo5"><input name="txtlugar_entrega" type="text" id="txtlugar_entrega" size="98" readonly  value="<?php echo $lugar_entrega?>">
                       </span></td>
                     </tr>
                   </table></td>
@@ -265,8 +265,8 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                   <td><table width="861">
                     <tr>
                       <td width="120"><span class="Estilo5">PROVEEDOR:</span></td>
-                      <td width="134"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="12"  value="<?echo $rif_proveedor?>" readonly> </span></td>
-                      <td width="586"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" value="<?echo $nombre?>" size="89" readonly>  </span></td>
+                      <td width="134"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="12"  value="<?php echo $rif_proveedor?>" readonly> </span></td>
+                      <td width="586"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" value="<?php echo $nombre?>" size="89" readonly>  </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -275,7 +275,7 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                   <td><table width="861">
                       <tr>
                         <td width="106"><span class="Estilo5">CONCEPTO:</span></td>
-                        <td width="694"><textarea name="txtconcepto" cols="89" readonly="readonly" class="headers" id="txtconcepto"><?echo $concepto?></textarea></td>
+                        <td width="694"><textarea name="txtconcepto" cols="89" readonly="readonly" class="headers" id="txtconcepto"><?php echo $concepto?></textarea></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -283,11 +283,11 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                     <td><table width="861">
                         <tr>
                           <td width="150"><span class="Estilo5">FECHA VENCIMIENTO:</span></td>
-                          <td width="105"><span class="Estilo5"><input name="txtfecha_vencim" type="text" id="txtfecha_vencim" value="<?echo $fecha_vencim?>" size="11" readonly> </span></td>
+                          <td width="105"><span class="Estilo5"><input name="txtfecha_vencim" type="text" id="txtfecha_vencim" value="<?php echo $fecha_vencim?>" size="11" readonly> </span></td>
                           <td width="130"><span class="Estilo5">APLICA IMPUESTO :</span></td>
-                          <td width="61"><span class="Estilo5"><input name="txtaplica_impuesto" type="text" id="txtaplica_impuesto" size="2"  value="<?echo $aplica_impuesto?>" readonly> </span></td>
+                          <td width="61"><span class="Estilo5"><input name="txtaplica_impuesto" type="text" id="txtaplica_impuesto" size="2"  value="<?php echo $aplica_impuesto?>" readonly> </span></td>
                           <td width="170"><span class="Estilo5">COD. PRESUP. IMPUESTO:</span></td>
-                          <td width="240"><span class="Estilo5"><input name="txtcod_presup_imp" type="text" id="txtcod_presup_imp" size="30"  value="<?echo $cod_presup_imp?>" readonly> </span></td>
+                          <td width="240"><span class="Estilo5"><input name="txtcod_presup_imp" type="text" id="txtcod_presup_imp" size="30"  value="<?php echo $cod_presup_imp?>" readonly> </span></td>
                         </tr>
                     </table></td>
                 </tr>
@@ -295,12 +295,12 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                       <td><table width="832">
                         <tr>
                           <td width="114"><span class="Estilo5">TIPO DE GASTO :</span></td>
-                          <td width="147"><span class="Estilo5"><input name="txtfunc_inv" type="text" id="txtfunc_inv"  value="<?echo $func_inv?>" size="15" readonly>  </span></td>
+                          <td width="147"><span class="Estilo5"><input name="txtfunc_inv" type="text" id="txtfunc_inv"  value="<?php echo $func_inv?>" size="15" readonly>  </span></td>
                           <td width="125" align="center"><span class="Estilo5">TIPO FLETE:</span</td>
-                          <td width="162"><span class="Estilo5"><input name="txtcampo_str1" type="text" id="txtcampo_str1"  value="<?echo $campo_str1?>" size="17" readonly></span></td>
+                          <td width="162"><span class="Estilo5"><input name="txtcampo_str1" type="text" id="txtcampo_str1"  value="<?php echo $campo_str1?>" size="17" readonly></span></td>
                           <td width="154" align="center"><span class="Estilo5">TIENE ANTICIPO :</span></td>
-                          <td width="89"><span class="Estilo5"><input name="txttiene_anticipo" type="text" id="txttiene_anticipo" size="3"  value="<?echo $tiene_anticipo?>" readonly> </span></td>
-                          <td width="44"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp" value="<?echo $cod_comp?>"></td>
+                          <td width="89"><span class="Estilo5"><input name="txttiene_anticipo" type="text" id="txttiene_anticipo" size="3"  value="<?php echo $tiene_anticipo?>" readonly> </span></td>
+                          <td width="44"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp" value="<?php echo $cod_comp?>"></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -308,9 +308,9 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                       <td><table width="826">
                         <tr>
                           <td width="197"><span class="Estilo5">PORCENTAJE DE ANTICIPO(%):</span></td>
-                          <td width="210"><span class="Estilo5"><input readonly name="txttasa_anticipo" type="text" id="txttasa_anticipo" value="<?echo $tasa_anticipo?>" size="8"></span></td>
+                          <td width="210"><span class="Estilo5"><input readonly name="txttasa_anticipo" type="text" id="txttasa_anticipo" value="<?php echo $tasa_anticipo?>" size="8"></span></td>
                           <td width="148"><span class="Estilo5">CUENTA DE ANTICIPO:</span></td>
-                          <td width="251"><span class="Estilo5"><input name="txtcod_con_anticipo" type="text" id="txtcod_con_anticipo" value="<?echo $cod_con_anticipo?>" size="30" readonly></span></td>
+                          <td width="251"><span class="Estilo5"><input name="txtcod_con_anticipo" type="text" id="txtcod_con_anticipo" value="<?php echo $cod_con_anticipo?>" size="30" readonly></span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -326,15 +326,15 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
    rows[1][1] = "Articulos";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "C&oacute;d. Presupuestario";        // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_cons_art_orden.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_art_orden.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_cons_cod_orden.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_cod_orden.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -344,15 +344,15 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
                 <tr>
                 <td width="130"> <span class="Estilo5">SUB-TOTAL : </span> </td>
                 <td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $campo_num1; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $campo_num1; ?></td> </tr>
          </table></td>
                 <td width="130" align="right"> <span class="Estilo5">IMPUESTO : </span> </td>
                 <td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $campo_num2; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $campo_num2; ?></td> </tr>
          </table></td>
                  <td width="130" align="right"> <span class="Estilo5">TOTAL ORDEN : </span> </td>
                 <td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_orden; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_orden; ?></td> </tr>
          </table></td>
                 </tr>
 
@@ -361,25 +361,25 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
 <form name="form2" method="post" action="Inc_Orden_Compra.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
 	 <td width="5"><input name="txtnro_ord" type="hidden" id="txtnro_ord" value="" ></td>
      <td width="5"><input name="txtasig_orden" type="hidden" id="txtasig_orden" value="S" ></td>
-     <td width="5"><input name="txtfecha_ord" type="hidden" id="txtfecha_ord" value="<?echo $fecha_hoy?>" ></td>
-     <td width="5"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td>
-     <td width="5"><input name="txtfecha_aut" type="hidden" id="txtfecha_aut" value="<?echo $fecha_aut?>" ></td>
-     <td width="5"><input name="txtcod_tipoc" type="hidden" id="txtcod_tipoc" value="<?echo $cod_tipoc?>" ></td>
-     <td width="5"><input name="txttipo_ordc" type="hidden" id="txttipo_ordc" value="<?echo $tipo_ordc?>" ></td>
-     <td width="5"><input name="txtnombre_abrev" type="hidden" id="txtnombre_abrev" value="<?echo $nomb_a_ordc?>" ></td>
-     <td width="5"><input name="txtmodifc_presup" type="hidden" id="txtmodifc_presup" value="<?echo $modifc_presup?>" ></td>
-     <td width="5"><input name="txtcod_imp_unico" type="hidden" id="txtcod_imp_unico" value="<?echo $cod_imp_unico?>" ></td>
-     <td width="5"><input name="txtcod_imp_part" type="hidden" id="txtcod_imp_part" value="<?echo $cod_imp_part?>" ></td>
-     <td width="5"><input name="txtcod_part_iva" type="hidden" id="txtcod_part_iva" value="<?echo $cod_part_iva?>" ></td>
-     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
+     <td width="5"><input name="txtfecha_ord" type="hidden" id="txtfecha_ord" value="<?php echo $fecha_hoy?>" ></td>
+     <td width="5"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td>
+     <td width="5"><input name="txtfecha_aut" type="hidden" id="txtfecha_aut" value="<?php echo $fecha_aut?>" ></td>
+     <td width="5"><input name="txtcod_tipoc" type="hidden" id="txtcod_tipoc" value="<?php echo $cod_tipoc?>" ></td>
+     <td width="5"><input name="txttipo_ordc" type="hidden" id="txttipo_ordc" value="<?php echo $tipo_ordc?>" ></td>
+     <td width="5"><input name="txtnombre_abrev" type="hidden" id="txtnombre_abrev" value="<?php echo $nomb_a_ordc?>" ></td>
+     <td width="5"><input name="txtmodifc_presup" type="hidden" id="txtmodifc_presup" value="<?php echo $modifc_presup?>" ></td>
+     <td width="5"><input name="txtcod_imp_unico" type="hidden" id="txtcod_imp_unico" value="<?php echo $cod_imp_unico?>" ></td>
+     <td width="5"><input name="txtcod_imp_part" type="hidden" id="txtcod_imp_part" value="<?php echo $cod_imp_part?>" ></td>
+     <td width="5"><input name="txtcod_part_iva" type="hidden" id="txtcod_part_iva" value="<?php echo $cod_part_iva?>" ></td>
+     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
      <td width="5"><input name="txtbloqueada" type="hidden" id="txtbloqueada" value="N" ></td>
      <td width="5"><input name="txtnro_req" type="hidden" id="txtnro_req" value="00000000"></td>
-     <td width="5"><input name="txtfecha_req" type="hidden" id="txtfecha_req" value="<?echo $fecha_hoy?>"></td>
+     <td width="5"><input name="txtfecha_req" type="hidden" id="txtfecha_req" value="<?php echo $fecha_hoy?>"></td>
      <td width="5"><input name="txtdias_c" type="hidden" id="txtdias_c" value="30"></td>
      <td width="5"><input name="txtoper" type="hidden" id="txtoper" value="C"></td>
      <td width="5"><input name="txtcod_est" type="hidden" id="txtconcep" value="" ></td>	 
@@ -388,9 +388,9 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
      <td width="5"><input name="txtlugar_ent" type="hidden" id="txtlugar_ent" value=""></td>     
      <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value=""></td>
      <td width="5"><input name="txtnomb_r" type="hidden" id="txtnomb_r" value=""></td>
-	 <td width="5"><input name="txtfecha_ven" type="hidden" id="txtfecha_ven" value="<?echo $fecha_hoy?>"></td>	 
+	 <td width="5"><input name="txtfecha_ven" type="hidden" id="txtfecha_ven" value="<?php echo $fecha_hoy?>"></td>	 
 	 <td width="5"><input name="txtaplica_imp" type="hidden" id="txtaplica_imp" value="S" ></td>
-     <td width="5"><input name="txtcod_pre_imp" type="hidden" id="txtcod_pre_imp" value="<?echo $cod_part_iva?>" ></td>  
+     <td width="5"><input name="txtcod_pre_imp" type="hidden" id="txtcod_pre_imp" value="<?php echo $cod_part_iva?>" ></td>  
 	 <td width="5"><input name="txtfuente_imp" type="hidden" id="txtfuente_imp" value="00" ></td>
 	 <td width="5"><input name="txtf_inv" type="hidden" id="txtf_inv" value="C" ></td>
      <td width="5"><input name="txttipo_f" type="hidden" id="txttipo_f" value="N" ></td>
@@ -408,4 +408,4 @@ $fecha_f=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f))
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

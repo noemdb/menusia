@@ -1,7 +1,7 @@
-<? include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc");  error_reporting(E_ALL ^ E_NOTICE); $php_os=PHP_OS;
+<?php  include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc");  error_reporting(E_ALL ^ E_NOTICE); $php_os=PHP_OS;
 if (!$_GET){ $referencia_comp=''; $tipo_compromiso=''; $cod_comp='';}else { $referencia_comp = $_GET["txtreferencia_comp"]; $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_comp = $_GET["txtcod_comp"];}  $rif_emp=""; $total_comp=0; $criterio1="";
 $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp' and cod_comp='$cod_comp'";  
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
  if($utf_rpt=="SI"){if($php_os=="WINNT"){$php_os="LINUX";}else{$php_os="WINNT";}}
 
 $descripcion="";$fecha="";$unidad_sol="";$des_unidad_sol="";$nombre_abrev_comp="";$cod_tipo_comp="";$des_tipo_comp="";$ced_rif="";$nombre="";$fecha_vencim="";$nro_documento="";$num_proyecto="";$des_proyecto="";$func_inv="";
@@ -97,7 +97,7 @@ require('../../class/fpdf/fpdf.php');
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
 		$this->Cell(100,4,'',0,0,'L');
-		$this->Cell(100,4,'SIA CONTABILIDAD PRESUPUESTARIA',0,1,'R');
+		$this->Cell(100,4,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,1,'R');
 		}
 	  }
 
@@ -125,7 +125,7 @@ require('../../class/fpdf/fpdf.php');
 
 
 
- pg_close();
+ pg_close($conn);
 ?> 
 
 	

@@ -1,5 +1,5 @@
-<?include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
-$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function cerrar_catalogo(mtipo,mabrev){
@@ -13,12 +13,12 @@ function cerrar_catalogo(mtipo,mabrev){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo Documentos de Ajustes)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo Documentos de Ajustes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head><body>
-<?      $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         $criterio = "where (substring(tipo_ajuste,1,1)='0')"; $txt_criterio = "";
         if ($_GET){if ($_GET["criterio"]!=""){ $txt_criterio = $_GET["criterio"]; $txt_criterio = strtoupper ($txt_criterio);
         $criterio = " where (substring(tipo_ajuste,1,1)='0') and (tipo_ajuste like '%" . $txt_criterio . "%' or nombre_tipo_ajuste like '%" . $txt_criterio . "% or nombre_abrev_ajuste like '%" . $txt_criterio . "%')";  }}
@@ -44,17 +44,17 @@ function cerrar_catalogo(mtipo,mabrev){
                 $linea=$linea+1;
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["tipo_ajuste"]; ?>','<? echo $registro["nombre_abrev_ajuste"]; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_ajuste"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre_tipo_ajuste"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre_abrev_ajuste"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["refierea"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["tipo_ajuste"]; ?>','<?php  echo $registro["nombre_abrev_ajuste"]; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_ajuste"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre_tipo_ajuste"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre_abrev_ajuste"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["refierea"]; ?></b></font></td>
      </tr>
-<?}}echo "</table>"; }?>
+<?php } }echo "</table>"; }?>
 <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?     if($pagina>1){
+<?php      if($pagina>1){
                 echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=".($pagina-1)."&orden=".$orden."&criterio=".$txt_criterio."'>";
                 echo "<font face='verdana' size='-2'>Anterior</font>";
                 echo "</a>&nbsp;"; }
@@ -79,6 +79,6 @@ Criterio de b&uacute;squeda:
 
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

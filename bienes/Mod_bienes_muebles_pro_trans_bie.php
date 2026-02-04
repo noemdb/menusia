@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$referencia_transf='';}else {$referencia_transf=$_GET["Greferencia_transf"];$clave=$referencia_transf;}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$referencia_transf='';}else {$referencia_transf=$_GET["Greferencia_t
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Trnasferencias de Salida Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Trnasferencias de Salida Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -69,10 +69,11 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN036 where referencia_transf='$referencia_transf'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
-$registro=pg_fetch_array($res,0);$referencia_transf=$registro["referencia_transf"];
+$registro=pg_fetch_array($res,0);
+$referencia_transf=$registro["referencia_transf"];
 $fecha_transf=$registro["fecha_transf"]; 
 $tipo_transferencia=$registro["tipo_transferencia"];  
 $cod_dependencia_r=$registro["cod_dependencia_r"]; 
@@ -166,11 +167,11 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                       <tr>
                  <td width="88" scope="col"><span class="Estilo5">REFERENCIAS :</span></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>                   
-		<input name="txtreferencia_transf" type="text" id="txtreferencia_transf" size="10" maxlength="8"  value="<?echo $referencia_transf?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+		<input name="txtreferencia_transf" type="text" id="txtreferencia_transf" size="10" maxlength="8"  value="<?php echo $referencia_transf?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
 </strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  <td width="49" scope="col"><span class="Estilo5">FECHA :</span></td>
                  <td width="121" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_transf" type="text" id="txtfecha_transf" size="15" maxlength="15" value="<?echo $fecha_transf?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtfecha_transf" type="text" id="txtfecha_transf" size="15" maxlength="15" value="<?php echo $fecha_transf?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                  <td width="104" scope="col"><div align="left"><span class="Estilo5">TIPO DE TRANSFERENCIA :</span></div></td>
                  <td width="452" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"><span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
@@ -187,7 +188,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="91" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></div></td>
                  <td width="859" scope="col"><div align="left">
-                     <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="txtdescripcion"><?echo $descripcion?></textarea>
+                     <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="txtdescripcion"><?php echo $descripcion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -203,12 +204,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DE EMPRESA :</span></div></td>
                  <td width="114" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_empresa_e" type="text" id="txtcod_empresa_e" size="4" maxlength="3" value="<?echo $cod_empresa_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_empresa_e" type="text" id="txtcod_empresa_e" size="4" maxlength="3" value="<?php echo $cod_empresa_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222243" type="button" id="bttipo_codeingre22422222245" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="762" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_emp_e" type="text" id="txtdenominacion_emp_e" size="75" maxlength="100" value="<?echo $denominacion_empresa_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_emp_e" type="text" id="txtdenominacion_emp_e" size="75" maxlength="100" value="<?php echo $denominacion_empresa_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -218,12 +219,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_dependencia_e" type="text" id="txtcod_dependencia_e" size="5" maxlength="4" value="<?echo $cod_dependencia_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_dependencia_e" type="text" id="txtcod_dependencia_e" size="5" maxlength="4" value="<?php echo $cod_dependencia_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222244" type="button" id="bttipo_codeingre22422222246" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="747" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep_e" type="text" id="txtdenominacion_dep_e" size="75" maxlength="250" value="<?echo $denominacion_dependen_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dep_e" type="text" id="txtdenominacion_dep_e" size="75" maxlength="250" value="<?php echo $denominacion_dependen_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -233,12 +234,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></div></td>
                  <td width="109" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_direccion_e" type="text" id="txtcod_direccion_e" size="5" maxlength="4" value="<?echo $cod_direccion_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_direccion_e" type="text" id="txtcod_direccion_e" size="5" maxlength="4" value="<?php echo $cod_direccion_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222245" type="button" id="bttipo_codeingre22422222247" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="758" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dir_e" type="text" id="txtdenominacion_dir_e" size="75" maxlength="100" value="<?echo $denominacion_dir_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dir_e" type="text" id="txtdenominacion_dir_e" size="75" maxlength="100" value="<?php echo $denominacion_dir_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -248,12 +249,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></div></td>
                  <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_departamento_e" type="text" id="txtcod_departamento_e" size="10" maxlength="8" value="<?echo $cod_departamento_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_departamento_e" type="text" id="txtcod_departamento_e" size="10" maxlength="8" value="<?php echo $cod_departamento_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="714" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep_e" type="text" id="txtdenominacion_dep_e" size="70" maxlength="100"  value="<?echo $denominacion_dep_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dep_e" type="text" id="txtdenominacion_dep_e" size="70" maxlength="100"  value="<?php echo $denominacion_dep_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -268,12 +269,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DE EMPRESA :</span></div></td>
                  <td width="114" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_empresa_r" type="text" id="txtcod_empresa_r" size="4" maxlength="3" value="<?echo $cod_empresa_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_empresa_r" type="text" id="txtcod_empresa_r" size="4" maxlength="3" value="<?php echo $cod_empresa_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222243" type="button" id="bttipo_codeingre22422222245" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="762" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_emp_r" type="text" id="txtdenominacion_emp_r" size="75" maxlength="100" value="<?echo $denominacion_empresa_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_emp_r" type="text" id="txtdenominacion_emp_r" size="75" maxlength="100" value="<?php echo $denominacion_empresa_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -283,12 +284,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_dependencia_r" type="text" id="txtcod_dependencia_r" size="5" maxlength="4" value="<?echo $cod_dependencia_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_dependencia_r" type="text" id="txtcod_dependencia_r" size="5" maxlength="4" value="<?php echo $cod_dependencia_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222244" type="button" id="bttipo_codeingre22422222246" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="747" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="75" maxlength="250" value="<?echo $denominacion_dependen_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="75" maxlength="250" value="<?php echo $denominacion_dependen_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -298,12 +299,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></div></td>
                  <td width="109" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_direccion_r" type="text" id="txtcod_direccion_r" size="5" maxlength="4" value="<?echo $cod_direccion_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_direccion_r" type="text" id="txtcod_direccion_r" size="5" maxlength="4" value="<?php echo $cod_direccion_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222245" type="button" id="bttipo_codeingre22422222247" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="758" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dir_r" type="text" id="txtdenominacion_dir_r" size="75" maxlength="100" value="<?echo $denominacion_dir_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dir_r" type="text" id="txtdenominacion_dir_r" size="75" maxlength="100" value="<?php echo $denominacion_dir_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -313,12 +314,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></div></td>
                  <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_departamento_r" type="text" id="txtcod_departamento_r" size="10" maxlength="8" value="<?echo $cod_departamento_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_departamento_r" type="text" id="txtcod_departamento_r" size="10" maxlength="8" value="<?php echo $cod_departamento_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="714" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="70" maxlength="100"  value="<?echo $denominacion_dep_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="70" maxlength="100"  value="<?php echo $denominacion_dep_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -328,12 +329,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">C.I. RESPONSABLE PRIMARIO :</span></div></td>
                  <td width="230" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  value="<?echo $ced_responsable?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  value="<?php echo $ced_responsable?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtnombre_responsabep" type="text" id="txtnombre_responsabep" size="65" maxlength="250"  value="<?echo $nombre_res?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtnombre_responsabep" type="text" id="txtnombre_responsabep" size="65" maxlength="250"  value="<?php echo $nombre_res?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -343,12 +344,12 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">C.I. RESPONSABLE DE USO :</span></div></td>
                  <td width="230" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_res_uso" type="text" id="txtced_res_uso" size="15" maxlength="12"  value="<?echo $ced_responsable_uso?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtced_res_uso" type="text" id="txtced_res_uso" size="15" maxlength="12"  value="<?php echo $ced_responsable_uso?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIA','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtnombre_res_uso" type="text" id="txtnombre_res_uso" size="65" maxlength="250"  value="<?echo $nombre_res_uso?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtnombre_res_uso" type="text" id="txtnombre_res_uso" size="65" maxlength="250"  value="<?php echo $nombre_res_uso?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -357,7 +358,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
              <td><span class="Estilo12">BIENES</span></td>
            </tr>
         </table>
-                <iframe src="Det_cons_bienes_muebles.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+                <iframe src="Det_cons_bienes_muebles.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         <table width="863" border="0">         
            <tr>
@@ -371,7 +372,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                  <td width="889" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_e" type="text" id="txtnombre_e" size="35" maxlength="15"   value="<?echo $nombre_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnombre_e" type="text" id="txtnombre_e" size="35" maxlength="15"   value="<?php echo $nombre_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -381,7 +382,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO :</span></div></td>
                  <td width="1100" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdepartamento_e" type="text" id="txtdepartamento_e" size="35" maxlength="15" value="<?echo $departamento_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdepartamento_e" type="text" id="txtdepartamento_e" size="35" maxlength="15" value="<?php echo $departamento_e?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -394,7 +395,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                  <td width="1000" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_r" type="text" id="txtnombre_r" size="35" maxlength="250" value="<?echo $nombre_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnombre_r" type="text" id="txtnombre_r" size="35" maxlength="250" value="<?php echo $nombre_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -404,7 +405,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO :</span></div></td>
                  <td width="1000" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdepartamento_r" type="text" id="txtdepartamento_r" size="35" maxlength="250" value="<?echo $departamento_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdepartamento_r" type="text" id="txtdepartamento_r" size="35" maxlength="250" value="<?php echo $departamento_r?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -417,7 +418,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                  <td width="1000" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre1" type="text" id="txtnombre1" size="35" maxlength="250" value="<?echo $nombre1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnombre1" type="text" id="txtnombre1" size="35" maxlength="250" value="<?php echo $nombre1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -427,7 +428,7 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO :</span></div></td>
                  <td width="1000" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdepartamento1" type="text" id="txtdepartamento1" size="35" maxlength="250" value="<?echo $departamento1?>"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdepartamento1" type="text" id="txtdepartamento1" size="35" maxlength="250" value="<?php echo $departamento1?>"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -453,4 +454,4 @@ $Ssql="SELECT * FROM bien031 where ced_res_uso='".$ced_responsable_uso."'"; $res
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

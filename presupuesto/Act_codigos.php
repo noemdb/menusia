@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?} else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php } else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql); $filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="01-0000005"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
 }$posicion=strpos($Mcamino,'S'); 
-if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"];}else{$formato_presup="XX-XX-XX-XXX-XX-XX-XX";$formato_cat="XX-XX-XX";}
 $len_cat=strlen($formato_cat);  $len_cod=strlen($formato_presup);
@@ -27,7 +27,7 @@ else {$codigo = $_GET["Gcodigo"]; $p_letra=substr($codigo, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -82,7 +82,7 @@ MM_reloadPage(true);
 </script>
 
 </head>
-<?
+<?php 
 $denominacion="";$des_fuente="";$cod_contable="";$nombre_cuenta="";$status_dist="";$func_inv="";$aplicacion="";$distribucion="ANUAL";
 $asignado=0;$disponible=0;$diferido=0;$disp_diferida=0;$montod=0;$tasignado=0;$tcompromiso=0;$tcausado=0;$tpagos=0;$tdiferidos=0;$ttraslados=0;$ttrasladon=0;$tadicion=0; $tdisminucion=0;
 $asignado01=0;$compromiso01=0;$causado01=0;$pagos01=0;$diferidos01=0;$traslados01=0;$trasladon01=0;$adicion01=0;$disminucion01=0;$disponible01=0;
@@ -193,26 +193,26 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
 <table width="978" height="535" border="1" id="tablacuerpo">
   <tr>
     <td><table width="92" height="531" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-	  <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+	  <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_codigos()";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_codigos()">Incluir</A></td>
       </tr>
-	  <?}if ($Mcamino{2}=="S"){?>
+	  <?php }if ($Mcamino{2}=="S"){?>
 		<tr>
-          <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cons_codigos.php?cod_fuente=<? echo $cod_fuente; ?>&cod_presup=<? echo $cod_presup; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cons_codigos.php?cod_fuente=<? echo $cod_fuente; ?>&cod_presup=<? echo $cod_presup; ?>" class="menu">Consultar</a></td>
+          <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cons_codigos.php?cod_fuente=<?php  echo $cod_fuente; ?>&cod_presup=<?php  echo $cod_presup; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cons_codigos.php?cod_fuente=<?php  echo $cod_fuente; ?>&cod_presup=<?php  echo $cod_presup; ?>" class="menu">Consultar</a></td>
         </tr>	
-	  <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_codigos.php?Gcodigo=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Ventana('Mod_codigos.php?Gcodigo=');">Modificar</A></td>
       </tr>
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Distribucion('Dist_codigos.php?Gcodigo=','<? echo $len_cod; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Distribucion('Dist_codigos.php?Gcodigo=','<? echo $len_cod; ?>');">Distribuir</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Distribucion('Dist_codigos.php?Gcodigo=','<?php  echo $len_cod; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Distribucion('Dist_codigos.php?Gcodigo=','<?php  echo $len_cod; ?>');">Distribuir</A></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?>
+	  <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -231,32 +231,32 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_codigos.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_codigos.php" class="menu">Catalogo</a></td>
   </tr>
-   <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+   <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></td>
   </tr>
   </tr>
-   <?} if (($Mcamino{11}=="S")and($SIA_Cierre=="N")){?>
+   <?php } if (($Mcamino{11}=="S")and($SIA_Cierre=="N")){?>
   <tr>
-    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Cargar('Borrar_cod_carga.php?codigo=<? echo $SIA_Definicion; ?>','<? echo $len_cat; ?>');"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Cargar('Borrar_cod_carga.php?codigo=<? echo $SIA_Definicion; ?>','<? echo $len_cat; ?>');" class="menu">Cargar</a></td>
+    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Cargar('Borrar_cod_carga.php?codigo=<?php  echo $SIA_Definicion; ?>','<?php  echo $len_cat; ?>');"
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Cargar('Borrar_cod_carga.php?codigo=<?php  echo $SIA_Definicion; ?>','<?php  echo $len_cat; ?>');" class="menu">Cargar</a></td>
   </tr>
-  <?} if ($Mcamino{10}=="S"){?>
+  <?php } if ($Mcamino{10}=="S"){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Consulta_disp('Consulta_dispon.php?Gcodigo=','<? echo $len_cod; ?>');" class="menu">Consulta Disponibilidad</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Consulta_disp('Consulta_dispon.php?Gcodigo=','<?php  echo $len_cod; ?>');" class="menu">Consulta Disponibilidad</a></td>
   </tr>
-  <?} if (($Mcamino{1}=="S")and($Cod_Emp=="99") and($len_cod==$len_formato)){?>
+  <?php } if (($Mcamino{1}=="S")and($Cod_Emp=="99") and($len_cod==$len_formato)){?>
 	  <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Cambia_codigos.php?Gcodigo=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Ventana('Cambia_codigos.php?Gcodigo=');">Cambiar Codigo</A></td>
       </tr>
 		
-  <?} ?>
+  <?php } ?>
   <tr>
-			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/presupuesto/ayuda/ayuda_codigos_asig.htm','Ayuda SIA','','1000','1000','true');";
-				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/presupuesto/ayuda/ayuda_codigos_asig.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/presupuesto/ayuda/ayuda_codigos_asig.htm','Ayuda SIPAP','','1000','1000','true');";
+				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/presupuesto/ayuda/ayuda_codigos_asig.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -274,10 +274,10 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
               <td><table width="854" border="0">
                 <tr>
                   <td width="180"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
-                  <td width="222"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" value="<?echo $cod_presup?>" size="34" maxlength="34" readonly>  </span></td>
+                  <td width="222"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" value="<?php echo $cod_presup?>" size="34" maxlength="34" readonly>  </span></td>
                   <td width="115"><span class="Estilo5">FUENTE FINANC. :</span></td>
-                  <td width="33"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?echo $cod_fuente?>" size="3" maxlength="2" readonly>   </span></td>
-                  <td width="282"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?echo $des_fuente?>" size="38" readonly>    </span></td>
+                  <td width="33"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?php echo $cod_fuente?>" size="3" maxlength="2" readonly>   </span></td>
+                  <td width="282"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?php echo $des_fuente?>" size="38" readonly>    </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -285,7 +285,7 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
               <td><table width="849" border="0">
                 <tr>
                   <td width="109"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                  <td width="730"><textarea name="txtdenominacion" cols="84" readonly="readonly" class="headers" id="txtdenominacion"><?echo $denominacion?></textarea></td>
+                  <td width="730"><textarea name="txtdenominacion" cols="84" readonly="readonly" class="headers" id="txtdenominacion"><?php echo $denominacion?></textarea></td>
                 </tr>
               </table>  </td>
             </tr>
@@ -293,8 +293,8 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
               <td ><table width="848" border="0">
                 <tr>
                   <td width="168"><span class="Estilo5">C&Oacute;DIGO CONTABLE GASTO:</span></td>
-                  <td width="179"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" value="<?echo $cod_contable?>" size="25" readonly>  </span></td>
-                  <td width="487"><span class="Estilo5"><input class="Estilo10" name="txtnombre_cuenta" type="text" id="txtnombre_cuenta" value="<?echo $nombre_cuenta?>" size="70" readonly>  </span></td>
+                  <td width="179"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" value="<?php echo $cod_contable?>" size="25" readonly>  </span></td>
+                  <td width="487"><span class="Estilo5"><input class="Estilo10" name="txtnombre_cuenta" type="text" id="txtnombre_cuenta" value="<?php echo $nombre_cuenta?>" size="70" readonly>  </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -302,12 +302,12 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
               <td ><table width="848" border="0">
                 <tr>
                   <td width="111"><span class="Estilo5">TIPO DE GASTO :</span> </td>
-                  <td width="174"><span class="Estilo5"><input class="Estilo10" name="txtTipo_Gasto" type="text" id="txtTipo_Gasto" size="15" maxlength="15"  value="<?echo $func_inv?>" readonly>
+                  <td width="174"><span class="Estilo5"><input class="Estilo10" name="txtTipo_Gasto" type="text" id="txtTipo_Gasto" size="15" maxlength="15"  value="<?php echo $func_inv?>" readonly>
                   </span></td>
                   <td width="105" class="Estilo5"><span class="Estilo5">APLICACI&Oacute;N :</span> </td>
-                  <td width="150" class="Estilo5"><input class="Estilo10" name="txtAplicacion" type="text" id="txtAplicacion" readonly size="4" maxlength="1"  value="<?ECHO $aplicacion?>"></td>
+                  <td width="150" class="Estilo5"><input class="Estilo10" name="txtAplicacion" type="text" id="txtAplicacion" readonly size="4" maxlength="1"  value="<?php ECHO $aplicacion?>"></td>
                   <td width="106" class="Estilo5">DISTRIBUCI&Oacute;N :</td>
-                  <td width="166" class="Estilo5"><input class="Estilo10" name="txtdistribucion" type="text" id="txtdistribucion" size="20"  value="<?ECHO $distribucion?>" readonly></td>
+                  <td width="166" class="Estilo5"><input class="Estilo10" name="txtdistribucion" type="text" id="txtdistribucion" size="20"  value="<?php ECHO $distribucion?>" readonly></td>
                 </tr>
               </table>
                           </td>
@@ -315,11 +315,11 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
             <tr><td ><table width="852" border="0">
               <tr>
                 <td width="90"><span class="Estilo5">ASIGNACI&Oacute;N :</span></td>
-                <td width="150"><span class="Estilo5"><input readonly name="txtasignado" type="text" id="txtasignado" value="<?echo $asignado?>" size="19" style="text-align:right">  </span></td>
+                <td width="150"><span class="Estilo5"><input readonly name="txtasignado" type="text" id="txtasignado" value="<?php echo $asignado?>" size="19" style="text-align:right">  </span></td>
                 <td width="122"><span class="Estilo5">DISPONIBILIDAD :</span></td>
-                <td width="150"><span class="Estilo5"><input readonly name="txtdisponible" type="text" id="txtdisponible" value="<?echo $disponible?>" size="19" style="text-align:right">   </span></td>
+                <td width="150"><span class="Estilo5"><input readonly name="txtdisponible" type="text" id="txtdisponible" value="<?php echo $disponible?>" size="19" style="text-align:right">   </span></td>
                 <td width="170"><span class="Estilo5">DISPONIBILIDAD DIFERIDA:</span></td>
-                <td width="140"><span class="Estilo5"><input readonly name="txtdisp_diferida" type="text" id="txtdisp_diferida" value="<?echo $disp_diferida?>" size="19" style="text-align:right">   </span></td>
+                <td width="140"><span class="Estilo5"><input readonly name="txtdisp_diferida" type="text" id="txtdisp_diferida" value="<?php echo $disp_diferida?>" size="19" style="text-align:right">   </span></td>
               </tr>
             </table></td>
             </tr>
@@ -333,9 +333,9 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
    rows[1][1] = "Ejecucion";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Modificaciones";        // Requiere: <div id="T12" class="tab-body">  ... </div>
 </script>
-<?include ("../class/class_tab.php");?>
+<?php include ("../class/class_tab.php");?>
 <script type="text/javascript" language="javascript"> DrawTabs(); </script>
-<!-- PESTAÑA 1 -->
+<!-- PESTAï¿½A 1 -->
 <div id="T11" class="tab-body">
 <table width="830"  border="1" cellspacing='0' cellpadding='0' align="center" id="ejecucion">
  <tr height="20" class="Estilo5">
@@ -348,113 +348,113 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
  </tr>
  <tr class="Estilo5">
     <td height="20" class="Estilo5">ENERO</td>
-    <td align="right"><? echo $asignado01; ?></td>
-    <td align="right"><? echo $compromiso01; ?></td>
-    <td align="right"><? echo $causado01; ?></td>
-    <td align="right"><? echo $pagos01; ?></td>
-    <td align="right"><? echo $diferidos01; ?></td>
+    <td align="right"><?php  echo $asignado01; ?></td>
+    <td align="right"><?php  echo $compromiso01; ?></td>
+    <td align="right"><?php  echo $causado01; ?></td>
+    <td align="right"><?php  echo $pagos01; ?></td>
+    <td align="right"><?php  echo $diferidos01; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">FEBRERO</td>
-    <td align="right"><? echo $asignado02; ?></td>
-    <td align="right"><? echo $compromiso02; ?></td>
-    <td align="right"><? echo $causado02; ?></td>
-    <td align="right"><? echo $pagos02; ?></td>
-    <td align="right"><? echo $diferidos02; ?></td>
+    <td align="right"><?php  echo $asignado02; ?></td>
+    <td align="right"><?php  echo $compromiso02; ?></td>
+    <td align="right"><?php  echo $causado02; ?></td>
+    <td align="right"><?php  echo $pagos02; ?></td>
+    <td align="right"><?php  echo $diferidos02; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">MARZO</td>
-    <td align="right"><? echo $asignado03; ?></td>
-    <td align="right"><? echo $compromiso03; ?></td>
-    <td align="right"><? echo $causado03; ?></td>
-    <td align="right"><? echo $pagos03; ?></td>
-    <td align="right"><? echo $diferidos03; ?></td>
+    <td align="right"><?php  echo $asignado03; ?></td>
+    <td align="right"><?php  echo $compromiso03; ?></td>
+    <td align="right"><?php  echo $causado03; ?></td>
+    <td align="right"><?php  echo $pagos03; ?></td>
+    <td align="right"><?php  echo $diferidos03; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">ABRIL</td>
-    <td align="right"><? echo $asignado04; ?></td>
-    <td align="right"><? echo $compromiso04; ?></td>
-    <td align="right"><? echo $causado04; ?></td>
-    <td align="right"><? echo $pagos04; ?></td>
-    <td align="right"><? echo $diferidos04; ?></td>
+    <td align="right"><?php  echo $asignado04; ?></td>
+    <td align="right"><?php  echo $compromiso04; ?></td>
+    <td align="right"><?php  echo $causado04; ?></td>
+    <td align="right"><?php  echo $pagos04; ?></td>
+    <td align="right"><?php  echo $diferidos04; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">MAYO</td>
-    <td align="right"><? echo $asignado05; ?></td>
-    <td align="right"><? echo $compromiso05; ?></td>
-    <td align="right"><? echo $causado05; ?></td>
-    <td align="right"><? echo $pagos05; ?></td>
-    <td align="right"><? echo $diferidos05; ?></td>
+    <td align="right"><?php  echo $asignado05; ?></td>
+    <td align="right"><?php  echo $compromiso05; ?></td>
+    <td align="right"><?php  echo $causado05; ?></td>
+    <td align="right"><?php  echo $pagos05; ?></td>
+    <td align="right"><?php  echo $diferidos05; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">JUNIO</td>
-    <td align="right"><? echo $asignado06; ?></td>
-    <td align="right"><? echo $compromiso06; ?></td>
-    <td align="right"><? echo $causado06; ?></td>
-    <td align="right"><? echo $pagos06; ?></td>
-    <td align="right"><? echo $diferidos06; ?></td>
+    <td align="right"><?php  echo $asignado06; ?></td>
+    <td align="right"><?php  echo $compromiso06; ?></td>
+    <td align="right"><?php  echo $causado06; ?></td>
+    <td align="right"><?php  echo $pagos06; ?></td>
+    <td align="right"><?php  echo $diferidos06; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">JULIO</td>
-    <td align="right"><? echo $asignado07; ?></td>
-    <td align="right"><? echo $compromiso07; ?></td>
-    <td align="right"><? echo $causado07; ?></td>
-    <td align="right"><? echo $pagos07; ?></td>
-    <td align="right"><? echo $diferidos07; ?></td>
+    <td align="right"><?php  echo $asignado07; ?></td>
+    <td align="right"><?php  echo $compromiso07; ?></td>
+    <td align="right"><?php  echo $causado07; ?></td>
+    <td align="right"><?php  echo $pagos07; ?></td>
+    <td align="right"><?php  echo $diferidos07; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">AGOSTO</td>
-    <td align="right"><? echo $asignado08; ?></td>
-    <td align="right"><? echo $compromiso08; ?></td>
-    <td align="right"><? echo $causado08; ?></td>
-    <td align="right"><? echo $pagos08; ?></td>
-    <td align="right"><? echo $diferidos08; ?></td>
+    <td align="right"><?php  echo $asignado08; ?></td>
+    <td align="right"><?php  echo $compromiso08; ?></td>
+    <td align="right"><?php  echo $causado08; ?></td>
+    <td align="right"><?php  echo $pagos08; ?></td>
+    <td align="right"><?php  echo $diferidos08; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">SEPTIEMBRE</td>
-    <td align="right"><? echo $asignado09; ?></td>
-    <td align="right"><? echo $compromiso09; ?></td>
-    <td align="right"><? echo $causado09; ?></td>
-    <td align="right"><? echo $pagos09; ?></td>
-    <td align="right"><? echo $diferidos09; ?></td>
+    <td align="right"><?php  echo $asignado09; ?></td>
+    <td align="right"><?php  echo $compromiso09; ?></td>
+    <td align="right"><?php  echo $causado09; ?></td>
+    <td align="right"><?php  echo $pagos09; ?></td>
+    <td align="right"><?php  echo $diferidos09; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">OCTUBRE</td>
-    <td align="right"><? echo $asignado10; ?></td>
-    <td align="right"><? echo $compromiso10; ?></td>
-    <td align="right"><? echo $causado10; ?></td>
-    <td align="right"><? echo $pagos10; ?></td>
-    <td align="right"><? echo $diferidos10; ?></td>
+    <td align="right"><?php  echo $asignado10; ?></td>
+    <td align="right"><?php  echo $compromiso10; ?></td>
+    <td align="right"><?php  echo $causado10; ?></td>
+    <td align="right"><?php  echo $pagos10; ?></td>
+    <td align="right"><?php  echo $diferidos10; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">NOVIEMBRE</td>
-    <td align="right"><? echo $asignado11; ?></td>
-    <td align="right"><? echo $compromiso11; ?></td>
-    <td align="right"><? echo $causado11; ?></td>
-    <td align="right"><? echo $pagos11; ?></td>
-    <td align="right"><? echo $diferidos11; ?></td>
+    <td align="right"><?php  echo $asignado11; ?></td>
+    <td align="right"><?php  echo $compromiso11; ?></td>
+    <td align="right"><?php  echo $causado11; ?></td>
+    <td align="right"><?php  echo $pagos11; ?></td>
+    <td align="right"><?php  echo $diferidos11; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">DICIEMBRE</td>
-    <td align="right"><? echo $asignado12; ?></td>
-    <td align="right"><? echo $compromiso12; ?></td>
-    <td align="right"><? echo $causado12; ?></td>
-    <td align="right"><? echo $pagos12; ?></td>
-    <td align="right"><? echo $diferidos12; ?></td>
+    <td align="right"><?php  echo $asignado12; ?></td>
+    <td align="right"><?php  echo $compromiso12; ?></td>
+    <td align="right"><?php  echo $causado12; ?></td>
+    <td align="right"><?php  echo $pagos12; ?></td>
+    <td align="right"><?php  echo $diferidos12; ?></td>
   </tr>
  </table>
  <table width="830"  border="1" cellspacing='0' cellpadding='0' align="center" id="total ejecucion">
  <tr class="Estilo5">
     <td height="20" width="80" class="Estilo5">TOTALES :</td>
-    <td width="150"  align="right"><? echo $tasignado; ?></td>
-    <td width="150" align="right"><? echo $tcompromiso; ?></td>
-    <td width="150" align="right"><? echo $tcausado; ?></td>
-    <td width="150" align="right"><? echo $tpagos; ?></td>
-    <td width="150" align="right"><? echo $tdiferidos; ?></td>
+    <td width="150"  align="right"><?php  echo $tasignado; ?></td>
+    <td width="150" align="right"><?php  echo $tcompromiso; ?></td>
+    <td width="150" align="right"><?php  echo $tcausado; ?></td>
+    <td width="150" align="right"><?php  echo $tpagos; ?></td>
+    <td width="150" align="right"><?php  echo $tdiferidos; ?></td>
   </tr>
  </table>
 </div>
-<!--PESTAÑA 2 -->
+<!--PESTAï¿½A 2 -->
 <div id="T12" class="tab-body" >
 <table width="830"  border="1" cellspacing='0' cellpadding='0' align="center" id="modificaciones">
  <tr height="20" class="Estilo5">
@@ -467,109 +467,109 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
  </tr>
  <tr class="Estilo5">
     <td height="20" class="Estilo5">ENERO</td>
-    <td align="right"><? echo $traslados01; ?></td>
-    <td align="right"><? echo $trasladon01; ?></td>
-    <td align="right"><? echo $adicion01; ?></td>
-    <td align="right"><? echo $disminucion01; ?></td>
-    <td align="right"><? echo $disponible01; ?></td>
+    <td align="right"><?php  echo $traslados01; ?></td>
+    <td align="right"><?php  echo $trasladon01; ?></td>
+    <td align="right"><?php  echo $adicion01; ?></td>
+    <td align="right"><?php  echo $disminucion01; ?></td>
+    <td align="right"><?php  echo $disponible01; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">FEBRERO</td>
-    <td align="right"><? echo $traslados02; ?></td>
-    <td align="right"><? echo $trasladon02; ?></td>
-    <td align="right"><? echo $adicion02; ?></td>
-    <td align="right"><? echo $disminucion02; ?></td>
-    <td align="right"><? echo $disponible02; ?></td>
+    <td align="right"><?php  echo $traslados02; ?></td>
+    <td align="right"><?php  echo $trasladon02; ?></td>
+    <td align="right"><?php  echo $adicion02; ?></td>
+    <td align="right"><?php  echo $disminucion02; ?></td>
+    <td align="right"><?php  echo $disponible02; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">MARZO</td>
-    <td align="right"><? echo $traslados03; ?></td>
-    <td align="right"><? echo $trasladon03; ?></td>
-    <td align="right"><? echo $adicion03; ?></td>
-    <td align="right"><? echo $disminucion03; ?></td>
-    <td align="right"><? echo $disponible03; ?></td>
+    <td align="right"><?php  echo $traslados03; ?></td>
+    <td align="right"><?php  echo $trasladon03; ?></td>
+    <td align="right"><?php  echo $adicion03; ?></td>
+    <td align="right"><?php  echo $disminucion03; ?></td>
+    <td align="right"><?php  echo $disponible03; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">ABRIL</td>
-    <td align="right"><? echo $traslados04; ?></td>
-    <td align="right"><? echo $trasladon04; ?></td>
-    <td align="right"><? echo $adicion04; ?></td>
-    <td align="right"><? echo $disminucion04; ?></td>
-    <td align="right"><? echo $disponible04; ?></td>
+    <td align="right"><?php  echo $traslados04; ?></td>
+    <td align="right"><?php  echo $trasladon04; ?></td>
+    <td align="right"><?php  echo $adicion04; ?></td>
+    <td align="right"><?php  echo $disminucion04; ?></td>
+    <td align="right"><?php  echo $disponible04; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">MAYO</td>
-    <td align="right"><? echo $traslados05; ?></td>
-    <td align="right"><? echo $trasladon05; ?></td>
-    <td align="right"><? echo $adicion05; ?></td>
-    <td align="right"><? echo $disminucion05; ?></td>
-    <td align="right"><? echo $disponible05; ?></td>
+    <td align="right"><?php  echo $traslados05; ?></td>
+    <td align="right"><?php  echo $trasladon05; ?></td>
+    <td align="right"><?php  echo $adicion05; ?></td>
+    <td align="right"><?php  echo $disminucion05; ?></td>
+    <td align="right"><?php  echo $disponible05; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">JUNIO</td>
-    <td align="right"><? echo $traslados06; ?></td>
-    <td align="right"><? echo $trasladon06; ?></td>
-    <td align="right"><? echo $adicion06; ?></td>
-    <td align="right"><? echo $disminucion06; ?></td>
-    <td align="right"><? echo $disponible06; ?></td>
+    <td align="right"><?php  echo $traslados06; ?></td>
+    <td align="right"><?php  echo $trasladon06; ?></td>
+    <td align="right"><?php  echo $adicion06; ?></td>
+    <td align="right"><?php  echo $disminucion06; ?></td>
+    <td align="right"><?php  echo $disponible06; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">JULIO</td>
-    <td align="right"><? echo $traslados07; ?></td>
-    <td align="right"><? echo $trasladon07; ?></td>
-    <td align="right"><? echo $adicion07; ?></td>
-    <td align="right"><? echo $disminucion07; ?></td>
-    <td align="right"><? echo $disponible07; ?></td>
+    <td align="right"><?php  echo $traslados07; ?></td>
+    <td align="right"><?php  echo $trasladon07; ?></td>
+    <td align="right"><?php  echo $adicion07; ?></td>
+    <td align="right"><?php  echo $disminucion07; ?></td>
+    <td align="right"><?php  echo $disponible07; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">AGOSTO</td>
-    <td align="right"><? echo $traslados08; ?></td>
-    <td align="right"><? echo $trasladon08; ?></td>
-    <td align="right"><? echo $adicion08; ?></td>
-    <td align="right"><? echo $disminucion08; ?></td>
-    <td align="right"><? echo $disponible08; ?></td>
+    <td align="right"><?php  echo $traslados08; ?></td>
+    <td align="right"><?php  echo $trasladon08; ?></td>
+    <td align="right"><?php  echo $adicion08; ?></td>
+    <td align="right"><?php  echo $disminucion08; ?></td>
+    <td align="right"><?php  echo $disponible08; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">SEPTIEMBRE</td>
-    <td align="right"><? echo $traslados09; ?></td>
-    <td align="right"><? echo $trasladon09; ?></td>
-    <td align="right"><? echo $adicion09; ?></td>
-    <td align="right"><? echo $disminucion09; ?></td>
-    <td align="right"><? echo $disponible09; ?></td>
+    <td align="right"><?php  echo $traslados09; ?></td>
+    <td align="right"><?php  echo $trasladon09; ?></td>
+    <td align="right"><?php  echo $adicion09; ?></td>
+    <td align="right"><?php  echo $disminucion09; ?></td>
+    <td align="right"><?php  echo $disponible09; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">OCTUBRE</td>
-    <td align="right"><? echo $traslados10; ?></td>
-    <td align="right"><? echo $trasladon10; ?></td>
-    <td align="right"><? echo $adicion10; ?></td>
-    <td align="right"><? echo $disminucion10; ?></td>
-    <td align="right"><? echo $disponible10; ?></td>
+    <td align="right"><?php  echo $traslados10; ?></td>
+    <td align="right"><?php  echo $trasladon10; ?></td>
+    <td align="right"><?php  echo $adicion10; ?></td>
+    <td align="right"><?php  echo $disminucion10; ?></td>
+    <td align="right"><?php  echo $disponible10; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">NOVIEMBRE</td>
-    <td align="right"><? echo $traslados11; ?></td>
-    <td align="right"><? echo $trasladon11; ?></td>
-    <td align="right"><? echo $adicion11; ?></td>
-    <td align="right"><? echo $disminucion11; ?></td>
-    <td align="right"><? echo $disponible11; ?></td>
+    <td align="right"><?php  echo $traslados11; ?></td>
+    <td align="right"><?php  echo $trasladon11; ?></td>
+    <td align="right"><?php  echo $adicion11; ?></td>
+    <td align="right"><?php  echo $disminucion11; ?></td>
+    <td align="right"><?php  echo $disponible11; ?></td>
   </tr>
   <tr class="Estilo5">
     <td height="20" class="Estilo5">DICIEMBRE</td>
-    <td align="right"><? echo $traslados12; ?></td>
-    <td align="right"><? echo $trasladon12; ?></td>
-    <td align="right"><? echo $adicion12; ?></td>
-    <td align="right"><? echo $disminucion12; ?></td>
-    <td align="right"><? echo $disponible12; ?></td>
+    <td align="right"><?php  echo $traslados12; ?></td>
+    <td align="right"><?php  echo $trasladon12; ?></td>
+    <td align="right"><?php  echo $adicion12; ?></td>
+    <td align="right"><?php  echo $disminucion12; ?></td>
+    <td align="right"><?php  echo $disponible12; ?></td>
   </tr>
  </table>
  <table width="830"  border="1" cellspacing='0' cellpadding='0' align="center" id="total ejecucion">
  <tr class="Estilo5">
     <td height="20" width="80" class="Estilo5">TOTALES :</td>
-    <td width="150"  align="right"><? echo $ttraslados; ?></td>
-    <td width="150" align="right"><? echo $ttrasladon; ?></td>
-    <td width="150" align="right"><? echo $tadicion; ?></td>
-    <td width="150" align="right"><? echo $tdisminucion; ?></td>
-    <td width="150" align="right"><? echo $disponible12; ?></td>
+    <td width="150"  align="right"><?php  echo $ttraslados; ?></td>
+    <td width="150" align="right"><?php  echo $ttrasladon; ?></td>
+    <td width="150" align="right"><?php  echo $tadicion; ?></td>
+    <td width="150" align="right"><?php  echo $tdisminucion; ?></td>
+    <td width="150" align="right"><?php  echo $disponible12; ?></td>
   </tr>
  </table>
 </div>
@@ -584,15 +584,15 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
 <form name="form2" method="post" action="Inc_codigos.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input name="txtSIA_Definicion" type="hidden" id="txtSIA_Definicion" value="<?echo $SIA_Definicion?>" ></td>
-	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?echo $Rif_Emp?>"></td>
-     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?echo $Nom_Emp?>"></td>
-	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
-	 <td width="5"><input name="txtformato" type="hidden" id="txtformato" value="<?echo $formato_presup?>"></td>
-	 <td width="5"><input name="txttitulo" type="hidden" id="txttitulo" value="<?echo $titulo?>"></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input name="txtSIA_Definicion" type="hidden" id="txtSIA_Definicion" value="<?php echo $SIA_Definicion?>" ></td>
+	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?php echo $Rif_Emp?>"></td>
+     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?php echo $Nom_Emp?>"></td>
+	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
+	 <td width="5"><input name="txtformato" type="hidden" id="txtformato" value="<?php echo $formato_presup?>"></td>
+	 <td width="5"><input name="txttitulo" type="hidden" id="txttitulo" value="<?php echo $titulo?>"></td>
 	  
 	  
 	  
@@ -601,4 +601,4 @@ $len_cod=strlen($cod_presup);  $len_formato=strlen($formato_presup);
 </form>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

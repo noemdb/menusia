@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); $cod_modulo="13";
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); $cod_modulo="13";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,7 +8,7 @@ if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Modificar Ficha de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Modificar Ficha de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
@@ -29,7 +29,7 @@ function LlamarURL(url){  document.location = url; }
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $cod_clasificacion=""; $num_bien="";$denominacion=""; $cod_dependencia=""; $cod_empresa=""; $cod_direccion=""; $cod_departamento=""; $ced_responsable=""; $fecha_actualizacion=""; $denomina_tipo="";
 $ced_responsable_uso="";$cod_metodo_rot="";$ced_rotulador=""; $fecha_rotulacion="";$direccion=""; $cod_region=""; $cod_entidad=""; $cod_municipio=""; $cod_ciudad=""; $cod_parroquia=""; $cod_postal="";$caracteristicas="";$marca="";  $modelo="";$color="";$matricula="";$serial1="";$serial2="";$tipo_clase="";$uso="";$dimension_tam="";$material="";$codigo_alterno="";$ano=""; $antiguedad="";$cod_contablea="";$cod_contabled="";$tipo_depreciacion="";$tasa_deprec=""; $vida_util=""; $valor_residual=""; $sit_contable="";$sit_legal=""; $edo_conservacion="";$ced_verificador=""; $fecha_verificacion=""; $tipo_incorporacion=""; $cod_imp_presup=""; $nom_imp_presup="";$des_imp_nopresup=""; $fecha_incorporacion=""; $valor_incorporacion="";$garantia="";$nro_oc=""; $fecha_oc=""; $nro_op=""; $fecha_op=""; $tipo_doc_cancela=""; $nro_doc_cancela=""; $fecha_doc_cancela="";$ced_rif_proveedor=""; $codigo_tipo_incorp=""; $nom_proveedor=""; $cod_presup_dep=""; $monto_depreciado=""; $nro_factura=""; $fecha_factura=""; $desincorporado=""; $fecha_desincorporado="";$des_desincorporado="";$bien_en_salida="";$status_bien_inm=""; $usuario_sia=""; $inf_usuario="";$accesorios="";  $descripcion_b="";  $denominacion_empresa=""; $denominacion_dependencia=""; $denominacion_dir="";$denominacion_dep="";  $nombre_res="";  $nombre_res_uso="";  $metodo_rotula="";  $nombre_res_rotu="";$nombre_region="";  $estado="";  $nombre_municipio=""; $nombre_ciudad="";  $nombre_parroquia=""; $tipo_situacion_cont="";  $tipo_situacion_legal=""; $edo_bien="";  $nombre_res_ver="";
 
@@ -136,8 +136,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
       <td width="86">
 		 <td width="92" height="560"><table width="94" height="560" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
 		   <tr>
-			<td width="89" height="27"  bgColor=#EAEAEA onClick="javascript:LlamarURL('Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?echo $cod_bien_mue;?>')" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'";o><A class=menu href="Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?echo $cod_bien_mue;?>">Atras</A></td>
+			<td width="89" height="27"  bgColor=#EAEAEA onClick="javascript:LlamarURL('Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?php echo $cod_bien_mue;?>')" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'";o><A class=menu href="Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?php echo $cod_bien_mue;?>">Atras</A></td>
 		   </tr>
 		   <tr>
 			 <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -159,8 +159,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="180"><span class="Estilo5">C&Oacute;DIGO DE CLASIFICACI&Oacute;N :</span></td>
-                 <td width="145"><span class="Estilo5"><input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" value="<?echo $cod_clasificacion?>" readonly  size="10" maxlength="10"  class="Estilo5"> </span></td>
-                 <td width="520"><span class="Estilo5"><input name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="100" maxlength="250" value="<?echo $descripcion_b?>" readonly></span></td>
+                 <td width="145"><span class="Estilo5"><input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" value="<?php echo $cod_clasificacion?>" readonly  size="10" maxlength="10"  class="Estilo5"> </span></td>
+                 <td width="520"><span class="Estilo5"><input name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="100" maxlength="250" value="<?php echo $descripcion_b?>" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -168,9 +168,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">N&Uacute;MERO DEL BIEN:</span></td>
-                 <td width="250"><span class="Estilo5"><div id="numbien"> <input name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20"  value="<?echo $num_bien?>" readonly></div></td>
+                 <td width="250"><span class="Estilo5"><div id="numbien"> <input name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20"  value="<?php echo $num_bien?>" readonly></div></td>
                  <td width="220"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></td>
-                 <td width="250"><span class="Estilo5"><input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="40"  value="<?echo $cod_bien_mue?>" readonly> </span></td>
+                 <td width="250"><span class="Estilo5"><input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="40"  value="<?php echo $cod_bien_mue?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -178,7 +178,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">DENOMINACI&Oacute;N DEL BIEN :</span></td>
-                 <td width="680"><span class="Estilo5"><input name="txtdenominacion" type="text" id="txtdenominacion" size="120" maxlength="250" value="<?echo $denominacion?>"  readonly  class="Estilo5"></div></td>
+                 <td width="680"><span class="Estilo5"><input name="txtdenominacion" type="text" id="txtdenominacion" size="120" maxlength="250" value="<?php echo $denominacion?>"  readonly  class="Estilo5"></div></td>
                </tr>
              </table></td>
            </tr>          
@@ -187,7 +187,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
 		   </tr>
         </table>
 		    <div id="T11" class="tab-body">
-              <iframe src="Det_componentes_bienes.php?cod_bien_mue=<?echo $cod_bien_mue?>" width="840" height="350" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_componentes_bienes.php?cod_bien_mue=<?php echo $cod_bien_mue?>" width="840" height="350" scrolling="auto" frameborder="1"></iframe>
             </div>
         
         </form>
@@ -197,4 +197,4 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

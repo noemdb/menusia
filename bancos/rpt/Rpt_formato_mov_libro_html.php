@@ -1,11 +1,11 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){$cod_banco='';$referencia=''; $tipo_mov='';}  else{$cod_banco=$_GET["cod_banco"];$referencia=$_GET["referencia"];$tipo_mov=$_GET["tipo_mov"];}
 $sql="Select * from MOV_LIBROS where cod_banco='$cod_banco' and referencia='$referencia' and tipo_mov_libro='$tipo_mov'"; ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Formato Movimiento en libros)</title>
+<title>SIPAP CONTROL BANCARIO (Formato Movimiento en libros)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -27,8 +27,8 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<? $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php  $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $direccion="CALLE 48 CON CARRERA 13 EDIF HIDROLARA, PISO 2, LOCAL S/N, SECTOR VICENTE-CAJA DE AGUA"; $nombre_emp="HIDROLARA C.A."; $rif_emp="G-20009014-6";
 $nombre_banco="";$nro_cuenta="";$des_tipo_mov="";$referencia=""; $tipo_mov="";$nombre_benef=""; $ced_rif=""; $descripcion=""; $monto_mov_libro=0; $fecha=""; $inf_usuario=""; $anulado="N"; $mes_conciliacion="00"; $fecha_anulado="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
@@ -49,7 +49,7 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
     <tr>
       <td width="150" align="center">&nbsp;</td>
       <td width="30"><span class="Estilo18">RIF:</span></td>
-      <td width="150"><span class="Estilo18"><?echo $rif_emp?></span></td>
+      <td width="150"><span class="Estilo18"><?php echo $rif_emp?></span></td>
       <td width="650" align="center">&nbsp;</td>
     </tr>
   </table></td>
@@ -57,7 +57,7 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
   </tr>
   <tr><td height="40" colspan="4"><table width="980" border="0"  height="40">
     <tr>
-      <td width="980" height="32" align="center"><span class="Estilo16"><?echo $des_tipo_mov?></span></td>
+      <td width="980" height="32" align="center"><span class="Estilo16"><?php echo $des_tipo_mov?></span></td>
      </tr>
     </table></td>
   </tr>
@@ -66,11 +66,11 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
       <td width="980" height="25"><table width="980" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CUENTA:</span></td>
-            <td width="200"><span class="Estilo17"><?echo $nro_cuenta?></span></td>
+            <td width="200"><span class="Estilo17"><?php echo $nro_cuenta?></span></td>
 			<td width="100"><span class="Estilo17">REFERENCIA:</span></td>
-            <td width="200"><span class="Estilo17"><?echo $referencia?></span></td>
+            <td width="200"><span class="Estilo17"><?php echo $referencia?></span></td>
 			<td width="80"><span class="Estilo17">FECHA:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $fecha?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $fecha?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -81,13 +81,13 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
       <td width="760" height="25"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">BENEFICIARIO:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $nombre_benef?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $nombre_benef?></span></td>
           </tr>
       </table></td>
           <td width="227"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CEDULA/RIF:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $ced_rif?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $ced_rif?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -98,7 +98,7 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
       <td width="980" height="25"><table width="980" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="80"><span class="Estilo17">CONCEPTO:</span></td>
-            <td width="900"><span class="Estilo17"><?echo $descripcion?></span></td>
+            <td width="900"><span class="Estilo17"><?php echo $descripcion?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -125,17 +125,17 @@ $monto_letras= monto_en_letras($monto_mov_libro); $tipo_comp="B".$cod_banco; $lu
   </tr>
   <tr><td height="25" ><table width="1006" border="0"  height="30" cellpadding="3" cellspacing="0">
 
-<? $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$ref_comp' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql); 
+<?php  $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$ref_comp' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql); 
 while($registro=pg_fetch_array($res)){$monto_a=$registro["monto_asiento"]; $monto_asiento=formato_monto($monto_a);
 if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";$total_debe=$total_debe+$monto_a;}else{$debe="";$haber=$monto_asiento; $total_haber=$total_haber+$monto_a;}?>
     <tr>
-        <td width="200" align="center"><span class="Estilo17"><? echo $registro["cod_cuenta"]; ?></span></td>
-        <td width="460" align="left"><span class="Estilo17"><? echo $registro["nombre_cuenta"]; ?></span></td>
-        <td width="160" align="right"><span class="Estilo17"><? echo $debe; ?></span></td>
-        <td width="160" align="right"><span class="Estilo17"><? echo $haber; ?></span></td>
+        <td width="200" align="center"><span class="Estilo17"><?php  echo $registro["cod_cuenta"]; ?></span></td>
+        <td width="460" align="left"><span class="Estilo17"><?php  echo $registro["nombre_cuenta"]; ?></span></td>
+        <td width="160" align="right"><span class="Estilo17"><?php  echo $debe; ?></span></td>
+        <td width="160" align="right"><span class="Estilo17"><?php  echo $haber; ?></span></td>
 		<td width="5" align="center">&nbsp;</td>
     </tr>
-<?}$total_debe=formato_monto($total_debe); $total_haber=formato_monto($total_haber);  ?>    
+<?php }$total_debe=formato_monto($total_debe); $total_haber=formato_monto($total_haber);  ?>    
     </table></td>	  
   </tr>
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
@@ -143,8 +143,8 @@ if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";$total_debe
       <td height="25"><table width="994" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="660" align="right"><span class="Estilo17">TOTAL:</span></td>
-            <td width="160" align="right"><span class="Estilo17"><?echo $total_debe?></span></td>
-			<td width="160" align="right"><span class="Estilo17"><?echo $total_haber?></span></td>
+            <td width="160" align="right"><span class="Estilo17"><?php echo $total_debe?></span></td>
+			<td width="160" align="right"><span class="Estilo17"><?php echo $total_haber?></span></td>
           </tr>
       </table></td>
         </tr>

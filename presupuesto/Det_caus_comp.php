@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Detalles Causados del Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Detalles Causados del Compromiso)</title>
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>
@@ -26,22 +26,22 @@ $sql="select * from pre037 where (pre037.referencia_comp='$referencia_comp') and
            <td width="110" align="right" bgcolor="#99CCFF" ><strong>Ajustado </strong></td>
            <td width="110" align="right" bgcolor="#99CCFF" ><strong>Neto </strong></td>
          </tr>
-         <? $total=0;$totaln=0;$totala=0;
+         <?php  $total=0;$totaln=0;$totala=0;
 while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);  $ajustado=formato_monto($registro["ajustado"]); 
   $neto=$registro["monto"]-$registro["pagado"]-$registro["ajustado"];  $totaln=$totaln+$neto;  
   $neto=formato_monto($neto);  $total=$total+$registro["monto"];  $totala=$totala+$registro["ajustado"]; $fecha=$registro["fecha_causado"];
   if($fecha==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha);}
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="120" align="left"><? echo $registro["referencia_caus"].' '.$registro["tipo_causado"]; ?></td>
-            <td width="100" align="left"><? echo $fecha; ?></td>
-            <td width="190" align="left"><? echo $registro["cod_presup"]; ?></td>
-           <td width="40" align="left"><? echo $registro["fuente_financ"]; ?></td>
-           <td width="110" align="right"><? echo $monto; ?></td>
-           <td width="110" align="right"><? echo $ajustado; ?></td>
-           <td width="110" align="right"><? echo $neto; ?></td>
+           <td width="120" align="left"><?php  echo $registro["referencia_caus"].' '.$registro["tipo_causado"]; ?></td>
+            <td width="100" align="left"><?php  echo $fecha; ?></td>
+            <td width="190" align="left"><?php  echo $registro["cod_presup"]; ?></td>
+           <td width="40" align="left"><?php  echo $registro["fuente_financ"]; ?></td>
+           <td width="110" align="right"><?php  echo $monto; ?></td>
+           <td width="110" align="right"><?php  echo $ajustado; ?></td>
+           <td width="110" align="right"><?php  echo $neto; ?></td>
          </tr>
-         <?}
+         <?php }
  $total=formato_monto($total); $totala=formato_monto($totala); $totaln=formato_monto($totaln);
 ?>
        </table></td>
@@ -56,9 +56,9 @@ while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);
          <td width="110" align="center"><span class="Estilo5">TOTALES :</span></td>
          <td width="335"><table width="335" border="1" cellspacing="0" cellpadding="0">
            <tr>
-             <td width="123" align="right" class="Estilo5"><? echo $total; ?></td>
-             <td width="110" align="right" class="Estilo5"><? echo $totala; ?></td>
-             <td width="110" align="right" class="Estilo5"><? echo $totaln; ?></td>
+             <td width="123" align="right" class="Estilo5"><?php  echo $total; ?></td>
+             <td width="110" align="right" class="Estilo5"><?php  echo $totala; ?></td>
+             <td width="110" align="right" class="Estilo5"><?php  echo $totaln; ?></td>
              </tr>
          </table></td>
        </tr>
@@ -72,4 +72,4 @@ while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);
  <p>&nbsp;</p>
 </body>
 </html>
-<?  pg_close(); ?>
+<?php   pg_close($conn); ?>

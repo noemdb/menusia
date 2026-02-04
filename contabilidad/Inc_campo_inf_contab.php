@@ -5,12 +5,12 @@ if (!$_GET){$tipo_informe="";$linea="00000001";}else{$tipo_informe=$_GET["tipo_i
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Agregar Linea Informes Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Agregar Linea Informes Contables)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_inf_contables.php?criterio=<?echo $tipo_informe?>'; }
+function llamar_anterior(){ document.location ='Det_inc_inf_contables.php?criterio=<?php echo $tipo_informe?>'; }
 
 function revisar(){var f=document.form1; var Valido=true;
    if(f.txtlinea.value==""){alert("Linea no puede estar Vacio");return false;}
@@ -38,10 +38,10 @@ return true;}
           <td><table width="830" border="0">
               <tr>
                 <td width="50"><span class="Estilo5">LINEA :</span> </td>
-                <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtlinea" type="text" id="txtlinea" size="10" maxlength="8" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $linea?>" > </span></td>
+                <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtlinea" type="text" id="txtlinea" size="10" maxlength="8" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $linea?>" > </span></td>
                 <td width="120"><span class="Estilo5">CODIGO CUENTA :</span> </td>
 				<td width="200"><span class="Estilo5"><input  class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" class="Estilo5"  size="30" maxlength="30" onFocus="encender(this)" onBlur="apagar(this)" ></span></td>
-                <td width="80"><input  class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas.php?criterio=','SIA','','750','500','true')" value="..."></td>                   
+                <td width="80"><input  class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas.php?criterio=','SIPAP','','750','500','true')" value="..."></td>                   
 			    <td width="80"><span class="Estilo5">CODIGO : </span></td>
                 <td width="200"><span class="Estilo5"><input  class="Estilo10" name="txtcod_cuenta" type="text" class="Estilo5" id="txtcod_cuenta"  size="30" maxlength="30" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
               </tr>
@@ -85,7 +85,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="20"><input name="txttipo_informe" type="hidden" id="txttipo_informe" value="<?echo $tipo_informe?>"></td>
+            <td width="20"><input name="txttipo_informe" type="hidden" id="txttipo_informe" value="<?php echo $tipo_informe?>"></td>
             <td width="80">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

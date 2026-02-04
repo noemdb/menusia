@@ -1,11 +1,11 @@
-<?include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");  $mcod_m="BIEN027".$usuario_sia.$equipo; 
+<?php include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");  $mcod_m="BIEN027".$usuario_sia.$equipo; 
 if (!$_GET){$codigo_mov=substr($mcod_m,0,49);}else{$codigo_mov=$_GET["codigo_mov"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -14,7 +14,7 @@ function validarNum(e){tecla=(document.all) ? e.keyCode : e.which;  if(tecla==0)
     if((tecla<48||tecla>57)&&(tecla!=46&&tecla!= 44&&tecla!= 45)){alert('Por Favor Ingrese Solo Numeros ') };
     patron=/[0-9\,\-\.]/;  te=String.fromCharCode(tecla); return patron.test(te);
 }
-function llamar_anterior(){ document.location ='Det_inc_bienes_inmu_depreciacion.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_bienes_inmu_depreciacion.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function revisar(){var f=document.form1; var Valido=true;
    if(f.txtcod_bien_mue.value==""){alert("Codigo del bien no puede estar Vacio");return false;}
    if(f.txtmonto.value==""){alert("Monto no puede estar Vacio");return false;}
@@ -42,7 +42,7 @@ return true;}
               <tr>
                 <td width="230"><span class="Estilo5">C&Oacute;DIGO DEL BIEN MUEBLES :</span></td>
                 <td width="300"><span class="Estilo5"><input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"></span></td>
-                <td width="250"><span class="Estilo5"><input name="btcod_bien" type="button" id="btcod_bien" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmuebles_depreciados.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                <td width="250"><span class="Estilo5"><input name="btcod_bien" type="button" id="btcod_bien" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmuebles_depreciados.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
               </tr>
             </table></td>
           </tr>
@@ -72,7 +72,7 @@ return true;}
                 <td width="200"><span class="Estilo5">COD. PRESUP. DEPRECIACI&Oacute;N :</span></td>
                 <td width="280"><span class="Estilo5"> <input name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32"  readonly class="Estilo5"></span></td>
                 <td width="150"><span class="Estilo5">SALDO DEPRECIADO :</span></td>
-                <td width="150"><span class="Estilo5"> <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="20" maxlength="15" value="<?echo $num?>" readonly class="Estilo5"></span></td>
+                <td width="150"><span class="Estilo5"> <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="20" maxlength="15" value="<?php echo $num?>" readonly class="Estilo5"></span></td>
               </tr>
             </table></td>
           </tr>	
@@ -103,7 +103,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="110" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

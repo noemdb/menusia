@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
 <?php include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $partida_d='';
  $partida_h='';
  $fuente_d='';
@@ -17,7 +17,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Asignacion Presupuestria Distribuida)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Asignacion Presupuestria Distribuida)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -65,7 +65,7 @@ var url;
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Cod_Fuente_Financ) As Max_Cod_Fuente_Financ, MIN(Cod_Fuente_Financ) As Min_Cod_Fuente_Financ FROM PRE095";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}
@@ -124,10 +124,10 @@ if($encontro=true){
               <td width="315" height="26">
                 <div align="left">C&Oacute;DIGO PRESUPUESTARIO DESDE : </div></td>
               <td width="195"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="30" maxlength="30" onFocus="encender(this); " value="<?echo $partida_d?>" onBlur="apagar(this);">
+                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="30" maxlength="30" onFocus="encender(this); " value="<?php echo $partida_d?>" onBlur="apagar(this);">
               </span></span></td>
               <td width="289"><span class="Estilo5">
-                <input name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_d.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_d.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -142,10 +142,10 @@ if($encontro=true){
                 <div align="left"></div></td>
               <td width="88">HASTA :</td>
               <td width="207"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="30" maxlength="30" onFocus="encender(this); " value="<?echo $partida_h?>" onBlur="apagar(this);">
+                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="30" maxlength="30" onFocus="encender(this); " value="<?php echo $partida_h?>" onBlur="apagar(this);">
               </span></span></td>
               <td width="291"><span class="Estilo5">
-                <input name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_h.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_h.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -159,10 +159,10 @@ if($encontro=true){
               <td width="321" height="26">
                 <div align="left">FUENTE DE FINANCIAMIENTO DESDE : </div></td>
               <td width="62"><span class="Estilo5">
-                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?echo $fuente_d?>">
+                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?php echo $fuente_d?>">
               </span></td>
               <td width="45"><span class="Estilo5">
-                <input name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdes_fuented" type="text" id="txtdes_fuented" size="50" maxlength="50" readonly>
@@ -180,10 +180,10 @@ if($encontro=true){
                 <div align="left"></div></td>
               <td width="75">HASTA : </td>
               <td width="61"><span class="Estilo5">
-                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?echo $fuente_h?>">
+                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?php echo $fuente_h?>">
               </span></td>
               <td width="46"><span class="Estilo5">
-                <input name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="50" maxlength="50" readonly>
@@ -217,4 +217,4 @@ if($encontro=true){
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

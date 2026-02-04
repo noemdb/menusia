@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $referencia_ajuste=''; $tipo_ajuste=''; $referencia_comp=''; $tipo_compromiso=''; $referencia_caus=''; $tipo_pago=''; $tipo_causado='';}
  else { $referencia_ajuste=$_GET["txtreferencia_ajuste"];$tipo_ajuste=$_GET["txttipo_ajuste"];$tipo_pago=$_GET["txttipo_pago"];$referencia_pago=$_GET["txtreferencia_pago"];
 $referencia_caus=$_GET["txtreferencia_caus"];$tipo_causado=$_GET["txttipo_causado"];$referencia_comp = $_GET["txtreferencia_comp"];$tipo_compromiso = $_GET["txttipo_compromiso"];
@@ -9,7 +9,7 @@ $referencia_caus=$_GET["txtreferencia_caus"];$tipo_causado=$_GET["txttipo_causad
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Ajustes Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Ajustes Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -31,7 +31,7 @@ var Valido=true;
      else{f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value;}
     if(f.txttipo_ajuste.value==""){alert("Tipo de ajuste no puede estar Vacio"); return false; }
       else{f.txttipo_ajuste.value=f.txttipo_ajuste.value.toUpperCase();}
-    if(f.txtdescrip_aju.value==""){alert("Descripción del ajuste no puede estar Vacia"); return false; }
+    if(f.txtdescrip_aju.value==""){alert("Descripciï¿½n del ajuste no puede estar Vacia"); return false; }
       else{f.txtdescrip_aju.value=f.txtdescrip_aju.value.toUpperCase();}
     if(f.txtreferencia_ajuste.value.length==8){f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value.toUpperCase();f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value;}
       else{alert("Longitud de Referencia Invalida");return false;}
@@ -43,9 +43,9 @@ return true;}
 </script>
 
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";$nombre_abrev_caus="";$nombre_abrev_pago="";$nombre_abrev_comp="";$inf_usuario="";$modulo="";$nombre_abrev_ajuste="";$anulado="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){$registro=pg_fetch_array($res);
@@ -98,15 +98,15 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
                         <tr>
                           <td width="166">
                             <p><span class="Estilo5">DOCUMENTO AJUSTE:</span></p></td>
-                          <td width="54"><input name="txttipo_ajuste" type="text"  id="txttipo_ajuste" value="<?echo $tipo_ajuste?>" size="6" readonly></td>
+                          <td width="54"><input name="txttipo_ajuste" type="text"  id="txttipo_ajuste" value="<?php echo $tipo_ajuste?>" size="6" readonly></td>
                           <td width="85"><span class="Estilo5">
-                            <input name="txtnombre_abrev_ajuste" type="text" id="txtnombre_abrev_ajuste" value="<?echo $nombre_abrev_ajuste?>" size="6" readonly>   </span></td>
+                            <input name="txtnombre_abrev_ajuste" type="text" id="txtnombre_abrev_ajuste" value="<?php echo $nombre_abrev_ajuste?>" size="6" readonly>   </span></td>
                           <td width="92"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="89"><input name="txtreferencia_ajuste" type="text"  id="txtreferencia_ajuste" value="<?echo $referencia_ajuste?>" size="12" readonly></td> 
+                          <td width="89"><input name="txtreferencia_ajuste" type="text"  id="txtreferencia_ajuste" value="<?php echo $referencia_ajuste?>" size="12" readonly></td> 
 						  <td width="103">&nbsp;</td>
                           <td width="58"><span class="Estilo5">FECHA :</span> </td>
                           <td width="141"><span class="Estilo5">
-                            <input name="txtfecha" type="text" id="txtfecha" value="<?echo $fecha?>" size="12" readonly> </span></td>
+                            <input name="txtfecha" type="text" id="txtfecha" value="<?php echo $fecha?>" size="12" readonly> </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -115,10 +115,10 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
                         <tr>
                           <td width="166">
                             <p><span class="Estilo5">DOCUMENTO PAGO:</span></p></td>
-                          <td width="56"><input name="txttipo_pago" type="text"  id="txttipo_pago" value="<?echo $tipo_pago?>" size="6" readonly></td>
-                          <td width="88"><span class="Estilo5"> <input name="txtnombre_abrev_pago" type="text" id="txtnombre_abrev_pago" value="<?echo $nombre_abrev_pago?>" size="6" readonly>                          </span></td>
+                          <td width="56"><input name="txttipo_pago" type="text"  id="txttipo_pago" value="<?php echo $tipo_pago?>" size="6" readonly></td>
+                          <td width="88"><span class="Estilo5"> <input name="txtnombre_abrev_pago" type="text" id="txtnombre_abrev_pago" value="<?php echo $nombre_abrev_pago?>" size="6" readonly>                          </span></td>
                           <td width="90"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="159"><input name="txtreferencia_pago" type="text"  id="txtreferencia_pago" value="<?echo $referencia_pago?>" size="12" readonly></td>
+                          <td width="159"><input name="txtreferencia_pago" type="text"  id="txtreferencia_pago" value="<?php echo $referencia_pago?>" size="12" readonly></td>
                           <td width="67">&nbsp; </td>
                           <td width="99"><span class="Estilo5">                          </span></td>
                           <td width="67">&nbsp;</td>
@@ -130,12 +130,12 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
                         <tr>
                           <td width="167">
                             <p><span class="Estilo5">DOCUMENTO CAUSADO:</span></p></td>
-                          <td width="55"><input name="txttipo_causado" type="text"  id="txttipo_causado" value="<?echo $tipo_causado?>" size="6" readonly></td>
+                          <td width="55"><input name="txttipo_causado" type="text"  id="txttipo_causado" value="<?php echo $tipo_causado?>" size="6" readonly></td>
                           <td width="86"><span class="Estilo5">
-                            <input name="txtnombre_abrev_caus" type="text" id="txtnombre_abrev_caus" value="<?ECHO $nombre_abrev_caus?>" size="6" readonly>
+                            <input name="txtnombre_abrev_caus" type="text" id="txtnombre_abrev_caus" value="<?php ECHO $nombre_abrev_caus?>" size="6" readonly>
                           </span></td>
                           <td width="90"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="173"><input name="txtreferencia_caus" type="text"  id="txtreferencia_caus" value="<?echo $referencia_caus?>" size="12" readonly></td>
+                          <td width="173"><input name="txtreferencia_caus" type="text"  id="txtreferencia_caus" value="<?php echo $referencia_caus?>" size="12" readonly></td>
                           <td width="73">&nbsp;</td>
                           <td width="82"><span class="Estilo5">                          </span></td>
                           <td width="65">&nbsp;</td>
@@ -147,12 +147,12 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
                         <tr>
                           <td width="167">
                             <p><span class="Estilo5">DOCUMENTO COMPROMISO:</span></p></td>
-                          <td width="55"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?echo $tipo_compromiso?>" size="6" readonly></td>
+                          <td width="55"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?php echo $tipo_compromiso?>" size="6" readonly></td>
                           <td width="86"><span class="Estilo5">
-                            <input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" value="<?ECHO $nombre_abrev_comp?>" size="6" readonly>
+                            <input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" value="<?php ECHO $nombre_abrev_comp?>" size="6" readonly>
                           </span></td>
                           <td width="90"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="143"><input name="txtreferencia_comp" type="text"  id="txtreferencia_comp" value="<?echo $referencia_comp?>" size="12" readonly></td>
+                          <td width="143"><input name="txtreferencia_comp" type="text"  id="txtreferencia_comp" value="<?php echo $referencia_comp?>" size="12" readonly></td>
                           <td width="116">&nbsp;</td>
                           <td width="132"><span class="Estilo5"></span></td>
                         </tr>
@@ -162,7 +162,7 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
                       <td><table width="827" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtdescrip_aju" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="txtdescrip_aju"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtdescrip_aju" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="txtdescrip_aju"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -178,7 +178,7 @@ $clave=$tipo_ajuste.$referencia_ajuste.$tipo_pago.$referencia_pago.$tipo_causado
         </table>
         <table width="768">
           <tr>
-            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp"></td>
             <td width="100"><input name="txtdescripcion" type="hidden" id="txtdescripcion"></td>
             <td width="290"><input name="txtfunc_inv" type="hidden" id="txtfunc_inv"></td>

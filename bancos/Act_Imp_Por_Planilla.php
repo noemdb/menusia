@@ -1,18 +1,18 @@
-<? include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php  include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $equipo=getenv("COMPUTERNAME"); $mcod_m="BAN013".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);  
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if(pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if(pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000065"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
-if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
+if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Actualiza Impuesto Enterado)</title>
+<title>SIPAP CONTROL BANCARIO (Actualiza Impuesto Enterado)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -32,7 +32,7 @@ var mdbname='<?php echo $dbname ?>';
 var mcodigo_mov='<?php echo $codigo_mov ?>';
 function chequea_planilla(mform){var mref;
    mref=mform.txttipo_planilla.value; mref = Rellenarizq(mref,"0",2);  mform.txttipo_planilla.value=mref;
-   ajaxSenddoc('GET', 'desplanilla2.php?codigo='+mref+'&codigo_mov=<?echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'desplan', 'innerHTML');
+   ajaxSenddoc('GET', 'desplanilla2.php?codigo='+mref+'&codigo_mov=<?php echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'desplan', 'innerHTML');
   return true;}
 function checkreferencia(mform){var mref;
    mref=mform.txtreferencia.value; mref = Rellenarizq(mref,"0",8);  mform.txtreferencia.value=mref;
@@ -50,9 +50,9 @@ return true;}
 </script>
 
 </head>
-<? $sfechad=formato_ddmmaaaa($Fec_Ini_Ejer); $sfechah=formato_ddmmaaaa($Fec_Fin_Ejer);
+<?php  $sfechad=formato_ddmmaaaa($Fec_Ini_Ejer); $sfechah=formato_ddmmaaaa($Fec_Fin_Ejer);
 $resultado=pg_exec($conn,"SELECT BORRAR_BAN029('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);
-pg_close();?>
+pg_close($conn);?>
 <body>
 <table width="978" height="38" border="0" bgcolor="#000066">
   <tr>
@@ -84,9 +84,9 @@ pg_close();?>
                       <td width="59"><span class="Estilo5">HASTA :</span></td>
                       <td width="150"><span class="Estilo5"> <input class="Estilo10" name="txtplanilla_hasta" type="text" id="txtplanilla_hasta" size="8" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_planillah(this.form);"  value="99999999">  </span> </td>
                       <td width="172"><span class="Estilo5">FECHA DE PLANILLA DESDE : </span></td>
-                      <td width="91"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_desde" type="text" id="txtfecha_desde" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $sfechad?>">  </span> </td>
+                      <td width="91"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_desde" type="text" id="txtfecha_desde" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $sfechad?>">  </span> </td>
                       <td width="62"><span class="Estilo5">HASTA :</span></td>
-                      <td width="102"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $sfechah?>">  </span> </td>
+                      <td width="102"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $sfechah?>">  </span> </td>
                    </tr>
                   </table></td>
               </tr>
@@ -97,7 +97,7 @@ pg_close();?>
           <table width="923">
           <tr> <td>&nbsp;</td> </tr>
           <tr>
-            <td width="100"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="100"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="526"><input class="Estilo10" name="txtnro_cuenta" type="hidden" id="txtnro_cuenta"></td>
             <td width="139"><input class="Estilo10" name="Submit" type="reset" value="Blanquear"></td>
             <td width="142" valign="middle"><input class="Estilo10" name="button" type="button" id="button" title="Retornar al menu principal" onclick="javascript:LlamarURL('menu.php')" value="Menu Principal"></td>

@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");include ("../class/configura.inc");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?} else{$Nom_Emp=busca_conf();}
+<?php include ("../class/conect.php");  include ("../class/funciones.php");include ("../class/configura.inc");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php } else{$Nom_Emp=busca_conf();}
 if (!$_GET){  $cod_presup=''; $cod_fuente='00'; $p_letra='';  $sql="SELECT * FROM codigos ORDER BY cod_presup,cod_fuente";}else {$codigo=$_GET["Gcodigo"]; $cod_fuente=substr($codigo,0,2);$cod_presup=substr($codigo,2,32);
 $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"];$titulo=$registro["campo525"];}else{$titulo=""; $formato_presup="XX-XX-XX-XXX-XX-XX-XX";$formato_cat="XX-XX-XX";}$len_cat=strlen($formato_cat);  $len_formato=strlen($formato_presup);
 $codigo=$cod_fuente.$cod_presup;  $sql="Select * from codigos where cod_presup='$cod_presup' and cod_fuente='$cod_fuente'";} $len_cod=strlen($cod_presup);
@@ -10,7 +10,7 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -49,7 +49,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
 
 </script>
 </head>
-<?
+<?php 
 $denominacion="";$des_fuente="";$cod_contable="";$nombre_cuenta="";$status_dist="";$func_inv="";$aplicacion="";$distribucion="ANUAL";$asignado=0;$disponible=0;$diferido=0;$disp_diferida=0;$montod=0; $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $cod_presup=$registro["cod_presup"];  $cod_fuente=$registro["cod_fuente"];  $denominacion=$registro["denominacion"];
   $cod_contable=$registro["cod_contable"];  $func_inv=$registro["func_inv"];  $aplicacion=$registro["aplicacion"];  $status_dist=$registro["status_dist"];
@@ -74,8 +74,8 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
   <tr>
     <td width="92"><table width="92" height="360" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<? echo $codigo; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<? echo $codigo; ?>')">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<?php  echo $codigo; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<?php  echo $codigo; ?>')">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -95,7 +95,7 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
               <td><table width="840" border="0">
                 <tr>
                   <td width="175"><span class="Estilo5">&nbsp;</span></td>
-                  <td width="227"><span class="Estilo10"> <? echo $titulo; ?>    </span></td>
+                  <td width="227"><span class="Estilo10"> <?php  echo $titulo; ?>    </span></td>
                   <td width="109">&nbsp;</td>
                   <td width="33"></td>
                   <td width="288"></td>
@@ -106,7 +106,7 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
               <td><table width="840" border="0">
                 <tr>
                   <td width="175"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
-                  <td width="227"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="34" maxlength="34"  value="<?echo $cod_presup?>" readonly>  </span></td>
+                  <td width="227"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="34" maxlength="34"  value="<?php echo $cod_presup?>" readonly>  </span></td>
                   <td width="109">&nbsp;</td>
                   <td width="33"></td>
                   <td width="288"></td>
@@ -117,8 +117,8 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
               <td><table width="843" border="0">
                 <tr>
                   <td width="176"><span class="Estilo5">FUENTE DE FINANCIAMIENTO :</span></td>
-                  <td width="31"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuentea" type="text" id="txtcod_fuentea" size="3" maxlength="2"  value="<?echo $cod_fuente?>" readonly>  </span></td>
-                  <td width="622"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuentea" type="text" id="txtdes_fuentea" size="75" value="<?echo $des_fuente?>" readonly>  </span></td>
+                  <td width="31"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuentea" type="text" id="txtcod_fuentea" size="3" maxlength="2"  value="<?php echo $cod_fuente?>" readonly>  </span></td>
+                  <td width="622"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuentea" type="text" id="txtdes_fuentea" size="75" value="<?php echo $des_fuente?>" readonly>  </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -126,7 +126,7 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
               <td><table width="849" border="0">
                 <tr>
                   <td width="108"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                  <td width="731"><textarea name="txtdenominacion" cols="84" class="Estilo10" id="txtdenominacion" onFocus="encender(this)" onBlur="apagar(this)" onkeypress="return stabular(event,this)"><?echo $denominacion?></textarea></td>
+                  <td width="731"><textarea name="txtdenominacion" cols="84" class="Estilo10" id="txtdenominacion" onFocus="encender(this)" onBlur="apagar(this)" onkeypress="return stabular(event,this)"><?php echo $denominacion?></textarea></td>
                 </tr>
               </table>   </td>
             </tr>
@@ -144,9 +144,9 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
               <td><table width="849" border="0">
                 <tr>
                   <td width="229"><span class="Estilo5">FUENTE DE FINANCIAMIENTO NUEVO :</span></td>
-                  <td width="25"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2"  value="<?echo $cod_fuente?>"  onFocus="encender(this); " onBlur="apagar(this);" onkeypress="return stabular(event,this)">  </span></td>
-                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
-                  <td width="540"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="70" value="<?echo $des_fuente?>" readonly onkeypress="return stabular(event,this)"> </span></td>
+                  <td width="25"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2"  value="<?php echo $cod_fuente?>"  onFocus="encender(this); " onBlur="apagar(this);" onkeypress="return stabular(event,this)">  </span></td>
+                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+                  <td width="540"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="70" value="<?php echo $des_fuente?>" readonly onkeypress="return stabular(event,this)"> </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -167,4 +167,4 @@ if($status_dist=='4'){$distribucion="TRIMESTRAL (%)";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

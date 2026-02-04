@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $cod_banco_d="";$cod_banco_h="";$num_cheque_d="00000000";$num_cheque_h="99999999";$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$cheque_d="00000000";$cheque_h="99999999";$detallado="S";$imprimir="S";$ordenado="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Ruta de Cheques)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Ruta de Cheques)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -55,7 +55,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Cod_Banco) As Max_Cod_Banco, MIN(Cod_Banco) As Min_Cod_Banco FROM BAN002";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -86,10 +86,10 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
             <tr>
               <td width="239" height="26"><div align="left">CODIGO DE BANCO DESDE:</div></td>
              <td width="56"><span class="Estilo5">
-                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="5">
+                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="5">
               </span></td>
               <td width="47"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="418"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_d" type="text" id="txtdesc_banco_d" size="60" maxlength="60"  readonly>
@@ -106,10 +106,10 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
               <td width="240" height="26">
                 <div align="left">CODIGO DE BANCO HASTA:</div></td>
                <td width="55"><span class="Estilo5">
-                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="5" maxlength="5">
+                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="5" maxlength="5">
               </span></td>
               <td width="46"><span class="Estilo5">
-                <input name="Catalogo32" type="button" id="Catalogo322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo32" type="button" id="Catalogo322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="420"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_h" type="text" id="txtdesc_banco_h" size="60" maxlength="60"  readonly>
@@ -125,11 +125,11 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
             <tr>
               <td width="226" height="26"><p align="left">NUMERO CHEQUE  DESDE:</p></td>
                <td width="301"><span class="Estilo5">
-                <input name="txtnum_cheque_d" type="text" id="txtnum_cheque_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_d?>" size="12" maxlength="8">
+                <input name="txtnum_cheque_d" type="text" id="txtnum_cheque_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_d?>" size="12" maxlength="8">
               </span></td>
               <td width="97">HASTA:</td>
               <td width="139"><span class="Estilo5">
-                <input name="txtnum_cheque_h" type="text" id="txtnum_cheque_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_h?>" size="12" maxlength="8">
+                <input name="txtnum_cheque_h" type="text" id="txtnum_cheque_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_h?>" size="12" maxlength="8">
               </span></td>
             </tr>
           </table></td>
@@ -143,13 +143,13 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
               <td width="205" align="center"><div align="left">FECHA EMISION DESDE: </div></td>
               <td width="349" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="77" align="center"><div align="left">HASTA :</div></td>
               <td width="146" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -163,11 +163,11 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
             <tr>
               <td width="273" height="26"><p align="left">ULT. 6 DIGITO CHEQUE  DESDE :</p></td>
               <td width="273"><span class="Estilo5">
-                <input name="txtchequed" type="text" id="txtUltimoDigCheqd" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cheque_d?>" size="12" maxlength="12">
+                <input name="txtchequed" type="text" id="txtUltimoDigCheqd" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cheque_d?>" size="12" maxlength="12">
               </span></td>
               <td width="74">HASTA :</td>
               <td width="146"><span class="Estilo5">
-                <input name="txtchequeh" type="text" id="txtUltimoDigCheq" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cheque_h?>" size="12" maxlength="12">
+                <input name="txtchequeh" type="text" id="txtUltimoDigCheq" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cheque_h?>" size="12" maxlength="12">
               </span></td>
             </tr>
           </table></td>
@@ -264,4 +264,4 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

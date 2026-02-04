@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");  include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");  include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="03-0000050"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
  $periodo='01';  $nivel='03';  $vimprimir="S";  $mcfinan=substr($SIA_Integrado,5,1);  $mcfinan="N";
  //echo $Cod_Emp;
 ?>
@@ -14,7 +14,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL (Reporte Balance General)</title>
+<title>SIPAP CONTABILIDAD FISCAL (Reporte Balance General)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -73,11 +73,11 @@ function Llama_Menu_Rpt(murl){var url;  url="../"+murl;  LlamarURL(url);}
             <td width="300"><span class="Estilo5">NIVEL PARA EL REPORTE:</span></td>
             <td width="184"><select name="txtnivel" size="1" id="select">
 			
-			<? if($Cod_Emp=="38"){?>	
+			<?php  if($Cod_Emp=="38"){?>	
               <option selected>02</option> <option >03</option><option>04</option><option>05</option><option>06</option><option>07</option>
-			<? }else{?>  
+			<?php }else{?>  
 			 <option>02</option> <option selected>03</option><option>04</option><option>05</option><option>06</option><option>07</option> 
-			<? }?> 
+			<?php }?> 
             </select></td>
             <td width="171">&nbsp;</td>
           </tr>
@@ -105,13 +105,13 @@ function Llama_Menu_Rpt(murl){var url;  url="../"+murl;  LlamarURL(url);}
             <td width="160"><span class="Estilo5">TIPO DE BALANCE : </span></td>
             <td width="459"><table width="421" height="30" border="1">
               <tr>
-                            <? if($mcfinan=='S'){?>
+                            <?php  if($mcfinan=='S'){?>
                 <td width="411" valign="top"> <label><input name="optpbalance" type="radio" value="S" checked> <span class="Estilo5">DOS COLUMNAS </span></label>
                   <label><input type="radio" name="optpbalance" value="N"><span class="Estilo5">TRES COLUMNAS </span></label>
                 </td>
-                                <? }else{?>
+                                <?php }else{?>
                                 <td width="411" valign="top"> <label><input name="optpbalance" type="radio" value="S" ><span class="Estilo5"> DOS COLUMNAS </span></label>
-                  <label><input type="radio" name="optpbalance" value="N" checked><span class="Estilo5">PUBLICACION </span></label>     <? }?>
+                  <label><input type="radio" name="optpbalance" value="N" checked><span class="Estilo5">PUBLICACION </span></label>     <?php }?>
                 </td>
               </tr>
             </table></td>
@@ -153,4 +153,4 @@ function Llama_Menu_Rpt(murl){var url;  url="../"+murl;  LlamarURL(url);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

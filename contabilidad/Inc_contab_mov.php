@@ -1,10 +1,10 @@
-<? if (!$_GET){  $equipo = getenv("COMPUTERNAME"); $mcod_m = "CON02".$equipo; $codigo_mov=substr($mcod_m,0,49);}  else{  $codigo_mov=$_GET["codigo_mov"];}
+<?php  if (!$_GET){  $equipo = getenv("COMPUTERNAME"); $mcod_m = "CON02".$equipo; $codigo_mov=substr($mcod_m,0,49);}  else{  $codigo_mov=$_GET["codigo_mov"];}
 include ("../class/conect.php");  include ("../class/funciones.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
@@ -12,7 +12,7 @@ function validarNum(e){tecla=(document.all) ? e.keyCode : e.which;  if(tecla==0)
     if((tecla<48||tecla>57)&&(tecla!=46&&tecla!= 44)){alert('Por Favor Ingrese Solo Numeros '+tecla) };
     patron=/[0-9\,\.]/;  te=String.fromCharCode(tecla); return patron.test(te);
 }
-function llamar_anterior(){ document.location ='Det_inc_mov_comp.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_mov_comp.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function apaga_monto(mthis){var mref; var mmonto;
    apagar(mthis);    mmonto=document.form1.txtmonto.value;  mmonto=camb_punto_coma(mmonto);document.form1.txtmonto.value=mmonto;
  return true;}
@@ -50,7 +50,7 @@ return true;}
                 <td width="330"><span class="Estilo5">C&Oacute;DIGO CUENTA :
                       <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el C&oacute;digo de la Cuenta"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);">
                 </span></td>
-                <td width="268"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="268"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
               </tr>
           </table></td>
         </tr>
@@ -95,7 +95,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov2" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov2" value="<?php echo $codigo_mov?>"></td>
             <td width="100">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php");
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php");
  $codigo_mov=$_POST["txtcodigo_mov"];  $fecha_hoy=asigna_fecha_hoy(); $tipo_imput_presu="P"; $gen_ord_ret=$_POST["txtgen_pre_ret"]; $port=$_POST["txtport"]; $host=$_POST["txthost"]; 
  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"]; $nro_aut=$_POST["txtnro_aut"]; $fecha_aut=$_POST["txtfecha_aut"]; $tipo_aju=$_POST["txttipo_aju"];
 ?>
@@ -7,7 +7,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Ajuste Ordenes de Pagos)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Ajuste Ordenes de Pagos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -59,10 +59,10 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $nombre_abrev_aju="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sSQL="SELECT nombre_abrev_ajuste from pre005 Where (tipo_ajuste='$tipo_aju')";
 $resultado=pg_exec($conn,$sSQL); $filas=pg_numrows($resultado);
 if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_abrev_ajuste"]; }
@@ -103,28 +103,28 @@ if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_a
                     <tr>
                       <td width="144"><span class="Estilo5">REFERENCIA AJUSTE : </span></td>
                       <td width="147"><span class="Estilo5"> <div id="refaju">
-                            <? if($nro_aut=='S'){?>
+                            <?php  if($nro_aut=='S'){?>
                               <input class="Estilo10" name="txtreferencia_aju" type="text"  id="txtreferencia_aju" size="10" maxlength="8" readonly>
-                            <? }else{?>
+                            <?php }else{?>
                              <input class="Estilo10" name="txtreferencia_aju" type="text"  id="txtreferencia_aju" size="10" maxlength="8" onFocus="encender(this); " onBlur="apagar(this);"  onchange="checkreferencia(this.form);">
-                            <? }?>
+                            <?php }?>
                              </div>
                            <script language="JavaScript" type="text/JavaScript">
                             ajaxSenddoc('GET', 'refajuaut.php?nro_aut='+mnro_aut+'& password='+mpassword+'&user='+muser+'&dbname='+mdbname+'&host='+mhost+'&port='+mport, 'refaju', 'innerHTML');
                           </script></td>
                       <td width="154"><span class="Estilo5">DOCUMENTO AJUSTE : </span></td>
-                      <td width="38"><span class="Estilo5"><input class="Estilo10" name="txttipo_ajuste" type="text" id="txttipo_ajuste" size="4" maxlength="4"  value="<?echo $tipo_aju?>" readonly >
+                      <td width="38"><span class="Estilo5"><input class="Estilo10" name="txttipo_ajuste" type="text" id="txttipo_ajuste" size="4" maxlength="4"  value="<?php echo $tipo_aju?>" readonly >
                       </span></td>
-                      <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev_ajuste" type="text" id="txtnombre_abrev_ajuste" size="5" maxlength="5" value="<?echo $nombre_abrev_aju?>" readonly></span></td>
+                      <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev_ajuste" type="text" id="txtnombre_abrev_ajuste" size="5" maxlength="5" value="<?php echo $nombre_abrev_aju?>" readonly></span></td>
                       <td width="54"><span class="Estilo5">FECHA :</span></td>
                       <td width="82"><span class="Estilo5">
-                      <? if($fecha_aut=='S'){?>
-                        <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10"  value="<?echo $fecha_hoy?>" readonly>
-                       <? }else{?>
-                        <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this);" onBlur="apagar(this);"  value="<?echo $fecha_hoy?>" onchange="checkrefecha(this.form)">
-                      <? }?>
+                      <?php  if($fecha_aut=='S'){?>
+                        <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10"  value="<?php echo $fecha_hoy?>" readonly>
+                       <?php }else{?>
+                        <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this);" onBlur="apagar(this);"  value="<?php echo $fecha_hoy?>" onchange="checkrefecha(this.form)">
+                      <?php }?>
                       </span></td>
-                      <td width="52"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                      <td width="52"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -134,7 +134,7 @@ if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_a
                       <td width="144"><span class="Estilo5">N&Uacute;MERO ORDEN : </span></td>
                       <td width="71"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden" type="text" id="txtnro_orden" size="10" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);" onchange="checkorden(this.form);">
                       </span></td>
-                      <td width="71"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('Cat_orden_pago.php?criterio=','SIA','','750','500','true')" value="...">   </td>
+                      <td width="71"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('Cat_orden_pago.php?criterio=','SIPAP','','750','500','true')" value="...">   </td>
                       <td width="153"><span class="Estilo5">DOCUMENTO CAUSADO :</span></td>
                       <td width="35"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado" type="text" id="txttipo_causado" size="4" maxlength="4"  readonly>
                       </span></td>
@@ -168,15 +168,15 @@ if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_a
    rows[1][1] = "C&oacute;d. Presupuestario";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";
              </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_inc_ajustes_orden.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_ajustes_orden.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
               <!--PESTA&Ntilde;A 2 -->
                <div id="T12" class="tab-body" >
-                <iframe src="Det_inc_comp_ajuste.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_comp_ajuste.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -185,7 +185,7 @@ if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_a
 
         <table width="768">
           <tr>
-            <td width="331"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="331"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100"><input name="txtp_ces" type="hidden" id="txtp_ces" value="N"></td>
             <td width="231"><input name="txtcaus_directo" type="hidden" id="txtcaus_directo" value="SI"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
@@ -199,4 +199,4 @@ if ($filas>0){ $reg=pg_fetch_array($resultado); $nombre_abrev_aju=$reg["nombre_a
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

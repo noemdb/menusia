@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$tipo_diferido='';} else {$tipo_diferido=$_GET["Gtipo_diferido"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Diferidos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Diferidos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -22,7 +22,7 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
 </script>
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_aplicacion="";$sql="Select * from pre024 WHERE tipo_diferido='$tipo_diferido'";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo_dife"];  $nombre_abrev=$registro["nombre_abrev_dife"];
@@ -66,7 +66,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                   <tr>
                     <td width="148"><span class="Estilo5">TIPO DE DIFERIDO :</span></td>
                     <td width="650"><span class="Estilo5">
-                      <input name="txttipo_diferido" type="text" id="txttipo_diferido" title="Registre el C&oacute;digo del tipo de diferido" size="10" maxlength="4"  readonly  value="<?ECHO $tipo_diferido?>">
+                      <input name="txttipo_diferido" type="text" id="txttipo_diferido" title="Registre el C&oacute;digo del tipo de diferido" size="10" maxlength="4"  readonly  value="<?php ECHO $tipo_diferido?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -79,7 +79,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                   <table width="816" border="0">
                     <tr>
                       <td width="148"><span class="Estilo5">DENSCRIPCION :</span></td>
-                      <td width="666"><input name="txtnombre_tipo_dife" type="text" id="txtnombre_tipo_dife" title="Registre la descripción del tipo de diferido" size="100" maxlength="200"  readonly value="<?ECHO $nombre_tipo_dife?>"></td>
+                      <td width="666"><input name="txtnombre_tipo_dife" type="text" id="txtnombre_tipo_dife" title="Registre la descripciï¿½n del tipo de diferido" size="100" maxlength="200"  readonly value="<?php ECHO $nombre_tipo_dife?>"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -92,7 +92,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                   <tr>
                     <td width="148"><span class="Estilo5">NOMBRE ABREVIADO :</span></td>
                     <td width="650"><span class="Estilo5">
-                      <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el nombre abreviado del tipo de diferido" size="10" maxlength="4"  readonly value="<?ECHO $nombre_abrev?>">
+                      <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el nombre abreviado del tipo de diferido" size="10" maxlength="4"  readonly value="<?php ECHO $nombre_abrev?>">
                     </span></td>
                   </tr>
                 </table>                <p class="Estilo5">&nbsp;
@@ -125,4 +125,4 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

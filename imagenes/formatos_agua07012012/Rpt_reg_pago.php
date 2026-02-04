@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){  $referencia_caus='';$tipo_causado='';$tipo_pago=''; $referencia_pago=''; $referencia_comp='';$tipo_compromiso=''; $cod_banco='';}
  else {  $tipo_pago=$_GET["txttipo_pago"];  $referencia_pago=$_GET["txtreferencia_pago"];   $referencia_caus=$_GET["txtreferencia_caus"];  $tipo_causado=$_GET["txttipo_causado"];  $referencia_comp = $_GET["txtreferencia_comp"];  $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_banco='';}
 ?>
@@ -6,7 +6,7 @@ if (!$_GET){  $referencia_caus='';$tipo_causado='';$tipo_pago=''; $referencia_pa
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Pago Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Pago Presupuestario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -28,8 +28,8 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?  $rif_emp="G-20009014-6";
-$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php   $rif_emp="G-20009014-6";
+$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $l_cat=0;  $sql="Select * from SIA005 where campo501='05'";  $resultado=pg_query($sql); if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"];$l_cat=strlen($formato_cat);} 
 $sql="Select * FROM PAGOS where tipo_pago='$tipo_pago' and referencia_pago='$referencia_pago' and tipo_causado='$tipo_causado' and referencia_caus='$referencia_caus' and  tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp'" ;
 $descripcion="";$fecha="";$nombre_abrev_caus="";$nombre_abrev_pago="";$nombre_abrev_comp="";$ced_rif="";$nombre="";$num_proyecto="";$des_proyecto="";$func_inv="";$genera_comprobante="";$inf_usuario="";$modulo="";$anulado="";
@@ -67,10 +67,10 @@ $res=pg_query($sql); $filas=pg_num_rows($res);
   <tr><td height="40" colspan="4"><table width="980" border="0"  height="40">
     <tr>
           <td width="30"><span class="Estilo18">RIF:</span></td>
-          <td width="100"><span class="Estilo18"><?echo $rif_emp?></span></td>
+          <td width="100"><span class="Estilo18"><?php echo $rif_emp?></span></td>
           <td width="650" height="32" align="center"><span class="Estilo16">REGISTRO DE PAGO PRESUPUESTARIO</span></td>
           <td width="100" align="center">NUMERO :</td>
-          <td width="100" align="center"><?echo $referencia_comp?></td>
+          <td width="100" align="center"><?php echo $referencia_comp?></td>
         </tr>
     </table></td>
   </tr>
@@ -79,13 +79,13 @@ $res=pg_query($sql); $filas=pg_num_rows($res);
       <td width="760"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">UNIDAD:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $des_unidad_sol?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $des_unidad_sol?></span></td>
           </tr>
       </table></td>
       <td width="220"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">FECHA:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $fecha?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $fecha?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -97,13 +97,13 @@ $res=pg_query($sql); $filas=pg_num_rows($res);
       <td width="760" height="25"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">BENEFICIARIO:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $nombre?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $nombre?></span></td>
           </tr>
       </table></td>
           <td width="227"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CEDULA/RIF:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $ced_rif?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $ced_rif?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -114,7 +114,7 @@ $res=pg_query($sql); $filas=pg_num_rows($res);
       <td width="980" height="25"><table width="980" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CONCEPTO :</span></td>
-            <td width="880"><span class="Estilo17"><?echo $descripcion?></span></td>
+            <td width="880"><span class="Estilo17"><?php echo $descripcion?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -136,14 +136,14 @@ $res=pg_query($sql); $filas=pg_num_rows($res);
           <td width="580" align="center"><span class="Estilo17">DENOMINACION</span></td>
           <td width="160" align="center"><span class="Estilo17">MONTO</span></td>
         </tr>
-<? $total=0;
+<?php  $total=0;
 while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]); $total=$total+$registro["monto"];?>
     <tr>
-      <td width="240" align="center"><span class="Estilo17"><? echo $registro["cod_presup"]; ?></span></td>
-          <td width="580" align="left"><span class="Estilo17"><? echo $registro["denominacion"]; ?></span></td>
-          <td width="160" align="right"><span class="Estilo17"><? echo $monto; ?></span></td>
+      <td width="240" align="center"><span class="Estilo17"><?php  echo $registro["cod_presup"]; ?></span></td>
+          <td width="580" align="left"><span class="Estilo17"><?php  echo $registro["denominacion"]; ?></span></td>
+          <td width="160" align="right"><span class="Estilo17"><?php  echo $monto; ?></span></td>
         </tr>
-<?}$total=formato_monto($total); ?>
+<?php }$total=formato_monto($total); ?>
     </table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
@@ -151,13 +151,13 @@ while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);
       <td height="25"><table width="994" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="815" align="right"><span class="Estilo18">TOTAL :</span></td>
-            <td width="165" align="right"><span class="Estilo18"><?echo $total?></span></td>
+            <td width="165" align="right"><span class="Estilo18"><?php echo $total?></span></td>
           </tr>
       </table></td>
         </tr>
     </table></td>
   </tr>
-<? $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$referencia_pago' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql); $filas=pg_num_rows($res);
+<?php  $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$referencia_pago' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql); $filas=pg_num_rows($res);
 if($filas>=1){?>
 
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
@@ -180,20 +180,20 @@ if($filas>=1){?>
   </table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="0"  height="30" cellpadding="3" cellspacing="0">
-<? $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$referencia_pago' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql);
+<?php  $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$referencia_pago' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql);
 while($registro=pg_fetch_array($res)){
 $monto_asiento=$registro["monto_asiento"]; $monto_asiento=formato_monto($monto_asiento);
 if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";}else{$debe="";$haber=$monto_asiento;}?>
     <tr>
-      <td width="200" align="center"><span class="Estilo17"><? echo $registro["cod_cuenta"]; ?></span></td>
-          <td width="460" align="left"><span class="Estilo17"><? echo $registro["nombre_cuenta"]; ?></span></td>
-          <td width="160" align="right"><span class="Estilo17"><? echo $debe; ?></span></td>
-          <td width="160" align="right"><span class="Estilo17"><? echo $haber; ?></span></td>
+      <td width="200" align="center"><span class="Estilo17"><?php  echo $registro["cod_cuenta"]; ?></span></td>
+          <td width="460" align="left"><span class="Estilo17"><?php  echo $registro["nombre_cuenta"]; ?></span></td>
+          <td width="160" align="right"><span class="Estilo17"><?php  echo $debe; ?></span></td>
+          <td width="160" align="right"><span class="Estilo17"><?php  echo $haber; ?></span></td>
         </tr>
-<?}$total=formato_monto($total); ?>
+<?php }$total=formato_monto($total); ?>
     </table></td>
   </tr>
-<?} ?>
+<?php } ?>
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
     <tr>
       <td width="480" align="center"><span class="Estilo17">ELABORADO POR</span></td>
@@ -204,7 +204,7 @@ if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";}else{$debe
       <td width="500" align="center">&nbsp;</td>
     </tr>
         <tr>
-      <td width="480" align="center"><span class="Estilo17"><?echo $nomb_usuario_comp?></span></td>
+      <td width="480" align="center"><span class="Estilo17"><?php echo $nomb_usuario_comp?></span></td>
       <td width="500" align="center"><span class="Estilo17"></span></td>
     </tr>
     </table></td>
@@ -212,6 +212,6 @@ if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";}else{$debe
   <tr><td>&nbsp;</td></tr>
 </table></td></tr>
 </table>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?> 

@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS Y ALMAC&Eacute;N (Verifica Partidas)</title>
+<title>SIPAP COMPRAS Y ALMAC&Eacute;N (Verifica Partidas)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -133,11 +133,11 @@ MM_reloadPage(true);
                     <tr>
                       <td width="184"><span class="Estilo5"><span class="Estilo11">SE-PR-PY-AC-PAR-GE-ES-SE : </span></span></td>
                       <td width="481"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtcod_par_ramo222" type="text" class="Estilo5" id="txtcod_par_ramo222"  value="<?echo $cod_par_ramo?>" size="25" maxlength="25" readonly>
+                      <input name="txtcod_par_ramo222" type="text" class="Estilo5" id="txtcod_par_ramo222"  value="<?php echo $cod_par_ramo?>" size="25" maxlength="25" readonly>
                       </span></span></td>
                       <td width="61"><span class="Estilo5"><span class="Estilo11">FUENTE : </span></span></td>
                       <td width="97"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtcod_par_ramo223" type="text" class="Estilo5" id="txtcod_par_ramo223"  value="<?echo $cod_par_ramo?>" size="9" maxlength="9" readonly>
+                      <input name="txtcod_par_ramo223" type="text" class="Estilo5" id="txtcod_par_ramo223"  value="<?php echo $cod_par_ramo?>" size="9" maxlength="9" readonly>
                       </span></span></td>
                       <td width="23"><img src="../pagos/b_info.png" width="11" height="11"></td>
                     </tr>
@@ -150,7 +150,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="199"><span class="Estilo5"><span class="Estilo11">DENOMINACI&Oacute;N DEL C&Oacute;DIGO :</span></span></td>
                       <td width="656"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtcod_par_ramo2232" type="text" class="Estilo5" id="txtcod_par_ramo2232"  value="<?echo $cod_par_ramo?>" size="117" maxlength="116" readonly>
+                      <input name="txtcod_par_ramo2232" type="text" class="Estilo5" id="txtcod_par_ramo2232"  value="<?php echo $cod_par_ramo?>" size="117" maxlength="116" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -160,7 +160,7 @@ MM_reloadPage(true);
                 <tr>
                   <td width="94"><span class="Estilo5"><span class="Estilo11">DISPONIBLE :</span></span></td>
                   <td width="769"><span class="Estilo5"><span class="Estilo11">
-                  <input name="txtcod_par_ramo2233" type="text" class="Estilo5" id="txtcod_par_ramo2233"  value="<?echo $cod_par_ramo?>" size="25" maxlength="25" readonly>
+                  <input name="txtcod_par_ramo2233" type="text" class="Estilo5" id="txtcod_par_ramo2233"  value="<?php echo $cod_par_ramo?>" size="25" maxlength="25" readonly>
                   </span></span></td>
                 </tr>
               </table>
@@ -172,4 +172,4 @@ MM_reloadPage(true);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

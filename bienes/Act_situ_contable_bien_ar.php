@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000070"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){  $codigo='';$p_letra="";  $sql="SELECT * FROM BIEN010 ORDER BY codigo";}
 else {  $codigo = $_GET["Gcodigo"];   $p_letra=substr($codigo, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$codigo=substr($codigo,1,12);}  else{$codigo=substr($codigo,0,12);}
@@ -21,7 +21,7 @@ else {  $codigo = $_GET["Gcodigo"];   $p_letra=substr($codigo, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Situacion Contable del Bien)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Situacion Contable del Bien)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -58,7 +58,7 @@ MM_reloadPage(true);
 </script>
 
 </head>
-<?
+<?php 
 $codigo=""; $tipo_situacion=""; $des_sit_contable="";$res=pg_query($sql); $filas=pg_num_rows($res);
 if ($filas==0){  if ($p_letra=="S"){$sql="SELECT * From BIEN010 ORDER BY codigo";}  if ($p_letra=="A"){$sql="SELECT * From BIEN010 ORDER BY codigo desc";}  $res=pg_query($sql);  $filas=pg_num_rows($res);}
 if($filas>=1){  $registro=pg_fetch_array($res,0);
@@ -121,7 +121,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                  <tr>
                    <td width="140" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
                    <td width="680" scope="col"><div align="left"><span class="Estilo5">
-                       <input class="Estilo10" name="txtcodigo" type="text" id="txtcodigo" size="5" maxlength="2"  value="<?echo $codigo?>" readonly>
+                       <input class="Estilo10" name="txtcodigo" type="text" id="txtcodigo" size="5" maxlength="2"  value="<?php echo $codigo?>" readonly>
                    </span></div></td>
                  </tr>
                </table></td>
@@ -132,7 +132,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">TIPO DE SITUACI&Oacute;N :</span></div></td>
                  <td width="680" scope="col"><div align="left"><span class="Estilo5">
-                     <input class="Estilo10" name="txttipo_situacion" type="text" id="txttipo_situacion" size="60" maxlength="50"  value="<?echo $tipo_situacion?>" readonly>
+                     <input class="Estilo10" name="txttipo_situacion" type="text" id="txttipo_situacion" size="60" maxlength="50"  value="<?php echo $tipo_situacion?>" readonly>
                  </span></div></td>
                </tr>
              </table></td>
@@ -143,7 +143,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
-                     <textarea name="txtdes_sit_contable" cols="80" id="txtdes_sit_contable" onFocus="encender(this)" readonly class="headers" ><?echo $des_sit_contable?></textarea>
+                     <textarea name="txtdes_sit_contable" cols="80" id="txtdes_sit_contable" onFocus="encender(this)" readonly class="headers" ><?php echo $des_sit_contable?></textarea>
                  </span></div></td>
                </tr>
              </table></td>
@@ -160,4 +160,4 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

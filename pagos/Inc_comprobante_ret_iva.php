@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");?>
-<? include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");?>
+<?php  include ("../class/funciones.php");
 if (!$_GET){
   $codigo_cuenta='';
   $p_letra='';
@@ -19,7 +19,7 @@ if (!$_GET){
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Comprobante Retenci&oacute;n IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Comprobante Retenci&oacute;n IVA)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -31,7 +31,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -91,9 +91,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $nombre_cuenta="";
 $cargable="";
 $clasificacion="";
@@ -291,11 +291,11 @@ $saldo12=formato_monto($saldo12);
                     <tr>
                       <td width="95" height="24"><span class="Estilo5"><span class="Estilo11">C&Eacute;DULA/RIF :</span></span></td>
                       <td width="205"><span class="Estilo5">
-                      <input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?echo $ced_rif?>" readonly>
+                      <input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?php echo $ced_rif?>" readonly>
 </span></td>
                       <td width="75"><span class="Estilo5"> <span class="Estilo11">NOMBRE :</span></span></td>
                       <td width="466"><span class="Estilo5">
-                        <input name="txttipo_benef" type="text" id="txttipo_benef" size="74"  value="<?ECHO $nombre_benef?>" readonly>
+                        <input name="txttipo_benef" type="text" id="txttipo_benef" size="74"  value="<?php ECHO $nombre_benef?>" readonly>
                       </span></td>
                     </tr>
                   </table></td>
@@ -322,4 +322,4 @@ $saldo12=formato_monto($saldo12);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

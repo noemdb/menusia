@@ -1,4 +1,4 @@
-<?include ("../class/seguridad.inc"); include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
+<?php include ("../class/seguridad.inc"); include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
  $SIA_Definicion=$_POST["txtSIA_Definicion"];  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];  
  $ced_r=$_POST["txtced_r"]; $nomb_r=$_POST["txtnomb"]; $fecha_fin=$_POST["txtfecha_fin"]; $Formato_Cuenta=$_POST["txtformato"]; 
  $fecha_hoy=asigna_fecha_hoy(); $fecha_c="01/01/".substr($fecha_fin,0,4);
@@ -9,7 +9,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL (Cuentas Contables)</title>
+<title>SIPAP CONTABILIDAD FISCAL (Cuentas Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language=JavaScript src="../class/sia.js" type=text/javascript></script>
@@ -87,7 +87,7 @@ return true;}
                           <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el Codigo de la Cuenta"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);" onKeypress="return validarNum(event)" onkeyup="mascara(this,'-',patroncodigo,true)">
                 </span></p>
             </blockquote></td>
-            <td width="419"><input name="button3" type="button" id="button3" title="Abrir Catalogo Plan de Cuentas" onclick="VentanaCentrada('Cat_plan_cuentas.php?criterio=','SIA','','750','500','true')" value="..."></td>
+            <td width="419"><input name="button3" type="button" id="button3" title="Abrir Catalogo Plan de Cuentas" onclick="VentanaCentrada('Cat_plan_cuentas.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
           </tr>
         </table>
         <table width="859" border="0">
@@ -106,17 +106,17 @@ return true;}
               <select name="txtClasificacion" size="1" id="txtClasificacion" onFocus="encender(this)" onBlur="apagar(this)">
                 <option selected>Activo del Tesoro</option> <option>Pasivo del Tesoro</option><option>Activo de la Hacienda</option> <option>Pasivo de la Hacienda</option> <option>Gastos del Presupuesto</option><option>Ingresos del Presupuesto</option> <option>Resultado del Presupuesto</option> <option>Cuenta de Patrimonio</option> </select></td>
             <td width="309" class="Estilo5">SALDO ANTERIOR :
-            <? IF($SIA_Definicion=="N"){?>
+            <?php  IF($SIA_Definicion=="N"){?>
                 <input name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" size="25" style="text-align:right" maxlength="22" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)" value="0">
-            <?} else { ?>
+            <?php } else { ?>
                 <input name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" size="25" style="text-align:right" maxlength="22" readonly value="0">
-            <?}?>
+            <?php }?>
           </tr>
         </table>
         <table width="861" border="0">
           <tr>
             <td width="833"><blockquote><span class="Estilo5">FECHA DE REGISTRO :
-                  <input name="txtFecha_Creado" type="text" id="txtFecha_Creado" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_c?>" size="12" maxlength="10" onchange="checkrefecha(this.form)">  </span></blockquote></td>
+                  <input name="txtFecha_Creado" type="text" id="txtFecha_Creado" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_c?>" size="12" maxlength="10" onchange="checkrefecha(this.form)">  </span></blockquote></td>
             <td width="18"> </td>
           </tr>
         </table>

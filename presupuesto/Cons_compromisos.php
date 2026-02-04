@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php");
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php");
   if (!$_GET){ $referencia_comp=""; $tipo_compromiso=""; $nombre_abrev_comp=""; } else { $referencia_comp=$_GET["referencia_comp"]; $tipo_compromiso=$_GET["tipo_compromiso"]; $nombre_abrev_comp=$_GET["nombre_abrev_comp"]; }
   $equipo = getenv("COMPUTERNAME");  $mcod_m = "PRE006".$equipo; $cod_tipo_comp="000000"; $des_tipo_comp="COMPROMISOS";
   $codigo_mov=substr($mcod_m,0,49);  $fecha_hoy=asigna_fecha_hoy();  
@@ -8,7 +8,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -78,11 +78,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                       <td><table width="832" border="0">
                         <tr>
                           <td width="168"><span class="Estilo5">DOCUMENTO COMPROMISO:</span></td>
-                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" size="6" maxlength="4" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);" onkeypress="return stabular(event,this)" value="<?echo $tipo_compromiso?>"></td>
-                          <td width="41"><span class="Estilo5"><input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comp.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)">   </span></td>
-                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" readonly value="<?echo $nombre_abrev_comp?>" onkeypress="return stabular(event,this)">   </span></td>
+                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" size="6" maxlength="4" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);" onkeypress="return stabular(event,this)" value="<?php echo $tipo_compromiso?>"></td>
+                          <td width="41"><span class="Estilo5"><input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comp.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)">   </span></td>
+                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" readonly value="<?php echo $nombre_abrev_comp?>" onkeypress="return stabular(event,this)">   </span></td>
                           <td width="87"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="170"><div id="refer"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp" size="12" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);" value="<?echo $referencia_comp?>" onchange="checkreferencia(this.form);" onkeypress="return stabular(event,this)"></div></td>
+                          <td width="170"><div id="refer"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp" size="12" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);" value="<?php echo $referencia_comp?>" onchange="checkreferencia(this.form);" onkeypress="return stabular(event,this)"></div></td>
                           <td width="177"><span class="Estilo5">  </span></td>
                         </tr>
                       </table></td>
@@ -94,7 +94,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
           </table>
         <table width="768">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Buscar"></td>
             <td width="88"><input name="Submit" type="reset" value="Blanquear"></td>
           </tr>

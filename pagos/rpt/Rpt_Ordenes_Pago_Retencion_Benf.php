@@ -1,13 +1,13 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $cedula_d="";$cedula_h="";$tipo_retencion_d="";$tipo_retencion_h="";$numero_orden_d="";$numero_orden_h="";$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$status_orden="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Relacion Beneficiarios/Retencion)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Relacion Beneficiarios/Retencion)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>
@@ -46,7 +46,7 @@ var url;
 
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Ced_Rif) As Max_Ced_Rif, MIN(Ced_Rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $cedula_d=$registro["min_ced_rif"];  $cedula_h=$registro["max_ced_rif"];}
 
@@ -98,16 +98,16 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
               <td width="182" height="26">
                 <div align="left">CEDULA/RIF: </div></td>
               <td width="99"><span class="Estilo5">
-                <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_d?>" size="15" maxlength="15">
+                <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_d?>" size="15" maxlength="15">
               </span></td>
               <td width="118"><span class="Estilo5">
-                <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                 <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_h?>" size="15" maxlength="15">
+                 <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_h?>" size="15" maxlength="15">
               </span></td>
               <td width="253"><span class="Estilo5">
-                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -121,16 +121,16 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
               <td width="182" height="26">
                 <div align="left">TIPO RETENCION: </div></td>
               <td width="99"><span class="Estilo5">
-                <input name="txttipo_reten_d" type="text" id="txttipo_reten_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_retencion_d?>" size="15" maxlength="15">
+                <input name="txttipo_reten_d" type="text" id="txttipo_reten_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_retencion_d?>" size="15" maxlength="15">
               </span></td>
               <td width="118"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                <input name="txttipo_reten_h" type="text" id="txttipo_reten_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_retencion_h?>" size="15" maxlength="15">
+                <input name="txttipo_reten_h" type="text" id="txttipo_reten_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_retencion_h?>" size="15" maxlength="15">
               </span></td>
               <td width="253"><span class="Estilo5">
-                <input name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -144,10 +144,10 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
               <td width="184" height="26">
                 <div align="left">NUMERO DE ORDEN: </div></td>
               <td width="225"><span class="Estilo5">
-                <input name="txtnro_orden_d" type="text" id="txtnro_orden_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $numero_orden_d?>" size="15" maxlength="15">
+                <input name="txtnro_orden_d" type="text" id="txtnro_orden_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $numero_orden_d?>" size="15" maxlength="15">
               </span></td>
               <td width="353"><span class="Estilo5">
-                <input name="txtnro_orden_h" type="text" id="txtnro_orden_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $numero_orden_h?>" size="15" maxlength="15">
+                <input name="txtnro_orden_h" type="text" id="txtnro_orden_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $numero_orden_h?>" size="15" maxlength="15">
               </span></td>
             </tr>
           </table></td>
@@ -161,12 +161,12 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
               <td width="186" align="center"><div align="left">FECHA ORDEN : </div></td>
               <td width="233" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="352" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -234,4 +234,4 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

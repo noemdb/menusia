@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$referencia_desin='';}else {$referencia_desin=$_GET["Greferencia_desin"];$clave=$referencia_desin;}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$referencia_desin='';}else {$referencia_desin=$_GET["Greferencia_des
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -31,10 +31,11 @@ function LlamarURL(url){  document.location = url; }
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN045 where referencia_desin='$referencia_desin'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
-$registro=pg_fetch_array($res,0);$referencia_desin=$registro["referencia_desin"];
+$registro=pg_fetch_array($res,0);
+$referencia_desin=$registro["referencia_desin"];
 $fecha_desin=$registro["fecha_desin"]; 
 $cod_dependencia=$registro["cod_dependencia"]; 
 $tipo_desin=$registro["tipo_desin"]; 
@@ -90,11 +91,11 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="88" scope="col"><span class="Estilo5">REFERENCIA :</span></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                     <input name="txtreferencia_desin" type="text" id="txtreferencia_desin" size="10" maxlength="8"   value="<?echo $referencia_desin?>" readonly class="Estilo5">
+                     <input name="txtreferencia_desin" type="text" id="txtreferencia_desin" size="10" maxlength="8"   value="<?php echo $referencia_desin?>" readonly class="Estilo5">
                  </strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  <td width="49" scope="col"><span class="Estilo5">FECHA :</span></td>
                  <td width="121" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_desin" type="text" id="txtfecha_desin" size="15" maxlength="15"   value="<?echo $fecha_desin?>" class="Estilo5">
+                     <input name="txtfecha_desin" type="text" id="txtfecha_desin" size="15" maxlength="15"   value="<?php echo $fecha_desin?>" class="Estilo5">
                  </span></div></td>
                  <td width="104" scope="col"><div align="left"><span class="Estilo5">TIPO DE SALIDA :</span></div></td>
                  <td width="452" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"><span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
@@ -112,12 +113,12 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_dependencia_e" type="text" id="txtcod_dependencia_e" size="5" maxlength="4" value="<?echo $cod_dependencia?>" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_dependencia_e" type="text" id="txtcod_dependencia_e" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_dependencias_ed.php?criterio=','SIA','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="747" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dependencia_e" type="text" id="txtdenominacion_dependencia_e" size="75" maxlength="250" value="<?echo $denominacion_dep?>" class="Estilo5">
+                     <input name="txtdenominacion_dependencia_e" type="text" id="txtdenominacion_dependencia_e" size="75" maxlength="250" value="<?php echo $denominacion_dep?>" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -127,12 +128,12 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DIRECCION :</span></div></td>
                  <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="10" maxlength="8" value="<?echo $txtcod_direccion?>" readonly class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="10" maxlength="8" value="<?php echo $txtcod_direccion?>" readonly class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="714" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="70" maxlength="100"  value="<?echo $denominacion_dir?>" readonly class="Estilo5">
+                     <input name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="70" maxlength="100"  value="<?php echo $denominacion_dir?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -142,12 +143,12 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></div></td>
                  <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_departamento_r" type="text" id="txtcod_departamento_r" size="10" maxlength="8" value="<?echo $cod_departamento_r?>" readonly class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_departamento_r" type="text" id="txtcod_departamento_r" size="10" maxlength="8" value="<?php echo $cod_departamento_r?>" readonly class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="714" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="70" maxlength="100"  value="<?echo $cod_departamento_r?>" readonly class="Estilo5">
+                     <input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="70" maxlength="100"  value="<?php echo $cod_departamento_r?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -157,7 +158,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
               <tr>
                 <td width="91" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></div></td>
                 <td width="859" scope="col"><div align="left">
-                    <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"  id="txtdescripcion"><?echo $descripcion?></textarea>
+                    <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"  id="txtdescripcion"><?php echo $descripcion?></textarea>
                 </div></td>
               </tr>
             </table></td>
@@ -174,15 +175,15 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
    rows[1][1] = "Bienes";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";            // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_cons_desin_bienes.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_desin_bienes.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>              
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_cons_comp_desin_bienes.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_comp_desin_bienes.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -190,7 +191,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
         <div id="Layer3" style="position:absolute; width:868px; height:25px; z-index:3; left: 2px; top: 550px;">
         <table width="812">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

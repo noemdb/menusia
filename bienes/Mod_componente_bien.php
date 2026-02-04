@@ -1,4 +1,4 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php"); $fecha_hoy=asigna_fecha_hoy(); if (!$_GET){$cod_bien_mue=""; $cod_componente=""; }
+<?php include ("../class/conect.php"); include ("../class/funciones.php"); $fecha_hoy=asigna_fecha_hoy(); if (!$_GET){$cod_bien_mue=""; $cod_componente=""; }
 else{$cod_bien_mue=$_GET["cod_bien_mue"]; $cod_componente=$_GET["cod_componente"];}
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 ?>
@@ -6,7 +6,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y AMAC&Eacute;N( Modificar Componentes)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y AMAC&Eacute;N( Modificar Componentes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -21,7 +21,7 @@ MM_reloadPage(true);
 //-->
 </script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_componentes_bienes.php?cod_bien_mue=<?echo $cod_bien_mue?>'; }
+function llamar_anterior(){ document.location ='Det_componentes_bienes.php?cod_bien_mue=<?php echo $cod_bien_mue?>'; }
 function llamar_eliminar(cod_bien_mue,cod_componente){ var murl;var r;
  if (cod_componente=="") {alert("Codigo debe ser Seleccionado");}
   else { murl="Esta seguro en Eliminar el Componente: "+cod_componente+" del Bien ?";   r=confirm(murl);
@@ -42,7 +42,7 @@ return true;}
 -->
 </style>
 </head>
-<?  $des_componente=""; $marca=""; $modelo=""; $serial1=""; $serial2=""; $campo_str1=""; $campo_str2=""; $monto1=0; $monto2=0;
+<?php   $des_componente=""; $marca=""; $modelo=""; $serial1=""; $serial2=""; $campo_str1=""; $campo_str2=""; $monto1=0; $monto2=0;
 $sSQL="Select * from BIEN053 WHERE cod_componente='$cod_componente' and cod_bien_mue='$cod_bien_mue'"; $res=pg_query($sSQL);
 if ($registro=pg_fetch_array($res,0)){ $des_componente=$registro["des_componente"]; 
 $serial1=$registro["serial1"]; $serial2=$registro["serial2"]; $marca=$registro["marca"]; $modelo=$registro["modelo"];
@@ -62,7 +62,7 @@ $campo_str1=$registro["campo_str1"]; $campo_str2=$registro["campo_str2"]; $monto
           <td><table width="730">
             <tr>
               <td width="130" ><span class="Estilo5">C&Oacute;DIGO : </span></td>
-              <td width="200" ><span class="Estilo5"> <input class="Estilo10" name="txtcod_componente" type="text" id="txtcod_componente" size="5" maxlength="5"  value="<?echo $cod_componente?>" readonly  > </span></td>
+              <td width="200" ><span class="Estilo5"> <input class="Estilo10" name="txtcod_componente" type="text" id="txtcod_componente" size="5" maxlength="5"  value="<?php echo $cod_componente?>" readonly  > </span></td>
               <td width="400"><span class="Estilo5"></span></td>  
 		   </tr>
           </table></td>
@@ -71,7 +71,7 @@ $campo_str1=$registro["campo_str1"]; $campo_str2=$registro["campo_str2"]; $monto
           <td><table width="730" border="0">
               <tr>
                 <td width="130" ><span class="Estilo5">DENOMINACI&Oacute;N : </span></td>
-                <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdes_componente" type="text" id="txtdes_componente"  onFocus="encender(this)" onBlur="apagar(this)" size="75" maxlength="150"  value="<?echo $des_componente?>"  ></span></td>
+                <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdes_componente" type="text" id="txtdes_componente"  onFocus="encender(this)" onBlur="apagar(this)" size="75" maxlength="150"  value="<?php echo $des_componente?>"  ></span></td>
               </tr>
           </table></td>
         </tr>
@@ -80,11 +80,11 @@ $campo_str1=$registro["campo_str1"]; $campo_str2=$registro["campo_str2"]; $monto
 			<td><table width="730">
 				<tr>
 				  <td width="80"><span class="Estilo5">MARCA :</span></td>
-				  <td width="170"><input class="Estilo10" name="txtmarca" type="text"  id="txtmarca" size="20" maxlength="30" onFocus="encender(this);" onBlur="apagar(this)"  value="<?echo $marca?>" ></td>
+				  <td width="170"><input class="Estilo10" name="txtmarca" type="text"  id="txtmarca" size="20" maxlength="30" onFocus="encender(this);" onBlur="apagar(this)"  value="<?php echo $marca?>" ></td>
 				  <td width="80"><span class="Estilo5">MODELO :</span></td>
-				  <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtmodelo" type="text" id="txtmodelo"  size="20" maxlength="30"  onFocus="encender(this);" onBlur="apagar(this);" value="<?echo $modelo?>" >   </span></td>
+				  <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtmodelo" type="text" id="txtmodelo"  size="20" maxlength="30"  onFocus="encender(this);" onBlur="apagar(this);" value="<?php echo $modelo?>" >   </span></td>
 				  <td width="80"><span class="Estilo5">SERIAL :</span></td>
-				  <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtserial1" type="text" id="txtserial1"   size="20" maxlength="30"onFocus="encender(this);"  onBlur="apagar(this);"  value="<?echo $serial1?>" >  </span></td>
+				  <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtserial1" type="text" id="txtserial1"   size="20" maxlength="30"onFocus="encender(this);"  onBlur="apagar(this);"  value="<?php echo $serial1?>" >  </span></td>
 				</tr>
 			</table></td>
 		</tr>
@@ -95,10 +95,10 @@ $campo_str1=$registro["campo_str1"]; $campo_str2=$registro["campo_str2"]; $monto
          <td>
            <table width="730" align="center">
           <tr>
-            <td width="30"><input class="Estilo10" name="txtcod_bien_mue" type="hidden" id="txtcod_bien_mue" value="<?echo $cod_bien_mue?>"></td>
+            <td width="30"><input class="Estilo10" name="txtcod_bien_mue" type="hidden" id="txtcod_bien_mue" value="<?php echo $cod_bien_mue?>"></td>
             <td width="200">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
-			<td width="100" align="center"><input name="Eliminar" type="button" id="Eliminar" value="Eliminar" onClick="JavaScript:llamar_eliminar('<? echo $cod_bien_mue; ?>','<? echo $cod_componente; ?>')"></td>
+			<td width="100" align="center"><input name="Eliminar" type="button" id="Eliminar" value="Eliminar" onClick="JavaScript:llamar_eliminar('<?php  echo $cod_bien_mue; ?>','<?php  echo $cod_componente; ?>')"></td>
            <td width="100" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>
             <td width="200">&nbsp;</td>
           </tr>
@@ -110,4 +110,4 @@ $campo_str1=$registro["campo_str1"]; $campo_str2=$registro["campo_str2"]; $monto
 </form>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="03-0000155"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
 $cod_bien_inmd=""; $cod_bien_inmh="";   $cod_empresad=""; $cod_empresah=""; $cod_dependenciad=""; $cod_dependenciah=""; $cod_direcciond=""; $cod_direccionh=""; $cod_departamentod=""; $cod_departamentoh=""; 
 $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$denominacion="";$accesorios=""; $fecha_d="01/01/1900";  $fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);
 $ced_responsabled=""; $ced_responsableh="";$nombre_rpt="Rpt_inve_bie_inmue_repor_bie.php";if($Cod_Emp=="58"){$nombre_rpt="Rpt_inve_bie_inmue_repor_bie_gby.php";}
@@ -15,7 +15,7 @@ $ced_responsabled=""; $ced_responsableh="";$nombre_rpt="Rpt_inve_bie_inmue_repor
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Reportes Listado De Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Reportes Listado De Bienes Inmuebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../../class/sia.js" type="text/javascript"></script>
@@ -44,7 +44,7 @@ return true;}function Llama_Rpt_inve_bie_mue_repor_bie(murl){var url;var r; var 
 function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 //BIENES INMUEBLES
 $sql="SELECT MAX(cod_bien_inm) As Max_cod_bien_inm, MIN(cod_bien_inm) As Min_cod_bien_inm FROM bien014";
 $res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -104,10 +104,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></td>
-                 <td width="320"><span class="Estilo5"><input name="txtcod_bien_inm_d" type="text" class="Estilo5" id="txtcod_bien_inm_d" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $cod_bien_inmd?>">
-                    <input name="btcat_biend" type="button" id="btcat_biend" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmueblesd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="300"><span class="Estilo5"><input name="txtcod_bien_inm_h" type="text" class="Estilo5" id="txtcod_bien_inm_h" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $cod_bien_inmh?>">
-                     <input name="btcat_bienh" type="button" id="btcat_bienh" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmueblesh.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+                 <td width="320"><span class="Estilo5"><input name="txtcod_bien_inm_d" type="text" class="Estilo5" id="txtcod_bien_inm_d" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_bien_inmd?>">
+                    <input name="btcat_biend" type="button" id="btcat_biend" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmueblesd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="300"><span class="Estilo5"><input name="txtcod_bien_inm_h" type="text" class="Estilo5" id="txtcod_bien_inm_h" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_bien_inmh?>">
+                     <input name="btcat_bienh" type="button" id="btcat_bienh" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_inmueblesh.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -115,10 +115,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DE DEPENDENCIA :</span></td>
-                 <td width="320"><span class="Estilo5"><input name="txtcod_dependenciad" type="text" class="Estilo5" id="txtcod_dependenciad" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_dependenciad?>" >
-                   <input name="btcat_depd" type="button" id="btcat_depd" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>
-                 <td width="300"><span class="Estilo5"><input name="txtcod_dependenciah" type="text" class="Estilo5" id="txtcod_dependenciah" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_dependenciah?>">
-                   <input name="btcat_deph" type="button" id="btcat_deph" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciash.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+                 <td width="320"><span class="Estilo5"><input name="txtcod_dependenciad" type="text" class="Estilo5" id="txtcod_dependenciad" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_dependenciad?>" >
+                   <input name="btcat_depd" type="button" id="btcat_depd" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>
+                 <td width="300"><span class="Estilo5"><input name="txtcod_dependenciah" type="text" class="Estilo5" id="txtcod_dependenciah" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_dependenciah?>">
+                   <input name="btcat_deph" type="button" id="btcat_deph" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciash.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -126,10 +126,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DE DIRECCI&Oacute;N :</span></td>
-                 <td width="320"><span class="Estilo5"><input name="txtcod_direcciond" type="text" class="Estilo5" id="txtcod_direcciond" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_direcciond?>" >
-                   <input name="btcod_dird" type="button" id="btcod_dird" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direcciond.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="300"><span class="Estilo5"><input name="txtcod_direccionh" type="text" class="Estilo5" id="txtcod_direccionh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_direccionh?>" >
-                   <input name="btcod_dirh" type="button" id="btcod_dirh" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionh.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                 <td width="320"><span class="Estilo5"><input name="txtcod_direcciond" type="text" class="Estilo5" id="txtcod_direcciond" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_direcciond?>" >
+                   <input name="btcod_dird" type="button" id="btcod_dird" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direcciond.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="300"><span class="Estilo5"><input name="txtcod_direccionh" type="text" class="Estilo5" id="txtcod_direccionh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_direccionh?>" >
+                   <input name="btcod_dirh" type="button" id="btcod_dirh" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionh.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -137,10 +137,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DEL DEPARTAMENTO :</span></td>
-                 <td width="320"><span class="Estilo5"><input name="txtcod_departamentod" type="text" class="Estilo5" id="txtcod_departamentod" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $cod_departamentod?>">
-                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentod.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="300"><span class="Estilo5">  <input name="txtcod_departamentoh" type="text" class="Estilo5" id="txtcod_departamentoh" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $cod_departamentoh?>">
-                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentoh.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                 <td width="320"><span class="Estilo5"><input name="txtcod_departamentod" type="text" class="Estilo5" id="txtcod_departamentod" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_departamentod?>">
+                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentod.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="300"><span class="Estilo5">  <input name="txtcod_departamentoh" type="text" class="Estilo5" id="txtcod_departamentoh" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_departamentoh?>">
+                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentoh.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -148,10 +148,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">C&Eacute;DULA RESPONSABLE :</span></td>
-                 <td width="320"><span class="Estilo5"><input name="txtced_responsabled" type="text" class="Estilo5" id="txtced_responsabled" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $ced_responsabled?>">
-                      <input name="btced_respd" type="button" id="btced_respd" title="Abrir Catalogo Cedula Responsable" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="300"><span class="Estilo5">  <input name="txtced_responsableh" type="text" class="Estilo5" id="txtced_responsableh" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $ced_responsableh?>">
-                      <input name="btced_resph" type="button" id="btced_resph" title="Abrir Catalogo Cedula Responsable" onClick="VentanaCentrada('Cat_responsablesh.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                 <td width="320"><span class="Estilo5"><input name="txtced_responsabled" type="text" class="Estilo5" id="txtced_responsabled" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $ced_responsabled?>">
+                      <input name="btced_respd" type="button" id="btced_respd" title="Abrir Catalogo Cedula Responsable" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="300"><span class="Estilo5">  <input name="txtced_responsableh" type="text" class="Estilo5" id="txtced_responsableh" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $ced_responsableh?>">
+                      <input name="btced_resph" type="button" id="btced_resph" title="Abrir Catalogo Cedula Responsable" onClick="VentanaCentrada('Cat_responsablesh.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -159,10 +159,10 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
              <td><table width="850">
                <tr>
                  <td width="230"><span class="Estilo5">FECHA DE INCORPORACI&Oacute;N :</span></td>
-                 <td width="320"><span class="Estilo5"> <input name="txtFechad" type="text" class="Estilo5" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" class="Estilo5" onChange="checkrefechad(this.form)">
+                 <td width="320"><span class="Estilo5"> <input name="txtFechad" type="text" class="Estilo5" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" class="Estilo5" onChange="checkrefechad(this.form)">
                     <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                         onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
-                <td width="300"><span class="Estilo5"><input name="txtFechah" type="text" class="Estilo5" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" class="Estilo5" onChange="checkrefechah(this.form)">
+                <td width="300"><span class="Estilo5"><input name="txtFechah" type="text" class="Estilo5" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" class="Estilo5" onChange="checkrefechah(this.form)">
                     <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                         onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
                </tr>
@@ -220,9 +220,9 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
 			<tr>		      
              <td><table width="454" border="0" align="center" cellpadding="0" cellspacing="0">
                <tr align="center" valign="middle">
-			     <td width="5"><input name="txtcod_empresad" type="hidden" id="txtcod_empresad" value="<?echo $cod_empresad?>" ></td>
-                 <td width="5"><input name="txtcod_empresah" type="hidden" id="txtcod_empresah" value="<?echo $cod_empresah?>" ></td>
-                 <td> <div align="center"><input name="btgenerar" type="button" id="btgenerar" value="GENERAR" onClick="javascript:Llama_Rpt_inve_bie_mue_repor_bie('<?echo $nombre_rpt;?>');">   </div></td>
+			     <td width="5"><input name="txtcod_empresad" type="hidden" id="txtcod_empresad" value="<?php echo $cod_empresad?>" ></td>
+                 <td width="5"><input name="txtcod_empresah" type="hidden" id="txtcod_empresah" value="<?php echo $cod_empresah?>" ></td>
+                 <td> <div align="center"><input name="btgenerar" type="button" id="btgenerar" value="GENERAR" onClick="javascript:Llama_Rpt_inve_bie_mue_repor_bie('<?php echo $nombre_rpt;?>');">   </div></td>
                  <td><div align="center"><input name="btcancelar" type="button" id="btcancelar" value="CANCELAR" onClick="javascript:Llama_Menu_Rpt('menu.php');">    </div></td> 
                </tr>
              </table></td>
@@ -236,4 +236,4 @@ if ($registro=pg_fetch_array($res,0)){$ced_responsabled=$registro["min_ced_respo
 <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

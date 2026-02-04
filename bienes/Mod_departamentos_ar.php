@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); if (!$_GET){$cod_dependen=""; $cod_direcci=""; $cod_departamen="";}
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); if (!$_GET){$cod_dependen=""; $cod_direcci=""; $cod_departamen="";}
 else{$cod_dependen=$_GET["cod_dependen"]; $cod_direcci=$_GET["cod_direcci"]; $cod_departamen=$_GET["cod_departamen"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Modifica Departamentos)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Modifica Departamentos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -22,7 +22,7 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 var cod_dependen='<?php echo $cod_dependen ?>';
 var cod_direcci='<?php echo $cod_direcci ?>';
-function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependen=<?echo $cod_dependen?>&cod_direcci=<?echo $cod_direcci?>'; }
+function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependen=<?php echo $cod_dependen?>&cod_direcci=<?php echo $cod_direcci?>'; }
 function llamar_eliminar(){var url; var r; var Gcodigo=document.form1.txtcod_departamento.value;
   if(Gcodigo==""){alert("Codigo Departamento debe ser Seleccionado");}else{r=confirm("Esta seguro en Eliminar el Departamento "+Gcodigo+" ?");
   if (r==true) {r=confirm("Esta Realmente seguro en Eliminar el Departamento ?");
@@ -46,8 +46,8 @@ return true;}
 -->
 </style>
 </head>
-<?  $denominacion_dep="";  $direccion_dep=""; $nombre_contacto_d=""; $observacion_dep="";
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php   $denominacion_dep="";  $direccion_dep=""; $nombre_contacto_d=""; $observacion_dep="";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT denominacion_dep, direccion_dep, nombre_contacto_d, observacion_dep FROM bien006 WHERE cod_dependencia='$cod_dependen' and cod_direccion='$cod_direcci' and cod_departamento='$cod_departamen'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); $denominacion_dep=$registro["denominacion_dep"]; $direccion_dep=$registro["direccion_dep"]; $nombre_contacto_d=$registro["nombre_contacto_d"]; $observacion_dep=$registro["observacion_dep"];}
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
@@ -69,7 +69,7 @@ if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo60
           <td><table width="730">
             <tr>
               <td width="150" ><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO: </span></td>
-              <td width="580" ><span class="Estilo5"> <input name="txtcod_departamento" type="text" class="Estilo10" id="txtcod_departamento" size="20" maxlength="20"   value="<?echo $cod_departamen?>" readonly > </span></td>
+              <td width="580" ><span class="Estilo5"> <input name="txtcod_departamento" type="text" class="Estilo10" id="txtcod_departamento" size="20" maxlength="20"   value="<?php echo $cod_departamen?>" readonly > </span></td>
             </tr>
           </table></td>
         </tr>
@@ -78,7 +78,7 @@ if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo60
           <td><table width="730" border="0">
               <tr>
                 <td width="130" ><span class="Estilo5">DESCRIPCI&Oacute;N : </span></td>
-                <td width="600"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" class="Estilo10" id="txtdenominacion_dep"  onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="100"  value="<?echo $denominacion_dep?>" ></span></td>
+                <td width="600"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" class="Estilo10" id="txtdenominacion_dep"  onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="100"  value="<?php echo $denominacion_dep?>" ></span></td>
               </tr>
           </table></td>
         </tr>
@@ -88,7 +88,7 @@ if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo60
             <table width="730" border="0">
               <tr>
                 <td width="130" ><span class="Estilo5">DIRECCION: </span></td>
-                <td width="600"><span class="Estilo5"><input name="txtdireccion_dep" type="text" class="Estilo10" id="txtdireccion_dep"  onFocus="encender(this)" onBlur="apagar(this)" size="120" maxlength="250"  value="<?echo $direccion_dep?>" ></span></td>
+                <td width="600"><span class="Estilo5"><input name="txtdireccion_dep" type="text" class="Estilo10" id="txtdireccion_dep"  onFocus="encender(this)" onBlur="apagar(this)" size="120" maxlength="250"  value="<?php echo $direccion_dep?>" ></span></td>
               </tr>
             </table></td>
         </tr>
@@ -98,16 +98,16 @@ if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo60
          <td>
            <table width="730" align="center">
           <tr>
-            <td width="30"><input name="txtcod_dependen" type="hidden" id="txtcod_dependen" value="<?echo $cod_dependen?>"></td>
-            <td width="30"><input name="txtcod_direcci" type="hidden" id="txtcod_direcci" value="<?echo $cod_direcci?>"></td>
+            <td width="30"><input name="txtcod_dependen" type="hidden" id="txtcod_dependen" value="<?php echo $cod_dependen?>"></td>
+            <td width="30"><input name="txtcod_direcci" type="hidden" id="txtcod_direcci" value="<?php echo $cod_direcci?>"></td>
 			<td width="10"><input name="txtnombre_contacto_d" type="hidden" id="txtnombre_contacto_d" value=""></td>
 			<td width="10"><input name="txtobservacion_dep" type="hidden" id="txtobservacion_dep" value=""></td>
             <td width="200">&nbsp;</td>
-			<?if ($Mcamino{1}=="S"){?>
+			<?php if ($Mcamino{1}=="S"){?>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
-            <?}if ($Mcamino{6}=="S"){?>
+            <?php }if ($Mcamino{6}=="S"){?>
 			<td width="100" align="center"><input name="Eliminar" type="button" id="Eliminar" value="Eliminar" onClick="JavaScript:llamar_eliminar()"></td>
-            <? }?>
+            <?php }?>
             <td width="100" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>
             <td width="200">&nbsp;</td>
           </tr>

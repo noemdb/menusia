@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php");  include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php");  include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $tipo_causado_d=""; $tipo_causado_h="zzzz"; 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte de Documentos Causados)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte de Documentos Causados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -38,7 +38,7 @@ function Llama_Rpt_documentos_causa(murl){var url;var r;
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="Select max(tipo_causado) As max_tipo_causado, min(tipo_causado) As min_tipo_causado from pre003"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){ $tipo_causado_d=$registro["min_tipo_causado"];  $tipo_causado_h=$registro["max_tipo_causado"];}
 ?>
@@ -74,10 +74,10 @@ if ($registro=pg_fetch_array($resultado,0)){ $tipo_causado_d=$registro["min_tipo
           <td height="19"><table width="827" border="0">
             <tr>
 			  <td width="206"><span class="Estilo5">TIPO CAUSADO : </span></td>              
-              <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado_d" type="text"  id="txttipo_causado_d" size="8"  maxlength="6" onFocus="encender(this); " value="<?echo $tipo_causado_d?>" onBlur="apagar(this);" class="Estilo5"></span></td>
-              <td width="285"><span class="Estilo5"><input class="Estilo10" name="bttipo_causado_d" type="button" id="bttipo_causado_d" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_doc_causad.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-              <td width="63"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado_h" type="text"  id="txttipo_causado_h" size="8" maxlength="6" onFocus="encender(this); " value="<?echo $tipo_causado_h?>" onBlur="apagar(this);" class="Estilo5">  </span></td>
-              <td width="194"><span class="Estilo5"><input class="Estilo10" name="bttipo_causado_h" type="button" id="bttipo_causado_h" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_doc_causah.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+              <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado_d" type="text"  id="txttipo_causado_d" size="8"  maxlength="6" onFocus="encender(this); " value="<?php echo $tipo_causado_d?>" onBlur="apagar(this);" class="Estilo5"></span></td>
+              <td width="285"><span class="Estilo5"><input class="Estilo10" name="bttipo_causado_d" type="button" id="bttipo_causado_d" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_doc_causad.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+              <td width="63"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado_h" type="text"  id="txttipo_causado_h" size="8" maxlength="6" onFocus="encender(this); " value="<?php echo $tipo_causado_h?>" onBlur="apagar(this);" class="Estilo5">  </span></td>
+              <td width="194"><span class="Estilo5"><input class="Estilo10" name="bttipo_causado_h" type="button" id="bttipo_causado_h" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_doc_causah.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
             </tr>
           </table></td>
         </tr>
@@ -114,4 +114,4 @@ if ($registro=pg_fetch_array($resultado,0)){ $tipo_causado_d=$registro["min_tipo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

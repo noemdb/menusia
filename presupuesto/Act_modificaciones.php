@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="02-0000025"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
 }$posicion=strpos($Mcamino,'S'); 
-if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $equipo = getenv("COMPUTERNAME");$mcod_m="PRE009".$usuario_sia.$equipo; $fecha_hoy=asigna_fecha_hoy(); 
 if (!$_GET){$p_letra=''; $criterio='';$referencia_modif=''; $tipo_modif=''; $sql="SELECT * FROM PRE009 ORDER BY referencia_modif,tipo_modif"; $codigo_mov=substr($mcod_m,0,49);
 } else {$codigo_mov="";$criterio = $_GET["Gcriterio"]; $p_letra=substr($criterio, 0, 1);
@@ -26,7 +26,7 @@ if (!$_GET){$p_letra=''; $criterio='';$referencia_modif=''; $tipo_modif=''; $sql
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificaciones Presupuestaria)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificaciones Presupuestaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -91,9 +91,9 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 if ($codigo_mov==""){$codigo_mov="";}
-else{ $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }}
+else{ $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php } }
 $mconf="";$Ssql="Select * from SIA005 where campo501='05'";$resultado=pg_query($Ssql);
 if ($registro=pg_fetch_array($resultado,0)){$mconf=$registro["campo502"];}$nro_aut=substr($mconf,10,1);$fecha_aut=substr($mconf,11,1);
 $preg_t=substr($mconf,12,1); $corr_m=substr($mconf,13,1); $modif_apr=substr($mconf,14,1);
@@ -137,7 +137,7 @@ $clave=$referencia_modif.$tipo_modif;
   <tr>
     <td><table width="92" height="602" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-	  <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+	  <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_modif('T')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_modif('T')">Incluir Traspaso</A></td>
       </tr>
@@ -149,17 +149,17 @@ $clave=$referencia_modif.$tipo_modif;
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_modif('D')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_modif('D')">Incluir Disminucion</A></td>
       </tr>
-	  <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>	
+	  <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>	
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Modificar()";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Modificar();">Modificar</A></td>
       </tr>
-	  <?} if (($Mcamino{10}=="S")and($SIA_Cierre=="N")){?>	
+	  <?php } if (($Mcamino{10}=="S")and($SIA_Cierre=="N")){?>	
           <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Aprobar()";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Aprobar();">Aprobar</A></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?>
+	  <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -178,27 +178,27 @@ $clave=$referencia_modif.$tipo_modif;
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_modificaciones.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_modificaciones.php" class="menu">Catalogo</a></td>
   </tr>
-  <?} if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
+  <?php } if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Anular('<?echo $modif_aprob?>','<?echo $modif_apr?>','<?echo $Fec_Fin_Ejer?>');" class="menu">Anular</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Anular('<?php echo $modif_aprob?>','<?php echo $modif_apr?>','<?php echo $Fec_Fin_Ejer?>');" class="menu">Anular</a></td>
         </tr>
-  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>	
+  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>	
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?echo $modif_aprob?>','<?echo $modif_apr?>');" class="menu">Eliminar</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?php echo $modif_aprob?>','<?php echo $modif_apr?>');" class="menu">Eliminar</a></td>
   </tr>
-  <?} if ($Mcamino{2}=="S"){?>
+  <?php } if ($Mcamino{2}=="S"){?>
 		<tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Copiar();" class="menu">Copiar</a></td>
         </tr>
-  <? } if ($Mcamino{4}=="S"){?>
+  <?php } if ($Mcamino{4}=="S"){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato();" class="menu">Formato</a></td>
   </tr>
-  <? }?>
+  <?php }?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="menu.php" class="menu">Menu</a></td>
@@ -218,15 +218,15 @@ $clave=$referencia_modif.$tipo_modif;
                       <td><table width="865" border="0">
                         <tr>
                           <td width="135"><span class="Estilo5">TIPO MODIFICACI&Oacute;N:</span></td>
-                          <td width="197"><input class="Estilo10" name="txttipo_modif" type="text"  id="txttipo_modif" value="<?echo $des_tipo_modif?>" size="30" readonly  ></td>
-                          <td width="28"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m" value="<?echo $tipo_modif?>"></td>
+                          <td width="197"><input class="Estilo10" name="txttipo_modif" type="text"  id="txttipo_modif" value="<?php echo $des_tipo_modif?>" size="30" readonly  ></td>
+                          <td width="28"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m" value="<?php echo $tipo_modif?>"></td>
                           <td width="82"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="115"><input class="Estilo10" name="txtreferencia_modif" type="text"  id="txtreferencia_modif" value="<?echo $referencia_modif?>" size="9" readonly  ></td>
-                          <? if($anulado=='S'){?> <td width="109"><a class="Estiloanu"  href="javascript:alert('<?echo $inf_sta?>');">ANULADO</a></td>
-						   <? }else{?> <td width="30"><span class="Estilo5"></span></td><? }?>
+                          <td width="115"><input class="Estilo10" name="txtreferencia_modif" type="text"  id="txtreferencia_modif" value="<?php echo $referencia_modif?>" size="9" readonly  ></td>
+                          <?php  if($anulado=='S'){?> <td width="109"><a class="Estiloanu"  href="javascript:alert('<?php echo $inf_sta?>');">ANULADO</a></td>
+						   <?php }else{?> <td width="30"><span class="Estilo5"></span></td><?php }?>
 						  <td width="110"><span class="Estilo5">FECHA REGISTRO:</span> </td>
-                          <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtFecha" type="text" id="txtFecha" value="<?echo $fecha_registro?>" size="10" readonly > </span></td>
-                          <td width="20"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                          <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtFecha" type="text" id="txtFecha" value="<?php echo $fecha_registro?>" size="10" readonly > </span></td>
+                          <td width="20"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -234,7 +234,7 @@ $clave=$referencia_modif.$tipo_modif;
                       <td><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtDescripcion" cols="90" readonly="readonly" class="Estilo10" id="textarea"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtDescripcion" cols="90" readonly="readonly" class="Estilo10" id="textarea"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -242,12 +242,12 @@ $clave=$referencia_modif.$tipo_modif;
                         <td><table width="819">
                         <tr>
                           <td width="105"><span class="Estilo5">MODIFICACI&Oacute;N:</span></td>
-                          <td width="163"><span class="Estilo5"><input class="Estilo10" name="txtmodif_i_e" type="text" id="txtmodif_i_e" size="20"  value="<?echo $modif_i_e?>" readonly>   </span></td>
+                          <td width="163"><span class="Estilo5"><input class="Estilo10" name="txtmodif_i_e" type="text" id="txtmodif_i_e" size="20"  value="<?php echo $modif_i_e?>" readonly>   </span></td>
                           <td width="166"><span class="Estilo5">FECHA DE MODIFICACI&Oacute;N:</span></td>
-                          <td width="141"><span class="Estilo5"><input class="Estilo10" name="txtfecha_modif" type="text" id="txtfecha_modif" value="<?echo $fecha_modif?>" size="12" readonly>    </span></td>
+                          <td width="141"><span class="Estilo5"><input class="Estilo10" name="txtfecha_modif" type="text" id="txtfecha_modif" value="<?php echo $fecha_modif?>" size="12" readonly>    </span></td>
                           <td width="99"><span class="Estilo5">APROBADA :</span></td>
-                          <td width="54"><span class="Estilo5"><input class="Estilo10" name="txtmodif_aprob" type="text" id="txtmodif_aprob" size="3"  value="<?echo $modif_aprob?>" readonly>   </span></td>
-                          <td width="55"><input class="Estilo10" name="corr_m" type="hidden" id="corr_m" value="<?echo $corr_m?>"></td>
+                          <td width="54"><span class="Estilo5"><input class="Estilo10" name="txtmodif_aprob" type="text" id="txtmodif_aprob" size="3"  value="<?php echo $modif_aprob?>" readonly>   </span></td>
+                          <td width="55"><input class="Estilo10" name="corr_m" type="hidden" id="corr_m" value="<?php echo $corr_m?>"></td>
                         </tr>
                       </table></td>
 					</tr>
@@ -255,7 +255,7 @@ $clave=$referencia_modif.$tipo_modif;
 						  <td><table width="800">
                         <tr>
                           <td width="108"><span class="Estilo5">APROBADO POR:</span></td>
-                          <td width="680"><span class="Estilo5"> <input class="Estilo10" name="txtaprobada_por" type="text" id="txtaprobada_por" value="<?echo $aprobada_por?>" size="100" readonly>     </span></td>
+                          <td width="680"><span class="Estilo5"> <input class="Estilo10" name="txtaprobada_por" type="text" id="txtaprobada_por" value="<?php echo $aprobada_por?>" size="100" readonly>     </span></td>
                         </tr>
                       </table></td>
 					</tr>
@@ -263,33 +263,33 @@ $clave=$referencia_modif.$tipo_modif;
 						  <td><table width="827">
                         <tr>
                           <td width="230"><span class="Estilo5">NRO.DOCUMENTO/ACTA APROBACI&Oacute;N:</span></td>
-                          <td width="337"><input class="Estilo10" name="txtnro_documento" type="text"  id="txtnro_documento" value="<?echo $nro_documento?>" size="60" readonly ></td>
+                          <td width="337"><input class="Estilo10" name="txtnro_documento" type="text"  id="txtnro_documento" value="<?php echo $nro_documento?>" size="60" readonly ></td>
                           <td width="170"><span class="Estilo5">FECHA DOCUMENTO/ACTA:</span></td>
-                          <td width="70"><span class="Estilo5"><input class="Estilo10" name="txtfecha_documento" type="text" id="txtfecha_documento" value="<?echo $fecha_documento?>" size="10" readonly>     </span></td>
+                          <td width="70"><span class="Estilo5"><input class="Estilo10" name="txtfecha_documento" type="text" id="txtfecha_documento" value="<?php echo $fecha_documento?>" size="10" readonly>     </span></td>
                         </tr>
                       </table></td>
                                     </tr>
                   </table>  </td>
               </tr>
             </table>
-        <iframe src="Det_cons_modificaciones.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_cons_modificaciones.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         </form>
 <form name="form2" method="post" action="Inc_traspaso.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-	 <td width="5"><input name="txtport" type="hidden" id="txtport" value="<?echo $port?>" ></td>	 
-	 <td width="5"><input name="txthost" type="hidden" id="txthost" value="<?echo $host?>" ></td>
-     <td width="5"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td>
-	 <td width="5"><input name="txtcorr_m" type="hidden" id="txtcorr_m" value="<?echo $corr_m?>" ></td> 	 
-     <td width="5"><input name="txtfecha_aut" type="hidden" id="txtfecha_aut" value="<?echo $fecha_aut?>" ></td>
-     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input name="txtfechar" type="hidden" id="txtfechar" value="<?echo $fecha_hoy?>"></td>
-	 <td width="5"><input name="txtfecham" type="hidden" id="txtfecham" value="<?echo $fecha_hoy?>"></td>
-	 <td width="5"><input name="txtfechad" type="hidden" id="txtfechad" value="<?echo $fecha_hoy?>"></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+	 <td width="5"><input name="txtport" type="hidden" id="txtport" value="<?php echo $port?>" ></td>	 
+	 <td width="5"><input name="txthost" type="hidden" id="txthost" value="<?php echo $host?>" ></td>
+     <td width="5"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td>
+	 <td width="5"><input name="txtcorr_m" type="hidden" id="txtcorr_m" value="<?php echo $corr_m?>" ></td> 	 
+     <td width="5"><input name="txtfecha_aut" type="hidden" id="txtfecha_aut" value="<?php echo $fecha_aut?>" ></td>
+     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input name="txtfechar" type="hidden" id="txtfechar" value="<?php echo $fecha_hoy?>"></td>
+	 <td width="5"><input name="txtfecham" type="hidden" id="txtfecham" value="<?php echo $fecha_hoy?>"></td>
+	 <td width="5"><input name="txtfechad" type="hidden" id="txtfechad" value="<?php echo $fecha_hoy?>"></td>
 	 <td width="5"><input name="txtnro_docr" type="hidden" id="txtnro_doc" value=""></td>	 
 	 <td width="5"><input name="txtconcepto_r" type="hidden" id="txtconcepto_r" value=""></td>
 	 <td width="5"><input name="txtmodie" type="hidden" id="txtmodie" value="I"></td>
@@ -301,19 +301,19 @@ $clave=$referencia_modif.$tipo_modif;
 <form name="form3" method="post" action="Inc_adicion.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser2" type="hidden" id="txtuser2" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword2" type="hidden" id="txtpassword2" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname2" type="hidden" id="txtdbname2" value="<?echo $dbname?>" ></td>
-	 <td width="5"><input name="txtport2" type="hidden" id="txtport2" value="<?echo $port?>" ></td>	 
-	 <td width="5"><input name="txthost2" type="hidden" id="txthost2" value="<?echo $host?>" ></td>
-     <td width="5"><input name="txtnro_aut2" type="hidden" id="txtnro_aut2" value="<?echo $nro_aut?>" ></td>
-	 <td width="5"><input name="txtcorr_m2" type="hidden" id="txtcorr_m2" value="<?echo $corr_m?>" ></td>
-     <td width="5"><input name="txtfecha_aut2" type="hidden" id="txtfecha_aut2" value="<?echo $fecha_aut?>" ></td>
-     <td width="5"><input name="txtcodigo_mov2" type="hidden" id="txtcodigo_mov2" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input name="txtfechac2" type="hidden" id="txtfechac2" value="<?echo $fecha_hoy?>"></td>	 
-	 <td width="5"><input name="txtfechar2" type="hidden" id="txtfechar2" value="<?echo $fecha_hoy?>"></td>
-	 <td width="5"><input name="txtfecham2" type="hidden" id="txtfecham2" value="<?echo $fecha_hoy?>"></td>
-	 <td width="5"><input name="txtfechad2" type="hidden" id="txtfechad2" value="<?echo $fecha_hoy?>"></td>
+     <td width="5"><input name="txtuser2" type="hidden" id="txtuser2" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword2" type="hidden" id="txtpassword2" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname2" type="hidden" id="txtdbname2" value="<?php echo $dbname?>" ></td>
+	 <td width="5"><input name="txtport2" type="hidden" id="txtport2" value="<?php echo $port?>" ></td>	 
+	 <td width="5"><input name="txthost2" type="hidden" id="txthost2" value="<?php echo $host?>" ></td>
+     <td width="5"><input name="txtnro_aut2" type="hidden" id="txtnro_aut2" value="<?php echo $nro_aut?>" ></td>
+	 <td width="5"><input name="txtcorr_m2" type="hidden" id="txtcorr_m2" value="<?php echo $corr_m?>" ></td>
+     <td width="5"><input name="txtfecha_aut2" type="hidden" id="txtfecha_aut2" value="<?php echo $fecha_aut?>" ></td>
+     <td width="5"><input name="txtcodigo_mov2" type="hidden" id="txtcodigo_mov2" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input name="txtfechac2" type="hidden" id="txtfechac2" value="<?php echo $fecha_hoy?>"></td>	 
+	 <td width="5"><input name="txtfechar2" type="hidden" id="txtfechar2" value="<?php echo $fecha_hoy?>"></td>
+	 <td width="5"><input name="txtfecham2" type="hidden" id="txtfecham2" value="<?php echo $fecha_hoy?>"></td>
+	 <td width="5"><input name="txtfechad2" type="hidden" id="txtfechad2" value="<?php echo $fecha_hoy?>"></td>
 	 <td width="5"><input name="txtnro_docr2" type="hidden" id="txtnro_doc2" value=""></td>	 
 	 <td width="5"><input name="txtconcepto_r2" type="hidden" id="txtconcepto_r2" value=""></td>
 	 <td width="5"><input name="txtmodie2" type="hidden" id="txtmodie2" value="I"></td>
@@ -325,16 +325,16 @@ $clave=$referencia_modif.$tipo_modif;
 <form name="form4" method="post" action="Inc_disminucion.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser3" type="hidden" id="txtuser3" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword3" type="hidden" id="txtpassword3" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname3" type="hidden" id="txtdbname3" value="<?echo $dbname?>" ></td>
-	 <td width="5"><input name="txtport3" type="hidden" id="txtport3" value="<?echo $port?>" ></td>	 
-	 <td width="5"><input name="txthost3" type="hidden" id="txthost3" value="<?echo $host?>" ></td>
-     <td width="5"><input name="txtnro_aut3" type="hidden" id="txtnro_aut3" value="<?echo $nro_aut?>" ></td>
-	 <td width="5"><input name="txtcorr_m3" type="hidden" id="txtcorr_m3" value="<?echo $corr_m?>" ></td>
-     <td width="5"><input name="txtfecha_aut3" type="hidden" id="txtfecha_aut3" value="<?echo $fecha_aut?>" ></td>
-     <td width="5"><input name="txtcodigo_mov3" type="hidden" id="txtcodigo_mov3" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input name="txtfechac3" type="hidden" id="txtfechac3" value="<?echo $fecha_hoy?>"></td>
+     <td width="5"><input name="txtuser3" type="hidden" id="txtuser3" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword3" type="hidden" id="txtpassword3" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname3" type="hidden" id="txtdbname3" value="<?php echo $dbname?>" ></td>
+	 <td width="5"><input name="txtport3" type="hidden" id="txtport3" value="<?php echo $port?>" ></td>	 
+	 <td width="5"><input name="txthost3" type="hidden" id="txthost3" value="<?php echo $host?>" ></td>
+     <td width="5"><input name="txtnro_aut3" type="hidden" id="txtnro_aut3" value="<?php echo $nro_aut?>" ></td>
+	 <td width="5"><input name="txtcorr_m3" type="hidden" id="txtcorr_m3" value="<?php echo $corr_m?>" ></td>
+     <td width="5"><input name="txtfecha_aut3" type="hidden" id="txtfecha_aut3" value="<?php echo $fecha_aut?>" ></td>
+     <td width="5"><input name="txtcodigo_mov3" type="hidden" id="txtcodigo_mov3" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input name="txtfechac3" type="hidden" id="txtfechac3" value="<?php echo $fecha_hoy?>"></td>
   </tr>
 </table>
 </form>
@@ -344,4 +344,4 @@ $clave=$referencia_modif.$tipo_modif;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

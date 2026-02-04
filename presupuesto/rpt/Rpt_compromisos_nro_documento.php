@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
 <?php include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $cod_presup_d="";  $cod_presup_h="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"; 
  $cod_fuente_d="";  $cod_fuente_h="zz"; $des_fuente_d=""; $des_fuente_h=""; $doc_comp_d=""; $doc_comp_h=""; $referencia_d=""; $referencia_h="";$tipo_comp_d=""; $tipo_comp_h=""; $fecha_d=date("01/01/Y"); $fecha_h=date("31/12/Y");$cedula_d=""; $cedula_h="";$tipo_regis="";
  $cedula_d=""; $cedula_h="";
@@ -11,7 +11,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte de Compromisos por Beneficiarios)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte de Compromisos por Beneficiarios)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>
@@ -50,7 +50,7 @@ function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 <style type="text/css">
 </style>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"]; $titulo=$registro["campo525"];} $l=strlen($formato_presup);
 $sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(Cod_Presup)=".$l.")"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){ $cod_presup_d=$registro["min_cod_presup"];  $cod_presup_h=$registro["max_cod_presup"];}
@@ -108,16 +108,16 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
           <td height="30"><table width="827" border="0">
             <tr>
               <td width="206" height="26">                <div align="right">DOCUM. COMPROMISO : </div></td><td width="53"><span class="Estilo12"><span class="Estilo5">
-                <input name="txttipo_compromiso" type="text"  id="txtdoc_compromiso_d" size="6" maxlength="4" value="<?echo $doc_comp_d?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
+                <input name="txttipo_compromiso" type="text"  id="txtdoc_compromiso_d" size="6" maxlength="4" value="<?php echo $doc_comp_d?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
               </span></span></td>
               <td width="283"><span class="Estilo5">
-                <input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_compd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_compd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="61"><span class="Estilo12"><span class="Estilo5">
-                <input name="txttipo_compromiso" type="text"  id="txtdoc_compromiso_h" size="6" maxlength="4" value="<?echo $doc_comp_h?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
+                <input name="txttipo_compromiso" type="text"  id="txtdoc_compromiso_h" size="6" maxlength="4" value="<?php echo $doc_comp_h?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
               </span></span></td>
               <td width="202"><span class="Estilo5">
-                <input name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comph.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comph.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -131,11 +131,11 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="205" height="26">
                 <div align="right">REFERENCIA : </div></td>
               <td width="169"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtreferencia_d" type="text" id="txtreferencia_d" size="10" maxlength="8" value="<?echo $referencia_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input name="txtreferencia_d" type="text" id="txtreferencia_d" size="10" maxlength="8" value="<?php echo $referencia_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></span></td>
               <td width="164"><span class="Estilo5">              </span></td>
               <td width="229"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtreferencia_h" type="text" id="txtreferencia_h" size="10" maxlength="8" value="<?echo $referencia_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input name="txtreferencia_h" type="text" id="txtreferencia_h" size="10" maxlength="8" value="<?php echo $referencia_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></span></td>
               <td width="38"><span class="Estilo5">              </span></td>
             </tr>
@@ -150,11 +150,11 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="202" height="26">
                 <div align="right">FECHA COMPROMISO  : </div></td>
               <td width="172"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtFechad" type="text" id="txtFechad" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_d?>" onchange="checkrefecha(this.form)">
+                <input name="txtFechad" type="text" id="txtFechad" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_d?>" onchange="checkrefecha(this.form)">
                                 <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha" onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /> </span></td>
               <td width="165"><span class="Estilo5"> </span></td>
               <td width="243"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtFechah" type="text" id="txtFechah" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_h?>" onchange="checkrefecha(this.form)">
+                <input name="txtFechah" type="text" id="txtFechah" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_h?>" onchange="checkrefecha(this.form)">
                 <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /></span></span></td>
               <td width="23"><span class="Estilo5"> </span></td>
@@ -170,16 +170,16 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="203" height="26">
                 <div align="right">TIPO COMPROMISO : </div></td>
               <td width="60"><span class="Estilo12"><span class="Estilo5">
-              <input name="txttipo_comp_d" type="text"  id="txttipo_comp_d" size="8" onFocus="encender(this); " value="<?echo $tipo_comp_d?>" onBlur="apagar(this);">
+              <input name="txttipo_comp_d" type="text"  id="txttipo_comp_d" size="8" onFocus="encender(this); " value="<?php echo $tipo_comp_d?>" onBlur="apagar(this);">
 </span></span></td>
               <td width="285"><span class="Estilo5">
-                <input name="bttipo_comp" type="button" id="bttipo_comp" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_compd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="bttipo_comp" type="button" id="bttipo_comp" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_compd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="63"><span class="Estilo12"><span class="Estilo5">
-                <input name="txttipo_comp_h" type="text"  id="txttipo_comp_h" size="8" onFocus="encender(this); " value="<?echo $tipo_comp_h?>" onBlur="apagar(this);">
+                <input name="txttipo_comp_h" type="text"  id="txttipo_comp_h" size="8" onFocus="encender(this); " value="<?php echo $tipo_comp_h?>" onBlur="apagar(this);">
               </span></span></td>
               <td width="194"><span class="Estilo5">
-                <input name="bttipo_comp_h" type="button" id="bttipo_comp_h" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_comph.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="bttipo_comp_h" type="button" id="bttipo_comp_h" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_comph.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -205,16 +205,16 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="191" height="26">
                 <div align="right">C&Oacute;DIGO PARTIDAS  : </div></td>
               <td width="188"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="30" maxlength="30" value="<?echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="30" maxlength="30" value="<?php echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></span></td>
               <td width="169"><span class="Estilo5">
-                <input name="btCodPre2" type="button" id="btCodPre2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btCodPre2" type="button" id="btCodPre2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="194"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="30" maxlength="30" value="<?echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="30" maxlength="30" value="<?php echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></span></td>
               <td width="63"><span class="Estilo5">
-                <input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -228,10 +228,10 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="321" height="26">
                 <div align="left">FUENTE DE FINANCIAMIENTO DESDE : </div></td>
               <td width="62"><span class="Estilo5">
-                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_d?>">
+                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_d?>">
               </span></td>
               <td width="45"><span class="Estilo5">
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdes_fuented" type="text" id="txtdes_fuented" size="50" maxlength="50" readonly>
@@ -249,10 +249,10 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
                 <div align="left"></div></td>
               <td width="75">HASTA : </td>
               <td width="61"><span class="Estilo5">
-                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_d?>">
+                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_d?>">
               </span></td>
               <td width="46"><span class="Estilo5">
-                <input name="btfuente2" type="button" id="btfuente7" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente2" type="button" id="btfuente7" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="50" maxlength="50" readonly>
@@ -269,16 +269,16 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="197" height="26">
                 <div align="right">C&Eacute;DULA/RIF : </div></td>
               <td width="106"><span class="Estilo5">
-                <input name="txtced_rif_d" type="text" id="txtced_rif_d" size="15" maxlength="15" value="<?echo $cedula_d?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtced_rif_d" type="text" id="txtced_rif_d" size="15" maxlength="15" value="<?php echo $cedula_d?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></td>
               <td width="335"><span class="Estilo5">
-                <input name="btfuente8"" type="button" id="btfuente9"" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_d.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente8"" type="button" id="btfuente9"" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_d.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                <input name="txtced_rif_h" type="text" id="txtced_rif_h" size="15" maxlength="15" value="<?echo $cedula_h?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtced_rif_h" type="text" id="txtced_rif_h" size="15" maxlength="15" value="<?php echo $cedula_h?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></td>
               <td width="67"><span class="Estilo5">
-                <input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_h.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_h.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -392,4 +392,4 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

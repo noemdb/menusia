@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 if (!$_GET){  $codigo_cuenta='';} else {  $codigo_cuenta = $_GET["Gcodigo_cuenta"]; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -6,7 +6,7 @@ if (!$_GET){  $codigo_cuenta='';} else {  $codigo_cuenta = $_GET["Gcodigo_cuenta
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL</title>
+<title>SIPAP CONTABILIDAD FISCAL</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -57,10 +57,10 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $nombre_cuenta="";$clasificacion="";$tSaldo="";$saldo_anterior=0; $fecha_creado=""; $cargable="N";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{ $Nom_Emp=busca_conf();  $sql="Select * from con001 where codigo_cuenta='$codigo_cuenta'";   $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){ $codigo_cuenta=$registro["codigo_cuenta"];  $nombre_cuenta=$registro["nombre_cuenta"];  $fecha_creado=$registro["fecha_creado"];
     $clasificacion=$registro["clasificacion"]; $tSaldo=$registro["tsaldo"];     $saldo_anterior=$registro["saldo_anterior"];  $cargable=$registro["cargable"];}
@@ -105,7 +105,7 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
         <table width="848" border="0">
           <tr>
             <td width="669"> <p><span class="Estilo5">C&Oacute;DIGO DE CUENTA :
-                                <input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" value="<?echo $codigo_cuenta?>"  size="30" maxlength="30" readonly">
+                                <input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" value="<?php echo $codigo_cuenta?>"  size="30" maxlength="30" readonly">
                 </span></p>
             </td>
             <td width="157">&nbsp;</td>
@@ -115,7 +115,7 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
         <table width="859" border="0">
           <tr>
             <td width="177"><span class="Estilo5">NOMBRE DE LA CUENTA :</span></td>
-            <td width="672"><textarea name="txtNombre_Cuenta" cols="80" class="headers" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" id="txtNombre_Cuenta"><?echo $nombre_cuenta?></textarea></td>
+            <td width="672"><textarea name="txtNombre_Cuenta" cols="80" class="headers" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" id="txtNombre_Cuenta"><?php echo $nombre_cuenta?></textarea></td>
           </tr>
 		  <tr> <td>&nbsp;</td> </tr>
         </table>
@@ -127,9 +127,9 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
             <td width="261" class="Estilo5">CLASIFICACI&Oacute;N :
               <select class="Estilo10" name="txtClasificacion" size="1" id="txtClasificacion" onFocus="encender(this)" onBlur="apagar(this)">
                 <option selected>Activo del Tesoro</option> <option>Pasivo del Tesoro</option><option>Activo de la Hacienda</option> <option>Pasivo de la Hacienda</option> <option>Gastos del Presupuesto</option><option>Ingresos del Presupuesto</option> <option>Resultado del Presupuesto</option> <option>Cuenta de Patrimonio</option> <option>No Clasificada</option> </select></td>
-<script language="Javascript"> Asigna_TSaldo('<?echo $tSaldo?>');</script>             
+<script language="Javascript"> Asigna_TSaldo('<?php echo $tSaldo?>');</script>             
 			 <script language="Javascript" type="text/Javascript">
-var valor='<?echo $clasificacion?>';
+var valor='<?php echo $clasificacion?>';
         if(valor=="Activo del Tesoro"){document.form1.txtClasificacion.options[0].selected = true;}
         if(valor=="Pasivo del Tesoro"){document.form1.txtClasificacion.options[1].selected = true;}
         if(valor=="Activo de la Hacienda"){document.form1.txtClasificacion.options[2].selected = true;}
@@ -140,18 +140,18 @@ var valor='<?echo $clasificacion?>';
         if(valor=="Cuenta de Patrimonio"){document.form1.txtClasificacion.options[7].selected = true;}
             </script>
                 <td width="309" class="Estilo5">SALDO ANTERIOR :
-                <? $SIA_Definicion="N"; IF(($SIA_Definicion=="N")and($cargable=="C")){?>
-                <input class="Estilo10" name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?echo $saldo_anterior?>" size="25" style="text-align:right" maxlength="22" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)"></td>   </tr>
-            <?} else { ?>
-               <input class="Estilo10" name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?echo $saldo_anterior?>" size="25" style="text-align:right" maxlength="22" readonly></td>   </tr>
-            <?}?>
+                <?php  $SIA_Definicion="N"; IF(($SIA_Definicion=="N")and($cargable=="C")){?>
+                <input class="Estilo10" name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?php echo $saldo_anterior?>" size="25" style="text-align:right" maxlength="22" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)"></td>   </tr>
+            <?php } else { ?>
+               <input class="Estilo10" name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?php echo $saldo_anterior?>" size="25" style="text-align:right" maxlength="22" readonly></td>   </tr>
+            <?php }?>
 		   </tr>
            <tr> <td>&nbsp;</td> </tr>		   
         </table>
         <table width="861" border="0">
           <tr>
             <td width="833"><span class="Estilo5">FECHA DE REGISTRO :
-                  <input class="Estilo10" name="txtFecha_Creado" type="text" id="txtFecha_Creado" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_creado?>" size="12" maxlength="10" onchange="checkrefecha(this.form)">  </span></td>
+                  <input class="Estilo10" name="txtFecha_Creado" type="text" id="txtFecha_Creado" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_creado?>" size="12" maxlength="10" onchange="checkrefecha(this.form)">  </span></td>
             <td width="18"> </td>
           </tr>
         </table>

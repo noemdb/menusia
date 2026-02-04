@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Empresas)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Empresas)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -43,7 +43,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * FROM BIEN022 where cod_bien_mue='$cod_bien_mue'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
 $cod_bien_mue=$registro["cod_bien_mue"]; 
@@ -95,9 +95,9 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                <tr>
                  <td width="120" scope="col"><span class="Estilo5">C&Oacute;DIGO DE L BIEN MUEBLES :</span></td>
                  <td width="839" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue" size="30" maxlength="30" value="<?echo $cod_bien_mue?>"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue" size="30" maxlength="30" value="<?php echo $cod_bien_mue?>"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <strong><strong>
-                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_mueblesd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_bienes_mueblesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                     </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  </tr>
              </table></td>
@@ -107,7 +107,7 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
               <tr>
                 <td width="120" scope="col"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
                 <td width="847" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong> <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <input name="txtdenominacion" type="text" id="txtdenominacion" size="85" maxlength="100"  value="<?echo $denominacion?>"  readonly class="Estilo5">
+                    <input name="txtdenominacion" type="text" id="txtdenominacion" size="85" maxlength="100"  value="<?php echo $denominacion?>"  readonly class="Estilo5">
                 </strong></strong></strong></strong></strong></strong></strong></strong> </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -117,11 +117,11 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
               <tr>
                 <td width="120" scope="col"><div align="left"><span class="Estilo5">MARCA :</span></div></td>
                 <td width="210" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtmarca" type="text" id="txtmarca" size="30" maxlength="30" value="<?echo $marca?>"   readonly class="Estilo5">
+                    <input name="txtmarca" type="text" id="txtmarca" size="30" maxlength="30" value="<?php echo $marca?>"   readonly class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="61" scope="col"><div align="left"><span class="Estilo5">MODELO :</span></div></td>
                 <td width="620" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtmodelo" type="text" id="txtmodelo" size="30" maxlength="30" value="<?echo $modelo?>"   readonly class="Estilo5">
+                    <input name="txtmodelo" type="text" id="txtmodelo" size="30" maxlength="30" value="<?php echo $modelo?>"   readonly class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -131,11 +131,11 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
               <tr>
                 <td width="120" scope="col"><div align="left"><span class="Estilo5">COLOR :</span></div></td>
                 <td width="208" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30"  value="<?echo $color?>"  readonly class="Estilo5">
+                    <input name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30"  value="<?php echo $color?>"  readonly class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="79" scope="col"><div align="left"><span class="Estilo5">MATRICULA :</span></div></td>
                 <td width="601" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtmatricula" type="text" id="txtmatricula" size="30" maxlength="30"  value="<?echo $matricula?>"  readonly class="Estilo5">
+                    <input name="txtmatricula" type="text" id="txtmatricula" size="30" maxlength="30"  value="<?php echo $matricula?>"  readonly class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -145,11 +145,11 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
               <tr>
                 <td width="120" scope="col"><div align="left"><span class="Estilo5">SERIAL :</span></div></td>
                 <td width="213" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtserial1" type="text" id="txtserial1" size="30" maxlength="30"  value="<?echo $serial1?>"  readonly class="Estilo5">
+                    <input name="txtserial1" type="text" id="txtserial1" size="30" maxlength="30"  value="<?php echo $serial1?>"  readonly class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="64" scope="col"><div align="left"><span class="Estilo5">SERIAL 2 :</span></div></td>
                 <td width="614" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtserial2" type="text" id="txtserial2" size="30" maxlength="30" value="<?echo $serial2?>"  readonly class="Estilo5">
+                    <input name="txtserial2" type="text" id="txtserial2" size="30" maxlength="30" value="<?php echo $serial2?>"  readonly class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -161,9 +161,9 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                    <tr>
                      <td width="120" scope="col"><span class="Estilo5">C&Eacute;DULA/RIF EMPRESA ASEGURADORA :</span></td>
                      <td width="820" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                         <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?echo $ced_rif_proveedor?>" onFocus="encender(this)" class="Estilo5" onBlur="apagar(this)">
+                         <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?php echo $ced_rif_proveedor?>" onFocus="encender(this)" class="Estilo5" onBlur="apagar(this)">
                          <strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIPAP','','750','500','true')" value="...">
                      </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                    </tr>
                  </table>
@@ -175,7 +175,7 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                  <tr>
                    <td width="120" scope="col"><span class="Estilo5">NOMBRE EMPRESA ASEGURADORA :</span></td>
                    <td width="842" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                       <input name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" size="70" maxlength="150" value="<?echo $nombre?>" readonly class="Estilo5">
+                       <input name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" size="70" maxlength="150" value="<?php echo $nombre?>" readonly class="Estilo5">
                        <strong><strong>                   </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  </tr>
                </table>
@@ -186,11 +186,11 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO DE P&Oacute;LIZA :</span></div></td>
                  <td width="92" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnumero_poliza" type="text" id="txtnumero_poliza" size="20" maxlength="20"  value="<?echo $numero_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnumero_poliza" type="text" id="txtnumero_poliza" size="20" maxlength="20"  value="<?php echo $numero_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="146" scope="col"><div align="left"><span class="Estilo5">FECHA EMISI&Oacute;N P&Oacute;LIZA :</span></div></td>
                  <td width="580" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_poliza" type="text" id="txtfecha_poliza" size="15" maxlength="15" value="<?echo $fecha_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"> 
+                     <input name="txtfecha_poliza" type="text" id="txtfecha_poliza" size="15" maxlength="15" value="<?php echo $fecha_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"> 
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -201,11 +201,11 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                  <tr>
                    <td width="138" scope="col"><div align="left"><span class="Estilo5">PERIODO COBERTURA DE P&Oacute;LIZA DESDE :</span></div></td>
                    <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15"  value="<?echo $fecha_desde?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15"  value="<?php echo $fecha_desde?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                        <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    <td width="50" scope="col"><div align="left"><span class="Estilo5">HASTA :</span></div></td>
                    <td width="635" scope="col"><div align="left"><span class="Estilo5">
-                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15"  value="<?echo $fecha_hasta?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15"  value="<?php echo $fecha_hasta?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                        <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    </tr>
                </table>
@@ -218,15 +218,15 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                    <tr>
                      <td width="134" scope="col"><div align="left"><span class="Estilo5">MONTO DE LA P&Oacute;LIZA :</span></div></td>
                      <td width="147" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                         <input name="txtmonto_poliza" type="text" id="txtmonto_poliza" size="20" maxlength="15"  value="<?echo $monto_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                         <input name="txtmonto_poliza" type="text" id="txtmonto_poliza" size="20" maxlength="15"  value="<?php echo $monto_poliza?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                          <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                      <td width="82" scope="col"><div align="left"><span class="Estilo5">TASA DE COBERTURA :</span></div></td>
                      <td width="85" scope="col"><div align="left"><span class="Estilo5">
-                         <input name="txttasa_cobertura" type="text" id="txttasa_cobertura" size="10" maxlength="15" value="<?echo $tasa_cobertura?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                         <input name="txttasa_cobertura" type="text" id="txttasa_cobertura" size="10" maxlength="15" value="<?php echo $tasa_cobertura?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                          <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                      <td width="150" scope="col"><span class="Estilo5">MONTO DEL COBERTURA :</span></td>
                      <td width="337" scope="col"><span class="Estilo5">
-                       <input name="txtmonto_cobertura" type="text" id="txtmonto_cobertura" size="25" maxlength="15" value="<?echo $monto_cobertura?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                       <input name="txtmonto_cobertura" type="text" id="txtmonto_cobertura" size="25" maxlength="15" value="<?php echo $monto_cobertura?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      </span></td>
                    </tr>
                  </table>
@@ -237,7 +237,7 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
                <tr>
                  <td width="95" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
                  <td width="855" scope="col"><div align="left">
-                     <textarea name="txtobservacion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtobservacion"><?echo $observacion?></textarea>
+                     <textarea name="txtobservacion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtobservacion"><?php echo $observacion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -264,4 +264,4 @@ $Ssql="SELECT * FROM pre099 where ced_rif='".$ced_rif_proveedor."'"; $resultado=
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

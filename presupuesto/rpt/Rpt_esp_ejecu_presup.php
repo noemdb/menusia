@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000245"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
   $cod_presup_d="";  $cod_presup_h="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";$cod_fuente_d="";  $cod_fuente_h="zz"; $des_fuente_d=""; $des_fuente_h="";$mes_desde="";$mes_hasta="";$asig_global="";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,14 +13,14 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Especial Ejecucion Presupuestaria)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Especial Ejecucion Presupuestaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
 <script language="javascript" src="../../class/cal2.js"></script>
 <script language="javascript" src="../../class/cal_conf2.js"></script>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX"; $cant_cat=1; $mdes_cat=array("NINGUNA","","","","","","","","");
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX"; $cant_cat=1; $mdes_cat=array("NINGUNA","","","","","","","","");
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$titulo=$registro["campo525"];$cant_cat=$registro["campo550"]; $mdes_cat[1]=$registro["campo505"]; $mdes_cat[2]=$registro["campo507"]; $mdes_cat[3]=$registro["campo509"]; $mdes_cat[4]=$registro["campo511"]; $mdes_cat[5]=$registro["campo513"]; $mdes_cat[5]=$registro["campo515"];
 } $l=strlen($formato_presup); $cant_cat=$cant_cat+1;
 $sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(Cod_Presup)=".$l.")"; $resultado=pg_query($sql);
@@ -55,7 +55,7 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td width="830" height="19"><table width="766" border="0">
             <tr>
               <td width="325" height="26"><div align="right"> </div></td>
-              <td width="241"><span class="Estilo15"><? echo $titulo; ?></span></td>
+              <td width="241"><span class="Estilo15"><?php  echo $titulo; ?></span></td>
               <td width="200">&nbsp;</td>
             </tr>
           </table></td>
@@ -64,8 +64,8 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="30"><table width="828" border="0">
             <tr>
               <td width="312" height="26"><div align="right"><span class="Estilo5">CODIGO PRESUPUESTARIO DESDE : </span></div></td>
-              <td width="491"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35"  value="<?echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">
-                <input class="Estilo10" name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo Codigos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="491"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35"  value="<?php echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input class="Estilo10" name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo Codigos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
 			  </tr>
           </table></td>
         </tr>
@@ -73,8 +73,8 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="30"><table width="828" border="0">
             <tr>
               <td width="312" height="26"><div align="right"><span class="Estilo5">HASTA : </span></div></td>
-              <td width="491"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35"  value="<?echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">
-                <input class="Estilo10" name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="491"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35"  value="<?php echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input class="Estilo10" name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
             </tr>
           </table></td>
         </tr>
@@ -85,9 +85,9 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="19"><table width="828" border="0">
             <tr>
               <td width="321" align="right"><span class="Estilo5">FUENTE DE FINANCIAMIENTO DESDE : </span></td>
-              <td width="62"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_d?>">
-              <td width="45"><span class="Estilo5"><input class="Estilo10" name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-              <td width="381"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="90" maxlength="90"  value="<?echo $des_fuente_d?>"  readonly></span></td>
+              <td width="62"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_d?>">
+              <td width="45"><span class="Estilo5"><input class="Estilo10" name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+              <td width="381"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="90" maxlength="90"  value="<?php echo $des_fuente_d?>"  readonly></span></td>
             </tr>
           </table></td>
         </tr>
@@ -96,9 +96,9 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
             <tr>
               <td width="243" height="26"></td>
               <td width="75" align="right"><span class="Estilo5">HASTA : </span></td>
-              <td width="61"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_h?>" ></span></td>
-              <td width="46"><span class="Estilo5"><input class="Estilo10" name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="90" maxlength="90"  value="<?echo $des_fuente_h?>"  readonly></span></td>
+              <td width="61"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_h?>" ></span></td>
+              <td width="46"><span class="Estilo5"><input class="Estilo10" name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="90" maxlength="90"  value="<?php echo $des_fuente_h?>"  readonly></span></td>
             </tr>
           </table></td>
         </tr>		
@@ -141,8 +141,8 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
               </table></td>   
               <td width="140"><div align="right"><span class="Estilo5">MOSTRAR EL NIVEL :</span></div></td>
 			  <td width="194"><select class="Estilo10" name="txtsubtotal" id="txtsubtotal" onFocus="encender(this)" onBlur="apagar(this);"> 
-			  <? for ($i=0; $i<=$cant_cat; $i++) {?> <option value="<? echo $i;?>"><? echo $mdes_cat[$i];?></option>
-			  <?}?>
+			  <?php  for ($i=0; $i<=$cant_cat; $i++) {?> <option value="<?php  echo $i;?>"><?php  echo $mdes_cat[$i];?></option>
+			  <?php }?>
 			  </td>     			  
             </tr>
           </table></td>
@@ -173,7 +173,7 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
 function Llama_Rpt_esp_ejecucion_presup(murl){var url;var r;var asig; var s; 
   if(document.form1.opasig[0].checked==true){asig="S";}
   if(document.form1.opasig[1].checked==true){asig="N";}
-  $s='<? echo $cant_cat;?>';
+  $s='<?php  echo $cant_cat;?>';
   s=document.form1.txtsubtotal.value; 
   r=confirm("Desea Generar el Reporte Especial Ejecucion Presupuestaria ?");
   if (r==true) { url=murl+"?cod_presupd="+document.form1.txtcod_presupd.value+"&cod_presuph="+document.form1.txtcod_presuph.value+"&cod_fuented="+document.form1.txtcod_fuented.value+"&cod_fuenteh="+document.form1.txtcod_fuenteh.value+"&mes_desde="+document.form1.txtmes_desde.value+"&mes_hasta="+document.form1.txtmes_hasta.value+"&asig_global="+asig+"&csubtotal="+s+"&tipo_rep=PDF";
@@ -182,4 +182,4 @@ function Llama_Rpt_esp_ejecucion_presup(murl){var url;var r;var asig; var s;
 }
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 </script>
-<? pg_close();?>
+<?php  pg_close($conn);?>

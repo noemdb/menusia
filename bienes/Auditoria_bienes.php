@@ -1,7 +1,7 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/fun_fechas.php"); include ("../class/configura.inc");  error_reporting(E_ALL ^ E_NOTICE);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/fun_fechas.php"); include ("../class/configura.inc");  error_reporting(E_ALL ^ E_NOTICE);
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 else{ $Nom_Emp=busca_conf();  $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql); $filas=pg_numrows($resultado); $tipo_u="U"; if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN"; if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}else{$modulo="13"; $opcion="04-0000005"; }
-	$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+	$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
   $fecha_aud=$Fec_Ini_Ejer;	$fecha_aud=formato_ddmmaaaa($fecha_aud);}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -9,7 +9,7 @@ else{ $Nom_Emp=busca_conf();  $sql="SELECT campo103 FROM sia001 where campo101='
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (AUDITORIA DE BIENES)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (AUDITORIA DE BIENES)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -24,7 +24,7 @@ function LlamarURL(url){ document.location = url;}
   </tr>
 </table>
 <div id="Layer1" style="position:absolute; width:978px; height:448px; z-index:1; top: 70px; left: 1px;">
-<?      $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         $criterio = " where modulo='13'"; if ($_GET){if ($_GET["criterio"]!=""){  $txt_criterio = $_GET["criterio"]; $txt_criterio = strtoupper ($txt_criterio);
         $criterio = " where modulo='13' and (usuario_sia like '%" . $txt_criterio . "%' or descrip_doc like '%" . $txt_criterio . "%' or operacion like '%" . $txt_criterio . "%')";    }}
         $sql="SELECT * FROM SIA004 ".$criterio;  $res=pg_query($sql);     $numeroRegistros=pg_num_rows($res);
@@ -51,18 +51,18 @@ function LlamarURL(url){ document.location = url;}
 ?>
 <!-- tabla de resultados -->
   <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["usuario_sia"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["hora_op"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fechad; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["operacion"]; ?></b></font></td>
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["usuario_sia"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["hora_op"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fechad; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["operacion"]; ?></b></font></td>
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion; ?></b></font></td>
   </tr>
-<?} }echo "</table>";}?>
+<?php } }echo "</table>";}?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    if($pagina>1){
+  <?php     if($pagina>1){
            echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
            echo "<font face='verdana' size='-2'>Principio</font>";
            echo "</a>&nbsp;";
@@ -89,9 +89,9 @@ Criterio de b&uacute;squeda:
 <input type="text" name="criterio" size="22" maxlength="150">
 <input type="submit" value="Buscar">
 <input name="btVolver" type="button" id="btVolver" value="Volver al menu" onClick="javascript:LlamarURL('menu.php');" >
-<input name="btImprimir" type="button" id="btImprimir" value="Imprimir" onClick="javascript:window.open('../bienes/rpt/imprimir_auditoria.php?criterio=<? echo $txt_criterio ?>');" >
+<input name="btImprimir" type="button" id="btImprimir" value="Imprimir" onClick="javascript:window.open('../bienes/rpt/imprimir_auditoria.php?criterio=<?php  echo $txt_criterio ?>');" >
 </div>
 </form>
 </body>
 </html>
-<?  pg_close();?>
+<?php   pg_close($conn);?>

@@ -6,7 +6,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Diferidos Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Diferidos Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -46,7 +46,7 @@ var Valido=true;
     if(f.txtreferencia_dife.value==""){alert("Referencia no puede estar Vacio");return false;}
         if(f.txttipo_diferido.value==""){alert("Tipo de diferido no puede estar Vacio"); return false; }
       else{f.txttipo_diferido.value=f.txttipo_diferido.value.toUpperCase();}
-    if(f.txtDescripcion.value==""){alert("Descripción del Movimiento no puede estar Vacia"); return false; }
+    if(f.txtDescripcion.value==""){alert("Descripciï¿½n del Movimiento no puede estar Vacia"); return false; }
       else{f.txtDescripcion.value=f.txtDescripcion.value.toUpperCase();}
     if(f.txtreferencia_dife.value.length==8){f.txtreferencia_dife.value=f.txtreferencia_dife.value.toUpperCase();}
       else{alert("Longitud de Referencia Invalida");return false;}
@@ -68,9 +68,9 @@ return true;}
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";
 $nombre_abrev_dife="";$inf_usuario="";
 $sql="Select * from DIFERIDOS where tipo_diferido='$tipo_diferido' and referencia_dife='$referencia_dife'";
@@ -126,17 +126,17 @@ $clave=$tipo_diferido.$referencia_dife;
                         <tr>
                           <td width="105">
                             <p><span class="Estilo5">TIPO DIFERIDO:</span></p>                          </td>
-                          <td width="59"><input name="txttipo_diferido" type="text"  id="txttipo_diferido"  readonly value="<?echo $tipo_diferido?>" size="6" maxlength="4"></td>
+                          <td width="59"><input name="txttipo_diferido" type="text"  id="txttipo_diferido"  readonly value="<?php echo $tipo_diferido?>" size="6" maxlength="4"></td>
                           <td width="44"><span class="Estilo5">
-                            <input name="txtnombre_abrev_dife" type="text" id="txtnombre_abrev_dife" value="<?ECHO $nombre_abrev_dife?>" size="6" readonly>
+                            <input name="txtnombre_abrev_dife" type="text" id="txtnombre_abrev_dife" value="<?php ECHO $nombre_abrev_dife?>" size="6" readonly>
                           </span></td>
                           <td width="104"><span class="Estilo5">
                           </span></td>
                           <td width="91"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="189"><input name="txtreferencia_dife" type="text"  id="txtreferencia_dife" readonly   value="<?echo $referencia_dife?>" size="12"></td>
+                          <td width="189"><input name="txtreferencia_dife" type="text"  id="txtreferencia_dife" readonly   value="<?php echo $referencia_dife?>" size="12"></td>
                           <td width="68"><span class="Estilo5">FECHA :</span> </td>
                           <td width="119"><span class="Estilo5">
-                            <input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" readonly value="<?echo $fecha?>" >
+                            <input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" readonly value="<?php echo $fecha?>" >
                           </span></td>
                         </tr>
                       </table></td>
@@ -145,14 +145,14 @@ $clave=$tipo_diferido.$referencia_dife;
                       <td><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="textarea"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="textarea"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
                   </table>  </td>
               </tr>
           </table>
-        <iframe src="Det_cons_diferidos.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_cons_diferidos.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
                 <table width="863" border="0">
           <tr>
@@ -161,7 +161,7 @@ $clave=$tipo_diferido.$referencia_dife;
         </table>
         <table width="768">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov2" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov2" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88">&nbsp;</td>
           </tr>

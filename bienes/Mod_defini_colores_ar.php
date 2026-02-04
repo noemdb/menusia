@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_color='';}else {$cod_color=$_GET["Gcod_color"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_color='';}else {$cod_color=$_GET["Gcod_color"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Colores)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Colores)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script><script language="JavaScript" type="text/JavaScript">
@@ -31,7 +31,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN034 where cod_color='$cod_color'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
 $cod_color=$registro["cod_color"]; $des_color=$registro["des_color"];}
@@ -67,7 +67,7 @@ $cod_color=$registro["cod_color"]; $des_color=$registro["des_color"];}
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"> <input name="txtcod_color" type="text" class="Estilo10" id="txtcod_color" size="5" maxlength="4" readonly value="<?echo $cod_color?>" >
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"> <input name="txtcod_color" type="text" class="Estilo10" id="txtcod_color" size="5" maxlength="4" readonly value="<?php echo $cod_color?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -77,7 +77,7 @@ $cod_color=$registro["cod_color"]; $des_color=$registro["des_color"];}
              <td><table width="820">
                <tr>
                  <td width="170" scope="col"><div align="left"><span class="Estilo5">DENOMINACI&Oacute;N DEL COLOR  :</span></div></td>
-                 <td width="650" scope="col"><div align="left"><span class="Estilo5"><input name="txtdes_color" type="text" class="Estilo10" id="txtdes_color" size="100" maxlength="60"  value="<?echo $des_color?>" >
+                 <td width="650" scope="col"><div align="left"><span class="Estilo5"><input name="txtdes_color" type="text" class="Estilo10" id="txtdes_color" size="100" maxlength="60"  value="<?php echo $des_color?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -102,4 +102,4 @@ $cod_color=$registro["cod_color"]; $des_color=$registro["des_color"];}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

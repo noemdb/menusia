@@ -1,5 +1,5 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$linea='';$cod_informe='';} else{$linea=$_GET["linea"];$cod_informe=$_GET["cod_informe"];}
 $sql="SELECT * FROM CON006 where (tipo_informe='$cod_informe') and (linea='$linea')";  $res=pg_query($sql);$filas=pg_num_rows($res);  
 $codigo_cuenta=""; $nombre_cuenta=""; 
@@ -9,13 +9,13 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Calculos de Informes Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Calculos de Informes Contables)</title>
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 <body>
  <table width="640" border="0" cellspacing="0" cellpadding="0">
    <tr>
-     <td width="640"><span class="Estilo5"><strong> LINEA : <?echo $linea?>  CUENTA : <?echo $codigo_cuenta." ".$nombre_cuenta?>  </strong></span></td>
+     <td width="640"><span class="Estilo5"><strong> LINEA : <?php echo $linea?>  CUENTA : <?php echo $codigo_cuenta." ".$nombre_cuenta?>  </strong></span></td>
    </tr>
    <tr>
      <td>
@@ -30,14 +30,14 @@ $sql="SELECT con007.codigo_cuenta,con007.operacion,con007.status_c,con001.nombre
            <td width="90" align="center" bgcolor="#99CCFF" ><strong>Operacion</strong></td>
            <td width="90" align="center" bgcolor="#99CCFF" ><strong>D/C/S</strong></td>
          </tr>
-         <?while($registro=pg_fetch_array($res)){  ?>
+         <?php while($registro=pg_fetch_array($res)){  ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="150" align="left"><? echo $registro["codigo_cuenta"]; ?></td>
-           <td width="300" align="left"><? echo $registro["nombre_cuenta"]; ?></td>
-           <td width="90" align="center"><? echo $registro["operacion"]; ?></td>
-           <td width="90" align="center"><? echo $registro["status_c"]; ?></td>
+           <td width="150" align="left"><?php  echo $registro["codigo_cuenta"]; ?></td>
+           <td width="300" align="left"><?php  echo $registro["nombre_cuenta"]; ?></td>
+           <td width="90" align="center"><?php  echo $registro["operacion"]; ?></td>
+           <td width="90" align="center"><?php  echo $registro["status_c"]; ?></td>
          </tr>
-         <?}?>
+         <?php }?>
        </table></td>
    </tr>
    <tr>
@@ -51,4 +51,4 @@ $sql="SELECT con007.codigo_cuenta,con007.operacion,con007.status_c,con001.nombre
  <p>&nbsp;</p>
 </body>
 </html>
-<?  pg_close(); ?>
+<?php   pg_close($conn); ?>

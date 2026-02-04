@@ -1,10 +1,10 @@
-<?include ("../class/ventana.php");?>
+<?php include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Descripción De Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Descripciï¿½n De Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -65,7 +65,7 @@ return true;}
                 <tr>
                   <td width="120"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
                   <td width="700"><div align="left"><span class="Estilo5"><input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apaga_cod(this)" class="Estilo10">
-				    <input name="btcod_clas" type="button" id="btcod_clas" title="Abrir Catalogo Clasificacion de Bienes" onClick="VentanaCentrada('Cat_clasificaciond.php?criterio=','SIA','','750','500','true')" class="Estilo5" value="...">
+				    <input name="btcod_clas" type="button" id="btcod_clas" title="Abrir Catalogo Clasificacion de Bienes" onClick="VentanaCentrada('Cat_clasificaciond.php?criterio=','SIPAP','','750','500','true')" class="Estilo5" value="...">
                   </span></div></td>
                 </tr>
               </table></td>

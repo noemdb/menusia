@@ -1,4 +1,4 @@
-<?include ("../class/seguridad.inc");include ("../class/ventana.php");  include ("../class/fun_fechas.php"); 
+<?php include ("../class/seguridad.inc");include ("../class/ventana.php");  include ("../class/fun_fechas.php"); 
 $codigo_mov=$_POST["txtcodigo_mov2"];  $user=$_POST["txtuser2"]; $password=$_POST["txtpassword2"]; $dbname=$_POST["txtdbname2"];  $ced_rif=$_POST["txtced_r2"]; $nombre_benef=$_POST["txtnomb2"]; $fecha_hoy=asigna_fecha_hoy(); 
 $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin2"]); if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;} $fecha=$fecha_hoy; $descripcion="";
 ?>
@@ -7,7 +7,7 @@ $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin2"]); if(FDate($fecha_hoy)>FDate
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Movimientos en Libros)</title>
+<title>SIPAP CONTROL BANCARIO (Movimientos en Libros)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -113,7 +113,7 @@ return true;}
                     <tr>
                       <td width="172"><span class="Estilo5">C&Oacute;DIGO BANCO RECEPTOR:</span></td>
                        <td width="51"><span class="Estilo5"> <input name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);">  </span> </td>
-                      <td width="69"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="69"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="137"><span class="Estilo5">N&Uacute;MERO DE CUENTA:</span></td>
                       <td width="405"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnro_cuenta" type="text"  id="txtnro_cuenta"   size="57" maxlength="57" readonly></span></div></td>
                     </tr>
@@ -142,10 +142,10 @@ return true;}
             <td><table width="860">
               <tr>
                 <td width="100"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text"  id="txtced_rif"  value="<?echo $ced_rif?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
-                <td width="45"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiario" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text"  id="txtced_rif"  value="<?php echo $ced_rif?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
+                <td width="45"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiario" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                 <td width="100"><span class="Estilo5">BENEFICIARIO : </span></td>
-                <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef"  value="<?echo $nombre_benef?>" size="70" maxlength="70" readonly> </span></td>
+                <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef"  value="<?php echo $nombre_benef?>" size="70" maxlength="70" readonly> </span></td>
               </tr>
             </table></td>
           </tr>
@@ -153,7 +153,7 @@ return true;}
             <td ><table width="860">
               <tr>
                 <td width="100"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" id="txtdescripcion"><?echo $descripcion?></textarea> </span> </td>
+                <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" id="txtdescripcion"><?php echo $descripcion?></textarea> </span> </td>
               </tr>
             </table></td>
           </tr>
@@ -162,7 +162,7 @@ return true;}
                     <tr>
                       <td width="172"><span class="Estilo5">C&Oacute;DIGO BANCO EMISOR:</span></td>
                        <td width="51"><span class="Estilo5"> <input class="Estilo10" name="txtcod_bancoA" type="text" id="txtcod_bancoA" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apaga_bancoA(this)" onchange="chequea_bancoA(this.form);">  </span> </td>
-                      <td width="69"><input class="Estilo10" name="btcod_bancoA" type="button" id="btcod_bancoA" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancosA.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="69"><input class="Estilo10" name="btcod_bancoA" type="button" id="btcod_bancoA" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancosA.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="137"><span class="Estilo5">N&Uacute;MERO DE CUENTA:</span></td>
                       <td width="405"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnro_cuentaA" type="text"  id="txtnro_cuentaA"   size="57" maxlength="57" readonly></span></div></td>
                     </tr>
@@ -191,7 +191,7 @@ return true;}
             <td><table width="860">
               <tr>
                 <td width="100"><span class="Estilo5">FECHA :</span></td>
-                <td width="390"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text"  id="txtfecha"  value="<?echo $fecha?>" size="12" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                <td width="390"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text"  id="txtfecha"  value="<?php echo $fecha?>" size="12" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                 <td width="69"><span class="Estilo5">MONTO :</span></td>
                 <td width="300"><span class="Estilo5"> <input class="Estilo10" name="txtmonto_mov_libro"  align="right"  type="text"  id="txtmonto_mov_libro" style="text-align:right"   size="17" maxlength="16" onFocus="encender(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)"> </span></td>
               </tr>
@@ -200,13 +200,13 @@ return true;}
           <tr>  <td>&nbsp;</td> </tr>
         </table>
         <div id="T11" class="tab-body">
-              <iframe src="Det_inc_trans_libro.php?codigo_mov=<?echo $codigo_mov?>" width="840" height="150" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_inc_trans_libro.php?codigo_mov=<?php echo $codigo_mov?>" width="840" height="150" scrolling="auto" frameborder="1"></iframe>
         </div>
 
         <table width="812">
           <tr>  <td>&nbsp;</td> </tr>
           <tr>
-            <td width="50"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
+            <td width="50"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
             <td width="614">&nbsp;</td>
             <td width="88"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
             <td width="88"><input name="Blanquear" type="reset" value="Blanquear"></td>

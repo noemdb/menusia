@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $nro_aut="N"; $equipo=getenv("COMPUTERNAME");   $tipo_comp="EM001";
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $nro_aut="N"; $equipo=getenv("COMPUTERNAME");   $tipo_comp="EM001";
 $fecha_hoy=asigna_fecha_hoy();  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"]; $port=$_POST["txtport"]; $host=$_POST["txthost"];
 $codigo_mov=$_POST["txtcodigo_mov"]; $cod_dep=$_POST["txtcod_dep"]; $nom_dep=$_POST["txtnom_dep"]; $formato_bien=$_POST["txtformato_bien"]; $long_num_bien=$_POST["txtlong_num_bien"];
 $fec_fin_e=$_POST["txtfecha_fin"]; $Cod_Emp=$_POST["txtcod_emp"]; $ced_rif_emp=$_POST["txtced_rif_emp"]; $fecha_fin=formato_ddmmaaaa($fec_fin_e);  if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;}  
@@ -8,7 +8,7 @@ $fec_fin_e=$_POST["txtfecha_fin"]; $Cod_Emp=$_POST["txtcod_emp"]; $ced_rif_emp=$
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Movimientos Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Movimientos Bienes Inmuebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -95,7 +95,7 @@ return true;}
                  <td width="170"><span class="Estilo5">REFERENCIA MOVIMIENTO:</span></td>
                  <td width="150"><div id="refmov"><input name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"  onFocus="encender(this); " onBlur="apagar(this);"  onchange="checkreferencia(this.form);" class="Estilo10"> </div> </td>
                  <td width="165"><span class="Estilo5">FECHA DEL MOVIMIENTO :</span></td>
-                 <td width="200"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"  value="<?echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="200"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"  value="<?php echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                  <td width="160"><span class="Estilo5"></span></td>	
                </tr>
              </table></td>
@@ -105,9 +105,9 @@ return true;}
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5"><div id="coddep">C&Oacute;DIGO DEPENDENCIA :</div> </span></td>
-                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dep?>" onFocus="encender(this)" onBlur="apaga_dep(this)" class="Estilo10">    </span></td>
-                 <td width="70"><span class="Estilo5"> <input name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $nom_dep?>" readonly class="Estilo10">    </span></td>
+                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dep?>" onFocus="encender(this)" onBlur="apaga_dep(this)" class="Estilo10">    </span></td>
+                 <td width="70"><span class="Estilo5"> <input name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $nom_dep?>" readonly class="Estilo10">    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -135,15 +135,15 @@ return true;}
    rows[1][1] = "Bienes";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";            // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_inc_bienes_inmue_movimientos.php?&codigo_mov=<?echo $codigo_mov?>"  width="846" height="370" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_bienes_inmue_movimientos.php?&codigo_mov=<?php echo $codigo_mov?>"  width="846" height="370" scrolling="auto" frameborder="0"> </iframe>
               </div>              
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_inc_comp_inmue_movimientos.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="370" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_comp_inmue_movimientos.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="370" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -151,9 +151,9 @@ return true;}
 		<div id="Layer3" style="position:absolute; width:868px; height:25px; z-index:3; left: 2px; top: 560px;">
         <table width="812">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-            <td width="20"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td> 
-			<td width="30"><input name="txtced_rif" type="hidden" id="txtced_rif" value="<?echo $ced_rif_emp?>" ></td> 
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+            <td width="20"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td> 
+			<td width="30"><input name="txtced_rif" type="hidden" id="txtced_rif" value="<?php echo $ced_rif_emp?>" ></td> 
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_partida='';} else {$cod_partida=$_GET["Gpartida"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd"> 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Clasificador de Partidas)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Clasificador de Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -20,15 +20,15 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function LlamarURL(url){  document.location = url; }
 function revisar(){var f=document.form1;var Valido;
-    if(f.txtCodigo_Partida.value==""){alert("Código de Partida no puede estar Vacio");return false;}
-    if(f.txtNombre_Partida.value==""){alert("Denominación de Partida no puede estar Vacia"); return false; }
+    if(f.txtCodigo_Partida.value==""){alert("Cï¿½digo de Partida no puede estar Vacio");return false;}
+    if(f.txtNombre_Partida.value==""){alert("Denominaciï¿½n de Partida no puede estar Vacia"); return false; }
        else{f.txtNombre_Partida.value=f.txtNombre_Partida.value.toUpperCase();}
     if(f.txtTipo_Gasto.value=="CORRIENTE" || f.txtTipo_Gasto.value=="INVERSION") {Valido=true;}
       else{alert("Tipo de Gasto no valida");return false; }
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_partida="";$aplicacion="";$func_inv="";$cod_contable=""; $nombre_cuenta="";
 $sql="Select cod_partida,den_partida,aplicacion,ord_cord,func_inv,cod_contable from pre098 where cod_partida='$cod_partida'";$res=pg_query($sql);
@@ -77,7 +77,7 @@ function asig_tgasto(mvalor){var f=document.form1;
                 <td><table width="800" border="0">
                   <tr>
                     <td width="159"><span class="Estilo5">C&Oacute;DIGO DE PARTIDA :</span></td>
-                    <td width="631"><span class="Estilo5"><input class="Estilo10" name="txtCodigo_Partida" type="text" id="txtCodigo_Partida" title="Registre el C&oacute;digo de la Partida" size="30" maxlength="30" readonly value="<?echo $cod_partida?>"></span></td>
+                    <td width="631"><span class="Estilo5"><input class="Estilo10" name="txtCodigo_Partida" type="text" id="txtCodigo_Partida" title="Registre el C&oacute;digo de la Partida" size="30" maxlength="30" readonly value="<?php echo $cod_partida?>"></span></td>
                   </tr>
                 </table></td>
               </tr>
@@ -89,7 +89,7 @@ function asig_tgasto(mvalor){var f=document.form1;
                   <table width="816" border="0">
                     <tr>
                       <td width="157"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                      <td width="659"><input class="Estilo10" name="txtNombre_Partida" type="text" id="txtNombre_Partida" title="Registre la denominaci&oacute;n de la Partida" size="100" value="<?echo $den_partida?>" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+                      <td width="659"><input class="Estilo10" name="txtNombre_Partida" type="text" id="txtNombre_Partida" title="Registre la denominaci&oacute;n de la Partida" size="100" value="<?php echo $den_partida?>" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -102,10 +102,10 @@ function asig_tgasto(mvalor){var f=document.form1;
                   <tr>
                     <td width="159"><span class="Estilo5">TIPO DE GASTO :</span></td>
                     <td width="231"><span class="Estilo5"> <select class="Estilo10" name="txtTipo_Gasto" size="1" id="txtTipo_Gasto" onFocus="encender(this)" onBlur="apagar(this)"><option selected>CORRIENTE</option>   <option>INVERSION</option></select>
-                      <script language="JavaScript" type="text/JavaScript"> asig_tgasto('<?echo $func_inv;?>');</script>
+                      <script language="JavaScript" type="text/JavaScript"> asig_tgasto('<?php echo $func_inv;?>');</script>
                     </span></td>
                     <td width="119"><span class="Estilo5">APLICACI&Oacute;N :</span></td>
-                    <td width="273"><input class="Estilo10" name="txtAplicacion" type="text" id="txtAplicacion" title="Registre el Tipo de Aplicacion" size="4" maxlength="1"  value="<?echo $aplicacion?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                    <td width="273"><input class="Estilo10" name="txtAplicacion" type="text" id="txtAplicacion" title="Registre el Tipo de Aplicacion" size="4" maxlength="1"  value="<?php echo $aplicacion?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
                   </tr>
                 </table></td>
               </tr>
@@ -116,9 +116,9 @@ function asig_tgasto(mvalor){var f=document.form1;
                 <td><table width="800" border="0">
                   <tr>
                     <td width="159"><span class="Estilo5">CODIGO DE CUENTA :</span></td>
-                    <td width="150"><input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el Codigo de Cuenta" size="30" maxlength="30"  value="<?echo $cod_contable?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
-                    <td width="35"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=6-1','SIA','','750','500','true')" value="..."></td>
-                    <td width="460"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" size="70" maxlength="250" value="<?echo $nombre_cuenta?>" readonly></td>
+                    <td width="150"><input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el Codigo de Cuenta" size="30" maxlength="30"  value="<?php echo $cod_contable?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                    <td width="35"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=6-1','SIPAP','','750','500','true')" value="..."></td>
+                    <td width="460"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" size="70" maxlength="250" value="<?php echo $nombre_cuenta?>" readonly></td>
 				  </tr>
                 </table></td>
               </tr>
@@ -149,4 +149,4 @@ function asig_tgasto(mvalor){var f=document.form1;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

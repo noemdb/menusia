@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
+<?php include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -6,7 +6,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Asociacion Cuentas de Activos)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Asociacion Cuentas de Activos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript  src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -66,7 +66,7 @@ return true;}
 				  <tr>
 					<td width="159"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
 					<td width="220"><span class="Estilo5"><input name="txtcod_presup" type="text" id="txtcod_presup" title="Registre C&oacute;digo pRESUPUESTARIO"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);"> </span></td>
-					<td width="80"><input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../pagos/Cat_codigos_presup.php?criterio=','SIA','','750','500','true')" value="..."></td>
+					<td width="80"><input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../pagos/Cat_codigos_presup.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
 					<td width="20"><input name="txtcod_contable" type="hidden" id="txtcod_contable"></td>
 					<td width="30"><input name="txtdes_contable" type="hidden" id="txtdes_contable"></td>
 					<td width="20"><input name="txtcod_fuente" type="hidden" id="txtcod_fuente"></td>
@@ -91,7 +91,7 @@ return true;}
                 <tr>
                   <td width="135"><span class="Estilo5">C&Oacute;DIGO ASOCIADO :</span></td>
                   <td width="188"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  onFocus="encender(this)" onBlur="apagar(this)" size="25">   </span></td>
-                  <td width="50"><div align="left"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="...">  </span></div></td>
+                  <td width="50"><div align="left"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></div></td>
                   <td width="470"><span class="Estilo5"> <input name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta"  readonly  size="70">   </span></td>
                 </tr>
             </table></td>

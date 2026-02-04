@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Detalle Gastos para Flujo de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Detalle Gastos para Flujo de Caja)</title>
 <LINK
 href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
@@ -30,26 +30,26 @@ $sql="SELECT * FROM MOV_GASTO_FLUJO  where periodo='$periodo' order by fecha_mov
            <td width="90" align="left" bgcolor="#99CCFF"><strong>Fecha</strong></td>
 		   <td width="120" align="right" bgcolor="#99CCFF" ><strong>Monto Mov.</strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 //periodo, cod_banco, referencia, tipo_mov_libro, ced_rif, fecha_mov_libro,  monto_mov_libro, cod_presup, fuente_financ, cod_partida, cod_contable,monto_codigo, campo_str1, campo_str2, campo_num1, campo_num2,descrip_mov_libro
 while($registro=pg_fetch_array($res)){ $sfecha=$registro["fecha_mov_libro"]; $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4); 
 $montoc=formato_monto($registro["monto_codigo"]); $montom=formato_monto($registro["monto_mov_libro"]);  $descripcion=$registro["descrip_mov_libro"]; $descripcion=substr($descripcion,0,100);
 $nombre=$registro["nombre"]; $nombre=substr($nombre,0,80);
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="55" align="left"><? echo $registro["cod_banco"]; ?></td>
-		   <td width="75" align="left"><? echo $registro["referencia"]; ?></td>
-		   <td width="40" align="left"><? echo $registro["tipo_mov_libro"]; ?></td>
-		   <td width="350" align="left"><? echo $descripcion; ?></td>
-		   <td width="120" align="right"><? echo $montoc; ?></td>
-		   <td width="130" align="left"><? echo $registro["cod_partida"]; ?></td>
-		   <td width="130" align="left"><? echo $registro["cod_contable"]; ?></td>
-           <td width="90" align="left"><? echo $registro["ced_rif"]; ?></td>
-           <td width="280" align="left"><? echo $nombre; ?></td>
-           <td width="90" align="left"><? echo $fecha; ?></td>
-           <td width="120" align="right"><? echo $montom; ?></td>
+           <td width="55" align="left"><?php  echo $registro["cod_banco"]; ?></td>
+		   <td width="75" align="left"><?php  echo $registro["referencia"]; ?></td>
+		   <td width="40" align="left"><?php  echo $registro["tipo_mov_libro"]; ?></td>
+		   <td width="350" align="left"><?php  echo $descripcion; ?></td>
+		   <td width="120" align="right"><?php  echo $montoc; ?></td>
+		   <td width="130" align="left"><?php  echo $registro["cod_partida"]; ?></td>
+		   <td width="130" align="left"><?php  echo $registro["cod_contable"]; ?></td>
+           <td width="90" align="left"><?php  echo $registro["ced_rif"]; ?></td>
+           <td width="280" align="left"><?php  echo $nombre; ?></td>
+           <td width="90" align="left"><?php  echo $fecha; ?></td>
+           <td width="120" align="right"><?php  echo $montom; ?></td>
          </tr>
-<?} ?>
+<?php } ?>
        </table></td>
    </tr>
    <tr> <td>&nbsp;</td>   </tr>   
@@ -57,4 +57,4 @@ $nombre=$registro["nombre"]; $nombre=substr($nombre,0,80);
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

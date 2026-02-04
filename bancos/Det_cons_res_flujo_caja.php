@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Detalle Flujo de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Detalle Flujo de Caja)</title>
 <LINK
 href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
@@ -25,7 +25,7 @@ $sql="SELECT * FROM BAN016  where periodo='$periodo' order by linea,consecutivo"
 		   <td width="25" align="left" bgcolor="#99CCFF"><strong>Op</strong></td>
            <td width="25" align="left" bgcolor="#99CCFF"><strong>St</strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 //periodo,linea,consecutivo,descripcion,monto,acumulado,operacion,status
 while($registro=pg_fetch_array($res)){ 
 $monto=formato_monto($registro["monto"]); $acumulado=formato_monto($registro["acumulado"]); 
@@ -33,15 +33,15 @@ $monto=formato_monto($registro["monto"]); $acumulado=formato_monto($registro["ac
  $descripcion=$registro["descripcion"]; $descripcion=substr($descripcion,0,150);
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="40" align="left"><? echo $registro["linea"]; ?></td>		   
-		   <td width="480" align="left"><? echo $descripcion; ?></td>		   
-		   <td width="120" align="right"><? echo $monto; ?></td>
-		   <td width="130" align="right"><? echo $acumulado; ?></td>		   
-		   <td width="25" align="left"><? echo $registro["operacion"]; ?></td>
-		   <td width="25" align="left"><? echo $registro["status"]; ?></td>
+           <td width="40" align="left"><?php  echo $registro["linea"]; ?></td>		   
+		   <td width="480" align="left"><?php  echo $descripcion; ?></td>		   
+		   <td width="120" align="right"><?php  echo $monto; ?></td>
+		   <td width="130" align="right"><?php  echo $acumulado; ?></td>		   
+		   <td width="25" align="left"><?php  echo $registro["operacion"]; ?></td>
+		   <td width="25" align="left"><?php  echo $registro["status"]; ?></td>
            
          </tr>
-<?} ?>
+<?php } ?>
        </table></td>
    </tr>
    <tr> <td>&nbsp;</td>   </tr>   
@@ -49,4 +49,4 @@ $monto=formato_monto($registro["monto"]); $acumulado=formato_monto($registro["ac
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

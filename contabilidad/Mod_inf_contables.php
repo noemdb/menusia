@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 if (!$_GET){  $cod_informe='';} else {  $cod_informe = $_GET["Gcodigo"]; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -6,7 +6,7 @@ if (!$_GET){  $cod_informe='';} else {  $cod_informe = $_GET["Gcodigo"]; }
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA</title>
+<title>SIPAP CONTABILIDAD FINANCIERA</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/JavaScript"></script>
@@ -28,10 +28,10 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $nombre_informe="";$arch_informe="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{ $Nom_Emp=busca_conf();  $sql="Select * from con005 where cod_informe='$cod_informe'";   $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){ $cod_informe=$registro["cod_informe"];  $nombre_informe=$registro["nombre_informe"];     $arch_informe=$registro["arch_informe"]; }
 }
@@ -48,8 +48,8 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
   <tr>
     <td width="92"><table width="92" height="350" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_inf_contab.php?Gcriterio=<?echo $cod_informe?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_inf_contab.php?Gcriterio=<?echo $cod_informe?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_inf_contab.php?Gcriterio=<?php echo $cod_informe?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_inf_contab.php?Gcriterio=<?php echo $cod_informe?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -62,7 +62,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
       <form name="form1" method="post" action="Update_inf_contables.php" onSubmit="return revisar()">
         <table width="861" border="0">
           <tr>
-            <td width="432"><span class="Estilo5">C&Oacute;DIGO DEL INFORME :  <input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" title="Registre el Codigo del informe" value="<?echo $cod_informe?>" size="4" maxlength="2" readonly ></span></td>
+            <td width="432"><span class="Estilo5">C&Oacute;DIGO DEL INFORME :  <input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" title="Registre el Codigo del informe" value="<?php echo $cod_informe?>" size="4" maxlength="2" readonly ></span></td>
             <td width="419"></td>
           </tr>
 		  <tr> <td>&nbsp;</td>  </tr>
@@ -70,7 +70,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
 		<table width="859" border="0">
           <tr>
             <td width="170"><span class="Estilo5">DESCRIPCION DEL INFORME :</span></td>
-            <td width="679"><textarea name="txtnombre_informe" cols="80" class="Estilo10" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" id="txtnombre_informe"><?echo $nombre_informe?></textarea></td>
+            <td width="679"><textarea name="txtnombre_informe" cols="80" class="Estilo10" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" id="txtnombre_informe"><?php echo $nombre_informe?></textarea></td>
           </tr>
 		  <tr> <td>&nbsp;</td>  </tr>
         </table>
@@ -78,7 +78,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
         <table width="859" border="0">
           <tr>
             <td width="209"><span class="Estilo5">NOMBRE DEL ARCHIVO REPORTES :</span></td>
-			<td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" title="Registre el nombre del archivo"  size="100" maxlength="250" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $arch_informe?>"></span></td>
+			<td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" title="Registre el nombre del archivo"  size="100" maxlength="250" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $arch_informe?>"></span></td>
           </tr>
 		  <tr> <td>&nbsp;</td>  </tr>
         </table>

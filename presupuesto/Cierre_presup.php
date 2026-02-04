@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); $sia_periodo="00"; $cod_modulo="05";    
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $sia_periodo="00"; $cod_modulo="05";    
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="04-0000025"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $sql="Select * from SIA005 where campo501='$cod_modulo'";$resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){$cod_modulo=$registro["campo501"]; $campo502=$registro["campo502"]; $periodo=$registro["campo503"];
 $tipo_op=$registro["campo504"];$tipo_opd=$registro["campo505"];$tipo_opf=$registro["campo506"];$tipo_opfa=$registro["campo507"];$tipo_opa=$registro["campo508"];$tipo_aju=$registro["campo509"];
@@ -15,7 +15,7 @@ $tipo_op=$registro["campo504"];$tipo_opd=$registro["campo505"];$tipo_opf=$regist
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Periodo de Trabajo)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Periodo de Trabajo)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -49,7 +49,7 @@ return true;}
             <tr>
               <td width="20">&nbsp;</td>
 			  <td width="260"><span class="Estilo5">PERIODO TRABAJO DESDE DEL MODULO :</span></td>
-              <td width="240"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="3" maxlength="2" value="<?echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">  </span></div></td>
+              <td width="240"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="3" maxlength="2" value="<?php echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">  </span></div></td>
              </tr>
           </table></td>
         </tr>

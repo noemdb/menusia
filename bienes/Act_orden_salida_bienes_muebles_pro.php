@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13"; $ced_rif_emp="";
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13"; $ced_rif_emp="";
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000017"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $equipo=getenv("COMPUTERNAME"); $mcod_m="BIEN043".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49); $tipo_comp="EM001"; $sfecha=$Fec_Fin_Ejer;
 if (!$_GET){$p_letra="";$referencia=''; $sql="SELECT * FROM BIEN043 ORDER BY referencia";} 
 else {$referencia = $_GET["Greferencia"]; $p_letra=substr($referencia,0,1);
@@ -23,7 +23,7 @@ else {$referencia = $_GET["Greferencia"]; $p_letra=substr($referencia,0,1);
 
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -69,10 +69,10 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 
 $resultado=pg_exec($conn,"SELECT ELIMINA_BIEN050('$codigo_mov')"); $resultado=pg_exec($conn,"SELECT ELIMINA_CON010('$codigo_mov')");
-$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 
 $referencia=""; $fecha=""; $tipo_salida=""; $cod_dependencia=""; $descripcion="";$nombre1="";$departamento1=""; $nombre2="";$departamento2=""; $denominacion_dep="";  
 $res=pg_query($sql);$filas=pg_num_rows($res);if ($filas==0){ if ($p_letra=="S"){$sql="SELECT * From BIEN043 ORDER BY referencia";}  if ($p_letra=="A"){$sql="SELECT * From BIEN043 ORDER BY referencia desc";}  $res=pg_query($sql);  $filas=pg_num_rows($res);}
@@ -112,17 +112,17 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
       <td>
     <table width="92" height="230" border="1" cellpadding="0" cellspacing="0" id="tablam">
    <td width="95" height="230"><table width="92" height="230" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+     <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
       <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_Mov_Bien()";
 					onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_Mov_Bien()">Incluir</A></td>
 	  </tr> 
-    <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+    <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Retornar_orden_salida_bienes_muebles.php?Greferencia=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Retornar_orden_salida_bienes_muebles.php?Greferencia=');">Retornar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -143,17 +143,17 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_Act_bienes_muebles_ord_salida_bie.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_Act_bienes_muebles_ord_salida_bie.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+     <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <?} if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
+     <?php } if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
 			<tr>
 			  <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato();" class="menu">Formato</a></td>
 			</tr> 
-	 <?} ?>	
+	 <?php } ?>	
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="menu.php" class="menu">Menu</a></td>
@@ -170,11 +170,11 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
              <td><table width="845">
                <tr>
                  <td width="120"><span class="Estilo5">REFERENCIA :</span></td>
-                 <td width="130"><input class="Estilo10" name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"  value="<?echo $referencia?>" readonly> </td>
+                 <td width="130"><input class="Estilo10" name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"  value="<?php echo $referencia?>" readonly> </td>
                  <td width="100"><span class="Estilo5">FECHA :</span></td>
-                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"   value="<?echo $fecha?>" readonly> </span></td>
+                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"   value="<?php echo $fecha?>" readonly> </span></td>
                  <td width="120"><span class="Estilo5">TIPO DE SALIDA :</span></td>
-                 <td width="230"><span class="Estilo5"><input class="Estilo10" name="txttipo_salida" type="text" id="txttipo_salida" size="30" maxlength="30"   value="<?echo $des_tipo_salida?>" readonly> </span></td>
+                 <td width="230"><span class="Estilo5"><input class="Estilo10" name="txttipo_salida" type="text" id="txttipo_salida" size="30" maxlength="30"   value="<?php echo $des_tipo_salida?>" readonly> </span></td>
                 	
                </tr>
              </table></td>
@@ -183,8 +183,8 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
-                 <td width="135"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" readonly>    </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $denominacion_dep?>" readonly>    </span></td>
+                 <td width="135"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" readonly>    </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $denominacion_dep?>" readonly>    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -192,7 +192,7 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                 <td width="720"><div align="left"><textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly  class="headers" id="txtdescripcion"><?echo $descripcion?></textarea>  </div></td>
+                 <td width="720"><div align="left"><textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly  class="headers" id="txtdescripcion"><?php echo $descripcion?></textarea>  </div></td>
                </tr>
              </table></td>
            </tr>
@@ -200,7 +200,7 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
 			<td >&nbsp;</td>
 		  </tr>
          </table> 
-          <iframe src="Det_cons_ord_sal_bienes_muebles.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+          <iframe src="Det_cons_ord_sal_bienes_muebles.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
           </iframe>
          <p>&nbsp;</p>
        </div>
@@ -211,21 +211,21 @@ $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);if ($re
 <form name="form2" method="post" action="Inc_orden_salida_bienes_muebles_pro.php">
 <table width="100">
   <tr>
-     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtport" type="hidden" id="txtport" value="<?echo $port?>" ></td>	 
-	 <td width="5"><input class="Estilo10" name="txthost" type="hidden" id="txthost" value="<?echo $host?>" ></td>	 
-     <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>	 	 
-     <td width="5"><input class="Estilo10" name="txtcod_dep" type="hidden" id="txtcod_dep" value="<?echo $cod_dep_t?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtnom_dep" type="hidden" id="txtnom_dep" value="<?echo $nom_dep_t?>" ></td>	 
-	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtcod_emp" type="hidden" id="txtcod_emp" value="<?echo $Cod_Emp?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtced_rif_emp" type="hidden" id="txtced_rif_emp" value="<?echo $Rif_Emp?>" ></td>	 
+     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtport" type="hidden" id="txtport" value="<?php echo $port?>" ></td>	 
+	 <td width="5"><input class="Estilo10" name="txthost" type="hidden" id="txthost" value="<?php echo $host?>" ></td>	 
+     <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>	 	 
+     <td width="5"><input class="Estilo10" name="txtcod_dep" type="hidden" id="txtcod_dep" value="<?php echo $cod_dep_t?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtnom_dep" type="hidden" id="txtnom_dep" value="<?php echo $nom_dep_t?>" ></td>	 
+	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtcod_emp" type="hidden" id="txtcod_emp" value="<?php echo $Cod_Emp?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtced_rif_emp" type="hidden" id="txtced_rif_emp" value="<?php echo $Rif_Emp?>" ></td>	 
   </tr>
 </table>
 </form>
 
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

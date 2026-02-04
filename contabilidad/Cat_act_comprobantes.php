@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Catalogo de Comprobantes)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Catalogo de Comprobantes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -20,7 +20,7 @@ function CargarUrl(mclave) {var murl;  murl="Act_comprobantes.php?Gcriterio="+mc
   </tr>
 </table>
 <div id="Layer1" style="position:absolute; width:978px; height:448px; z-index:1; top: 70px; left: 1px;">
-<?
+<?php 
         $criterio = "";
         if ($_GET){if ($_GET["criterio"]!=""){$txt_criterio = $_GET["criterio"];$txt_criterio = strtoupper ($txt_criterio);
         $criterio = " where referencia like '%" . $txt_criterio . "%' or tipo_asiento like '%" . $txt_criterio . "% ' or descripcion like '%" . $txt_criterio . "%' or tipo_asiento like '%" . $txt_criterio . "%'";
@@ -44,14 +44,14 @@ function CargarUrl(mclave) {var murl;  murl="Act_comprobantes.php?Gcriterio="+mc
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
 <!-- tabla de resultados -->
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:CargarUrl('<? echo $fecha.$registro["referencia"].$registro["tipo_comp"]; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["referencia"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_asiento"]; ?></b></font></td>
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:CargarUrl('<?php  echo $fecha.$registro["referencia"].$registro["tipo_comp"]; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["referencia"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_asiento"]; ?></b></font></td>
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion; ?></b></font></td>
   </tr>
 <!-- fin tabla resultados -->
-<?}
+<?php }
                 }//fin while
                 echo "</table>";
         }//fin if
@@ -59,7 +59,7 @@ function CargarUrl(mclave) {var murl;  murl="Act_comprobantes.php?Gcriterio="+mc
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
+  <?php     echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
         echo "<font face='verdana' size='-2'>Principio</font>";
         echo "</a>&nbsp;";
         if($pagina>1){
@@ -89,4 +89,4 @@ Criterio de b&uacute;squeda:
 </form>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

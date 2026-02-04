@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $equipo = getenv("COMPUTERNAME");$mcod_m = "BIEN027".$equipo;
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000045"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$p_letra="";$referencia_dep='';$tipo_causado='';
   $sql="SELECT * FROM BIEN029 ORDER BY referencia_dep";
   $codigo_mov=substr($mcod_m,0,49);
@@ -29,7 +29,7 @@ print_r($clave);
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -68,20 +68,20 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if ($codigo_mov==""){$codigo_mov="";}
 else{
  $res=pg_exec($conn,"SELECT BORRAR_BIEN050('$codigo_mov')");
  $error=pg_errormessage($conn); $error=substr($error, 0, 61);
- if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+ if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 }
 if ($codigo_mov==""){$codigo_mov="";}
 else{
  $res=pg_exec($conn,"SELECT ELIMINA_CON008('$codigo_mov')");
  $error=pg_errormessage($conn); $error=substr($error, 0, 61);
- if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+ if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 }
 $referencia_dep=""; $fecha_dep="";  $cod_dependencia=""; $descripcion=""; $denominacion_dep="";
 $res=pg_query($sql);
@@ -117,12 +117,12 @@ print_r($clave);
        <td>
     <table width="92" height="230" border="1" cellpadding="0" cellspacing="0" id="tablam">
    <td width="95" height="230"><table width="92" height="230" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_bienes_semovientes_pro_depre_act.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_bienes_semovientes_pro_depre_act.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -139,12 +139,12 @@ print_r($clave);
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('U')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Mover_Registro('U');" class="menu">Ultimo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="menu.php" class="menu">Menu</a></td>
@@ -164,11 +164,11 @@ print_r($clave);
                <tr>
                  <td width="100" scope="col"><span class="Estilo5">REFERENCIA DEPRECIACION :</span></td>
                  <td width="113" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>                   
-		<input name="txtreferencia_dep" type="text" id="txtreferencia_dep" size="10" maxlength="8"   value="<?echo $referencia_dep?>" readonly class="Estilo5">
+		<input name="txtreferencia_dep" type="text" id="txtreferencia_dep" size="10" maxlength="8"   value="<?php echo $referencia_dep?>" readonly class="Estilo5">
 </strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  <td width="100" scope="col"><span class="Estilo5">FECHA DEPRECIACION :</span></td>
                  <td width="653" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_dep" type="text" id="txtfecha_dep" size="15" maxlength="15"   value="<?echo $fecha_dep?>" readonly class="Estilo5">
+                     <input name="txtfecha_dep" type="text" id="txtfecha_dep" size="15" maxlength="15"   value="<?php echo $fecha_dep?>" readonly class="Estilo5">
                  </span></div></td>
 <td width="120" scope="col"><span class="Estilo5">CALCULAR DEPRECIACION :</span></td>
                 <td width="653" scope="col"><div align="left"><span class="Estilo5">
@@ -186,7 +186,7 @@ print_r($clave);
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></div></td>
                  <td width="859" scope="col"><div align="left">
-                     <textarea name="txtdescripcion" cols="70" readonly class="Estilo5" id="txtdescripcion"><?echo $descripcion?></textarea>
+                     <textarea name="txtdescripcion" cols="70" readonly class="Estilo5" id="txtdescripcion"><?php echo $descripcion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -203,15 +203,15 @@ print_r($clave);
    rows[1][1] = "Bienes";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";            // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_cons_depreciaciones_bienes_semo.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_depreciaciones_bienes_semo.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>              
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_cons_comp_depreciaciones_bienes_semo.php?criterio=<?echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_comp_depreciaciones_bienes_semo.php?criterio=<?php echo $clave?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>

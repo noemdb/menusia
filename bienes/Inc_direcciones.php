@@ -1,6 +1,6 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_dependencia='';}else{$cod_dependencia=$_GET["cod_dependencia"];}  
 print_r ($cod_dependencia);
 
@@ -8,7 +8,7 @@ print_r ($cod_dependencia);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Direcciones)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Direcciones)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@ MM_reloadPage(true);
 //-->
 </script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependencia=<?echo $cod_dependencia?>'; }
+function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependencia=<?php echo $cod_dependencia?>'; }
 
 function chequea_unidad_sol(mform){ var mref;
  mref=mform.txtcod_unidad_sol.value;  mref=Rellenarizq(mref,"0",10);   mform.txtcod_unidad_sol.value=mref;
@@ -114,7 +114,7 @@ return true;}
          <td>
            <table width="730" align="center">
           <tr>
-            <td width="30"><input name="txtcod_dependencia" type="hidden" id="txtcod_dependencia" value="<?echo $txtcod_dependencia?>"></td>
+            <td width="30"><input name="txtcod_dependencia" type="hidden" id="txtcod_dependencia" value="<?php echo $txtcod_dependencia?>"></td>
             <td width="200">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

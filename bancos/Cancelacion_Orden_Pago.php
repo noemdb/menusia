@@ -1,4 +1,4 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");
 if (!$_GET){$continua="N";}else{$continua=$_GET["continua"];}  $fecha_hoy=asigna_fecha_hoy();
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "PRE008N".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
@@ -7,14 +7,14 @@ if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000020"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
 }$posicion=strpos($Mcamino,'S'); 
-if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
  ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Cancelacion Ordenes de Pago)</title>
+<title>SIPAP CONTROL BANCARIO (Cancelacion Ordenes de Pago)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -46,7 +46,7 @@ function revisar(){var f=document.form1; var Valido=true; var r;
     if(f.txtfecha_emi.value==""){alert("Fecha no puede estar Vacia");return false;}
     if(f.txtreferencia_pago.value==""){alert("Referencia no puede estar Vacia");return false;}
      else{f.txtreferencia_pago.value=f.txtreferencia_pago.value;}
-    if(f.txtdescripcion.value==""){alert("Descripción del pago no puede estar Vacia"); return false; }
+    if(f.txtdescripcion.value==""){alert("Descripciï¿½n del pago no puede estar Vacia"); return false; }
       else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
     if(f.txtreferencia_pago.value.length==8){f.txtreferencia_pago.value=f.txtreferencia_pago.value.toUpperCase();f.txtreferencia_pago.value=f.txtreferencia_pago.value;}
       else{alert("Longitud de Referencia Invalida");return false;}
@@ -62,11 +62,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
 
 </script>
 </head>
-<?
+<?php 
 $tipo_pago="0003"; $nombre_abrev="NDB"; $cod_banco="0001"; $nro_cuenta=""; $nombre_banco=""; $nro_ndb="00000000"; $fecha=$fecha_hoy; $fecha_hasta=nextDate($fecha,30); $fecha_desde=prevDate($fecha,30);
 $mconf="";  $Ssql="Select * from SIA005 where campo501='02'"; $resultado=pg_query($Ssql);if ($registro=pg_fetch_array($resultado,0)){$mconf=$registro["campo502"]; $tipo_pago=$registro["campo507"];}
-$res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
-pg_close();
+$res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+pg_close($conn);
 ?>
 <body>
 <table width="978" height="38" border="0" bgcolor="#000066">
@@ -86,12 +86,12 @@ pg_close();
                   <td><table width="945">
                     <tr>
                       <td width="125"><span class="Estilo5">DOCUMENTO PAGO: </span></td>
-                      <td width="30"><span class="Estilo5"><input class="Estilo10" name="txttipo_pago" type="text" id="txttipo_pago" readonly  value="<?echo $tipo_pago?>" size="4" maxlength="4" onkeypress="return stabular(event,this)"> </span></td>
-                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" size="5" maxlength="5"  value="<?echo $nombre_abrev?>" readonly onkeypress="return stabular(event,this)">  </span> </td>
+                      <td width="30"><span class="Estilo5"><input class="Estilo10" name="txttipo_pago" type="text" id="txttipo_pago" readonly  value="<?php echo $tipo_pago?>" size="4" maxlength="4" onkeypress="return stabular(event,this)"> </span></td>
+                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" size="5" maxlength="5"  value="<?php echo $nombre_abrev?>" readonly onkeypress="return stabular(event,this)">  </span> </td>
                       <td width="118"><span class="Estilo5">REFERENCIA :</span> </td>
                       <td width="172"><div id="refpago"><input class="Estilo10" name="txtreferencia_pago" type="text"  id="txtreferencia_pago" size="12" maxlength="8" onFocus="encender(this); " onBlur="apagar(this);"  onchange="checkreferencia(this.form);" onkeypress="return stabular(event,this)"></div></td>
                       <td width="135"><span class="Estilo5">FECHA :</span> </td>
-                      <td width="249"><span class="Estilo5"><input class="Estilo10" name="txtfecha_emi" type="text" id="txtfecha_emi" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_hoy?>" onchange="checkrefecha(this.form)"  onkeyup="mascara(this,'/',patronfecha,true)" onkeypress="return stabular(event,this)">                          </span></td>
+                      <td width="249"><span class="Estilo5"><input class="Estilo10" name="txtfecha_emi" type="text" id="txtfecha_emi" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_hoy?>" onchange="checkrefecha(this.form)"  onkeyup="mascara(this,'/',patronfecha,true)" onkeypress="return stabular(event,this)">                          </span></td>
 						  
 					            </tr>
                   </table></td>
@@ -101,7 +101,7 @@ pg_close();
                     <tr>
                       <td width="156"><span class="Estilo5">N&Uacute;MERO DE ORDEN : </span></td>
                       <td width="77"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden" type="text" id="txtnro_orden" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkorden(this.form);" onkeypress="return stabular(event,this)"> </span></td>
-                      <td width="91"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('../pagos/Cat_ord_pago.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"> </td>
+                      <td width="91"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('../pagos/Cat_ord_pago.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"> </td>
                       <td width="92"><span class="Estilo5">FECHA ORDEN:</span></td>
                       <td width="279"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="10" maxlength="10" readonly onkeypress="return stabular(event,this)"></span></td>
                       <td width="187"><span class="Estilo5"> <input type="button" name="btcarga_ret" value="Cargar Codigos de la Orden" title="Cargar Codigos de la Orden de pago" onClick="javascript:Cargar_Cod_Caus(this.form)" onkeypress="return stabular(event,this)"> </span></td>
@@ -127,7 +127,7 @@ pg_close();
                     </tr>
           </table>
           <div id="codcaus">
-             <iframe src="../presupuesto/Det_inc_pagos_caus.php?codigo_mov=<?echo $codigo_mov?>" width="950" height="300" scrolling="auto" frameborder="1" >
+             <iframe src="../presupuesto/Det_inc_pagos_caus.php?codigo_mov=<?php echo $codigo_mov?>" width="950" height="300" scrolling="auto" frameborder="1" >
              </iframe>
           </div>
                 <div id="criterios">
@@ -135,7 +135,7 @@ pg_close();
                   <tr> <td><table width="923" border="0"> <tr> <td height="10">&nbsp;</td> </tr> </table></td> </tr>
                   <tr> <td><table width="923" border="0"> <tr> <td height="10">&nbsp;</td> </tr> </table></td> </tr>
           <tr><td><table width="923">
-            <td width="229"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="229"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100"><input name="txtconcepto" type="hidden" id="txtconcepto" value=""></td>
 			<td width="100"><input name="txtrefiereA" type="hidden" id="txtrefiereA" value="CAUSADO"></td>
 			<td width="193" valign="middle"><input name="button" type="submit" id="button"  value="Registrar Cancelacion" title="Registrar Cancelacion de Orden"></td>

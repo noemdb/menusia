@@ -1,4 +1,4 @@
-<?include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
 include ("../../class/conect.php");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "PAG001".$usuario_sia.$equipo;
 if (!$_GET){ $p_letra='';$criterio=''; $nro_planilla=''; $nro_orden=''; $sql="SELECT * FROM planilla_ret Order by nro_planilla, nro_orden";}
@@ -19,7 +19,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $nro_planilla=''; $nro_orden=''; $sql="SE
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -62,9 +62,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if ($codigo_mov==""){$codigo_mov="";}
 else
 {
@@ -126,9 +126,9 @@ $hora = date("h:i:s a");
   <tr>
     <td width="289" height="44"><div align="center" class="Estilo2 Estilo4"></div></td>
     <td width="435"><div align="center" class="Estilo2 Estilo6">
-      <? echo $descripcion; ?>
+      <?php  echo $descripcion; ?>
     </div></td>
-    <td width="277"><div align="right">NRO.<? echo $nro_planilla; ?></div></td>
+    <td width="277"><div align="right">NRO.<?php  echo $nro_planilla; ?></div></td>
   </tr>
 </table>
 <table width="1019" height="543" border="0" id="tablacuerpo">
@@ -141,8 +141,8 @@ $hora = date("h:i:s a");
               <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
 					  <td width="130" scope="col"><div align="left">
-                        <input name="txtnro_orden" type="text"  style="visibility:hidden;"  id="txtnro_orden3" value="<?echo $nro_orden?>" size="1" readonly>
-                        <input name="txtnro_planilla" type="text"  style="visibility:hidden;"  id="txtnro_planilla2" value="<?echo $nro_planilla?>" size="1" readonly>
+                        <input name="txtnro_orden" type="text"  style="visibility:hidden;"  id="txtnro_orden3" value="<?php echo $nro_orden?>" size="1" readonly>
+                        <input name="txtnro_planilla" type="text"  style="visibility:hidden;"  id="txtnro_planilla2" value="<?php echo $nro_planilla?>" size="1" readonly>
 					    </div>
 					   </td>
                       <td width="723" scope="col"><div align="center"><strong><b></b>NOMBRE DEL AGENTE DE RETENCION </strong></div></td>
@@ -153,8 +153,8 @@ $hora = date("h:i:s a");
             <tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="837" scope="col"><div align="center"><? echo $nombre_empresa?></div></td>
-                      <td width="162" scope="col"><div align="center"><? echo $rif_empresa?></div></td>
+                      <td width="837" scope="col"><div align="center"><?php  echo $nombre_empresa?></div></td>
+                      <td width="162" scope="col"><div align="center"><?php  echo $rif_empresa?></div></td>
                     </tr>
                 </table></td>
             </tr>
@@ -162,7 +162,7 @@ $hora = date("h:i:s a");
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
                       <td width="68" height="39" scope="col"><div align="left"><strong>DIRECCION: </strong></div></td>
-                      <td width="931" scope="col"><div align="left"><? echo $direccion_empresa?></div></td>
+                      <td width="931" scope="col"><div align="left"><?php  echo $direccion_empresa?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -178,9 +178,9 @@ $hora = date("h:i:s a");
 			<tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="370" scope="col"><div align="left"><? echo $tlf_empresa?></div></td>
-					  <td width="369" scope="col"><div align="left"><? echo $ciudad_empresa?></div></td>
-                      <td width="256" scope="col"><div align="left"><? echo $estado_empresa?></div></td>
+                      <td width="370" scope="col"><div align="left"><?php  echo $tlf_empresa?></div></td>
+					  <td width="369" scope="col"><div align="left"><?php  echo $ciudad_empresa?></div></td>
+                      <td width="256" scope="col"><div align="left"><?php  echo $estado_empresa?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -198,8 +198,8 @@ $hora = date("h:i:s a");
            <tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="861" scope="col"><div align="center"><? echo $nombre_empresa?></div></td>
-                      <td width="138" scope="col"><div align="center"><? echo $ced_rif?></div></td>
+                      <td width="861" scope="col"><div align="center"><?php  echo $nombre_empresa?></div></td>
+                      <td width="138" scope="col"><div align="center"><?php  echo $ced_rif?></div></td>
                     </tr>
                </table></td>
             </tr>
@@ -207,7 +207,7 @@ $hora = date("h:i:s a");
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
                       <td width="68" height="39" scope="col"><div align="left"><strong>DIRECCION: </strong></div></td>
-                      <td width="931" scope="col"><div align="left"><? echo $direccion_empresa?></div></td>
+                      <td width="931" scope="col"><div align="left"><?php  echo $direccion_empresa?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -223,9 +223,9 @@ $hora = date("h:i:s a");
 			<tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="370" scope="col"><div align="left"><? echo $tlf_empresa?></div></td>
-					  <td width="369" scope="col"><div align="left"><? echo $ciudad_empresa?></div></td>
-                      <td width="256" scope="col"><div align="left"><? echo $estado_empresa?></div></td>
+                      <td width="370" scope="col"><div align="left"><?php  echo $tlf_empresa?></div></td>
+					  <td width="369" scope="col"><div align="left"><?php  echo $ciudad_empresa?></div></td>
+                      <td width="256" scope="col"><div align="left"><?php  echo $estado_empresa?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -241,10 +241,10 @@ $hora = date("h:i:s a");
 			<tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="373" scope="col"><div align="left"><? echo $fecha_emision?></div></td>
-					  <td width="223" scope="col"><div align="left"><? echo $tipo_documento?></div></td>
-					  <td width="141" scope="col"><div align="left"><? echo $nro_documento?></div></td>
-                      <td width="254" scope="col"><div align="left"><? echo $referencia?></div></td>
+                      <td width="373" scope="col"><div align="left"><?php  echo $fecha_emision?></div></td>
+					  <td width="223" scope="col"><div align="left"><?php  echo $tipo_documento?></div></td>
+					  <td width="141" scope="col"><div align="left"><?php  echo $nro_documento?></div></td>
+                      <td width="254" scope="col"><div align="left"><?php  echo $referencia?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -259,8 +259,8 @@ $hora = date("h:i:s a");
 			<tr>
               <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="489" scope="col"><div align="center"><? echo $tipo_en?></div></td>
-                      <td width="510" scope="col"><div align="center"><? echo $monto_pago?></div></td>
+                      <td width="489" scope="col"><div align="center"><?php  echo $tipo_en?></div></td>
+                      <td width="510" scope="col"><div align="center"><?php  echo $monto_pago?></div></td>
                     </tr>
               </table></td>
             </tr>
@@ -276,9 +276,9 @@ $hora = date("h:i:s a");
 			<tr>
              <td colspan="2"><div align="left"><table width="1009" border="0">
                     <tr>
-                      <td width="370" scope="col"><div align="center"><? echo $monto_objeto?></div></td>
-					  <td width="369" scope="col"><div align="center"><? echo $tasa?></div></td>
-                      <td width="256" scope="col"><div align="center"><? echo $monto_retencion?></div></td>
+                      <td width="370" scope="col"><div align="center"><?php  echo $monto_objeto?></div></td>
+					  <td width="369" scope="col"><div align="center"><?php  echo $tasa?></div></td>
+                      <td width="256" scope="col"><div align="center"><?php  echo $monto_retencion?></div></td>
                     </tr>
                   </table></td>
             </tr>
@@ -294,7 +294,7 @@ $hora = date("h:i:s a");
             <tr>
               <td height="28" colspan="2"><table width="1010">
                 <tr>
-                  <td height="18"><div align="center"><? echo $descripcion_ret?></div></td>
+                  <td height="18"><div align="center"><?php  echo $descripcion_ret?></div></td>
                 </tr>
               </table></td>
             </tr>
@@ -335,7 +335,7 @@ $hora = date("h:i:s a");
                     <tr>
                       <td width="370" scope="col"><div align="center"></div></td>
 					  <td width="369" scope="col"><div align="center"></div></td>
-                      <td width="256" scope="col"><div align="right">Fecha: <? echo $date?> - Hora: <? echo $hora?></div></td>
+                      <td width="256" scope="col"><div align="right">Fecha: <?php  echo $date?> - Hora: <?php  echo $hora?></div></td>
                     </tr>
                   </table></td>
             </tr>          
@@ -347,4 +347,4 @@ $hora = date("h:i:s a");
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

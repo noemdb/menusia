@@ -11,7 +11,7 @@ include ("../../class/configura.inc");
 
 $conn = pg_connect("host=" . $host . " port=" . $port . " password=" . $password . " user=" . $user . " dbname=" . $dbname . "");
 
-if (pg_ErrorMessage($conn))
+if (pg_last_error($conn))
   { ?> <script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php
   }
   else
@@ -78,7 +78,7 @@ $fecha_h = formato_ddmmaaaa($Fec_Fin_Ejer);
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Reportes Listado de Bienes Muebles Desincorporados)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Reportes Listado de Bienes Muebles Desincorporados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../../class/sia.js" type="text/javascript"></script>
@@ -278,9 +278,9 @@ if ($encontro = true)
                  <td width="230"><span class="Estilo5">IDENTIFICACIÓN DEL BIEN MUEBLE :</span></td>
                  <td width="320"><span class="Estilo5">
                     <input name="txtcod_bien_inm_d" type="text" class="Estilo5" id="txtcod_bien_mue_d" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_bien_mued;?>">
-                    <input name="btcat_biend" type="button" id="btcat_biend" title="Abrir Catalogo de Bienes Muebles" onClick="VentanaCentrada('Cat_bienes_mueblesd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                    <input name="btcat_biend" type="button" id="btcat_biend" title="Abrir Catalogo de Bienes Muebles" onClick="VentanaCentrada('Cat_bienes_mueblesd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                  <td width="300"><span class="Estilo5"><input name="txtcod_bien_inm_h" type="text" class="Estilo5" id="txtcod_bien_mue_h" size="30" maxlength="30"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_bien_mueh;?>">
-                     <input name="btcat_bienh" type="button" id="btcat_bienh" title="Abrir Catalogo de Bienes Muebles" onClick="VentanaCentrada('Cat_bienes_mueblesh.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+                     <input name="btcat_bienh" type="button" id="btcat_bienh" title="Abrir Catalogo de Bienes Muebles" onClick="VentanaCentrada('Cat_bienes_mueblesh.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
                  </tr>
              </table></td>
            </tr> 
@@ -291,9 +291,9 @@ if ($encontro = true)
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
                  <td width="320"><span class="Estilo5"><input name="txtcod_dependenciad" type="text" class="Estilo5" id="txtcod_dependenciad" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_dependenciad;?>">
-                   <input name="btcat_depd" type="button" id="btcat_depd" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>
+                   <input name="btcat_depd" type="button" id="btcat_depd" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>
                  <td width="300"><span class="Estilo5"><input name="txtcod_dependenciah" type="text" class="Estilo5" id="txtcod_dependenciah" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_dependenciah;?>">
-                   <input name="btcat_deph" type="button" id="btcat_deph" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciash.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+                   <input name="btcat_deph" type="button" id="btcat_deph" title="Abrir Catalogo Dependencias" onClick="VentanaCentrada('Cat_dependenciash.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -302,9 +302,9 @@ if ($encontro = true)
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></td>
                  <td width="320"><span class="Estilo5"><input name="txtcod_direcciond" type="text" class="Estilo5" id="txtcod_direcciond" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_direcciond;?>" >
-                   <input name="btcod_dird" type="button" id="btcod_dird" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direcciond.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                   <input name="btcod_dird" type="button" id="btcod_dird" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direcciond.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                  <td width="300"><span class="Estilo5"><input name="txtcod_direccionh" type="text" class="Estilo5" id="txtcod_direccionh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_direccionh;?>" >
-                   <input name="btcod_dirh" type="button" id="btcod_dirh" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionh.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                   <input name="btcod_dirh" type="button" id="btcod_dirh" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionh.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -313,9 +313,9 @@ if ($encontro = true)
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></td>
                  <td width="320"><span class="Estilo5"><input name="txtcod_departamentod" type="text" class="Estilo5" id="txtcod_departamentod" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_departamentod;?>">
-                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentod.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentod.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                  <td width="300"><span class="Estilo5">  <input name="txtcod_departamentoh" type="text" class="Estilo5" id="txtcod_departamentoh" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $cod_departamentoh;?>">
-                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentoh.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Departamentos" onClick="VentanaCentrada('Cat_departamentoh.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -324,9 +324,9 @@ if ($encontro = true)
                <tr>
                  <td width="230"><span class="Estilo5">C&Oacute;DIGO EMPRESA :</span></td>
                  <td width="320"><span class="Estilo5"><input name="txtcod_empresad" type="text" class="Estilo5" id="txtcod_empresad" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" value="<?php echo $cod_empresad;?>">
-                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                      <input name="btcod_depd" type="button" id="btcod_depd" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                  <td width="300"><span class="Estilo5">  <input name="txtcod_empresah" type="text" class="Estilo5" id="txtcod_empresah" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" value="<?php echo $cod_empresah;?>">
-                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresash.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                     <input name="btcod_deph" type="button" id="btcod_deph" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresash.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -413,5 +413,5 @@ if ($encontro = true)
 </body>
 </html>
 <?php
-pg_close();
+pg_close($conn);
 ?>

@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$referencia='';}else {$referencia=$_GET["Greferencia"];$clave=$referencia;}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$referencia='';}else {$referencia=$_GET["Greferencia"];$clave=$refer
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Orden de Salida Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -45,10 +45,11 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN043 where referencia='$referencia'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
-$registro=pg_fetch_array($res,0);$referencia=$registro["referencia"];
+$registro=pg_fetch_array($res,0);
+$referencia=$registro["referencia"];
 $fecha=$registro["fecha"]; 
 $tipo_salida=$registro["tipo_salida"];
 $descripcion=$registro["descripcion"];  
@@ -93,11 +94,11 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                       <tr>
                  <td width="88" scope="col"><span class="Estilo5">REFERENCIAS :</span></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                     <input name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"   value="<?echo $referencia?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"   value="<?php echo $referencia?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  <td width="49" scope="col"><span class="Estilo5">FECHA :</span></td>
                  <td width="121" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"   value="<?echo $fecha?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"   value="<?php echo $fecha?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                  <td width="104" scope="col"><div align="left"><span class="Estilo5">TIPO DE SALIDA :</span></div></td>
                  <td width="452" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"><span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
@@ -118,12 +119,12 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
-                     <span class="menu"><strong><strong>
+                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <span class="menu"><strong><strong>SIPAP
                      <input name="bttipo_codeingre22422222244" type="button" id="bttipo_codeingre22422222246" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="747" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="75" maxlength="250" value="<?echo $denominacion_dep?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="75" maxlength="250" value="<?php echo $denominacion_dep?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -133,7 +134,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="91" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></div></td>
                  <td width="859" scope="col"><div align="left">
-                     <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtdescripcion"><?echo $descripcion?></textarea>
+                     <textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtdescripcion"><?php echo $descripcion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -142,7 +143,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
              <td><span class="Estilo12">BIENES</span></td>
            </tr>
         </table>
-                <iframe src="Det_cons_bienes.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+                <iframe src="Det_cons_bienes.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         <table width="863" border="0">         
            <tr>
@@ -153,7 +154,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">NOMBRE ENTREGA :</span></div></td>
                  <td width="854" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre1" type="text" id="txtnombre1" size="85" maxlength="80"  value="<?echo $nombre1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnombre1" type="text" id="txtnombre1" size="85" maxlength="80"  value="<?php echo $nombre1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -165,7 +166,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO ENTREGA :</span></div></td>
                  <td width="851" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdepartamento1" type="text" id="txtdepartamento1" size="85" maxlength="80" value="<?echo $departamento1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdepartamento1" type="text" id="txtdepartamento1" size="85" maxlength="80" value="<?php echo $departamento1?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -175,7 +176,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">NOMBRE RECIBIO :</span></div></td>
                  <td width="853" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre2" type="text" id="txtnombre2" size="85" maxlength="80"  value="<?echo $nombre2?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtnombre2" type="text" id="txtnombre2" size="85" maxlength="80"  value="<?php echo $nombre2?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -185,7 +186,7 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
                <tr>
                  <td width="100" height="26" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO RECIBI :</span></div></td>
                  <td width="852" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdepartamento2" type="text" id="txtdepartamento2" size="85" maxlength="80" value="<?echo $departamento2?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                     <input name="txtdepartamento2" type="text" id="txtdepartamento2" size="85" maxlength="80" value="<?php echo $departamento2?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -211,4 +212,4 @@ $Ssql="SELECT * FROM bien001 where cod_dependencia='".$cod_dependencia."'"; $res
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

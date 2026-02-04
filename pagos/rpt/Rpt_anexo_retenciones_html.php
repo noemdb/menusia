@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){ $nro_orden="";$tipo_causado=""; } else{$nro_orden=$_GET["txtnro_orden"];  $tipo_causado=$_GET["txttipo_causado"];}
 $sql="Select * from ORD_PAGO where tipo_causado='$tipo_causado' and nro_orden='$nro_orden'";
 ?>
@@ -7,7 +7,7 @@ $sql="Select * from ORD_PAGO where tipo_causado='$tipo_causado' and nro_orden='$
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Formato Anexo Cheque)</title>
+<title>SIPAP CONTROL BANCARIO (Formato Anexo Cheque)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -29,9 +29,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?  $rif_emp="G-20009014-6";
+<?php   $rif_emp="G-20009014-6";
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $concepto="";$fecha="";$nombre_abrev_caus=""; $ced_rif="";$nombre="";$inf_usuario="";$anulado="";  $tipo_documento="";  $nro_documento=""; $afecta_presu=""; $status_1=""; $usuario_sia="";
 $res=pg_query($sql); $filas=pg_num_rows($res); $total_neto=0;
 if($filas>0){  $registro=pg_fetch_array($res); $nro_orden=$registro["nro_orden"];   $tipo_causado=$registro["tipo_causado"];
@@ -66,7 +66,7 @@ $sql="select * from sia001 where campo101='$usuario_comp'";$res=pg_query($sql);$
     <tr>
       <td width="150" align="center">&nbsp;</td>
       <td width="30"><span class="Estilo18">RIF:</span></td>
-      <td width="150"><span class="Estilo18"><?echo $rif_emp?></span></td>
+      <td width="150"><span class="Estilo18"><?php echo $rif_emp?></span></td>
       <td width="650" align="center">&nbsp;</td>
     </tr>
   </table></td>
@@ -84,9 +84,9 @@ $sql="select * from sia001 where campo101='$usuario_comp'";$res=pg_query($sql);$
       <td width="980" height="25"><table width="980" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="200"><span class="Estilo17">NUMERO DE ORDEN:</span></td>
-            <td width="200"><span class="Estilo17"><?echo $nro_orden?></span></td>
+            <td width="200"><span class="Estilo17"><?php echo $nro_orden?></span></td>
             <td width="80"><span class="Estilo17">FECHA:</span></td>
-            <td width="320"><span class="Estilo17"><?echo $fecha?></span></td>
+            <td width="320"><span class="Estilo17"><?php echo $fecha?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -97,13 +97,13 @@ $sql="select * from sia001 where campo101='$usuario_comp'";$res=pg_query($sql);$
       <td width="760" height="25"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">BENEFICIARIO:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $nombre?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $nombre?></span></td>
           </tr>
       </table></td>
           <td width="227"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CEDULA/RIF:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $ced_rif?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $ced_rif?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -121,21 +121,21 @@ $sql="select * from sia001 where campo101='$usuario_comp'";$res=pg_query($sql);$
   </table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="0"  height="30" cellpadding="3" cellspacing="0">
-<? $total=0; $sql="SELECT tipo_retencion,descripcion_ret,tasa_retencion,sum(monto_retencion) as monto_ret FROM RET_ORD where nro_orden_ret='$nro_orden' group by tipo_retencion,descripcion_ret,tasa_retencion order by tipo_retencion";
+<?php  $total=0; $sql="SELECT tipo_retencion,descripcion_ret,tasa_retencion,sum(monto_retencion) as monto_ret FROM RET_ORD where nro_orden_ret='$nro_orden' group by tipo_retencion,descripcion_ret,tasa_retencion order by tipo_retencion";
 $resret=pg_query($sql); $filas=pg_num_rows($resret); $prev_ret="";
 while($registro=pg_fetch_array($resret)){
 $tasa=$registro["tasa_retencion"]; $tasa=formato_monto($tasa); $monto=$registro["monto_ret"]; $monto=formato_monto($monto); $total=$total+$registro["monto_ret"];
 $concepto_ret=$registro["descripcion_ret"]; $concepto_ret=substr($concepto_ret,0,100);?>
     <tr><td><table width="1000" border="0"  cellpadding="3" cellspacing="0">
         <tr>
-          <td width="100" align="center"><span class="Estilo17"><? echo $registro["tipo_retencion"]; ?></span></td>
-          <td width="660" align="left"><span class="Estilo17"><? echo $concepto_ret; ?></span></td>
-          <td width="60" align="right"><span class="Estilo17"><? echo $tasa; ?></span></td>
-          <td width="160" align="right"><span class="Estilo17"><? echo $monto; ?></span></td>
+          <td width="100" align="center"><span class="Estilo17"><?php  echo $registro["tipo_retencion"]; ?></span></td>
+          <td width="660" align="left"><span class="Estilo17"><?php  echo $concepto_ret; ?></span></td>
+          <td width="60" align="right"><span class="Estilo17"><?php  echo $tasa; ?></span></td>
+          <td width="160" align="right"><span class="Estilo17"><?php  echo $monto; ?></span></td>
 		</tr>  
 		</table></td>
     </tr>
-<?}  $total=formato_monto($total); ?>
+<?php }  $total=formato_monto($total); ?>
         </table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
@@ -143,7 +143,7 @@ $concepto_ret=$registro["descripcion_ret"]; $concepto_ret=substr($concepto_ret,0
       <td height="25"><table width="994" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="830" align="right"><span class="Estilo18">TOTAL RETENCIONES :</span></td>
-            <td width="150" align="right"><span class="Estilo18"><?echo $total?></span></td>
+            <td width="150" align="right"><span class="Estilo18"><?php echo $total?></span></td>
           </tr>
       </table></td>
         </tr>

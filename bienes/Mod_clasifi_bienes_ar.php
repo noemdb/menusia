@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$Ggrupo='';}else {$Ggrupo=$_GET["Ggrupo_c"];  } $grupo_c=substr($Ggrupo,0,1); $codigo_c=substr($Ggrupo,1,10);
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$Ggrupo='';}else {$Ggrupo=$_GET["Ggrupo_c"];  } $grupo_c=substr($Ggr
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Modificar Clasificacion de Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Modificar Clasificacion de Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -35,7 +35,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<? $denominacion_c=""; $especificaciones=""; $cod_presup="";$cod_contable=""; $cod_contable_c=""; $tipo_depreciacion="";   $tasa_deprec="0";    $vida_util="0"; 
+<?php  $denominacion_c=""; $especificaciones=""; $cod_presup="";$cod_contable=""; $cod_contable_c=""; $tipo_depreciacion="";   $tasa_deprec="0";    $vida_util="0"; 
 $sql="SELECT * From BIEN008 where grupo_c='$grupo_c' and codigo_c='$codigo_c'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
 $grupo_c=$registro["grupo_c"]; $codigo_c=$registro["codigo_c"]; $denominacion_c=$registro["denominacion_c"]; $cod_contable=$registro["cod_contable"]; $cod_contable_c=$registro["cod_contable_c"];
@@ -55,8 +55,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
   <tr>
    <td width="92" height="320"><table width="92" height="320" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_clasifi_bienes_ar.php?Ggrupo_c=<?echo $Ggrupo?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_clasifi_bienes_ar.php?Ggrupo_c=<?echo $Ggrupo?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_clasifi_bienes_ar.php?Ggrupo_c=<?php echo $Ggrupo?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_clasifi_bienes_ar.php?Ggrupo_c=<?php echo $Ggrupo?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -75,9 +75,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
                <table width="850">
                  <tr>
                    <td width="120"><span class="Estilo5">GRUPO :</span></td>
-                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtgrupo_c" type="text" id="txtgrupo_c" size="4" maxlength="1"  value="<?echo $grupo_c?>" readonly> </span></td>
+                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtgrupo_c" type="text" id="txtgrupo_c" size="4" maxlength="1"  value="<?php echo $grupo_c?>" readonly> </span></td>
                    <td width="100"><span class="Estilo5">C&Oacute;DIGO :</span></td>
-                   <td width="330"><span class="Estilo5"> <input class="Estilo10" name="txtcodigo_c" type="text" id="txtcodigo_c" size="12" maxlength="10"   value="<?echo $codigo_c?>" readonly> </span></td>
+                   <td width="330"><span class="Estilo5"> <input class="Estilo10" name="txtcodigo_c" type="text" id="txtcodigo_c" size="12" maxlength="10"   value="<?php echo $codigo_c?>" readonly> </span></td>
 				 </tr>
                </table>
              </div></td>
@@ -86,7 +86,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="850">
                <tr>
                  <td width="120"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                 <td width="730"><span class="Estilo5"><textarea name="txtdenominacion_c" cols="80" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdenominacion_c"><?echo $denominacion_c?></textarea>
+                 <td width="730"><span class="Estilo5"><textarea name="txtdenominacion_c" cols="80" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdenominacion_c"><?php echo $denominacion_c?></textarea>
                  </span></td>
                </tr>
              </table></td>
@@ -95,11 +95,11 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="850">
                <tr>
                  <td width="120"><span class="Estilo5">COD. CONTABLE :</span></td>
-                 <td width="260"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" class="Estilo10" size="35" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_contable?>" >
-                   <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="260"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" class="Estilo10" size="35" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_contable?>" >
+                   <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  <td width="200"><span class="Estilo5">CODIGO COTAB. DEPRECIACION :</span></td>
-                 <td width="270"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" class="Estilo10" size="35" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_contable_c?>" >
-                   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="270"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" class="Estilo10" size="35" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_contable_c?>" >
+                   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                </tr>
              </table></td>
            </tr>          
@@ -107,8 +107,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="850">
                <tr>
                  <td width="250"><span class="Estilo5">CODIGO PRESUPUESTARIO DEPRECIACION :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32" value="<?echo $cod_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  
-                  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32" value="<?php echo $cod_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  
+                  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  
 			   </tr>
              </table></td>
@@ -119,9 +119,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
                  <td width="150"><span class="Estilo5">TIPO DE DEPRECIACI&Oacute;N :</span></td>
 				 <td width="150"><span class="Estilo5">  <select name="txttipo_depreciacion" onFocus="encender(this)" onBlur="apagar(this)"> <option>NINGUNA</option>    <option>LINEA RECTA</option> </select> </span></td>
                  <td width="150"><span class="Estilo5">TASA DEPRECIACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" style="text-align:right"  size="10" maxlength="15" value="<?echo $tasa_deprec?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" style="text-align:right"  size="10" maxlength="15" value="<?php echo $tasa_deprec?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
                  <td width="150"><span class="Estilo5">VIDA &Uacute;TIL :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" style="text-align:right"  size="10" maxlength="15" value="<?echo $vida_util?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" style="text-align:right"  size="10" maxlength="15" value="<?php echo $vida_util?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -151,4 +151,4 @@ var mvalor='<?php echo $tipo_depreciacion ?>';
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

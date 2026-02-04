@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="03-0000095"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
 $cod_banco_d="";$cod_banco_h="";$num_cheque_d="00000000";$num_cheque_h="99999999";$cedula_d="";$cedula_h="zzzzzzzzzzzz";$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$monto_cheque_d="0";$monto_cheque_h="999999999999";$cheques_nulos="N";$imprimir_cheques_anulados="N";$cantidad_cheques="N";$ordenar="";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ $cod_banco_d="";$cod_banco_h="";$num_cheque_d="00000000";$num_cheque_h="99999999
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Cheques/Retenciones)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Cheques/Retenciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></scrip
@@ -35,7 +35,7 @@ function Llama_Rpt_Cheques_Retenciones(murl){var url;var r;var nulos;var ord;
 function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 </head>
-<? $nombre_banco_d=""; $nombre_banco_h=""; $nombre_d=""; $nombre_h="";
+<?php  $nombre_banco_d=""; $nombre_banco_h=""; $nombre_d=""; $nombre_h="";
 $sql="SELECT MAX(cod_banco) As Max_cod_banco, MIN(cod_banco) As Min_cod_banco FROM BAN002";$res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registro["max_cod_banco"];}
 $sql="SELECT MAX(ced_rif) As Max_Ced_Rif, MIN(ced_rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_ced_rif"];}
 $sql="Select nombre_banco from BAN002 where cod_banco='$cod_banco_d'"; $resultado=pg_query($sql);if ($registro=pg_fetch_array($resultado,0)){$nombre_banco_d=$registro["nombre_banco"];}
@@ -65,9 +65,9 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
           <td height="19" colspan="2"><table width="776" border="0">
             <tr>
                <td width="200" align="left" ><span class="Estilo5">CODIGO DE BANCO DESDE:</span> </td>
-              <td width="56"><span class="Estilo5"><input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="5">              </span></td>
-              <td width="47"><span class="Estilo5"><input name="Cat_codd" type="button" id="Cat_codd" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIA','','750','500','true')" value="...">              </span></td>
-              <td width="450"><span class="Estilo5"><input name="txtdesc_banco_d" type="text" id="txtdesc_banco_d" size="70" maxlength="70" value="<?echo $nombre_banco_d?>"  readonly>          </span></td>
+              <td width="56"><span class="Estilo5"><input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="5">              </span></td>
+              <td width="47"><span class="Estilo5"><input name="Cat_codd" type="button" id="Cat_codd" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIPAP','','750','500','true')" value="...">              </span></td>
+              <td width="450"><span class="Estilo5"><input name="txtdesc_banco_d" type="text" id="txtdesc_banco_d" size="70" maxlength="70" value="<?php echo $nombre_banco_d?>"  readonly>          </span></td>
             </tr>
           </table></td>
         </tr>
@@ -78,9 +78,9 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
           <td height="19" colspan="2"><table width="776" border="0">
             <tr>
               <td width="200" align="left" ><span class="Estilo5">CODIGO DE BANCO HASTA:</span> </td>
-              <td width="55"><span class="Estilo5"><input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="5" maxlength="5">              </span></td>
-              <td width="46"><span class="Estilo5"> <input name="Cat_codh" type="button" id="Cat_codh" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIA','','750','500','true')" value="...">              </span></td>
-              <td width="450"><span class="Estilo5"><input name="txtdesc_banco_h" type="text" id="txtdesc_banco_h" size="70" maxlength="70" value="<?echo $nombre_banco_h?>" readonly>              </span></td>
+              <td width="55"><span class="Estilo5"><input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="5" maxlength="5">              </span></td>
+              <td width="46"><span class="Estilo5"> <input name="Cat_codh" type="button" id="Cat_codh" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIPAP','','750','500','true')" value="...">              </span></td>
+              <td width="450"><span class="Estilo5"><input name="txtdesc_banco_h" type="text" id="txtdesc_banco_h" size="70" maxlength="70" value="<?php echo $nombre_banco_h?>" readonly>              </span></td>
             </tr>
           </table></td>
         </tr>
@@ -91,9 +91,9 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
           <td height="19" colspan="2"><table width="783" border="0">
             <tr>
               <td width="204" align="left" ><span class="Estilo5">NUMERO CHEQUE DESDE:</span> </td>
-              <td width="249"><span class="Estilo5"><input name="txtnum_cheque_d" type="text" id="txtnum_cheque_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_d?>" size="12" maxlength="8">  </span></td>
+              <td width="249"><span class="Estilo5"><input name="txtnum_cheque_d" type="text" id="txtnum_cheque_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_d?>" size="12" maxlength="8">  </span></td>
               <td width="92"align="left" ><span class="Estilo5">HASTA :</span> </td>
-              <td width="220"><span class="Estilo5"><input name="txtnum_cheque_h" type="text" id="txtnum_cheque_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_h?>" size="12" maxlength="8">   </span></td>
+              <td width="220"><span class="Estilo5"><input name="txtnum_cheque_h" type="text" id="txtnum_cheque_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_h?>" size="12" maxlength="8">   </span></td>
             </tr>
           </table></td>
         </tr>   
@@ -104,9 +104,9 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
           <td height="19" colspan="2"><table width="833" border="0">
             <tr>
               <td width="208" align="left" ><span class="Estilo5">CEDULA/RIF BENEFICIARIO DESDE: </span> </td>
-              <td width="109"><span class="Estilo5"> <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_d?>" size="15" maxlength="12">   </span></td>
-              <td width="54"><span class="Estilo5"><input name="cat_benefd" type="button" id="cat_benefd" title="Abrir Catalogo de Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-              <td width="444"><span class="Estilo5"><input name="txtdesccedrifbenefd" type="text" id="txtdesccedrifbenefd" size="70" maxlength="70"  value="<?echo $nombre_d?>" readonly>    </span></span></td>
+              <td width="109"><span class="Estilo5"> <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_d?>" size="15" maxlength="12">   </span></td>
+              <td width="54"><span class="Estilo5"><input name="cat_benefd" type="button" id="cat_benefd" title="Abrir Catalogo de Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+              <td width="444"><span class="Estilo5"><input name="txtdesccedrifbenefd" type="text" id="txtdesccedrifbenefd" size="70" maxlength="70"  value="<?php echo $nombre_d?>" readonly>    </span></span></td>
             </tr>
           </table></td>
         </tr>
@@ -117,9 +117,9 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
           <td height="19" colspan="2"><table width="834" border="0">
             <tr>
               <td width="211" align="left" ><span class="Estilo5">CEDULA/RIF BENEFICIARIO HASTA:</span> </td>
-              <td width="109"><span class="Estilo5"><input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_h?>" size="15" maxlength="12"> </span></td>
-              <td width="54"><span class="Estilo5"><input name="cat_benefh" type="button" id="cat_benefh" title="Abrir Catalogo de Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-              <td width="442"><span class="Estilo5"><input name="txtdesccedrifbenefh" type="text" id="txtdesccedrifbenefh" size="70" maxlength="70" value="<?echo $nombre_h?>"  readonly>  </span></span></td>
+              <td width="109"><span class="Estilo5"><input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_h?>" size="15" maxlength="12"> </span></td>
+              <td width="54"><span class="Estilo5"><input name="cat_benefh" type="button" id="cat_benefh" title="Abrir Catalogo de Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+              <td width="442"><span class="Estilo5"><input name="txtdesccedrifbenefh" type="text" id="txtdesccedrifbenefh" size="70" maxlength="70" value="<?php echo $nombre_h?>"  readonly>  </span></span></td>
             </tr>
           </table></td>
         </tr>
@@ -129,12 +129,12 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
             <tr>
                <td width="213" align="left" ><span class="Estilo5">FECHA EMISION DESDE: </span> </td>
               <td width="245" align="center"><div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="86" align="left" ><span class="Estilo5">HASTA :</span> </td>
               <td width="228" align="center"><div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -171,4 +171,4 @@ $sql="Select nombre from pre099 where ced_rif='$cedula_h'"; $resultado=pg_query(
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

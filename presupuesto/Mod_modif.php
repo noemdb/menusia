@@ -1,4 +1,4 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");
  $equipo = getenv("COMPUTERNAME"); $mcod_m = "PRE009".$equipo; $codigo_mov=substr($mcod_m,0,49);
  if (!$_GET){$referencia_modif=''; $tipo_modif='';} 
   else{$referencia_modif=$_GET["txtreferencia_modif"];  $tipo_modif=$_GET["txttipo_modif"]; }
@@ -9,7 +9,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificaciones Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificaciones Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -27,9 +27,9 @@ var f=document.form1;
 var Valido=true;
     if(f.txtfecha.value==""){alert("Fecha no puede estar Vacia");return false;}
     if(f.txtreferencia_modif.value==""){alert("Referencia no puede estar Vacio");return false;}
-    if(f.txttipo_modif.value==""){alert("Tipo de Modificación no puede estar Vacio"); return false; }
+    if(f.txttipo_modif.value==""){alert("Tipo de Modificaciï¿½n no puede estar Vacio"); return false; }
       else{f.txttipo_modif.value=f.txttipo_modif.value.toUpperCase();}
-    if(f.txtdescripcion.value==""){alert("Descripción de Modificación no puede estar Vacia"); return false; }
+    if(f.txtdescripcion.value==""){alert("Descripciï¿½n de Modificaciï¿½n no puede estar Vacia"); return false; }
       else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
     if(f.txtreferencia_modif.value.length==8){f.txtreferencia_modif.value=f.txtreferencia_modif.value.toUpperCase();}
       else{alert("Longitud de Referencia Invalida");return false;}       
@@ -38,9 +38,9 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha_registro="";$modif_i_e="";$fecha_modif="";$modif_aprob="";
 $inf_usuario="";$aprobada_por="";$nro_documento="";$fecha_documento="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
@@ -105,14 +105,14 @@ $clave=$referencia_modif.$tipo_modif;
                       <td><table width="813" border="0">
                         <tr>
                           <td width="139"> <p><span class="Estilo5">TIPO MODIFICACI&Oacute;N : </span></p>                          </td>
-                          <td width="204"><span class="Estilo5"> <input class="Estilo10" name="txttipo_modif" type="text"  id="txttipo_modif" value="<?echo $des_tipo_modif?>" size="30" readonly>
+                          <td width="204"><span class="Estilo5"> <input class="Estilo10" name="txttipo_modif" type="text"  id="txttipo_modif" value="<?php echo $des_tipo_modif?>" size="30" readonly>
                           </span></td>
-                          <td width="21"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m" value="<?echo $tipo_modif?>"></td>
+                          <td width="21"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m" value="<?php echo $tipo_modif?>"></td>
                           <td width="101"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="130"><div id="refer"><input class="Estilo10" name="txtreferencia_modif" type="text"  id="txtreferencia_modif"  value="<?echo $referencia_modif?>" size="12" readonly>
+                          <td width="130"><div id="refer"><input class="Estilo10" name="txtreferencia_modif" type="text"  id="txtreferencia_modif"  value="<?php echo $referencia_modif?>" size="12" readonly>
                           </div></td>
                           <td width="59"><span class="Estilo5">FECHA :</span> </td>
-                          <td width="129"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10"  value="<?echo $fecha_registro?>" readonly>
+                          <td width="129"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10"  value="<?php echo $fecha_registro?>" readonly>
                           </span></td>
                         </tr>
                       </table></td>
@@ -121,7 +121,7 @@ $clave=$referencia_modif.$tipo_modif;
                       <td height="90"><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtdescripcion" cols="90"  class="Estilo10" id="textarea"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtdescripcion" cols="90"  class="Estilo10" id="textarea"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -145,7 +145,7 @@ function asig_modif_i_e(mvalor){var f=document.form1;
                               <option>EXTERNA MENOR AL 20%</option>
                               <option>EXTERNA IGUAL 10%</option>
                             </select>
-							<script language="JavaScript" type="text/JavaScript"> asig_modif_i_e('<?echo $modif_i_e;?>');</script>
+							<script language="JavaScript" type="text/JavaScript"> asig_modif_i_e('<?php echo $modif_i_e;?>');</script>
                           </span> </td>
                           <td width="287">&nbsp;</td>
                         </tr>
@@ -164,7 +164,7 @@ function asig_modif_i_e(mvalor){var f=document.form1;
         </table>
         <table width="768">
           <tr>
-            <td width="664"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
             <td width="88">&nbsp;</td>
           </tr>

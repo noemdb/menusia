@@ -1,6 +1,6 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?} else{$Nom_Emp=busca_conf();}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php } else{$Nom_Emp=busca_conf();}
 if (!$_GET){$cod_banco=''; $sql="SELECT * FROM bancos ORDER BY cod_banco";} else{$cod_banco=$_GET["Gcod_banco"]; $sql="Select * from bancos where cod_banco='$cod_banco'";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,7 +8,7 @@ if (!$_GET){$cod_banco=''; $sql="SELECT * FROM bancos ORDER BY cod_banco";} else
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Definci&oacute;n de Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Definci&oacute;n de Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language=JavaScript src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -46,7 +46,7 @@ return true;}
 function LlamarURL(url){  document.location = url; }
 </script>
 </head>
-<?
+<?php 
 $debito01=0;$credito01=0;$debitob01=0;$creditob01=0;$debito02=0;$credito02=0;$debitob02=0;$creditob02=0;$debito03=0;$credito03=0;$debitob03=0;$creditob03=0;$debito04=0;$credito04=0;$debitob04=0;$creditob04=0;
 $debito05=0;$credito05=0;$debitob05=0;$creditob05=0;$debito06=0;$credito06=0;$debitob06=0;$creditob06=0;$debito07=0;$credito07=0;$debitob07=0;$creditob07=0;$debito08=0;$credito08=0;$debitob08=0;$creditob08=0;
 $debito09=0;$credito09=0;$debitob09=0;$creditob09=0;$debito10=0;$credito10=0;$debitob10=0;$creditob10=0;$debito11=0;$credito11=0;$debitob11=0;$creditob11=0;$debito12=0;$credito12=0;$debitob12=0;$creditob12=0;
@@ -74,8 +74,8 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
   <tr>
     <td width="93" height="638"><table width="92" height="635" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_bancos.php?Gcod_banco=C<?echo $cod_banco?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="Act_bancos.php?Gcod_banco=C<?echo $cod_banco?>">Atras</a></div></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_bancos.php?Gcod_banco=C<?php echo $cod_banco?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="Act_bancos.php?Gcod_banco=C<?php echo $cod_banco?>">Atras</a></div></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -93,9 +93,9 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                   <td width="868"><table width="868" >
                       <tr>
                         <td width="110" height="24"><span class="Estilo5">C&Oacute;DIGO BANCO :</span></td>
-                        <td width="70"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco"  size="5" maxlength="4" onFocus="encender(this)" value="<?echo $cod_banco?>" readonly> </span></td>
+                        <td width="70"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco"  size="5" maxlength="4" onFocus="encender(this)" value="<?php echo $cod_banco?>" readonly> </span></td>
                         <td width="70"><span class="Estilo5">NOMBRE:</span></td>
-                        <td width="500"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_banco" type="text"  id="txtnombre_banco" value="<?echo $nombre_banco?>" size="94" maxlength="150" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                        <td width="500"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_banco" type="text"  id="txtnombre_banco" value="<?php echo $nombre_banco?>" size="94" maxlength="150" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -104,9 +104,9 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                   <td width="868"><table width="868" >
                       <tr>
                         <td width="110"><span class="Estilo5">TIPO DE CUENTA : </span></td>
-                        <td width="50"><span class="Estilo5"><input class="Estilo10" name="txttipo_cuenta" type="text" id="txttipo_cuenta" value="<?echo $tipo_cuenta?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                        <td width="50"><input class="Estilo10" name="btTipo_Cuenta" type="button" id="bttipo_cuenta" title="Abrir Catalogo Tipos de Cuenta" onclick="VentanaCentrada('Cat_tipo_cuenta.php?criterio=','SIA','','750','500','true')" value="..."></td>
-                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_cuenta" type="text" id="txtdes_tipo_cuenta" value="<?echo $des_tipo_cuenta?>"  size="100" maxlength="100" readonly>   </span></td>
+                        <td width="50"><span class="Estilo5"><input class="Estilo10" name="txttipo_cuenta" type="text" id="txttipo_cuenta" value="<?php echo $tipo_cuenta?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                        <td width="50"><input class="Estilo10" name="btTipo_Cuenta" type="button" id="bttipo_cuenta" title="Abrir Catalogo Tipos de Cuenta" onclick="VentanaCentrada('Cat_tipo_cuenta.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
+                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_cuenta" type="text" id="txtdes_tipo_cuenta" value="<?php echo $des_tipo_cuenta?>"  size="100" maxlength="100" readonly>   </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -115,10 +115,10 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                   <td width="868"><table width="868" >
                     <tr>
                       <td width="135"><span class="Estilo5">N&Uacute;MERO DE CUENTA :</span></td>
-                      <td width="275"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?echo $nro_cuenta?>" size="30" maxlength="25" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                      <td width="275"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?php echo $nro_cuenta?>" size="30" maxlength="25" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                       <td width="135"><span class="Estilo5">C&Oacute;DIGO CONTABLE :</span></td>
-                      <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  value="<?echo $cod_contable?>" size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                      <td width="50"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  value="<?php echo $cod_contable?>" size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                      <td width="50"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -127,7 +127,7 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                   <td width="868"><table width="868" >
                     <tr>
                       <td width="190"><span class="Estilo5">NOMBRE C&Oacute;DIGO CONTABLE :</span></td>
-                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" value="<?echo $nombre_cuenta?>" size="100" maxlength="99" readonly>  </span></td>
+                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" value="<?php echo $nombre_cuenta?>" size="100" maxlength="99" readonly>  </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -136,7 +136,7 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                   <td><table width="869">
                       <tr>
                         <td width="168"><span class="Estilo5">DESCRIPCI&Oacute;N DE BANCO :</span></td>
-                        <td width="700"><span class="Estilo5"> <textarea name="txtdescripcion_banco" cols="80"  id="txtdescripcion_banco" onFocus="encender(this)" onBlur="apagar(this)"><?echo $descripcion_banco?></textarea>  </span></td>
+                        <td width="700"><span class="Estilo5"> <textarea name="txtdescripcion_banco" cols="80"  id="txtdescripcion_banco" onFocus="encender(this)" onBlur="apagar(this)"><?php echo $descripcion_banco?></textarea>  </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -151,7 +151,7 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                         <option>FIDEICOMISOS-LAEE</option>  <option>FIEM</option> <option>OTROS FIDEICOMISOS</option> <option>PENDIENTE POR CANCELAR</option> <option>OTROS</option>
                       </select>
                     </span></td>
-                    <script language="JavaScript" type="text/JavaScript"> asig_tipo_banco('<?echo $tipo_bco;?>');</script>
+                    <script language="JavaScript" type="text/JavaScript"> asig_tipo_banco('<?php echo $tipo_bco;?>');</script>
                   </tr>
                  </table></td>
                 </tr>
@@ -160,7 +160,7 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                  <td><table width="865">
                     <tr>
                       <td width="145"><span class="Estilo5">FORMATO DE CHEQUE :</span></td>
-                      <td width="710"><span class="Estilo5"><input class="Estilo10" name="txtformato_cheque" type="text"  id="txtformato_cheque" value="<?echo $formato_cheque?>" onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="120">  </span> </td>
+                      <td width="710"><span class="Estilo5"><input class="Estilo10" name="txtformato_cheque" type="text"  id="txtformato_cheque" value="<?php echo $formato_cheque?>" onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="120">  </span> </td>
                     </tr>
                  </table></td>
                </tr>
@@ -169,9 +169,9 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                 <td><table width="868">
                   <tr>
                     <td width="140"><span class="Estilo5">GRUPO DE BANCO : </span></td>
-                    <td width="59"><span class="Estilo5"> <input class="Estilo10" name="txtgrupo_banco" type="text" id="txtgrupo_banco" value="<?echo $campo_str2?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                    <td width="50"><input class="Estilo10" name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('Cat_grupo_banco.php?criterio=','SIA','','750','500','true')" value="..."></td>
-                    <td width="618"><span class="Estilo5"><input class="Estilo10" name="txtnombre_grupob" type="text" id="txtnombre_grupob" value="<?echo $nombre_grupob?>"  size="90" maxlength="100" readonly>   </span></td>
+                    <td width="59"><span class="Estilo5"> <input class="Estilo10" name="txtgrupo_banco" type="text" id="txtgrupo_banco" value="<?php echo $campo_str2?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                    <td width="50"><input class="Estilo10" name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('Cat_grupo_banco.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
+                    <td width="618"><span class="Estilo5"><input class="Estilo10" name="txtnombre_grupob" type="text" id="txtnombre_grupob" value="<?php echo $nombre_grupob?>"  size="90" maxlength="100" readonly>   </span></td>
                  </tr>
                 </table></td>
               </tr>
@@ -180,9 +180,9 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                <td><table width="868">
                  <tr>
                    <td width="110"><span class="Estilo5">TASA I.D.B (%) :</span></td>
-                   <td width="255"><span class="Estilo5"><input class="Estilo10" name="txttasa_idb" type="text" id="txttasa_idb" value="<?echo $campo_num1?>" size="6" maxlength="5" style="text-align:right" onFocus="encender(this)" onBlur="apagar(this)" value="0" onKeypress="return validarNum(event)">  </span></td>
+                   <td width="255"><span class="Estilo5"><input class="Estilo10" name="txttasa_idb" type="text" id="txttasa_idb" value="<?php echo $campo_num1?>" size="6" maxlength="5" style="text-align:right" onFocus="encender(this)" onBlur="apagar(this)" value="0" onKeypress="return validarNum(event)">  </span></td>
                    <td width="200"><span class="Estilo5">C&Oacute;DIGO CONTABLE I.D.B (%) : </span></td>
-                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable_idb" type="text"id="txtcod_contable_idb" value="<?echo $campo_str1?>" size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable_idb" type="text"id="txtcod_contable_idb" value="<?php echo $campo_str1?>" size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                  </tr>
                </table></td>
              </tr>
@@ -191,19 +191,19 @@ $saldo_ant_libro=formato_monto($saldo_ant_libro); $saldo_ant_banco=formato_monto
                 <tr>
                   <td width="170"><span class="Estilo5">SALDO ANTERIOR LIBRO : </span></td>
                   <td width="230"><span class="Estilo5">
-                  <? if($SIA_Definicion=="N"){?>
-                    <input class="Estilo10" name="txts_inic_libro" type="text"  id="txts_inic_libro" value="<?echo $saldo_ant_libro?>" size="20" style="text-align:right" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)">
-                  <?} else { ?>
-                    <input class="Estilo10" name="txts_inic_libro" type="text"  id="txts_inic_libro" value="<?echo $saldo_ant_libro?>" size="20" style="text-align:right" readonly>
-                  <?}?>
+                  <?php  if($SIA_Definicion=="N"){?>
+                    <input class="Estilo10" name="txts_inic_libro" type="text"  id="txts_inic_libro" value="<?php echo $saldo_ant_libro?>" size="20" style="text-align:right" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)">
+                  <?php } else { ?>
+                    <input class="Estilo10" name="txts_inic_libro" type="text"  id="txts_inic_libro" value="<?php echo $saldo_ant_libro?>" size="20" style="text-align:right" readonly>
+                  <?php }?>
                   </span></td>
                   <td width="170"><span class="Estilo5">SALDO ANTERIOR BANCO : </span></td>
                   <td width="230"><span class="Estilo5">
-                  <? if($SIA_Definicion=="N"){?>
-                    <input class="Estilo10" name="txts_inic_banco" type="text" cid="txts_inic_banco" value="<?echo $saldo_ant_banco?>" size="20" style="text-align:right" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)">
-                  <?} else { ?>
-                    <input class="Estilo10" name="txts_inic_banco" type="text"  id="txts_inic_banco" value="<?echo $saldo_ant_banco?>" size="20" style="text-align:right" readonly>
-                  <?}?>
+                  <?php  if($SIA_Definicion=="N"){?>
+                    <input class="Estilo10" name="txts_inic_banco" type="text" cid="txts_inic_banco" value="<?php echo $saldo_ant_banco?>" size="20" style="text-align:right" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)">
+                  <?php } else { ?>
+                    <input class="Estilo10" name="txts_inic_banco" type="text"  id="txts_inic_banco" value="<?php echo $saldo_ant_banco?>" size="20" style="text-align:right" readonly>
+                  <?php }?>
                   </span></td>
                 </tr>
               </table></td></tr>

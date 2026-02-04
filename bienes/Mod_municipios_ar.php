@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_municipio='';}else {$cod_municipio=$_GET["Gcod_municipio"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_municipio='';}else {$cod_municipio=$_GET["Gcod_municipio"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Municipios)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Municipios)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -29,11 +29,11 @@ function LlamarURL(url){  document.location = url; }
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Municipio.value==""){alert("Código del Municipio no puede estar Vacio");return false;}
-    if(f.txtNombre_Municipio.value==""){alert("Denominación del Municipio no puede estar Vacia"); return false; }
+    if(f.txtCodigo_Municipio.value==""){alert("Cï¿½digo del Municipio no puede estar Vacio");return false;}
+    if(f.txtNombre_Municipio.value==""){alert("Denominaciï¿½n del Municipio no puede estar Vacia"); return false; }
        else{f.txtNombre_Municipio.value=f.txtNombre_Municipio.value.toUpperCase();}
     if(f.txtCodigo_Municipio.value.length==4){f.txtCodigo_Municipio.value=f.txtCodigo_Municipio.value.toUpperCase();}
-       else{alert("Longitud Código del Municipio Invalido");return false;}
+       else{alert("Longitud Cï¿½digo del Municipio Invalido");return false;}
 document.form1.submit;
 return true;}
 function chequea_codigo(mform){
@@ -48,7 +48,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
 $den_municipio="";$sql="Select cod_municipio,nombre_municipio from PRE093 where cod_municipio='$cod_municipio'";
 $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_municipio=$registro["cod_municipio"];  $den_municipio=$registro["nombre_municipio"];}
@@ -89,7 +89,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_municipio=$reg
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Municipio" type="text" id="txtCodigo_Municipio" title="Registre el C&oacute;digo del Municipio" size="10" maxlength="4"  readonly value="<?ECHO $cod_municipio?>">
+                      <input name="txtCodigo_Municipio" type="text" id="txtCodigo_Municipio" title="Registre el C&oacute;digo del Municipio" size="10" maxlength="4"  readonly value="<?php ECHO $cod_municipio?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -102,7 +102,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_municipio=$reg
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Municipio" type="text" id="txtNombre_Municipio" title="Registre el Nombre del Municipio" size="80" maxlength="200"  value="<?ECHO $den_municipio?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                      <td width="720"><input name="txtNombre_Municipio" type="text" id="txtNombre_Municipio" title="Registre el Nombre del Municipio" size="80" maxlength="200"  value="<?php ECHO $den_municipio?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -131,4 +131,4 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_municipio=$reg
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

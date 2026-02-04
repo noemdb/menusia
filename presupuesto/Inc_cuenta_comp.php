@@ -6,7 +6,7 @@ $mmonto=cambia_punto_comas($mmonto);
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -21,13 +21,13 @@ return str2;}
 function encender_monto(mthis){var mmonto; encender(mthis); 
   mmonto=mthis.value; mmonto=eliminapunto(mmonto);  mthis.value=mmonto; 
 }
-function llamar_anterior(){ document.location ='Det_inc_comp_caus.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_comp_caus.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function revisar(){var f=document.form1;var Valido=true;
    if(f.txtCodigo_Cuenta.value==""){alert("Codigo de Cuenta no puede estar Vacio");return false;}
    if(f.txtDeb_Cre.value=="D" || f.txtDeb_Cre.value=="C") {Valido=true;}   else{alert("Valor Dedito/Credito no valida");return false; }
    if(f.txtDes_A.value==""){alert("Descripcion de Asiento no puede estar Vacio"); return false; }  else{f.txtDes_A.value=f.txtDes_A.value.toUpperCase();}   
    if(f.txtmonto.value==""){alert("Monto no puede estar Vacio");return false;}
-   if(MontoValido(f.txtmonto.value)) {Valido=true;}else{alert("monto debe tener valores numéricos.");return false;}
+   if(MontoValido(f.txtmonto.value)) {Valido=true;}else{alert("monto debe tener valores numï¿½ricos.");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -47,7 +47,7 @@ return true;}
               <tr>
                 <td width="330"><span class="Estilo5">C&Oacute;DIGO CUENTA :
                       <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el C&oacute;digo de la Cuenta"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);">     </span></td>
-                <td width="268"><input name="btCatCuenta" type="button" id="btCatCuenta" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="268"><input name="btCatCuenta" type="button" id="btCatCuenta" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
               </tr>
           </table></td>
         </tr>
@@ -67,7 +67,7 @@ return true;}
                   <td width="336"><span class="Estilo5">DEBITO/CREDITO :
 				     <input name="txtDeb_Cre" type="text" id="txtDeb_Cre" value="C" size="3"  readonly>  </span></td>
                   <td width="242"><span class="Estilo5">MONTO :
-                        <input name="txtmonto" type="text" id="txtmonto" size="25" style="text-align:right" maxlength="22" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $mmonto?>" onKeypress="return validarNum(event)">    </span></td>
+                        <input name="txtmonto" type="text" id="txtmonto" size="25" style="text-align:right" maxlength="22" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $mmonto?>" onKeypress="return validarNum(event)">    </span></td>
                 </tr>
             </table></td>
         </tr>        
@@ -77,7 +77,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

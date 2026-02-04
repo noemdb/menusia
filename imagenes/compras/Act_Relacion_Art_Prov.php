@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS Y ALMAC&Eacute;N (Relaci&oacute;n Art&iacute;culos/Proveedores)</title>
+<title>SIPAP COMPRAS Y ALMAC&Eacute;N (Relaci&oacute;n Art&iacute;culos/Proveedores)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -145,7 +145,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="133"><span class="Estilo5"><span class="Estilo11">C&Oacute;DIGO ART&Iacute;CULO : </span></span></td>
                       <td width="116"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Articulo" type="text" class="Estilo5" id="txtcod_almacen 3"  value="<?echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Articulo" type="text" class="Estilo5" id="txtcod_almacen 3"  value="<?php echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="312"><span class="Estilo5">
                       </span></td>
@@ -157,7 +157,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="102"><span class="Estilo5"><span class="Estilo11">DESCRIPCI&Oacute;N :</span></span></td>
                       <td width="724"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Articulo2" type="text" class="Estilo5" id="txtCod_Articulo"  value="<?echo $Cod_Articulo ?>" size="135" maxlength="130" readonly>
+                      <input name="txtCod_Articulo2" type="text" class="Estilo5" id="txtCod_Articulo"  value="<?php echo $Cod_Articulo ?>" size="135" maxlength="130" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -189,7 +189,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="97" height="22"><span class="Estilo5"><span class="Estilo11">CED&Uacute;LA/R.I.F : </span></span></td>
                       <td width="116"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Articulo3" type="text" class="Estilo5" id="txtCod_Articulo2"  value="<?echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Articulo3" type="text" class="Estilo5" id="txtCod_Articulo2"  value="<?php echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="352"><span class="Estilo5">
                       </span></td>
@@ -201,7 +201,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="67"><span class="Estilo5"><span class="Estilo11">NOMBRE :</span></span></td>
                       <td width="766"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Articulo4" type="text" class="Estilo5" id="txtCod_Articulo4"  value="<?echo $Cod_Articulo ?>" size="140" maxlength="132" readonly>
+                      <input name="txtCod_Articulo4" type="text" class="Estilo5" id="txtCod_Articulo4"  value="<?php echo $Cod_Articulo ?>" size="140" maxlength="132" readonly>
 </span></span></td>
                     </tr>
                   </table></td>
@@ -233,4 +233,4 @@ MM_reloadPage(true);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,9 +1,9 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS;
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS;
 if (!$_GET){ $referencia_modif=''; $tipo_modif='';} else { $referencia_modif=$_GET["txtreferencia_modif"];$tipo_modif=$_GET["txttipo_modif"];}
   $sql="Select * FROM PRE009 where tipo_modif='$tipo_modif' and referencia_modif='$referencia_modif'";
   $rif_emp="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf();  if($utf_rpt=="SI"){ $php_os="WINNT";}    }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf();  if($utf_rpt=="SI"){ $php_os="WINNT";}    }
 $descripcion="";$fecha_registro="";$modif_i_e="";$fecha_modif="";$modif_aprob="";$inf_usuario="";$aprobada_por="";$nro_documento="";$fecha_documento="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){  $registro=pg_fetch_array($res);
@@ -144,7 +144,7 @@ class PDF extends FPDF{
 		$this->SetFillColor(255,0,0);
 		$this->Ln(2);
 		$this->SetFont('Arial','',5);
-		$this->Cell(100,4,'SIA Contabilidad Presupuestaria',0,1,'L');		
+		$this->Cell(100,4,'SIPAP Contabilidad Presupuestaria',0,1,'L');		
 	}
 }	
 $pdf=new PDF('P', 'mm', Letter);
@@ -223,6 +223,6 @@ $pdf=new PDF('P', 'mm', Letter);
 	$pdf->Cell(20,3,$total_mod,0,1,'R');
   }
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 
 ?>

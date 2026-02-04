@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13";
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000018"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $equipo = getenv("COMPUTERNAME"); $mcod_m="BIEN045".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49); $tipo_comp="ED004"; $sfecha=$Fec_Fin_Ejer;
 if (!$_GET){$p_letra="";$referencia_desin='';  $sql="SELECT * FROM BIEN045 ORDER BY referencia_desin";  } 
 else{ $referencia_desin = $_GET["Greferencia_desin"];  $p_letra=substr($referencia_desin, 0, 1);
@@ -23,7 +23,7 @@ else{ $referencia_desin = $_GET["Greferencia_desin"];  $p_letra=substr($referenc
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Desincorporacion de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Desincorporacion de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -66,9 +66,9 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $resultado=pg_exec($conn,"SELECT ELIMINA_BIEN050('$codigo_mov')"); $resultado=pg_exec($conn,"SELECT ELIMINA_CON010('$codigo_mov')");
-$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 $referencia_desin="";  $fecha_desin=""; $tipo_desin=""; $cod_dependencia=""; $descripcion="";$nombre1="";$departamento1=""; $nombre2="";$departamento2="";$denominacion_dep="";$denominacion_dir=""; $cod_departamento_r="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From BIEN045 ORDER BY referencia_desin";} if ($p_letra=="A"){$sql="SELECT * From BIEN045 ORDER BY referencia_desin desc";} $res=pg_query($sql); $filas=pg_num_rows($res);}
@@ -130,12 +130,12 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
       <td width="86">
 	    <td width="92" height="600"><table width="92" height="600" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">		
 
-		 <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+		 <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_Des_Bien()";
 					onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_Des_Bien()">Incluir</A></td>
 		  </tr>     
-		 <?} if ($Mcamino{2}=="S"){?>
+		 <?php } if ($Mcamino{2}=="S"){?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
 				   onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -152,17 +152,17 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('U')";
 							  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Mover_Registro('U');" class="menu">Ultimo</a></td>
 		  </tr>
-		 <?} if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
+		 <?php } if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
 			<tr>
 			  <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato();" class="menu">Formato</a></td>
 			</tr>  
-		 <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+		 <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
 				   onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
 		  </tr>
-		 <? }?>
+		 <?php }?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="menu.php" class="menu">Menu</a></td>
@@ -181,11 +181,11 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
              <td><table width="845">
                <tr>
                  <td width="100"><span class="Estilo5">REFERENCIA :</span></td>
-                 <td width="150"><input class="Estilo10" name="txtreferencia_desin" type="text" id="txtreferencia_desin" size="10" maxlength="8"  value="<?echo $referencia_desin?>" readonly> </td>
+                 <td width="150"><input class="Estilo10" name="txtreferencia_desin" type="text" id="txtreferencia_desin" size="10" maxlength="8"  value="<?php echo $referencia_desin?>" readonly> </td>
                  <td width="100"><span class="Estilo5">FECHA :</span></td>
-                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desin" type="text" id="txtfecha_desin" size="15" maxlength="15"   value="<?echo $fecha_desin?>" readonly> </span></td>
+                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desin" type="text" id="txtfecha_desin" size="15" maxlength="15"   value="<?php echo $fecha_desin?>" readonly> </span></td>
                  <td width="180"><span class="Estilo5">TIPO DESINCORPORACION :</span></td>				 
-                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txttipo_desin" type="text" id="txttipo_desin" size="25" maxlength="25"   value="<?echo $des_desin?>" readonly> </span></td>
+                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txttipo_desin" type="text" id="txttipo_desin" size="25" maxlength="25"   value="<?php echo $des_desin?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -193,8 +193,8 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
              <td><table width="845">
                <tr>
                  <td width="145"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
-                 <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" readonly>    </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $denominacion_dependencia?>" readonly>    </span></td>
+                 <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" readonly>    </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $denominacion_dependencia?>" readonly>    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -202,8 +202,8 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></td>
-                 <td width="135"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?echo $cargo1?>" readonly>   </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?echo $departamento1?>" readonly>   </span></td>
+                 <td width="135"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?php echo $cargo1?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?php echo $departamento1?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -211,8 +211,8 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
              <td><table width="845">
                <tr>
                  <td width="155"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></td>
-                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?echo $cargo2?>" readonly>   </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="100"  value="<?echo $departamento2?>" readonly>   </span></td>
+                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?php echo $cargo2?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="100"  value="<?php echo $departamento2?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>         
@@ -220,7 +220,7 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                 <td width="720"><div align="left"><textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly  class="headers" id="txtdescripcion"><?echo $descripcion?></textarea>  </div></td>
+                 <td width="720"><div align="left"><textarea name="txtdescripcion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly  class="headers" id="txtdescripcion"><?php echo $descripcion?></textarea>  </div></td>
                </tr>
              </table></td>
            </tr>
@@ -236,15 +236,15 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
    rows[1][1] = "Bienes";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";            // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_cons_desin_bienes.php?criterio=<?echo $referencia_desin?>"  width="940" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_desin_bienes.php?criterio=<?php echo $referencia_desin?>"  width="940" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>              
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body">
-                <iframe src="Det_cons_comp_desin_bienes.php?criterio=<?echo $criterio?>"  width="940" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_cons_comp_desin_bienes.php?criterio=<?php echo $criterio?>"  width="940" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -258,17 +258,17 @@ $num_bien_unico=substr($campo502,3,1);  $mod_solo_transf=substr($campo502,6,1);
 <form name="form2" method="post" action="Inc_bienes_muebles_pro_desin_bie.php">
 <table width="100">
   <tr>
-     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>	 
-	 <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input class="Estilo10" name="txtformato_bien" type="hidden" id="txtformato_bien" value="<?echo $formato_bien?>" ></td>
-	 <td width="5"><input class="Estilo10" name="txtlong_num_bien" type="hidden" id="txtlong_num_bien" value="<?echo $long_num_bien?>" ></td>	 
-     <td width="5"><input class="Estilo10" name="txtcod_dep" type="hidden" id="txtcod_dep" value="<?echo $cod_dep_t?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtnom_dep" type="hidden" id="txtnom_dep" value="<?echo $nom_dep_t?>" ></td>	 
-	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtcod_emp" type="hidden" id="txtcod_emp" value="<?echo $Cod_Emp?>" ></td> 
-	 <td width="5"><input class="Estilo10" name="txtced_rif_emp" type="hidden" id="txtced_rif_emp" value="<?echo $ced_rif_emp?>" ></td> 
+     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>	 
+	 <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input class="Estilo10" name="txtformato_bien" type="hidden" id="txtformato_bien" value="<?php echo $formato_bien?>" ></td>
+	 <td width="5"><input class="Estilo10" name="txtlong_num_bien" type="hidden" id="txtlong_num_bien" value="<?php echo $long_num_bien?>" ></td>	 
+     <td width="5"><input class="Estilo10" name="txtcod_dep" type="hidden" id="txtcod_dep" value="<?php echo $cod_dep_t?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtnom_dep" type="hidden" id="txtnom_dep" value="<?php echo $nom_dep_t?>" ></td>	 
+	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtcod_emp" type="hidden" id="txtcod_emp" value="<?php echo $Cod_Emp?>" ></td> 
+	 <td width="5"><input class="Estilo10" name="txtced_rif_emp" type="hidden" id="txtced_rif_emp" value="<?php echo $ced_rif_emp?>" ></td> 
   </tr>
 </table>
 </form>

@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="03-0000200"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);  $fecha_hoy=asigna_fecha_hoy(); $fecha_h=formato_aaaammdd($fecha_hoy); if($fecha_h>$Fec_Fin_Ejer){$fecha_d=formato_ddmmaaaa($Fec_Fin_Ejer);}else{$fecha_d=$fecha_hoy;} ;$imprimir="N";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Depositos Bancarios)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Depositos Bancarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="javascript" src="../../class/sia.js" type="text/javascript"></SCRIPT>
@@ -37,7 +37,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 
 </head>
-<? $cod_banco_d=""; $cod_banco_h="zzzz";
+<?php  $cod_banco_d=""; $cod_banco_h="zzzz";
 $sql="SELECT MAX(cod_banco) As Max_cod_banco, MIN(cod_banco) As Min_cod_banco FROM BAN002";$res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registro["max_cod_banco"];}
 ?>
 <body>
@@ -61,11 +61,11 @@ $sql="SELECT MAX(cod_banco) As Max_cod_banco, MIN(cod_banco) As Min_cod_banco FR
           <td height="19"><table width="775" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td width="155"><span class="Estilo5">FECHA BALANCE: </span></td>
-              <td width="610"><span class="Estilo5"><input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10"  class="Estilo5" onChange="checkrefechad(this.form)" onkeyup="mascara(this,'/',patronfecha,true)">
+              <td width="610"><span class="Estilo5"><input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10"  class="Estilo5" onChange="checkrefechad(this.form)" onkeyup="mascara(this,'/',patronfecha,true)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"   onClick="javascript:showCal('Calendario1')"  /></span></td>
-              <td width="5"><input name="txtcod_banco_d" type="hidden" id="txtcod_banco_d" value="<?echo $cod_banco_d?>" ></td>
-              <td width="5"><input name="txtcod_banco_h" type="hidden" id="txtcod_banco_h" value="<?echo $cod_banco_h?>" ></td>
+              <td width="5"><input name="txtcod_banco_d" type="hidden" id="txtcod_banco_d" value="<?php echo $cod_banco_d?>" ></td>
+              <td width="5"><input name="txtcod_banco_h" type="hidden" id="txtcod_banco_h" value="<?php echo $cod_banco_h?>" ></td>
             </tr>
           </table></td>
         </tr>
@@ -117,4 +117,4 @@ $sql="SELECT MAX(cod_banco) As Max_cod_banco, MIN(cod_banco) As Min_cod_banco FR
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

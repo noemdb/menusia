@@ -1,13 +1,13 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){$codigo=''; $sql="SELECT * FROM ban011 ORDER BY codigo";} else{$codigo=$_GET["Gcodigo"]; $sql="Select * from ban011 where codigo='$codigo'";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipos Planillas de Retenci&oacute;n)</title>
+<title>SIPAP CONTROL BANCARIO (Tipos Planillas de Retenci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js"  type="text/javascript"></script>
@@ -25,13 +25,13 @@ MM_reloadPage(true);
 function revisar(){
 var f=document.form1;
   if(f.txtcodigo.value==""){alert("Tipo de planilla no puede estar Vacio");return false;}else{f.txtcodigo.value=f.txtcodigo.value.toUpperCase();}
-  if(f.txtdescripcion.value==""){alert("Descripción no puede estar Vacia"); return false; } else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
+  if(f.txtdescripcion.value==""){alert("Descripciï¿½n no puede estar Vacia"); return false; } else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
   document.form1.submit;
 return true;}
 </script>
 
 </head>
-<?
+<?php 
 $descripcion="";$nro_planilla="";$formato_planilla="";$formato_relacion="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $descripcion=$registro["descripcion"];$nro_planilla=$registro["nro_planilla"];$formato_planilla=$registro["formato_planilla"]; $formato_relacion=$registro["formato_relacion"]; }
 ?>
@@ -68,7 +68,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $de
                     <tr>
                       <td width="200"><span class="Estilo5">TIPO DE PLANILLA :</span></td>
                       <td width="650"><span class="Estilo5">
-                        <input name="txtcodigo" type="text"  id="txtcodigo"  value="<?echo $codigo?>" size="4" maxlength="2" readonly>
+                        <input name="txtcodigo" type="text"  id="txtcodigo"  value="<?php echo $codigo?>" size="4" maxlength="2" readonly>
                       </span></td>
                     </tr>
                 </table></td>
@@ -79,7 +79,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $de
                     <tr>
                       <td width="200"><span class="Estilo5">DESCRIPCI&Oacute;N TIPO PLANILLA : </span></td>
                       <td width="650"><span class="Estilo5">
-                        <input name="txtdescripcion" type="text" id="txtdescripcion"  value="<?echo $descripcion?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
+                        <input name="txtdescripcion" type="text" id="txtdescripcion"  value="<?php echo $descripcion?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
                       </span> </td>
                     </tr>
                 </table></td>
@@ -90,7 +90,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $de
                   <tr>
                     <td width="230"><span class="Estilo5">NOMBRE FORMATO PLANILLA :</span></td>
                     <td width="620"><span class="Estilo5">
-                      <input name="txtformato_planilla" type="text"  id="txtformato_planilla"  value="<?echo $formato_planilla?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
+                      <input name="txtformato_planilla" type="text"  id="txtformato_planilla"  value="<?php echo $formato_planilla?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
                     </span></td>
                   </tr>
                 </table></td>
@@ -101,7 +101,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $de
                     <tr>
                       <td width="230"><span class="Estilo5">FORMATO PLANILLA DE RETENCI&Oacute;N :</span></td>
                       <td width="620"><span class="Estilo5">
-                          <input name="txtformato_relacion" type="text"  id="txtformato_relacion"  value="<?echo $formato_relacion?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
+                          <input name="txtformato_relacion" type="text"  id="txtformato_relacion"  value="<?php echo $formato_relacion?>" size="90" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)" >
                       </span></td>
                     </tr>
                 </table></td>
@@ -123,4 +123,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $de
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Actualiza Impuesto Enterado por Beneficiario)</title>
+<title>SIPAP CONTROL BANCARIO (Actualiza Impuesto Enterado por Beneficiario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -16,7 +16,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -112,7 +112,7 @@ MM_reloadPage(true);
                   <td width="92"><span class="Estilo5"> <span class="Estilo12">
                     <input name="txtTipo_Cuenta22" type="text" class="Estilo5" id="txtTipo_Cuenta2"  onFocus="encender(this)" onBlur="apagar(this)" size="11" maxlength="10">
                   </span></span></td>
-                  <td width="201"><input name="btCat_Cont3" type="button" class="Estilo5" id="btCat_Cont3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                  <td width="201"><input name="btCat_Cont3" type="button" class="Estilo5" id="btCat_Cont3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                   <td width="468"><span class="Estilo5"> <span class="Estilo12"> </span> </span></td>
                 </tr>
             </table></td>

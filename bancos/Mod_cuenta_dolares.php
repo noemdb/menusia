@@ -1,6 +1,6 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); 
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){$codigo_cuenta=''; $sql="SELECT * FROM BAN043 ORDER BY codigo_cuenta";} else{$codigo_cuenta=$_GET["Gcodigo_cuenta"]; $sql="Select * from BAN043 where codigo_cuenta='$codigo_cuenta'";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,7 +8,7 @@ if (!$_GET){$codigo_cuenta=''; $sql="SELECT * FROM BAN043 ORDER BY codigo_cuenta
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipos de Cuenta)</title>
+<title>SIPAP CONTROL BANCARIO (Tipos de Cuenta)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language=JavaScript src="../class/sia.js"  type=text/javascript></SCRIPT>
@@ -31,7 +31,7 @@ var f=document.form1;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $des_codigo_cuenta="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo_cuenta"]; $des_codigo_cuenta=$registro["descripcion_cuenta"];}
 ?>
@@ -47,8 +47,8 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo
   <tr>
     <td><table width="92" height="354" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_cuentas_dolares.php?Gcodigo_cuenta=C<?echo $codigo_cuenta?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_cuentas_dolares.php?Gcodigo_cuenta=C<?echo $codigo_cuenta?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_cuentas_dolares.php?Gcodigo_cuenta=C<?php echo $codigo_cuenta?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_cuentas_dolares.php?Gcodigo_cuenta=C<?php echo $codigo_cuenta?>">Atras</A></td>
       </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -67,7 +67,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo
                   <td width="830" height="24"><table width="830" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td width="200"><span class="Estilo5">CODIGO DE CUENTA :</span></td>
-                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_cuenta" type="text"  id="txtcodigo_cuenta"  readonly value="<?echo $codigo_cuenta?>"  size="30" maxlength="30">
+                        <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_cuenta" type="text"  id="txtcodigo_cuenta"  readonly value="<?php echo $codigo_cuenta?>"  size="30" maxlength="30">
                         </span></td>
                       </tr>
                   </table></td>
@@ -77,7 +77,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo
                   <td><table width="830" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td width="200"><span class="Estilo5">DESCRIPCI&Oacute;N CUENTA : </span></td>
-                      <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_cuenta" type="text"  id="txtdescripcion_cuenta"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $des_codigo_cuenta?>"  size="80" maxlength="100">
+                      <td width="630"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_cuenta" type="text"  id="txtdescripcion_cuenta"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $des_codigo_cuenta?>"  size="80" maxlength="100">
                       </span></td>
                     </tr>
                   </table></td>
@@ -100,4 +100,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_cuenta=$registro["codigo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

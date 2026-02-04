@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); if (!$_GET){$tipo_diferido='';} else {$tipo_diferido=$_GET["Gtipo_diferido"];}?>
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); if (!$_GET){$tipo_diferido='';} else {$tipo_diferido=$_GET["Gtipo_diferido"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Diferidos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Diferidos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -20,12 +20,12 @@ MM_reloadPage(true);
 function LlamarURL(url){  document.location = url; }
 function revisar(){var f=document.form1;var Valido;
     if(f.txttipo_diferido.value==""){alert("Tipo de Diferido no puede estar Vacio");return false;}
-    if(f.txtnombre_tipo_dife.value==""){alert("Descripción Tipo de Diferido no puede estar Vacia"); return false; }
+    if(f.txtnombre_tipo_dife.value==""){alert("Descripciï¿½n Tipo de Diferido no puede estar Vacia"); return false; }
        else{f.txtnombre_tipo_dife.value=f.txtnombre_tipo_dife.value.toUpperCase();}
 	if(f.txtnombre_abrev.value==""){alert("Nombre Abreviado del Tipo de Diferido no puede estar Vacio");return false; }
        else{f.txtnombre_abrev.value=f.txtnombre_abrev.value.toUpperCase();}   
     if(f.txttipo_diferido.value.length==4){f.txttipo_diferido.value=f.txttipo_diferido.value.toUpperCase();}
-       else{alert("Longitud Código de Aplicación Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de Aplicaciï¿½n Invalida");return false;}
 document.form1.submit;
 return true;}
 function chequea_codigo(mform){var mref;
@@ -34,7 +34,7 @@ return true;}
 </script>
 
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_aplicacion="";$sql="Select * from pre024 WHERE tipo_diferido='$tipo_diferido'";  $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo_dife"];  $nombre_abrev=$registro["nombre_abrev_dife"];}
@@ -76,7 +76,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                 <td><table width="800" border="0">
                   <tr>
                     <td width="148"><span class="Estilo5">TIPO DE DIFERIDO :</span></td>
-                    <td width="650"><span class="Estilo5"><input class="Estilo10" name="txttipo_diferido" type="text" id="txttipo_diferido" title="Registre el C&oacute;digo del tipo de diferido" size="10" maxlength="4"  readonly onFocus="encender(this); " onBlur="apagar(this);" value="<?ECHO $tipo_diferido?>">
+                    <td width="650"><span class="Estilo5"><input class="Estilo10" name="txttipo_diferido" type="text" id="txttipo_diferido" title="Registre el C&oacute;digo del tipo de diferido" size="10" maxlength="4"  readonly onFocus="encender(this); " onBlur="apagar(this);" value="<?php ECHO $tipo_diferido?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -89,7 +89,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                   <table width="816" border="0">
                     <tr>
                       <td width="148"><span class="Estilo5">DENSCRIPCION :</span></td>
-                      <td width="666"><input class="Estilo10" name="txtnombre_tipo_dife" type="text" id="txtnombre_tipo_dife" title="Registre la descripción del tipo de diferido" size="100" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $nombre_tipo_dife?>"></td>
+                      <td width="666"><input class="Estilo10" name="txtnombre_tipo_dife" type="text" id="txtnombre_tipo_dife" title="Registre la descripciï¿½n del tipo de diferido" size="100" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $nombre_tipo_dife?>"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -101,7 +101,7 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
                 <td><table width="800" border="0">
                   <tr>
                     <td width="148"><span class="Estilo5">NOMBRE ABREVIADO :</span></td>
-                    <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el nombre abreviado del tipo de diferido" size="10" maxlength="4"  onFocus="encender(this); " onBlur="apagar(this);" value="<?ECHO $nombre_abrev?>">
+                    <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el nombre abreviado del tipo de diferido" size="10" maxlength="4"  onFocus="encender(this); " onBlur="apagar(this);" value="<?php ECHO $nombre_abrev?>">
                     </span></td>
                   </tr>
                 </table>                <p class="Estilo5">&nbsp;
@@ -134,4 +134,4 @@ if ($registro=pg_fetch_array($res,0)){  $nombre_tipo_dife=$registro["nombre_tipo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

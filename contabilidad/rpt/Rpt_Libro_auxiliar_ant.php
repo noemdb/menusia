@@ -1,18 +1,18 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="03-0000035"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
  $periodo='01';  $vimprimir="S"; $cod_cuenta_d="";$cod_cuenta_h="9-9-999-99-99-9999";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD (Reporte Libro Auxiliar de Tesoreria)</title>
+<title>SIPAP CONTABILIDAD (Reporte Libro Auxiliar de Tesoreria)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></scrip>
@@ -27,7 +27,7 @@ function Llama_Rpt_Res_Diario_G(murl){var url; var r; var imp;
 function Llama_Menu_Rpt(murl){var url;    url="../"+murl;  LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod_cuenta FROM con001";$res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$cod_cuenta_d=$registro["min_cod_cuenta"];$cod_cuenta_h=$registro["max_cod_cuenta"];}
 ?>
 <body>
@@ -67,11 +67,11 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
           <td colspan="2"><table width="748" height="29" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td width="121" align="center"><div align="left"><span class="Estilo5">CUENTA DESDE :</span></div></td>
-              <td width="221" align="center"><div align="left"><span class="Estilo5"><input name="txtCodigo_Cuenta_D" type="text" id="txtCodigo_Cuenta_D3" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_d?>" size="25" maxlength="24"></span></div></td>
-              <td width="59" align="left"><span class="Estilo5"><input name="Catalogo3" type="button" id="Catalogo33" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="221" align="center"><div align="left"><span class="Estilo5"><input name="txtCodigo_Cuenta_D" type="text" id="txtCodigo_Cuenta_D3" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_d?>" size="25" maxlength="24"></span></div></td>
+              <td width="59" align="left"><span class="Estilo5"><input name="Catalogo3" type="button" id="Catalogo33" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
               <td width="54" align="center"><div align="left"><span class="Estilo5">HASTA :</span></div></td>
-              <td width="215" align="center"> <div align="left"><span class="Estilo5"><input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_h?>" size="25" maxlength="24"></span></div></td>
-              <td width="78" align="left"><span class="Estilo5"> <input name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>
+              <td width="215" align="center"> <div align="left"><span class="Estilo5"><input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_h?>" size="25" maxlength="24"></span></div></td>
+              <td width="78" align="left"><span class="Estilo5"> <input name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>
             </tr>
           </table></td>
         </tr>
@@ -99,4 +99,4 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

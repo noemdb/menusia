@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000050"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
   $partida_d=''; $partida_h=''; $fuente_d=''; $fuente_h=''; $des_fuente_d=""; $des_fuente_h="";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Asignacion Actualizada por Partida)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Asignacion Actualizada por Partida)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
 </script>
 </style>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"]; $titulo=$registro["campo525"];}
 $sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){ $partida_d=$registro["min_cod_presup"];  $partida_h=$registro["max_cod_presup"];}
@@ -67,7 +67,7 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
           <td height="19"><table width="766" border="0">
             <tr>
               <td width="325" height="26"><div align="right"> </div></td>
-              <td width="241"><span class="Estilo15"><? echo $titulo; ?></span></td>
+              <td width="241"><span class="Estilo15"><?php  echo $titulo; ?></span></td>
               <td width="200">&nbsp;</td>
             </tr>
           </table></td>
@@ -76,8 +76,8 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
           <td height="30"><table width="813" border="0">
             <tr>
               <td width="315" height="26"><div align="right"><span class="Estilo5">CODIGO PRESUPUESTARIO DESDE : </span></div></td>
-              <td width="195"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35"  value="<?echo $partida_d?>" onFocus="encender(this); " onBlur="apagar(this);" onkeyup="mascara(this,'-',patroncodigo,true)" onkeypress="return stabular(event,this)">    </span></td>
-              <td width="289"><span class="Estilo5"><input class="Estilo10" name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_d.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)">     </span></td>
+              <td width="195"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35"  value="<?php echo $partida_d?>" onFocus="encender(this); " onBlur="apagar(this);" onkeyup="mascara(this,'-',patroncodigo,true)" onkeypress="return stabular(event,this)">    </span></td>
+              <td width="289"><span class="Estilo5"><input class="Estilo10" name="catalogo1" type="button" id="catalogo1" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_d.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)">     </span></td>
             </tr>
           </table></td>
         </tr>
@@ -89,8 +89,8 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
             <tr>
               <td width="223" height="26"><div align="left"></div></td>
               <td width="88"><div align="right"><span class="Estilo5">HASTA :</span></div></td>
-              <td width="207"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35"  value="<?echo $partida_h?>" onFocus="encender(this); " onBlur="apagar(this);" onkeyup="mascara(this,'-',patroncodigo,true)" onkeypress="return stabular(event,this)">   </span></td>
-              <td width="291"><span class="Estilo5"> <input class="Estilo10" name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_h.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)">    </span></td>
+              <td width="207"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35"  value="<?php echo $partida_h?>" onFocus="encender(this); " onBlur="apagar(this);" onkeyup="mascara(this,'-',patroncodigo,true)" onkeypress="return stabular(event,this)">   </span></td>
+              <td width="291"><span class="Estilo5"> <input class="Estilo10" name="catalogo2" type="button" id="catalogo2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('../Cat_codigos_presup_h.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)">    </span></td>
             </tr>
           </table></td>
         </tr>
@@ -101,9 +101,9 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
           <td height="19"><table width="827" border="0">
             <tr>
               <td width="321" height="26"><div align="right"><span class="Estilo5">FUENTE DE FINANCIAMIENTO DESDE : </span></div></td>
-              <td width="62"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?echo $fuente_d?>" onkeypress="return stabular(event,this)">  </span></td>
-              <td width="45"><span class="Estilo5"><input class="Estilo10" name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)">    </span></td>
-              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="60" maxlength="60"  value="<?echo $des_fuente_d?>" readonly onkeypress="return stabular(event,this)">   </span></td>
+              <td width="62"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?php echo $fuente_d?>" onkeypress="return stabular(event,this)">  </span></td>
+              <td width="45"><span class="Estilo5"><input class="Estilo10" name="catalogo3" type="button" id="catalogo3" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)">    </span></td>
+              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="60" maxlength="60"  value="<?php echo $des_fuente_d?>" readonly onkeypress="return stabular(event,this)">   </span></td>
             </tr>
           </table></td>
         </tr>
@@ -115,9 +115,9 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
             <tr>
               <td width="243" height="26"><div align="left"></div></td>
               <td width="75"><div align="right"><span class="Estilo5">HASTA : </span></div></td>
-              <td width="61"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?echo $fuente_h?>" onkeypress="return stabular(event,this)">   </span></td>
-              <td width="46"><span class="Estilo5"><input class="Estilo10" name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)">  </span></td>
-              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="60" maxlength="60"  value="<?echo $des_fuente_h?>" readonly onkeypress="return stabular(event,this)">    </span></td>
+              <td width="61"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="5" value="<?php echo $fuente_h?>" onkeypress="return stabular(event,this)">   </span></td>
+              <td width="46"><span class="Estilo5"><input class="Estilo10" name="catalogo4" type="button" id="catalogo4" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)">  </span></td>
+              <td width="381"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="60" maxlength="60"  value="<?php echo $des_fuente_h?>" readonly onkeypress="return stabular(event,this)">    </span></td>
             </tr>
           </table></td>
         </tr>
@@ -158,4 +158,4 @@ $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato_presup);
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

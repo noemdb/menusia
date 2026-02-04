@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); 
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="03-0000060"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $codigocuentad="";$codigocuentah="9-9-999-99-99-9999";$periodo="";$nivel="";$vimprimir="S";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ $codigocuentad="";$codigocuentah="9-9-999-99-99-9999";$periodo="";$nivel="";$vim
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD (Reporte Balance de Comprobacion)</title>
+<title>SIPAP CONTABILIDAD (Reporte Balance de Comprobacion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ function Llama_Rpt_Balance_Comp(murl){var url;var r;var st="N";
 function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Referencia) As Max_Referencia, MIN(Referencia) As Min_Referencia,MAX(Tipo_Asiento) As Max_Tipo,MIN(Tipo_Asiento) As Min_Tipo FROM CON002";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$referencia_d=$registro["min_referencia"];$referencia_h=$registro["max_referencia"];$tipo_asiento_d=$registro["min_tipo"];$tipo_asiento_h=$registro["max_tipo"];}
 $sql="SELECT MAX(codigo_cuenta) As max_codigo_cuenta, MIN(codigo_cuenta) As min_codigo_cuenta FROM con001";$res=pg_query($sql);
@@ -73,10 +73,10 @@ if ($registro=pg_fetch_array($res,0)){$codigocuentad=$registro["min_codigo_cuent
             <tr>
               <td width="93">&nbsp;</td>
               <td width="173"><span class="Estilo5">CODIGO CUENTA : </span></td>
-              <td width="152"><span class="Estilo5"><input name="txtCodigo_Cuentad" class="Estilo5" type="text" id="txtCodigo_Cuentad" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?echo $codigocuentad?>">   </span></td>
-              <td width="88"><span class="Estilo5"><input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentasd.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
-              <td width="148"><span class="Estilo5"><input name="txtCodigo_Cuentah" class="Estilo5" type="text" id="txtCodigo_Cuentah" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?echo $codigocuentah?>">  </span></td>
-              <td width="87"><span class="Estilo5"><input name="Catalogo2" type="button" id="Catalogo22" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentash.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+              <td width="152"><span class="Estilo5"><input name="txtCodigo_Cuentad" class="Estilo5" type="text" id="txtCodigo_Cuentad" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?php echo $codigocuentad?>">   </span></td>
+              <td width="88"><span class="Estilo5"><input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentasd.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
+              <td width="148"><span class="Estilo5"><input name="txtCodigo_Cuentah" class="Estilo5" type="text" id="txtCodigo_Cuentah" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?php echo $codigocuentah?>">  </span></td>
+              <td width="87"><span class="Estilo5"><input name="Catalogo2" type="button" id="Catalogo22" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentash.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
             </tr>
           </table></td>
         </tr>
@@ -187,4 +187,4 @@ if ($registro=pg_fetch_array($res,0)){$codigocuentad=$registro["min_codigo_cuent
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

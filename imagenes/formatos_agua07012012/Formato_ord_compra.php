@@ -1,10 +1,10 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
 if (!$_GET){ $referencia_comp=''; $tipo_compromiso=''; $cod_comp='';}
  else { $nro_orden = $_GET["txtnro_orden"]; $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_comp = $tipo_compromiso;}
 
-$rif_emp="G-20000831-8"; $flete="NUESTRO CARGO";   $direccion_emp="CALLEJON LA MOSCA ENTRE AV. CEDEÑO Y YARACUY";
+$rif_emp="G-20000831-8"; $flete="NUESTRO CARGO";   $direccion_emp="CALLEJON LA MOSCA ENTRE AV. CEDEï¿½O Y YARACUY";
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="Select * from ORD_COMPRA where tipo_compromiso='$tipo_compromiso' and nro_orden='$nro_orden'";
 $fecha_orden=""; $unidad_solicitante=""; $tipo_documento=""; $nro_documento=""; $rif_proveedor=""; $nro_requisicion=""; $inf_canc=""; $nombre_abrev_comp=""; $nombre=""; $des_fuente_financ=""; $concepto="";
 $fecha_requisicion=""; $tiempo_entrega=""; $lugar_entrega=""; $direccion_entrega=""; $operacion=""; $dias_credito=""; $afecta_presupuesto=""; $fuente_financ=""; $anulado=""; $fecha_anulado=""; $cancelada="";
@@ -72,7 +72,7 @@ class PDF extends FPDF{
 		$this->Cell(80,3,'AGUAS DE YARACUY C.A.',0,0,'L');
 		$this->SetFont('Arial','B',12);
 		$this->Cell(55,3,'ORDEN DE COMPRA',0,0,'C');			   
-		$this->Cell(18,3,'N° '.$nro_orden,0,1,'C');
+		$this->Cell(18,3,'Nï¿½ '.$nro_orden,0,1,'C');
 		$this->SetFont('Arial','B',9);
 		$this->Cell(25);
 		$this->Cell(75,3,'DEPARTAMENTO  DE COMPRAS',0,1,'L');
@@ -120,7 +120,7 @@ class PDF extends FPDF{
 		$this->SetFont('Arial','B',7);
 		$this->Cell(135,3,'DESPACHAR A',1,0,'C',true);
 		$this->Cell(40,3,'CLASIFICACION DEL GASTO',1,0,'C',true);
-		$this->Cell(25,3,'N° REQUISICION',1,1,'C',true);
+		$this->Cell(25,3,'Nï¿½ REQUISICION',1,1,'C',true);
 		$this->SetFont('Arial','',8);
 		$direccion_entrega=utf8_decode($direccion_entrega);
 		$this->Cell(135,4,$direccion_entrega,1,0,'C');
@@ -244,7 +244,7 @@ class PDF extends FPDF{
 		$this->Ln(2);
 		$this->SetFont('Arial','',5);
 		$this->Cell(100,4,'NOTA: ARTICULOS CON (*) APLICAN IMPUESTO',0,0,'L');
-		$this->Cell(100,4,'SIA COMPRAS Y ALMACEN',0,1,'R');
+		$this->Cell(100,4,'SIPAP COMPRAS Y ALMACEN',0,1,'R');
 	} 
 		
 }
@@ -297,5 +297,5 @@ class PDF extends FPDF{
 	$pdf->MultiCell($w,3,$denominacion,0); 	 
   }  
   $pdf->Output();
-  pg_close();
+  pg_close($conn);
 ?>

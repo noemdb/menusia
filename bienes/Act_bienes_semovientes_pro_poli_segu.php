@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){
   $cod_bien_sem='';$p_letra="";
   $sql="SELECT * FROM BIEN023 ORDER BY cod_bien_sem";}
@@ -20,7 +20,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Bienes Semovientes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Bienes Semovientes)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -33,7 +33,7 @@ var murl;
     Gcod_bien_sem=document.form1.txtcod_bien_sem.value;
     murl=url+Gcod_bien_sem;
     if (Gcod_bien_sem=="")
-        {alert("Cédula/Rif debe ser Seleccionada");}
+        {alert("Cï¿½dula/Rif debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -84,7 +84,7 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $cod_bien_sem=""; $numero_poliza="";$ced_rif_proveedor="";$fecha_poliza="";$fecha_desde=""; $fecha_hasta="";$monto_poliza=""; $tasa_cobertura=""; $monto_cobertura="";$inf_usuario=""; $observacion="";
 $res=pg_query($sql);
 $filas=pg_num_rows($res);
@@ -178,9 +178,9 @@ $observacion=$registro["observacion"];
                <tr>
                  <td width="120" scope="col"><span class="Estilo5">C&Oacute;DIGO DE L BIEN MUEBLES :</span></td>
                  <td width="839" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                     <input name="txtcod_bien_sem" type="text" id="txtcod_bien_sem" size="30" maxlength="30"  value="<?echo $cod_bien_sem?>" readonly class="Estilo5">
+                     <input name="txtcod_bien_sem" type="text" id="txtcod_bien_sem" size="30" maxlength="30"  value="<?php echo $cod_bien_sem?>" readonly class="Estilo5">
                      <strong><strong>
-                     <input name="bttipo_codeingre2242222224326" type="button" id="bttipo_codeingre2242222224326" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="bttipo_codeingre2242222224326" type="button" id="bttipo_codeingre2242222224326" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                     </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  </tr>
              </table></td>
@@ -212,9 +212,9 @@ $observacion=$registro["observacion"];
                    <tr>
                      <td width="120" scope="col"><span class="Estilo5">C&Eacute;DULA/RIF EMPRESA ASEGURADORA :</span></td>
                      <td width="820" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                         <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?echo $ced_rif_proveedor?>" readonly class="Estilo5">
+                         <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?php echo $ced_rif_proveedor?>" readonly class="Estilo5">
                          <strong><strong>
-                         <input name="bttipo_codeingre22422222243262" type="button" id="bttipo_codeingre224222222432623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                         <input name="bttipo_codeingre22422222243262" type="button" id="bttipo_codeingre224222222432623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                      </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                    </tr>
                  </table>
@@ -237,11 +237,11 @@ $observacion=$registro["observacion"];
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO DE P&Oacute;LIZA :</span></div></td>
                  <td width="92" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnumero_poliza" type="text" id="txtnumero_poliza" size="20" maxlength="20"  value="<?echo $numero_poliza?>" readonly class="Estilo5">
+                     <input name="txtnumero_poliza" type="text" id="txtnumero_poliza" size="20" maxlength="20"  value="<?php echo $numero_poliza?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="146" scope="col"><div align="left"><span class="Estilo5">FECHA EMISI&Oacute;N P&Oacute;LIZA :</span></div></td>
                  <td width="580" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_poliza" type="text" id="txtfecha_poliza" size="15" maxlength="15" value="<?echo $fecha_poliza?>" readonly class="Estilo5">
+                     <input name="txtfecha_poliza" type="text" id="txtfecha_poliza" size="15" maxlength="15" value="<?php echo $fecha_poliza?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -252,11 +252,11 @@ $observacion=$registro["observacion"];
                  <tr>
                    <td width="138" scope="col"><div align="left"><span class="Estilo5">PERIODO COBERTURA DE P&Oacute;LIZA DESDE :</span></div></td>
                    <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15"  value="<?echo $fecha_desde?>" readonly class="Estilo5">
+                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15"  value="<?php echo $fecha_desde?>" readonly class="Estilo5">
                        <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    <td width="50" scope="col"><div align="left"><span class="Estilo5">HASTA :</span></div></td>
                    <td width="635" scope="col"><div align="left"><span class="Estilo5">
-                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15"  value="<?echo $fecha_hasta?>" readonly class="Estilo5">
+                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15"  value="<?php echo $fecha_hasta?>" readonly class="Estilo5">
                        <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    </tr>
                </table>
@@ -269,15 +269,15 @@ $observacion=$registro["observacion"];
                    <tr>
                      <td width="134" scope="col"><div align="left"><span class="Estilo5">MONTO DE LA P&Oacute;LIZA :</span></div></td>
                      <td width="147" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                         <input name="txtmonto_poliza" type="text" id="txtmonto_poliza" size="20" maxlength="15"  value="<?echo $monto_poliza?>" readonly class="Estilo5">
+                         <input name="txtmonto_poliza" type="text" id="txtmonto_poliza" size="20" maxlength="15"  value="<?php echo $monto_poliza?>" readonly class="Estilo5">
                          <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                      <td width="82" scope="col"><div align="left"><span class="Estilo5">TASA DE COBERTURA :</span></div></td>
                      <td width="85" scope="col"><div align="left"><span class="Estilo5">
-                         <input name="txttasa_cobertura" type="text" id="txttasa_cobertura" size="10" maxlength="15" value="<?echo $tasa_cobertura?>" readonly class="Estilo5">
+                         <input name="txttasa_cobertura" type="text" id="txttasa_cobertura" size="10" maxlength="15" value="<?php echo $tasa_cobertura?>" readonly class="Estilo5">
                          <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                      <td width="150" scope="col"><span class="Estilo5">MONTO DEL COBERTURA :</span></td>
                      <td width="337" scope="col"><span class="Estilo5">
-                       <input name="txtmonto_cobertura" type="text" id="txtmonto_cobertura" size="25" maxlength="15" value="<?echo $monto_cobertura?>" readonly class="Estilo5">
+                       <input name="txtmonto_cobertura" type="text" id="txtmonto_cobertura" size="25" maxlength="15" value="<?php echo $monto_cobertura?>" readonly class="Estilo5">
                      </span></td>
                    </tr>
                  </table>
@@ -288,7 +288,7 @@ $observacion=$registro["observacion"];
                <tr>
                  <td width="95" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
                  <td width="855" scope="col"><div align="left">
-                     <textarea name="textobservacion" cols="70" readonly class="Estilo5" class="headers" id="textarea11"><?echo $observacion?></textarea>
+                     <textarea name="textobservacion" cols="70" readonly class="Estilo5" class="headers" id="textarea11"><?php echo $observacion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -302,4 +302,4 @@ $observacion=$registro["observacion"];
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

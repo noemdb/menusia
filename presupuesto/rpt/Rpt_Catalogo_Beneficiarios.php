@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000030"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $cedrifd="zzzzzzzzzz"; $cedrifh="zzzzzzzzzz"; $clasificad=""; $clasificah=""; $detallado="S"; 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Catalogo de Beneficiarios)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Catalogo de Beneficiarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../../class/sia.js" type="text/javascript"></script>
@@ -33,7 +33,7 @@ function Llama_Rpt_catalogo_benefi(murl){var url;var det;var ord;
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 </script>
 </head>
-<?$sql="SELECT MAX(ced_rif) As Max_bene, MIN(ced_rif) As Min_bene  FROM PRE099";
+<?php $sql="SELECT MAX(ced_rif) As Max_bene, MIN(ced_rif) As Min_bene  FROM PRE099";
 $res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){ $cedrifd=$registro["min_bene"]; $cedrifh=$registro["max_bene"];}
 ?>
 <body>
@@ -71,10 +71,10 @@ $res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){ $cedrifd=$registro["m
           <td height="19" colspan="3" align="center"  ><table width="784" border="0">
             <tr>
               <td width="199" height="26"><span class="Estilo5"><div align="left">CEDULA /RIF: </div></span></td>
-              <td width="99"><span class="Estilo5"> <input class="Estilo10" name="txtced_rifd" type="text" id="txtced_rifd" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedrifd?>" size="15" maxlength="15" class="Estilo5">  </span></td>			  
-              <td width="118"><span class="Estilo5"><input class="Estilo10" name="catcedd" type="button" id="catcedd" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_benefi_d.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-              <td width="102"><span class="Estilo5"><input class="Estilo10" name="txtced_rifh" type="text" id="txtced_rifh" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedrifh?>" size="15" maxlength="15" class="Estilo5">   </span></td>
-              <td width="253"><span class="Estilo5"><input class="Estilo10" name="catcedh" type="button" id="catcedh" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_benefi_h.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+              <td width="99"><span class="Estilo5"> <input class="Estilo10" name="txtced_rifd" type="text" id="txtced_rifd" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedrifd?>" size="15" maxlength="15" class="Estilo5">  </span></td>			  
+              <td width="118"><span class="Estilo5"><input class="Estilo10" name="catcedd" type="button" id="catcedd" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_benefi_d.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+              <td width="102"><span class="Estilo5"><input class="Estilo10" name="txtced_rifh" type="text" id="txtced_rifh" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedrifh?>" size="15" maxlength="15" class="Estilo5">   </span></td>
+              <td width="253"><span class="Estilo5"><input class="Estilo10" name="catcedh" type="button" id="catcedh" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_benefi_h.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
             </tr>
           </table></td>
         </tr>
@@ -165,4 +165,4 @@ $res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){ $cedrifd=$registro["m
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

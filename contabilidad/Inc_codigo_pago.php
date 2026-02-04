@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php");
+<?php include ("../class/ventana.php");
 $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$mcod_m="PRE008".$equipo;$codigo_mov=substr($mcod_m,0,49);}else{$codigo_mov=$_GET["codigo_mov"];}
 ?>
@@ -6,20 +6,20 @@ if (!$_GET){$mcod_m="PRE008".$equipo;$codigo_mov=substr($mcod_m,0,49);}else{$cod
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Incluir Códigos en el Pago)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Incluir Cï¿½digos en el Pago)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_pagos.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_pagos.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function revisar(){
 var f=document.form1;
 var Valido=true;
-   if(f.txtcod_presup.value==""){alert("Código Presupuestario no puede estar Vacio");return false;}
-   if(f.txtcod_fuente.value==""){alert("Código de Fuente no puede estar Vacio"); return false; }
+   if(f.txtcod_presup.value==""){alert("Cï¿½digo Presupuestario no puede estar Vacio");return false;}
+   if(f.txtcod_fuente.value==""){alert("Cï¿½digo de Fuente no puede estar Vacio"); return false; }
    if(f.txtmonto.value==""){alert("Monto no puede estar Vacio");return false;}
    if(MontoValido(f.txtmonto.value)) {Valido=true;}
-    else{alert("monto debe tener valores numéricos.");return false;}
+    else{alert("monto debe tener valores numï¿½ricos.");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -32,7 +32,7 @@ return true;}
     <tr>
       <td><table width="683" border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td height="31" align="center" bgcolor="#000066"><span class="Estilo9">INCLUIR NUEVO CÓDIGO EN EL PAGO </span></td>
+          <td height="31" align="center" bgcolor="#000066"><span class="Estilo9">INCLUIR NUEVO Cï¿½DIGO EN EL PAGO </span></td>
         </tr>
         <tr>
           <td><table width="679" border="0">
@@ -43,7 +43,7 @@ return true;}
                 <td width="217"><span class="Estilo5">
                   <input name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo de la Cuenta"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);">
                 </span></td>
-                <td width="103"><input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="103"><input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                 <td width="59"><input name="txtdes_contable" type="hidden" id="txtdes_contable"></td>
               </tr>
           </table></td>
@@ -55,7 +55,7 @@ return true;}
               <td width="18"><span class="Estilo10">
                 <input name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);">
               </span></td>
-              <td width="28"><input name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+              <td width="28"><input name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
               <td width="391"><span class="Estilo10">
                 <input name="txtdes_fuente" type="text" id="txtdes_fuente" size="55" readonly>
               </span></td>
@@ -88,7 +88,7 @@ return true;}
               <td width="270"><span class="Estilo5">REFERENCIA DEL CREDITO ADICIONAL:</span></td>
               <td width="72"><input name="txtref_imput_presu" type="text"  id="txtref_imput_presu" onFocus="encender(this); " onBlur="apagar(this);" size="12" maxlength="8" value="00000000" onchange="checkimput(this.form);"></td>
               <td width="36"><span class="Estilo5">
-                <input name="btref_cred" type="button" id="btref_cred" title="Abrir Catalogo Cr&eacute;ditos Adicional" onClick="VentanaCentrada('Cat_cred_adic.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btref_cred" type="button" id="btref_cred" title="Abrir Catalogo Cr&eacute;ditos Adicional" onClick="VentanaCentrada('Cat_cred_adic.php?criterio=','SIPAP','','750','500','true')" value="...">
 </span></td>
             </tr>
           </table></td>
@@ -129,7 +129,7 @@ return true;}
       </table>
         <table width="653" align="center">
           <tr>
-            <td width="20"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="20"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="131">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="110" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

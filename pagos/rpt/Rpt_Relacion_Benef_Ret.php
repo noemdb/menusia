@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $periodod='01';
  $periodoh='01';
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);
@@ -20,7 +20,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Relaci&oacute;n Beneficiario  Retenci&oacute;n)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Relaci&oacute;n Beneficiario  Retenci&oacute;n)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -131,16 +131,16 @@ var url;
               <td width="182" height="26">
                 <div align="left">TIPO RETENCI&Oacute;N : </div></td>
               <td width="99"><span class="Estilo5">
-                <input name="txtcod_banco_d52" type="text" id="txtcod_banco_d52" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="15" maxlength="15">
+                <input name="txtcod_banco_d52" type="text" id="txtcod_banco_d52" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="15" maxlength="15">
               </span></td>
               <td width="118"><span class="Estilo5">
-                <input name="Catalogo352" type="button" id="Catalogo352" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo352" type="button" id="Catalogo352" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                <input name="txtcod_banco_d242" type="text" id="txtcod_banco_d242" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="15" maxlength="15">
+                <input name="txtcod_banco_d242" type="text" id="txtcod_banco_d242" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="15" maxlength="15">
               </span></td>
               <td width="253"><span class="Estilo5">
-                <input name="Catalogo3242" type="button" id="Catalogo3242" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3242" type="button" id="Catalogo3242" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -154,16 +154,16 @@ var url;
               <td width="182" height="26">
                 <div align="left">N&Uacute;MERO DE ORDEN   : </div></td>
               <td width="104"><span class="Estilo5">
-                <input name="txtcod_banco_d5" type="text" id="txtcod_banco_d5" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="15" maxlength="15">
+                <input name="txtcod_banco_d5" type="text" id="txtcod_banco_d5" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="15" maxlength="15">
               </span></td>
               <td width="114"><span class="Estilo5">
-                <input name="Catalogo35" type="button" id="Catalogo35" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo35" type="button" id="Catalogo35" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                <input name="txtcod_banco_d24" type="text" id="txtcod_banco_d24" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="15" maxlength="15">
+                <input name="txtcod_banco_d24" type="text" id="txtcod_banco_d24" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="15" maxlength="15">
               </span></td>
               <td width="252"><span class="Estilo5">
-                <input name="Catalogo324" type="button" id="Catalogo324" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo324" type="button" id="Catalogo324" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -177,12 +177,12 @@ var url;
               <td width="186" align="center"><div align="left">FECHA ORDEN : </div></td>
               <td width="233" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="352" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -292,13 +292,13 @@ var url;
               <td width="239" align="center"><div align="left">FECHA CANCELADA DESDE : </div></td>
               <td width="177" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad2" type="text" id="txtFechad2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad2" type="text" id="txtFechad2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="75" align="center"><div align="left">HASTA :</div></td>
               <td width="280" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah2" type="text" id="txtFechah2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah2" type="text" id="txtFechah2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -375,4 +375,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

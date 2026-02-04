@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");   $p_letra="";
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{$Nom_Emp=busca_conf();}
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{$Nom_Emp=busca_conf();}
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="01-0000005"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){ $tipo_cuenta=''; $sql="SELECT * FROM ban001 ORDER BY tipo_cuenta";}
 else {$tipo_cuenta = $_GET["Gtipo_cuenta"];$p_letra=substr($tipo_cuenta, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")||($p_letra=="C")){$tipo_cuenta=substr($tipo_cuenta,1,3);} else{$tipo_cuenta=substr($tipo_cuenta,0,3);}
@@ -21,7 +21,7 @@ else {$tipo_cuenta = $_GET["Gtipo_cuenta"];$p_letra=substr($tipo_cuenta, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipos de Cuenta)</title>
+<title>SIPAP CONTROL BANCARIO (Tipos de Cuenta)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -55,7 +55,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $des_tipo_cuenta="";$conciliable="";$res=pg_query($sql);$filas=pg_num_rows($res); if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From ban001 ORDER BY tipo_cuenta";} if ($p_letra=="A"){$sql="SELECT * From ban001 ORDER BY tipo_cuenta desc";} $res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); $tipo_cuenta=$registro["tipo_cuenta"]; $des_tipo_cuenta=$registro["descripcion_tipo"];$conciliable=$registro["conciliable"];}
 if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
@@ -71,17 +71,17 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
 <table width="978" height="359" border="1" id="tablacuerpo">
   <tr>
     <td><table width="92" height="354" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-	  <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?> 
+	  <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?> 
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_Tipo_Cuenta.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="Inc_Tipo_Cuenta.php">Incluir</a></div></td>
       </tr>
-	  <?}if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+	  <?php }if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_Tipo_Cuenta.php?Gtipo_cuenta=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="javascript:Llamar_Ventana('Mod_Tipo_Cuenta.php?Gtipo_cuenta=')">Modificar</a></div></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?> 
+	  <?php } if ($Mcamino{2}=="S"){?> 
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="javascript:Mover_Registro('P');">Primero</a></div></td>
@@ -100,12 +100,12 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_tipos_cuenta.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="Cat_act_tipos_cuenta.php" class="menu">Catalogo</a></div></td>
   </tr>
-  <?}if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+  <?php }if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></div></td>
   </tr>
-  <?}?> 
+  <?php }?> 
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="menu.php">Menu</a></div></td>
@@ -123,7 +123,7 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
                   <td width="830" height="28"><table width="830" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td width="200"><span class="Estilo5">TIPO DE CUENTA :</span></td>
-                        <td width="630"><span class="Estilo5"> <input name="txttipo_cuenta" type="text"  id="txttipo_cuenta"  value="<?echo $tipo_cuenta?>" size="5" maxlength="5" readonly></span></td>
+                        <td width="630"><span class="Estilo5"> <input name="txttipo_cuenta" type="text"  id="txttipo_cuenta"  value="<?php echo $tipo_cuenta?>" size="5" maxlength="5" readonly></span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -132,7 +132,7 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
                   <td><table width="830" border="0" cellpadding="0" cellspacing="0" dwcopytype="CopyTableColumn">
                     <tr>
                       <td width="200"><span class="Estilo5">DESCRIPCI&Oacute;N TIPO CUENTA : </span></td>
-                      <td width="630"><span class="Estilo5"><input name="txtdes_tipo_cuenta" type="text"  id="txtdes_tipo_cuenta"  value="<?echo $des_tipo_cuenta?>" size="100" maxlength="80" readonly>   </span></td>
+                      <td width="630"><span class="Estilo5"><input name="txtdes_tipo_cuenta" type="text"  id="txtdes_tipo_cuenta"  value="<?php echo $des_tipo_cuenta?>" size="100" maxlength="80" readonly>   </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -141,7 +141,7 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
                   <td><table width="830" border="0" cellpadding="0" cellspacing="0" dwcopytype="CopyTableColumn">
                     <tr>
                       <td width="200"><span class="Estilo5">CONCILIABLE :</span></td>
-                      <td width="630"><span class="Estilo5"><input name="txtconciliable" type="text"  id="txtconciliable"  value="<?echo $conciliable?>" size="3" maxlength="3" readonly>   </span></td>
+                      <td width="630"><span class="Estilo5"><input name="txtconciliable" type="text"  id="txtconciliable"  value="<?php echo $conciliable?>" size="3" maxlength="3" readonly>   </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -155,4 +155,4 @@ if($conciliable=="N"){$conciliable="NO";}else{$conciliable="SI";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

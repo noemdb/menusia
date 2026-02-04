@@ -1,4 +1,4 @@
-<? include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
+<?php  include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
  $SIA_Definicion=$_POST["txtSIA_Definicion"];  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];  
  $ced_r=$_POST["txtced_r"]; $nomb_r=$_POST["txtnomb"]; $fecha_fin=$_POST["txtfecha_fin"];$Formato_Cuenta=$_POST["txtformato"]; $titulo=$_POST["txttitulo"];
  $fecha_hoy=asigna_fecha_hoy(); $fecha_c="01/01/".substr($fecha_fin,0,4);
@@ -9,7 +9,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -88,7 +88,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
               <td><table width="840" border="0">
                 <tr>
                   <td width="175"><span class="Estilo5">&nbsp;</span></td>
-                  <td width="227"><span class="Estilo10"> <? echo $titulo; ?>    </span></td>
+                  <td width="227"><span class="Estilo10"> <?php  echo $titulo; ?>    </span></td>
                   <td width="109">&nbsp;</td>
                   <td width="33"></td>
                   <td width="288"></td>
@@ -111,7 +111,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                 <tr>
                   <td width="198"><span class="Estilo5">FUENTE DE FINANCIAMIENTO :</span></td>
                   <td width="21"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);" onkeypress="return stabular(event,this)">  </span></td>
-                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
                   <td width="569"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="75" readonly onkeypress="return stabular(event,this)"> </span></td>
                 </tr>
               </table></td>
@@ -129,7 +129,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                 <tr>
                   <td width="182"><span class="Estilo5">CODIGO CONTABLE GASTO:</span></td>
                   <td width="152"><span class="Estilo5"><input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="25" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);" onkeypress="return stabular(event,this)">   </span></td>
-                  <td width="37"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+                  <td width="37"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
                   <td width="460"><span class="Estilo5"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" size="65" maxlength="250" readonly onkeypress="return stabular(event,this)">   </span></td>
                 </tr>
               </table></td>
@@ -144,11 +144,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                   <td width="103" class="Estilo5"><input class="Estilo10" name="txtAplicacion" type="text" id="txtAplicacion" title="Registre el Tipo de Aplicacion" size="4" maxlength="1" value="1"  onFocus="encender(this)" onBlur="apagar(this)" onkeypress="return stabular(event,this)"></td>
                   <td width="93" class="Estilo5">ASIGNACI&Oacute;N :</td>
                   <td width="248" class="Estilo5">
-                   <? IF($SIA_Definicion=="N"){?>
+                   <?php  IF($SIA_Definicion=="N"){?>
                        <input class="Estilo10" name="txtasignado" type="text" id="txtasignado" size="30" style="text-align:right" maxlength="30" title="Registre el Monto de Asignacion" value="0" onFocus="encender_monto(this)" onBlur="apagar(this)" onKeypress="return validarNum(event,this)" >
-                    <?} else { ?>
+                    <?php } else { ?>
                        <input class="Estilo10" name="txtasignado" type="text" id="txtasignado" size="30" style="text-align:right" maxlength="30" readonly value="0" onkeypress="return stabular(event,this)">
-                     <?}?>
+                     <?php }?>
                    </td>
                 </tr>
               </table></td>

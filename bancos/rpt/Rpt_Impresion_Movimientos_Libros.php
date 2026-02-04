@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $cod_banco_d="";$num_trasnf_d="00000000"; $num_trasnf_h="99999999";$tipo_mov="";
  $vurl;
 ?>
@@ -10,7 +10,7 @@ $cod_banco_d="";$num_trasnf_d="00000000"; $num_trasnf_h="99999999";$tipo_mov="";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANACARIO (Reporte Impresion Movimientos en Libros)</title>
+<title>SIPAP CONTROL BANACARIO (Reporte Impresion Movimientos en Libros)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -63,7 +63,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Cod_Banco) As Max_Cod_Banco, MIN(Cod_Banco) As Min_Cod_Banco FROM BAN002";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -99,10 +99,10 @@ if($encontro=true){$tipo_mov_d=$registro["min_tipo_movimiento"];$tipo_mov_h=$reg
                <td width="244" height="26">
                 <div align="left">CODIGO DE BANCO DESDE : </div></td>
               <td width="52"><span class="Estilo5">
-                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="32">
+                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="32">
               </span></td>
               <td width="35"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="427"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_d" type="text" id="txtdesc_banco_d" size="60" maxlength="60"  readonly>
@@ -120,12 +120,12 @@ if($encontro=true){$tipo_mov_d=$registro["min_tipo_movimiento"];$tipo_mov_h=$reg
                   <td width="318" align="center"><div align="left">NUMERO DE TRANSFERENCIA DESDE : </div></td>
                   <td width="143" align="center">
                     <div align="left"><span class="Estilo5">
-                      <input name="txtnum_trasnf_d" type="text" id="txtnum_trasnf_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_trasnf_d?>" size="12" maxlength="12">
+                      <input name="txtnum_trasnf_d" type="text" id="txtnum_trasnf_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_trasnf_d?>" size="12" maxlength="12">
                   </span></div></td>
                   <td width="75" align="center"><div align="left">HASTA :</div></td>
                   <td width="247" align="center">
                     <div align="left"><span class="Estilo5">
-                      <input name="txtnum_trasnf_h" type="text" id="txtnum_trasnf_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_trasnf_h?>" size="12" maxlength="12">
+                      <input name="txtnum_trasnf_h" type="text" id="txtnum_trasnf_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_trasnf_h?>" size="12" maxlength="12">
                   </span></div></td>
                 </tr>
               </table>
@@ -188,4 +188,4 @@ if($encontro=true){$tipo_mov_d=$registro["min_tipo_movimiento"];$tipo_mov_h=$reg
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

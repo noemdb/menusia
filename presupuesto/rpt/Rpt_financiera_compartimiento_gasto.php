@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/funciones.php");?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/funciones.php");?>
 <?php include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $cod_presup_d="";  $cod_presup_h="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"; 
  $cod_fuente_d="";  $cod_fuente_h="zz"; $des_fuente_d=""; $des_fuente_h="";
  $vurl;
@@ -11,7 +11,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Financiera)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Financiera)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -114,10 +114,10 @@ var url;
           <td height="30" colspan="2"><table width="813" border="0">
             <tr>
               <td width="298" height="26">                <div align="left">C&Oacute;DIGO PRESUPUESTARIO DESDE : </div></td><td width="149"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtFechad22" type="text" id="txtFechad22" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="22" maxlength="22" onChange="checkrefechad(this.form)">
+                <input name="txtFechad22" type="text" id="txtFechad22" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="22" maxlength="22" onChange="checkrefechad(this.form)">
               </span></span></td>
               <td width="352"><span class="Estilo5">
-                <input name="Catalogo32222" type="button" id="Catalogo32222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo32222" type="button" id="Catalogo32222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               </tr>
           </table></td>
@@ -141,10 +141,10 @@ var url;
                 <div align="left"></div></td>
               <td width="73">HASTA :</td>
               <td width="148"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtFechad222" type="text" id="txtFechad222" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="22" maxlength="22" onChange="checkrefechad(this.form)">
+                <input name="txtFechad222" type="text" id="txtFechad222" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="22" maxlength="22" onChange="checkrefechad(this.form)">
               </span></span></td>
               <td width="347"><span class="Estilo5">
-                <input name="Catalogo322222" type="button" id="Catalogo322222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo322222" type="button" id="Catalogo322222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               </tr>
           </table></td>
@@ -158,10 +158,10 @@ var url;
               <td width="321" height="26">
                 <div align="left">FUENTE DE FINANCIAMIENTO  DESDE : </div></td>
               <td width="62"><span class="Estilo5">
-                <input name="txtced_rif_benef_d2" type="text" id="txtced_rif_benef_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_d?>" size="5" maxlength="5">
+                <input name="txtced_rif_benef_d2" type="text" id="txtced_rif_benef_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_d?>" size="5" maxlength="5">
               </span></td>
               <td width="45"><span class="Estilo5">
-                <input name="Catalogo3223" type="button" id="Catalogo322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3223" type="button" id="Catalogo322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_ced_rif_benef_d2" type="text" id="txtdesc_ced_rif_benef_d" size="50" maxlength="50"  value="C&Oacute;DIGO PRESUPUESTARIO" readonly>
@@ -179,10 +179,10 @@ var url;
                 <div align="left"></div></td>
               <td width="75">HASTA : </td>
               <td width="61"><span class="Estilo5">
-                <input name="txtced_rif_benef_d222" type="text" id="txtced_rif_benef_d222" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_d?>" size="5" maxlength="5">
+                <input name="txtced_rif_benef_d222" type="text" id="txtced_rif_benef_d222" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_d?>" size="5" maxlength="5">
               </span></td>
               <td width="46"><span class="Estilo5">
-                <input name="Catalogo322322" type="button" id="Catalogo322322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo322322" type="button" id="Catalogo322322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_ced_rif_benef_d222" type="text" id="txtdesc_ced_rif_benef_d222" size="50" maxlength="50"  value="C&Oacute;DIGO PRESUPUESTARIO" readonly>
@@ -294,4 +294,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

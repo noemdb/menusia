@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $cod_banco_d="";
  $cod_banco_h="";
  $num_cheque_d="00000000";
@@ -13,7 +13,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Impresi&oacute;n de Cheques)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Impresi&oacute;n de Cheques)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -66,7 +66,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Cod_Banco) As Max_Cod_Banco, MIN(Cod_Banco) As Min_Cod_Banco FROM BAN002";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -101,10 +101,10 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
             <tr>
               <td width="278" align="center"><div align="left">CODIGO DE BANCO DESDE: </div></td>
               <td width="42"><span class="Estilo5">
-                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="5">
+                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="5">
               </span></td>
               <td width="28"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="450"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_d" type="text" id="txtdesc_banco_d" size="60" maxlength="60"  readonly>
@@ -122,12 +122,12 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
                   <td width="254" align="center"><div align="left">NUMERO DE CHEQUE DESDE: </div></td>
                   <td width="178" align="center">
                     <div align="left"><span class="Estilo5">
-                      <input name="txtnum_cheq_d" type="text" id="txtnum_cheq_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_d?>" size="12" maxlength="12">
+                      <input name="txtnum_cheq_d" type="text" id="txtnum_cheq_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_d?>" size="12" maxlength="12">
                   </span></div></td>
                   <td width="78" align="center"><div align="left">HASTA :</div></td>
                   <td width="273" align="center">
                     <div align="left"><span class="Estilo5">
-                      <input name="txtnum_cheq_h" type="text" id="txtnum_cheq_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_cheque_h?>" size="12" maxlength="12">
+                      <input name="txtnum_cheq_h" type="text" id="txtnum_cheq_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_cheque_h?>" size="12" maxlength="12">
                   </span></div></td>
                 </tr>
               </table>
@@ -163,4 +163,4 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close();?>

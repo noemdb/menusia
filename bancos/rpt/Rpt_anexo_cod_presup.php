@@ -1,8 +1,8 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
 if (!$_GET){$cod_banco='';$num_cheque=''; }  else{$cod_banco=$_GET["cod_banco"];$num_cheque=$_GET["num_cheque"];}  $fecha_hoy=asigna_fecha_hoy(); 
 $sql="Select * from EDO_CHEQUES where cod_banco='$cod_banco' and num_cheque='$num_cheque'";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos; .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos; .</b></p>"; exit; }
 $nombre_banco="";$nro_cuenta="";$concepto="";$num_cheque=""; $nro_orden=""; $nombre_benef=""; $ced_rif=""; $concepto=""; $monto_cheque=0; $fecha=""; $mes=""; $inf_usuario=""; $anulado="N";  $fecha_anulado="";  $tipo_pago=""; $edo_cheque=""; $entregado="N";$fecha_entregado="";$ced_rif_recib="";$nombre_recib="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0);
@@ -58,7 +58,7 @@ class PDF extends FPDF{
 		$this->SetY(-10);
 		$this->Ln(5);
 		$this->SetFont('Arial','I',5);
-		$this->Cell(50,5,'SIA Control Bancario',0,1,'L');
+		$this->Cell(50,5,'SIPAP Control Bancario',0,1,'L');
 	} 
 }  
   $pdf=new PDF('P', 'mm', Letter);
@@ -84,6 +84,6 @@ class PDF extends FPDF{
   $pdf->Cell(175,4,'TOTAL Bs.',0,0,'R');
   $pdf->Cell(25,4,$total_pre,0,1,'R');
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?>
 

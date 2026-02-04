@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); 
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); 
 include ("../class/configura.inc"); $equipo = getenv("COMPUTERNAME"); $mcod_m = "BAN05L".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000035"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 
 if (!$_GET){  $gcod_banco='';  $cod_banco='';  $p_letra=''; $tipo_mov='';  $referencia=''; $sql="SELECT * FROM MOV_BANCOS ORDER BY cod_banco,referencia,tipo_mov_banco";}
 else {  $gcod_banco=$_GET["Gcod_banco"];  $p_letra=substr($gcod_banco, 0, 1);
@@ -21,7 +21,7 @@ else {  $gcod_banco=$_GET["Gcod_banco"];  $p_letra=substr($gcod_banco, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Movimientos en Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Movimientos en Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -50,7 +50,7 @@ var Gtipo_mov=document.form1.txttipo_movimiento.value
 function Llama_Anular(manu,mconc){var url;
 var Gtipo_mov=document.form1.txttipo_movimiento.value
   if(mconc=="00"){if ((Gtipo_mov=="ANU")||(Gtipo_mov=="ANC")||(Gtipo_mov=="AND")||(Gtipo_mov=="REV")||(manu=="S")){alert("MOVIMIENTO  NO PUEDE SER ANULADO"); }
-  else{url="Anula_mov_banco.php?cod_banco="+document.form1.txtcod_banco.value+"&referencia="+document.form1.txtreferencia.value+"&tipo_mov="+Gtipo_mov+"&fecha_fin=<?echo $Fec_Fin_Ejer?>"; VentanaCentrada(url,'Anular Movimiento','','800','400','true'); } }else {alert("MOVIMIENTO ESTA CONCILIADO");}
+  else{url="Anula_mov_banco.php?cod_banco="+document.form1.txtcod_banco.value+"&referencia="+document.form1.txtreferencia.value+"&tipo_mov="+Gtipo_mov+"&fecha_fin=<?php echo $Fec_Fin_Ejer?>"; VentanaCentrada(url,'Anular Movimiento','','800','400','true'); } }else {alert("MOVIMIENTO ESTA CONCILIADO");}
 }
 function Llama_cargar(codigo_mov){var url;  murl="Car_Mov_Banco.php?codigo_mov="+codigo_mov; document.location=murl;}
 </script>
@@ -66,7 +66,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<? 
+<?php  
 $resultado=pg_exec($conn,"SELECT BORRAR_BAN035('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);
 $nombre_banco="";$nro_cuenta="";$des_tipo_mov="";$referencia=""; $tipo_mov=""; $descripcion=""; $monto_mov_banco=0; $fecha=""; $inf_usuario=""; $anulado="N"; $mes_conciliacion="00"; $fecha_anulado="";
 $res=pg_query($sql);$filas=pg_num_rows($res); if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From MOV_BANCOS ORDER BY cod_banco,referencia,tipo_mov_banco";} if ($p_letra=="A"){$sql="SELECT * From MOV_BANCOS ORDER BY cod_banco Desc,referencia Desc,tipo_mov_banco Desc";} $res=pg_query($sql);$filas=pg_num_rows($res);}
@@ -75,7 +75,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
   $des_tipo_mov=$registro["descrip_tipo_mov"]; $referencia=$registro["referencia"];  $tipo_mov=$registro["tipo_mov_banco"];   $fecha=$registro["fecha_mov_banco"];
   $monto_mov_banco=$registro["monto_mov_banco"]; $descripcion=$registro["des_mov_banco"];   $inf_usuario=$registro["inf_usuario"];
 }$clave=$cod_banco.$referencia.$tipo_mov;  $monto_mov_banco=formato_monto($monto_mov_banco); if($fecha==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha);}  if($fecha==""){$sfecha="0000000000";}else{$sfecha=formato_aaaammdd($fecha);}  $criterio=$sfecha.$referencia.'B'.$cod_banco;if(($anulado=='S')and(($tipo_mov=="ANU")or($tipo_mov=="ANC")or($tipo_mov=="AND"))){$criterio=$sfecha.'A'.substr($referencia,1,7).'B'.$cod_banco;}
-pg_close();
+pg_close($conn);
 ?>
 <body>
 <table width="978" height="38" border="0" bgcolor="#000066">
@@ -88,16 +88,16 @@ pg_close();
 <table width="978" height="351" border="1" id="tablacuerpo">
   <tr>
     <td width="92" height="345"><table width="92" height="342" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-      <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+      <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_Mov('I')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu ref="javascript:Llamar_Inc_Mov('I')">Incluir</a></div></td>
       </tr>
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llama_cargar('<?echo $codigo_mov?>') ";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu ref="javascript:Llama_cargar('<?echo $codigo_mov?>')">Cargar</a></div></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llama_cargar('<?php echo $codigo_mov?>') ";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu ref="javascript:Llama_cargar('<?php echo $codigo_mov?>')">Cargar</a></div></td>
       </tr>
-      <?} if ($Mcamino{2}=="S"){?>
+      <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu  href="javascript:Mover_Registro('P');">Primero</a></div></td>
@@ -117,17 +117,17 @@ pg_close();
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_mov_banco.php')";
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="Cat_act_mov_banco.php" class="menu">Catalogo</a></div></td>
 	  </tr>
-	  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Eliminar('<?echo $anulado?>','<? echo $mes_conciliacion?>');" class="menu">Eliminar</a></div></td>
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Eliminar('<?php echo $anulado?>','<?php  echo $mes_conciliacion?>');" class="menu">Eliminar</a></div></td>
 	  </tr>
-	  <?} if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Anular('<?echo $anulado?>','<? echo $mes_conciliacion?>');" class="menu">Anular</a></div></td>
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Anular('<?php echo $anulado?>','<?php  echo $mes_conciliacion?>');" class="menu">Anular</a></div></td>
 	  </tr>
-	  <?}?>
+	  <?php }?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="menu.php">Menu</a></div></td>
@@ -144,14 +144,14 @@ pg_close();
                   <td width="855"><table width="854" border="0" cellspacing="1" cellpadding="1">
                      <tr>
                       <td width="115"><span class="Estilo5">C&Oacute;DIGO BANCO:</span></td>
-                      <td width="107"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text"  id="txtcod_banco"  value="<?echo $cod_banco?>" size="8" maxlength="4" readonly> </span></td>
-                       <? if($anulado=='S'){?> <td width="151" center><span class="Estilo15">ANULADO</span></td>
-                       <? }else{if($mes_conciliacion<>'00'){?> <td width="109"><a class="Estilo19" href="javascript:alert('MOVIMIENTO CONCILIADO EL MES: <?echo $mes_conciliacion?>');">CONCILIADO</a>
-                       <? }else{?><td width="102"></td><? }}?>
+                      <td width="107"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text"  id="txtcod_banco"  value="<?php echo $cod_banco?>" size="8" maxlength="4" readonly> </span></td>
+                       <?php  if($anulado=='S'){?> <td width="151" center><span class="Estilo15">ANULADO</span></td>
+                       <?php }else{if($mes_conciliacion<>'00'){?> <td width="109"><a class="Estilo19" href="javascript:alert('MOVIMIENTO CONCILIADO EL MES: <?php echo $mes_conciliacion?>');">CONCILIADO</a>
+                       <?php }else{?><td width="102"></td><?php } }?>
                       <td width="127"><span class="Estilo5">N&Uacute;MERO DE CUENTA:</span></td>
                       <td width="216"><div align="left"><span class="Estilo5">
-                      <input class="Estilo10" name="txtnro_cuenta" type="text"  id="txtnro_cuenta"  value="<?echo $nro_cuenta?>" size="30" maxlength="30" readonly></span></div></td>
-                       <td width="28"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                      <input class="Estilo10" name="txtnro_cuenta" type="text"  id="txtnro_cuenta"  value="<?php echo $nro_cuenta?>" size="30" maxlength="30" readonly></span></div></td>
+                       <td width="28"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -160,7 +160,7 @@ pg_close();
                   <td><table width="854" border="0" cellspacing="1" cellpadding="1">
                       <tr>
                         <td width="130"><span class="Estilo5">NOMBRE DEL BANCO : </span></td>
-                        <td width="713"><span class="Estilo5">  <input class="Estilo10" name="txtNombre_Banco" type="text" id="txtcod_titulo32"  value="<?echo $nombre_banco?>" size="100" maxlength="100" readonly> </span></td>
+                        <td width="713"><span class="Estilo5">  <input class="Estilo10" name="txtNombre_Banco" type="text" id="txtcod_titulo32"  value="<?php echo $nombre_banco?>" size="100" maxlength="100" readonly> </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -169,10 +169,10 @@ pg_close();
                   <td><table width="854" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td width="100"><span class="Estilo5">REFERENCIA  :</span></td>
-                        <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtreferencia" type="text"  id="txtreferencia"  value="<?echo $referencia?>" size="10" maxlength="8" readonly> </span></td>
+                        <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtreferencia" type="text"  id="txtreferencia"  value="<?php echo $referencia?>" size="10" maxlength="8" readonly> </span></td>
                         <td width="122"><span class="Estilo5">TIPO MOVIMIENTO :</span></td>
-                        <td width="57"><span class="Estilo5"><input class="Estilo10" name="txttipo_movimiento" type="text" id="txttipo_movimiento"  value="<?echo $tipo_mov?>" size="4" maxlength="4" readonly></span></td>
-                        <td width="450"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_mov" type="text" id="txtdes_tipo_mov"  value="<?echo $des_tipo_mov?>" size="63" maxlength="63" readonly> </span></td>
+                        <td width="57"><span class="Estilo5"><input class="Estilo10" name="txttipo_movimiento" type="text" id="txttipo_movimiento"  value="<?php echo $tipo_mov?>" size="4" maxlength="4" readonly></span></td>
+                        <td width="450"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_mov" type="text" id="txtdes_tipo_mov"  value="<?php echo $des_tipo_mov?>" size="63" maxlength="63" readonly> </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -181,7 +181,7 @@ pg_close();
                   <td width="855"><table width="853" border="0" cellspacing="1" cellpadding="1">
                   <tr>
                    <td width="100"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                   <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" readonly="readonly" id="txtdescripcion"><?echo $descripcion?></textarea> </span></td>
+                   <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" readonly="readonly" id="txtdescripcion"><?php echo $descripcion?></textarea> </span></td>
                   </tr>
                   </table></td>
                 </tr>
@@ -190,9 +190,9 @@ pg_close();
                   <td><table width="854" border="0" cellpadding="2" cellspacing="1">
                   <tr>
                     <td width="74"><span class="Estilo5">FECHA :</span></td>
-                    <td width="506"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text" id="txtfecha"  value="<?echo $fecha?>" size="10" maxlength="10" readonly></span></td>
+                    <td width="506"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text" id="txtfecha"  value="<?php echo $fecha?>" size="10" maxlength="10" readonly></span></td>
                     <td width="66"><span class="Estilo5">MONTO :</span></td>
-                    <td width="187"><span class="Estilo5"> <input class="Estilo10" name="txtmonto_mov_banco" type="text" id="txtmonto_mov_banco" style="text-align:right" value="<?echo $monto_mov_banco?>" size="17" maxlength="16" readonly> </span></td>
+                    <td width="187"><span class="Estilo5"> <input class="Estilo10" name="txtmonto_mov_banco" type="text" id="txtmonto_mov_banco" style="text-align:right" value="<?php echo $monto_mov_banco?>" size="17" maxlength="16" readonly> </span></td>
                   </tr>
                  </table></td>
                </tr>
@@ -202,21 +202,21 @@ pg_close();
 <form name="form2" method="post" action="Inc_Mov_Banco.php">
 <table width="10">
   <tr>
-     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtced_r" type="hidden" id="txtced_r" value="<?echo $Rif_Emp?>"></td>
-     <td width="5"><input class="Estilo10" name="txtnomb" type="hidden" id="txtnomb" value="<?echo $Nom_Emp?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtcod_b" type="hidden"  id="txtcod_b"  value="<?echo $cod_banco?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtnro_c" type="hidden"  id="txtnro_c"  value="<?echo $nro_cuenta?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtnombre_b" type="hidden"  id="txtnombre_b"  value="<?echo $nombre_banco?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtref" type="hidden"  id="txtref"  value="<?echo $referencia?>" ></td>	 
-	 <td width="5"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m"  value="<?echo $tipo_mov?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtdes_tipo_m" type="hidden" id="txtdes_tipo_m"  value="<?echo $des_tipo_mov?>"></td>
-	 <td width="5"><input class="Estilo10" name="txtdesc" type="hidden" id="txtdesc" value="<?echo $descripcion?>"></td>
+     <td width="5"><input class="Estilo10" name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtced_r" type="hidden" id="txtced_r" value="<?php echo $Rif_Emp?>"></td>
+     <td width="5"><input class="Estilo10" name="txtnomb" type="hidden" id="txtnomb" value="<?php echo $Nom_Emp?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtcod_b" type="hidden"  id="txtcod_b"  value="<?php echo $cod_banco?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtnro_c" type="hidden"  id="txtnro_c"  value="<?php echo $nro_cuenta?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtnombre_b" type="hidden"  id="txtnombre_b"  value="<?php echo $nombre_banco?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtref" type="hidden"  id="txtref"  value="<?php echo $referencia?>" ></td>	 
+	 <td width="5"><input class="Estilo10" name="txttipo_m" type="hidden" id="txttipo_m"  value="<?php echo $tipo_mov?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtdes_tipo_m" type="hidden" id="txtdes_tipo_m"  value="<?php echo $des_tipo_mov?>"></td>
+	 <td width="5"><input class="Estilo10" name="txtdesc" type="hidden" id="txtdesc" value="<?php echo $descripcion?>"></td>
   </tr>
 </table>
 </form>
@@ -226,4 +226,4 @@ pg_close();
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $Doc_compromiso='';} else {$Doc_compromiso = $_GET["GDoc_compromiso"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Documentos Compromisos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Documentos Compromisos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -24,7 +24,7 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
     url="Delete_doc_compromiso.php?txtdoc_compromiso="+f.txtdoc_compromiso.value;
     document.location = url;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre002 where tipo_compromiso='$Doc_compromiso'"; $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$Doc_Compromiso=$registro["tipo_compromiso"];$Nombre_doc_compromiso=$registro["nombre_tipo_comp"];  $Nombre_Abrev=$registro["nombre_abrev_comp"];}
@@ -60,21 +60,21 @@ if ($registro=pg_fetch_array($res,0)){$Doc_Compromiso=$registro["tipo_compromiso
           <tr>
             <td height="49" valign="middle"><blockquote>
               <p class="Estilo5">C&Oacute;DIGO :
-                                <input readOnly size="10" value="<?ECHO $Doc_compromiso?>" name="txtdoc_compromiso">
+                                <input readOnly size="10" value="<?php ECHO $Doc_compromiso?>" name="txtdoc_compromiso">
                   </p>
                           </blockquote></td>
           </tr>
           <tr>
             <td height="49" valign="middle"><blockquote>
               <p align="left"><span class="Estilo5">NOMBRE DEL DOCUMENTO :</span>
-                <input readOnly name="txtnombre_doc_compromiso" id="txtnombre_doc_compromiso" value="<?ECHO $Nombre_doc_compromiso?>" size="80">
+                <input readOnly name="txtnombre_doc_compromiso" id="txtnombre_doc_compromiso" value="<?php ECHO $Nombre_doc_compromiso?>" size="80">
 </p>
             </blockquote></td>
           </tr>
           <tr>
             <td height="43" valign="middle"><blockquote>
               <p><span class="Estilo5">NOMBRE ABREVIADO DEL DOCUMENTO :</span>
-                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?ECHO $Nombre_Abrev?>" size="8">
+                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?php ECHO $Nombre_Abrev?>" size="8">
               </p>
             </blockquote></td>
           </tr>
@@ -99,4 +99,4 @@ if ($registro=pg_fetch_array($res,0)){$Doc_Compromiso=$registro["tipo_compromiso
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

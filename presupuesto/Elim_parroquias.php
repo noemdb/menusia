@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_parroquia='';} else {$cod_parroquia=$_GET["Gcod_parroquia"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminar Parroquia)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminar Parroquia)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -27,15 +27,15 @@ var url;
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Parroquia.value==""){alert("Código de la Parroquia no puede estar Vacio");return false;}
+    if(f.txtCodigo_Parroquia.value==""){alert("Cï¿½digo de la Parroquia no puede estar Vacio");return false;}
     if(f.txtNombre_Parroquia.value==""){alert("Nombre de la parroquia no puede estar Vacia"); return false; }
        else{f.txtNombre_Parroquia.value=f.txtNombre_Parroquia.value.toUpperCase();}
     if(f.txtCodigo_Parroquia.value.length==6){f.txtCodigo_Parroquia.value=f.txtCodigo_Parroquia.value.toUpperCase();}
-       else{alert("Longitud Código de la Parroquia Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de la Parroquia Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_parroquia="";$sql="Select cod_parroquia,nombre_parroquia from PRE096 where cod_parroquia='$cod_parroquia'";
 $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_parroquia=$registro["cod_parroquia"];  $den_parroquia=$registro["nombre_parroquia"];}
@@ -76,7 +76,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_parroquia=$reg
                   <tr>
                     <td width="148"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="650"><span class="Estilo5">
-                      <input name="txtCodigo_Parroquia" type="text" id="txtCodigo_Parroquia" title="Registre el C&oacute;digo de la Parroquia" size="10" maxlength="6"  readonly value="<?ECHO $cod_parroquia?>">
+                      <input name="txtCodigo_Parroquia" type="text" id="txtCodigo_Parroquia" title="Registre el C&oacute;digo de la Parroquia" size="10" maxlength="6"  readonly value="<?php ECHO $cod_parroquia?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -89,7 +89,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_parroquia=$reg
                   <table width="816" border="0">
                     <tr>
                       <td width="148"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="666"><input name="txtNombre_Parroquia" type="text" id="txtNombre_Parroquia" title="Registre el Nombre de la Parroquia" size="100" maxlength="200"  value="<?ECHO $den_parroquia?>" readonly></td>
+                      <td width="666"><input name="txtNombre_Parroquia" type="text" id="txtNombre_Parroquia" title="Registre el Nombre de la Parroquia" size="100" maxlength="200"  value="<?php ECHO $den_parroquia?>" readonly></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -118,4 +118,4 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_parroquia=$reg
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

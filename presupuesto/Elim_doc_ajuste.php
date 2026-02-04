@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $Doc_ajuste='';} else {$Doc_ajuste = $_GET["GDoc_ajuste"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Documentos Ajustes)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Documentos Ajustes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -24,7 +24,7 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
     url="Delete_doc_ajuste.php?txtdoc_ajuste="+f.txtdoc_ajuste.value;  document.location = url;}
 </script>
 
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre005 where tipo_ajuste='$Doc_ajuste'";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$Doc_ajuste=$registro["tipo_ajuste"];$Nombre_doc_ajuste=$registro["nombre_tipo_ajuste"];
@@ -61,25 +61,25 @@ if ($registro=pg_fetch_array($res,0)){$Doc_ajuste=$registro["tipo_ajuste"];$Nomb
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p class="Estilo5">C&Oacute;DIGO :
-                                <input name="txtdoc_ajuste" id="txtdoc_ajuste" value="<?ECHO $Doc_ajuste?>" size="10" readOnly>
+                                <input name="txtdoc_ajuste" id="txtdoc_ajuste" value="<?php ECHO $Doc_ajuste?>" size="10" readOnly>
                   </p>
                           </blockquote></td>
           </tr>
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p align="left"><span class="Estilo5">NOMBRE DEL DOCUMENTO :</span>
-                <input readOnly name="txtnombre_doc_ajuste" id="txtnombre_doc_ajuste" value="<?ECHO $Nombre_doc_ajuste?>" size="80">
+                <input readOnly name="txtnombre_doc_ajuste" id="txtnombre_doc_ajuste" value="<?php ECHO $Nombre_doc_ajuste?>" size="80">
 </p>
             </blockquote></td>
           </tr>
           <tr>
             <td width="380" height="43" valign="middle"><blockquote>
               <p><span class="Estilo5">NOMBRE ABREVIADO DOCUMENTO :</span>
-                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?ECHO $Nombre_Abrev?>" size="6">
+                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?php ECHO $Nombre_Abrev?>" size="6">
               </p>
             </blockquote></td>
             <td width="226" valign="middle"><span class="Estilo5">REFIERE A :
-                <input readOnly name="txtRefierea" id="txtRefierea" value="<?ECHO $Refiera_a?>" size="12">
+                <input readOnly name="txtRefierea" id="txtRefierea" value="<?php ECHO $Refiera_a?>" size="12">
             </span></td>
           </tr>
           <tr>
@@ -106,4 +106,4 @@ if ($registro=pg_fetch_array($res,0)){$Doc_ajuste=$registro["tipo_ajuste"];$Nomb
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

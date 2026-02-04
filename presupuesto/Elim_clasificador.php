@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_partida='';} else {$cod_partida=$_GET["Gpartida"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminar Clasificador de Partidas)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminar Clasificador de Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -23,15 +23,15 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Partida.value==""){alert("Código de Partida no puede estar Vacio");return false;}
-    if(f.txtNombre_Partida.value==""){alert("Denominación de Partida no puede estar Vacia"); return false; }
+    if(f.txtCodigo_Partida.value==""){alert("Cï¿½digo de Partida no puede estar Vacio");return false;}
+    if(f.txtNombre_Partida.value==""){alert("Denominaciï¿½n de Partida no puede estar Vacia"); return false; }
        else{f.txtNombre_Partida.value=f.txtNombre_Partida.value.toUpperCase();}
     if(f.txtTipo_Gasto.value=="CORRIENTE" || f.txtTipo_Gasto.value=="INVERSION") {Valido=true;}
       else{alert("Tipo de Gasto no valida");return false; }
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_partida="";$aplicacion="";$func_inv="";$cod_contable="";
 $sql="Select cod_partida,den_partida,aplicacion,ord_cord,func_inv,cod_contable from pre098 where cod_partida='$cod_partida'";$res=pg_query($sql);
@@ -74,7 +74,7 @@ if($func_inv=="I"){$func_inv="INVERSION";}else{$func_inv="CORRIENTE";}
                   <tr>
                     <td width="159"><span class="Estilo5">C&Oacute;DIGO DE PARTIDA :</span></td>
                     <td width="631"><span class="Estilo5">
-                      <input name="txtCodigo_Partida" type="text" id="txtCodigo_Partida" title="Registre el C&oacute;digo de la Partida" size="30" maxlength="30" readonly value="<?ECHO $cod_partida?>">
+                      <input name="txtCodigo_Partida" type="text" id="txtCodigo_Partida" title="Registre el C&oacute;digo de la Partida" size="30" maxlength="30" readonly value="<?php ECHO $cod_partida?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -87,7 +87,7 @@ if($func_inv=="I"){$func_inv="INVERSION";}else{$func_inv="CORRIENTE";}
                   <table width="816" border="0">
                     <tr>
                       <td width="157"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                      <td width="659"><input name="txtNombre_Partida" type="text" id="txtNombre_Partida" title="Registre la denominaci&oacute;n de la Partida" size="100" value="<?ECHO $den_partida?>" maxlength="200"  readonly></td>
+                      <td width="659"><input name="txtNombre_Partida" type="text" id="txtNombre_Partida" title="Registre la denominaci&oacute;n de la Partida" size="100" value="<?php ECHO $den_partida?>" maxlength="200"  readonly></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -100,10 +100,10 @@ if($func_inv=="I"){$func_inv="INVERSION";}else{$func_inv="CORRIENTE";}
                   <tr>
                     <td width="159"><span class="Estilo5">TIPO DE GASTO :</span></td>
                     <td width="231"><span class="Estilo5">
-                      <input name="txtTipo_Gasto" type="text" id="txtTipo_Gasto" size="20" maxlength="20"  value="<?ECHO $func_inv?>" readonly>
+                      <input name="txtTipo_Gasto" type="text" id="txtTipo_Gasto" size="20" maxlength="20"  value="<?php ECHO $func_inv?>" readonly>
                     </span></td>
                     <td width="119"><span class="Estilo5">APLICACI&Oacute;N :</span></td>
-                    <td width="273"><input name="txtAplicacion" type="text" id="txtAplicacion" title="Registre el Tipo de Aplicaciòn" size="4" maxlength="1"  value="<?ECHO $aplicacion?>" readonly></td>
+                    <td width="273"><input name="txtAplicacion" type="text" id="txtAplicacion" title="Registre el Tipo de Aplicaciï¿½n" size="4" maxlength="1"  value="<?php ECHO $aplicacion?>" readonly></td>
                   </tr>
                 </table></td>
               </tr>
@@ -115,7 +115,7 @@ if($func_inv=="I"){$func_inv="INVERSION";}else{$func_inv="CORRIENTE";}
                 <td><table width="800" border="0">
                   <tr>
                     <td width="159"><span class="Estilo5">CODIGO DE CUENTA :</span></td>
-                    <td width="631"><input name="txtCod_Cuenta" type="text" id="txtCod_Cuenta" title="Registre el Còdigo de Cuenta" size="32" maxlength="30"  value="<?ECHO $cod_contable?>" readonly></td>
+                    <td width="631"><input name="txtCod_Cuenta" type="text" id="txtCod_Cuenta" title="Registre el Cï¿½digo de Cuenta" size="32" maxlength="30"  value="<?php ECHO $cod_contable?>" readonly></td>
                   </tr>
                 </table></td>
               </tr>
@@ -146,4 +146,4 @@ if($func_inv=="I"){$func_inv="INVERSION";}else{$func_inv="CORRIENTE";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

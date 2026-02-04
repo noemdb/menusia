@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){$ano_fiscal=""; $mes_fiscal=""; $nro_comprobante=""; $critero="";} else{$critero=$_GET["criterio"]; $nro_comprobante=substr($criterio,6,8);  $ano_fiscal=substr($criterio,0,4);  $mes_fiscal=substr($criterio,4,2);}
 $fecha_hoy=asigna_fecha_hoy();  $clave=$ano_fiscal.$mes_fiscal.$nro_comprobante;
 ?>
@@ -6,7 +6,7 @@ $fecha_hoy=asigna_fecha_hoy();  $clave=$ano_fiscal.$mes_fiscal.$nro_comprobante;
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Comprobante Retenciones IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Comprobante Retenciones IVA)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -35,14 +35,14 @@ MM_reloadPage(true);
 -->
 </style> 
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  $error=0;
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  $error=0;
 $direccion="CALLE 48 CON CARRERA 13 EDIF HIDROLARA, PISO 2, LOCAL S/N, SECTOR SAN VICENTE-CAJA DE AGUA"; $nombre_emp="HIDROLARA C.A."; $ced_rif_emp="G-20009014-6";
 $ced_rif="";  $nombre_benef=""; $fecha_e="";
 $sql="Select * from COMP_IVA where ano_fiscal='$ano_fiscal' and  mes_fiscal='$mes_fiscal' and nro_comprobante='$nro_comprobante' and monto_iva_retenido>0"; $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $fecha_e=$registro["fecha_emision"];  $ced_rif=$registro["ced_rif"];  $nombre_benef=$registro["nombre"]; $referencia=$registro["referencia"];  $inf_usuario=$registro["inf_usuario"];}
-else{$error=1; ?> <script language="JavaScript">muestra('COMPROBANTE IVA NO LOCALIZADO');</script><? }
+else{$error=1; ?> <script language="JavaScript">muestra('COMPROBANTE IVA NO LOCALIZADO');</script><?php }
 if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$ano_fiscal.'-'.$mes_fiscal.'-'.$nro_comprobante;
 ?>
 <body>
@@ -68,7 +68,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                                     <td><span class="Estilo19"> 0.- NRO. DE COMPROBANTE</span></td>
                                   </tr>
                                   <tr>
-                                    <td align="center"><span class="Estilo20"><?echo $nro_comp?></span></td>
+                                    <td align="center"><span class="Estilo20"><?php echo $nro_comp?></span></td>
                                   </tr>
                               </table></td>
                             </tr>
@@ -80,7 +80,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                                     <td><span class="Estilo19">1.- FECHA </span></td>
                                   </tr>
                                   <tr>
-                                    <td align="center"><span class="Estilo20"><?echo $fecha?></span></td>
+                                    <td align="center"><span class="Estilo20"><?php echo $fecha?></span></td>
                                   </tr>
                               </table></td>
                             </tr>
@@ -110,7 +110,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                      <td><span class="Estilo19"> 2.- NOMBRE O RAZ&Oacute;N SOCIAL DEL AGENTE DE RETENCI&Oacute;N</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $nombre_emp?></span></td>
+                     <td><span class="Estilo20"><?php echo $nombre_emp?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -122,7 +122,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                      <td><span class="Estilo19"> 3.- REGISTRO DE INFORMACI&Oacute;N FISCAL DEL AGENTE DE RETENCI&Oacute;N</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $ced_rif_emp?></span></td>
+                     <td><span class="Estilo20"><?php echo $ced_rif_emp?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -134,7 +134,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                      <td><span class="Estilo19"> 4.- PERIODO FISCAL</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20">A&Ntilde;O:<?echo $ano_fiscal?>  MES:<?echo $mes_fiscal?></span></td>
+                     <td><span class="Estilo20">A&Ntilde;O:<?php echo $ano_fiscal?>  MES:<?php echo $mes_fiscal?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -151,7 +151,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                <td width="911"><span class="Estilo19">5.- DIRECCI&Oacute;N FISCAL DEL AGENTE DE RETENCI&Oacute;N </span></td>
              </tr>
              <tr>
-               <td><span class="Estilo20"><?echo $direccion?></span></td>
+               <td><span class="Estilo20"><?php echo $direccion?></span></td>
              </tr>
            </table></td>
          </tr>
@@ -169,7 +169,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                      <td><span class="Estilo19"> 2.- NOMBRE O RAZ&Oacute;N SOCIAL DEL SUJETO RETENIDO</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $nombre_benef?></span></td>
+                     <td><span class="Estilo20"><?php echo $nombre_benef?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -181,7 +181,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
                      <td><span class="Estilo19"> 3.- REGISTRO DE INFORMACI&Oacute;N FISCAL DEL SUJETO RETENIDO</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $ced_rif?></span></td>
+                     <td><span class="Estilo20"><?php echo $ced_rif?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -219,7 +219,7 @@ if($fecha_e==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha_e);} $nro_comp=$
           <td width="75" align="center"><span class="Estilo19">IMPUESTO IVA</span></td>
           <td width="70" align="center"><span class="Estilo19">IVA RETENIDO</span></td>
 		</tr>
-<? $total_d=0;  $total_e=0;  $total_b=0;  $total_iva=0;  $total_ret=0;
+<?php  $total_d=0;  $total_e=0;  $total_b=0;  $total_iva=0;  $total_ret=0;
 $sql="SELECT * FROM BAN027 where ano_fiscal='$ano_fiscal' and  mes_fiscal='$mes_fiscal' and nro_comprobante='$nro_comprobante' order by nro_operacion"; $res=pg_query($sql);
 while(($registro=pg_fetch_array($res))and($error==0)){ $sfecha=$registro["fecha_documento"]; $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
 $monto=formato_monto($registro["monto_documento"]); $montob=formato_monto($registro["base_imponible"]);  $montos=formato_monto($registro["monto_exento_iva"]);
@@ -232,22 +232,22 @@ if($nro_ndb==""){$nro_ndb="<pre>".$espacio."</pre>";} if($nro_ncr==""){$nro_ncr=
 $nro_fact_af=$registro["nro_doc_afectado"]; if($nro_fact_af==""){$nro_fact_af="<pre>".$espacio."</pre>";}
 ?>
         <tr>
-		   <td width="40" align="center"><span class="Estilo19"><? echo $registro["nro_operacion"]; ?></span></td>
-           <td width="55" align="center"><span class="Estilo19"><? echo $fecha; ?></span></td>
-           <td width="90" align="left"><span class="Estilo19"><? echo $nro_fact; ?></span></td>
-           <td width="80" align="left"><span class="Estilo19"><? echo $registro["nro_con_documento"]; ?></span></td>
-		   <td width="70" align="left"><span class="Estilo19"><? echo $nro_ndb; ?></span></td>
-           <td width="70" align="left"><span class="Estilo19"><? echo $nro_ncr; ?></span></td> 
-           <td width="55" align="center"><span class="Estilo19"><? echo $registro["tipo_transaccion"]; ?></span></td>
-           <td width="75" align="left"><span class="Estilo19"><? echo $nro_fact_af ?></span></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $monto; ?></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $montos; ?></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $montob; ?></td>
-           <td width="30" align="right"><span class="Estilo19"><? echo $tasa; ?></td>
-           <td width="75" align="right"><span class="Estilo19"><? echo $montoi; ?></td>
-           <td width="70" align="right"><span class="Estilo19"><? echo $montor; ?></td>
+		   <td width="40" align="center"><span class="Estilo19"><?php  echo $registro["nro_operacion"]; ?></span></td>
+           <td width="55" align="center"><span class="Estilo19"><?php  echo $fecha; ?></span></td>
+           <td width="90" align="left"><span class="Estilo19"><?php  echo $nro_fact; ?></span></td>
+           <td width="80" align="left"><span class="Estilo19"><?php  echo $registro["nro_con_documento"]; ?></span></td>
+		   <td width="70" align="left"><span class="Estilo19"><?php  echo $nro_ndb; ?></span></td>
+           <td width="70" align="left"><span class="Estilo19"><?php  echo $nro_ncr; ?></span></td> 
+           <td width="55" align="center"><span class="Estilo19"><?php  echo $registro["tipo_transaccion"]; ?></span></td>
+           <td width="75" align="left"><span class="Estilo19"><?php  echo $nro_fact_af ?></span></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $monto; ?></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $montos; ?></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $montob; ?></td>
+           <td width="30" align="right"><span class="Estilo19"><?php  echo $tasa; ?></td>
+           <td width="75" align="right"><span class="Estilo19"><?php  echo $montoi; ?></td>
+           <td width="70" align="right"><span class="Estilo19"><?php  echo $montor; ?></td>
 		</tr>
-<? }
+<?php }
  $total_d=formato_monto($total_d); $total_e=formato_monto($total_e); $total_b=formato_monto($total_b);
  $total_ret=formato_monto($total_ret); $total_iva=formato_monto($total_iva);
 ?>         
@@ -257,12 +257,12 @@ $nro_fact_af=$registro["nro_doc_afectado"]; if($nro_fact_af==""){$nro_fact_af="<
 	  <td><table width="1050" border="1"  height="30" cellpadding="3" cellspacing="0">
 	    <tr>
           <td width="588" align="center">&nbsp;</td>
-          <td width="77" align="right"><span class="Estilo19"><? echo $total_d; ?></span></td>
-		  <td width="77" align="right"><span class="Estilo19"><? echo $total_e; ?></span></td>
-		  <td width="77" align="right"><span class="Estilo19"><? echo $total_b; ?></span></td>
+          <td width="77" align="right"><span class="Estilo19"><?php  echo $total_d; ?></span></td>
+		  <td width="77" align="right"><span class="Estilo19"><?php  echo $total_e; ?></span></td>
+		  <td width="77" align="right"><span class="Estilo19"><?php  echo $total_b; ?></span></td>
           <td width="30" align="center"><span class="Estilo19">&nbsp;</span></td>
-          <td width="75" align="right"><span class="Estilo19"><? echo $total_iva; ?></span></td>
-          <td width="70" align="right"><span class="Estilo19"><? echo $total_ret; ?></span></td>
+          <td width="75" align="right"><span class="Estilo19"><?php  echo $total_iva; ?></span></td>
+          <td width="70" align="right"><span class="Estilo19"><?php  echo $total_ret; ?></span></td>
 		</tr>
 	  </table></td> 
 	  </tr> 

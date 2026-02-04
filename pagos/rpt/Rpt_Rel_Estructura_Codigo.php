@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="03-0000056"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $codigo_estrucrura_d='';$codigo_estrucrura_h='';$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Relacion Estructura de Codigo)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Relacion Estructura de Codigo)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../../class/sia.js" type="text/javascript"></SCRIPT>
@@ -42,7 +42,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 
 </head>
-<?
+<?php 
 $sql="SELECT MAX(cod_estructura) As Max_cod_estructura, MIN(cod_estructura) As Min_cod_estructura FROM PAG006";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$codigo_estrucrura_d=$registro["min_cod_estructura"];$codigo_estrucrura_h=$registro["max_cod_estructura"];}
 ?>
@@ -81,9 +81,9 @@ if ($registro=pg_fetch_array($res,0)){$codigo_estrucrura_d=$registro["min_cod_es
           <td height="30"><table width="776" border="0">
             <tr>
               <td width="225" height="26"> <span class="Estilo5"><div align="left">CODIGO ESTRUCTURA: </div></span></td>
-              <td width="110"><span class="Estilo5"><input class="Estilo10" name="txtcod_estructura_d" type="text" id="txtcod_estructura_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciad(this.form)" value="<?echo $codigo_estrucrura_d?>" size="15" maxlength="8"> </span></td>
+              <td width="110"><span class="Estilo5"><input class="Estilo10" name="txtcod_estructura_d" type="text" id="txtcod_estructura_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciad(this.form)" value="<?php echo $codigo_estrucrura_d?>" size="15" maxlength="8"> </span></td>
               <td width="61"></td>
-              <td width="188"><span class="Estilo5"><input class="Estilo10" name="txtcod_estructura_h" type="text" id="txtcod_estructura_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciah(this.form)" value="<?echo $codigo_estrucrura_h?>" size="15" maxlength="8"></span></td>
+              <td width="188"><span class="Estilo5"><input class="Estilo10" name="txtcod_estructura_h" type="text" id="txtcod_estructura_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciah(this.form)" value="<?php echo $codigo_estrucrura_h?>" size="15" maxlength="8"></span></td>
               <td width="170"></td>
             </tr>
           </table></td>
@@ -120,4 +120,4 @@ if ($registro=pg_fetch_array($res,0)){$codigo_estrucrura_d=$registro["min_cod_es
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

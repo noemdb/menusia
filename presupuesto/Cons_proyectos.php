@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Definci&oacute;n de Proyectos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Definci&oacute;n de Proyectos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -16,7 +16,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -113,12 +113,12 @@ MM_reloadPage(true);
                         <input name="txtdoc_compromiso" type="text" id="txtdoc_compromiso" title="Registre el c&oacute;digo del documento compromiso" onChange="chequea_tipo(this.form);" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);">
                       </span></td>
                       <td width="526"><span class="Estilo5">
-                        <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                        <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                       </span></td>
-                      <? if($anulado=='S'){?>
-                      <? }else{?>
-                      <? }?>
-                      <td width="40"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                      <?php  if($anulado=='S'){?>
+                      <?php }else{?>
+                      <?php }?>
+                      <td width="40"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -126,7 +126,7 @@ MM_reloadPage(true);
                   <td><table width="810" border="0">
                     <tr>
                       <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                      <td width="694"><textarea name="txtDescripcion" cols="77" readonly="readonly" class="headers" id="texDescripcion"><?echo $descripcion?></textarea></td>
+                      <td width="694"><textarea name="txtDescripcion" cols="77" readonly="readonly" class="headers" id="texDescripcion"><?php echo $descripcion?></textarea></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -139,11 +139,11 @@ MM_reloadPage(true);
                   <tr>
                     <td width="191"><span class="Estilo5">IMPUTACI&Oacute;N PRESUPUESTARIA :</span></td>
                     <td width="217"><span class="Estilo5">
-                      <input name="txtfunc_inv2" type="text" id="txtfunc_inv2"  value="<?echo $func_inv?>" size="25" readonly>
+                      <input name="txtfunc_inv2" type="text" id="txtfunc_inv2"  value="<?php echo $func_inv?>" size="25" readonly>
                     </span></td>
                     <td width="229"><span class="Estilo5">REFERENCIA DEL CR&Eacute;DITO ADICIONAL :</span></td>
                     <td width="155"><span class="Estilo5">
-                    <input name="txtfecha_vencim" type="text" id="txtfecha_vencim" value="<?echo $fecha_vencim?>" size="12" readonly>
+                    <input name="txtfecha_vencim" type="text" id="txtfecha_vencim" value="<?php echo $fecha_vencim?>" size="12" readonly>
 </span></td>
                   </tr>
                 </table></td>
@@ -153,10 +153,10 @@ MM_reloadPage(true);
                   <tr>
                     <td width="156"><span class="Estilo5">FUENTE FINANCIAMIENTO :</span></td>
                     <td width="124"><span class="Estilo5">
-                      <input name="txttipo_compromiso2" type="text"  id="txttipo_compromiso22" value="<?echo $tipo_compromiso?>" size="15" readonly>
+                      <input name="txttipo_compromiso2" type="text"  id="txttipo_compromiso22" value="<?php echo $tipo_compromiso?>" size="15" readonly>
                     </span></td>
                     <td width="567"><span class="Estilo5">
-                      <input name="txttiene_anticipo" type="text" id="txttiene_anticipo3" size="73"  value="<?echo $tiene_anticipo?>" readonly>
+                      <input name="txttiene_anticipo" type="text" id="txttiene_anticipo3" size="73"  value="<?php echo $tiene_anticipo?>" readonly>
                     </span></td>
                   </tr>
                 </table>
@@ -164,10 +164,10 @@ MM_reloadPage(true);
                     <tr>
                       <td width="156"><span class="Estilo5">FUENTE FINANCIAMIENTO :</span></td>
                       <td width="124"><span class="Estilo5">
-                        <input name="txttipo_compromiso22" type="text"  id="txttipo_compromiso23" value="<?echo $tipo_compromiso?>" size="15" readonly>
+                        <input name="txttipo_compromiso22" type="text"  id="txttipo_compromiso23" value="<?php echo $tipo_compromiso?>" size="15" readonly>
                       </span></td>
                       <td width="567"><span class="Estilo5">
-                        <input name="txttiene_anticipo2" type="text" id="txttiene_anticipo4" size="73"  value="<?echo $tiene_anticipo?>" readonly>
+                        <input name="txttiene_anticipo2" type="text" id="txttiene_anticipo4" size="73"  value="<?php echo $tiene_anticipo?>" readonly>
                       </span></td>
                     </tr>
                   </table>
@@ -175,10 +175,10 @@ MM_reloadPage(true);
                     <tr>
                       <td width="156"><span class="Estilo5">FUENTE FINANCIAMIENTO :</span></td>
                       <td width="124"><span class="Estilo5">
-                        <input name="txttipo_compromiso23" type="text"  id="txttipo_compromiso24" value="<?echo $tipo_compromiso?>" size="15" readonly>
+                        <input name="txttipo_compromiso23" type="text"  id="txttipo_compromiso24" value="<?php echo $tipo_compromiso?>" size="15" readonly>
                       </span></td>
                       <td width="567"><span class="Estilo5">
-                        <input name="txttiene_anticipo3" type="text" id="txttiene_anticipo5" size="73"  value="<?echo $tiene_anticipo?>" readonly>
+                        <input name="txttiene_anticipo3" type="text" id="txttiene_anticipo5" size="73"  value="<?php echo $tiene_anticipo?>" readonly>
                       </span></td>
                     </tr>
                   </table>
@@ -189,7 +189,7 @@ MM_reloadPage(true);
                   <tr>
                     <td width="148"><span class="Estilo5">MONTO DEL PROYECTO :</span></td>
                     <td width="263"><span class="Estilo5">
-                      <input readonly name="txttasa_anticipo" type="text" id="txttasa_anticipo" value="<?ECHO $tasa_anticipo?>" size="20">
+                      <input readonly name="txttasa_anticipo" type="text" id="txttasa_anticipo" value="<?php ECHO $tasa_anticipo?>" size="20">
                     </span></td>
                   </tr>
                 </table></td>

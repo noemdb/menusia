@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){  $cod_presup='';} else {  $cod_presup = $_GET["Gcod_presup"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -6,7 +6,7 @@ if (!$_GET){  $cod_presup='';} else {  $cod_presup = $_GET["Gcod_presup"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Modificar Asociacion Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Modificar Asociacion Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -29,7 +29,7 @@ function revisar(){var f=document.form1; var r; var valido;
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $cod_contab_asoc="";$denominacion=""; $nombre_cuenta="";
 $sql="Select * from con019 where cod_presup='$cod_presup'";$res=pg_query($sql);
@@ -75,7 +75,7 @@ if ($registro=pg_fetch_array($resultado,0)){  $nombre_cuenta=$registro["nombre_c
 			  <td><table width="859" border="0">
 				  <tr>
 					<td width="159"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
-					<td width="300"><span class="Estilo5"><input name="txtcod_presup" type="text" id="txtcod_presup" title="Registre C&oacute;digo Presupuestario"  size="30" maxlength="30" readonly value="<?echo $cod_presup?>"> </span></td>
+					<td width="300"><span class="Estilo5"><input name="txtcod_presup" type="text" id="txtcod_presup" title="Registre C&oacute;digo Presupuestario"  size="30" maxlength="30" readonly value="<?php echo $cod_presup?>"> </span></td>
 					<td width="20"><input name="txtcod_contable" type="hidden" id="txtcod_contable"></td>
 					<td width="30"><input name="txtdes_contable" type="hidden" id="txtdes_contable"></td>
 					<td width="20"><input name="txtcod_fuente" type="hidden" id="txtcod_fuente"></td>
@@ -89,7 +89,7 @@ if ($registro=pg_fetch_array($resultado,0)){  $nombre_cuenta=$registro["nombre_c
             <table width="621" border="0">
               <tr>
                 <td width="110"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><?echo $denominacion?></textarea>
+                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><?php echo $denominacion?></textarea>
                 </span></td>
               </tr>
             </table>   
@@ -99,9 +99,9 @@ if ($registro=pg_fetch_array($resultado,0)){  $nombre_cuenta=$registro["nombre_c
             <td height="14"><table width="843" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="135"><span class="Estilo5">C&Oacute;DIGO ASOCIADO :</span></td>
-                  <td width="188"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  value="<?echo $cod_contab_asoc?>" onFocus="encender(this)" onBlur="apagar(this)" size="25">   </span></td>
-                  <td width="50"><div align="left"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="...">  </span></div></td>
-                  <td width="470"><span class="Estilo5"> <input name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta"  readonly  value="<?echo $nombre_cuenta?>" size="70">   </span></td>
+                  <td width="188"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  value="<?php echo $cod_contab_asoc?>" onFocus="encender(this)" onBlur="apagar(this)" size="25">   </span></td>
+                  <td width="50"><div align="left"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></div></td>
+                  <td width="470"><span class="Estilo5"> <input name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta"  readonly  value="<?php echo $nombre_cuenta?>" size="70">   </span></td>
                 </tr>
             </table></td>
           </tr>

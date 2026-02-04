@@ -1,12 +1,12 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_bien_mue='';}else{$cod_bien_mue=$_GET["cod_bien_mue"];}  $fecha_hoy=asigna_fecha_hoy();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Detalle Componentes)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Detalle Componentes)</title>
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>
@@ -14,7 +14,7 @@ if (!$_GET){$cod_bien_mue='';}else{$cod_bien_mue=$_GET["cod_bien_mue"];}  $fecha
    <tr>
       <td align="left"><table width="840" border="0" align="left" cellpadding="0" cellspacing="0">
           <tr>
-		    <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar" onclick="javascript:Llama_Agregar('<?echo $cod_bien_mue?>')">   </td>
+		    <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar" onclick="javascript:Llama_Agregar('<?php echo $cod_bien_mue?>')">   </td>
             <td width="255" align="center">&nbsp;</td>
             <td width="215" align="center">&nbsp;</td>
             <td width="215" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar"></td>
@@ -41,23 +41,23 @@ $sql="SELECT * FROM bien053 where cod_bien_mue='$cod_bien_mue' order by cod_comp
            <td width="110" align="left" bgcolor="#99CCFF"><strong>Modelo</strong></td>
 		   <td width="110" align="left" bgcolor="#99CCFF"><strong>Serial</strong></td>
          </tr>
-         <?$ult_cod="00001"; $des_cod=""; $filas=pg_num_rows($resultado); 
+         <?php $ult_cod="00001"; $des_cod=""; $filas=pg_num_rows($resultado); 
          while($registro=pg_fetch_array($resultado)){ $ult_cod=$registro["cod_componente"]+1;   ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<? echo $cod_bien_mue; ?>','<? echo $registro["cod_componente"]; ?>');">
-           <td width="100" align="left"><? echo $registro["cod_componente"]; ?></td>
-           <td width="370" align="left"><? echo $registro["des_componente"]; ?></td>
-		   <td width="110" align="left"><? echo $registro["marca"]; ?></td>
-		   <td width="110" align="left"><? echo $registro["modelo"]; ?></td>
-		   <td width="110" align="left"><? echo $registro["serial1"]; ?></td>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<?php  echo $cod_bien_mue; ?>','<?php  echo $registro["cod_componente"]; ?>');">
+           <td width="100" align="left"><?php  echo $registro["cod_componente"]; ?></td>
+           <td width="370" align="left"><?php  echo $registro["des_componente"]; ?></td>
+		   <td width="110" align="left"><?php  echo $registro["marca"]; ?></td>
+		   <td width="110" align="left"><?php  echo $registro["modelo"]; ?></td>
+		   <td width="110" align="left"><?php  echo $registro["serial1"]; ?></td>
          </tr>
-         <?}  ?>
+         <?php }  ?>
        </table></td>
    </tr>
  </table>
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
 var mult_cod='<?php echo $ult_cod ?>';

@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); error_reporting(E_ALL ^ E_NOTICE);
-$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); error_reporting(E_ALL ^ E_NOTICE);
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Catalogo Ordenes de Pago)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Catalogo Ordenes de Pago)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -21,7 +21,7 @@ function cerrar_catalogo(mtipo_caus,mnro_orden,mnomb_abrev,mcedr,mnomb,mconc,mmo
 }
 </script></head>
 <body>
-<?
+<?php 
         $criterio = "where (status='N') "; $txt_criterio = "";
         if ($_GET){if ($_GET["criterio"]!=""){$txt_criterio = $_GET["criterio"]; $txt_criterio = strtoupper ($txt_criterio);
         $criterio = $criterio . " and (tipo_causado like '%" . $txt_criterio . "%' or nro_orden like '%" . $txt_criterio . "%' or concepto like '%" . $txt_criterio . "%')";}}
@@ -51,18 +51,18 @@ function cerrar_catalogo(mtipo_caus,mnro_orden,mnomb_abrev,mcedr,mnomb,mconc,mmo
 				if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["tipo_causado"];?>','<? echo $registro["nro_orden"];?>','<? echo $registro["nombre_abrev_caus"];?>','<? echo $registro["ced_rif"];?>','<? echo $registro["nombre"];?>','<? echo $concepto;?>','<? echo $total_neto;?>');" >
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nro_orden"]; ?></b></font></td>
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_causado"]; ?></b></font></td>
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["tipo_causado"];?>','<?php  echo $registro["nro_orden"];?>','<?php  echo $registro["nombre_abrev_caus"];?>','<?php  echo $registro["ced_rif"];?>','<?php  echo $registro["nombre"];?>','<?php  echo $concepto;?>','<?php  echo $total_neto;?>');" >
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nro_orden"]; ?></b></font></td>
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_causado"]; ?></b></font></td>
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion; ?></b></font></td>
   </tr>
-<?}} echo "</table>"; }
+<?php } } echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    if($pagina>1){
+  <?php     if($pagina>1){
           echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
           echo "<font face='verdana' size='-2'>Principio</font>";
           echo "</a>&nbsp;";
@@ -88,4 +88,4 @@ Criterio de b&uacute;squeda:<input type="text" name="criterio" size="22" maxleng
 </form>
 </body>
 </html>
-<?   pg_close(); ?>
+<?php    pg_close($conn); ?>

@@ -1,11 +1,11 @@
-<?include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
+<?php include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$mcod_m="PRE006".$equipo;$codigo_mov=substr($mcod_m,0,49); $cod_cat="";$formato="XX-XX-XX-XXX-XX-XX-XX";}else{$codigo_mov=$_GET["codigo_mov"]; $cod_cat=$_GET["cod_cat"]; $formato=$_GET["formato"]; }  $mpatron="Array(2,2,2,2,2,3,2,2,2,2)";  $mpatron=arma_patron($formato);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Incluir Codigos en el Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Incluir Codigos en el Compromiso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@ return str2;}
 function encender_monto(mthis){var mmonto; encender(mthis); 
   mmonto=mthis.value; mmonto=eliminapunto(mmonto);  mthis.value=mmonto; 
 }
-function llamar_anterior(){ document.location ='Det_inc_compromisos.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_compromisos.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function chequea_monto(mform){
    if(mform.txttipo_imput_presu.value=="CRED. ADICIONAL"){mform.txtmonto_credito.value=mform.txtmonto.value;}
     else{mform.txtmonto_credito.value="0";}
@@ -38,7 +38,7 @@ function apaga_monto_cred(mthis){var mmonto; apagar(mthis);
 }
 function llama_codpresup(){var cod_presup;
   cod_presup=document.form1.txtcod_presup.value; if(cod_presup==''){ cod_presup='<?php echo $cod_cat ?>';}
-  VentanaCentrada('Cat_codigos_presup.php?criterio='+cod_presup,'SIA','','750','500','true');
+  VentanaCentrada('Cat_codigos_presup.php?criterio='+cod_presup,'SIPAP','','750','500','true');
 }  
 function revisar(){var f=document.form1; var Valido=true;
    if(f.txtcod_presup.value==""){alert("Codigo Presupuestario no puede estar Vacio"); f.txtcod_presup.focus(); return false;}
@@ -63,7 +63,7 @@ return true;}
           <td><table width="679" border="0">
               <tr>
                 <td width="168"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO : </span></td>
-                <td width="217"><span class="Estilo5"> <input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el Codigo Presupuestario"  size="34" maxlength="34" onFocus="encender(this); " onBlur="apagar(this)" value="<? echo $cod_cat ?>" onkeypress="return stabular(event,this)" onkeyup="mascara(this,'-',patroncodigo,true)">    </span></td>
+                <td width="217"><span class="Estilo5"> <input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el Codigo Presupuestario"  size="34" maxlength="34" onFocus="encender(this); " onBlur="apagar(this)" value="<?php  echo $cod_cat ?>" onkeypress="return stabular(event,this)" onkeyup="mascara(this,'-',patroncodigo,true)">    </span></td>
                 <td width="103"><input class="Estilo10" name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo Codigos Presupuestarios"  onclick="llama_codpresup()" value="..." onkeypress="return stabular(event,this)"></td>
                 <td width="51"><input class="Estilo10" name="txtcod_contable" type="hidden" id="txtcod_contable"></td>
                 <td width="59"><input class="Estilo10" name="txtdes_contable" type="hidden" id="txtdes_contable"></td>
@@ -75,7 +75,7 @@ return true;}
             <tr>
               <td width="200"><span class="Estilo5">FUENTE DE FINANCIAMIENTO : </span></td>
               <td width="40"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this)" onkeypress="return stabular(event,this)">  </span></td>
-              <td width="28"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+              <td width="28"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
               <td width="391"><span class="Estilo15"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="55" readonly onkeypress="return stabular(event,this)"></span></td>
             </tr>
           </table></td>
@@ -98,7 +98,7 @@ return true;}
                   <option selected>PRESUPUESTO</option> <option>CRED. ADICIONAL</option>     </select></span></td>
               <td width="230"><span class="Estilo5">REFERENCIA DEL CREDITO ADICIONAL:</span></td>
               <td width="75"><input class="Estilo10" name="txtref_imput_presu" type="text"  id="txtref_imput_presu" onFocus="encender(this); " onBlur="apagar(this);" size="12" maxlength="8" value="00000000" onchange="checkimput(this.form)" onkeypress="return stabular(event,this)"></td>
-              <td width="38"><span class="Estilo5"><input class="Estilo10" name="btref_cred" type="button" id="btref_cred" title="Abrir Catalogo Croditos Adicional" onClick="VentanaCentrada('../presupuesto/Cat_cred_adic.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></span></td>
+              <td width="38"><span class="Estilo5"><input class="Estilo10" name="btref_cred" type="button" id="btref_cred" title="Abrir Catalogo Croditos Adicional" onClick="VentanaCentrada('../presupuesto/Cat_cred_adic.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></span></td>
             </tr>
           </table></td>
         </tr>
@@ -133,7 +133,7 @@ return true;}
             <td width="130" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="130" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>
             <td width="130" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>
-			<td width="20"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+			<td width="20"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             
             <td width="110">&nbsp;</td>
           </tr>

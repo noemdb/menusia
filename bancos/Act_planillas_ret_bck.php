@@ -1,12 +1,12 @@
-<? include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php  include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $equipo = getenv("COMPUTERNAME"); $mcod_m="BAN012M".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000060"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$criterio='';$p_letra='';$sql="SELECT * FROM PLANILLAS_RET Order by tipo_planilla,nro_planilla";
 } else{ $criterio = $_GET["Gcriterio"];   $p_letra=substr($criterio, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")||($p_letra=="C")){ $nro_planilla=substr($criterio,3,8);  $tipo_planilla=substr($criterio,1,2);}
@@ -24,7 +24,7 @@ if (!$_GET){$criterio='';$p_letra='';$sql="SELECT * FROM PLANILLAS_RET Order by 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO  (Planillas de Retencion)</title>
+<title>SIPAP CONTROL BANCARIO  (Planillas de Retencion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -81,8 +81,8 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
-if($codigo_mov==""){$codigo_mov="";}else{ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG029(4,'$codigo_mov','','','','','2007-01-01',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','','','','')");$error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? } }
+<?php 
+if($codigo_mov==""){$codigo_mov="";}else{ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG029(4,'$codigo_mov','','','','','2007-01-01',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','','','','')");$error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php } }
 $fecha=""; $ced_rif=""; $nombre_benef=""; $tipo_planilla="";  $nro_planilla=""; $descripcion=""; $tipo_mov=""; $cod_banco=""; $referencia=""; 
 $formato_planilla=""; $orden=""; $anulada=""; $res=pg_query($sql); $filas=pg_num_rows($res);
 if ($filas==0){ if ($p_letra=="A"){$sql="SELECT * FROM PLANILLAS_RET Order by tipo_planilla,nro_planilla";}  if ($p_letra=="S"){$sql="SELECT * FROM PLANILLAS_RET Order by text(tipo_planilla)||text(nro_planilla) desc";}  $res=pg_query($sql); $filas=pg_num_rows($res);}
@@ -105,13 +105,13 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
 <table width="989" height="510" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="502" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-      <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+      <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>      
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_planillas_ret()";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="javascript:Llamar_Inc_planillas_ret()">Incluir</a></div></td>
       </tr>
 	 
-	  <?} if ($Mcamino{2}=="S"){?> 
+	  <?php } if ($Mcamino{2}=="S"){?> 
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu  href="javascript:Mover_Registro('P');">Primero</a></div></td>
@@ -132,22 +132,22 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_planillas_ret.php')";
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="Cat_planillas_ret.php" class="menu">Catalogo</a></div></td>
 	  </tr>
-	  <?} if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?> 
+	  <?php } if (($Mcamino{7}=="S")and($SIA_Cierre=="N")){?> 
 	  <tr>
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Anular();" class="menu">Anular</a></td>
 	  </tr>
-	  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?> 
+	  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?> 
 	  <tr>
 		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></div></td>
 	  </tr>
-	 <?} if ($Mcamino{4}=="S"){?>
+	 <?php } if ($Mcamino{4}=="S"){?>
 	    <tr>
 			  <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato('<? echo $formato_planilla; ?>');" class="menu">Formato</a></td>
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato('<?php  echo $formato_planilla; ?>');" class="menu">Formato</a></td>
 	    </tr>
-	  <?} ?>
+	  <?php } ?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="menu.php" class="menu">Menu </a></div></td>
@@ -164,7 +164,7 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
                   <td height="14"><table width="861" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 					   <td width="400" height="14">&nbsp;</td>
-				       <td width="450"><a class="Estiloanu" ><?echo $etiq_anu?></a></td>   </tr>
+				       <td width="450"><a class="Estiloanu" ><?php echo $etiq_anu?></a></td>   </tr>
                   </table></td>
                 </tr>
 				
@@ -172,12 +172,12 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
                   <td height="14"><table width="861" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 					  <td width="100"><span class="Estilo5">TIPO PLANILLA: </span></td>
-					  <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla" type="text" id="txttipo_planilla" size="3" maxlength="2"  readonly  value="<?echo $tipo_planilla?>"></span></td>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtdes_planilla" type="text" id="txtdes_planilla" size="40" maxlength="100"  readonly value="<?echo $descripcion?>"> </span></td>
+					  <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla" type="text" id="txttipo_planilla" size="3" maxlength="2"  readonly  value="<?php echo $tipo_planilla?>"></span></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtdes_planilla" type="text" id="txtdes_planilla" size="40" maxlength="100"  readonly value="<?php echo $descripcion?>"> </span></td>
                       <td width="120"><span class="Estilo5">N&Uacute;MERO PLANILLA  :</span></td>
-                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtnro_planilla" type="text" id="txtnro_planilla" size="9" maxlength="8"  readonly value="<?echo $nro_planilla?>"></span></td>
+                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtnro_planilla" type="text" id="txtnro_planilla" size="9" maxlength="8"  readonly value="<?php echo $nro_planilla?>"></span></td>
                       <td width="120"><span class="Estilo5">FECHA EMISI&Oacute;N  : </span></td>
-                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="10" maxlength="10"  readonly value="<?echo $fecha?>"> </span></td>
+                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="10" maxlength="10"  readonly value="<?php echo $fecha?>"> </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -187,31 +187,31 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
                   <td width="883"><table width="861" >
                     <tr>
                       <td width="95" height="24"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                      <td width="120"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="12" maxlength="12"  value="<?echo $ced_rif?>" readonly> </span></td>
+                      <td width="120"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="12" maxlength="12"  value="<?php echo $ced_rif?>" readonly> </span></td>
                       <td width="70"><span class="Estilo5"> NOMBRE :</span></td>
-                      <td width="580"><span class="Estilo5">  <input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef" size="85"  value="<?echo $nombre_benef?>" readonly>  </span></td>
-                      <td width="5"><input class="Estilo10" name="txtnro_orden" type="hidden" id="txtnro_orden" value="<?echo $orden?>" ></td>
-	                  <td width="5"><input class="Estilo10" name="txttipo_mov" type="hidden" id="txttipo_mov" value="<?echo $tipo_mov?>" ></td>
-                      <td width="5"><input class="Estilo10" name="txtcod_banco" type="hidden" id="txtcod_banco" value="<?echo $cod_banco?>" ></td>
-                      <td width="5"><input class="Estilo10" name="txtreferencia" type="hidden" id="txtreferencia" value="<?echo $referencia?>" ></td>	
+                      <td width="580"><span class="Estilo5">  <input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef" size="85"  value="<?php echo $nombre_benef?>" readonly>  </span></td>
+                      <td width="5"><input class="Estilo10" name="txtnro_orden" type="hidden" id="txtnro_orden" value="<?php echo $orden?>" ></td>
+	                  <td width="5"><input class="Estilo10" name="txttipo_mov" type="hidden" id="txttipo_mov" value="<?php echo $tipo_mov?>" ></td>
+                      <td width="5"><input class="Estilo10" name="txtcod_banco" type="hidden" id="txtcod_banco" value="<?php echo $cod_banco?>" ></td>
+                      <td width="5"><input class="Estilo10" name="txtreferencia" type="hidden" id="txtreferencia" value="<?php echo $referencia?>" ></td>	
 					</tr>
                   </table></td>
                 </tr>
                 <tr> <td>&nbsp;</td> </tr>
               </table>
               <div id="T11" class="tab-body">
-              <iframe src="Det_cons_planillas_ret.php?criterio=<?echo $clave?>" width="870" height="370" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_cons_planillas_ret.php?criterio=<?php echo $clave?>" width="870" height="370" scrolling="auto" frameborder="1"></iframe>
               </div>
          <table width="863" border="0"> <tr> <td height="10">&nbsp;</td> </tr> </table>
         </form>
 <form name="form2" method="post" action="Inc_planilla_ret.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
-     <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
+     <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
   </tr>
 </table>
       </div>
@@ -220,4 +220,4 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

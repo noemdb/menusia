@@ -1,6 +1,6 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -15,7 +15,7 @@ function Llama_Eliminar(codigo_mov,mref,mfecha,mtipo){var murl; var r;
 }
 </script>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Detalles Movimientos Reporte)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Detalles Movimientos Reporte)</title>
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>
@@ -23,7 +23,7 @@ function Llama_Eliminar(codigo_mov,mref,mfecha,mtipo){var murl; var r;
    <tr>
      <td><table width="400" border="0" cellspacing="0" cellpadding="0">
 	   <tr>
-		 <td  width="130" align="center"><input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar Comprobante" onclick="javascript:LlamarURL('Inc_comp_rpt.php?codigo_mov=<?echo $codigo_mov?>')"></td>
+		 <td  width="130" align="center"><input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar Comprobante" onclick="javascript:LlamarURL('Inc_comp_rpt.php?codigo_mov=<?php echo $codigo_mov?>')"></td>
 		 <td  width="140" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar el Comprobante"> </span></td>
 	     <td  width="130" align="center"><input name="btCerrar" type="button" id="btCerrar" value="Cerrar" title="Cerrar Ventana" onclick="javascript:window.close()"></td>
 		 
@@ -44,15 +44,15 @@ $sql="SELECT * FROM con018 where codigo_mov='$codigo_mov' order by fecha,referen
            <td width="150" align="left" bgcolor="#99CCFF"><strong>Fecha</strong></td>
 		   <td width="100" align="left" bgcolor="#99CCFF"><strong>Tipo Asiento</strong></td>
          </tr>
-         <? 
+         <?php  
 while($registro=pg_fetch_array($res)){$fecha=$registro["fecha"];  $fecha=formato_ddmmaaaa($fecha); 
 ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Eliminar('<? echo $codigo_mov; ?>','<? echo $registro["referencia"]; ?>','<? echo $registro["fecha"]; ?>','<? echo $registro["tipo_asiento"]; ?>');" >
-           <td width="150" align="left"><? echo $registro["referencia"]; ?></td>
-           <td width="150" align="left"><? echo $fecha; ?></td>
-		   <td width="100" align="left"><? echo $registro["tipo_asiento"]; ?></td>  
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Eliminar('<?php  echo $codigo_mov; ?>','<?php  echo $registro["referencia"]; ?>','<?php  echo $registro["fecha"]; ?>','<?php  echo $registro["tipo_asiento"]; ?>');" >
+           <td width="150" align="left"><?php  echo $registro["referencia"]; ?></td>
+           <td width="150" align="left"><?php  echo $fecha; ?></td>
+		   <td width="100" align="left"><?php  echo $registro["tipo_asiento"]; ?></td>  
          </tr>
-         <?} 
+         <?php } 
 ?>
        </table></td>
    </tr>
@@ -64,6 +64,6 @@ while($registro=pg_fetch_array($res)){$fecha=$registro["fecha"];  $fecha=formato
  <p>&nbsp;</p>
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

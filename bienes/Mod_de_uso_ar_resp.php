@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$ced_res_uso='';}else {$ced_res_uso=$_GET["Gced_res_uso"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$ced_res_uso='';}else {$ced_res_uso=$_GET["Gced_res_uso"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Responsables de Uso)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Responsables de Uso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript">
@@ -33,7 +33,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN031 where ced_res_uso='$ced_res_uso'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
 $ced_res_uso=$registro["ced_res_uso"]; $nombre_res_uso=$registro["nombre_res_uso"]; $observaciones_uso=$registro["observaciones_uso"]; }
@@ -69,7 +69,7 @@ $ced_res_uso=$registro["ced_res_uso"]; $nombre_res_uso=$registro["nombre_res_uso
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">C&Eacute;DULA DE IDENTIDAD:</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtced_res_uso" type="text" class="Estilo10" id="txtced_res_uso" size="15" maxlength="12" readonly value="<?echo $ced_res_uso?>" >   </span></div></td>
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtced_res_uso" type="text" class="Estilo10" id="txtced_res_uso" size="15" maxlength="12" readonly value="<?php echo $ced_res_uso?>" >   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -78,7 +78,7 @@ $ced_res_uso=$registro["ced_res_uso"]; $nombre_res_uso=$registro["nombre_res_uso
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"> <input name="txtnombre_res_uso" type="text" class="Estilo10" id="txtnombre_res_uso" size="100" maxlength="100"   onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $nombre_res_uso?>" >
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"> <input name="txtnombre_res_uso" type="text" class="Estilo10" id="txtnombre_res_uso" size="100" maxlength="100"   onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $nombre_res_uso?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -88,7 +88,7 @@ $ced_res_uso=$registro["ced_res_uso"]; $nombre_res_uso=$registro["nombre_res_uso
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><textarea name="txtobservaciones_uso" cols="80" class="headers"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" id="txtobservaciones_uso"><?echo $observaciones_uso?></textarea>   </div></td>
+                 <td width="680" scope="col"><div align="left"><textarea name="txtobservaciones_uso" cols="80" class="headers"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" id="txtobservaciones_uso"><?php echo $observaciones_uso?></textarea>   </div></td>
                </tr>
              </table></td>
 		   </tr>	
@@ -111,4 +111,4 @@ $ced_res_uso=$registro["ced_res_uso"]; $nombre_res_uso=$registro["nombre_res_uso
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

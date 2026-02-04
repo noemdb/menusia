@@ -6,7 +6,7 @@ $fecha_hoy=asigna_fecha_hoy(); $url="Act_Mov_Libros.php?Gcod_banco=C".$cod_banco
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Anular Movimientos en Libros)</title>
+<title>SIPAP CONTROL BANCARIO (Anular Movimientos en Libros)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -72,7 +72,7 @@ return true;}
             <td><table width="680" border="0" align="center">
               <tr>
                 <td width="140"><span class="Estilo5">FECHA : </span></td>
-                <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtfecha_anu" type="text" id="txtfecha_anu" size="12" value="<?echo $fecha_hoy?>"  onchange="checkrefecha(this.form)" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
+                <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtfecha_anu" type="text" id="txtfecha_anu" size="12" value="<?php echo $fecha_hoy?>"  onchange="checkrefecha(this.form)" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
 				<td width="150"><span class="Estilo5">REFERENCIA DEPOSITO : </span></td>
                 <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtref_dep" type="text"  id="txtref_dep"   size="10" maxlength="8" onFocus="encender(this)" onBlur="apaga_ref_dep(this)"> </span></td>
               </tr>
@@ -116,7 +116,7 @@ return true;}
 				<tr>
 				  <td width="250"><span class="Estilo5">C&Oacute;DIGO CONTABLE DE ANULACION :</span></td>
 				  <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
-				  <td width="180"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+				  <td width="180"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
 				</tr>
 			  </table></td>
 		  </tr>
@@ -135,7 +135,7 @@ return true;}
                     <tr>
                       <td width="160"><span class="Estilo5">C&Oacute;DIGO BANCO DEPOSITO:</span></td>
                        <td width="60"><span class="Estilo5"> <input class="Estilo10" name="txtcod_bancoA" type="text" id="txtcod_bancoA" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apaga_bancoA(this)" onchange="chequea_bancoA(this.form);">  </span> </td>
-                      <td width="60"><input class="Estilo10" name="btcod_bancoA" type="button" id="btcod_bancoA" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancosA.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="60"><input class="Estilo10" name="btcod_bancoA" type="button" id="btcod_bancoA" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancosA.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="140"><span class="Estilo5">N&Uacute;MERO DE CUENTA:</span></td>
                       <td width="160"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnro_cuentaA" type="text"  id="txtnro_cuentaA"   size="25" maxlength="25" readonly></span></div></td>
                     </tr>
@@ -152,10 +152,10 @@ return true;}
 		  <tr> <td>&nbsp;</td></tr>
           <tr>
           <td><table width="680" border="0" align="center"> <tr>
-            <td width="40"><input name="txtcod_banco" type="hidden" id="txtcod_banco" value="<?echo $cod_banco?>"></td>
-            <td width="40"><input name="txttipo_movimiento" type="hidden" id="txttipo_movimiento" value="<?echo $tipo_mov?>"></td>
-            <td width="40"><input name="txtreferencia" type="hidden" id="txtreferencia" value="<?echo $referencia?>"></td>
-			<td width="40"><input name="txtmonto_dep" type="hidden" id="txtmonto_dep" value="<?echo $monto_mov?>"></td>
+            <td width="40"><input name="txtcod_banco" type="hidden" id="txtcod_banco" value="<?php echo $cod_banco?>"></td>
+            <td width="40"><input name="txttipo_movimiento" type="hidden" id="txttipo_movimiento" value="<?php echo $tipo_mov?>"></td>
+            <td width="40"><input name="txtreferencia" type="hidden" id="txtreferencia" value="<?php echo $referencia?>"></td>
+			<td width="40"><input name="txtmonto_dep" type="hidden" id="txtmonto_dep" value="<?php echo $monto_mov?>"></td>
           </tr></table></td>
           </tr>
           <tr><td>&nbsp;</td> </tr>
@@ -165,7 +165,7 @@ return true;}
                 <td width="182">&nbsp;</td>
                 <td width="127" align="center" valign="middle"><input name="Procesar" type="submit" id="Procesar"  value="Procesar"></td>
                 <td width="10" align="center">&nbsp;</td>
-                <td width="136" align="center"><input name="Retornar" type="button" id="Retornar" value="Retornar" onClick="JavaScript:document.location ='<? echo $url; ?>';"></td>
+                <td width="136" align="center"><input name="Retornar" type="button" id="Retornar" value="Retornar" onClick="JavaScript:document.location ='<?php  echo $url; ?>';"></td>
                 <td width="181">&nbsp;</td>
               </tr>
             </table></td>

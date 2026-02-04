@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); 
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); 
 if (!$_GET){$cod_presup=""; $cod_fuente="00";$codigo_mov="";$ref_imput_presu="";$ref_comp=""; $tipo_comp="0000";}
  else{ $cod_presup=$_GET["codigo"];$cod_fuente=$_GET["fuente"]; $ref_imput_presu=$_GET["ref_imput"]; $ref_comp=$_GET["ref_comp"]; $tipo_comp=$_GET["tipo_comp"];$codigo_mov=$_GET["codigo_mov"];}
 ?>
@@ -6,7 +6,7 @@ if (!$_GET){$cod_presup=""; $cod_fuente="00";$codigo_mov="";$ref_imput_presu="";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Modificar Codigos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Modificar Codigos de la Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -26,11 +26,11 @@ function encende_monto(mthis){var mmonto; encender(mthis);
 function apaga_monto(mthis){var mmonto; apagar(mthis);
  mmonto=document.form1.txtmonto.value;  mmonto=camb_punto_coma(mmonto); document.form1.txtmonto.value=mmonto; 
 }
-function llamar_anterior(){document.location ='Det_inc_comp_ord.php?codigo_mov=<?echo $codigo_mov?>';}
+function llamar_anterior(){document.location ='Det_inc_comp_ord.php?codigo_mov=<?php echo $codigo_mov?>';}
 
 function llamar_causar_todos(){  var r;
   r=confirm("Desea Causar todos los Codigos del Compromiso ?");  
-  if (r==true) { document.location='Causa_comp_ord.php?codigo_mov=<?echo $codigo_mov?>&tipo_comp=<?echo $tipo_comp?>&ref_comp=<?echo $ref_comp?>'; }
+  if (r==true) { document.location='Causa_comp_ord.php?codigo_mov=<?php echo $codigo_mov?>&tipo_comp=<?php echo $tipo_comp?>&ref_comp=<?php echo $ref_comp?>'; }
 }
 function llamar_asociar(codigo_mov,codigo,fuente,ref_imput,ref_comp,tipo_comp){ var murl;var r;
  if (codigo=="") {alert("Codigo debe ser Seleccionado");}
@@ -52,7 +52,7 @@ return true;}
 -->
 </style>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $denominacion="";$des_fuente="";$cod_contable="";$monto=0;$montoc=0;$montod=0;
 $sql="SELECT * FROM CODIGOS_PRE026 where codigo_mov='$codigo_mov' and cod_presup='$cod_presup' and fuente_financ='$cod_fuente' and referencia_comp='$ref_comp' and tipo_compromiso='$tipo_comp' and ref_imput_presu='$ref_imput_presu'"; $res=pg_query($sql);
@@ -75,7 +75,7 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
           <td><table width="620" border="0">
               <tr>
                 <td width="168"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO : </span></td>
-                <td width="217"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo de la Cuenta" value="<? echo $cod_presup ?>"  size="32" maxlength="32" readonly>
+                <td width="217"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo de la Cuenta" value="<?php  echo $cod_presup ?>"  size="32" maxlength="32" readonly>
                 </span></td>
                 <td width="103">&nbsp;</td>
                 <td width="51">&nbsp;</td>
@@ -87,10 +87,10 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
           <td><table width="663" border="0">
             <tr>
               <td width="200"><span class="Estilo5">FUENTE DE FINANCIAMIENTO : </span></td>
-              <td width="34"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" value="<? echo $cod_fuente ?>" size="3" maxlength="2" readonly>
+              <td width="34"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?php  echo $cod_fuente ?>" size="3" maxlength="2" readonly>
               </span></td>
               <td width="10">&nbsp;</td>
-              <td width="401"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" value="<? echo $des_fuente ?>" size="55" readonly>
+              <td width="401"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?php  echo $des_fuente ?>" size="55" readonly>
               </span></td>
             </tr>
           </table></td>
@@ -98,7 +98,7 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
         <tr>
           <td><table width="678" border="0">
               <tr>  <td width="110"><span class="Estilo5">DENOMINACI&Oacute;N : </span></td>
-                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion"  class="Estilo10" cols="65" rows="1" readonly="readonly" id="txtdenominacion"><? echo $denominacion ?></textarea>
+                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion"  class="Estilo10" cols="65" rows="1" readonly="readonly" id="txtdenominacion"><?php  echo $denominacion ?></textarea>
                 </span></td>
               </tr>
             </table>            </td>
@@ -107,18 +107,18 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
 		  <tr><td><table width="681">
 		   <tr>
               <td width="181"><span class="Estilo5">DOCUMENTO COMPROMISO:</span> </td>
-              <td width="167"><span class="Estilo5"><span class="Estilo10"><input class="Estilo10" name="txttipo_comp" type="text" id="txttipo_comp" value="<?echo $tipo_comp?>" size="5" readonly></span> </span></td>
+              <td width="167"><span class="Estilo5"><span class="Estilo10"><input class="Estilo10" name="txttipo_comp" type="text" id="txttipo_comp" value="<?php echo $tipo_comp?>" size="5" readonly></span> </span></td>
               <td width="187"><span class="Estilo5">REFERENCIA COMPROMISO:</span> </td>
-              <td width="126"><span class="Estilo5"><span class="Estilo10"><input class="Estilo10" name="txtref_comp" type="text" id="txtref_comp" value="<?echo $ref_comp?>" size="10" readonly>
+              <td width="126"><span class="Estilo5"><span class="Estilo10"><input class="Estilo10" name="txtref_comp" type="text" id="txtref_comp" value="<?php echo $ref_comp?>" size="10" readonly>
               </span> </span></td>
               </tr>
 		  </table>            </td><tr>
           <td><table width="681">            
             <tr>
               <td width="164"><span class="Estilo5">IMPUTACI&Oacute;N PRESUP.:</span></td>
-              <td width="146"><span class="Estilo5"><input class="Estilo10" name="txttipo_imput_presu" type="text" id="txttipo_imput_presu"  value="<?echo $tipo_imput_presu?>" size="20" readonly>  </span> </td>
+              <td width="146"><span class="Estilo5"><input class="Estilo10" name="txttipo_imput_presu" type="text" id="txttipo_imput_presu"  value="<?php echo $tipo_imput_presu?>" size="20" readonly>  </span> </td>
               <td width="243"><span class="Estilo5">REFERENCIA DEL CREDITO ADICIONAL:</span></td>
-              <td width="108"><input class="Estilo10" name="txtref_imput_presu" type="text"  id="txtref_imput_presu" value="<?echo $ref_imput_presu?>" size="12" readonly ></td>
+              <td width="108"><input class="Estilo10" name="txtref_imput_presu" type="text"  id="txtref_imput_presu" value="<?php echo $ref_imput_presu?>" size="12" readonly ></td>
             </tr>
           </table></td>
         </tr>
@@ -126,9 +126,9 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
           <td><table width="677" border="0">
             <tr>
               <td width="124"><span class="Estilo5">COMPROMETIDO :</span></td>
-              <td width="244"><span class="Estilo5"><input class="Estilo10" name="txtcomprometido" type="text" id="txtcomprometido" size="25" style="text-align:right" value="<? echo $montod ?>" readonly onkeypress="return stabular(event,this)">  </span></td>
+              <td width="244"><span class="Estilo5"><input class="Estilo10" name="txtcomprometido" type="text" id="txtcomprometido" size="25" style="text-align:right" value="<?php  echo $montod ?>" readonly onkeypress="return stabular(event,this)">  </span></td>
               <td width="124"><span class="Estilo5">MONTO CAUSADO :</span></td>
-              <td width="167"><span class="Estilo5"><input class="Estilo10" name="txtmonto" type="text" id="txtmonto" style="text-align:right" onFocus="encende_monto(this)" onBlur="apaga_monto(this)" value="<? echo $monto ?>" size="25" maxlength="22" onKeypress="return validarNum(event,this)" >   </span></td>
+              <td width="167"><span class="Estilo5"><input class="Estilo10" name="txtmonto" type="text" id="txtmonto" style="text-align:right" onFocus="encende_monto(this)" onBlur="apaga_monto(this)" value="<?php  echo $monto ?>" size="25" maxlength="22" onKeypress="return validarNum(event,this)" >   </span></td>
             </tr>
           </table></td>
         </tr>
@@ -136,8 +136,8 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
           <td><table width="679">
             <tr>
               <td width="139"><span class="Estilo5">CODIGO CONTABLE : </span></td>
-              <td width="180"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" size="25" maxlength="30" value="<? echo $cod_contable?>" onFocus="encender(this)" onBlur="apagar(this)"onkeypress="return stabular(event,this)" >     </span></td>
-              <td width="40"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo de Cuentas" onclick="VentanaCentrada('Cat_cuentasc.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+              <td width="180"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" size="25" maxlength="30" value="<?php  echo $cod_contable?>" onFocus="encender(this)" onBlur="apagar(this)"onkeypress="return stabular(event,this)" >     </span></td>
+              <td width="40"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo de Cuentas" onclick="VentanaCentrada('Cat_cuentasc.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
               
 			 <td width="300"></td>
             </tr>
@@ -147,11 +147,11 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
       </table>
         <table width="629" align="center">
           <tr>
-            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100" align="center"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>			
 			<td width="129" align="center"><input name="Causar" type="button" id="Causar" value="Causar Todos" onClick="JavaScript:llamar_causar_todos()"></td>			
             <td width="100" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>			
-			<td width="100" align="center"><input class="Estilo10" name="Asociar" type="button" id="Asociar" value="Asociar" onClick="JavaScript:llamar_asociar('<? echo $codigo_mov; ?>','<? echo $cod_presup; ?>','<? echo $cod_fuente; ?>','<? echo $ref_imput_presu; ?>','<? echo $ref_comp; ?>','<? echo $tipo_comp; ?>')"></td>
+			<td width="100" align="center"><input class="Estilo10" name="Asociar" type="button" id="Asociar" value="Asociar" onClick="JavaScript:llamar_asociar('<?php  echo $codigo_mov; ?>','<?php  echo $cod_presup; ?>','<?php  echo $cod_fuente; ?>','<?php  echo $ref_imput_presu; ?>','<?php  echo $ref_comp; ?>','<?php  echo $tipo_comp; ?>')"></td>
             <td width="100">&nbsp;</td>
           </tr>
         </table>      </td>
@@ -160,7 +160,7 @@ if ($monto==0) {$monto=$montod;}$monto=formato_monto($monto);$montoc=formato_mon
 </form>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>
 <script language="JavaScript" type="text/JavaScript">
 var f=document.form1; f.txtmonto.focus();
 </script>

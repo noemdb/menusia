@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $periodod='01';
  $periodoh='01';
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);
@@ -20,7 +20,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Planillas de Retenci&oacute;n)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Planillas de Retenci&oacute;n)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -114,11 +114,11 @@ var url;
             <tr>
               <td width="201" height="26"> <div align="left">TIPO PLANILLA DESDE : </div></td><td width="292"><span class="Estilo5">
                 <span class="Estilo12">
-                <input name="txtcod_planilla_ret_d" type="text" id="txtcod_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_planilla_ret_d?>" size="15" maxlength="15">
+                <input name="txtcod_planilla_ret_d" type="text" id="txtcod_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_planilla_ret_d?>" size="15" maxlength="15">
                 </span>              </span></td>
               <td width="76">HASTA : </td>
               <td width="189"><span class="Estilo12"><span class="Estilo5">
-              <input name="txtcod_planilla_ret_h" type="text" id="txtcod_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_planilla_ret_h?>" size="15" maxlength="15">
+              <input name="txtcod_planilla_ret_h" type="text" id="txtcod_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_planilla_ret_h?>" size="15" maxlength="15">
 </span></span></td>
             </tr>
           </table></td>
@@ -130,11 +130,11 @@ var url;
           <td height="19" align="center" class="Estilo16"><table width="776" border="0">
             <tr>
               <td width="197" height="26"> <div align="left">Nro. PLANILLA DESDE : </div></td><td width="299"><span class="Estilo5">
-                <input name="txtnum_planilla_ret_d" type="text" id="txtnum_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_planilla_ret_d?>" size="15" maxlength="15">
+                <input name="txtnum_planilla_ret_d" type="text" id="txtnum_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_planilla_ret_d?>" size="15" maxlength="15">
               </span></td>
               <td width="76">HASTA : </td>
               <td width="186"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtnum_planilla_ret_h" type="text" id="txtnum_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_planilla_ret_h?>" size="15" maxlength="15">
+                <input name="txtnum_planilla_ret_h" type="text" id="txtnum_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_planilla_ret_h?>" size="15" maxlength="15">
               </span></span></td>
             </tr>
           </table></td>
@@ -148,13 +148,13 @@ var url;
               <td width="239" height="26">
                 <div align="left">C&Oacute;DIGO DE BANCO DESDE : </div></td>
               <td width="46"><span class="Estilo5">
-                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="32">
+                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="32">
               </span></td>
               <td width="48"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="425"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_banco_d" type="text" id="txtcod_titulo22" size="60" maxlength="60"  value="<?echo $desc_banco_d?>" readonly>
+                <input name="txtdesc_banco_d" type="text" id="txtcod_titulo22" size="60" maxlength="60"  value="<?php echo $desc_banco_d?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -168,13 +168,13 @@ var url;
               <td width="240" height="26">
                 <div align="left">C&Oacute;DIGO DE BANCO HASTA : </div></td>
               <td width="46"><span class="Estilo5">
-                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="5" maxlength="32">
+                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="5" maxlength="32">
               </span></td>
               <td width="46"><span class="Estilo5">
-                <input name="Catalogo32" type="button" id="Catalogo323" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo32" type="button" id="Catalogo323" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="426"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_banco_h" type="text" id="txtDesc_Banco_D" size="60" maxlength="60"  value="<?echo $desc_banco_h?>" readonly>
+                <input name="txtdesc_banco_h" type="text" id="txtDesc_Banco_D" size="60" maxlength="60"  value="<?php echo $desc_banco_h?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -188,13 +188,13 @@ var url;
               <td width="261" height="26">
                 <div align="left">TIPO DE MOVIMIENTO DESDE : </div></td>
               <td width="49"><span class="Estilo5">
-                <input name="txttipo_mov_d" type="text" id="txttipo_mov_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_mov_d?>" size="5" maxlength="32">
+                <input name="txttipo_mov_d" type="text" id="txttipo_mov_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_mov_d?>" size="5" maxlength="32">
               </span></td>
               <td width="40"><span class="Estilo5">
-                <input name="Catalogo33" type="button" id="Catalogo333" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo33" type="button" id="Catalogo333" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="408"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_tipo_Mov_d" type="text" id="txtdesc_tipo_Mov_d" size="59" maxlength="58"  value="<?echo $desc_tipo_mov_d?>" readonly>
+                <input name="txtdesc_tipo_Mov_d" type="text" id="txtdesc_tipo_Mov_d" size="59" maxlength="58"  value="<?php echo $desc_tipo_mov_d?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -208,13 +208,13 @@ var url;
               <td width="261" height="26">
                 <div align="left">TIPO DE MOVIMIENTO HASTA : </div></td>
               <td width="46"><span class="Estilo5">
-                <input name="txttipo_mov_h" type="text" id="txttipo_mov_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_mov_h?>" size="5" maxlength="32">
+                <input name="txttipo_mov_h" type="text" id="txttipo_mov_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_mov_h?>" size="5" maxlength="32">
               </span></td>
               <td width="44"><span class="Estilo5">
-                <input name="Catalogo332" type="button" id="Catalogo3322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo332" type="button" id="Catalogo3322" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="407"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_tipo_mov_h" type="text" id="txtDesc_Tipo_Mov_D" size="59" maxlength="58"  value="<?echo $desc_tipo_mov_h?>" readonly>
+                <input name="txtdesc_tipo_mov_h" type="text" id="txtDesc_Tipo_Mov_D" size="59" maxlength="58"  value="<?php echo $desc_tipo_mov_h?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -227,11 +227,11 @@ var url;
             <tr>
               <td width="294" height="26"><p align="left">REFERENCIA MOVIMIENTO DESDE :</p></td>
               <td width="263"><span class="Estilo5">
-                <input name="txtreferencia_h" type="text" id="txtreferencia_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $referencia_h?>" size="8" maxlength="8">
+                <input name="txtreferencia_h" type="text" id="txtreferencia_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $referencia_h?>" size="8" maxlength="8">
               </span></td>
               <td width="73">HASTA :</td>
               <td width="135"><span class="Estilo5">
-                <input name="txtCodigo_Cuenta_D23" type="text" id="txtCodigo_Cuenta_D23" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_d?>" size="12" maxlength="12">
+                <input name="txtCodigo_Cuenta_D23" type="text" id="txtCodigo_Cuenta_D23" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_d?>" size="12" maxlength="12">
               </span></td>
             </tr>
           </table></td>
@@ -245,13 +245,13 @@ var url;
               <td width="301" height="26">
                 <div align="left">C&Eacute;DULA/RIF BENEFICIARIO DESDE : </div></td>
               <td width="109"><span class="Estilo5">
-                <input name="txtced_rif_benef_d" type="text" id="txtced_rif_benef_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_d?>" size="15" maxlength="15">
+                <input name="txtced_rif_benef_d" type="text" id="txtced_rif_benef_d2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_d?>" size="15" maxlength="15">
               </span></td>
               <td width="44"><span class="Estilo5">
-                <input name="Catalogo322" type="button" id="Catalogo3225" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo322" type="button" id="Catalogo3225" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="304"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_ced_rif_benef_d" type="text" id="txtdesc_ced_rif_benef_d3" size="41" maxlength="15"  value="<?echo $desc_ced_rif_benef_d?>" readonly>
+                <input name="txtdesc_ced_rif_benef_d" type="text" id="txtdesc_ced_rif_benef_d3" size="41" maxlength="15"  value="<?php echo $desc_ced_rif_benef_d?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -265,13 +265,13 @@ var url;
               <td width="303" height="26">
                 <div align="left">C&Eacute;DULA/RIF BENEFICIARIO HASTA : </div></td>
               <td width="107"><span class="Estilo5">
-                <input name="txtced_rif_benef_h" type="text" id="txtced_rif_benef_h2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_h?>" size="15" maxlength="15">
+                <input name="txtced_rif_benef_h" type="text" id="txtced_rif_benef_h2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_h?>" size="15" maxlength="15">
               </span></td>
               <td width="41"><span class="Estilo5">
-                <input name="Catalogo3222" type="button" id="Catalogo3222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3222" type="button" id="Catalogo3222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="307"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtdesc_ced_rif_benef_h" type="text" id="txtdesc_ced_rif_benef_h" size="41" maxlength="41"  value="<?echo $desc_ced_rif_benef_h?>" readonly>
+                <input name="txtdesc_ced_rif_benef_h" type="text" id="txtdesc_ced_rif_benef_h" size="41" maxlength="41"  value="<?php echo $desc_ced_rif_benef_h?>" readonly>
               </span></span></td>
             </tr>
           </table></td>
@@ -305,4 +305,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

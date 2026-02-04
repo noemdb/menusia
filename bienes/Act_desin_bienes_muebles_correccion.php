@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13";
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc"); $cod_modulo="13";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000010"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$cod_bien_mue='';$p_letra="";  $sql="SELECT * FROM BIEN055 ORDER BY cod_bien_mue";}
 else {  $cod_bien_mue = $_GET["Gcod_bien_mue"];  $p_letra=substr($cod_bien_mue, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$cod_bien_mue=substr($cod_bien_mue,1,30);}
@@ -22,7 +22,7 @@ else {  $cod_bien_mue = $_GET["Gcod_bien_mue"];  $p_letra=substr($cod_bien_mue, 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Muebles Desincorporado por Correcion)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Muebles Desincorporado por Correcion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -56,7 +56,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $cod_bien_mue=""; $cod_clasificacion=""; $num_bien="";$denominacion=""; $cod_dependencia=""; $cod_empresa=""; $cod_direccion=""; $cod_departamento=""; $ced_responsable=""; $fecha_actualizacion=""; $denomina_tipo="";
 $ced_responsable_uso="";$cod_metodo_rot="";$ced_rotulador=""; $fecha_rotulacion="";$direccion=""; $cod_region=""; $cod_entidad=""; $cod_municipio=""; $cod_ciudad=""; $cod_parroquia=""; $cod_postal="";$caracteristicas="";$marca="";  $modelo="";$color="";$matricula="";$serial1="";$serial2="";$tipo_clase="";$uso="";$dimension_tam="";$material="";$codigo_alterno="";$ano=""; $antiguedad="";$cod_contablea="";$cod_contabled="";$tipo_depreciacion="";$tasa_deprec=""; $vida_util=""; $valor_residual=""; $sit_contable="";$sit_legal=""; $edo_conservacion="";$ced_verificador=""; $fecha_verificacion=""; $tipo_incorporacion=""; $cod_imp_presup=""; $nom_imp_presup="";$des_imp_nopresup=""; $fecha_incorporacion=""; $valor_incorporacion="";$garantia="";$nro_oc=""; $fecha_oc=""; $nro_op=""; $fecha_op=""; $tipo_doc_cancela=""; $nro_doc_cancela=""; $fecha_doc_cancela="";$ced_rif_proveedor=""; $codigo_tipo_incorp=""; $nom_proveedor=""; $cod_presup_dep=""; $monto_depreciado=""; $nro_factura=""; $fecha_factura=""; $desincorporado=""; $fecha_desincorporado="";$des_desincorporado="";$bien_en_salida="";$status_bien_inm=""; $usuario_sia=""; $inf_usuario="";$accesorios="";  $descripcion_b="";  $denominacion_empresa=""; $denominacion_dependencia=""; $denominacion_dir="";$denominacion_dep="";  $nombre_res="";  $nombre_res_uso="";  $metodo_rotula="";  $nombre_res_rotu="";$nombre_region="";  $estado="";  $nombre_municipio=""; $nombre_ciudad="";  $nombre_parroquia=""; $tipo_situacion_cont="";  $tipo_situacion_legal=""; $edo_bien="";  $nombre_res_ver="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
@@ -161,12 +161,12 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
     <table width="92" height="460" border="1" cellpadding="0" cellspacing="0" id="tablam">
       <td width="86">
 	    <td width="92" height="460"><table width="92" height="460" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-		 <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+		 <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cargar_bien_correccion.php')";
 					onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Cargar_bien_correccion.php')">Incluir</A></td>
 		  </tr>		 
-		 <?} if ($Mcamino{2}=="S"){?>
+		 <?php } if ($Mcamino{2}=="S"){?>
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
 				   onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -187,12 +187,12 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_desin_bienes_muebles_correccion.php')";
 							  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_desin_bienes_muebles_correccion.php" class="menu">Catalogo</a></td>
 		  </tr>	
-         <?} if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
+         <?php } if (($Mcamino{4}=="S")and($SIA_Cierre=="N")){?>
 			<tr>
 			  <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
 			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Formato();" class="menu">Formato</a></td>
 			</tr>  
-	     <?} ?>			 
+	     <?php } ?>			 
 		  <tr>
 			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
 				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -211,8 +211,8 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="180"><span class="Estilo5">C&Oacute;DIGO DE CLASIFICACI&Oacute;N :</span></td>
-                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="10"  value="<?echo $cod_clasificacion?>" readonly> </span></td>
-                 <td width="520"><span class="Estilo5"> <input class="Estilo10" name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="80" maxlength="250" value="<?echo $descripcion_b?>" readonly></span></td>
+                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="10"  value="<?php echo $cod_clasificacion?>" readonly> </span></td>
+                 <td width="520"><span class="Estilo5"> <input class="Estilo10" name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="80" maxlength="250" value="<?php echo $descripcion_b?>" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -220,9 +220,9 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">N&Uacute;MERO DEL BIEN:</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20" value="<?echo $num_bien?>" readonly></div></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20" value="<?php echo $num_bien?>" readonly></div></td>
                  <td width="220"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="30" value="<?echo $cod_bien_mue?>" readonly> </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="30" value="<?php echo $cod_bien_mue?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -230,7 +230,7 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">DENOMINACI&Oacute;N DEL BIEN :</span></td>
-                 <td width="680"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text" id="txtdenominacion" size="120" maxlength="250" value="<?echo $denominacion?>" readonly></div></td>
+                 <td width="680"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text" id="txtdenominacion" size="120" maxlength="250" value="<?php echo $denominacion?>" readonly></div></td>
                </tr>
              </table></td>
            </tr>
@@ -238,8 +238,8 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
-                 <td width="135"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" readonly>    </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $denominacion_dependencia?>" readonly>    </span></td>
+                 <td width="135"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" readonly>    </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $denominacion_dependencia?>" readonly>    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -247,8 +247,8 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></td>
-                 <td width="135"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?echo $cod_direccion?>" readonly>   </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?echo $denominacion_dir?>" readonly>   </span></td>
+                 <td width="135"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?php echo $cod_direccion?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?php echo $denominacion_dir?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -256,8 +256,8 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="155"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></td>
-                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?echo $cod_departamento?>" readonly>   </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_depart" type="text" id="txtdenominacion_depart" size="100" maxlength="100"  value="<?echo $denominacion_dep?>" readonly>   </span></td>
+                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?php echo $cod_departamento?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_depart" type="text" id="txtdenominacion_depart" size="100" maxlength="100"  value="<?php echo $denominacion_dep?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>    
@@ -265,8 +265,8 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">C&Oacute;DIGO MOVIMIENTO INCORPORACI&Oacute;N:</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txcodigo_tipo_incorp" type="text" id="txtcodigo_tipo_incorp" size="5" maxlength="5" value="<?echo $codigo_tipo_incorp?>" readonly>  </span></td>
-                 <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="100" maxlength="150" value="<?echo $denomina_tipo?>" readonly> </span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txcodigo_tipo_incorp" type="text" id="txtcodigo_tipo_incorp" size="5" maxlength="5" value="<?php echo $codigo_tipo_incorp?>" readonly>  </span></td>
+                 <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="100" maxlength="150" value="<?php echo $denomina_tipo?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -274,7 +274,7 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="195"><span class="Estilo5">TIPO DE INCORPORACI&Oacute;N :</span></td>
-                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txttipo_incorporacion" type="text" id="txttipo_incorporacion" size="30" maxlength="30" value="<?echo $tipo_incorporacion ?>" readonly></span></td>
+                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txttipo_incorporacion" type="text" id="txttipo_incorporacion" size="30" maxlength="30" value="<?php echo $tipo_incorporacion ?>" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -282,7 +282,7 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">C&Oacute;D. IMPUTACI&Oacute;N PRESUPUESTARIA :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_imp_presup" type="text" id="txtcod_imp_presup" size="35" maxlength="32"  value="<?echo $cod_imp_presup?>" readonly> </span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_imp_presup" type="text" id="txtcod_imp_presup" size="35" maxlength="32"  value="<?php echo $cod_imp_presup?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -290,7 +290,7 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">NOMBRE IMPUTACI&Oacute;N PRESUPUESTARIA :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtnom_imp_presup" type="text" id="txtnom_imp_presup" size="130" maxlength="150" value="<?echo $nom_imp_presup?>" readonly>  </span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtnom_imp_presup" type="text" id="txtnom_imp_presup" size="130" maxlength="150" value="<?php echo $nom_imp_presup?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>           
@@ -298,11 +298,11 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">VALOR INCORPORACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?echo $valor_incorporacion?>" readonly>   </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?php echo $valor_incorporacion?>" readonly>   </span></td>
                  <td width="150"><span class="Estilo5">FECHA INCORPORACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="15" maxlength="15"  value="<?echo $fecha_incorporacion?>" readonly>   </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="15" maxlength="15"  value="<?php echo $fecha_incorporacion?>" readonly>   </span></td>
                  <td width="90"><span class="Estilo5">GARANTIA :</span></td>
-                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtgarantia" type="text" id="txtgarantia" size="10" maxlength="15" value="<?echo $garantia?>" readonly>   </span></td>
+                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtgarantia" type="text" id="txtgarantia" size="10" maxlength="15" value="<?php echo $garantia?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -313,9 +313,9 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">DESINCORPORADO :</span></td>
-				 <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtdesincorporado" type="text" id="txtdesincorporado" size="4" maxlength="2" value="<?echo $desincorporado?>" readonly>   </span></td>                 
+				 <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtdesincorporado" type="text" id="txtdesincorporado" size="4" maxlength="2" value="<?php echo $desincorporado?>" readonly>   </span></td>                 
                  <td width="200"><span class="Estilo5">FECHA DESINCORPORACI&Oacute;N :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desincorporado" type="text" id="txtfecha_desincorporado" size="20" maxlength="15"  value="<?echo $fecha_desincorporado?>" readonly> </span></td>
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desincorporado" type="text" id="txtfecha_desincorporado" size="20" maxlength="15"  value="<?php echo $fecha_desincorporado?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -323,7 +323,7 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">MOTIVO DESINCORPORACI&Oacute;N :</span></td>
-                 <td width="680"><div align="left"><textarea name="txtdes_desincorporado" cols="70" onFocus="encender(this)" readonly class="headers" id="txtdes_desincorporado"><?echo $des_desincorporado?></textarea>   </div></td>
+                 <td width="680"><div align="left"><textarea name="txtdes_desincorporado" cols="70" onFocus="encender(this)" readonly class="headers" id="txtdes_desincorporado"><?php echo $des_desincorporado?></textarea>   </div></td>
                </tr>
              </table></td>
            </tr>
@@ -337,4 +337,4 @@ if($desincorporado=="S"){$desincorporado="SI";}else{$desincorporado="NO";}
 
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

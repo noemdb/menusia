@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="03-0000054"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
 $tipo_retencion_d="";$tipo_retencion_h="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,7 +13,7 @@ $tipo_retencion_d="";$tipo_retencion_h="";$vurl;
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Listado Tipos Retencion)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Listado Tipos Retencion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -50,7 +50,7 @@ function Llama_Menu_Rpt(murl){var url;   url="../"+murl;   LlamarURL(url);}
 
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Ced_Rif) As Max_Ced_Rif, MIN(Ced_Rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $cedula_d=$registro["min_ced_rif"];  $cedula_h=$registro["max_ced_rif"];}
 $sql="SELECT MAX(Tipo_Retencion) As Max_Tipo_Retencion, MIN(Tipo_Retencion) As Min_Tipo_Retencion FROM RETENCIONES";$res=pg_query($sql);
@@ -93,10 +93,10 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
           <td height="19" colspan="3" align="center"  ><table width="776" border="0">
             <tr>
               <td width="182" height="26"><div align="left"><span class="Estilo5">TIPO RETENCION : </span></div></td>
-              <td width="69"><span class="Estilo5"><input class="Estilo10" name="txttipo_reten_d" type="text" id="txttipo_reten_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_retencion_d?>" size="6" maxlength="3"  onchange="checktipod(this.form)" class="Estilo5"> </span></td>
-              <td width="148"><span class="Estilo5"><input class="Estilo10" name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-              <td width="69"><span class="Estilo5"> <input class="Estilo10" name="txttipo_reten_h" type="text" id="txttipo_reten_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_retencion_h?>" size="6" maxlength="3" onchange="checktipoh(this.form)" class="Estilo5"> </span></td>
-              <td width="296"><span class="Estilo5"><input class="Estilo10" name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesh.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+              <td width="69"><span class="Estilo5"><input class="Estilo10" name="txttipo_reten_d" type="text" id="txttipo_reten_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_retencion_d?>" size="6" maxlength="3"  onchange="checktipod(this.form)" class="Estilo5"> </span></td>
+              <td width="148"><span class="Estilo5"><input class="Estilo10" name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+              <td width="69"><span class="Estilo5"> <input class="Estilo10" name="txttipo_reten_h" type="text" id="txttipo_reten_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_retencion_h?>" size="6" maxlength="3" onchange="checktipoh(this.form)" class="Estilo5"> </span></td>
+              <td width="296"><span class="Estilo5"><input class="Estilo10" name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Tipos de Retenciones" onClick="VentanaCentrada('../Cat_Tipo_Retencionesh.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
             </tr>
           </table></td>
         </tr> 
@@ -132,4 +132,4 @@ if ($registro=pg_fetch_array($res,0)){$numero_orden_d=$registro["min_nro_orden"]
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

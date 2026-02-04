@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");include ("../class/ventana.php");?>
+<?php include ("../class/seguridad.inc");include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Definci&oacute;n de Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Definci&oacute;n de Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -88,7 +88,7 @@ return true;}
                       <tr>
                         <td width="110"><span class="Estilo5">TIPO DE CUENTA : </span></td>
                         <td width="50"><span class="Estilo5"> <input name="txttipo_cuenta" type="text" id="txttipo_cuenta"  size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                        <td width="50"><input name="btTipo_Cuenta" type="button" id="bttipo_cuenta" title="Abrir Catalogo Tipos de Cuenta" onclick="VentanaCentrada('Cat_tipo_cuenta.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                        <td width="50"><input name="btTipo_Cuenta" type="button" id="bttipo_cuenta" title="Abrir Catalogo Tipos de Cuenta" onclick="VentanaCentrada('Cat_tipo_cuenta.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                         <td width="630"><span class="Estilo5"><input name="txtdes_tipo_cuenta" type="text" id="txtdes_tipo_cuenta"   size="100" maxlength="100" readonly>  </span></td>
                       </tr>
                   </table></td>
@@ -101,7 +101,7 @@ return true;}
                       <td width="275"><span class="Estilo5"><input name="txtnro_cuenta" type="text" id="txtnro_cuenta"  size="30" maxlength="25" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                       <td width="135"><span class="Estilo5">C&Oacute;DIGO CONTABLE :</span></td>
                       <td width="250"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
-                      <td width="50"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="50"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -150,7 +150,7 @@ return true;}
                   <tr>
                     <td width="140"><span class="Estilo5">GRUPO DE BANCO : </span></td>
                     <td width="59"><span class="Estilo5"><input name="txtgrupo_banco" type="text" id="txtgrupo_banco"  size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                   <td width="50"><input name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('Cat_grupo_banco.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                   <td width="50"><input name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('Cat_grupo_banco.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                    <td width="618"><span class="Estilo5"><input name="txtnombre_grupob" type="text" id="txtnombre_grupob"   size="90" maxlength="100" readonly>   </span></td>
                  </tr>
                 </table></td>

@@ -1,19 +1,19 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); 
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$codigo_mov='';}else{$codigo_mov=$_GET["codigo_mov"];}  $fecha_hoy=asigna_fecha_hoy();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Planillas de Retención)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Planillas de Retenciï¿½n)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <table width="845" border="0" cellspacing="0" cellpadding="0">
    <tr height="5"> <td><p>&nbsp;</p></td></tr>
    <tr> <td>
-<?
+<?php 
 $sql="SELECT * FROM BAN029 where codigo_mov='$codigo_mov' order by tipo_retencion,nro_planilla";
 $res=pg_query($sql);
 ?>
@@ -37,32 +37,32 @@ $res=pg_query($sql);
            <td width="80" align="right" bgcolor="#99CCFF" ><strong>% Alic.</strong></td>
            <td width="100" align="left" bgcolor="#99CCFF" ><strong>Nro.Expediente</strong></td>
          </tr>
-<? $total=0;
+<?php  $total=0;
 while($registro=pg_fetch_array($res))
 { $monto_r=formato_monto($registro["monto_retencion"]); $monto_p=formato_monto($registro["monto_pago"]); $monto_o=formato_monto($registro["monto_objeto"]); $monto_e=formato_monto($registro["monto2"]); $tasa=formato_monto($registro["tasa"]);
   $sfecha=$registro["fecha_factura"];  $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);  $total=$total+$registro["monto_retencion"];
 ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<? echo $codigo_mov; ?>','<? echo $registro["nro_orden"]; ?>','<? echo $registro["tipo_retencion"]; ?>','<? echo $registro["aux_orden"]; ?>','<? echo $registro["tipo_planilla"]; ?>','<? echo $registro["nro_planilla"]; ?>');">
-           <td width="100" align="left"><? echo $registro["ced_rif"]; ?></td>
-           <td width="100" align="left"><? echo $fecha; ?></td>
-           <td width="50" align="left"><? echo $registro["tipo_operacion"]; ?></td>
-           <td width="50" align="center"><? echo $registro["tipo_documento"]; ?></td>
-           <td width="100" align="left"><? echo $registro["nro_documento"]; ?></td>
-           <td width="100" align="left"><? echo $registro["nro_con_factura"]; ?></td>
-           <td width="120" align="right"><? echo $monto_p; ?></td>
-           <td width="120" align="right"><? echo $monto_o; ?></td>
-           <td width="120" align="right"><? echo $monto_r; ?></td>
-           <? if ($registro["nro_doc_afectado"]=="") {?>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<?php  echo $codigo_mov; ?>','<?php  echo $registro["nro_orden"]; ?>','<?php  echo $registro["tipo_retencion"]; ?>','<?php  echo $registro["aux_orden"]; ?>','<?php  echo $registro["tipo_planilla"]; ?>','<?php  echo $registro["nro_planilla"]; ?>');">
+           <td width="100" align="left"><?php  echo $registro["ced_rif"]; ?></td>
+           <td width="100" align="left"><?php  echo $fecha; ?></td>
+           <td width="50" align="left"><?php  echo $registro["tipo_operacion"]; ?></td>
+           <td width="50" align="center"><?php  echo $registro["tipo_documento"]; ?></td>
+           <td width="100" align="left"><?php  echo $registro["nro_documento"]; ?></td>
+           <td width="100" align="left"><?php  echo $registro["nro_con_factura"]; ?></td>
+           <td width="120" align="right"><?php  echo $monto_p; ?></td>
+           <td width="120" align="right"><?php  echo $monto_o; ?></td>
+           <td width="120" align="right"><?php  echo $monto_r; ?></td>
+           <?php  if ($registro["nro_doc_afectado"]=="") {?>
            <td width="100" align="left">&nbsp;</td>
-           <?}else{?>
-           <td width="100" align="left"><? echo $registro["nro_doc_afectado"]; ?></td>
-           <?}?>
-           <td width="100" align="left"><? echo $registro["nro_comprobante"]; ?></td>
-           <td width="120" align="right"><? echo $monto_e; ?></td>
-           <td width="50" align="right"><? echo $tasa; ?></td>
-           <td width="100" align="left"><? echo $registro["tipo_en"]; ?></td>
+           <?php }else{?>
+           <td width="100" align="left"><?php  echo $registro["nro_doc_afectado"]; ?></td>
+           <?php }?>
+           <td width="100" align="left"><?php  echo $registro["nro_comprobante"]; ?></td>
+           <td width="120" align="right"><?php  echo $monto_e; ?></td>
+           <td width="50" align="right"><?php  echo $tasa; ?></td>
+           <td width="100" align="left"><?php  echo $registro["tipo_en"]; ?></td>
          </tr>
-         <? }
+         <?php }
  $total=formato_monto($total);
 ?>
        </table></td>
@@ -74,7 +74,7 @@ while($registro=pg_fetch_array($res))
          <td width="580">&nbsp;</td>
          <td width="150" align="center"><span class="Estilo5">TOTAL :</span></td>
          <td><table width="150" border="1" cellspacing="0" cellpadding="0">
-           <tr> <td width="123" align="right" class="Estilo5"><? echo $total; ?></td> </tr>
+           <tr> <td width="123" align="right" class="Estilo5"><?php  echo $total; ?></td> </tr>
          </table></td>
        </tr>
      </table></td>
@@ -83,4 +83,4 @@ while($registro=pg_fetch_array($res))
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

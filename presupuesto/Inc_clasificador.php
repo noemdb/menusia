@@ -1,4 +1,4 @@
-<?include ("../class/seguridad.inc"); include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
+<?php include ("../class/seguridad.inc"); include ("../class/ventana.php"); include ("../class/fun_fechas.php"); 
  $Formato_Cuenta="XXX-XX-XX-XX-XXX"; $fecha_hoy=asigna_fecha_hoy(); $fecha_c="01/01/".substr($fecha_hoy,0,4);
  $mpatron="Array(4,2,2,2,2,0,0,0,0,0)";  $mpatron=arma_patron($Formato_Cuenta);
  ?> 
@@ -7,7 +7,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Incluir Clasificador de Partidas)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Incluir Clasificador de Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -110,7 +110,7 @@ return true;}
                   <tr>
                     <td width="159"><span class="Estilo5">CODIGO DE CUENTA :</span></td>
                     <td width="150"><input class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el Codigo de Cuenta" size="30" maxlength="30"   onFocus="encender(this)" onBlur="apagar(this)"></td>
-                    <td width="35"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=6-1','SIA','','750','500','true')" value="..."></td>
+                    <td width="35"><input class="Estilo10" name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=6-1','SIPAP','','750','500','true')" value="..."></td>
                     <td width="460"><input class="Estilo10" name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" size="70" maxlength="250"  readonly></td>
 				  </tr>
                 </table></td>

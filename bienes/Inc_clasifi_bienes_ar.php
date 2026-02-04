@@ -1,10 +1,10 @@
-<?include ("../class/ventana.php");  $cod_contable=""; $cod_contable_c=""; $cod_presup="";?>
+<?php include ("../class/ventana.php");  $cod_contable=""; $cod_contable_c=""; $cod_presup="";?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Clasificacion de Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Clasificacion de Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -77,11 +77,11 @@ return true;}
              <td><table width="850">
                <tr>
                  <td width="120"><span class="Estilo5">COD. CONTABLE :</span></td>
-                 <td width="260"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" class="Estilo10" size="35" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_contable?>" >
-                   <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="260"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" class="Estilo10" size="35" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_contable?>" >
+                   <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  <td width="200"><span class="Estilo5">CODIGO COTAB. DEPRECIACION :</span></td>
-                 <td width="270"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" class="Estilo10" size="35" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_contable_c?>" >
-                   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="270"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" class="Estilo10" size="35" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_contable_c?>" >
+                   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                </tr>
              </table></td>
            </tr>          
@@ -89,8 +89,8 @@ return true;}
              <td><table width="850">
                <tr>
                  <td width="250"><span class="Estilo5">CODIGO PRESUPUESTARIO DEPRECIACION :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32" value="<?echo $cod_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  
-                  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32" value="<?php echo $cod_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  
+                  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  
 			   </tr>
              </table></td>

@@ -1,11 +1,11 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");$fecha_hoy=asigna_fecha_hoy(); 
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");$fecha_hoy=asigna_fecha_hoy(); 
 if (!$_GET){$cedula_d=""; $cedula_h="";} else{$cedula_d=$_GET["cedula_d"];  $cedula_h=$_GET["cedula_h"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Comprobante Retenciones ISLR)</title>
+<title>SIPAP CONTROL BANCARIO (Comprobante Retenciones ISLR)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -32,9 +32,9 @@ H1.SaltoDePagina{PAGE-BREAK-AFTER: always}
 </style>
 
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  $error=0;
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  $error=0;
 $direccion_ag=""; $nombre=""; $nom_comp=""; $rif=""; $nit=""; $telefono_ag=""; $fax=""; $str1="NO"; $fecha_ini="2011-01-01"; $fecha_fin="2011-12-31"; $periodo="01"; $correo=""; $tasa_iva=0; $monto_ut=0; $definicion="N";
 $sql="Select * from SIA000 order by campo001"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){$cod_emp=$registro["campo001"];
@@ -67,9 +67,9 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
   if($prev_ced<>$ced_rif){ $prev_ced=$ced_rif;
 ?>
 <body>
-<?if($num_pag>1){?>
+<?php if($num_pag>1){?>
 <H1 class=SaltoDePagina> </H1>
-<?} ?>
+<?php } ?>
 <table width="1267" height="588" border="0" cellspacing="0">
   <tr>
     <td height="101"><table width="1256" height="89" border="0">
@@ -191,16 +191,16 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
 							<td class="Estilo3">N&uacute;mero de Rif</td>
 						  </tr>
 						  <tr>
-							<td height="12" class="Estilo20"><?echo $nombre_agente?></td>
-							<td class="Estilo20"><?echo $rif?></td>
+							<td height="12" class="Estilo20"><?php echo $nombre_agente?></td>
+							<td class="Estilo20"><?php echo $rif?></td>
 						  </tr>
 						  <tr>
-							<td height="12" bordercolor="#000000" class="Estilo3">Funcionario Autorizado para hacer la Retención: </td>
+							<td height="12" bordercolor="#000000" class="Estilo3">Funcionario Autorizado para hacer la Retenciï¿½n: </td>
 							<td class="Estilo3">N&uacute;mero de Rif</td>
 						  </tr>
 						  <tr>
-							<td height="12" class="Estilo20"><?echo $nombre_funcionario?></td>
-							<td class="Estilo20"><?echo $ced_funcionario?></td>
+							<td height="12" class="Estilo20"><?php echo $nombre_funcionario?></td>
+							<td class="Estilo20"><?php echo $ced_funcionario?></td>
 						  </tr>
 				   </table></td>
 				  </tr>
@@ -222,8 +222,8 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                     <td width="118" class="Estilo3">Fecha Cierre del Ejercicio </td>
                   </tr>
                   <tr>
-                    <td height="30" valign="top" class="Estilo20"><?echo $direccion_ag." ".$telefono_ag ?></td>
-                    <td class="Estilo20" aling="left"><?echo $fecha_fin?></td>
+                    <td height="30" valign="top" class="Estilo20"><?php echo $direccion_ag." ".$telefono_ag ?></td>
+                    <td class="Estilo20" aling="left"><?php echo $fecha_fin?></td>
                   </tr>
               </table></td>
             </tr>
@@ -236,14 +236,14 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                   <td height="17" class="Estilo3">Nombre o Razon Social : </td>
                 </tr>
                 <tr>
-                  <td class="Estilo20" aling="left"><?echo $nombre?></td>
+                  <td class="Estilo20" aling="left"><?php echo $nombre?></td>
                 </tr>
               </table></td>
               <td width="169"><table width="157" border="0">
                 <tr>
                   <td width="167"  class="Estilo3">Tipo de empresa:</td>
                 </tr>
-                <td class="Estilo3">Natural [ <?echo $tpe1?> ] &nbsp;&nbsp;  Juridica [ <?echo $tpe2?> ]</td>
+                <td class="Estilo3">Natural [ <?php echo $tpe1?> ] &nbsp;&nbsp;  Juridica [ <?php echo $tpe2?> ]</td>
               </table></td>
             </tr>
             <tr>
@@ -253,15 +253,15 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                   <td width="260" class="Estilo3">Residente en el Pais :</td>
                 </tr>
                 <tr>
-                  <td class="Estilo3">Venezolana [ <?echo $nac1?> ]  &nbsp;&nbsp; Extranjera [ <?echo $nac2?> ]</td>
-                  <td class="Estilo3">Si [ <?echo $res1?> ] &nbsp;&nbsp;  No [ <?echo $res2?> ]</td>
+                  <td class="Estilo3">Venezolana [ <?php echo $nac1?> ]  &nbsp;&nbsp; Extranjera [ <?php echo $nac2?> ]</td>
+                  <td class="Estilo3">Si [ <?php echo $res1?> ] &nbsp;&nbsp;  No [ <?php echo $res2?> ]</td>
                 </tr>
               </table></td>
               <td><table width="157" border="0">
                 <tr>
                   <td width="171" class="Estilo3">Constituida en el Pais :</td>
                 </tr>
-                 <td class="Estilo3">Si [ <?echo $cons1?> ] &nbsp;&nbsp;  No [ <?echo $cons2?> ]</td>
+                 <td class="Estilo3">Si [ <?php echo $cons1?> ] &nbsp;&nbsp;  No [ <?php echo $cons2?> ]</td>
               </table></td>
             </tr>
             <tr>
@@ -271,8 +271,8 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                   <td width="265" class="Estilo3">Numero de pasaporte:</td>
                 </tr>
                 <tr>
-                  <td class="Estilo20" aling="left"><?echo $cedula?></td>
-                  <td class="Estilo20" aling="left"><?echo $pasaporte?></td>
+                  <td class="Estilo20" aling="left"><?php echo $cedula?></td>
+                  <td class="Estilo20" aling="left"><?php echo $pasaporte?></td>
                 </tr>
               </table></td>
               <td><table width="158" border="0">
@@ -280,7 +280,7 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                   <td width="171" class="Estilo3">Numero de RIF :</td>
                 </tr>
                 <tr>
-                  <td class="Estilo20" aling="left"><?echo $ced_rif?></td>
+                  <td class="Estilo20" aling="left"><?php echo $ced_rif?></td>
                 </tr>
               </table></td>
             </tr>
@@ -290,15 +290,15 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                   <td height="14" colspan="2" class="Estilo3">Direccion y Telefono(s):</td>
                 </tr>
                  <tr valign="top">
-                  <td height="30" colspan="2" class="Estilo20" aling="left"><?echo $direccion?></td>
+                  <td height="30" colspan="2" class="Estilo20" aling="left"><?php echo $direccion?></td>
                 </tr>
                 <tr>
-                  <td width="262" height="20" class="Estilo20" ><?echo $ciudad?></td>
-				  <td width="242" height="20" class="Estilo20" ><?echo $cod_postal?></td>
+                  <td width="262" height="20" class="Estilo20" ><?php echo $ciudad?></td>
+				  <td width="242" height="20" class="Estilo20" ><?php echo $cod_postal?></td>
                 </tr>
 				<tr>
-                  <td height="20" class="Estilo20" ><?echo $estado?></td>
-                  <td height="20" class="Estilo20" ><?echo $telefono?></td>
+                  <td height="20" class="Estilo20" ><?php echo $estado?></td>
+                  <td height="20" class="Estilo20" ><?php echo $telefono?></td>
 				</tr>
               </table></td>
               <td><table width="157" height="101" border="0">
@@ -307,10 +307,10 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
                     las Remuneraciones Pagadas</td>
                 </tr>
                 <tr>
-                  <td height="30"  class="Estilo3">Desde: <?echo $fecha_ini?></td>
+                  <td height="30"  class="Estilo3">Desde: <?php echo $fecha_ini?></td>
                 </tr>
                 <tr>
-                  <td height="30"  class="Estilo3">Hasta: <?echo $fecha_fin?></td>
+                  <td height="30"  class="Estilo3">Hasta: <?php echo $fecha_fin?></td>
                 </tr>
               </table></td>
             </tr>
@@ -342,7 +342,7 @@ while(($registro=pg_fetch_array($res))and($error==0)){  $num_pag=$num_pag+1;  $c
             </tr>
         </table></td>
       </tr>
-      <? $total_monto_abonado=0; $total_monto_objeto=0; $total_monto_retencion=0; $total_acum_objeto=0; $total_acum_retenido=0; 
+      <?php  $total_monto_abonado=0; $total_monto_objeto=0; $total_monto_retencion=0; $total_acum_objeto=0; $total_acum_retenido=0; 
 	  
 $sqld="Select * from ban019 where ced_rif='$ced_rif' and nombre_usuario='$usuario_sia'"; $resd=pg_query($sqld);
 while(($regd=pg_fetch_array($resd))and($error==0)){ 
@@ -354,29 +354,29 @@ $fecha_a=formato_ddmmaaaa($fecha_abono); $fecha_e=formato_ddmmaaaa($fecha_entera
 
 ?>
       <tr>
-        <td class="Estilo5" align="center"><?echo $fecha_a?></td>
-        <td class="Estilo5" align="center"><?echo $cod_retencion?></td>
-        <td class="Estilo5" align="right"><?echo $monto_abonado?> </td>
-        <td class="Estilo5" align="right"><?echo $monto_objeto?> </td>
-        <td class="Estilo5" align="center"><?echo $tasa?> </td>
-        <td class="Estilo5" align="right"><?echo $monto_retencion?> </td>
-        <td class="Estilo5" align="right"><?echo $acum_objeto?> </td>
-        <td class="Estilo5" align="right"><?echo $acum_retenido?> </td>
-        <td width="99" class="Estilo5" align="center"><?echo $fecha_e?> </td>
-        <td width="361" class="Estilo5"><?echo $nombre_banco_ent?></td>
+        <td class="Estilo5" align="center"><?php echo $fecha_a?></td>
+        <td class="Estilo5" align="center"><?php echo $cod_retencion?></td>
+        <td class="Estilo5" align="right"><?php echo $monto_abonado?> </td>
+        <td class="Estilo5" align="right"><?php echo $monto_objeto?> </td>
+        <td class="Estilo5" align="center"><?php echo $tasa?> </td>
+        <td class="Estilo5" align="right"><?php echo $monto_retencion?> </td>
+        <td class="Estilo5" align="right"><?php echo $acum_objeto?> </td>
+        <td class="Estilo5" align="right"><?php echo $acum_retenido?> </td>
+        <td width="99" class="Estilo5" align="center"><?php echo $fecha_e?> </td>
+        <td width="361" class="Estilo5"><?php echo $nombre_banco_ent?></td>
       </tr>
-      <? }
+      <?php }
  $total_monto_abonado=formato_monto($total_monto_abonado);  $total_monto_objeto=formato_monto($total_monto_objeto);  $total_monto_retencion=formato_monto($total_monto_retencion);
 $total_acum_objeto=formato_monto($total_acum_objeto); $total_acum_retenido=formato_monto($total_acum_retenido);
 ?>
       <tr>
         <td colspan="2"><div align="right" class="Estilo5"><strong>TOTALES --->  </strong></div></td>
-        <td class="Estilo5" align="right"><strong><?echo $total_monto_abonado?> </strong></td>
-        <td class="Estilo5" align="right"><strong><?echo $total_monto_objeto?> </strong></td>
+        <td class="Estilo5" align="right"><strong><?php echo $total_monto_abonado?> </strong></td>
+        <td class="Estilo5" align="right"><strong><?php echo $total_monto_objeto?> </strong></td>
         <td>&nbsp;</td>
-        <td class="Estilo5" align="right"><strong><?echo $total_monto_retencion?> </strong></td>
-        <td class="Estilo5" align="right"><strong><?echo $acum_objeto?> </strong></td>
-        <td class="Estilo5" align="right"><strong><?echo $acum_retenido?> </strong></td>
+        <td class="Estilo5" align="right"><strong><?php echo $total_monto_retencion?> </strong></td>
+        <td class="Estilo5" align="right"><strong><?php echo $acum_objeto?> </strong></td>
+        <td class="Estilo5" align="right"><strong><?php echo $acum_retenido?> </strong></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
@@ -403,6 +403,6 @@ $total_acum_objeto=formato_monto($total_acum_objeto); $total_acum_retenido=forma
     </table></td>
   </tr>
 </table>
-<? }} ?>
+<?php } } ?>
 </body>
 </html>

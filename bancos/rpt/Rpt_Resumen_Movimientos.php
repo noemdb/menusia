@@ -1,14 +1,14 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }$cod_banco_d="";$cod_banco_h="";$periodod='01';$periodoh='01';$vurl;
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }$cod_banco_d="";$cod_banco_h="";$periodod='01';$periodoh='01';$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Resumen de  Movimientos)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Resumen de  Movimientos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -48,7 +48,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Cod_Banco) As Max_Cod_Banco, MIN(Cod_Banco) As Min_Cod_Banco FROM BAN002";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -80,10 +80,10 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
               <td width="244" height="26">
                 <div align="left"><span class="Estilo5">CODIGO DE BANCO DESDE : </span></div></td>
               <td width="52"><span class="Estilo5">
-                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_d?>" size="5" maxlength="4">
+                <input name="txtcod_banco_d" type="text" id="txtcod_banco_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_d?>" size="5" maxlength="4">
               </span></td>
               <td width="35"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo32" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="427"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_d" type="text" id="txtcod_titulo22" size="60" maxlength="150"  readonly>
@@ -100,10 +100,10 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
               <td width="245" height="26">
                 <div align="left"><span class="Estilo5">C&Oacute;DIGO DE BANCO HASTA : </span></div></td>
               <td width="51"><span class="Estilo5">
-                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h2" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="5" maxlength="4">
+                <input name="txtcod_banco_h" type="text" id="txtcod_banco_h2" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="5" maxlength="4">
               </span></td>
               <td width="34"><span class="Estilo5">
-                <input name="Catalogo32" type="button" id="Catalogo323" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo32" type="button" id="Catalogo323" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Bancosh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="428"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesc_banco_h" type="text" id="txtdesc_banco_h" size="60" maxlength="150"  readonly>
@@ -178,4 +178,4 @@ if($encontro=true){$cod_banco_d=$registro["min_cod_banco"];$cod_banco_h=$registr
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

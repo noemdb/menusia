@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");   $equipo=getenv("COMPUTERNAME");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");   $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$mcod_m="BAN04L".$equipo;$codigo_mov=substr($mcod_m,0,49);$monto=0;$dcmov="N";}else{$codigo_mov=$_GET["codigo_mov"];$monto=$_GET["monto"];$dcmov=$_GET["dcmov"];}
 if($dcmov=="D"){$deb_cre="C";} else{$deb_cre="D";} $monto=cambia_punto_comas($monto);
 ?>
@@ -6,11 +6,11 @@ if($dcmov=="D"){$deb_cre="C";} else{$deb_cre="D";} $monto=cambia_punto_comas($mo
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Incluir Cuentas al Movimiento Libro)</title>
+<title>SIPAP CONTROL BANCARIO (Incluir Cuentas al Movimiento Libro)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_comp_libro.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_comp_libro.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function apaga_monto(mthis){var mref; var mmonto;
    apagar(mthis);    mmonto=document.form1.txtmonto.value;  mmonto=camb_punto_coma(mmonto);document.form1.txtmonto.value=mmonto;
  return true;}
@@ -46,7 +46,7 @@ return true;}
                 <td width="330"><span class="Estilo5">C&Oacute;DIGO CUENTA :
                       <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el C&oacute;digo de la Cuenta"  size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);">
                 </span></td>
-                <td width="268"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="268"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
               </tr>
           </table></td>
         </tr>
@@ -62,9 +62,9 @@ return true;}
           <td><table width="614" border="0">
                 <tr>
                   <td width="336"><span class="Estilo5">DEBITO/CREDITO :
-                      <input name="txtDeb_Cre" type="text"  id="txtDeb_Cre" size="2" maxlength="2" value="<?echo $deb_cre?>" readonly >  </span></td>
+                      <input name="txtDeb_Cre" type="text"  id="txtDeb_Cre" size="2" maxlength="2" value="<?php echo $deb_cre?>" readonly >  </span></td>
                   <td width="242"><span class="Estilo5">MONTO :
-                        <input name="txtmonto" type="text" id="txtmonto" size="25" align="right" maxlength="22" onFocus="encender(this)" onBlur="apaga_monto(this)" value="<?echo $monto?>">
+                        <input name="txtmonto" type="text" id="txtmonto" size="25" align="right" maxlength="22" onFocus="encender(this)" onBlur="apaga_monto(this)" value="<?php echo $monto?>">
                   </span></td>
                 </tr>
             </table></td>
@@ -76,7 +76,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

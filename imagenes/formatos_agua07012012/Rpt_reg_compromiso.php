@@ -1,9 +1,9 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS;
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS;
 if (!$_GET){ $referencia_comp=''; $tipo_compromiso=''; $cod_comp='';}else { $referencia_comp = $_GET["txtreferencia_comp"]; $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_comp = $_GET["txtcod_comp"];}
 $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp' and cod_comp='$cod_comp'";   
 $rif_emp="G-20009014-6"; $total_comp=0;
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";$unidad_sol="";$des_unidad_sol="";$nombre_abrev_comp="";$cod_tipo_comp="";$des_tipo_comp="";$ced_rif="";$nombre="";$fecha_vencim="";$nro_documento="";$num_proyecto="";$des_proyecto="";$func_inv="";
 $tiene_anticipo="";$tasa_anticipo="";$cod_con_anticipo="";$inf_usuario="";$anulado="";$modulo=""; $nombre_tipo_comp="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){  $registro=pg_fetch_array($res);
@@ -45,7 +45,7 @@ class PDF extends FPDF{
 		$this->SetFont('Arial','B',10);
 		$this->Cell(78,3,'REGISTRO DE COMPROMISO',0,0,'R');
 		$this->SetFont('Arial','B',10);	   
-		$this->Cell(20,3,'N° '.$referencia_comp,0,1,'C');
+		$this->Cell(20,3,'Nï¿½ '.$referencia_comp,0,1,'C');
 		$this->Ln(8);		
 		$this->SetFont('Arial','',7);
         $this->SetFillColor(192,192,192);
@@ -95,7 +95,7 @@ class PDF extends FPDF{
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
 		$this->Cell(100,4,'FORMA: FTPP001',0,0,'L');
-		$this->Cell(100,4,'SIA CONTABILIDAD PRESUPUESTARIA',0,1,'R');
+		$this->Cell(100,4,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,1,'R');
 	}
 }  
   $pdf=new PDF('P', 'mm', Letter);
@@ -116,5 +116,5 @@ class PDF extends FPDF{
 	$total_comp=$total_comp+$registro["monto"];
   }	
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?> 

@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?} else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php } else{ $Nom_Emp=busca_conf(); }
 if (!$_GET){$codigo="";}else{$codigo=$_GET["Gcodigo"];} $fecha_hoy=asigna_fecha_hoy();
 $cod_fuente=substr($codigo,0,2);  $cod_presup=substr($codigo,2,32);  $asignado=0;    $denominacion="";   $des_fuente="";
 if($cod_presup==""){$asignado="";  $denominacion="";}else{
 $sSQL="Select * from codigos where cod_presup='$cod_presup' and cod_fuente='$cod_fuente'"; $resultado=pg_exec($conn,$sSQL);  $filas=pg_numrows($resultado);
-if ($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CÓDIGO PRESUPUESTARIO NO EXISTE'); window.close();  </script> <? }
+if ($filas==0){$error=1; ?> <script language="JavaScript"> muestra('Cï¿½DIGO PRESUPUESTARIO NO EXISTE'); window.close();  </script> <?php }
  else {  $registro=pg_fetch_array($resultado); $asignado=$registro["asignado"];  $denominacion=$registro["denominacion"];   $des_fuente=$registro["des_fuente_financ"]; } }
 $fecha_a=formato_aaaammdd($fecha_hoy); $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer); $fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);
 if($fecha_a>$Fec_Fin_Ejer){$fecha_hoy=$fecha_h;}
@@ -16,12 +16,12 @@ if($fecha_a>$Fec_Fin_Ejer){$fecha_hoy=$fecha_h;}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Consulta Disponibilidad PreSupuestaria)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Consulta Disponibilidad PreSupuestaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_diferidos.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_diferidos.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function revisar(){var f=document.form1;var Valido=true;
    if(f.txtcod_presup.value==""){alert("Codigo Presupuestario no puede estar Vacio");return false;}
    if(f.txtcod_fuente.value==""){alert("Codigo de Fuente no puede estar Vacio"); return false; }
@@ -48,9 +48,9 @@ return true;}
         <tr>
           <td><table width="620" border="0">
               <tr> <td width="169"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO : </span></td>
-                <td width="219"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo de la Cuenta"  size="35" maxlength="35" readonly value="<?echo $cod_presup?>">
+                <td width="219"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" title="Registre el C&oacute;digo de la Cuenta"  size="35" maxlength="35" readonly value="<?php echo $cod_presup?>">
                 </span></td>
-				 <td width="63"><input class="Estilo10" name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup_comp.php?criterio=','SIA','','750','500','true')" value="..."></td>
+				 <td width="63"><input class="Estilo10" name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presup_comp.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                 <td width="45"><input class="Estilo10" name="txtcod_contable" type="hidden" id="txtcod_contable"></td>
 				<td width="45"><input class="Estilo10" name="txtdisponible" type="hidden" id="txtdisponible"></td>
 				<td width="53"><input class="Estilo10" name="txtdes_contable" type="hidden" id="txtdes_contable"></td>
@@ -61,10 +61,10 @@ return true;}
           <td><table width="623" border="0">
             <tr>
               <td width="184"><span class="Estilo5">FUENTE DE FINANCIAMIENTO : </span></td>
-              <td width="38"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" readonly value="<?echo $cod_fuente?>">
+              <td width="38"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" readonly value="<?php echo $cod_fuente?>">
               </span></td>
               <td width="24">&nbsp;</td>
-              <td width="359"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="50" readonly value="<?echo $des_fuente?>">
+              <td width="359"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="50" readonly value="<?php echo $des_fuente?>">
               </span></td>
             </tr>
           </table></td>
@@ -76,7 +76,7 @@ return true;}
                 <td width="110"><span class="Estilo5">DENOMINACI&Oacute;N :
 
                 </span></td>
-                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion" class="Estilo10" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><?echo $denominacion?></textarea>   </span></td>
+                <td width="494"><span class="Estilo5"><textarea name="txtdenominacion" class="Estilo10" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><?php echo $denominacion?></textarea>   </span></td>
               </tr>
             </table>            </td>
         </tr>
@@ -85,7 +85,7 @@ return true;}
               <table width="620" border="0">
                 <tr>
                   <td width="109"><span class="Estilo5">FECHA:</span></td>
-                  <td width="190"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_hoy?>" size="12" maxlength="12" onChange="checkrefechad(this.form)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                  <td width="190"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_hoy?>" size="12" maxlength="12" onChange="checkrefechad(this.form)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                   <td width="109">&nbsp;</td>
                   <td width="180"><span class="Estilo5">
                   </span></td>
@@ -99,8 +99,8 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo?>"></td>
-			<td width="1o"><input name="txtasignado" type="hidden" id="txtasignado" value="<?echo $asignado?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo?>"></td>
+			<td width="1o"><input name="txtasignado" type="hidden" id="txtasignado" value="<?php echo $asignado?>"></td>
             <td width="100">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Mostrar Disponibilidad"></td>
             <td width="100">&nbsp;</td>

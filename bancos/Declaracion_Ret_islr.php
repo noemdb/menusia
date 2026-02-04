@@ -1,20 +1,20 @@
-<? include ("../class/seguridad.inc"); include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php  include ("../class/seguridad.inc"); include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "DECISLR".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else{ $Nom_Emp=busca_conf(); }
 $nombre_emp=$Nom_Emp; $ced_rif_emp=$Rif_Emp;  $fecha_hoy=asigna_fecha_hoy();  $ano=substr($fecha_hoy,6,4);  $mes=substr($fecha_hoy,3,2); $desde="01".substr($fecha_hoy,2,8); $hasta=colocar_udiames($fecha_hoy);
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000068"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO  (Declaracion Retenci&oacute;n ISLR)</title>
+<title>SIPAP CONTROL BANCARIO  (Declaracion Retenci&oacute;n ISLR)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -52,10 +52,10 @@ function Cargar_Ret(mform){var mmes;  var mano; var mdesde; var mhasta; var vali
 return true;}
 </script>
 </head>
-<? $resultado=pg_exec($conn,"SELECT BORRAR_BAN029('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); $tipo_ret="01"; $des_ret="";
+<?php  $resultado=pg_exec($conn,"SELECT BORRAR_BAN029('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); $tipo_ret="01"; $des_ret="";
 $sql="Select * from ban011 where codigo='$tipo_ret'"; $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"]; $des_ret=$registro["descripcion"];$nro_planilla=$registro["nro_planilla"];$formato_planilla=$registro["formato_planilla"]; $formato_relacion=$registro["formato_relacion"]; }
-pg_close(); ?>
+pg_close($conn); ?>
 <body>
 <table width="978" height="38" border="0" bgcolor="#000066">
   <tr>
@@ -74,8 +74,8 @@ pg_close(); ?>
                   <td height="14"><table width="939" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="140"><span class="Estilo5">TIPO DE RETENCION: </span></td>
-					  <td width="79"><span class="Estilo5"><input class="Estilo10" name="txttipo_ret" type="text" id="txttipo_ret" size="3" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $tipo_ret?>"></span></td>
-                      <td width="720"><span class="Estilo5"><input class="Estilo10" name="txtdes_ret" type="text" id="txtdes_ret" size="100" maxlength="100"  readonly value="<?echo $des_ret?>"> </span></td>
+					  <td width="79"><span class="Estilo5"><input class="Estilo10" name="txttipo_ret" type="text" id="txttipo_ret" size="3" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $tipo_ret?>"></span></td>
+                      <td width="720"><span class="Estilo5"><input class="Estilo10" name="txtdes_ret" type="text" id="txtdes_ret" size="100" maxlength="100"  readonly value="<?php echo $des_ret?>"> </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -85,13 +85,13 @@ pg_close(); ?>
                   <td width="950"><table width="934" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="104"><span class="Estilo5">PERIODO A&Ntilde;O  :</span></td>
-                      <td width="71"><span class="Estilo5"><input class="Estilo10" name="txtano" type="text" id="txtano" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkano(this.form);" value="<?echo $ano?>"> </span></td>
+                      <td width="71"><span class="Estilo5"><input class="Estilo10" name="txtano" type="text" id="txtano" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkano(this.form);" value="<?php echo $ano?>"> </span></td>
                       <td width="62"><span class="Estilo5">MES :</span></td>
-                      <td width="78"><span class="Estilo5"><input class="Estilo10" name="txtmes" type="text" id="txtmes" size="3" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkmes(this.form);" value="<?echo $mes?>"></span></td>
+                      <td width="78"><span class="Estilo5"><input class="Estilo10" name="txtmes" type="text" id="txtmes" size="3" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkmes(this.form);" value="<?php echo $mes?>"></span></td>
                       <td width="91"><span class="Estilo5">FECHA DESDE :</span></td>
-                      <td width="110"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desde" type="text" id="txtfecha_desde" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $desde?>"></span></td>
+                      <td width="110"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desde" type="text" id="txtfecha_desde" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $desde?>"></span></td>
                       <td width="95"><span class="Estilo5">FECHA HASTA  :</span></td>
-                      <td width="103"><span class="Estilo5"><input class="Estilo10" name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $hasta?>"></span></td>
+                      <td width="103"><span class="Estilo5"><input class="Estilo10" name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $hasta?>"></span></td>
                       <td width="100"><span class="Estilo5">COMPROBANTES:</span></td>
 					  <td width="100"><span class="Estilo5"><Select name="txttipo_comp" size="1" id="txttipo_comp"><option>TODOS</option>  <option>ORDEN CANCELADA</option> <option>CHEQUE ENTREGADO</option> </Select> </span></td>
                     </tr>
@@ -110,12 +110,12 @@ pg_close(); ?>
                 </table>
                 </tr>
           </table>
-          <div id="T11" class="tab-body"><iframe src="Det_dec_ret_islr.php?codigo_mov=<?echo $codigo_mov?>" width="940" height="350" scrolling="auto" frameborder="1"></iframe> </div>
+          <div id="T11" class="tab-body"><iframe src="Det_dec_ret_islr.php?codigo_mov=<?php echo $codigo_mov?>" width="940" height="350" scrolling="auto" frameborder="1"></iframe> </div>
           <table width="962" border="0">
           <tr> <td height="10">&nbsp;</td> </tr> </table>
           <table width="923">
             <tr>
-              <td width="526"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+              <td width="526"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
                <td width="100" align="center" valign="middle"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
               <td width="140" align="center" valign="middle"><input name="Blanqueas" type="reset" value="Blanquear"></td>
               <td width="140" align="center" valign="middle"><input name="button" type="button" id="button" title="Retornar al menu principal" onclick="javascript:LlamarURL('menu.php')" value="Menu Principal"></td>
@@ -128,4 +128,4 @@ pg_close(); ?>
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,13 +1,13 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc"); 
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc"); 
 if (!$_GET){$codbanco="0000";}else{$codbanco=$_GET["codbanco"];}  $fecha_hoy=asigna_fecha_hoy();$equipo = getenv("COMPUTERNAME"); $mcod_m = "BAN0010".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);  
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit;} else{$Nom_Emp=busca_conf();}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit;} else{$Nom_Emp=busca_conf();}
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000050"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 /*
-if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 */
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -15,7 +15,7 @@ if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.lo
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Conciliacion Bancaria)</title>
+<title>SIPAP CONTROL BANCARIO (Conciliacion Bancaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -52,7 +52,7 @@ function chequea_banco(mform){var mref;
 return true;}
 </script>
 </head>
-<? $temp_mes="01"; $cod_banco=""; $nombre_banco=""; $nro_cuenta="";
+<?php  $temp_mes="01"; $cod_banco=""; $nombre_banco=""; $nro_cuenta="";
 $mes1="";$mes2="";$mes3="";$mes4="";$mes5="";$mes6="";$mes7="";$mes8="";$mes9="";$mes10="";$mes11="";$mes12="";
 if($codbanco=="0000"){$sql="SELECT * FROM bancos ORDER BY cod_banco";}else{$sql="SELECT * FROM bancos where cod_banco='".$codbanco."'";}$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $cod_banco=$registro["cod_banco"]; $nombre_banco=$registro["nombre_banco"]; $nro_cuenta=$registro["nro_cuenta"];}
@@ -60,7 +60,7 @@ $sql="SELECT * FROM ban009 where cod_banco='".$cod_banco."'";$res=pg_query($sql)
 if($filas>=1){$reg=pg_fetch_array($res,0); $temp_mes=$reg["u_conciliacion"];  if($reg["mes01"]=="S"){$mes1='checked';}else{$mes1='';} if($reg["mes02"]=="S"){$mes2='checked';}else{$mes2='';} if($reg["mes03"]=="S"){$mes3='checked';}else{$mes3='';}
 if($reg["mes04"]=="S"){$mes4='checked';}else{$mes4='';} if($reg["mes05"]=="S"){$mes5='checked';}else{$mes5='';} if($reg["mes06"]=="S"){$mes6='checked';}else{$mes6='';} if($reg["mes07"]=="S"){$mes7='checked';}else{$mes7='';}
 if($reg["mes08"]=="S"){$mes8='checked';}else{$mes8='';} if($reg["mes09"]=="S"){$mes9='checked';}else{$mes9='';} if($reg["mes10"]=="S"){$mes10='checked';}else{$mes10='';} if($reg["mes11"]=="S"){$mes11='checked';}else{$mes11='';} if($reg["mes12"]=="S"){$mes12='checked';}else{$mes12='';} }
-pg_close();
+pg_close($conn);
 ?>
 
 <body>
@@ -81,11 +81,11 @@ pg_close();
                   <td><table width="945">
                     <tr>
                       <td width="134"><span class="Estilo5">C&Oacute;DIGO DEL BANCO:</span></td>
-                      <td width="68"><span class="Estilo5"> <input name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  value="<?echo $cod_banco?>" onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);">
+                      <td width="68"><span class="Estilo5"> <input name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  value="<?php echo $cod_banco?>" onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);">
                       </span> </td>
-                      <td width="221"><input name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="221"><input name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="157"><span class="Estilo5">N&Uacute;MERO DE CUENTA :</span></td>
-                      <td width="341"><span class="Estilo5"> <input name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?echo $nro_cuenta?>"  size="30" maxlength="25" readonly>
+                      <td width="341"><span class="Estilo5"> <input name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?php echo $nro_cuenta?>"  size="30" maxlength="25" readonly>
                       </span></td>
                     </tr>
                   </table></td>
@@ -95,7 +95,7 @@ pg_close();
                   <td width="945"><table width="945" >
                     <tr>
                       <td width="134"><span class="Estilo5"> NOMBRE DEL BANCO :</span></td>
-                      <td width="795"><span class="Estilo5"> <input name="txtnombre_banco" type="text" id="txtnombre_banco" value="<?echo $nombre_banco?>" size="100" maxlength="100" readonly>
+                      <td width="795"><span class="Estilo5"> <input name="txtnombre_banco" type="text" id="txtnombre_banco" value="<?php echo $nombre_banco?>" size="100" maxlength="100" readonly>
                       </span></td>
                     </tr>
                   </table></td>
@@ -125,18 +125,18 @@ pg_close();
                                    <td><div id="smes"><table width="640" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="170"><span class="Estilo5">PERIODOS CONCILIADOS :</span></td>
-                      <td width="33"><div align="center"><input name="Mes1" type="checkbox" id="Mes1" value="checkbox" <?echo $mes1;?>> </div></td>
-                      <td width="33"><div align="center"><input name="Mes2" type="checkbox" id="Mes2" value="checkbox" <?echo $mes2;?>> </div></td>
-                      <td width="33"><div align="center"><input name="Mes3" type="checkbox" id="Mes3" value="checkbox" <?echo $mes3;?>> </div></td>
-                      <td width="33"><div align="center"><input name="Mes4" type="checkbox" id="Mes4" value="checkbox" <?echo $mes4;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes5" type="checkbox" id="Mes_Conc" value="checkbox" <?echo $mes5;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes6" type="checkbox" id="Mes_Conc" value="checkbox" <?echo $mes6;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes7" type="checkbox" id="Mes_Conc" value="checkbox" <?echo $mes7;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes8" type="checkbox" id="Mes8" value="checkbox" <?echo $mes8;?>></div></td>
-                      <td width="33"><div align="center"> <input name="Mes9" type="checkbox" id="Mes9" value="checkbox" <?echo $mes9;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes10" type="checkbox" id="Mes10" value="checkbox" <?echo $mes10;?>></div></td>
-                      <td width="33"><div align="center"> <input name="Mes11" type="checkbox" id="Mes11" value="checkbox" <?echo $mes11;?>> </div></td>
-                      <td width="33"><div align="center"> <input name="Mes12" type="checkbox" id="Mes12" value="checkbox" <?echo $mes12;?>> </div></td>
+                      <td width="33"><div align="center"><input name="Mes1" type="checkbox" id="Mes1" value="checkbox" <?php echo $mes1;?>> </div></td>
+                      <td width="33"><div align="center"><input name="Mes2" type="checkbox" id="Mes2" value="checkbox" <?php echo $mes2;?>> </div></td>
+                      <td width="33"><div align="center"><input name="Mes3" type="checkbox" id="Mes3" value="checkbox" <?php echo $mes3;?>> </div></td>
+                      <td width="33"><div align="center"><input name="Mes4" type="checkbox" id="Mes4" value="checkbox" <?php echo $mes4;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes5" type="checkbox" id="Mes_Conc" value="checkbox" <?php echo $mes5;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes6" type="checkbox" id="Mes_Conc" value="checkbox" <?php echo $mes6;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes7" type="checkbox" id="Mes_Conc" value="checkbox" <?php echo $mes7;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes8" type="checkbox" id="Mes8" value="checkbox" <?php echo $mes8;?>></div></td>
+                      <td width="33"><div align="center"> <input name="Mes9" type="checkbox" id="Mes9" value="checkbox" <?php echo $mes9;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes10" type="checkbox" id="Mes10" value="checkbox" <?php echo $mes10;?>></div></td>
+                      <td width="33"><div align="center"> <input name="Mes11" type="checkbox" id="Mes11" value="checkbox" <?php echo $mes11;?>> </div></td>
+                      <td width="33"><div align="center"> <input name="Mes12" type="checkbox" id="Mes12" value="checkbox" <?php echo $mes12;?>> </div></td>
                                           <td width="60">&nbsp;</td>
                     </tr>
                   </table> </div></td>
@@ -167,7 +167,7 @@ function asig_num_mes(mvalor){var f=document.form1;
                           <option>05</option> <option>06</option> <option>07</option>  <option>08</option>
                           <option>09</option> <option>10</option> <option>11</option>  <option>12</option>
                       </select> </div>
-                      <script language="JavaScript" type="text/JavaScript"> asig_num_mes('<?echo $temp_mes;?>');</script>
+                      <script language="JavaScript" type="text/JavaScript"> asig_num_mes('<?php echo $temp_mes;?>');</script>
                       </span> </td>
                     </tr>
                   </table></td>
@@ -177,9 +177,9 @@ function asig_num_mes(mvalor){var f=document.form1;
           </table>
         <table width="957">
           <tr><td><table width="923">
-            <td width="538"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-            <?if ($Mcamino{0}=="S"){?> <td width="115"><input name="Generar" type="button" id="Generar" title="Generar Conciliacion Bancaria" onclick="javascript:Llama_Registrar()" value="Generar"></td>
-            <?} if ($Mcamino{6}=="S"){?> <td width="107"><input name="Eliminar" type="button" id="Eliminar" title="Eliminar Conciliacion Bancaria" onclick="javascript:Llama_Eliminar()" value="Eliminar"></td><?}?> 
+            <td width="538"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+            <?php if ($Mcamino{0}=="S"){?> <td width="115"><input name="Generar" type="button" id="Generar" title="Generar Conciliacion Bancaria" onclick="javascript:Llama_Registrar()" value="Generar"></td>
+            <?php } if ($Mcamino{6}=="S"){?> <td width="107"><input name="Eliminar" type="button" id="Eliminar" title="Eliminar Conciliacion Bancaria" onclick="javascript:Llama_Eliminar()" value="Eliminar"></td><?php }?> 
             <td width="143" valign="middle"><input name="button" type="button" id="button" title="Retornar al menu principal" onclick="javascript:LlamarURL('menu.php')" value="Menu Principal"></td>
           </table></td></tr>
         </table>

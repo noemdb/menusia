@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php");
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php");
  $codigo_mov=$_POST["txtcodigo_mov"];  $fecha_hoy=asigna_fecha_hoy();  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];
  $nro_planilla="00000000";   $tipo_planilla=""; $descripcion=""; $tasa=0;
  $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin"]); if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;} $fecha=$fecha_hoy; 
@@ -8,7 +8,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Incluir Planillas de Retencion)</title>
+<title>SIPAP CONTROL BANCARIO (Incluir Planillas de Retencion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -32,8 +32,8 @@ function validarNum(e){tecla=(document.all) ? e.keyCode : e.which;  if(tecla==0)
 }
 function chequea_planilla(mform){var mref;
    mref=mform.txtplanilla.value; mref = Rellenarizq(mref,"0",2);  mform.txtplanilla.value=mref;
-   ajaxSenddoc('GET', 'desplanilla.php?codigo='+mref+'&codigo_mov=<?echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'desplan', 'innerHTML');
-   ajaxSenddoc('GET', 'numplanilla.php?codigo='+mref+'&codigo_mov=<?echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nroplan', 'innerHTML');
+   ajaxSenddoc('GET', 'desplanilla.php?codigo='+mref+'&codigo_mov=<?php echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'desplan', 'innerHTML');
+   ajaxSenddoc('GET', 'numplanilla.php?codigo='+mref+'&codigo_mov=<?php echo $codigo_mov?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nroplan', 'innerHTML');
 return true;}
 
 function checkrefecha(mform){
@@ -121,12 +121,12 @@ return true;}
                   <td><table width="861" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 					  <td width="100"><span class="Estilo5">TIPO PLANILLA: </span></td>
-					  <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtplanilla" type="text" id="txtplanilla" title="Registre el tipo de Planilla" value="<? echo $tipo_planilla ?>"  size="2" maxlength="2" onFocus="encender(this)" onBlur="apagar(this)"  onchange="chequea_planilla(this.form);">  </span></td>
-                       <td width="380"><span class="Estilo5"><div id="desplan"><input class="Estilo10" name="txtdescripcion" type="text" id="txtdescripcion" size="50" value="<? echo $descripcion ?>" readonly> </div></span></td>
+					  <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtplanilla" type="text" id="txtplanilla" title="Registre el tipo de Planilla" value="<?php  echo $tipo_planilla ?>"  size="2" maxlength="2" onFocus="encender(this)" onBlur="apagar(this)"  onchange="chequea_planilla(this.form);">  </span></td>
+                       <td width="380"><span class="Estilo5"><div id="desplan"><input class="Estilo10" name="txtdescripcion" type="text" id="txtdescripcion" size="50" value="<?php  echo $descripcion ?>" readonly> </div></span></td>
                       <td width="80"><span class="Estilo5">N&Uacute;MERO:</span></td>
                       <td width="100"><span class="Estilo5"><div id="nroplan"> <input class="Estilo10" name="txtnro_planilla" type="text" id="txtnro_planilla" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apaga_referencia(this)" > </div></span></td>
                       <td width="50"><span class="Estilo5">FECHA : </span></td>
-                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $fecha_hoy?>" onchange="checkrefecha(this.form)"> </span></td>
+                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $fecha_hoy?>" onchange="checkrefecha(this.form)"> </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -135,10 +135,10 @@ return true;}
 					<tr>
 					  <td width="111"><span class="Estilo5"><div id="tpret">TIPO RETENCI&Oacute;N:</div></span></td>
 					  <td width="50"><span class="Estilo5"><input class="Estilo10" name="txttipo_retencion" type="text" id="txttipo_retencion" size="3" maxlength="3" onFocus="encender(this)" onBlur="apaga_tipo(this)"  onchange="chequea_tipo(this.form);"></span></td>
-					  <td width="50"><input class="Estilo10" name="bttiporet" type="button" id="bttiporet" title="Abrir Catalogo Tipos de Retencion" onclick="VentanaCentrada('Cat_tipo_ret.php?criterio=','SIA','','750','500','true')" value="..."></td>
+					  <td width="50"><input class="Estilo10" name="bttiporet" type="button" id="bttiporet" title="Abrir Catalogo Tipos de Retencion" onclick="VentanaCentrada('Cat_tipo_ret.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
 					  <td width="450"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_ret" type="text" id="txtdescripcion_ret"  readonly  size="60"> </span></td>
 					  <td width="50"><span class="Estilo5">TASA :</span></td>
-                      <td width="100"><span class="Estilo5"><input class="Estilo10" name="txttasa" type="text" id="txttasa" size="6" maxlength="6" style="text-align:right" onFocus="encender(this)" onBlur="apaga_tasa(this)" onchange="chequea_tasa(this.form);" value="<? echo $tasa ?>" onKeypress="return validarNum(event)"> </span></td>
+                      <td width="100"><span class="Estilo5"><input class="Estilo10" name="txttasa" type="text" id="txttasa" size="6" maxlength="6" style="text-align:right" onFocus="encender(this)" onBlur="apaga_tasa(this)" onchange="chequea_tasa(this.form);" value="<?php  echo $tasa ?>" onKeypress="return validarNum(event)"> </span></td>
              
 					</tr>
 				  </table></td>
@@ -159,20 +159,20 @@ return true;}
                    <tr>
                       <td width="161"><span class="Estilo5"> CED./RIF BENEFICIARIO  :</span></span></td>
                       <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="14" maxlength="12"  onFocus="encender(this)" onBlur="apaga_ced_rif(this)"></span></td>
-                      <td width="50"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiario" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="50"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiario" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="550"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef" size="70" readonly>                   </span></td>
                    </tr>
                  </table></td>
                 </tr>
           </table>
               <div id="T11" class="tab-body">
-              <iframe src="Det_inc_plan_ret.php?codigo_mov=<?echo $codigo_mov?>&agregar=S" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_inc_plan_ret.php?codigo_mov=<?php echo $codigo_mov?>&agregar=S" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
               </div>
          <table width="863" border="0"> <tr> <td height="5">&nbsp;</td> </tr> </table>
          <table width="812">
           <tr>
             <td width="654">&nbsp;</td>
-            <td width="10"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="10"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
 			<td width="10"><input name="txtsustraendo" type="hidden" id="txtsustraendo"> </td>
             <td width="88"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
             <td width="88"><input name="Blanquear" type="reset" value="Blanquear"></td>

@@ -1,7 +1,7 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); error_reporting(E_ALL ^ E_NOTICE); $php_os=PHP_OS;
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); error_reporting(E_ALL ^ E_NOTICE); $php_os=PHP_OS;
 if (!$_GET){ $referencia_dife=''; $tipo_diferido='';} else{$referencia_dife=$_GET["txtreferencia_dife"]; $tipo_diferido=$_GET["txttipo_diferido"];}
    $sql="Select * from DIFERIDOS where tipo_diferido='$tipo_diferido' and referencia_dife='$referencia_dife'"; $rif_emp=""; $total_comp=0; $nombre="";
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else { $Nom_Emp=busca_conf(); }
 if($utf_rpt=="SI"){ $php_os="WINNT";} 
 $descripcion="";$fecha="";$nombre_abrev_dife="";$inf_usuario=""; $nombre_tipo_dife="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){  $registro=pg_fetch_array($res);   $referencia_dife=$registro["referencia_dife"];$fecha=$registro["fecha_diferido"];  $tipo_diferido=$registro["tipo_diferido"]; $descripcion=$registro["descripcion_dife"];  $inf_usuario=$registro["inf_usuario"]; $nombre_abrev_dife=$registro["nombre_abrev_dife"];}
@@ -60,7 +60,7 @@ class PDF extends FPDF{
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
 		$this->Cell(100,4,'',0,0,'L');
-		$this->Cell(100,4,'SIA CONTABILIDAD PRESUPUESTARIA',0,1,'R');
+		$this->Cell(100,4,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,1,'R');
 	}
 }  
   $pdf=new PDF('P', 'mm', Letter);
@@ -81,5 +81,5 @@ class PDF extends FPDF{
 	$total_comp=$total_comp+$registro["monto_diferido"];
   }	
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?> 

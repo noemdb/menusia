@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function cerrar_catalogo(mcod_banco,mnombre,mtipo_mov,mref,mfecha,mcedrif,mnomb){
@@ -18,12 +18,12 @@ function cerrar_catalogo(mcod_banco,mnombre,mtipo_mov,mref,mfecha,mcedrif,mnomb)
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Catalogo de Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Catalogo de Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?      $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         $criterio="where ((tipo_mov_libro='CHQ') or (tipo_mov_libro='NDB')) ";$txt_criterio="";
         if ($_GET["criterio"]!=""){$txt_criterio=$_GET["criterio"];$txt_criterio=strtoupper ($txt_criterio);
         $criterio= $criterio. " and (referencia like '%" . $txt_criterio . "%' or cod_banco like '%" . $txt_criterio . "%' or descrip_mov_libro like '%" . $txt_criterio . "%' or nombre like '%" . $txt_criterio . "%')";}
@@ -45,18 +45,18 @@ function cerrar_catalogo(mcod_banco,mnombre,mtipo_mov,mref,mfecha,mcedrif,mnomb)
                 $descripcion=$registro["descrip_mov_libro"]; $sfecha=$registro["fecha_mov_libro"]; $descripcion=substr($descripcion,0,150); $fecha=substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
                 if ($linea>$limitInf+$tamPag){$Salir=true;}  if (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["cod_banco"];?>','<? echo $registro["nombre_banco"];?>','<? echo $registro["tipo_mov_libro"]; ?>','<? echo $registro["referencia"]; ?>','<? echo $fecha; ?>','<? echo $registro["ced_rif"]; ?>','<? echo $registro["nombre"]; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["cod_banco"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["referencia"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_mov_libro"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["cod_banco"];?>','<?php  echo $registro["nombre_banco"];?>','<?php  echo $registro["tipo_mov_libro"]; ?>','<?php  echo $registro["referencia"]; ?>','<?php  echo $fecha; ?>','<?php  echo $registro["ced_rif"]; ?>','<?php  echo $registro["nombre"]; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["cod_banco"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["referencia"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_mov_libro"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion; ?></b></font></td>
   </tr>
-<?}}echo "</table>"; }?>
+<?php } }echo "</table>"; }?>
 <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
            echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
            echo "<font face='verdana' size='-2'>Principio</font>";
            echo "</a>&nbsp;";
@@ -80,4 +80,4 @@ function cerrar_catalogo(mcod_banco,mnombre,mtipo_mov,mref,mfecha,mcedrif,mnomb)
 <hr noshade style="color:CC6666;height:1px">
 <form action="Cat_mov_chq_ndb.php" method="get">
 Criterio de b&uacute;squeda: <input type="text" name="criterio" size="22" maxlength="150"> <input type="submit" value="Buscar">
-</div></form></body> </html> <? pg_close();?>
+</div></form></body> </html> <?php  pg_close($conn);?>

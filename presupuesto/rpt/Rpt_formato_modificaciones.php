@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/funciones.php");?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/funciones.php");?>
 <?php include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $periodod='01';
  $periodoh='01';
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);
@@ -20,7 +20,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Formato de Modificaciones)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Formato de Modificaciones)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -132,11 +132,11 @@ var url;
               <td width="122" height="26">
                 <div align="left">REFERENCIA : </div></td>
               <td width="252"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcodbancoh36" type="text" id="txtcodbancoh36" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="10" maxlength="10">
+                <input name="txtcodbancoh36" type="text" id="txtcodbancoh36" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="10" maxlength="10">
               </span></span></td>
               <td width="99"><span class="Estilo5">              </span></td>
               <td width="294"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcodbancoh362" type="text" id="txtcodbancoh362" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_banco_h?>" size="10" maxlength="10">
+                <input name="txtcodbancoh362" type="text" id="txtcodbancoh362" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_banco_h?>" size="10" maxlength="10">
               </span></span></td>
               <td width="38"><span class="Estilo5">              </span></td>
             </tr>
@@ -186,4 +186,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

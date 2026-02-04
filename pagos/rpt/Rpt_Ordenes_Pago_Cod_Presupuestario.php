@@ -1,13 +1,13 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $formato_presup="XX-XX-XX-XXX-XX-XX-XX"; $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];} $long_c=strlen($formato_presup); 
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="03-0000022"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
   $nro_orden_d="";$nro_orden_h="";$documento_causado_d="";$documento_causado_h="";$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$cedula_d="";$cedula_h="";
  $tipo_orden_d="";$tipo_orden_h="";$codigo_presu_d="";$codigo_presu_h="";$status_orden="";$ref_comp_d="00000000"; $ref_comp_h="99999999"; $cod_fuente_d="";  $cod_fuente_h="zz";
 ?>
@@ -16,7 +16,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Reporte Relacion Listado Ordenes Ordenes de Pago/Codigo Presupuestario)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Reporte Relacion Listado Ordenes Ordenes de Pago/Codigo Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -58,7 +58,7 @@ function Llama_Rpt_Ordenes_Pago_Cod_Presupuesta(murl){var url;var r;var st;
 function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(nro_orden) As Max_Nro_Orden, MIN(nro_orden) As Min_Nro_Orden FROM ORD_PAGO";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$nro_orden_d=$registro["min_nro_orden"];$nro_orden_h=$registro["max_nro_orden"];}
 $sql="SELECT MAX(Ced_Rif) As Max_Ced_Rif, MIN(Ced_Rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);
@@ -104,9 +104,9 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
            <td height="19" colspan="3"><table width="771" border="0">
              <tr>
 	        <td width="249" height="26"><span class="Estilo5">NUMERO DE ORDEN:</span></td>
-                <td width="202"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden_d" type="text" id="txtnro_orden_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciad(this.form)" value="<?echo $nro_orden_d?>" size="12" maxlength="8" class="Estilo5"></span></td>
+                <td width="202"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden_d" type="text" id="txtnro_orden_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciad(this.form)" value="<?php echo $nro_orden_d?>" size="12" maxlength="8" class="Estilo5"></span></td>
                 <td width="81"></td>
-                <td width="221"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden_h" type="text" id="txtnro_orden_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciah(this.form)" value="<?echo $nro_orden_h?>" size="12" maxlength="8" class="Estilo5"></span></td>
+                <td width="221"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden_h" type="text" id="txtnro_orden_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkreferenciah(this.form)" value="<?php echo $nro_orden_h?>" size="12" maxlength="8" class="Estilo5"></span></td>
 	     </tr>
           </table></td>
         </tr>
@@ -115,10 +115,10 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="19" colspan="3"><table width="776" border="0">
             <tr>
               <td width="252" height="26"> <span class="Estilo5">DOCUMENTO CAUSADO: </span></td>
-              <td width="79"><span class="Estilo5"><input class="Estilo10" name="txtdoc_causado_d" type="text" id="txtdoc_causado_d" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $documento_causado_d?>" size="6" maxlength="4" class="Estilo5"></span></td>
-              <td width="203"><span class="Estilo5"><input class="Estilo10" name="catadocd" type="button" id="catadocd" title="Abrir Catalogo Documentos causados" onClick="VentanaCentrada('../Cat_doc_causd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-              <td width="57"><span class="Estilo5"><input class="Estilo10" name="txtdoc_causado_h" type="text" id="txtdoc_causado_h" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $documento_causado_h?>" size="6" maxlength="4" class="Estilo5"></span></td>
-              <td width="163"><span class="Estilo5"> <input class="Estilo10" name="catadoch" type="button" id="catadoch" title="Abrir Catalogo  Documentos causados" onClick="VentanaCentrada('../Cat_doc_caush.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="79"><span class="Estilo5"><input class="Estilo10" name="txtdoc_causado_d" type="text" id="txtdoc_causado_d" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $documento_causado_d?>" size="6" maxlength="4" class="Estilo5"></span></td>
+              <td width="203"><span class="Estilo5"><input class="Estilo10" name="catadocd" type="button" id="catadocd" title="Abrir Catalogo Documentos causados" onClick="VentanaCentrada('../Cat_doc_causd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+              <td width="57"><span class="Estilo5"><input class="Estilo10" name="txtdoc_causado_h" type="text" id="txtdoc_causado_h" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $documento_causado_h?>" size="6" maxlength="4" class="Estilo5"></span></td>
+              <td width="163"><span class="Estilo5"> <input class="Estilo10" name="catadoch" type="button" id="catadoch" title="Abrir Catalogo  Documentos causados" onClick="VentanaCentrada('../Cat_doc_caush.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
             </tr>
           </table></td>
         </tr>
@@ -127,9 +127,9 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
            <td height="19" colspan="3"><table width="771" border="0">
              <tr>
 	        <td width="249" height="26"><span class="Estilo5">REFERENCIA COMPROMISO:</span></td>
-                <td width="202"><span class="Estilo5"><input class="Estilo10" name="txtref_comp_d" type="text" id="txtref_comp_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkrefcompd(this.form)" value="<?echo $ref_comp_d?>" size="12" maxlength="8" class="Estilo5"></span></td>
+                <td width="202"><span class="Estilo5"><input class="Estilo10" name="txtref_comp_d" type="text" id="txtref_comp_d" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkrefcompd(this.form)" value="<?php echo $ref_comp_d?>" size="12" maxlength="8" class="Estilo5"></span></td>
                 <td width="81"></td>
-                <td width="221"><span class="Estilo5"><input class="Estilo10" name="txtref_comp_h" type="text" id="txtref_comp_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkrefcomph(this.form)" value="<?echo $ref_comp_h?>" size="12" maxlength="8" class="Estilo5"></span></td>
+                <td width="221"><span class="Estilo5"><input class="Estilo10" name="txtref_comp_h" type="text" id="txtref_comp_h" onFocus="encender(this)" onBlur="apagar(this)" onchange="checkrefcomph(this.form)" value="<?php echo $ref_comp_h?>" size="12" maxlength="8" class="Estilo5"></span></td>
 	     </tr>
           </table></td>
         </tr>
@@ -138,10 +138,10 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="19" colspan="3"><table width="771" border="0"  >
             <tr>
               <td width="251" align="left"><span class="Estilo5">FECHA ORDEN: </span></td>
-              <td width="285" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
+              <td width="285" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
-              <td width="221" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
+              <td width="221" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -154,10 +154,10 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="18" colspan="3"><table width="776" border="0">
             <tr>
               <td width="253" height="26"><span class="Estilo5">CEDULA/RIF PROVEEDOR: </span></td>
-              <td width="104"><span class="Estilo5"><input class="Estilo10" name="txtcedula_d" type="text" id="txtcedula_d4" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_d?>" size="15" maxlength="12" class="Estilo5"></span></td>
-              <td width="171"><span class="Estilo5"><input class="Estilo10" name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-              <td width="104"><span class="Estilo5"><input class="Estilo10" name="txtcedula_h" type="text" id="txtcedula_h3" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_h?>" size="15" maxlength="12" class="Estilo5"></span></td>
-              <td width="122"><span class="Estilo5"><input class="Estilo10" name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="104"><span class="Estilo5"><input class="Estilo10" name="txtcedula_d" type="text" id="txtcedula_d4" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_d?>" size="15" maxlength="12" class="Estilo5"></span></td>
+              <td width="171"><span class="Estilo5"><input class="Estilo10" name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+              <td width="104"><span class="Estilo5"><input class="Estilo10" name="txtcedula_h" type="text" id="txtcedula_h3" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_h?>" size="15" maxlength="12" class="Estilo5"></span></td>
+              <td width="122"><span class="Estilo5"><input class="Estilo10" name="Catalogo4" type="button" id="Catalogo4" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
             </tr>
           </table></td>
         </tr>
@@ -168,10 +168,10 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="18" colspan="3"><table width="776" border="0">
             <tr>
               <td width="254" height="26"><span class="Estilo5">TIPO ORDEN: </span></td>
-              <td width="65"><span class="Estilo5"><input class="Estilo10" name="txttipo_ordend" type="text" id="txttipo_ordend" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_orden_d?>" size="6" maxlength="4" class="Estilo5"></span></td>
-              <td width="206"><span class="Estilo5"><input class="Estilo10" name="Catalogo5" type="button" id="Catalogo5" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordend.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-              <td width="64"><span class="Estilo5"><input class="Estilo10" name="txttipo_ordenh" type="text" id="txttipo_ordenh" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_orden_h?>" size="6" maxlength="4" class="Estilo5"></span></td>
-              <td width="155"><span class="Estilo5"><input class="Estilo10" name="Catalogo6" type="button" id="Catalogo6" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordenh.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="65"><span class="Estilo5"><input class="Estilo10" name="txttipo_ordend" type="text" id="txttipo_ordend" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_orden_d?>" size="6" maxlength="4" class="Estilo5"></span></td>
+              <td width="206"><span class="Estilo5"><input class="Estilo10" name="Catalogo5" type="button" id="Catalogo5" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordend.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+              <td width="64"><span class="Estilo5"><input class="Estilo10" name="txttipo_ordenh" type="text" id="txttipo_ordenh" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_orden_h?>" size="6" maxlength="4" class="Estilo5"></span></td>
+              <td width="155"><span class="Estilo5"><input class="Estilo10" name="Catalogo6" type="button" id="Catalogo6" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordenh.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
             </tr>
           </table></td>
         </tr>
@@ -182,10 +182,10 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="30" colspan="3"><table width="826" border="0">
             <tr>
               <td width="253" height="26"><span class="Estilo5">CODIGOS PRESUPUESTARIO: </span></td>
-              <td width="210"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $codigo_presu_d?>" size="36" maxlength="30" class="Estilo5"></span></td>
-              <td width="62"><span class="Estilo5"><input class="Estilo10" name="cat_cod_pred" type="button" id="cat_cod_pred" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('../Cat_codigos_presupd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-              <td width="204"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $codigo_presu_h?>" size="36" maxlength="30" class="Estilo5"></span></td>
-              <td width="75"><span class="Estilo5"><input class="Estilo10" name="cat_cod_preh" type="button" id="cat_cod_preh" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('../Cat_codigos_presuph.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="210"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $codigo_presu_d?>" size="36" maxlength="30" class="Estilo5"></span></td>
+              <td width="62"><span class="Estilo5"><input class="Estilo10" name="cat_cod_pred" type="button" id="cat_cod_pred" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('../Cat_codigos_presupd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+              <td width="204"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $codigo_presu_h?>" size="36" maxlength="30" class="Estilo5"></span></td>
+              <td width="75"><span class="Estilo5"><input class="Estilo10" name="cat_cod_preh" type="button" id="cat_cod_preh" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('../Cat_codigos_presuph.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
             </tr>
           </table></td>
         </tr>
@@ -196,11 +196,11 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
           <td height="30" colspan="3"><table width="826" border="0">
             <tr>
               <td width="253" height="26"><span class="Estilo5">CODIGOS FUENTE: </span></td>
-			  <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" value="<?echo $cod_fuente_d?>" onFocus="encender(this)" onBlur="apagar(this)" maxlength="2" size="5" class="Estilo5"> </span></td>
-              <td width="62"><span class="Estilo5"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('../../presupuesto/rpt/Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+			  <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" value="<?php echo $cod_fuente_d?>" onFocus="encender(this)" onBlur="apagar(this)" maxlength="2" size="5" class="Estilo5"> </span></td>
+              <td width="62"><span class="Estilo5"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('../../presupuesto/rpt/Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
               <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuented" type="hidden" id="txtdes_fuented" ></span></td>
-              <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" value="<?echo $cod_fuente_h?>" onFocus="encender(this)" onBlur="apagar(this)" maxlength="2"  size="5" class="Estilo5"> </span></td>
-              <td width="75"><span class="Estilo5"><input class="Estilo10" name="btfuente2" type="button" id="btfuente2" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('../../presupuesto/rpt/Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+              <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" value="<?php echo $cod_fuente_h?>" onFocus="encender(this)" onBlur="apagar(this)" maxlength="2"  size="5" class="Estilo5"> </span></td>
+              <td width="75"><span class="Estilo5"><input class="Estilo10" name="btfuente2" type="button" id="btfuente2" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('../../presupuesto/rpt/Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
               <td width="154"><span class="Estilo5"><input class="Estilo10" name="txtdes_fuenteh" type="hidden" id="txtdes_fuenteh" ></span></td>
              </tr>
           </table></td>
@@ -257,4 +257,4 @@ $codigo_presu_d=str_replace("X","?",$formato_presup); $codigo_presu_h=str_replac
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Conciliaci&oacute;n Bancaria)</title>
+<title>SIPAP CONTROL BANCARIO (Conciliaci&oacute;n Bancaria)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -16,7 +16,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -115,13 +115,13 @@ MM_reloadPage(true);
                       </span></span></td>
                       <td width="236"><span class="Estilo12"><span class="Estilo5">
                       </span><span class="Estilo5">
-                      <input name="bttipo_orden" type="button" id="bttipo_orden" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                      <input name="bttipo_orden" type="button" id="bttipo_orden" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                       
                       </span> </span></td>
                       <td width="125"><span class="Estilo12"><span class="Estilo5">N&Uacute;MERO DE CUENTA </span> :</span></td>
                       <td width="135"><div align="left"><span class="Estilo12">
                       <span class="Estilo5">
-                      <input name="txtNro_Cuenta" type="text" id="txtcod_titulo" size="20" maxlength="19"  value="<?echo $Nro_Cuenta?>" readonly>
+                      <input name="txtNro_Cuenta" type="text" id="txtcod_titulo" size="20" maxlength="19"  value="<?php echo $Nro_Cuenta?>" readonly>
                       </span></span></div></td>
                       <td width="12">&nbsp;</td>
                       <td width="95"><img src="b_info.png" width="11" height="11"></td>
@@ -134,7 +134,7 @@ MM_reloadPage(true);
                         <td width="130"><span class="Estilo5">NOMBRE DEL BANCO  : </span></td>
                         <td width="672"><span class="Estilo5">
                         <span class="Estilo12">
-                        <input name="txtNombre_Banco" type="text" id="txtcod_titulo32" size="96" maxlength="91"  value="<?echo $Nombre_Banco?>" readonly>
+                        <input name="txtNombre_Banco" type="text" id="txtcod_titulo32" size="96" maxlength="91"  value="<?php echo $Nombre_Banco?>" readonly>
                         </span></span></td>
                         <td width="38">&nbsp;</td>
                       </tr>

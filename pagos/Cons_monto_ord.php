@@ -1,11 +1,11 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Montos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Montos de la Orden)</title>
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 <body>
@@ -29,11 +29,11 @@ $monto_am_ant=formato_monto($monto_am_ant);$total_neto=formato_monto($total_neto
       <tr>
 		<td width="100"> <span class="Estilo5">TOTAL CAUSADO : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_causado; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_causado; ?></td> </tr>
          </table></td>
 		<td width="130" align="right"> <span class="Estilo5">AMORT. ANTICIPO : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $monto_am_ant; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $monto_am_ant; ?></td> </tr>
          </table></td>
                  
        </tr>
@@ -44,11 +44,11 @@ $monto_am_ant=formato_monto($monto_am_ant);$total_neto=formato_monto($total_neto
       <tr>
 		<td width="100"> <span class="Estilo5">RETENCIONES : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_retencion; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_retencion; ?></td> </tr>
          </table></td>
 		<td width="130" align="right"> <span class="Estilo5">AJUSTE : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_ajuste; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_ajuste; ?></td> </tr>
          </table></td>
        </tr>
 	   </table></td>
@@ -58,11 +58,11 @@ $monto_am_ant=formato_monto($monto_am_ant);$total_neto=formato_monto($total_neto
       <tr>
 	    <td width="100"> <span class="Estilo5">TOTAL PASIVO : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_pasivos; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_pasivos; ?></td> </tr>
          </table></td>
 		<td width="130" align="right"> <span class="Estilo5"><strong>NETO</strong> : </span> </td>
 		<td width="155"><table width="151" border="1" cellspacing="0" cellpadding="0">
-             <tr> <td align="right" class="Estilo5"><? echo $total_neto; ?></td> </tr>
+             <tr> <td align="right" class="Estilo5"><?php  echo $total_neto; ?></td> </tr>
          </table></td>
       </tr>
 	 </table></td>
@@ -77,4 +77,4 @@ $monto_am_ant=formato_monto($monto_am_ant);$total_neto=formato_monto($total_neto
  <p>&nbsp;</p>
 </body>
 </html>
-<?  pg_close(); ?>
+<?php   pg_close($conn); ?>

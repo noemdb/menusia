@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Definci&oacute;n de Proyectos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Definci&oacute;n de Proyectos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -15,7 +15,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -112,10 +112,10 @@ MM_reloadPage(true);
                       <td width="641"><span class="Estilo5">
                         <input name="txtdoc_compromiso" type="text" id="txtdoc_compromiso" title="Registre el c&oacute;digo del documento compromiso" onChange="chequea_tipo(this.form);" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);">
                       </span></td>
-                      <? if($anulado=='S'){?>
-                      <? }else{?>
-                      <? }?>
-                      <td width="38"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                      <?php  if($anulado=='S'){?>
+                      <?php }else{?>
+                      <?php }?>
+                      <td width="38"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -155,10 +155,10 @@ MM_reloadPage(true);
                         <input name="txtdoc_compromiso5" type="text" id="txtdoc_compromiso52" title="Registre el c&oacute;digo del documento compromiso" onChange="chequea_tipo(this.form);" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);">
                       </span></td>
                       <td width="40"><span class="Estilo5">
-                        <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                        <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                       </span></td>
                       <td width="541"><span class="Estilo5">
-                        <input name="txttiene_anticipo" type="text" id="txttiene_anticipo2" size="68"  value="<?echo $tiene_anticipo?>" readonly>
+                        <input name="txttiene_anticipo" type="text" id="txttiene_anticipo2" size="68"  value="<?php echo $tiene_anticipo?>" readonly>
                       </span></td>
                     </tr>
                 </table></td>

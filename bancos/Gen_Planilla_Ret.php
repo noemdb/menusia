@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Generar Planillas de Retenmci&oacute;n)</title>
+<title>SIPAP CONTROL BANCARIO (Generar Planillas de Retenmci&oacute;n)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -16,7 +16,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -112,11 +112,11 @@ MM_reloadPage(true);
                   <td width="59"><span class="Estilo5"> <span class="Estilo12">
                     <input name="txtTipo_Cuenta2" type="text" class="Estilo5" id="txtTipo_Cuenta"  onFocus="encender(this)" onBlur="apagar(this)" size="11" maxlength="10">
                   </span> </span></td>
-                  <td width="46"><input name="btCat_Cont2" type="button" class="Estilo5" id="btCat_Cont2" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                  <td width="46"><input name="btCat_Cont2" type="button" class="Estilo5" id="btCat_Cont2" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                   <td width="571"><span class="Estilo12"><span class="Estilo5">
-                    <input name="txtDes_Cod_Banco" type="text" class="Estilo5" id="txtDes_Cod_Banco"  value="<?echo $Des_Cod_Banco?>" size="109" maxlength="109" readonly>
+                    <input name="txtDes_Cod_Banco" type="text" class="Estilo5" id="txtDes_Cod_Banco"  value="<?php echo $Des_Cod_Banco?>" size="109" maxlength="109" readonly>
                   </span></span></td>
-                  <td width="44"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                  <td width="44"><img src="../imagenes/b_info.png" width="11" height="11" onClick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                 </tr>
             </table></td>
           </tr>
@@ -144,7 +144,7 @@ MM_reloadPage(true);
                   <td width="92"><span class="Estilo5"> <span class="Estilo12">
                     <input name="txtTipo_Cuenta22" type="text" class="Estilo5" id="txtTipo_Cuenta2"  onFocus="encender(this)" onBlur="apagar(this)" size="11" maxlength="10">
                   </span></span></td>
-                  <td width="201"><input name="btCat_Cont3" type="button" class="Estilo5" id="btCat_Cont3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                  <td width="201"><input name="btCat_Cont3" type="button" class="Estilo5" id="btCat_Cont3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                   <td width="468"><span class="Estilo5"> <span class="Estilo12"> </span> </span></td>
                 </tr>
             </table></td>
@@ -164,15 +164,15 @@ MM_reloadPage(true);
                 <tr>
                   <td width="111"><span class="Estilo5">FECHA DE PAGO :</span></td>
                   <td width="170"><span class="Estilo5"> <span class="Estilo12">
-                    <input name="txtFecha" type="text" class="Estilo5" id="txtFecha"  value="<?echo $Fecha?>" size="10" maxlength="9" readonly>
+                    <input name="txtFecha" type="text" class="Estilo5" id="txtFecha"  value="<?php echo $Fecha?>" size="10" maxlength="9" readonly>
                   </span> </span></td>
                   <td width="87"><span class="Estilo5">MONTO PAGO :</span></td>
                   <td width="150"><span class="Estilo5"> <span class="Estilo12">
-                    <input name="txtMonto_Movimiento" type="text" class="Estilo5" id="txtcod_titulo35"  value="<?echo $Monto_Movimiento?>" size="17" maxlength="16" readonly>
+                    <input name="txtMonto_Movimiento" type="text" class="Estilo5" id="txtcod_titulo35"  value="<?php echo $Monto_Movimiento?>" size="17" maxlength="16" readonly>
                   </span> </span></td>
                   <td width="100"><span class="Estilo5">FECHA EMISI&Oacute;N :</span></td>
                   <td width="195"><span class="Estilo5"><span class="Estilo12">
-                    <input name="txtMonto_Movimiento2" type="text" class="Estilo5" id="txtMonto_Movimiento"  value="<?echo $Monto_Movimiento?>" size="17" maxlength="16" readonly>
+                    <input name="txtMonto_Movimiento2" type="text" class="Estilo5" id="txtMonto_Movimiento"  value="<?php echo $Monto_Movimiento?>" size="17" maxlength="16" readonly>
                   </span></span></td>
                 </tr>
             </table></td>

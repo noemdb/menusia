@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");?>
-<?include ("../class/conects.php");  include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");?>
+<?php include ("../class/conects.php");  include ("../class/funciones.php");
 if (!$_GET){
   $codigo_cuenta='';
   $p_letra='';
@@ -19,7 +19,7 @@ if (!$_GET){
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS Y ALMAC&Eacute;N (Facturas por Proveedor)</title>
+<title>SIPAP COMPRAS Y ALMAC&Eacute;N (Facturas por Proveedor)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -150,7 +150,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="89" height="22"><span class="Estilo5"><span class="Estilo11">C&Eacute;DULA/RIF :</span></span></td>
                       <td width="83"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Solvencia" type="text" class="Estilo5" id="txtCod_Solvencia"  value="<?echo $ced_proveedor?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Solvencia" type="text" class="Estilo5" id="txtCod_Solvencia"  value="<?php echo $ced_proveedor?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="636"><span class="Estilo5">
                       </span></td>
@@ -163,7 +163,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="71"><span class="Estilo5"><span class="Estilo11">NOMBRE :</span></span></td>
                       <td width="783"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtnombre_proveedor" type="text" class="Estilo5" id="txtnombre_proveedor"  value="<?echo $nom_proveedor?>" size="73" maxlength="73" readonly>
+                      <input name="txtnombre_proveedor" type="text" class="Estilo5" id="txtnombre_proveedor"  value="<?php echo $nom_proveedor?>" size="73" maxlength="73" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -204,4 +204,4 @@ MM_reloadPage(true);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,7 +1,7 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS; error_reporting(E_ALL ^ E_NOTICE); 
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS; error_reporting(E_ALL ^ E_NOTICE); 
 if (!$_GET){  $referencia_caus='';$tipo_causado='';$tipo_pago=''; $referencia_pago=''; $referencia_comp='';$tipo_compromiso=''; $cod_banco='';}
  else {  $tipo_pago=$_GET["txttipo_pago"];  $referencia_pago=$_GET["txtreferencia_pago"];   $referencia_caus=$_GET["txtreferencia_caus"];  $tipo_causado=$_GET["txttipo_causado"];  $referencia_comp = $_GET["txtreferencia_comp"];  $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_banco='';}
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); if($utf_rpt=="SI"){if($php_os=="WINNT"){$php_os="LINUX";}else{$php_os="WINNT";}} }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); if($utf_rpt=="SI"){if($php_os=="WINNT"){$php_os="LINUX";}else{$php_os="WINNT";}} }
 $l_cat=0;  $sql="Select * from SIA005 where campo501='05'";  $resultado=pg_query($sql); if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"];$l_cat=strlen($formato_cat);} 
 $sql="Select * FROM PAGOS where tipo_pago='$tipo_pago' and referencia_pago='$referencia_pago' and tipo_causado='$tipo_causado' and referencia_caus='$referencia_caus' and  tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp'" ;
 $descripcion="";$fecha="";$nombre_abrev_caus="";$nombre_abrev_pago="";$nombre_abrev_comp="";$ced_rif="";$nombre="";$num_proyecto="";$des_proyecto="";$func_inv="";$genera_comprobante="";$inf_usuario="";$modulo="";$anulado="";
@@ -68,8 +68,8 @@ class PDF extends FPDF{
 		$this->SetFont('Arial','',9);
         $this->MultiCell(200,3,$descripcion,0);
 		$this->Cell(200,3,' ','B',1,'C');
-		$this->Cell(40,4,'Código Presupuestario',1,0,'C');
-		$this->Cell(140,4,'Denominación Código Presupuestario',1,0,'C');
+		$this->Cell(40,4,'Cï¿½digo Presupuestario',1,0,'C');
+		$this->Cell(140,4,'Denominaciï¿½n Cï¿½digo Presupuestario',1,0,'C');
 		$this->Cell(20,4,'Monto','TB',1,'C');
 		$y=$this->GetY();
 		$this->SetFillColor(255,0,0);		
@@ -91,7 +91,7 @@ class PDF extends FPDF{
 		$this->SetFillColor(255,0,0);
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
-		$this->Cell(100,3,'SIA CONTABILIDAD PRESUPUESTARIA',0,0,'L');
+		$this->Cell(100,3,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,0,'L');
 		$this->Cell(100,3,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
 	}
 }  
@@ -113,5 +113,5 @@ class PDF extends FPDF{
 	$total_comp=$total_comp+$registro["monto"];
   }	
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?> 

@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php");  $equipo = getenv("COMPUTERNAME");  $mcod_m = "PRE011".$equipo;
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php");  $equipo = getenv("COMPUTERNAME");  $mcod_m = "PRE011".$equipo;
  $codigo_mov=substr($mcod_m,0,49);  $fecha_hoy=asigna_fecha_hoy(); $tipo_imput_presu="P";
  $user=$_POST["txtuser2"];   $password=$_POST["txtpassword2"];  $dbname=$_POST["txtdbname2"]; 
  $codigo_mov=$_POST["txtcodigo_mov2"];  $genera_comprobante="NO"; $tipo_ajuste=$_POST["txttipo_ajuste2"];
@@ -8,7 +8,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Ajustes Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Ajustes Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -66,7 +66,7 @@ function revisar(){var f=document.form1; var Valido=true;
      else{f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value;}
     if(f.txttipo_ajuste.value==""){alert("Tipo de ajuste no puede estar Vacio"); return false; }
       else{f.txttipo_ajuste.value=f.txttipo_ajuste.value.toUpperCase();}
-    if(f.txtdescrip_aju.value==""){alert("Descripción del ajuste no puede estar Vacia"); return false; }
+    if(f.txtdescrip_aju.value==""){alert("Descripciï¿½n del ajuste no puede estar Vacia"); return false; }
       else{f.txtdescrip_aju.value=f.txtdescrip_aju.value.toUpperCase();}
     if(f.txtreferencia_ajuste.value.length==8){f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value.toUpperCase();f.txtreferencia_ajuste.value=f.txtreferencia_ajuste.value;}
       else{alert("Longitud de Referencia Invalida");return false;}
@@ -117,9 +117,9 @@ return true;}
                         <tr>
                           <td width="188">
                             <p><span class="Estilo5">DOCUMENTO AJUSTE:</span></p></td>
-                          <td width="46"><input name="txttipo_ajuste" type="text"  id="txttipo_ajuste" size="6" maxlength="4"  onFocus="encender(this); " onBlur="apaga_doc(this);" value="<?echo $tipo_ajuste;?>" onchange="chequea_tipo(this.form);"></td>
+                          <td width="46"><input name="txttipo_ajuste" type="text"  id="txttipo_ajuste" size="6" maxlength="4"  onFocus="encender(this); " onBlur="apaga_doc(this);" value="<?php echo $tipo_ajuste;?>" onchange="chequea_tipo(this.form);"></td>
                           <td width="38"><span class="Estilo5">
-                            <input name="bttipo_ajuste" type="button" id="bttipo_ajuste" title="Abrir Catalogo Documentos ajustes" onclick="VentanaCentrada('Cat_doc_ajuste.php?criterio=','SIA','','750','500','true')" value="...">
+                            <input name="bttipo_ajuste" type="button" id="bttipo_ajuste" title="Abrir Catalogo Documentos ajustes" onclick="VentanaCentrada('Cat_doc_ajuste.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                           <td width="77"><span class="Estilo5">
                             <input name="txtnombre_abrev_ajuste" type="text" id="txtnombre_abrev_ajuste" size="6" readonly>
@@ -128,7 +128,7 @@ return true;}
                           <td width="187"><div id="refajuste"><input name="txtreferencia_ajuste" type="text"  id="txtreferencia_ajuste" size="12" onFocus="encender(this); " onBlur="apagar(this);"  onchange="checkreferencia(this.form);"></div></td>
                           <td width="69"><span class="Estilo5">FECHA :</span> </td>
                           <td width="121"><span class="Estilo5">
-                            <input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_hoy?>" onchange="checkrefecha(this.form)">
+                            <input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_hoy?>" onchange="checkrefecha(this.form)">
                           </span></td>
                         </tr>
                       </table></td>
@@ -144,7 +144,7 @@ return true;}
                             <p><span class="Estilo5">DOCUMENTO CAUSADO:</span></p></td>
                           <td width="45"><input name="txttipo_causado" type="text"  id="txttipo_causado" size="6" maxlength="4" onFocus="encender(this);" onBlur="apagar(this);"   onChange="chequea_tipo_caus(this.form);"></td>
                           <td width="36"><span class="Estilo5">
-                            <input name="btdoc_caus" type="button" id="btdoc_caus" title="Abrir Catalogo Documentos Causados" onClick="VentanaCentrada('Cat_doc_caus.php?criterio=','SIA','','750','500','true')" value="...">
+                            <input name="btdoc_caus" type="button" id="btdoc_caus" title="Abrir Catalogo Documentos Causados" onClick="VentanaCentrada('Cat_doc_caus.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                           <td width="79"><span class="Estilo5">
                             <input name="txtnombre_abrev_caus" type="text" id="txtnombre_abrev_caus" size="6" readonly>
@@ -154,7 +154,7 @@ return true;}
                               <input name="txtreferencia_caus" type="text" id="txtreferencia_caus" size="10" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_caus(this.form);">
                           </div></td>
                           <td width="37"><span class="Estilo5">
-                            <input name="btref_caus" type="button" id="btref_caus" title="Abrir Catalogo de Causados" onClick="VentanaCentrada('Cat_causados.php?criterio=','SIA','','750','500','true')" value="...">
+                            <input name="btref_caus" type="button" id="btref_caus" title="Abrir Catalogo de Causados" onClick="VentanaCentrada('Cat_causados.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                           <td width="208"><span class="Estilo5"> </span></td>
                         </tr>
@@ -167,7 +167,7 @@ return true;}
                             <p><span class="Estilo5">DOCUMENTO COMPROMISO:</span></p></td>
                           <td width="44"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" size="6" maxlength="4" onFocus="encender(this);" onBlur="apagar(this);"   onchange="chequea_tipo_comp(this.form);"></td>
                           <td width="36"><span class="Estilo5">
-                            <input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comp.php?criterio=','SIA','','750','500','true')" value="...">
+                            <input name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comp.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                           <td width="80"><span class="Estilo5">
                             <input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" readonly>
@@ -177,7 +177,7 @@ return true;}
                               <input name="txtreferencia_comp" type="text" id="txtreferencia_comp" size="10" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
                           </div></td>
                           <td width="36"><span class="Estilo5">
-                            <input name="btref_comp" type="button" id="btref_comp" title="Abrir Catalogo de Compromisos" onClick="VentanaCentrada('Cat_compromisos.php?criterio=','SIA','','750','500','true')" value="...">
+                            <input name="btref_comp" type="button" id="btref_comp" title="Abrir Catalogo de Compromisos" onClick="VentanaCentrada('Cat_compromisos.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                           <td width="211"><span class="Estilo5">
                           </span></td>
@@ -208,7 +208,7 @@ return true;}
               </tr>
           </table>
         <div id="codcomp">
-        <iframe src="Det_inc_ajustes_caus.php?codigo_mov=<?echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_inc_ajustes_caus.php?codigo_mov=<?php echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         </div>
         <table width="870" border="0">
@@ -218,7 +218,7 @@ return true;}
         </table>
         <table width="768">
           <tr>
-            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="100"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp"></td>
             <td width="100"><input name="txttipo_pago" type="hidden" id="txttipo_pago" value="0000"></td>
             <td width="100"><input name="txtreferencia_pago" type="hidden" id="txtreferencia_pago" value="00000000"></td>

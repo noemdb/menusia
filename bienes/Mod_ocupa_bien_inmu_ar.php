@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$ced_rif='';}else {$ced_rif=$_GET["Gced_rif"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$ced_rif='';}else {$ced_rif=$_GET["Gced_rif"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Ocupantes del Bien Inmueble)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Ocupantes del Bien Inmueble)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -40,7 +40,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN011 where ced_rif='$ced_rif'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
   $ced_rif=$registro["ced_rif"];$nombre_ocupante=$registro["nombre_ocupante"];$cedula=$registro["cedula"];$rif=$registro["rif"];$nit=$registro["nit"];$tipo=$registro["tipo"];$observacion=$registro["observacion"]; }
@@ -77,7 +77,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Eacute;DULA/RIF :</span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtced_rif" type="text" class="Estilo5" id="txtced_rif" size="15" maxlength="12"   value="<?echo $ced_rif?>">
+                     <input name="txtced_rif" type="text" class="Estilo5" id="txtced_rif" size="15" maxlength="12"   value="<?php echo $ced_rif?>">
                  </span></div></td>
                </tr>
              </table></td>
@@ -87,7 +87,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
                <tr>
                  <td width="130" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                  <td width="730" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_ocupante" type="text" class="Estilo5" id="txtnombre_ocupante" size="80" maxlength="80"   value="<?echo $nombre_ocupante?>">
+                     <input name="txtnombre_ocupante" type="text" class="Estilo5" id="txtnombre_ocupante" size="80" maxlength="80"   value="<?php echo $nombre_ocupante?>">
                  </span></div></td>
                </tr>
              </table></td>
@@ -97,15 +97,15 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
                <tr>
                  <td width="110" scope="col"><span class="Estilo5">C&Eacute;DULA : </span></td>
                  <td width="122" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcedula" type="text" class="Estilo5" id="txtcedula" size="15" maxlength="12"   value="<?echo $cedula?>">
+                     <input name="txtcedula" type="text" class="Estilo5" id="txtcedula" size="15" maxlength="12"   value="<?php echo $cedula?>">
                      <span class="menu"><strong><strong> </strong></strong></span> </span></span></div></td>
                  <td width="45" scope="col"><span class="Estilo5">R.I.F :</span></td>
                  <td width="129" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtrif" type="text" class="Estilo5" id="txtrif" size="15" maxlength="12"  value="<?echo $rif?>">
+                     <input name="txtrif" type="text" class="Estilo5" id="txtrif" size="15" maxlength="12"  value="<?php echo $rif?>">
                  </span></div></td>
                  <td width="43" scope="col"><div align="left"><span class="Estilo5">N.I.T :</span></div></td>
                  <td width="379" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnit" type="text" class="Estilo5" id="txtnit" size="15" maxlength="15"  value="<?echo $nit?>">
+                     <input name="txtnit" type="text" class="Estilo5" id="txtnit" size="15" maxlength="15"  value="<?php echo $nit?>">
                  </span></div></td>
                </tr>
              </table></td>
@@ -115,7 +115,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
                <tr>
                  <td width="94" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
                  <td width="694" scope="col"><div align="left">
-                     <textarea name="txtobservacion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtobservacion"><?echo $observacion?></textarea>
+                     <textarea name="txtobservacion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" id="txtobservacion"><?php echo $observacion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -141,4 +141,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

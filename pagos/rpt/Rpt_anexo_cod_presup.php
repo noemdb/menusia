@@ -1,7 +1,7 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT"; error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT"; error_reporting(E_ALL ^ E_NOTICE);
 if (!$_GET){ $nro_orden="";$tipo_causado=""; } else{$nro_orden=$_GET["txtnro_orden"];  $tipo_causado=$_GET["txttipo_causado"];}
 $sql="Select * from ORD_PAGO where tipo_causado='$tipo_causado' and nro_orden='$nro_orden'";
-$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $direccion=""; $nombre_emp=""; $ced_rif_emp="";$sqle="Select * from SIA000 order by campo001"; $rese=pg_query($sqle); if ($registro=pg_fetch_array($rese,0)){$cod_emp=$registro["campo001"]; $direccion=$registro["campo006"]; $nombre_emp=$registro["campo004"]; $nom_completo=$registro["campo005"]; $ced_rif_emp=$registro["campo007"]; $nit_emp=$registro["campo008"]; }
 $concepto="";$fecha="";$nombre_abrev_caus=""; $ced_rif="";$nombre="";$inf_usuario="";$anulado="";  $tipo_documento="";  $nro_documento=""; $afecta_presu=""; $status_1=""; $usuario_sia="";
 $func=""; $inv=""; $con_comp=""; $directa=""; $financ=""; $caja_chica=""; $permanente=""; $orden_permanen=""; $cod_tipo_orden="";
@@ -38,7 +38,7 @@ class PDF extends FPDF{
 		$this->Cell(100,4,$nombre_emp,0,1,'L');
 		$this->Ln(4);
 		$this->SetFont('Arial','B',12);
-		$this->Cell(200,3,'RELACION ANEXA ORDEN DE PAGO N° '.$nro_orden,0,1,'C');	
+		$this->Cell(200,3,'RELACION ANEXA ORDEN DE PAGO Nï¿½ '.$nro_orden,0,1,'C');	
 		$this->Ln(2);
 		$this->SetFont('Arial','B',9);
 		$this->Cell(180,3,'FECHA: ',0,0,'R');
@@ -59,7 +59,7 @@ class PDF extends FPDF{
         $this->SetFillColor(255,0,0);
 		$this->Ln(5);
 		$this->SetFont('Arial','I',5);
-		$this->Cell(50,4,'SIA Ordenamiento de Pago',0,0,'L');
+		$this->Cell(50,4,'SIPAP Ordenamiento de Pago',0,0,'L');
 		$this->Cell(50,5,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
 		$this->Cell(100,5,'fecha: '.$ffechar.' Hora: '.$fhorar,0,0,'R');
 	} 
@@ -87,6 +87,6 @@ class PDF extends FPDF{
   $pdf->Cell(175,4,'TOTAL CAUSADO Bs.',0,0,'R');
   $pdf->Cell(25,4,$total_pre,0,1,'R');
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?>
 

@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $nro_aut="N"; $equipo=getenv("COMPUTERNAME");  $tipo_comp="EM001";
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $nro_aut="N"; $equipo=getenv("COMPUTERNAME");  $tipo_comp="EM001";
 $fecha_hoy=asigna_fecha_hoy();  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];
 $codigo_mov=$_POST["txtcodigo_mov"]; $cod_dep=$_POST["txtcod_dep"]; $nom_dep=$_POST["txtnom_dep"];  $formato_bien=$_POST["txtformato_bien"]; $long_num_bien=$_POST["txtlong_num_bien"];
 $fec_fin_e=$_POST["txtfecha_fin"]; $Cod_Emp=$_POST["txtcod_emp"]; $ced_rif_emp=$_POST["txtced_rif_emp"]; $fecha_fin=formato_ddmmaaaa($fec_fin_e);  if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;}  
@@ -8,7 +8,7 @@ $fec_fin_e=$_POST["txtfecha_fin"]; $Cod_Emp=$_POST["txtcod_emp"]; $ced_rif_emp=$
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Transferencias Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Transferencias Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js"  type="text/javascript"></script>
@@ -37,20 +37,20 @@ function chequea_fecha(mthis){var mref; var mfec;   mref=mthis.value;
 return true;}
 
 function llama_cat_dir(mform){  var mcod_dep; var murl; mcod_dep=mform.txtcod_dependencia.value;
-  murl='Cat_direcc_dep.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+  murl='Cat_direcc_dep.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 
 function llama_cat_dep(mform){  var mcod_dep; var murl;  var mcod_dir;
    mcod_dep=mform.txtcod_dependencia.value; mcod_dir=mform.txtcod_direccion.value;
-  murl='Cat_departamentos.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+  murl='Cat_departamentos.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 
 function llama_cat_dir_r(mform){  var mcod_dep; var murl; mcod_dep=mform.txtcod_dependencia_r.value;
-  murl='Cat_direcc_dep_r.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+  murl='Cat_direcc_dep_r.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 function llama_cat_dep_r(mform){  var mcod_dep; var murl;  var mcod_dir;
    mcod_dep=mform.txtcod_dependencia_r.value; mcod_dir=mform.txtcod_direccion_r.value;
-  murl='Cat_departamentos_r.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+  murl='Cat_departamentos_r.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 
 function apaga_dep(mthis){var mref;  var mdir=""; var mdep="";
@@ -130,7 +130,7 @@ return true;}
                  <td width="170"><span class="Estilo5">REFERENCIA MOVIMIENTO :</span></td>
                  <td width="115"><div id="refmov"><input name="txtreferencia" type="text" id="txtreferencia" size="10" maxlength="8"  onFocus="encender(this); " onBlur="apagar(this);"  onchange="checkreferencia(this.form);" class="Estilo10"> </div> </td>
                  <td width="160"><span class="Estilo5">FECHA DEL MOVIMIENTO :</span></td>
-                 <td width="120"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="14" maxlength="10"  value="<?echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="120"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="14" maxlength="10"  value="<?php echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                  <td width="160"><span class="Estilo5">TIPO DE TRANSFERENCIA:</span></td>
 				 <td width="120"><span class="Estilo5"><select class="Estilo10" name="txttipo_transferencia" onFocus="encender(this)" onBlur="apagar(this)">
 				     <option>INTERNA</option> <option>EXTERNA</option>
@@ -155,9 +155,9 @@ return true;}
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5"><div id="coddep">C&Oacute;DIGO DEPENDENCIA :</div> </span></td>
-                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dep?>" onFocus="encender(this)" onBlur="apaga_dep(this)" class="Estilo10">    </span></td>
-                 <td width="70"><span class="Estilo5"> <input name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $nom_dep?>" readonly class="Estilo10">    </span></td>
+                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dep?>" onFocus="encender(this)" onBlur="apaga_dep(this)" class="Estilo10">    </span></td>
+                 <td width="70"><span class="Estilo5"> <input name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $nom_dep?>" readonly class="Estilo10">    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -202,9 +202,9 @@ return true;}
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
-                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia_r" type="text" id="txtcod_dependencia_r" size="5" maxlength="4" value="<?echo $cod_dep?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">    </span></td>
-                 <td width="70"><span class="Estilo5"> <input name="btdependencia_r" type="button" id="btdependencia_r" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasr.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="100" maxlength="250" value="<?echo $nom_dep?>" readonly class="Estilo10">    </span></td>
+                 <td width="65"><span class="Estilo5"><input name="txtcod_dependencia_r" type="text" id="txtcod_dependencia_r" size="5" maxlength="4" value="<?php echo $cod_dep?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">    </span></td>
+                 <td width="70"><span class="Estilo5"> <input name="btdependencia_r" type="button" id="btdependencia_r" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasr.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="570"><span class="Estilo5"><input name="txtdenominacion_dep_r" type="text" id="txtdenominacion_dep_r" size="100" maxlength="250" value="<?php echo $nom_dep?>" readonly class="Estilo10">    </span></td>
                </tr>
              </table></td>
            </tr>	
@@ -233,7 +233,7 @@ return true;}
                <tr>
                  <td width="185"><span class="Estilo5">C.I. RESPONSABLE PRIMARIO :</span></td>
                  <td width="95"><span class="Estilo5"><input name="txtced_responsable" type="text" id="txtced_responsable" size="14" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"  value=""  class="Estilo5">   </span></td>
-                 <td width="45"><span class="Estilo5"><input name="btresp_p" type="button" id="btresp_p" title="Abrir Catalogo Responsable Primario" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                 <td width="45"><span class="Estilo5"><input name="btresp_p" type="button" id="btresp_p" title="Abrir Catalogo Responsable Primario" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                  <td width="520"><span class="Estilo5"><input name="txtnombre_respp" type="text" id="txtnombre_respp" size="100" maxlength="250"  value="" readonly class="Estilo10">  </span></td>
                </tr>
              </table></td>
@@ -243,7 +243,7 @@ return true;}
                <tr>
                  <td width="185"><span class="Estilo5">C.I. RESPONSABLE DE USO :</span></td>
                  <td width="95"><span class="Estilo5"> <input name="txtced_responsable_uso" type="text" id="txtced_responsable_uso" size="15" maxlength="12"  value="" onFocus="encender(this)" onBlur="apagar(this)"  class="Estilo5">   </span></td>
-                 <td width="45"><span class="Estilo5"><input name="btresp_uso" type="button" id="btresp_uso" title="Abrir Catalogo Responsable Uso" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
+                 <td width="45"><span class="Estilo5"><input name="btresp_uso" type="button" id="btresp_uso" title="Abrir Catalogo Responsable Uso" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
                  <td width="520"><span class="Estilo5"><input name="txtnombre_res_uso" type="text" id="txtnombre_res_uso" size="100" maxlength="250"  value="" readonly class="Estilo10">    </span></td>
                </tr>
              </table></td>
@@ -257,7 +257,7 @@ return true;}
              </table></td>
            </tr> 	
         </table>
-        <iframe src="Det_inc_bienes_trans.php?codigo_mov=<?echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_inc_bienes_trans.php?codigo_mov=<?php echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         
         <table width="812">
@@ -265,9 +265,9 @@ return true;}
 		  <td >&nbsp;</td>
 		  </tr>
           <tr>
-            <td width="614"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-			<td width="20"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td> 
-			<td width="30"><input name="txtced_rif" type="hidden" id="txtced_rif" value="<?echo $ced_rif_emp?>" ></td> 
+            <td width="614"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+			<td width="20"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td> 
+			<td width="30"><input name="txtced_rif" type="hidden" id="txtced_rif" value="<?php echo $ced_rif_emp?>" ></td> 
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

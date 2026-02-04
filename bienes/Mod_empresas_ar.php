@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_empresa='';}else {$cod_empresa=$_GET["Gcod_empresa"];}
 ?>
 
@@ -9,7 +9,7 @@ if (!$_GET){$cod_empresa='';}else {$cod_empresa=$_GET["Gcod_empresa"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Empresas)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Empresas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -33,7 +33,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN007 where cod_empresa='$cod_empresa'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); 
 $cod_empresa=$registro["cod_empresa"]; $denominacion_emp=$registro["denominacion_emp"];}
@@ -69,7 +69,7 @@ $cod_empresa=$registro["cod_empresa"]; $denominacion_emp=$registro["denominacion
              <td><table width="821">
                <tr>
                  <td width="161"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
-                 <td width="660"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_empresa" type="text" id="txtcod_empresa" size="5" maxlength="3"  value="<?echo $cod_empresa?>" >
+                 <td width="660"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_empresa" type="text" id="txtcod_empresa" size="5" maxlength="3"  value="<?php echo $cod_empresa?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -81,7 +81,7 @@ $cod_empresa=$registro["cod_empresa"]; $denominacion_emp=$registro["denominacion
              <td><table width="821">
                <tr>
                  <td width="161"><div align="left"><span class="Estilo5">NOMBRE DE LA EMPRESA :</span></div></td>
-                 <td width="660"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_emp" type="text" id="txtdenominacion_emp" size="120" maxlength="200"  value="<?echo $denominacion_emp?>" >
+                 <td width="660"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_emp" type="text" id="txtdenominacion_emp" size="120" maxlength="200"  value="<?php echo $denominacion_emp?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -111,4 +111,4 @@ $cod_empresa=$registro["cod_empresa"]; $denominacion_emp=$registro["denominacion
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

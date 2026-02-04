@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="01-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$cod_estructura='';  $p_letra='';   $sql="SELECT * FROM ESTRUCTURA_ORD ORDER BY cod_estructura";}
   else { $cod_estructura = $_GET["Gcod_estructura"];  $p_letra=substr($cod_estructura, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$cod_estructura=substr($cod_estructura,1,8);}
@@ -21,7 +21,7 @@ if (!$_GET){$cod_estructura='';  $p_letra='';   $sql="SELECT * FROM ESTRUCTURA_O
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Definci&oacute;n Estructura de Ordenes)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Definci&oacute;n Estructura de Ordenes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -56,10 +56,10 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<? 
-$resultado=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">muestra('<? echo $error; ?>');</script><?}
-$resultado=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">muestra('<? echo $error; ?>');</script><?}
-$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG030(4,'$codigo_mov','','',0)");  $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+<?php  
+$resultado=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">muestra('<?php  echo $error; ?>');</script><?php }
+$resultado=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">muestra('<?php  echo $error; ?>');</script><?php }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG030(4,'$codigo_mov','','',0)");  $error=pg_errormessage($conn); $error=substr($error,0,91); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 $descripcion_est="";$ced_rif_est="";$fecha_desde_est="";$fecha_hasta_est=""; $bloqueada="";$modulo="";$tipo_documento="";$nro_documento="";$inf_usuario="";
 $cod_tipo_ord="";$concepto_est=""; $nombre="";  $des_tipo_orden=""; $res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From ESTRUCTURA_ORD ORDER BY cod_estructura";}
@@ -83,18 +83,18 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
 <table width="978" height="617" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="607" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>  
+     <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>  
 	
         <tr>
-          <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_estructura.php?codigo_mov=<?echo $codigo_mov?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_estructura.php?codigo_mov=<?echo $codigo_mov?>">Incluir</A></td>
+          <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_estructura.php?codigo_mov=<?php echo $codigo_mov?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_estructura.php?codigo_mov=<?php echo $codigo_mov?>">Incluir</A></td>
      </tr>
-	 <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?> 	
+	 <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?> 	
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Modifica_est.php?Gcod_estructura=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Modifica_est.php?Gcod_estructura=');">Modificar</A></td>
       </tr>
-	 <?} if ($Mcamino{2}=="S"){?> 
+	 <?php } if ($Mcamino{2}=="S"){?> 
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -115,22 +115,22 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_estructura.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_estructura.php" class="menu">Catalogo</a></td>
    </tr>
-  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?> 
+  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?> 
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></td>
   </tr>
   <!--
-  <?//} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")AND($Cod_Emp=="70")){ ?> 
+  <?php //} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")AND($Cod_Emp=="70")){ ?> 
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llamar_Ventana('Asig_comp_est.php?Gcod_estructura=');" class="menu">Asignar Compromisos</a></td>
   </tr>
   -->
-  <?} ?>  
+  <?php } ?>  
   <tr>
-	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_estructura_orden.htm','Ayuda SIA','','1000','1000','true');";
-		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_estructura_orden.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_estructura_orden.htm','Ayuda SIPAP','','1000','1000','true');";
+		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_estructura_orden.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -148,10 +148,10 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td width="850" height="32"><table width="855" >
                       <tr>
                         <td width="69" height="24"><span class="Estilo5">C&Oacute;DIGO : </span></td>
-                        <td width="94"><span class="Estilo5"> <input class="Estilo10" name="txtcod_estructura"  class="Estilo5" type="text" id="txtcod_estructura"  readonly value="<?echo $cod_estructura?>" size="10" maxlength="8">    </span></td>
+                        <td width="94"><span class="Estilo5"> <input class="Estilo10" name="txtcod_estructura"  class="Estilo5" type="text" id="txtcod_estructura"  readonly value="<?php echo $cod_estructura?>" size="10" maxlength="8">    </span></td>
                         <td width="93"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                        <td width="542"><span class="Estilo5"> <input class="Estilo10" name="txtdescripcion_est" type="text" id="txtdescripcion_est"   class="Estilo5" readonly value="<?echo $descripcion_est?>" size="85">    </span></td>
-                        <td width="24"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                        <td width="542"><span class="Estilo5"> <input class="Estilo10" name="txtdescripcion_est" type="text" id="txtdescripcion_est"   class="Estilo5" readonly value="<?php echo $descripcion_est?>" size="85">    </span></td>
+                        <td width="24"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -159,8 +159,8 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td><table width="851" >
                     <tr>
                       <td width="170" height="24"><span class="Estilo5">C&Eacute;DULA/RIF BENEFICIARIO : </span></td>
-                      <td width="133"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_est" type="text" id="txtced_rif_est"   class="Estilo5" readonly value="<?echo $ced_rif_est?>" size="15" maxlength="15">   </span></td>
-                      <td width="532"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre"  class="Estilo5" value="<?echo $nombre?>" size="81" readonly>     </span></td>
+                      <td width="133"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_est" type="text" id="txtced_rif_est"   class="Estilo5" readonly value="<?php echo $ced_rif_est?>" size="15" maxlength="15">   </span></td>
+                      <td width="532"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre"  class="Estilo5" value="<?php echo $nombre?>" size="81" readonly>     </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -168,7 +168,7 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td><table width="841">
                       <tr>
                         <td width="91" height="24"><span class="Estilo5">CONCEPTO :</span></td>
-                        <td width="738"><span class="Estilo5"><textarea name="txtconcepto_est" cols="88" readonly="readonly" class="Estilo10" id="txtconcepto_est"><?echo $concepto_est?></textarea>   </span></td>
+                        <td width="738"><span class="Estilo5"><textarea name="txtconcepto_est" cols="88" readonly="readonly" class="Estilo10" id="txtconcepto_est"><?php echo $concepto_est?></textarea>   </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -176,9 +176,9 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td><table width="852" >
                     <tr>
                       <td width="123" height="24"><span class="Estilo5">TIPO DOCUMENTO  : </span></td>
-                      <td width="154"><span class="Estilo5"><input class="Estilo10" name="txttipo_documento" type="text" id="txttipo_documento" class="Estilo5" readonly value="<?echo $tipo_documento?>" size="20">   </span> </td>
+                      <td width="154"><span class="Estilo5"><input class="Estilo10" name="txttipo_documento" type="text" id="txttipo_documento" class="Estilo5" readonly value="<?php echo $tipo_documento?>" size="20">   </span> </td>
                       <td width="145"><span class="Estilo5">NUMERO DOCUMENTO :</span></td>
-                      <td width="410"><span class="Estilo5"><input class="Estilo10" name="txtnro_documento" type="text" id="txtnro_documento" class="Estilo5" readonly value="<?echo $nro_documento?>" size="60">     </span> </td>
+                      <td width="410"><span class="Estilo5"><input class="Estilo10" name="txtnro_documento" type="text" id="txtnro_documento" class="Estilo5" readonly value="<?php echo $nro_documento?>" size="60">     </span> </td>
                     </tr>
                   </table></td>
                 </tr>
@@ -186,8 +186,8 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td><table width="850">
                     <tr>
                       <td width="124"><span class="Estilo5">TIPO DE ORDEN :</span></td>
-                      <td width="92"><span class="Estilo5"> <input class="Estilo10" name="txtcod_tipo_ord" type="text" id="txtcod_tipo_ord" size="8" maxlength="15" class="Estilo5" readonly  value="<?echo $cod_tipo_ord?>">   </span> </td>
-                      <td width="618"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden" size="96" readonly class="Estilo5" value="<?echo $des_tipo_orden?>">  </span></td>
+                      <td width="92"><span class="Estilo5"> <input class="Estilo10" name="txtcod_tipo_ord" type="text" id="txtcod_tipo_ord" size="8" maxlength="15" class="Estilo5" readonly  value="<?php echo $cod_tipo_ord?>">   </span> </td>
+                      <td width="618"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden" size="96" readonly class="Estilo5" value="<?php echo $des_tipo_orden?>">  </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -195,9 +195,9 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
                   <td><table width="846">
                     <tr>
                       <td width="123"><span class="Estilo5">FECHA DESDE :</span></td>
-                      <td width="370"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desde_est" type="text" id="txtfecha_desde_est" size="15" value="<?echo $fecha_desde_est?>" class="Estilo5" readonly>   </span></td>
+                      <td width="370"><span class="Estilo5"><input class="Estilo10" name="txtfecha_desde_est" type="text" id="txtfecha_desde_est" size="15" value="<?php echo $fecha_desde_est?>" class="Estilo5" readonly>   </span></td>
                       <td width="107"><span class="Estilo5">FECHA HASTA :</span></td>
-                      <td width="226"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_hasta_est" type="text" id="txtfecha_hasta_est" value="<?echo $fecha_hasta_est?>"  class="Estilo5" size="15" readonly>  </span></td>
+                      <td width="226"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_hasta_est" type="text" id="txtfecha_hasta_est" value="<?php echo $fecha_hasta_est?>"  class="Estilo5" size="15" readonly>  </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -212,20 +212,20 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
    rows[1][2] = "Retenciones";        // Requiere: <div id="T12" class="tab-body">  ... </div>
    rows[1][3] = "Otros Pasivos"; 
 </script>
-<?include ("../class/class_tab.php");?>
+<?php include ("../class/class_tab.php");?>
 <script type="text/javascript" language="javascript"> DrawTabs(); </script>
-<!-- PESTAÑA 1 -->
+<!-- PESTAï¿½A 1 -->
 <div id="T11" class="tab-body">
-   <iframe src="Det_cons_estructura.php?criterio=<?echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0">
+   <iframe src="Det_cons_estructura.php?criterio=<?php echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0">
    </iframe>
 </div>
-<!--PESTAÑA 2 -->
+<!--PESTAï¿½A 2 -->
 <div id="T12" class="tab-body" >
-   <iframe src="Det_ret_estructura.php?criterio=<?echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0">
+   <iframe src="Det_ret_estructura.php?criterio=<?php echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0">
    </iframe>
-<!--PESTAÑA 3 -->
+<!--PESTAï¿½A 3 -->
 <div id="T13" class="tab-body" >
-    <iframe src="Det_cons_pas_estructura.php?clave=<?echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+    <iframe src="Det_cons_pas_estructura.php?clave=<?php echo $cod_estructura?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
     </div>
 </div>
 </div> </form> </div>
@@ -234,4 +234,4 @@ if($fecha_hasta_est==""){$fecha_hasta_est="";}else{$fecha_hasta_est=formato_ddmm
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

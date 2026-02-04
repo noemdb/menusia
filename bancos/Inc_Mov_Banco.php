@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $codigo_mov=$_POST["txtcodigo_mov"];  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];  $ced_rif=$_POST["txtced_r"]; $nombre_benef=$_POST["txtnomb"]; $fecha_hoy=asigna_fecha_hoy();  $descripcion="";
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $codigo_mov=$_POST["txtcodigo_mov"];  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];  $ced_rif=$_POST["txtced_r"]; $nombre_benef=$_POST["txtnomb"]; $fecha_hoy=asigna_fecha_hoy();  $descripcion="";
 $cod_banco=$_POST["txtcod_b"]; $nombre_banco=$_POST["txtnombre_b"];$nro_cuenta=$_POST["txtnro_c"];$des_tipo_mov=$_POST["txtdes_tipo_m"];$referencia=$_POST["txtref"]; $tipo_mov=$_POST["txttipo_m"]; $descripcion=$_POST["txtdesc"];
 $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin"]); if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;} $fecha=$fecha_hoy; 
 ?>
@@ -7,7 +7,7 @@ $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin"]); if(FDate($fecha_hoy)>FDate(
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Movimientos en Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Movimientos en Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -56,7 +56,7 @@ function revisar(){var f=document.form1;
     if(f.txtcod_banco.value==""){alert("Codigo de Banco no puede estar Vacio");return false;}
     if(f.txtreferencia.value==""){alert("Referencia no puede estar Vacio");return false;}
     if(f.txtnombre_banco.value==""){alert("Nombre de Banco no puede estar Vacio");return false;} else{f.txtnombre_banco.value=f.txtnombre_banco.value.toUpperCase();}
-    if(f.txtcod_banco.value.length==4){f.txtcod_banco.value=f.txtcod_banco.value.toUpperCase();} else{alert("Longitud Código de Banco Invalida");return false;}
+    if(f.txtcod_banco.value.length==4){f.txtcod_banco.value=f.txtcod_banco.value.toUpperCase();} else{alert("Longitud Cï¿½digo de Banco Invalida");return false;}
     if((f.txttipo_movimiento.value=="")||(f.txttipo_movimiento.value=="ANU")||(f.txttipo_movimiento.value=="ANC")||(f.txttipo_movimiento.value=="AND")){alert("Tipo de Movimiento Inavlido");return false;} else{f.txttipo_movimiento.value=f.txttipo_movimiento.value.toUpperCase();}
     if(f.txtmonto_mov_banco.value==""){alert("Monto no puede estar Vacio");return false;}
     if(f.txtdescripcion.value==""){alert("Descripcion no puede estar Vacio");return false;}else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
@@ -96,10 +96,10 @@ return true;}
                   <td width="867"><table width="863" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 					   <td width="127"><span class="Estilo5">C&Oacute;DIGO BANCO:</span></td>
-                       <td width="72"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);" value="<?echo $cod_banco?>" onkeypress="return stabular(event,this)">  </span> </td>
-                      <td width="91"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                       <td width="72"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);" value="<?php echo $cod_banco?>" onkeypress="return stabular(event,this)">  </span> </td>
+                      <td width="91"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="144"><span class="Estilo5">N&Uacute;MERO DE CUENTA:</span></td>
-                      <td width="419"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnro_cuenta" type="text"  id="txtnro_cuenta"  value="<?echo $nro_cuenta?>" size="55" maxlength="55" readonly onkeypress="return stabular(event,this)"></span></div></td>
+                      <td width="419"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnro_cuenta" type="text"  id="txtnro_cuenta"  value="<?php echo $nro_cuenta?>" size="55" maxlength="55" readonly onkeypress="return stabular(event,this)"></span></div></td>
                  
                     </tr>
                   </table></td>
@@ -109,7 +109,7 @@ return true;}
                   <td><table width="863" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="126"><span class="Estilo5">NOMBRE DEL BANCO  : </span></td>
-                        <td width="617"><span class="Estilo5">  <input class="Estilo10" name="txtnombre_banco" type="text"  id="txtnombre_banco"  value="<?echo $nombre_banco?>" size="100" maxlength="100" readonly onkeypress="return stabular(event,this)"></span></td>
+                        <td width="617"><span class="Estilo5">  <input class="Estilo10" name="txtnombre_banco" type="text"  id="txtnombre_banco"  value="<?php echo $nombre_banco?>" size="100" maxlength="100" readonly onkeypress="return stabular(event,this)"></span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -118,11 +118,11 @@ return true;}
                   <td><table width="864">
                     <tr>
                         <td width="100"><span class="Estilo5"><div id="rmov">REFERENCIA  : </div> </span></td>
-                        <td width="115"><span class="Estilo5"><input class="Estilo10" name="txtreferencia" type="text"  id="txtreferencia"   size="10" maxlength="8" onFocus="encender(this)" onBlur="apaga_referencia(this)" value="<?echo $referencia?>" onkeypress="return stabular(event,this)"> </span></td>
+                        <td width="115"><span class="Estilo5"><input class="Estilo10" name="txtreferencia" type="text"  id="txtreferencia"   size="10" maxlength="8" onFocus="encender(this)" onBlur="apaga_referencia(this)" value="<?php echo $referencia?>" onkeypress="return stabular(event,this)"> </span></td>
                         <td width="125"><span class="Estilo5">TIPO MOVIMIENTO :</span></td>
-                        <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_movimiento" type="text" id="txttipo_movimiento"   size="4" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_mov?>" onkeypress="return stabular(event,this)"></span></td>
-                        <td width="45"><input class="Estilo10" name="bttipo_mov" type="button" id="bttipo_mov" title="Abrir Catalogo Tipos de Movimiento" onclick="VentanaCentrada('Cat_tipo_mov_inc.php?criterio=','SIA','','750','500','true')" value="..."></td>
-                        <td width="410"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_mov" type="text" id="txtdes_tipo_mov"   size="57" maxlength="57" value="<?echo $des_tipo_mov?>" readonly onkeypress="return stabular(event,this)"> </span></td>
+                        <td width="60"><span class="Estilo5"><input class="Estilo10" name="txttipo_movimiento" type="text" id="txttipo_movimiento"   size="4" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_mov?>" onkeypress="return stabular(event,this)"></span></td>
+                        <td width="45"><input class="Estilo10" name="bttipo_mov" type="button" id="bttipo_mov" title="Abrir Catalogo Tipos de Movimiento" onclick="VentanaCentrada('Cat_tipo_mov_inc.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
+                        <td width="410"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_mov" type="text" id="txtdes_tipo_mov"   size="57" maxlength="57" value="<?php echo $des_tipo_mov?>" readonly onkeypress="return stabular(event,this)"> </span></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -131,7 +131,7 @@ return true;}
             <td ><table width="864" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="100"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" class="Estilo10"  onFocus="encender(this)" onBlur="apagar(this)" id="txtdescripcion" onkeypress="return stabular(event,this)"><?echo $descripcion?></textarea> </span> </td>
+                <td width="750"><span class="Estilo5"> <textarea name="txtdescripcion" cols="90" class="Estilo10"  onFocus="encender(this)" onBlur="apagar(this)" id="txtdescripcion" onkeypress="return stabular(event,this)"><?php echo $descripcion?></textarea> </span> </td>
               </tr>
             </table></td>
           </tr>
@@ -140,7 +140,7 @@ return true;}
             <td><table width="864" border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="100"><span class="Estilo5">FECHA :</span></td>
-                <td width="390"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text"  id="txtfecha"  value="<?echo $fecha?>" size="12" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)" onkeyup="mascara(this,'/',patronfecha,true)" onkeypress="return stabular(event,this)"></span></td>
+                <td width="390"><span class="Estilo5"><input class="Estilo10" name="txtfecha" type="text"  id="txtfecha"  value="<?php echo $fecha?>" size="12" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)" onkeyup="mascara(this,'/',patronfecha,true)" onkeypress="return stabular(event,this)"></span></td>
                 <td width="69"><span class="Estilo5">MONTO :</span></td>
                 <td width="300"><span class="Estilo5"> <input class="Estilo10" name="txtmonto_mov_banco"   type="text"  id="txtmonto_mov_banco"   size="17" maxlength="16" style="text-align:right" onFocus="encender_monto(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event,this)" > </span></td>
               </tr>
@@ -150,7 +150,7 @@ return true;}
         </table>        
         <table width="812">
           <tr>
-            <td width="50"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
+            <td width="50"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
             <td width="50"><input name="txtcod_bancoA" type="hidden" id="txtcod_bancoA" value="0000"></td>
             <td width="50"><input name="txtreferenciaA" type="hidden" id="txtreferenciaA" value="00000000"></td>
 			<td width="100"><input name="txtbenef_mov_banco" type="hidden" id="txtbenef_mov_banco" value=""></td>

@@ -1,5 +1,5 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){  $cod_presup=''; $cod_fuente='00'; $SIA_Definicion="N";  $sql="SELECT * FROM codigos ORDER BY cod_presup,cod_fuente";}
 else { $codigo=$_GET["Gcodigo"]; $SIA_Definicion=substr($codigo,0,1); $cod_fuente=substr($codigo,1,2);$cod_presup=substr($codigo,3,32);
   $sql="Select * from codigos where cod_presup='$cod_presup' and cod_fuente='$cod_fuente'";}
@@ -9,7 +9,7 @@ $codigo=$SIA_Definicion.$cod_fuente.$cod_presup;
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -29,7 +29,7 @@ mcod_pre="N"+Gcod_presup; document.location ='Carga_codigos.php?Gcodigo='+mcod_p
 </script>
 
 </head>
-<?$denominacion="";$des_fuente="";$res=pg_query($sql);
+<?php $denominacion="";$des_fuente="";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod_fuente=$registro["cod_fuente"]; $denominacion=$registro["denominacion"]; $des_fuente=$registro["des_fuente_financ"];}
 ?>
 <body>
@@ -63,10 +63,10 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
                 <tr>
                   <td width="146"><span class="Estilo5">C&Oacute;DIGO CATEGORIA :</span></td>
                   <td width="136"><span class="Estilo5">
-                  <input name="txtcod_cat" type="text" id="txtcod_cat" size="20" maxlength="20" value="<?echo $cod_presup?>" readonly>
+                  <input name="txtcod_cat" type="text" id="txtcod_cat" size="20" maxlength="20" value="<?php echo $cod_presup?>" readonly>
                   </span></td>
                   <td width="544"><span class="Estilo5">
-                    <input name="txtdes_cat" type="text" id="txtdes_cat" size="84" readonly value="<?echo $denominacion?>" >
+                    <input name="txtdes_cat" type="text" id="txtdes_cat" size="84" readonly value="<?php echo $denominacion?>" >
                   </span></td>
                 </tr>
               </table></td>
@@ -76,11 +76,11 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
                 <tr>
                   <td width="198"><span class="Estilo5">FUENTE DE FINANCIAMIENTO :</span></td>
                   <td width="21"><span class="Estilo5">
-                    <input name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2"  value="<?echo $cod_fuente?>" onFocus="encender(this); " onBlur="apagar(this);">
+                    <input name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2"  value="<?php echo $cod_fuente?>" onFocus="encender(this); " onBlur="apagar(this);">
                   </span></td>
-                  <td width="45"><input name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                  <td width="45"><input name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                   <td width="569"><span class="Estilo5">
-                    <input name="txtdes_fuente" type="text" id="txtdes_fuente" size="75"  value="<?echo $des_fuente?>" readonly>
+                    <input name="txtdes_fuente" type="text" id="txtdes_fuente" size="75"  value="<?php echo $des_fuente?>" readonly>
                   </span></td>
                 </tr>
               </table></td>
@@ -103,4 +103,4 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

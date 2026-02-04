@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc"); 
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc"); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="03-0000090"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $periodod='2012';$periodoh='01'; $fecha_hoy=asigna_fecha_hoy(); $periodod=substr($fecha_hoy,6,4);  $periodoh=substr($fecha_hoy,3,2);
  $nombre_rpt="Rpt_Libro_Compra.php";  if($Cod_Emp=="71"){$nombre_rpt="Rpt_Libro_Compra_yac.php";};
 ?>
@@ -14,7 +14,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Reporte Libro de Compras IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Reporte Libro de Compras IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../../class/sia.js" type="text/javascript"></SCRIPT>
@@ -60,10 +60,10 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="19" align="center" class="Estilo16"><table width="776" border="0">
             <tr>
               <td width="257" height="26" class="Estilo5"> <div align="right">PERIODO FISCAL MES : </div></td>
-              <td width="82"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_h" type="text" id="txtperiodo_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $periodoh?>" size="5" maxlength="4" class="Estilo5">
+              <td width="82"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_h" type="text" id="txtperiodo_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $periodoh?>" size="5" maxlength="4" class="Estilo5">
               </span></td>
               <td width="128" class="Estilo5"><div align="right">A&Ntilde;O  : </div></td>
-              <td width="291"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_d" type="text" id="txtperiodo_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $periodod?>" size="12" maxlength="10" class="Estilo5">
+              <td width="291"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_d" type="text" id="txtperiodo_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $periodod?>" size="12" maxlength="10" class="Estilo5">
               </span></td>
             </tr>
           </table></td>
@@ -71,7 +71,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
         <tr>
           <td width="783">&nbsp;</td>
         </tr>
-		<?if($Cod_Emp=="71"){?>
+		<?php if($Cod_Emp=="71"){?>
         <tr>
 		  <td height="19"><table width="782" border="0">
 			  <tr>
@@ -86,7 +86,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 			  </tr>
 			</table></td>
         </tr>
-		<?} else {?>
+		<?php } else {?>
 		<tr>
 		  <td height="19"><table width="782" border="0">
 			  <tr>
@@ -99,13 +99,13 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 			  </tr>
 		  </table></td>
         </tr> 
-		<?} ?>
+		<?php } ?>
 <script language="JavaScript" type="text/JavaScript">var mpdf_rpt='<?php echo $pdf_rpt ?>';if(mpdf_rpt=="SI"){document.form1.tipo_rpt.options[1].selected = true;}else{document.form1.tipo_rpt.options[0].selected = true;} </script>
         <tr> <td height="18" colspan="3">&nbsp;</td>  </tr> 		 
         <tr>
           <td><table width="454" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr align="center" valign="middle">
-              <td><div align="center"> <input name="btgenera" type="button" id="btgenera" value="GENERAR" onClick="javascript:Llama_Rpt_Libro_Compra('<?echo $nombre_rpt?>');">  </div></td>
+              <td><div align="center"> <input name="btgenera" type="button" id="btgenera" value="GENERAR" onClick="javascript:Llama_Rpt_Libro_Compra('<?php echo $nombre_rpt?>');">  </div></td>
               <td><div align="center"><input name="btcancelar" type="button" id="btcancelar" value="CANCELAR" onClick="javascript:Llama_Menu_Rpt('menu.php');">   </div></td>
 			</tr>
           </table></td>
@@ -124,4 +124,4 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,6 +1,6 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);  $fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);
  $referencia_d=""; $referencia_h="zzzzzzzz";  $tipo_asiento_d="";  $tipo_asiento_h="zzz"; $cedula_d="";$cedula_h="zzzzzzzzzzzz";
  $cod_cuenta_d=""; $cod_cuenta_h=""; $cta_unica=""; $vstatus="T";
@@ -9,7 +9,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD (Reporte Movimientos de Cuentas)</title>
+<title>SIPAP CONTABILIDAD (Reporte Movimientos de Cuentas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -34,7 +34,7 @@ function Llama_Rpt_Asientos_D(murl){var url; var r; var st;
 function Llama_Menu_Rpt(murl){var url;    url="../"+murl;  LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Referencia) As Max_Referencia, MIN(Referencia) As Min_Referencia,MAX(Tipo_Asiento) As Max_Tipo,MIN(Tipo_Asiento) As Min_Tipo FROM CON002";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$referencia_d=$registro["min_referencia"];  $referencia_h=$registro["max_referencia"]; $tipo_asiento_d=$registro["min_tipo"]; $tipo_asiento_h=$registro["max_tipo"];}
 $sql="SELECT MAX(ced_rif) As Max_Ced_Rif, MIN(ced_rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_ced_rif"];}
@@ -66,13 +66,13 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
                 <td width="170" align="center"><div align="left"><span class="Estilo5">FECHA DESDE: </span></div></td>
                 <td width="160" align="center">
                   <div align="left"><span class="Estilo5">
-                    <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                    <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                     <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
                 <td width="70" align="center"><div align="left"><span class="Estilo5">HASTA:</span></div></td>
                 <td width="190" align="center">
                   <div align="left"><span class="Estilo5">
-                    <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                    <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                     <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
               </tr>
@@ -88,12 +88,12 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
                 <td width="170" align="center"><div align="left"><span class="Estilo5">REFERENCIA DESDE: </span></div></td>
                 <td width="160" align="center">
                   <div align="left"><span class="Estilo5">
-                    <input name="txtReferenciad" type="text" id="txtReferenciad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $referencia_d?>" size="12" maxlength="8">
+                    <input name="txtReferenciad" type="text" id="txtReferenciad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $referencia_d?>" size="12" maxlength="8">
                 </span></div></td>
                 <td width="70" align="center"><div align="left"><span class="Estilo5">HASTA:</span></div></td>
                 <td width="190" align="center">
                   <div align="left"><span class="Estilo5">
-                    <input name="txtReferenciah" type="text" id="txtReferenciah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $referencia_h?>" size="12" maxlength="8">
+                    <input name="txtReferenciah" type="text" id="txtReferenciah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $referencia_h?>" size="12" maxlength="8">
                 </span></div></td>
               </tr>
           </table></td>
@@ -107,13 +107,13 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
               <tr>
                 <td width="170" align="left"><span class="Estilo5">CEDULA/RIF DESDE : </span></td>
                 <td width="160" align="left"><span class="Estilo5">
-                  <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_d?>" size="15" maxlength="12">
-                  <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIA','','650','500','true')" value="...">
+                  <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_d?>" size="15" maxlength="12">
+                  <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIPAP','','650','500','true')" value="...">
                 </span></td>
                 <td width="70" align="left"><span class="Estilo5">HASTA:</span></td>
                 <td width="190" align="left"><span class="Estilo5">
-                  <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_h?>" size="15" maxlength="12">
-                  <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIA','','650','500','true')" value="...">
+                  <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_h?>" size="15" maxlength="12">
+                  <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo Beneficiario" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIPAP','','650','500','true')" value="...">
                 </span></td>
               </tr>
           </table></td>
@@ -126,10 +126,10 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
               <tr>
                 <td width="170"><div align="left"><span class="Estilo5">CODIGO DE CUENTA DESDE : </span></div></td>
                 <td width="200"><span class="Estilo5">
-                  <input name="txtCodigo_Cuenta_D" type="text" id="txtCodigo_Cuenta_D" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_d?>" size="32" maxlength="32">
+                  <input name="txtCodigo_Cuenta_D" type="text" id="txtCodigo_Cuenta_D" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_d?>" size="32" maxlength="32">
                 </span></td>
                 <td width="190"><span class="Estilo5">
-                  <input name="Catalogo_ctad" type="button" id="Catalogo_ctad" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                  <input name="Catalogo_ctad" type="button" id="Catalogo_ctad" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </span></td>
               </tr>
           </table></td>
@@ -142,10 +142,10 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
               <tr>
                 <td width="170"><div align="left"><span class="Estilo5">CODIGO DE CUENTA HASTA : </span></div></td>
                 <td width="200"><span class="Estilo5">
-                  <input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_h?>" size="32" maxlength="32">
+                  <input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_h?>" size="32" maxlength="32">
                 </span></td>
                 <td width="190"><span class="Estilo5">
-                  <input name="Catalogo_ctah" type="button" id="Catalogo_ctah" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIA','','750','500','true')" value="...">
+                  <input name="Catalogo_ctah" type="button" id="Catalogo_ctah" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </span></td>
               </tr>
           </table></td>
@@ -214,4 +214,4 @@ $sql="SELECT MAX(codigo_cuenta) As max_cod_cuenta, MIN(codigo_cuenta) As min_cod
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

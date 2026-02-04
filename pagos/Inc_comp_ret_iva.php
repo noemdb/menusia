@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php");
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php");
  $codigo_mov=$_POST["txtcodigo_mov"];  $fecha_hoy=asigna_fecha_hoy();  $user=$_POST["txtuser"]; $password=$_POST["txtpassword"]; $dbname=$_POST["txtdbname"];
  $corr_iva_mes=$_POST["txtcorr_iva_mes"]; $nro_comprobante="00000000";  
  $fecha_fin=formato_ddmmaaaa($_POST["txtfecha_fin"]); if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;} $fecha=$fecha_hoy; $ano_fiscal=substr($fecha_hoy,6,4);  $mes_fiscal=substr($fecha_hoy,3,2);
@@ -8,7 +8,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Comprobante Retenciones IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Comprobante Retenciones IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -41,7 +41,7 @@ function encender_monto(mthis){var mmonto; encender(mthis);
 }
 function chequea_mes(mform){var mref; var mano; 
    mano=mform.txtano_fiscal.value;  mref=mform.txtmes_fiscal.value; mref = Rellenarizq(mref,"0",2); mform.txtmes_fiscal.value=mref;
-   ajaxSenddoc('GET', 'compretiva.php?ano='+mano+'&mes='+mref+'&codigo_mov=<?echo $codigo_mov?>'+'&corr_iva_mes=<?echo $corr_iva_mes?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nrocomp', 'innerHTML');
+   ajaxSenddoc('GET', 'compretiva.php?ano='+mano+'&mes='+mref+'&codigo_mov=<?php echo $codigo_mov?>'+'&corr_iva_mes=<?php echo $corr_iva_mes?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nrocomp', 'innerHTML');
 return true;}
 function checkrefecha(mform){var mref;var mfec;
   mref=mform.txtfecha_e.value;   mfec=mform.txtfecha_e.value;
@@ -97,14 +97,14 @@ return true;}
                   <td height="14"><table width="861" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="155"><span class="Estilo5">PERIODO FISCAL A&Ntilde;O  : </span></td>
-                      <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtano_fiscal" type="text" id="txtano_fiscal" size="5" maxlength="5"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ano_fiscal?>" ></span></td>
+                      <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtano_fiscal" type="text" id="txtano_fiscal" size="5" maxlength="5"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ano_fiscal?>" ></span></td>
                       <td width="45"><span class="Estilo5">MES :</span></td>
-                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtmes_fiscal" type="text" id="txtmes_fiscal" size="2" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $mes_fiscal?>" onchange="chequea_mes(this.form)"></span></td>
+                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtmes_fiscal" type="text" id="txtmes_fiscal" size="2" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $mes_fiscal?>" onchange="chequea_mes(this.form)"></span></td>
                       <td width="170"><span class="Estilo5">N&Uacute;MERO COMPROBANTE  :</span></td>
                       <td width="120"><span class="Estilo5"><div id="nrocomp"> <input class="Estilo10" name="txtnro_comprobante" type="text" id="txtnro_comprobante" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" > </div></span></td>
-                      <script language="JavaScript" type="text/JavaScript"> var mref; var mano; mano=document.form1.txtano_fiscal.value;  mref=document.form1.txtmes_fiscal.value; mref = Rellenarizq(mref,"0",2); document.form1.txtmes_fiscal.value=mref; ajaxSenddoc('GET', 'compretiva.php?ano='+mano+'&mes='+mref+'&codigo_mov=<?echo $codigo_mov?>'+'&corr_iva_mes=<?echo $corr_iva_mes?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nrocomp', 'innerHTML'); </script>
+                      <script language="JavaScript" type="text/JavaScript"> var mref; var mano; mano=document.form1.txtano_fiscal.value;  mref=document.form1.txtmes_fiscal.value; mref = Rellenarizq(mref,"0",2); document.form1.txtmes_fiscal.value=mref; ajaxSenddoc('GET', 'compretiva.php?ano='+mano+'&mes='+mref+'&codigo_mov=<?php echo $codigo_mov?>'+'&corr_iva_mes=<?php echo $corr_iva_mes?>'+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'nrocomp', 'innerHTML'); </script>
                       <td width="120"><span class="Estilo5">FECHA EMISI&Oacute;N  : </span></td>
-                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $fecha_hoy?>" onchange="checkrefecha(this.form)"> </span></td>
+                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $fecha_hoy?>" onchange="checkrefecha(this.form)"> </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -115,7 +115,7 @@ return true;}
                     <tr>
                       <td width="95" height="24"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
                       <td width="110"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="14" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" > </span></td>
-                      <td width="55"><span class="Estilo5"> <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                      <td width="55"><span class="Estilo5"> <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                       <td width="75"><span class="Estilo5"> NOMBRE :</span></td>
                       <td width="515"><span class="Estilo5">  <input class="Estilo10" name="txtnombre" type="text" id="txtnombre" size="90"  readonly>  </span></td>
                     </tr>
@@ -128,7 +128,7 @@ return true;}
                     <tr>
                       <td width="150"><span class="Estilo5">N&Uacute;MERO DE ORDEN : </span></td>
                       <td width="84"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden" type="text" id="txtnro_orden" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" onchange="checkorden(this.form);"> </span></td>
-                      <td width="90"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('Cat_ord_pago.php?criterio=','SIA','','750','500','true')" value="..."> </td>
+                      <td width="90"><input class="Estilo10" name="btordenes" type="button" id="btordenes" title="Catalogo Ordenes de Pago" onClick="VentanaCentrada('Cat_ord_pago.php?criterio=','SIPAP','','750','500','true')" value="..."> </td>
                       <td width="92"><span class="Estilo5">FECHA ORDEN:</span></td>
                       <td width="279"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha" size="10" maxlength="10" readonly></span></td>
                       <td width="187"><span class="Estilo5"> <input type="button" name="btcarga_ret" value="Cargar Retenciones" title="Cargar Retenciones de la Orden de pago" onClick="javascript:Cargar_Ret(this.form)" > </span></td>
@@ -138,13 +138,13 @@ return true;}
                 <tr> <td>&nbsp;</td> </tr>
           </table>
               <div id="T11" class="tab-body">
-              <iframe src="Det_inc_comp_iva.php?codigo_mov=<?echo $codigo_mov?>&agregar=S" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_inc_comp_iva.php?codigo_mov=<?php echo $codigo_mov?>&agregar=S" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
               </div>
          <table width="863" border="0"> <tr> <td height="5">&nbsp;</td> </tr> </table>
          <table width="812">
           <tr>
             <td width="654">&nbsp;</td>
-			<td width="10"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+			<td width="10"><input class="Estilo10" name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
             <td width="88"><input name="Blanquear" type="reset" value="Blanquear"></td>
           </tr>

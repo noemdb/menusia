@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){$cod_banco='';$num_cheque=''; }  else{$cod_banco=$_GET["cod_banco"];$num_cheque=$_GET["num_cheque"];}
 $sql="Select * from EDO_CHEQUES where cod_banco='$cod_banco' and num_cheque='$num_cheque'";
 ?>
@@ -6,7 +6,7 @@ $sql="Select * from EDO_CHEQUES where cod_banco='$cod_banco' and num_cheque='$nu
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Formato Cheque)</title>
+<title>SIPAP CONTROL BANCARIO (Formato Cheque)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -29,8 +29,8 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<? $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php  $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $nombre_banco="";$nro_cuenta="";$concepto="";$num_cheque=""; $nro_orden=""; $nombre_benef=""; $ced_rif=""; $concepto=""; $monto_cheque=0; $fecha=""; $inf_usuario=""; $anulado="N";  $fecha_anulado="";  $tipo_pago=""; $edo_cheque=""; $entregado="N";$fecha_entregado="";$ced_rif_recib="";$nombre_recib="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0);
@@ -73,7 +73,7 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="25" ><table width="980" border="0" >
     <tr>
      <td width="500">&nbsp;</td>
-     <td width="431"><div align="left"> </div> <p align="right" class="Estilo19">***<? echo $monto_cheque; ?>***</p></td>
+     <td width="431"><div align="left"> </div> <p align="right" class="Estilo19">***<?php  echo $monto_cheque; ?>***</p></td>
      <td width="50">&nbsp;</td>
     </tr>
   </table></td>
@@ -82,7 +82,7 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="20" ><table width="980" border="0" >
     <tr>
      <td width="170">&nbsp;</td>
-     <td width="810"><div align="left"> </div> <p align="left" class="Estilo19">***<? echo $nombre_benef; ?>***</p></td>
+     <td width="810"><div align="left"> </div> <p align="left" class="Estilo19">***<?php  echo $nombre_benef; ?>***</p></td>
         </tr>
   </table></td>
 </tr>
@@ -90,7 +90,7 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="25" ><table width="980" border="0" >
     <tr>
      <td width="180">&nbsp;</td>
-     <td width="900"><div align="left"> </div> <p align="left" class="Estilo18"><? echo $monto_letras; ?></p></td>
+     <td width="900"><div align="left"> </div> <p align="left" class="Estilo18"><?php  echo $monto_letras; ?></p></td>
         </tr>
   </table></td>
 </tr>
@@ -98,8 +98,8 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="25" ><table width="980" border="0" >
     <tr>
      <td width="120">&nbsp;</td>
-     <td width="300"><div align="left"> </div> <p align="left" class="Estilo19"><? echo $lugar; ?></p></td>
-         <td width="380"><div align="left"> </div> <p align="left" class="Estilo19"><? echo $ano; ?></p></td>
+     <td width="300"><div align="left"> </div> <p align="left" class="Estilo19"><?php  echo $lugar; ?></p></td>
+         <td width="380"><div align="left"> </div> <p align="left" class="Estilo19"><?php  echo $ano; ?></p></td>
      <td width="180">&nbsp;</td>
         </tr>
   </table></td>
@@ -107,9 +107,9 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="280">&nbsp;</td></tr>
 <tr><td height="25" ><table width="980" border="0" >
     <tr>
-     <td width="400"><div align="left"> </div> <p align="left" class="Estilo18"><? echo $nombre_banco; ?></p></td>
-         <td width="300"><div align="left"> </div> <p align="left" class="Estilo18"><? echo $nro_cuenta; ?></p></td>
-         <td width="180"><div align="left"> </div> <p align="left" class="Estilo18"><? echo $num_cheque; ?></p></td>
+     <td width="400"><div align="left"> </div> <p align="left" class="Estilo18"><?php  echo $nombre_banco; ?></p></td>
+         <td width="300"><div align="left"> </div> <p align="left" class="Estilo18"><?php  echo $nro_cuenta; ?></p></td>
+         <td width="180"><div align="left"> </div> <p align="left" class="Estilo18"><?php  echo $num_cheque; ?></p></td>
         </tr>
   </table></td>
 </tr>
@@ -117,7 +117,7 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
 <tr><td height="180" ><table width="980" border="0" >
     <tr>
      <td width="40">&nbsp;</td>
-     <td width="840"><div align="left"> </div> <p align="left" class="Estilo18"><? echo $concepto; ?></p></td>
+     <td width="840"><div align="left"> </div> <p align="left" class="Estilo18"><?php  echo $concepto; ?></p></td>
      <td width="100">&nbsp;</td>
     </tr>
   </table>
@@ -125,17 +125,17 @@ $cod_p[$k]=$registro["cod_presup"]; $den_c[$k]=$registro["denominacion"]; $debe_
       <table width="975" border="0" >
         <tr>
           <td height="25" ><table width="996" border="0"  cellpadding="3" cellspacing="0">
-<? $total=0; $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$num_cheque' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql);
+<?php  $total=0; $sql="SELECT * FROM CUENTAS_COMPROB where text(fecha)='$sfecha' and referencia='$num_cheque' and tipo_comp='$tipo_comp' order by debito_credito desc,cod_cuenta";$res=pg_query($sql);
 while($registro=pg_fetch_array($res)){$monto_asiento=$registro["monto_asiento"]; $monto_asiento=formato_monto($monto_asiento);
 if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";}else{$debe="";$haber=$monto_asiento;}?>
               <tr>
-                <td width="200" align="left"><span class="Estilo17"><? echo $registro["cod_cuenta"]; ?></span></td>
-                <td width="440" align="left"><span class="Estilo17"><? echo $registro["nombre_cuenta"]; ?></span></td>
-                <td width="120" align="right"><span class="Estilo17"><? echo $debe; ?></span></td>
-                <td width="120" align="right"><span class="Estilo17"><? echo $haber; ?></span></td>
+                <td width="200" align="left"><span class="Estilo17"><?php  echo $registro["cod_cuenta"]; ?></span></td>
+                <td width="440" align="left"><span class="Estilo17"><?php  echo $registro["nombre_cuenta"]; ?></span></td>
+                <td width="120" align="right"><span class="Estilo17"><?php  echo $debe; ?></span></td>
+                <td width="120" align="right"><span class="Estilo17"><?php  echo $haber; ?></span></td>
                 <td width="80"></td>
               </tr>
-<?}$total=formato_monto($total); ?>
+<?php }$total=formato_monto($total); ?>
           </table></td>
         </tr>
       </table>
@@ -143,16 +143,16 @@ if ($registro["debito_credito"]=="D"){$debe=$monto_asiento;$haber="";}else{$debe
 </tr>
 <tr><td height="180">&nbsp;</td></tr>
 <tr><td height="25" ><table width="1006" border="0"  height="30" cellpadding="3" cellspacing="0">
-<? $total=0;
+<?php  $total=0;
 $sql="SELECT cod_presup,denominacion,sum(monto) as monto_chq FROM codigos_pagos where referencia_pago='$num_cheque' and cod_banco='$cod_banco' and tipo_pago='$tipo_pago' group by cod_presup,denominacion order by cod_presup";$res=pg_query($sql);$filas=pg_num_rows($res);
 while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto_chq"]); $total=$total+$registro["monto_chq"];?>
     <tr>
-      <td width="200" align="left"><span class="Estilo17"><? echo $registro["cod_presup"]; ?></span></td>
-          <td width="560" align="left"><span class="Estilo17"><? echo $registro["denominacion"]; ?></span></td>
-          <td width="120" align="right"><span class="Estilo17"><? echo $monto; ?></span></td>
+      <td width="200" align="left"><span class="Estilo17"><?php  echo $registro["cod_presup"]; ?></span></td>
+          <td width="560" align="left"><span class="Estilo17"><?php  echo $registro["denominacion"]; ?></span></td>
+          <td width="120" align="right"><span class="Estilo17"><?php  echo $monto; ?></span></td>
           <td width="100">&nbsp;</td>
         </tr>
-<? } ?>
+<?php } ?>
     </table></td>
   </tr>
   <tr><td height="100">&nbsp;</td></tr>

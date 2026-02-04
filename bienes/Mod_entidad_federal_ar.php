@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_estado='';}else {$cod_estado=$_GET["Gcod_estado"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_estado='';}else {$cod_estado=$_GET["Gcod_estado"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Entidad)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Entidad)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -38,7 +38,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
 $den_estado="";
 $sql="Select cod_estado,estado from pre091 where cod_estado='$cod_estado'";$res=pg_query($sql);
@@ -80,7 +80,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Entidad" type="text" class="Estilo5" id="txtCodigo_Entidad" title="Registre el C&oacute;digo de la Entidad" size="10" maxlength="2"  readonly value="<?ECHO $cod_estado?>">
+                      <input name="txtCodigo_Entidad" type="text" class="Estilo5" id="txtCodigo_Entidad" title="Registre el C&oacute;digo de la Entidad" size="10" maxlength="2"  readonly value="<?php ECHO $cod_estado?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -91,7 +91,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Entidad" type="text" class="Estilo5" id="txtNombre_Entidad" title="Registre el Nombre de la Entidad" size="80" maxlength="200"  value="<?ECHO $den_estado?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                      <td width="720"><input name="txtNombre_Entidad" type="text" class="Estilo5" id="txtNombre_Entidad" title="Registre el Nombre de la Entidad" size="80" maxlength="200"  value="<?php ECHO $den_estado?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -120,4 +120,4 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

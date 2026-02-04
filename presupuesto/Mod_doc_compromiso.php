@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$Doc_compromiso='';} else { $Doc_compromiso = $_GET["GDoc_compromiso"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modifica Documentos Compromisos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modifica Documentos Compromisos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../class/sia.css" type=text/css
@@ -24,14 +24,14 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function revisar(){
 var f=document.form1;
-    if(f.txtdoc_compromiso.value==""){alert("Código de Documento Compromiso no puede estar Vacio");return false;}
+    if(f.txtdoc_compromiso.value==""){alert("Cï¿½digo de Documento Compromiso no puede estar Vacio");return false;}
         if(f.txtdoc_compromiso.value.charAt(0)=='A'){alert("Documento de Compromiso no valido");return false;}
     if(f.txtnombre_doc_compromiso.value==""){alert("Nombre del Documento Compromiso no puede estar Vacio");return false; }
        else{f.txtnombre_doc_compromiso.value=f.txtnombre_doc_compromiso.value.toUpperCase();}
     if(f.txtnombre_abrev.value==""){alert("Nombre Abreviado del Documento Compromiso no puede estar Vacio");return false; }
        else{f.txtnombre_abrev.value=f.txtnombre_abrev.value.toUpperCase();}
     if(f.txtdoc_compromiso.value.length==4){f.txtdoc_compromiso.value=f.txtdoc_compromiso.value.toUpperCase();}
-       else{alert("Longitud Código de Documento Compromiso Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de Documento Compromiso Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -47,7 +47,7 @@ return true;}
 .Estilo10 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre002 where tipo_compromiso='$Doc_compromiso'";
 $res=pg_query($sql);
@@ -87,21 +87,21 @@ if ($registro=pg_fetch_array($res,0)){
           <tr>
             <td height="49" valign="middle"><blockquote>
               <p class="Estilo5">C&Oacute;DIGO :
-                                <input readOnly size="10" value="<?ECHO $Doc_compromiso?>" name="txtdoc_compromiso">
+                                <input readOnly size="10" value="<?php ECHO $Doc_compromiso?>" name="txtdoc_compromiso">
                   </p>
                           </blockquote></td>
           </tr>
           <tr>
             <td height="49" valign="middle"><blockquote>
               <p align="left"><span class="Estilo5">NOMBRE DEL DOCUMENTO :</span>
-                <input name="txtnombre_doc_compromiso" type="text" id="txtnombre_doc_compromiso" title="Registre el Nombre del Documento Compromiso"  onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $Nombre_doc_compromiso?>" size="80" maxlength="70">
+                <input name="txtnombre_doc_compromiso" type="text" id="txtnombre_doc_compromiso" title="Registre el Nombre del Documento Compromiso"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $Nombre_doc_compromiso?>" size="80" maxlength="70">
 </p>
             </blockquote></td>
           </tr>
           <tr>
             <td height="43" valign="middle"><blockquote>
               <p><span class="Estilo5">NOMBRE ABREVIADO DEL DOCUMENTO :</span>
-                    <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el Nombre Abreviado del Documento Compromiso"  onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $Nombre_Abrev?>" size="8" maxlength="4">
+                    <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el Nombre Abreviado del Documento Compromiso"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $Nombre_Abrev?>" size="8" maxlength="4">
               </p>
             </blockquote></td>
           </tr>
@@ -126,4 +126,4 @@ if ($registro=pg_fetch_array($res,0)){
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

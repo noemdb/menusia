@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Detalles Movimientos Libros)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Detalles Movimientos Libros)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -24,18 +24,18 @@ $sql="SELECT * FROM ban034 where codigo_mov='$codigo_mov' order by referenciaa,c
            <td width="80" align="right" bgcolor="#99CCFF" ><strong>Monto</strong></td>
            <td width="440" align="left" bgcolor="#99CCFF"><strong>Descripcion </strong></td>
          </tr>
-         <? 
+         <?php  
 while($registro=pg_fetch_array($res)){ $monto_asiento=$registro["monto_mov_libro"]; $total=$total+$monto_asiento; $monto_asiento=formato_monto($monto_asiento);
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="50" align="left"><? echo $registro["referenciaa"]; ?></td>
-           <td width="50" align="left"><? echo $registro["cod_banco"]; ?></td>
-		   <td width="80" align="left"><? echo $registro["referencia"]; ?></td>           
-           <td width="40" align="center"><? echo $registro["tipo_mov_libro"]; ?></td>
-           <td width="80" align="right"><? echo $monto_asiento; ?></td>
-           <td width="440" align="left"><? echo $registro["descrip_mov_libro"]; ?></td>
+           <td width="50" align="left"><?php  echo $registro["referenciaa"]; ?></td>
+           <td width="50" align="left"><?php  echo $registro["cod_banco"]; ?></td>
+		   <td width="80" align="left"><?php  echo $registro["referencia"]; ?></td>           
+           <td width="40" align="center"><?php  echo $registro["tipo_mov_libro"]; ?></td>
+           <td width="80" align="right"><?php  echo $monto_asiento; ?></td>
+           <td width="440" align="left"><?php  echo $registro["descrip_mov_libro"]; ?></td>
          </tr>
-         <?} $total=formato_monto($total); 
+         <?php } $total=formato_monto($total); 
 ?>
        </table></td>
    </tr>
@@ -48,7 +48,7 @@ while($registro=pg_fetch_array($res)){ $monto_asiento=$registro["monto_mov_libro
          <td width="142"><span class="Estilo5">TOTAL MOVIMIENTOS :</span></td>
          <td width="163"><table width="151" border="1" cellspacing="0" cellpadding="0">
              <tr>
-               <td align="right" class="Estilo5"><? echo $total; ?></td>
+               <td align="right" class="Estilo5"><?php  echo $total; ?></td>
              </tr>
          </table></td>
          <td width="50">&nbsp;</td>
@@ -62,6 +62,6 @@ while($registro=pg_fetch_array($res)){ $monto_asiento=$registro["monto_mov_libro
  <p>&nbsp;</p>
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="03-0000157"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$comprobante_d="00000000";$comprobante_h="99999999";$cedula_d="";$cedula_h="";$vurl;
  
  $periodod='2010';$periodoh='01';$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer); $fecha_hoy=asigna_fecha_hoy(); 
@@ -16,7 +16,7 @@ $periodod=substr($fecha_hoy,6,4);  $periodoh=substr($fecha_hoy,3,2); $fecha_d="0
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Listado Relaci&oacute;n Impuesto Retenido)</title>
+<title>SIPAP CONTROL BANCARIO (Listado Relaci&oacute;n Impuesto Retenido)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -79,9 +79,9 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="19" align="center" class="Estilo16"><table width="776" border="0">
             <tr>
               <td width="198" height="26"> <div align="left" class="Estilo5">PERIODO FISCAL A&Ntilde;O: </div></td>
-              <td width="223"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_d" type="text" id="txtperiodo_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $periodod?>" size="12" maxlength="10" class="Estilo5"></span></td>
+              <td width="223"><span class="Estilo5"><input class="Estilo10" name="txtperiodo_d" type="text" id="txtperiodo_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $periodod?>" size="12" maxlength="10" class="Estilo5"></span></td>
               <td width="52" class="Estilo5">MES : </td>
-              <td width="285"><span class="Estilo12"><span class="Estilo5"><input class="Estilo10" name="txtmes" type="text" id="txtmes" onFocus="encender(this)" onBlur="apaga_mes(this)" value="<?echo $periodoh?>" size="3" maxlength="3" class="Estilo5"></span></span></td>
+              <td width="285"><span class="Estilo12"><span class="Estilo5"><input class="Estilo10" name="txtmes" type="text" id="txtmes" onFocus="encender(this)" onBlur="apaga_mes(this)" value="<?php echo $periodoh?>" size="3" maxlength="3" class="Estilo5"></span></span></td>
             </tr>
           </table></td>
         </tr>
@@ -90,11 +90,11 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="19"><table width="783" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td width="207" align="center"><div align="left"><p align="left" class="Estilo5"> FECHA  DESDE : </p> </div></td>
-              <td width="217" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
+              <td width="217" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="70" align="center" class="Estilo5"><div align="left">HASTA :</div></td>
-              <td width="289" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
+              <td width="289" align="center"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -134,4 +134,4 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

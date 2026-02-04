@@ -8,7 +8,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Coprobantes Contables Multiples)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Coprobantes Contables Multiples)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript"  src="../class/sia.js"  type=text/javascript></SCRIPT>
@@ -84,13 +84,13 @@ return true;}
         <table width="858" border="0">
           <tr>
             <td width="157"><p><span class="Estilo5">FECHA :
-                    <input name="txtFecha" type="text" id="txtFecha" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha?>" size="12" maxlength="10" onchange="checkrefecha(this.form)"> </span></p>
+                    <input name="txtFecha" type="text" id="txtFecha" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha?>" size="12" maxlength="10" onchange="checkrefecha(this.form)"> </span></p>
             </td>
             <td width="125"><img src="../imagenes/img_cal.png" width="20" height="14" id="calendario3" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onmouseover="this.style.background='blue';" onmouseout="this.style.background=''"  onClick="javascript:showCal('Calendario3')"  /></td>
              <td width="170"><span class="Estilo5">TIPO ASIENTO:</span>
-              <input name="txttipo_asiento" id="txttipo_asiento" size="5" maxlength="3" onFocus="encender(this)" onBlur="apaga_tipo(this)"   value="<?echo $tipo_asiento?>" ></td>
-            <td width="110"><input type="button" name="Submit" value="..." title="Abrir Catalogo Tipos de Asientos" onclick="VentanaCentrada('Cat_tipo_asiento.php?criterio=','SIA','','650','500','true')"></td>
+              <input name="txttipo_asiento" id="txttipo_asiento" size="5" maxlength="3" onFocus="encender(this)" onBlur="apaga_tipo(this)"   value="<?php echo $tipo_asiento?>" ></td>
+            <td width="110"><input type="button" name="Submit" value="..." title="Abrir Catalogo Tipos de Asientos" onclick="VentanaCentrada('Cat_tipo_asiento.php?criterio=','SIPAP','','650','500','true')"></td>
             <td width="100"><span class="Estilo5">REFERENCIA :</span></td>
 			<td width="174"><span class="Estilo5"> <div id="rdoc"><input name="txtReferencia" type="text"  id="txtReferencia" size="10" maxlength="8" onFocus="encender(this)" onBlur="apagar(this)"  onchange="checkreferencia(this.form)"></div> </span></td>
           </tr>
@@ -102,9 +102,9 @@ return true;}
         <table width="854">
           <tr>
             <td width="155"><span class="Estilo5">CED./RIF BENEFICIARIO:</span></td>
-            <td width="101"><span class="Estilo5"> <input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);" onchange="checkcedrif(this.form);" value="<?echo $ced_r?>">   </span></td>
-            <td width="44"><span class="Estilo5"><input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_Benef_comp.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-            <td width="529"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" size="84" readonly value="<?echo $nomb_r?>"> </span></td>
+            <td width="101"><span class="Estilo5"> <input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);" onchange="checkcedrif(this.form);" value="<?php echo $ced_r?>">   </span></td>
+            <td width="44"><span class="Estilo5"><input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_Benef_comp.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+            <td width="529"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" size="84" readonly value="<?php echo $nomb_r?>"> </span></td>
           </tr>
         </table>
         <table width="859" border="0">
@@ -130,15 +130,15 @@ return true;}
    rows[1][2] = "Comprobante";
    if ((mbloq=="N")&&(gordr=="N")) {rows[1][5] = "O/P Retenciones Canc.";}
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_inc_mov_comp.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="300" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_mov_comp.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="300" scrolling="auto" frameborder="0"> </iframe>
               </div>
               <!--PESTA&Ntilde;A 2 -->
 			  <div id="T12" class="tab-body" >
-                 <iframe src="Det_inc_comp_mult.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="300" scrolling="auto" frameborder="0"> </iframe>
+                 <iframe src="Det_inc_comp_mult.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="300" scrolling="auto" frameborder="0"> </iframe>
               </div>
               
             </div></td>
@@ -148,7 +148,7 @@ return true;}
         
         <table width="768">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

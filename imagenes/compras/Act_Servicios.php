@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");  include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");  include ("../class/configura.inc");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103, campo104 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; $modulo="09";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $Nom_usuario=$registro["campo104"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="09"; $opcion="01-0000035"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 
 if (!$_GET){$ramo_serv=''; $cod_servicio=''; $p_letra='';$sql="SELECT * FROM servicios ORDER BY cod_servicio";
 } else {$codigo=$_GET["Gcod_servicio"];$p_letra=substr($codigo, 0, 1);
@@ -22,7 +22,7 @@ if (!$_GET){$ramo_serv=''; $cod_servicio=''; $p_letra='';$sql="SELECT * FROM ser
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Definici&oacute;n de Servicios)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Definici&oacute;n de Servicios)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -56,7 +56,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From servicios Order by cod_servicio";}if ($p_letra=="A"){$sql="SELECT * From servicios Order by cod_servicio desc";}  $res=pg_query($sql);$filas=pg_num_rows($res);}
 $descripcion_ramo_ser="";$ramo_serv="";$des_servicio="";$tipo_servicio=""; $cod_contable="";$partida="";$unidad_medida=""; $observacion="";
@@ -86,17 +86,17 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 <table width="978" height="440" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="430" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-      <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+      <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_servicios.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="Inc_servicios.php">Incluir</a></div></td>
       </tr>
-	  <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_servicios.php?Gcod_servicio=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="javascript:Llamar_Ventana('Mod_servicios.php?Gcod_servicio=');">Modificar</a></div></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?>
+	  <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Mover_Registro('P');" class="menu" >Primero</a></div></td>
@@ -116,12 +116,12 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_servicios.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="Cat_act_servicios.php" class="menu">Catalogo</a></div></td>
       </tr>
-	  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></div></td>
       </tr>
-	   <?}?>
+	   <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgcolor=#EAEAEA><a class=menu href="menu.php">Menu</a></div></td>
@@ -136,9 +136,9 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="866">
                  <tr>
                    <td width="135"><span class="Estilo5">RAMO :</span></td>
-                   <td width="90"><span class="Estilo5"> <input name="txtramo_serv" type="text" id="txtramo_serv" size="3" maxlength="3" readonly value="<?echo $ramo_serv?>"> </span></td>
-                   <td width="620"><span class="Estilo5"> <input name="txtdescripcion_ramo_ser" type="text" id="txtdescripcion_ramo_ser" size="92" maxlength="92" readonly value="<?echo $descripcion_ramo_ser?>"> </span></td>
-                   <td width="20"><img src="../imagenes/b_info.png" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                   <td width="90"><span class="Estilo5"> <input name="txtramo_serv" type="text" id="txtramo_serv" size="3" maxlength="3" readonly value="<?php echo $ramo_serv?>"> </span></td>
+                   <td width="620"><span class="Estilo5"> <input name="txtdescripcion_ramo_ser" type="text" id="txtdescripcion_ramo_ser" size="92" maxlength="92" readonly value="<?php echo $descripcion_ramo_ser?>"> </span></td>
+                   <td width="20"><img src="../imagenes/b_info.png" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                  </tr>
              </table></td>
            </tr>
@@ -146,7 +146,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="866">
                  <tr>
                    <td width="135"><span class="Estilo5">C&Oacute;DIGO SERVICIO :</span></td>
-                   <td width="730"><span class="Estilo5"> <input name="txtcod_servicio" type="text" id="txtcod_servicio" size="15" maxlength="10" readonly value="<?echo $cod_servicio?>"> </span></td>
+                   <td width="730"><span class="Estilo5"> <input name="txtcod_servicio" type="text" id="txtcod_servicio" size="15" maxlength="10" readonly value="<?php echo $cod_servicio?>"> </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -154,7 +154,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="866">
                  <tr>
                     <td width="105"><span class="Estilo5">DESCRIPCI&Oacute;N  : </span></td>
-                    <td width="760"><span class="Estilo5"><textarea name="txtdes_servicio" cols="82" readonly="readonly" id="txtdes_servicio"><?echo $des_servicio ?></textarea> </span></td>
+                    <td width="760"><span class="Estilo5"><textarea name="txtdes_servicio" cols="82" readonly="readonly" id="txtdes_servicio"><?php echo $des_servicio ?></textarea> </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -162,11 +162,11 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="866">
                  <tr>
 				    <td width="135"><span class="Estilo5">C&Oacute;DIGO  PARTIDA :</span></td>
-                    <td width="200"><span class="Estilo5"><input name="txtpartida" type="text" id="txtpartida"  value="<?echo $partida ?>" size="15" maxlength="15" readonly></span></td>
+                    <td width="200"><span class="Estilo5"><input name="txtpartida" type="text" id="txtpartida"  value="<?php echo $partida ?>" size="15" maxlength="15" readonly></span></td>
                     <td width="110"><span class="Estilo5">TIPO SERVICIO   :</span></td>					
-					<td width="200"><span class="Estilo5"><input name="txttipo_servicio" type="text"  id="txttipo_servicio"  value="<?echo $tipo_servicio ?>" size="10" maxlength="10" readonly></span></td>
+					<td width="200"><span class="Estilo5"><input name="txttipo_servicio" type="text"  id="txttipo_servicio"  value="<?php echo $tipo_servicio ?>" size="10" maxlength="10" readonly></span></td>
 					<td width="70"><span class="Estilo5">UNIDAD  : </span></td>
-                    <td width="150"><span class="Estilo5"><input name="txtunidad_medida" type="text" id="txtunidad_medida"  value="<?echo $unidad_medida ?>" size="15" maxlength="15" readonly> </span></td>
+                    <td width="150"><span class="Estilo5"><input name="txtunidad_medida" type="text" id="txtunidad_medida"  value="<?php echo $unidad_medida ?>" size="15" maxlength="15" readonly> </span></td>
                  </tr>
              </table></td>
            </tr>            
@@ -174,11 +174,11 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                <td><table width="866">
                     <tr>
                       <td width="150"><span class="Estilo5">ULTIMO COSTO  : </span></td>
-                      <td width="180"><input name="txtultimo_costo" type="text" id="txtultimo_costo" class="Estilo7" value="<?echo $ultimo_costo ?>" size="14" maxlength="14" readonly>  </td>
+                      <td width="180"><input name="txtultimo_costo" type="text" id="txtultimo_costo" class="Estilo7" value="<?php echo $ultimo_costo ?>" size="14" maxlength="14" readonly>  </td>
                       <td width="120"><span class="Estilo5">TASA IMPUESTO  : </span></td>
-                      <td width="115"><span class="Estilo5"><input name="txtimpuesto" type="text" id="txtimpuesto" align="right" value="<?echo $impuesto ?>" size="6" maxlength="6" readonly></span></td>
+                      <td width="115"><span class="Estilo5"><input name="txtimpuesto" type="text" id="txtimpuesto" align="right" value="<?php echo $impuesto ?>" size="6" maxlength="6" readonly></span></td>
                       <td width="150"><span class="Estilo5">FECHA ULTIMO COSTO  : </span></td>
-                      <td width="150"><span class="Estilo5"><input name="txtfecha_u_costo" type="text" id="txtfecha_u_costo"  value="<?echo $fecha_u_costo ?>" size="12" maxlength="12" readonly></span></td>
+                      <td width="150"><span class="Estilo5"><input name="txtfecha_u_costo" type="text" id="txtfecha_u_costo"  value="<?php echo $fecha_u_costo ?>" size="12" maxlength="12" readonly></span></td>
                        </tr>
                   </table></td>
           </tr>
@@ -186,9 +186,9 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                <td><table width="866">
                     <tr>
                       <td width="150"><span class="Estilo5">FECHA DE REGISTRO : </span></td>
-                      <td width="415"><span class="Estilo5"><input name="txtfecha_creado" type="text" id="txtfecha_creado"  value="<?echo $fecha_creado?>" size="10" maxlength="10" readonly>  </span></td>
+                      <td width="415"><span class="Estilo5"><input name="txtfecha_creado" type="text" id="txtfecha_creado"  value="<?php echo $fecha_creado?>" size="10" maxlength="10" readonly>  </span></td>
                       <td width="100"><span class="Estilo5">C&Oacute;DIGO CCCE  : </span></td>
-                      <td width="200"><span class="Estilo5"><input name="txtcod_aux1" type="text"  id="txtcod_aux1"  value="<?echo $cod_aux1 ?>" size="15" maxlength="15" readonly></span></td>
+                      <td width="200"><span class="Estilo5"><input name="txtcod_aux1" type="text"  id="txtcod_aux1"  value="<?php echo $cod_aux1 ?>" size="15" maxlength="15" readonly></span></td>
                    </tr>
                   </table></td>
           </tr>
@@ -199,20 +199,20 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                  <td><table width="840">
                           <tr>
                             <td width="80"><span class="Estilo5">COSTO 1 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtcosto1" type="text" id="txtcosto1" align="right" value="<?echo $costo1 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtcosto1" type="text" id="txtcosto1" align="right" value="<?php echo $costo1 ?>" size="14" maxlength="14" readonly>  </span></td>
                             <td width="80"><span class="Estilo5">COSTO 2 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtcosto2" type="text" id="txtcosto2" align="right" value="<?echo $costo2 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtcosto2" type="text" id="txtcosto2" align="right" value="<?php echo $costo2 ?>" size="14" maxlength="14" readonly>  </span></td>
                             <td width="80"><span class="Estilo5">COSTO 3 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtcosto3" type="text" id="txtcosto3" align="right" value="<?echo $costo3 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtcosto3" type="text" id="txtcosto3" align="right" value="<?php echo $costo3 ?>" size="14" maxlength="14" readonly>  </span></td>
                           </tr>
 						  <tr><td>&nbsp;</td></tr>
                           <tr>
                             <td width="80"><span class="Estilo5">FECHA 1 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtfecha_costo1" type="text" id="txtfecha_costo1"  value="<?echo $fecha_costo1 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtfecha_costo1" type="text" id="txtfecha_costo1"  value="<?php echo $fecha_costo1 ?>" size="14" maxlength="14" readonly>  </span></td>
                             <td width="80"><span class="Estilo5">FECHA 2 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtfecha_costo2" type="text" id="txtfecha_costo2"  value="<?echo $fecha_costo2 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtfecha_costo2" type="text" id="txtfecha_costo2"  value="<?php echo $fecha_costo2 ?>" size="14" maxlength="14" readonly>  </span></td>
                             <td width="80"><span class="Estilo5">FECHA 3 : </span></td>
-							<td width="200"><span class="Estilo5"><input name="txtfecha_costo3" type="text" id="txtfecha_costo3"  value="<?echo $fecha_costo3 ?>" size="14" maxlength="14" readonly>  </span></td>
+							<td width="200"><span class="Estilo5"><input name="txtfecha_costo3" type="text" id="txtfecha_costo3"  value="<?php echo $fecha_costo3 ?>" size="14" maxlength="14" readonly>  </span></td>
                           </tr>
                       </table></td>
                </tr>
@@ -226,4 +226,4 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,4 +1,4 @@
-<?include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
 include ("../../class/conect.php");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "PAG001".$usuario_sia.$equipo;
 if (!$_GET){ $p_letra='';$criterio=''; $cod_banco=''; $referencia='';  $sql="SELECT * FROM BAN004, BAN002, BAN003 WHERE BAN004.Cod_Banco = BAN002.Cod_Banco AND BAN004.Tipo_Mov_Libro= BAN003.Tipo_Movimiento Order by  BAN004.Cod_Banco, BAN004.Referencia";}
@@ -19,7 +19,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $cod_banco=''; $referencia='';  $sql="SEL
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANACARIO (Reporte Impresion Movimientos en Libros)</title>
+<title>SIPAP CONTROL BANACARIO (Reporte Impresion Movimientos en Libros)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -69,9 +69,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 else
 {
 }
@@ -117,12 +117,12 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
     <td width="74" rowspan="2"><div align="center" class="Estilo2 Estilo4"><img src="../../imagenes/Logo_sia.gif" width="72" height="91"></div></td>
     <td height="35" bordercolor="#FFFFFF"><div align="center" class="Estilo2 Estilo6">
       <div align="left"><p align="left" class="Estilo14">
-                  <? echo $nombre_empresa; ?>
+                  <?php  echo $nombre_empresa; ?>
         </p></div>
     </div>    </td>
   </tr>
    <tr>
-     <td height="51" border="1" bordercolor="#FFFFFF"><div align="center"><span class="Estilo15"><? echo $titulo; ?> </span></div></td>
+     <td height="51" border="1" bordercolor="#FFFFFF"><div align="center"><span class="Estilo15"><?php  echo $titulo; ?> </span></div></td>
   </tr>
 </table>
 <table width="982" height="749" border="1" id="tablacuerpo">
@@ -136,9 +136,9 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                                 <tr>
                                         <td width="10" height="39"></td>
                                    <td width="646" height="39"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong> FECHA DE EMISION :</strong><? echo $fecha_mov_libro; ?></p></td>
+                   <p align="left" class="Estilo14"><strong> FECHA DE EMISION :</strong><?php  echo $fecha_mov_libro; ?></p></td>
                                    <td width="335"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong>MONTO :</strong><? echo $monto_mov_libro; ?></p></td>
+                   <p align="left" class="Estilo14"><strong>MONTO :</strong><?php  echo $monto_mov_libro; ?></p></td>
                                 </tr>
                                 </table></td>
                         </tr>
@@ -147,16 +147,16 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                                 <tr>
                                         <td width="9" height="39"></td>
                                         <td colspan="2"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong>BANCO  :</strong><? echo $cod_banco; ?>           <? echo $nombre_banco; ?></p></td>
+                   <p align="left" class="Estilo14"><strong>BANCO  :</strong><?php  echo $cod_banco; ?>           <?php  echo $nombre_banco; ?></p></td>
                             </tr>
                                 <tr>
                                         <td width="9" height="43"></td>
                                         <td width="656" height="43"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong>CUENTA NRO :</strong><? echo $nro_cuenta; ?></p></td>
+                   <p align="left" class="Estilo14"><strong>CUENTA NRO :</strong><?php  echo $nro_cuenta; ?></p></td>
                                    <td width="328"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong>REFERENCIA :</strong><? echo $referencia; ?>
-                     				 <input name="textcod_banco" style="visibility:hidden;"  type="text" id="textcod_banco" value="<?echo $cod_banco?>" size="1" readonly>
-                                     <input name="textreferencia" style="visibility:hidden;"  type="text" id="textreferencia" value="<?echo $referencia?>" size="1" readonly>
+                   <p align="left" class="Estilo14"><strong>REFERENCIA :</strong><?php  echo $referencia; ?>
+                     				 <input name="textcod_banco" style="visibility:hidden;"  type="text" id="textcod_banco" value="<?php echo $cod_banco?>" size="1" readonly>
+                                     <input name="textreferencia" style="visibility:hidden;"  type="text" id="textreferencia" value="<?php echo $referencia?>" size="1" readonly>
                                 </p></td>
                                 </tr>
                           </table></td>
@@ -166,7 +166,7 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                                 <tr>
                                         <td width="9" height="39"></td>
                                         <td colspan="2"><div align="left"> </div>
-                   <p align="left" class="Estilo14"><strong>CONCEPTO :</strong><? echo $descrip_mov_libro; ?></p></td>
+                   <p align="left" class="Estilo14"><strong>CONCEPTO :</strong><?php  echo $descrip_mov_libro; ?></p></td>
                                 </tr>
                           </table></td>
             </tr>
@@ -175,7 +175,7 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                                 <tr>
                                         <td width="982" height="21">
                     <div id="T11" class="tab-body">
-                      <iframe src="Det_contabilidad_finan_nota_debito.php?clave=<?echo $clave?>"  width="1010" height="170" scrolling="auto" frameborder="0"> </iframe>
+                      <iframe src="Det_contabilidad_finan_nota_debito.php?clave=<?php echo $clave?>"  width="1010" height="170" scrolling="auto" frameborder="0"> </iframe>
                   </div></td>
                                 </tr>
                           </table></td>
@@ -199,4 +199,4 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,4 +1,4 @@
-<? include ("../class/conect.php");  include ("../class/funciones.php");
+<?php  include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){  $equipo = getenv("COMPUTERNAME"); 
 $mcod_m = "CON02".$equipo; $codigo_mov=substr($mcod_m,0,49);}  else{  $codigo_mov=$_GET["codigo_mov"];}
 ?>
@@ -6,7 +6,7 @@ $mcod_m = "CON02".$equipo; $codigo_mov=substr($mcod_m,0,49);}  else{  $codigo_mo
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>
 <script language="javascript" src="ajax_comp.js" type="text/javascript"></script>
@@ -15,7 +15,7 @@ var muser='<?php echo $user ?>';
 var mpassword='<?php echo $password ?>';
 var mdbname='<?php echo $dbname ?>';
 var mcodigo_mov='<?php echo $codigo_mov ?>';
-function llamar_anterior(){ document.location ='Det_inc_mov_comp.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_mov_comp.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function apaga_referencia(mthis){var mref;
    apagar(mthis); mref=document.form1.txtreferencia.value;  mref=Rellenarizq(mref,"0",8);  document.form1.txtreferencia.value=mref;
 return true;}
@@ -53,7 +53,7 @@ return true;}
               <tr>
 			    <td width="168"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
 				<td width="260"><span class="Estilo5"> <input name="txtcod_presup" type="text" id="txtcod_presup" size="30" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);"> </span></td>
-                <td width="180"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo Codigo de Ingresos"  onclick="VentanaCentrada('Cat_codigo_ing.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="180"><input name="btCatcuentas" type="button" id="btCatcuentas" title="Abrir Catalogo Codigo de Ingresos"  onclick="VentanaCentrada('Cat_codigo_ing.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
               </tr>
           </table></td>
         </tr>
@@ -95,7 +95,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="7"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="7"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
 			<td width="10"><input name="txtcod_contable" type="hidden" id="txtcod_contable" value=""></td>
 			
             <td width="100">&nbsp;</td>

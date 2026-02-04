@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="03-0000067"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $tipo_planilla_d="01"; $tipo_planilla_h="99";  $numero_planilla_d="00000000"; $numero_planilla_h="99999999";
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer); $fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);
  $tasa_d="0"; $tasa_h="999.99"; $tipo_en_d=""; $tipo_en_h=""; $tipo_bene_d=""; $tipo_bene_h=""; $ordenado=""; $generado=""; $vurl;
@@ -15,7 +15,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO  (Reporte Listado Planillas de Retencion)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO  (Reporte Listado Planillas de Retencion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="javascript" src="../../class/sia.js" type="text/javascript"></script>
@@ -47,7 +47,7 @@ function Llama_Rpt_Listado_Planillas_Reten(murl){var url;var r;var ord;var gen;
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl;   LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(nro_orden) As Max_Nro_Orden, MIN(nro_orden) As Min_Nro_Orden FROM PAG001";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$nro_orden_d=$registro["min_nro_orden"];$nro_orden_h=$registro["max_nro_orden"];}
 $sql="SELECT MAX(Ced_Rif) As Max_Ced_Rif, MIN(Ced_Rif) As Min_Ced_Rif FROM PRE099";$res=pg_query($sql);
@@ -89,9 +89,9 @@ if ($registro=pg_fetch_array($res,0)){$tipo_planilla_d=$registro["min_planilla"]
           <td height="19" colspan="3" align="center" class="Estilo5"><table width="776" border="0">
             <tr>
               <td width="233" height="26"><div align="left" class="Estilo5">TIPO PLANILLA: </div></td>
-              <td width="200"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla_ret_d" type="text" id="txttipo_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_planilla_d?>" size="4" maxlength="2" class="Estilo5"></span></td>
+              <td width="200"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla_ret_d" type="text" id="txttipo_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_planilla_d?>" size="4" maxlength="2" class="Estilo5"></span></td>
               <td width="48">&nbsp;</td>
-              <td width="277"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla_ret_h" type="text" id="txttipo_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_planilla_h?>" size="4" maxlength="2" class="Estilo5"></span></td>
+              <td width="277"><span class="Estilo5"><input class="Estilo10" name="txttipo_planilla_ret_h" type="text" id="txttipo_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_planilla_h?>" size="4" maxlength="2" class="Estilo5"></span></td>
             </tr>
           </table></td>
         </tr>
@@ -102,9 +102,9 @@ if ($registro=pg_fetch_array($res,0)){$tipo_planilla_d=$registro["min_planilla"]
           <td height="19" colspan="3" align="center" class="Estilo5"><table width="776" border="0">
             <tr>
               <td width="232" height="26"> <div align="left" class="Estilo5">NRO. PLANILLA: </div></td>
-              <td width="201"><span class="Estilo5"><input class="Estilo10" name="txtnum_planilla_ret_d" type="text" id="txtnum_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $numero_planilla_d?>" size="10" maxlength="8" class="Estilo5"></span></td>
+              <td width="201"><span class="Estilo5"><input class="Estilo10" name="txtnum_planilla_ret_d" type="text" id="txtnum_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $numero_planilla_d?>" size="10" maxlength="8" class="Estilo5"></span></td>
               <td width="46">&nbsp;</td>
-              <td width="279"><span class="Estilo5"><input class="Estilo10" name="txtnum_planilla_ret_h" type="text" id="txtnum_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $numero_planilla_h?>" size="10" maxlength="8" class="Estilo5"></span></td>
+              <td width="279"><span class="Estilo5"><input class="Estilo10" name="txtnum_planilla_ret_h" type="text" id="txtnum_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $numero_planilla_h?>" size="10" maxlength="8" class="Estilo5"></span></td>
             </tr>
           </table></td>
         </tr>
@@ -116,11 +116,11 @@ if ($registro=pg_fetch_array($res,0)){$tipo_planilla_d=$registro["min_planilla"]
             <tr>
               <td width="244" align="center"><div align="left"><p align="left" class="Estilo5">FECHA:</p></div></td>
               <td width="253" align="center"><div align="left"><span class="Estilo5">
-                  <input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
+                  <input class="Estilo10" name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="286" align="center"><div align="left"><span class="Estilo5">
-                  <input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
+                  <input class="Estilo10" name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)" class="Estilo5">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -133,9 +133,9 @@ if ($registro=pg_fetch_array($res,0)){$tipo_planilla_d=$registro["min_planilla"]
           <td height="19" colspan="3"><table width="776" border="0">
             <tr>
               <td width="236" height="26" class="Estilo5"> <div align="left">TASA: </div></td>
-              <td width="202"><span class="Estilo5"><input class="Estilo10" name="txttasa_d" type="text" id="txttasa_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tasa_d?>" size="8" maxlength="6" class="Estilo5"></span></td>
+              <td width="202"><span class="Estilo5"><input class="Estilo10" name="txttasa_d" type="text" id="txttasa_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tasa_d?>" size="8" maxlength="6" class="Estilo5"></span></td>
               <td width="47">&nbsp;</td>
-              <td width="273"><span class="Estilo5"><input class="Estilo10" name="txttasa_h" type="text" id="txttasa_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tasa_h?>" size="8" maxlength="6" class="Estilo5"></span></td>
+              <td width="273"><span class="Estilo5"><input class="Estilo10" name="txttasa_h" type="text" id="txttasa_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tasa_h?>" size="8" maxlength="6" class="Estilo5"></span></td>
             </tr>
           </table></td>
         </tr>
@@ -225,4 +225,4 @@ if ($registro=pg_fetch_array($res,0)){$tipo_planilla_d=$registro["min_planilla"]
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

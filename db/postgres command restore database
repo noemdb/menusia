@@ -1,0 +1,125 @@
+backup
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/respdatos22-1.sql" DATOS19
+
+
+restore
+pg_restore -h localhost -p 5432 -U postgres -d DATOS19 -v "/home/nuser/Escritorio/sia_db_bck/06/DATOS19_JR.sql"
+
+sudo -u postgres psql -c "CREATE DATABASE DATOS WITH TEMPLATE template0 ENCODING 'SQL_ASCII' LC_COLLATE 'es_VE.UTF-8' LC_CTYPE 'es_VE.UTF-8';"
+
+sudo -u postgres psql -c "ALTER DATABASE datos RENAME TO DATOS;"
+
+pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/home/nuser/code/sia/db/DATOS22.sql"
+
+pg_restore -h localhost -p 5432 -U postgres -d datos -v "/home/nuser/code/sia/db/DATOS22.sql"
+
+#!/bin/bash
+# crear_usuario_invsia.sh
+
+DB_NAME="datos"  # Cambia esto si la BD tiene otro nombre
+USER="invsia"
+PASSWORD="0agi6s"
+
+echo "Creando usuario $USER para la base de datos $DB_NAME..."
+
+# Crear usuario
+sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD '$PASSWORD';"
+
+# Otorgar permisos en la base de datos
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $USER;"
+
+# Otorgar permisos en las tablas
+sudo -u postgres psql -d $DB_NAME << EOF
+GRANT ALL ON SCHEMA public TO $USER;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $USER;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $USER;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO $USER;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+    GRANT ALL ON TABLES TO $USER;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+    GRANT ALL ON SEQUENCES TO $USER;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+    GRANT ALL ON FUNCTIONS TO $USER;
+EOF
+
+echo "Usuario $USER creado exitosamente."
+echo "Verificando creación:"
+sudo -u postgres psql -c "\du $USER"
+
+-----------------------------------
+
+# Ver información del usuario
+sudo -u postgres psql -c "\du invsia"
+
+# Ver permisos en bases de datos
+sudo -u postgres psql -c "\l"
+
+# Probar conexión con el nuevo usuario
+psql -h localhost -U invsia -d datos -c "SELECT current_user;"
+
+----------------------------------------------------
+sudo -u postgres psql -c "DROP USER IF EXISTS usia; CREATE USER usia WITH PASSWORD 'super';"
+sudo -u postgres psql -c 'GRANT ALL PRIVILEGES ON DATABASE "DATOS" TO usia;'
+
+# Conceder permisos en el esquema público de DATOS
+sudo -u postgres psql -d "DATOS" -c '
+GRANT ALL ON SCHEMA public TO usia;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO usia;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO usia;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO usia;
+'
+
+
+
+---------------------------------------------------
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS21-2022-06-21.sql" DATOS21
+pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2022-04-25.sql"
+
+psql -U postgres -d DATOS21 < /var/www/html/sia/db/DATOS21-2022-04-25.sql
+
+
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/DATOS19.sql" DATOS19
+
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/DATOS19.sql" DATOS19
+
+
+
+sudo -i -u postgres
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS16-2023-10-14.sql" DATOS16
+pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2022-04-25.sql"
+
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS17-2023-10-14.sql" DATOS17
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS18-2023-10-14.sql" DATOS18
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS19-2023-10-14.sql" DATOS19
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS20-2023-10-14.sql" DATOS20
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS21-2023-10-14.sql" DATOS21
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS22-2023-10-14.sql" DATOS22
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS-2023-10-14.sql" DATOS
+
+pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/var/www/html/sia/db/DATOS-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS22 -v "/var/www/html/sia/db/DATOS22-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS20 -v "/var/www/html/sia/db/DATOS20-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS19 -v "/var/www/html/sia/db/DATOS19-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS18 -v "/var/www/html/sia/db/DATOS18-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS17 -v "/var/www/html/sia/db/DATOS17-2023-10-14.sql"
+pg_restore -h localhost -p 5432 -U postgres -d DATOS16 -v "/var/www/html/sia/db/DATOS16-2023-10-14.sql"
+
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS-2024-03-15.sql" DATOS
+
+Procedimieto SIPAP
+sudo -i -u postgres
+psql -h localhost -U postgres -p 5432 -d DATOS23A < "/var/www/html/sia/db/DATOS23_2024-03-15.sql"
+psql -h localhost -U postgres -p 5432 -d DATOS < "/var/www/html/sia/db/DATOS-2024-04-15.sql"
+
+psql -h localhost -U postgres -p 5432 -d DATOS21 < "/var/www/html/sia/db/DATOS21.sql"
+
+pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21.sql"
+
+
+
+pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/var/www/html/sia/db/DATOS-2024-04-15.sql"
+
+
+

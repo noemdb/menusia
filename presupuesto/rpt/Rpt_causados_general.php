@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000165"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $cod_presup_d="";  $cod_presup_h="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"; $referencia_d=""; $referencia_h="";$doc_causa_d=""; $doc_causa_h="";
  $cod_fuente_d="";  $cod_fuente_h="zz"; $des_fuente_d=""; $des_fuente_h=""; $cedula_d=""; $cedula_h=""; $tipo_regis="";
  $doc_comp_d=""; $doc_comp_h=""; $tipo_comp_d=""; $tipo_comp_h=""; $referenciacomp_d=""; $referenciacomp_h=""; $ref_credd="00000000"; $ref_credh="99999999";
@@ -16,7 +16,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte de Causados)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte de Causados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -40,7 +40,7 @@ function Llama_Rpt_causados_gene(murl){var url;var r;var tipo;
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 </script>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"]; $titulo=$registro["campo525"];} $l=strlen($formato_presup);
 $sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(Cod_Presup)=".$l.")"; $resultado=pg_query($sql);
 if ($registro=pg_fetch_array($resultado,0)){ $cod_presup_d=$registro["min_cod_presup"];  $cod_presup_h=$registro["max_cod_presup"];}
@@ -101,16 +101,16 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="30"><table width="827" border="0">
             <tr>
               <td width="206" height="26"><div align="left"><span class="Estilo5">DOCUM. CAUSADO : </span></div></td><td width="53"><span class="Estilo5">
-                <input class="Estilo10" name="txttipo_causado_d" type="text"  id="txttipo_causado_d" size="6" maxlength="4" value="<?echo $doc_causa_d?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
+                <input class="Estilo10" name="txttipo_causado_d" type="text"  id="txttipo_causado_d" size="6" maxlength="4" value="<?php echo $doc_causa_d?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
               </span></td>
               <td width="283"><span class="Estilo5">
-                <input class="Estilo10" name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_causad.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_causad.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="61"><span class="Estilo5">
-                <input class="Estilo10" name="txttipo_causado_h" type="text"  id="txttipo_causado_h" size="6" maxlength="4" value="<?echo $doc_causa_h?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
+                <input class="Estilo10" name="txttipo_causado_h" type="text"  id="txttipo_causado_h" size="6" maxlength="4" value="<?php echo $doc_causa_h?>" onFocus="encender(this);" onBlur="apaga_doc(this)"  onchange="chequea_tipo(this.form);">
               </span></td>
               <td width="202"><span class="Estilo5">
-                <input class="Estilo10" name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_causah.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_causah.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -123,11 +123,11 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
             <tr>
               <td width="206" height="26"><div align="left"><span class="Estilo5">REFERENCIA CAUSADO : </span></div></td>
               <td width="169"><span class="Estilo5">
-                <input class="Estilo10" name="txtreferencia_d" type="text" id="txtreferencia_d" size="10" maxlength="8" value="<?echo $referencia_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input class="Estilo10" name="txtreferencia_d" type="text" id="txtreferencia_d" size="10" maxlength="8" value="<?php echo $referencia_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></td>
               <td width="168"><span class="Estilo5">              </span></td>
               <td width="229"><span class="Estilo5">
-                <input class="Estilo10" name="txtreferencia_h" type="text" id="txtreferencia_h" size="10" maxlength="8" value="<?echo $referencia_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input class="Estilo10" name="txtreferencia_h" type="text" id="txtreferencia_h" size="10" maxlength="8" value="<?php echo $referencia_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></td>
               <td width="38"><span class="Estilo5">              </span></td>
             </tr>
@@ -140,16 +140,16 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="30"><table width="827" border="0">
             <tr>
               <td width="206" height="26"><div align="left"><span class="Estilo5">DOCUM. COMPROMISO : </span></div></td><td width="53"><span class="Estilo5">
-                <input class="Estilo10" name="txtdoc_compromiso_d" type="text"  id="txtdoc_compromiso_d" size="6" maxlength="4" value="<?echo $doc_comp_d?>" onFocus="encender(this);" onBlur="apagar(this)"  onchange="chequea_tipo(this.form);">
+                <input class="Estilo10" name="txtdoc_compromiso_d" type="text"  id="txtdoc_compromiso_d" size="6" maxlength="4" value="<?php echo $doc_comp_d?>" onFocus="encender(this);" onBlur="apagar(this)"  onchange="chequea_tipo(this.form);">
               </span></td>
               <td width="283"><span class="Estilo5">
-                <input class="Estilo10" name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_compd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btdoc_comp" type="button" id="btdoc_comp" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_compd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="61"><span class="Estilo5">
-                <input class="Estilo10" name="txtdoc_compromiso_h" type="text"  id="txtdoc_compromiso_h" size="6" maxlength="4" value="<?echo $doc_comp_h?>" onFocus="encender(this);" onBlur="apagar(this)"  onchange="chequea_tipo(this.form);">
+                <input class="Estilo10" name="txtdoc_compromiso_h" type="text"  id="txtdoc_compromiso_h" size="6" maxlength="4" value="<?php echo $doc_comp_h?>" onFocus="encender(this);" onBlur="apagar(this)"  onchange="chequea_tipo(this.form);">
               </span></td>
               <td width="202"><span class="Estilo5">
-                <input class="Estilo10" name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comph.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btdoc_comp2" type="button" id="btdoc_comp2" title="Abrir Catalogo Documentos Compromiso" onClick="VentanaCentrada('Cat_doc_comph.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -163,11 +163,11 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
               <td width="211" height="26">
                 <div align="left"><span class="Estilo5">REFERENCIA COMPROMISO: </span></div></td>
               <td width="169"><span class="Estilo5">
-                <input class="Estilo10" name="txtreferenciacomp_d" type="text" id="txtreferenciacomp_d" size="10" maxlength="8" value="<?echo $referenciacomp_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input class="Estilo10" name="txtreferenciacomp_d" type="text" id="txtreferenciacomp_d" size="10" maxlength="8" value="<?php echo $referenciacomp_d?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></td>
               <td width="164"><span class="Estilo5">              </span></td>
               <td width="229"><span class="Estilo5">
-                <input class="Estilo10" name="txtreferenciacomp_h" type="text" id="txtreferenciacomp_h" size="10" maxlength="8" value="<?echo $referenciacomp_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
+                <input class="Estilo10" name="txtreferenciacomp_h" type="text" id="txtreferenciacomp_h" size="10" maxlength="8" value="<?php echo $referenciacomp_h?>" onFocus="encender(this);" onBlur="apagar(this);"  onchange="checkrefe_comp(this.form);">
               </span></td>
               <td width="38"><span class="Estilo5"> </span></td>
             </tr>
@@ -182,11 +182,11 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
               <td width="212" height="24">
                 <div align="left"><span class="Estilo5">FECHA CAUSADO : </span></div></td>
               <td width="172"><span class="Estilo5">
-                <input class="Estilo10" name="txtFechad" type="text" id="txtFechad" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_d?>" onchange="checkrefecha(this.form)">
+                <input class="Estilo10" name="txtFechad" type="text" id="txtFechad" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_d?>" onchange="checkrefecha(this.form)">
                                 <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha" onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /> </span></td>
               <td width="165"><span class="Estilo5"> </span></td>
               <td width="243"><span class="Estilo5">
-                <input class="Estilo10" name="txtFechah" type="text" id="txtFechah" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha_h?>" onchange="checkrefecha(this.form)">
+                <input class="Estilo10" name="txtFechah" type="text" id="txtFechah" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha_h?>" onchange="checkrefecha(this.form)">
                 <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /></span></td>
               <td width="23"><span class="Estilo5"> </span></td>
@@ -200,8 +200,8 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="19"><table width="827" border="0">
             <tr>
               <td width="186" height="26"><div align="right"> </div></td>
-              <td width="365"><span class="Estilo15"><strong><? echo $titulo; ?></span></td>
-              <td width="276"><span class="Estilo15"><strong><? echo $titulo; ?></span></td>
+              <td width="365"><span class="Estilo15"><strong><?php  echo $titulo; ?></span></td>
+              <td width="276"><span class="Estilo15"><strong><?php  echo $titulo; ?></span></td>
             </tr>
           </table></td>
         </tr>
@@ -209,10 +209,10 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
           <td height="19"><table width="827" border="0">
             <tr>
 			  <td width="191"><span class="Estilo5">C&Oacute;DIGO PARTIDAS  : </span></td>
-               <td width="198"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35" value="<?echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">   </span></td>
-              <td width="159"><span class="Estilo5"><input class="Estilo10" name="btCodPred" type="button" id="btCodPred" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>
-              <td width="197"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35" value="<?echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">    </span></td>
-              <td width="60"><span class="Estilo5"><input class="Estilo10" name="btCodPreh" type="button" id="btCodPreh" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+               <td width="198"><span class="Estilo5"><input class="Estilo10" name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="35" value="<?php echo $cod_presup_d?>" onFocus="encender(this); " onBlur="apagar(this);">   </span></td>
+              <td width="159"><span class="Estilo5"><input class="Estilo10" name="btCodPred" type="button" id="btCodPred" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>
+              <td width="197"><span class="Estilo5"><input class="Estilo10" name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="35" value="<?php echo $cod_presup_h?>" onFocus="encender(this); " onBlur="apagar(this);">    </span></td>
+              <td width="60"><span class="Estilo5"><input class="Estilo10" name="btCodPreh" type="button" id="btCodPreh" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onclick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
             </tr>
           </table></td>
         </tr>
@@ -224,13 +224,13 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
             <tr>
 			  <td width="225"><span class="Estilo5">FUENTE DE FINANCIAMIENTO DESDE  : </span></td>
                <td width="47"><span class="Estilo5">
-                <input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_d?>">
+                <input class="Estilo10" name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_d?>">
               </span></td>
               <td width="51"><span class="Estilo5">
-                <input class="Estilo10" name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="486"><span class="Estilo5">
-                <input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="75" maxlength="75"  value="<?echo $des_fuente_d?>" readonly>
+                <input class="Estilo10" name="txtdes_fuented" type="text" id="txtdes_fuented" size="75" maxlength="75"  value="<?php echo $des_fuente_d?>" readonly>
               </span></td>
             </tr>
           </table></td>
@@ -244,13 +244,13 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
               <td width="228"> <span class="Estilo5"><div align="left">HASTA :</div> 
               </span></td>
               <td width="42"><span class="Estilo5">
-                <input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_h?>">
+                <input class="Estilo10" name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_h?>">
               </span></td>
               <td width="54"><span class="Estilo5">
-                <input class="Estilo10" name="btfuente2" type="button" id="btfuente7" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btfuente2" type="button" id="btfuente7" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="486"><span class="Estilo5">
-                <input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="75" maxlength="75" value="<?echo $des_fuente_h?>" readonly>
+                <input class="Estilo10" name="txtdes_fuenteh" type="text" id="txtdes_fuenteh" size="75" maxlength="75" value="<?php echo $des_fuente_h?>" readonly>
               </span></td>
             </tr>
           </table></td>
@@ -264,16 +264,16 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
               <td width="149" height="26">
                 <div align="left"><span class="Estilo5">C&Eacute;DULA/RIF : </span></div></td>
               <td width="106"><span class="Estilo5">
-                <input class="Estilo10" name="txtced_rif_d" type="text" id="txtced_rif_d" size="15" maxlength="15" value="<?echo $cedula_d?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input class="Estilo10" name="txtced_rif_d" type="text" id="txtced_rif_d" size="15" maxlength="15" value="<?php echo $cedula_d?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></td>
               <td width="335"><span class="Estilo5">
-                <input class="Estilo10" name="btfuente8"" type="button" id="btfuente9"" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_d.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btfuente8"" type="button" id="btfuente9"" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_d.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="102"><span class="Estilo5">
-                <input class="Estilo10" name="txtced_rif_h" type="text" id="txtced_rif_h" size="15" maxlength="15" value="<?echo $cedula_h?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input class="Estilo10" name="txtced_rif_h" type="text" id="txtced_rif_h" size="15" maxlength="15" value="<?php echo $cedula_h?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></td>
               <td width="67"><span class="Estilo5">
-                <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_h.php?criterio=','SIA','','750','500','true')" value="...">
+                <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios_h.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -286,10 +286,10 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
             <tr>
               <td width="202" height="26"><span class="Estilo5"><div align="left">CR&Eacute;DITO ADICIONAL  : </div></span></td>
               <td width="182"><span class="Estilo5">
-              <input class="Estilo10" name="txtref_creditod" type="text" id="txtref_creditod" title="Registre el codigo del documento compromiso" onChange="chequea_tipo(this.form);" size="12" maxlength="8" value="<?echo $ref_credd?>" onFocus="encender(this); " onBlur="apagar(this);"></span></td>
+              <input class="Estilo10" name="txtref_creditod" type="text" id="txtref_creditod" title="Registre el codigo del documento compromiso" onChange="chequea_tipo(this.form);" size="12" maxlength="8" value="<?php echo $ref_credd?>" onFocus="encender(this); " onBlur="apagar(this);"></span></td>
               <td width="264"><span class="Estilo5"> </span></td>
               <td width="130"><span class="Estilo5">
-                <input class="Estilo10" name="txtref_creditoh" type="text" id="txtref_creditoh" title="Registre el codigo del documento compromiso" onChange="chequea_tipo(this.form);" size="12" maxlength="8" value="<?echo $ref_credh?>" onFocus="encender(this); " onBlur="apagar(this);">
+                <input class="Estilo10" name="txtref_creditoh" type="text" id="txtref_creditoh" title="Registre el codigo del documento compromiso" onChange="chequea_tipo(this.form);" size="12" maxlength="8" value="<?php echo $ref_credh?>" onFocus="encender(this); " onBlur="apagar(this);">
               </span></span></td>
               <td width="37"><span class="Estilo5"> </span></td>
             </tr>
@@ -368,4 +368,4 @@ $cod_presup_d=str_replace("X","?",$formato_presup); $cod_presup_h=str_replace("X
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

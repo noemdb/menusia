@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 if (!$_GET){ $referencia_ajuste=''; $tipo_ajuste=''; $tipo_pago=''; $referencia_pago='';} else{$referencia_ajuste=$_GET["txtreferencia_ajuste"]; $tipo_ajuste=$_GET["txttipo_ajuste"]; $tipo_pago=$_GET["txttipo_pago"]; $referencia_pago=$_GET["txtreferencia_pago"];
 $referencia_caus=$_GET["txtreferencia_caus"];$tipo_causado=$_GET["txttipo_causado"];$referencia_comp = $_GET["txtreferencia_comp"];$tipo_compromiso = $_GET["txttipo_compromiso"];}
    $sql="Select * from AJUSTES where tipo_ajuste='$tipo_ajuste' and referencia_ajuste='$referencia_ajuste' and tipo_pago='$tipo_pago' and referencia_pago='$referencia_pago' and referencia_caus='$referencia_caus' and tipo_causado='$tipo_causado' and tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp'";
@@ -7,7 +7,7 @@ $referencia_caus=$_GET["txtreferencia_caus"];$tipo_causado=$_GET["txttipo_causad
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Ajuste Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Ajuste Presupuestario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -29,9 +29,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";$nombre_abrev_ajuste="";$inf_usuario=""; $nombre_refiere_a=""; $tpo_ajuste="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){  $registro=pg_fetch_array($res);
@@ -80,25 +80,25 @@ $res=pg_query($sql); $filas=pg_num_rows($res);?>
   </tr>
   <tr><td height="40" colspan="4"><table width="980" border="0"  height="40">
     <tr>
-      <td width="766" height="32" align="center"><span class="Estilo16"><?echo $titulo?></span></td>
+      <td width="766" height="32" align="center"><span class="Estilo16"><?php echo $titulo?></span></td>
           <td width="91" align="center">NUMERO :</td>
-          <td width="99" align="center"><?echo $referencia_ajuste?></td>
+          <td width="99" align="center"><?php echo $referencia_ajuste?></td>
         </tr>
     </table></td>
   </tr>
-<? if($refierea=="COMPROMISO"){ ?>
+<?php  if($refierea=="COMPROMISO"){ ?>
   <tr><td height="25"><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
     <tr>
       <td width="760"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">UNIDAD:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $des_unidad_sol?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $des_unidad_sol?></span></td>
           </tr>
       </table></td>
       <td width="220"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">FECHA:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $fecha?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $fecha?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -109,13 +109,13 @@ $res=pg_query($sql); $filas=pg_num_rows($res);?>
       <td width="540" height="25"><table width="440" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="80"><span class="Estilo17">DOCUMENTO:</span></td>
-            <td width="460"><span class="Estilo17"><?echo $nombre_refiere_c ?></span></td>
+            <td width="460"><span class="Estilo17"><?php echo $nombre_refiere_c ?></span></td>
           </tr>
       </table></td>
           <td width="440"><table width="440" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="140"><span class="Estilo17">NUMERO DOCUMENTO:</span></td>
-            <td width="300"><span class="Estilo17"><?echo $nro_documento?></span></td>
+            <td width="300"><span class="Estilo17"><?php echo $nro_documento?></span></td>
           </tr>
       </table></td>
 
@@ -127,43 +127,43 @@ $res=pg_query($sql); $filas=pg_num_rows($res);?>
       <td width="760" height="25"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">BENEFICIARIO:</span></td>
-            <td width="660"><span class="Estilo17"><?echo $nombre?></span></td>
+            <td width="660"><span class="Estilo17"><?php echo $nombre?></span></td>
           </tr>
       </table></td>
           <td width="227"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CEDULA/RIF:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $ced_rif?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $ced_rif?></span></td>
           </tr>
       </table></td>
         </tr>
     </table></td>
   </tr>
-<?} else { ?>
+<?php } else { ?>
   <tr><td height="25"><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
     <tr>
       <td width="760"><table width="760" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="150"><span class="Estilo17">DOCUMENTO DE AJUSTE:</span></td>
-            <td width="610"><span class="Estilo17"><?echo $nombre_refiere_a?></span></td>
+            <td width="610"><span class="Estilo17"><?php echo $nombre_refiere_a?></span></td>
           </tr>
       </table></td>
       <td width="220"><table width="220" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">FECHA:</span></td>
-            <td width="120"><span class="Estilo17"><?echo $fecha?></span></td>
+            <td width="120"><span class="Estilo17"><?php echo $fecha?></span></td>
           </tr>
       </table></td>
         </tr>
     </table></td>
   </tr>
-<?}  ?>
+<?php }  ?>
    <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
     <tr>
       <td width="980" height="25"><table width="980" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="100"><span class="Estilo17">CONCEPTO :</span></td>
-            <td width="880"><span class="Estilo17"><?echo $descripcion?></span></td>
+            <td width="880"><span class="Estilo17"><?php echo $descripcion?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -190,14 +190,14 @@ $res=pg_query($sql); $filas=pg_num_rows($res);?>
 	</table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="0"  height="30" cellpadding="3" cellspacing="0">	
-<? $total=0;
+<?php  $total=0;
 while($registro=pg_fetch_array($res)){$monto=$registro["monto"]; if($tpo_ajuste=="A"){$monto=$monto*-1;}else{$monto=$monto*-1;} $total=$total+$monto; $monto=formato_monto($monto); ?>
     <tr>
-      <td width="240" align="center"><span class="Estilo17"><? echo $registro["cod_presup"]; ?></span></td>
-          <td width="580" align="left"><span class="Estilo17"><? echo $registro["denominacion"]; ?></span></td>
-          <td width="160" align="right"><span class="Estilo17"><? echo $monto; ?></span></td>
+      <td width="240" align="center"><span class="Estilo17"><?php  echo $registro["cod_presup"]; ?></span></td>
+          <td width="580" align="left"><span class="Estilo17"><?php  echo $registro["denominacion"]; ?></span></td>
+          <td width="160" align="right"><span class="Estilo17"><?php  echo $monto; ?></span></td>
         </tr>
-<?}$total=formato_monto($total); ?>
+<?php }$total=formato_monto($total); ?>
     </table></td>
   </tr>
   <tr><td height="25" ><table width="1006" border="1"  height="30" cellpadding="3" cellspacing="0">
@@ -205,7 +205,7 @@ while($registro=pg_fetch_array($res)){$monto=$registro["monto"]; if($tpo_ajuste=
       <td height="25"><table width="994" border="0" cellpadding="3" cellspacing="0">
           <tr>
             <td width="815" align="right"><span class="Estilo18">TOTAL :</span></td>
-            <td width="165" align="right"><span class="Estilo18"><?echo $total?></span></td>
+            <td width="165" align="right"><span class="Estilo18"><?php echo $total?></span></td>
           </tr>
       </table></td>
         </tr>
@@ -221,7 +221,7 @@ while($registro=pg_fetch_array($res)){$monto=$registro["monto"]; if($tpo_ajuste=
           <td width="500" align="center">&nbsp;</td>
        </tr>
        <tr>
-         <td width="480" align="center"><span class="Estilo17"><?echo $nomb_usuario_comp?></span></td>
+         <td width="480" align="center"><span class="Estilo17"><?php echo $nomb_usuario_comp?></span></td>
          <td width="500" align="center"><span class="Estilo17"></span></td>
         </tr>
     </table></td>

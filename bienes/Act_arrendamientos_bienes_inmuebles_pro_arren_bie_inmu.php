@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000050"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$cod_bien_inm='';$p_letra="";
   $sql="SELECT * FROM BIEN017 ORDER BY cod_bien_inm";}
 else {
@@ -24,7 +24,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Arrendamiento Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Arrendamiento Bienes Inmuebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -63,7 +63,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $cod_bien_inm=""; $numero_contrato="";$ced_arrendatario="";$fecha_contrato="";$fecha_desde=""; $fecha_hasta="";$canon_arr=""; $garantia_fianza=""; $inf_usuario=""; $observacion="";$denominacion="";$nombre="";
 $res=pg_query($sql);
 $filas=pg_num_rows($res);
@@ -102,17 +102,17 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
 <table width="977" height="438" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="432"><table width="92" height="428" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_arrendamientos_bienes_inmuebles_pro_arren_bie_inmu.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_arrendamientos_bienes_inmuebles_pro_arren_bie_inmu.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_arrendamientos_bienes_inmuebles_pro_arren_bie_inmu.php?Gcod_bien_inm=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_arrendamientos_bienes_inmuebles_pro_arren_bie_inmu.php?Gcod_bien_inm=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_beneficiario.php?Gcod_bien_inm=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_beneficiario.php?Gcod_bien_inm=');">Consultar</A></td>
@@ -137,12 +137,12 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_Act_arrendamientos_bienes_inmuebles_pro_arren_bie_inmu.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Catalago</A></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="30"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Procesos </A></td>
@@ -157,7 +157,7 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                <tr>
                  <td width="100" scope="col"><span class="Estilo5">C&Oacute;DIGO DE L BIEN INMUEBLES :</span></td>
                  <td width="839" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                     <input name="txtcod_bien_inm" type="text" id="txtcod_bien_inm" size="30" maxlength="30" class="Estilo5" value="<?echo $cod_bien_inm?>" readonly>
+                     <input name="txtcod_bien_inm" type="text" id="txtcod_bien_inm" size="30" maxlength="30" class="Estilo5" value="<?php echo $cod_bien_inm?>" readonly>
                      <strong><strong>
                     </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  </tr>
@@ -168,7 +168,7 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                <tr>
                  <td width="100" scope="col"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
                  <td width="847" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                     <input name="txtdenominacion" type="text" id="txtdenominacion" size="80" maxlength="150" class="Estilo5" value="<?echo $denominacion?>" readonly>
+                     <input name="txtdenominacion" type="text" id="txtdenominacion" size="80" maxlength="150" class="Estilo5" value="<?php echo $denominacion?>" readonly>
                      <strong><strong>                 </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                </tr>
              </table></td>
@@ -179,7 +179,7 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                  <tr>
                    <td width="170" scope="col"><span class="Estilo5">C&Eacute;DULA DE ARRENDATARIO :</span></td>
                    <td width="784" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                       <input name="txtced_arrendatario" type="text" id="txtced_arrendatario" size="" maxlength="12" class="Estilo5" value="<?echo $ced_arrendatario?>" readonly>
+                       <input name="txtced_arrendatario" type="text" id="txtced_arrendatario" size="" maxlength="12" class="Estilo5" value="<?php echo $ced_arrendatario?>" readonly>
                        <strong><strong>
 
                    </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
@@ -193,7 +193,7 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                  <tr>
                    <td width="170" scope="col"><span class="Estilo5">NOMBRE DE ARRENDATARIO :</span></td>
                    <td width="780" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                       <input name="txtnombre" type="text" id="txtmonbre" size="70" maxlength="150" class="Estilo5" value="<?echo $nombre?>" readonly>
+                       <input name="txtnombre" type="text" id="txtmonbre" size="70" maxlength="150" class="Estilo5" value="<?php echo $nombre?>" readonly>
                        <strong><strong> </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
                  </tr>
                </table>
@@ -204,11 +204,11 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                <tr>
                  <td width="170" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO CONTRATO :</span></div></td>
                  <td width="90" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnumero_contrato" type="text" id="txtnumero_contrato" size="10" maxlength="10" class="Estilo5" value="<?echo $numero_contrato?>" readonly>
+                     <input name="txtnumero_contrato" type="text" id="txtnumero_contrato" size="10" maxlength="10" class="Estilo5" value="<?php echo $numero_contrato?>" readonly>
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="115" scope="col"><div align="left"><span class="Estilo5">FECHA CONTRATO :</span></div></td>
                  <td width="611" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_contrato" type="text" id="txtfecha_contrato" size="15" maxlength="15" class="Estilo5" value="<?echo $fecha_contrato?>" readonly>
+                     <input name="txtfecha_contrato" type="text" id="txtfecha_contrato" size="15" maxlength="15" class="Estilo5" value="<?php echo $fecha_contrato?>" readonly>
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -219,11 +219,11 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                  <tr>
                    <td width="170" scope="col"><div align="left"><span class="Estilo5">PERIODO ARRENDAMIENTO DESDE :</span></div></td>
                    <td width="125" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15" class="Estilo5" value="<?echo $fecha_desde?>" readonly>
+                       <input name="txtfecha_desde" type="text" id="txtfecha_desde" size="15" maxlength="15" class="Estilo5" value="<?php echo $fecha_desde?>" readonly>
                        <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    <td width="50" scope="col"><div align="left"><span class="Estilo5">HASTA :</span></div></td>
                    <td width="610" scope="col"><div align="left"><span class="Estilo5">
-                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15" class="Estilo5" value="<?echo $fecha_hasta?>" readonly>
+                       <input name="txtfecha_hasta" type="text" id="txtfecha_hasta" size="15" maxlength="15" class="Estilo5" value="<?php echo $fecha_hasta?>" readonly>
                        <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  </tr>
                </table>
@@ -236,11 +236,11 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                    <tr>
                      <td width="170" scope="col"><div align="left"><span class="Estilo5">CANON DE ARRENDAMIENTO :</span></div></td>
                      <td width="122" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                         <input name="txtcanon_arr" type="text" id="txtcanon_arr" size="15" maxlength="15" class="Estilo5" value="<?echo $canon_arr?>" readonly>
+                         <input name="txtcanon_arr" type="text" id="txtcanon_arr" size="15" maxlength="15" class="Estilo5" value="<?php echo $canon_arr?>" readonly>
                          <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                      <td width="163" scope="col"><div align="left"><span class="Estilo5">VALOR GARANTIA/FINANZA :</span></div></td>
                      <td width="548" scope="col"><div align="left"><span class="Estilo5">
-                         <input name="txtgarantia_fianza" type="text" id="txtgarantia_fianza" size="20" class="Estilo5" value="<?echo $garantia_fianza?>" readonly>
+                         <input name="txtgarantia_fianza" type="text" id="txtgarantia_fianza" size="20" class="Estilo5" value="<?php echo $garantia_fianza?>" readonly>
                          <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                    </tr>
                  </table>
@@ -255,7 +255,7 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
                    <tr>
                      <td width="170" scope="col"><div align="left"><span class="Estilo5">ODSERVACI&Oacute;N :</span></div></td>
                      <td width="855" scope="col"><div align="left">
-                         <textarea name="textobservacion" cols="70" readonly class="headers" id="textobservacion" class="Estilo5"><?echo $observacion?></textarea>
+                         <textarea name="textobservacion" cols="70" readonly class="headers" id="textobservacion" class="Estilo5"><?php echo $observacion?></textarea>
                      </div></td>
                    </tr>
                  </table>
@@ -270,4 +270,4 @@ $Ssql="SELECT * FROM BIEN011 where ced_rif='".$ced_arrendatario."'"; $resultado=
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

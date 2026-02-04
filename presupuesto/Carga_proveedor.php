@@ -1,12 +1,12 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Cargar Proveedor)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Cargar Proveedor)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -26,7 +26,7 @@ document.form2.txtced_rif_c.value=Gced_rif; document.form2.submit(); }
 </script>
 
 </head>
-<?
+<?php 
 $Ssql="Select * from SIA000"; $resultado=pg_query($Ssql);if ($registro=pg_fetch_array($resultado,0)){$reg_e=$registro["campo041"];$edo_e=$registro["campo010"];$mun_e=$registro["campo011"];$ciu_e=$registro["campo009"];}else{$reg_e="REGION CENTRO-OCCIDENTAL";$edo_e="LARA";$mun_e="IRIBARREN";$ciu_e="BARQUISIMETO";}
 $cod_e="00"; $Ssql="SELECT * FROM pre091 where estado='".$edo_e."'"; $resultado=pg_query($Ssql); if ($registro=pg_fetch_array($resultado,0)){$cod_e=$registro["cod_estado"];}
 ?>
@@ -62,7 +62,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where estado='".$edo_e."'"; $resultado=
                   <tr>
                     <td width="200"><span class="Estilo5">CED./RIF PROVEEDOR:</span></td>
                     <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);"> </span></td>
-                    <td width="540"><span class="Estilo5"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Proveedores" onClick="VentanaCentrada('Cat_proveedores.php?criterio=','SIA','','750','500','true')" value="...">
+                    <td width="540"><span class="Estilo5"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Proveedores" onClick="VentanaCentrada('Cat_proveedores.php?criterio=','SIPAP','','750','500','true')" value="...">
                           </span></td>
                    </tr>
                 </table></td>
@@ -90,16 +90,16 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where estado='".$edo_e."'"; $resultado=
 <form name="form2" method="post" action="Inc_beneficiario.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-	 <td width="5"><input class="Estilo10" name="txthost" type="hidden" id="txthost" value="<?echo $host?>" ></td>
-     <td width="5"><input class="Estilo10" name="txtport" type="hidden" id="txtport" value="<?echo $port?>" ></td>
-     <td width="5"><input name="txtregion_e" type="hidden" id="txtregion_e" value="<?echo $reg_e?>" ></td>
-     <td width="5"><input name="txtestado_e" type="hidden" id="txtestado_e" value="<?echo $edo_e?>" ></td>
-     <td width="5"><input name="txtmunicipio_e" type="hidden" id="txtmunicipio_e" value="<?echo $mun_e?>" ></td>
-     <td width="5"><input name="txtciudad_e" type="hidden" id="txtciudad_e" value="<?echo $ciu_e?>" ></td>
-     <td width="5"><input name="txtcod_estado" type="hidden" id="txtcod_estado" value="<?echo $cod_e?>" ></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+	 <td width="5"><input class="Estilo10" name="txthost" type="hidden" id="txthost" value="<?php echo $host?>" ></td>
+     <td width="5"><input class="Estilo10" name="txtport" type="hidden" id="txtport" value="<?php echo $port?>" ></td>
+     <td width="5"><input name="txtregion_e" type="hidden" id="txtregion_e" value="<?php echo $reg_e?>" ></td>
+     <td width="5"><input name="txtestado_e" type="hidden" id="txtestado_e" value="<?php echo $edo_e?>" ></td>
+     <td width="5"><input name="txtmunicipio_e" type="hidden" id="txtmunicipio_e" value="<?php echo $mun_e?>" ></td>
+     <td width="5"><input name="txtciudad_e" type="hidden" id="txtciudad_e" value="<?php echo $ciu_e?>" ></td>
+     <td width="5"><input name="txtcod_estado" type="hidden" id="txtcod_estado" value="<?php echo $cod_e?>" ></td>
      <td width="5"><input name="txtced_rif_c" type="hidden" id="txtced_rif_c" value="" ></td>
   </tr>
 </table>
@@ -110,4 +110,4 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where estado='".$edo_e."'"; $resultado=
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

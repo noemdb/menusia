@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $fecha_hoy=asigna_fecha_hoy(); $equipo=getenv("COMPUTERNAME");  $mcod_m="PRE023".$equipo;
+<?php include ("../class/ventana.php"); include ("../class/fun_fechas.php"); $fecha_hoy=asigna_fecha_hoy(); $equipo=getenv("COMPUTERNAME");  $mcod_m="PRE023".$equipo;
   $codigo_mov=substr($mcod_m,0,49);  $fecha_hoy=asigna_fecha_hoy();   $codigo_mov=$_POST["txtcodigo_mov"]; $fecha=$_POST["txtfechad"]; $nomb_a_dif=$_POST["txtabrev_dif"];
   $user=$_POST["txtuser"];  $password=$_POST["txtpassword"];  $dbname=$_POST["txtdbname"]; $port=$_POST["txtport"]; $host=$_POST["txthost"]; 
   $nro_aut=$_POST["txtnro_aut"];  $fecha_aut=$_POST["txtfecha_aut"];  $ref_dife=$_POST["txtref_dif"]; $tipo_dife=$_POST["txttipo_dif"]; $concepto_r=$_POST["txtconcepto_r"];
@@ -9,7 +9,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Diferidos Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Diferidos Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -40,7 +40,7 @@ function checkrefecha(mform){var mref;var mfec;
   if(mform.txtfecha.value.length==8){ mfec = mref.substring (0, 6) + "20" + mref.charAt(6)+mref.charAt(7);  mform.txtfecha.value=mfec;}
 return true;}
 
-function Llamar_Pegar_Diferido(){ var murl; murl="pegar_diferido.php?codigo_mov=<?echo $codigo_mov?>"; document.location = murl;}
+function Llamar_Pegar_Diferido(){ var murl; murl="pegar_diferido.php?codigo_mov=<?php echo $codigo_mov?>"; document.location = murl;}
 function revisar(){var f=document.form1; var Valido=true; var r;
     if(f.txtfecha.value==""){alert("Fecha no puede estar Vacia");return false;}
     if(f.txtreferencia_dife.value==""){alert("Referencia no puede estar Vacio");return false;}
@@ -98,13 +98,13 @@ return true;}
                       <td><table width="813" border="0">
                         <tr>
                           <td width="105"><p><span class="Estilo5">TIPO DIFERIDO:</span></p>                          </td>
-                          <td width="59"><input name="txttipo_diferido" type="text"  id="txttipo_diferido" size="6" maxlength="4"  onFocus="encender(this); " onBlur="apaga_doc(this)"    value="<?echo $tipo_dife?>"  onchange="chequea_tipo(this.form);"></td>
-                          <td width="44"><span class="Estilo5"> <input name="bttipo_dif" type="button" id="bttipo_dif" title="Abrir Catalogo Tipos de Diferido" onclick="VentanaCentrada('Cat_tipos_dif.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                          <td width="104"><span class="Estilo5"> <input name="txtnombre_abrev_dife" type="text" id="txtnombre_abrev_dife" size="6"  value="<?echo $nomb_a_dif?>"  readonly> </span></td>
+                          <td width="59"><input name="txttipo_diferido" type="text"  id="txttipo_diferido" size="6" maxlength="4"  onFocus="encender(this); " onBlur="apaga_doc(this)"    value="<?php echo $tipo_dife?>"  onchange="chequea_tipo(this.form);"></td>
+                          <td width="44"><span class="Estilo5"> <input name="bttipo_dif" type="button" id="bttipo_dif" title="Abrir Catalogo Tipos de Diferido" onclick="VentanaCentrada('Cat_tipos_dif.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                          <td width="104"><span class="Estilo5"> <input name="txtnombre_abrev_dife" type="text" id="txtnombre_abrev_dife" size="6"  value="<?php echo $nomb_a_dif?>"  readonly> </span></td>
                           <td width="91"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="189"><div id="refer"><input name="txtreferencia_dife" type="text"  id="txtreferencia_dife" size="12" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $ref_dife?>" onchange="checkreferencia(this.form);"></div></td>
+                          <td width="189"><div id="refer"><input name="txtreferencia_dife" type="text"  id="txtreferencia_dife" size="12" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $ref_dife?>" onchange="checkreferencia(this.form);"></div></td>
                           <td width="68"><span class="Estilo5">FECHA :</span> </td>
-                          <td width="119"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $fecha?>" onchange="checkrefecha(this.form)">
+                          <td width="119"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $fecha?>" onchange="checkrefecha(this.form)">
                           </span></td>
                         </tr>
                       </table></td>
@@ -113,21 +113,21 @@ return true;}
                       <td><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="textarea"><?echo $concepto_r?></textarea></td>
+                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="textarea"><?php echo $concepto_r?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
                   </table>  </td>
               </tr>
             </table>
-        <iframe src="Det_inc_diferidos.php?codigo_mov=<?echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_inc_diferidos.php?codigo_mov=<?php echo $codigo_mov?>" width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         <table width="863" border="0">
           <tr> <td height="10">&nbsp;</td> </tr>
         </table>
         <table width="768">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

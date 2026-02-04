@@ -1,11 +1,11 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$codigo_mov='';}else{$codigo_mov=$_GET["codigo_mov"];}  $fecha_hoy=asigna_fecha_hoy();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Detalles Planillas de Retencion)</title>
+<title>SIPAP CONTROL BANCARIO (Detalles Planillas de Retencion)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">
@@ -17,10 +17,10 @@ function Llama_Modificar(codigo_mov,orden,tipo,aux,planilla,nro_planilla){var mu
    <tr>
       <td align="left"><table width="840" border="0" align="left" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar planilla de retención" onclick="javascript:LlamarURL('Inc_plan_ret.php?codigo_mov=<?echo $codigo_mov?>&password=<?echo $password?>&user=<?echo $user?>&dbname=<?echo $dbname?>&fechah=<?echo $fecha_hoy?>')">   </td>
+            <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar planilla de retenciï¿½n" onclick="javascript:LlamarURL('Inc_plan_ret.php?codigo_mov=<?php echo $codigo_mov?>&password=<?php echo $password?>&user=<?php echo $user?>&dbname=<?php echo $dbname?>&fechah=<?php echo $fecha_hoy?>')">   </td>
             <td width="255" align="center">&nbsp;</td>
             <td width="215" align="center">&nbsp;</td>
-            <td width="215" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar los Códigos de la Orden"></td>
+            <td width="215" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar los Cï¿½digos de la Orden"></td>
           </tr>
       </table></td>
     </tr>
@@ -51,29 +51,29 @@ function Llama_Modificar(codigo_mov,orden,tipo,aux,planilla,nro_planilla){var mu
            <td width="140" align="right" bgcolor="#99CCFF" ><strong>Total Factura</strong></td>
            <td width="120" align="right" bgcolor="#99CCFF" ><strong>Monto IVA</strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 while($registro=pg_fetch_array($res)){ $monto_r=formato_monto($registro["monto_retencion"]);
   $monto_o=formato_monto($registro["monto_objeto"]); $tasa=formato_monto($registro["tasa"]); $monto1=formato_monto($registro["monto1"]);  $monto2=formato_monto($registro["monto2"]);
   if($registro["tipo_planilla"]!="00"){$total=$total+$registro["monto_retencion"];} else{$total=$total;}  $sfecha=$registro["fecha_factura"];  $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
 ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<? echo $codigo_mov; ?>','<? echo $registro["nro_orden"]; ?>','<? echo $registro["tipo_retencion"]; ?>','<? echo $registro["aux_orden"]; ?>','<? echo $registro["tipo_planilla"]; ?>','<? echo $registro["nro_planilla"]; ?>');">
-           <td width="100" align="left"><? echo $registro["nro_orden"]; ?></td>
-           <td width="40" align="left"><? echo $registro["tipo_retencion"]; ?></td>
-           <td width="100" align="left"><? echo $registro["aux_orden"]; ?></td>
-           <td width="50" align="right"><? echo $tasa; ?></td>
-           <td width="120" align="right"><? echo $monto_o; ?></td>
-           <td width="120" align="right"><? echo $monto_r; ?></td>
-           <td width="60" align="center"><? echo $registro["tipo_planilla"]; ?></td>
-           <td width="100" align="left"><? echo $registro["nro_planilla"]; ?></td>
-           <td width="200" align="left"><? echo $registro["tipo_en"]; ?></td>
-           <td width="120" align="left"><? echo $registro["tipo_documento"]; ?></td>
-           <td width="120" align="left"><? echo $registro["nro_documento"]; ?></td>
-           <td width="120" align="left"><? echo $registro["nro_con_factura"]; ?></td>
-           <td width="100" align="left"><? echo $fecha; ?></td>
-           <td width="140" align="right"><? echo $monto1; ?></td>
-           <td width="120" align="right"><? echo $monto2; ?></td>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<?php  echo $codigo_mov; ?>','<?php  echo $registro["nro_orden"]; ?>','<?php  echo $registro["tipo_retencion"]; ?>','<?php  echo $registro["aux_orden"]; ?>','<?php  echo $registro["tipo_planilla"]; ?>','<?php  echo $registro["nro_planilla"]; ?>');">
+           <td width="100" align="left"><?php  echo $registro["nro_orden"]; ?></td>
+           <td width="40" align="left"><?php  echo $registro["tipo_retencion"]; ?></td>
+           <td width="100" align="left"><?php  echo $registro["aux_orden"]; ?></td>
+           <td width="50" align="right"><?php  echo $tasa; ?></td>
+           <td width="120" align="right"><?php  echo $monto_o; ?></td>
+           <td width="120" align="right"><?php  echo $monto_r; ?></td>
+           <td width="60" align="center"><?php  echo $registro["tipo_planilla"]; ?></td>
+           <td width="100" align="left"><?php  echo $registro["nro_planilla"]; ?></td>
+           <td width="200" align="left"><?php  echo $registro["tipo_en"]; ?></td>
+           <td width="120" align="left"><?php  echo $registro["tipo_documento"]; ?></td>
+           <td width="120" align="left"><?php  echo $registro["nro_documento"]; ?></td>
+           <td width="120" align="left"><?php  echo $registro["nro_con_factura"]; ?></td>
+           <td width="100" align="left"><?php  echo $fecha; ?></td>
+           <td width="140" align="right"><?php  echo $monto1; ?></td>
+           <td width="120" align="right"><?php  echo $monto2; ?></td>
          </tr>
-         <?} $total=formato_monto($total);
+         <?php } $total=formato_monto($total);
 ?>
        </table></td>
    </tr>
@@ -84,7 +84,7 @@ while($registro=pg_fetch_array($res)){ $monto_r=formato_monto($registro["monto_r
          <td width="530">&nbsp;</td>
          <td width="150" align="center"><span class="Estilo5">TOTAL :</span></td>
          <td><table width="125" border="1" cellspacing="0" cellpadding="0">
-           <tr> <td width="123" align="right" class="Estilo5"><? echo $total; ?></td> </tr>
+           <tr> <td width="123" align="right" class="Estilo5"><?php  echo $total; ?></td> </tr>
          </table></td>
        </tr>
      </table></td>
@@ -93,4 +93,4 @@ while($registro=pg_fetch_array($res)){ $monto_r=formato_monto($registro["monto_r
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

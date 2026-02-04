@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$tipo_orden_d="";$tipo_orden_h="";$cod_cuenta_d="";$cod_cuenta_h="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Relacion Orden de Pago / Asociacion Contable)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Relacion Orden de Pago / Asociacion Contable)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -56,7 +56,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Tipo_Orden) As Max_Tipo_Orden, MIN(Tipo_Orden) As Min_Tipo_Orden FROM TIPOS_ORDEN";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -104,12 +104,12 @@ if($encontro=true){$cod_cuenta_d=$registro["min_codigo_cuenta"];$cod_cuenta_h=$r
               <td width="170" align="center"><div align="left">FECHA ORDENES:</div></td>
               <td width="238" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="363" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -124,16 +124,16 @@ if($encontro=true){$cod_cuenta_d=$registro["min_codigo_cuenta"];$cod_cuenta_h=$r
               <td width="170" height="26">
                 <div align="left">TIPO ORDEN:</div></td>
               <td width="92"><span class="Estilo5">
-                <input name="txttipo_ordend" type="text" id="txttipo_ordend" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_orden_d?>" size="15" maxlength="15">
+                <input name="txttipo_ordend" type="text" id="txttipo_ordend" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_orden_d?>" size="15" maxlength="15">
               </span></td>
               <td width="139"><span class="Estilo5">
-                <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordend.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo1" type="button" id="Catalogo1" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordend.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="90"><span class="Estilo5">
-                <input name="txttipo_ordenh" type="text" id="txttipo_ordenh" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_orden_h?>" size="15" maxlength="15">
+                <input name="txttipo_ordenh" type="text" id="txttipo_ordenh" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_orden_h?>" size="15" maxlength="15">
               </span></td>
               <td width="263"><span class="Estilo5">
-                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordenh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_tipo_ordenh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -147,16 +147,16 @@ if($encontro=true){$cod_cuenta_d=$registro["min_codigo_cuenta"];$cod_cuenta_h=$r
               <td width="170" height="26">
                 <div align="left">CODIGO CUENTA: </div></td>
               <td width="150"><span class="Estilo5">
-                <input name="txtcod_cuentad" type="text" id="txtcod_cuentad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_d?>" size="25" maxlength="15">
+                <input name="txtcod_cuentad" type="text" id="txtcod_cuentad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_d?>" size="25" maxlength="15">
               </span></td>
               <td width="85"><span class="Estilo5">
-                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_cuentasd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_cuentasd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="150"><span class="Estilo5">
-                <input name="txtcod_cuentah" type="text" id="txtcod_cuentah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_cuenta_h?>" size="25" maxlength="15">
+                <input name="txtcod_cuentah" type="text" id="txtcod_cuentah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_cuenta_h?>" size="25" maxlength="15">
               </span></td>
               <td width="199"><span class="Estilo5">
-                <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_cuentash.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3" type="button" id="Catalogo3" title="Abrir Catalogo de Tipo Orden" onClick="VentanaCentrada('../Cat_cuentash.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -192,4 +192,4 @@ if($encontro=true){$cod_cuenta_d=$registro["min_codigo_cuenta"];$cod_cuenta_h=$r
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close();?>

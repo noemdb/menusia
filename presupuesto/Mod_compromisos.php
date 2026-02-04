@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $referencia_comp=''; $tipo_compromiso=''; $cod_comp='';}else { $referencia_comp = $_GET["txtreferencia_comp"]; $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_comp = $_GET["txtcod_comp"];}
 $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp' and cod_comp='$cod_comp'" ;  
 ?>
@@ -7,7 +7,7 @@ $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and ref
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -51,9 +51,9 @@ function modificar_ref_comp(){var f=document.form1; var mref;  mref=f.txtreferen
 function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla!=13) return;  frm=obj.form;  for(i=0;i<frm.elements.length;i++)  if(frm.elements[i]==obj) {if (i==frm.elements.length-1) i=-1; break } frm.elements[i+1].focus(); return false;} 
 </script>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";$unidad_sol="";$des_unidad_sol="";$nombre_abrev_comp="";$cod_tipo_comp="";$des_tipo_comp=""; $ced_rif="";$nombre="";$fecha_vencim="";
 $nro_documento="";$num_proyecto="";$des_proyecto="";$func_inv="";$tiene_anticipo="";$tasa_anticipo="";$cod_con_anticipo="";$inf_usuario="";$anulado="";$modulo="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
@@ -86,8 +86,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
       <td>
       <table width="92" height="423" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<? echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<? echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<?php  echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<?php  echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')">Atras</A></td>
       </tr>
      <tr>
        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -110,12 +110,12 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                         <tr>
                           <td width="168">
                           <p><span class="Estilo5">DOCUMENTO COMPROMISO:</span></p>                          </td>
-                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?echo $tipo_compromiso?>" size="6" readonly onKeypress="return stabular(event,this)"></td>
-                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" value="<?echo $nombre_abrev_comp?>" readonly onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?php echo $tipo_compromiso?>" size="6" readonly onKeypress="return stabular(event,this)"></td>
+                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" value="<?php echo $nombre_abrev_comp?>" readonly onKeypress="return stabular(event,this)">   </span></td>
                           <td width="87"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="170"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp"  value="<?echo $referencia_comp?>" readonlyonKeypress="return stabular(event,this)" ></td>
+                          <td width="170"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp"  value="<?php echo $referencia_comp?>" readonlyonKeypress="return stabular(event,this)" ></td>
                           <td width="63"><span class="Estilo5">FECHA :</span> </td>
-                          <td width="114"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" value="<?echo $fecha?>" readonly onKeypress="return stabular(event,this)"></span></td>
+                          <td width="114"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" value="<?php echo $fecha?>" readonly onKeypress="return stabular(event,this)"></span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -123,8 +123,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="830">
                         <tr>
                           <td width="177"><p><span class="Estilo5">CATEGORIA PROGRAMATICA:</span></p></td>
-                          <td width="125"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?echo $unidad_sol?>" size="20" readonly onKeypress="return stabular(event,this)"></td>
-                          <td width="453"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="70" value="<?echo $des_unidad_sol?>" readonly onKeypress="return stabular(event,this)"></td>
+                          <td width="125"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?php echo $unidad_sol?>" size="20" readonly onKeypress="return stabular(event,this)"></td>
+                          <td width="453"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="70" value="<?php echo $des_unidad_sol?>" readonly onKeypress="return stabular(event,this)"></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -132,9 +132,9 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="829">
                         <tr>
                           <td width="162"><span class="Estilo5">TIPO DE COMPROMISO:</span></td>
-                          <td width="48"><input name="txtcod_tipo_comp" type="text"  id="txtcod_tipo_comp" size="8" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $cod_tipo_comp?>" onKeypress="return stabular(event,this)"></td>
-                          <td width="42"><span class="Estilo5"><input name="bttipo_comp" type="button" id="bttipo_comp" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_comp.php?criterio=','SIA','','750','500','true')" value="..." onKeypress="return stabular(event,this)">   </span></td>
-                          <td width="542"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" size="83" value="<?echo $des_tipo_comp?>" readonly onKeypress="return stabular(event,this)"> </span></td>
+                          <td width="48"><input name="txtcod_tipo_comp" type="text"  id="txtcod_tipo_comp" size="8" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $cod_tipo_comp?>" onKeypress="return stabular(event,this)"></td>
+                          <td width="42"><span class="Estilo5"><input name="bttipo_comp" type="button" id="bttipo_comp" title="Abrir Catalogo Tipos de Compromiso" onClick="VentanaCentrada('Cat_tipos_comp.php?criterio=','SIPAP','','750','500','true')" value="..." onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="542"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" size="83" value="<?php echo $des_tipo_comp?>" readonly onKeypress="return stabular(event,this)"> </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -142,9 +142,9 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="845">
                         <tr>
                           <td width="160"><span class="Estilo5">CED./RIF BENEFICIARIO:</span></td>
-                          <td width="96"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $ced_rif?>" onKeypress="return stabular(event,this)">   </span></td>
-                          <td width="44"><span class="Estilo5"><input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios.php?criterio=','SIA','','750','500','true')" value="..." onKeypress="return stabular(event,this)">   </span></td>
-                          <td width="525"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" size="80" value="<?echo $nombre?>" readonly onKeypress="return stabular(event,this)">  </span></td>
+                          <td width="96"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $ced_rif?>" onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="44"><span class="Estilo5"><input name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('Cat_beneficiarios.php?criterio=','SIPAP','','750','500','true')" value="..." onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="525"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" size="80" value="<?php echo $nombre?>" readonly onKeypress="return stabular(event,this)">  </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -152,7 +152,7 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="texDescripcion" onKeypress="return stabular(event,this)"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtDescripcion" cols="85" onFocus="encender(this); " onBlur="apagar(this);" class="headers" id="texDescripcion" onKeypress="return stabular(event,this)"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -160,9 +160,9 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="812">
                         <tr>
                           <td width="164"><span class="Estilo5">N&Uacute;MERO DE DOCUMENTO:</span></td>
-                          <td width="400"><input name="txtnro_documento" type="text"  id="txtnro_documento" size="50" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $nro_documento?>" onKeypress="return stabular(event,this)"></td>
+                          <td width="400"><input name="txtnro_documento" type="text"  id="txtnro_documento" size="50" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $nro_documento?>" onKeypress="return stabular(event,this)"></td>
                           <td width="130"><span class="Estilo5">FECHA VENCIMIENTO:</span></td>
-                          <td width="98"><span class="Estilo5"><input name="txtfecha_vencim" type="text" id="txtfecha_vencim" size="12" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $fecha_vencim?>" onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="98"><span class="Estilo5"><input name="txtfecha_vencim" type="text" id="txtfecha_vencim" size="12" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $fecha_vencim?>" onKeypress="return stabular(event,this)">   </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -170,8 +170,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="809">
                         <tr>
                           <td width="164"><span class="Estilo5">N&Uacute;MERO DE PROYECTO:</span></td>
-                          <td width="122"><span class="Estilo5"><input name="txtnum_proyecto" type="text" id="txtnum_proyecto" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $num_proyecto?>" size="15" maxlength="10" onchange="checkproyecto(this.form);" onKeypress="return stabular(event,this)">     </span></td>
-                          <td width="507"><span class="Estilo5"><input name="txtdes_proyecto" type="text" id="txtdes_proyecto" size="75"  value="<?echo $des_proyecto?>" readonly onKeypress="return stabular(event,this)">   </span></td>
+                          <td width="122"><span class="Estilo5"><input name="txtnum_proyecto" type="text" id="txtnum_proyecto" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $num_proyecto?>" size="15" maxlength="10" onchange="checkproyecto(this.form);" onKeypress="return stabular(event,this)">     </span></td>
+                          <td width="507"><span class="Estilo5"><input name="txtdes_proyecto" type="text" id="txtdes_proyecto" size="75"  value="<?php echo $des_proyecto?>" readonly onKeypress="return stabular(event,this)">   </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -179,7 +179,7 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="855">
                         <tr>
                           <td width="114"><span class="Estilo5">TIPO DE GASTO :</span></td>
-                          <td width="141"><span class="Estilo5"> <input name="txtfunc_inv" type="text" id="txtfunc_inv"  value="<?echo $func_inv?>" size="15" readonly onKeypress="return stabular(event,this)">  </span></td>
+                          <td width="141"><span class="Estilo5"> <input name="txtfunc_inv" type="text" id="txtfunc_inv"  value="<?php echo $func_inv?>" size="15" readonly onKeypress="return stabular(event,this)">  </span></td>
                           <td width="147" align="center">&nbsp;</td>
                           <td width="135"><span class="Estilo5"> </span></td>
 <script language="JavaScript" type="text/JavaScript">
@@ -191,7 +191,7 @@ var f=document.form1;
                           <td width="154" align="center"><div align="right"><span class="Estilo5">TIENE ANTICIPO :</span></div></td>
                           <td width="89"><span class="Estilo5"> <select name="txttiene_anticipo" size="1" id="txttiene_anticipo" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return stabular(event,this)">
                               <option>SI</option> <option>NO</option> </select>
-                           <script language="JavaScript" type="text/JavaScript"> asig_tiene_anticipo('<?echo $tiene_anticipo;?>');</script>
+                           <script language="JavaScript" type="text/JavaScript"> asig_tiene_anticipo('<?php echo $tiene_anticipo;?>');</script>
                           </span></td>
                           <td width="44"><span class="Estilo5"></span></td>
                         </tr>
@@ -201,10 +201,10 @@ var f=document.form1;
                       <td><table width="851">
                         <tr>
                           <td width="191"><span class="Estilo5">PORCENTAJE DE ANTICIPO(%):</span></td>
-                          <td width="176"><span class="Estilo5"> <input name="txttasa_anticipo" type="text" id="txttasa_anticipo" size="8" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $tasa_anticipo?>" style="text-align:right" onKeypress="return validarNum(event,this)">   </span></td>
+                          <td width="176"><span class="Estilo5"> <input name="txttasa_anticipo" type="text" id="txttasa_anticipo" size="8" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $tasa_anticipo?>" style="text-align:right" onKeypress="return validarNum(event,this)">   </span></td>
                           <td width="164"><span class="Estilo5">CUENTA DE ANTICIPO:</span></td>
-                          <td width="223"><span class="Estilo5"> <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="30" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $cod_con_anticipo?>" onKeypress="return stabular(event,this)"></span></td>
-                          <td width="48"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                          <td width="223"><span class="Estilo5"> <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="30" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $cod_con_anticipo?>" onKeypress="return stabular(event,this)"></span></td>
+                          <td width="48"><span class="Estilo5"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                           <td width="24"><input name="txtNombre_Cuenta" type="hidden" id="txtcodigo_mov"></td>
                         </tr>
                       </table></td>
@@ -217,11 +217,11 @@ var f=document.form1;
           </table>
 		  <table width="768">
           <tr>
-		    <td width="10"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp" value="<?echo $cod_comp?>"></td>
+		    <td width="10"><input name="txtcodigo_comp" type="hidden" id="txtcodigo_comp" value="<?php echo $cod_comp?>"></td>
 		    <td width="40"><div id="destipocomp">&nbsp;</div></td>
 			<td width="150" align="center"><input name="Modficar_ref" type="button" id="Modifica Referencia Compromiso" value="Modifica Referencia Compromiso" onClick="JavaScript:modificar_ref_comp()"></td>
             
-            <td width="268"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="268"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="100" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="100"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>
@@ -233,4 +233,4 @@ var f=document.form1;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

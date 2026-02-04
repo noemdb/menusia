@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000081"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$des_unidad_sol='';$p_letra="";
   $sql="SELECT * FROM BIEN051 ORDER BY des_unidad_sol";}
 else {
@@ -24,7 +24,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Unidades/Dependencias)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Unidades/Dependencias)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -33,7 +33,7 @@ function Llamar_Ventana(url){var murl;
     Gdes_unidad_sol=document.form1.txtdes_unidad_sol.value;
     murl=url+Gdes_unidad_sol;
     if (Gdes_unidad_sol=="")
-        {alert("Cédula/Rif debe ser Seleccionada");}
+        {alert("Cï¿½dula/Rif debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos){var murl;
@@ -63,7 +63,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $des_unidad_sol=""; $cod_dependencia=""; $cod_empresa=""; $cod_direccion=""; $cod_departamento=""; $ced_responsable=""; $campo_str1=""; $campo_str2="";
 $res=pg_query($sql);
 $filas=pg_num_rows($res);
@@ -96,17 +96,17 @@ if($filas>=1){
 <table width="977" height="335" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="329"><table width="92" height="325" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_uni_dependencias_ar.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_uni_dependencias_ar.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_uni_dependencias_ar.php?Gdes_unidad_sol=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_uni_dependencias_ar.php?Gdes_unidad_sol=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -127,12 +127,12 @@ if($filas>=1){
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_uni_dependencias_ar.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_uni_dependencias_ar.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -148,7 +148,7 @@ if($filas>=1){
                  <tr>
                    <td width="100" scope="col"><div align="left"><span class="Estilo5">UNIDAD SOLICITABLES :</span></div></td>
                    <td width="686" scope="col"><div align="left"><span class="Estilo5">
-                       <input name="txtdes_unidad_sol" type="text" id="txtdes_unidad_sol" size="80" maxlength="250" value="<?echo $des_unidad_sol?>" readonly class="Estilo5">
+                       <input name="txtdes_unidad_sol" type="text" id="txtdes_unidad_sol" size="80" maxlength="250" value="<?php echo $des_unidad_sol?>" readonly class="Estilo5">
                    </span></div></td>
                  </tr>
                </table>
@@ -159,7 +159,7 @@ if($filas>=1){
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DEPENDENCIA :</span></div></td>
                  <td width="692" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4"  value="<?echo $cod_dependencia?>" readonly class="Estilo5">
+                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4"  value="<?php echo $cod_dependencia?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -169,7 +169,7 @@ if($filas>=1){
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DIRECI&Oacute;N :</span></div></td>
                  <td width="711" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4"  value="<?echo $cod_direccion?>" readonly class="Estilo5">
+                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4"  value="<?php echo $cod_direccion?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -179,7 +179,7 @@ if($filas>=1){
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DEPARTAMENTO :</span></div></td>
                  <td width="678" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8"  value="<?echo $cod_departamento?>" readonly class="Estilo5">
+                     <input name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8"  value="<?php echo $cod_departamento?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -196,4 +196,4 @@ if($filas>=1){
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

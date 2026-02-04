@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php");?>
+<?php include ("../class/ventana.php");?>
 <?php include ("../class/fun_fechas.php");
  if (!$_GET){   $equipo = getenv("COMPUTERNAME");   $mcod_m = "BIEN026".$equipo;  $codigo_mov=substr($mcod_m,0,49);}
  else{$codigo_mov=$_GET["codigo_mov"];} $fecha_hoy=asigna_fecha_hoy();$nro_aut=$_POST["txtnro_aut"]; 
@@ -7,7 +7,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Movimientos Bienes Semovientes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Movimientos Bienes Semovientes)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -104,18 +104,18 @@ return true;}
                                           <td width="106">
                           <p><span class="Estilo5">N&Uacute;MERO REFERENCIA:</span></p></td>
                       <td width="147"><span class="Estilo5"> <div id="refaju">
-                            <? if($nro_aut=='S'){?>
+                            <?php  if($nro_aut=='S'){?>
                               <input name="txtreferencia" type="text"  id="txtreferencia" size="8" maxlength="8" readonly class="Estilo5">
-                            <? }else{?>
+                            <?php }else{?>
                              <input name="txtreferencia" type="text"  id="txtreferencia" size="8" maxlength="8" onFocus="encender(this); " onBlur="apagar(this);" class="Estilo5"   onchange="checkreferencia(this.form);">
-                            <? }?>
+                            <?php }?>
                              </div>
                            <script language="JavaScript" type="text/JavaScript">
                             ajaxSenddoc('GET', 'refmovisemoaut.php?nro_aut='+mnro_aut+'& password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'refaju', 'innerHTML');
                           </script></td>
                 <td width="90" scope="col"><span class="Estilo5">FECHA DEL MOVIMIENTO :</span></td>
                 <td width="653" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $fecha_hoy?>">
+                    <input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $fecha_hoy?>">
                 </span></div></td>
               </tr>
             </table></td>
@@ -127,7 +127,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_dependencia_e" type="text" id="txtcod_dependencia_e" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" size="5" maxlength="4">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_dependencias_ed.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_dependencias_ed.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="575" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtdenominacion_dependencia_e" type="text" id="txtdenominacion_dependencia_e" size="68" maxlength="250" readonly class="Estilo5">
@@ -157,15 +157,15 @@ return true;}
    rows[1][1] = "Bienes";        // Requiere: <div id="T11" class="tab-body">  ... </div>
    rows[1][2] = "Comprobantes";            // Requiere: <div id="T12" class="tab-body">  ... </div>
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_inc_bienes_semo_movimientos.php?&codigo_mov=<?echo $codigo_mov?>"  width="846" height="380" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_bienes_semo_movimientos.php?&codigo_mov=<?php echo $codigo_mov?>"  width="846" height="380" scrolling="auto" frameborder="0"> </iframe>
               </div>              
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_inc_comp_semo_movimientos.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="380" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_comp_semo_movimientos.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="380" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -174,8 +174,8 @@ return true;}
         <div id="Layer3" style="position:absolute; width:868px; height:25px; z-index:3; left: 2px; top: 500px;">
         <table width="812" height="200">
           <tr>
-            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-            <td width="50"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?echo $nro_aut?>" ></td> 
+            <td width="664"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+            <td width="50"><input name="txtnro_aut" type="hidden" id="txtnro_aut" value="<?php echo $nro_aut?>" ></td> 
             <td width="88" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>

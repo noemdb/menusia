@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
 <?php include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $cod_presup_d="";  $cod_presup_h="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"; 
  $cod_fuente_d="";  $cod_fuente_h="zz"; $des_fuente_d=""; $des_fuente_h="";$tipo_deuda="";$mes="";
 ?>
@@ -45,9 +45,10 @@ function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 -->
 </style>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX";
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"]; $titulo=$registro["campo525"];} $l=strlen($formato_presup);
-$sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(Cod_Presup)=".$l.")"; $resultado=pg_query($sql);if ($registro=pg_fetch_array($resultado,0)){ $cod_presup_d=$registro["min_cod_presup"];  $cod_presup_h=$registro["max_cod_presup"];}
+$sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(Cod_Presup)=".$l.")"; $resultado=pg_query($sql);
+if ($registro=pg_fetch_array($resultado,0)){ $cod_presup_d=$registro["min_cod_presup"];  $cod_presup_h=$registro["max_cod_presup"];}
 //$sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001"; $resultado=pg_query($sql);
 //if ($registro=pg_fetch_array($resultado,0)){ $cod_presup_d=$registro["min_cod_presup"];  $cod_presup_h=$registro["max_cod_presup"];}
 $sql="SELECT min(cod_fuente_financ) as min_fuente, max(cod_fuente_financ) as max_fuente  from pre095"; $resultado=pg_query($sql);
@@ -80,7 +81,7 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
           <td height="19"><table width="766" border="0">
             <tr>
               <td width="325" height="26"><div align="right"> </div></td>
-              <td width="223"><span class="Estilo15"><?echo $titulo?></span></td>
+              <td width="223"><span class="Estilo15"><?php echo $titulo?></span></td>
               <td width="204">&nbsp;</td>
             </tr>
           </table></td>
@@ -91,9 +92,9 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="326" height="26">
                 <div align="left">C&Oacute;DIGO PRESUPUESTARIO DESDE : </div></td>
               <td width="221"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="32"  value="<?echo $cod_presup_d?>"  onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtcod_presupd" type="text" id="txtcod_presupd" size="35" maxlength="32"  value="<?php echo $cod_presup_d?>"  onFocus="encender(this); " onBlur="apagar(this);">
               </span></span></td>
-              <td width="252"><span class="Estilo5">
+              <td width="252"><span class="Estilo5">SIPAP
                 <input name="btCodPre" type="button" id="btCodPre" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presupd.php?criterio=','SIA','','750','500','true')" value="...">
               </span></td>
             </tr>
@@ -106,7 +107,7 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
           <td height="19"><table width="766" border="0">
             <tr>
               <td width="325" height="26"><div align="right"> </div></td>
-              <td width="223"><span class="Estilo15"><?echo $titulo?></span></td>
+              <td width="223"><span class="Estilo15"><?php echo $titulo?></span></td>
               <td width="204">&nbsp;</td>
             </tr>
           </table></td>
@@ -118,9 +119,9 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
                 <div align="left"></div></td>
               <td width="98">HASTA :</td>
               <td width="222"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="32"  value="<?echo $cod_presup_h?>"  onFocus="encender(this); " onBlur="apagar(this);">
+                <input name="txtcod_presuph" type="text" id="txtcod_presuph" size="35" maxlength="32"  value="<?php echo $cod_presup_h?>"  onFocus="encender(this); " onBlur="apagar(this);">
               </span></span></td>
-              <td width="266"><span class="Estilo5">
+              <td width="266"><span class="Estilo5">SIPAP
                 <input name="btCodPre2" type="button" id="btCodPre2" title="Abrir Catalogo C&oacute;digos Presupuestarios"  onClick="VentanaCentrada('Cat_codigos_presuph.php?criterio=','SIA','','750','500','true')" value="...">
               </span></td>
             </tr>
@@ -135,9 +136,9 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
               <td width="321" height="26">
                 <div align="left">FUENTE DE FINANCIAMIENTO DESDE : </div></td>
               <td width="62"><span class="Estilo5">
-                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?echo $cod_fuente_d?>">
+                <input name="txtcod_fuented" type="text" id="txtcod_fuented" onFocus="encender(this)" onBlur="apagar(this)" size="5" maxlength="2" value="<?php echo $cod_fuente_d?>">
               </span></td>
-              <td width="45"><span class="Estilo5">
+              <td width="45"><span class="Estilo5">SIPAP
                 <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesd.php?criterio=','SIA','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
@@ -156,9 +157,9 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
                 <div align="left"></div></td>
               <td width="75">HASTA : </td>
               <td width="61"><span class="Estilo5">
-                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="2" maxlength="2" value="<?echo $cod_fuente_h?>">
+                <input name="txtcod_fuenteh" type="text" id="txtcod_fuenteh" onFocus="encender(this)" onBlur="apagar(this)" size="2" maxlength="2" value="<?php echo $cod_fuente_h?>">
               </span></td>
-              <td width="46"><span class="Estilo5">
+              <td width="46"><span class="Estilo5">SIPAP
                 <input name="btfuente2" type="button" id="btfuente7" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_fuentesh.php?criterio=','SIA','','750','500','true')" value="...">
               </span></td>
               <td width="381"><span class="Estilo12"><span class="Estilo5">
@@ -263,4 +264,4 @@ if ($registro=pg_fetch_array($resultado,0)){$des_fuente_h=$registro["des_fuente_
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

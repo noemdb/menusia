@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_region='';} else {$cod_region=$_GET["Gregion"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Regiones)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Regiones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -21,11 +21,11 @@ function LlamarURL(url){  document.location = url; }
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Region.value==""){alert("Código de la Región no puede estar Vacio");return false;}
-    if(f.txtNombre_Region.value==""){alert("nombre de la Región no puede estar Vacia"); return false; }
+    if(f.txtCodigo_Region.value==""){alert("Cï¿½digo de la Regiï¿½n no puede estar Vacio");return false;}
+    if(f.txtNombre_Region.value==""){alert("nombre de la Regiï¿½n no puede estar Vacia"); return false; }
        else{f.txtNombre_Region.value=f.txtNombre_Region.value.toUpperCase();}
     if(f.txtCodigo_Region.value.length==2){f.txtCodigo_Region.value=f.txtCodigo_Region.value.toUpperCase();}
-       else{alert("Longitud Código de la Región Invalido");return false;}
+       else{alert("Longitud Cï¿½digo de la Regiï¿½n Invalido");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -34,7 +34,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_region="";
 $sql="Select cod_region,nombre_region from pre092 where cod_region='$cod_region'";$res=pg_query($sql);
@@ -76,7 +76,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_region=$registro["cod_region"];   $
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Region" type="text" id="txtCodigo_Region" title="Registre el C&oacute;digo de la Región" size="10" maxlength="2"  readonly value="<?ECHO $cod_region?>">
+                      <input name="txtCodigo_Region" type="text" id="txtCodigo_Region" title="Registre el C&oacute;digo de la Regiï¿½n" size="10" maxlength="2"  readonly value="<?php ECHO $cod_region?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -87,7 +87,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_region=$registro["cod_region"];   $
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Region" type="text" id="txtNombre_Region" title="Registre el nombre de la Región" size="100" maxlength="200"  value="<?ECHO $den_region?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                      <td width="720"><input name="txtNombre_Region" type="text" id="txtNombre_Region" title="Registre el nombre de la Regiï¿½n" size="100" maxlength="200"  value="<?php ECHO $den_region?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -116,4 +116,4 @@ if ($registro=pg_fetch_array($res,0)){  $cod_region=$registro["cod_region"];   $
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

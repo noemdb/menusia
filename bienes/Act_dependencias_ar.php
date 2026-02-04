@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000005"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){ $cod_dependencia='';$p_letra="";  $sql="SELECT * FROM BIEN001 ORDER BY cod_dependencia";}
 else {  $cod_dependencia = $_GET["Gcod_dependencia"];  $p_letra=substr($cod_dependencia, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$cod_dependencia=substr($cod_dependencia,1,4);} else{$cod_dependencia=substr($cod_dependencia,0,4);}
@@ -20,7 +20,7 @@ else {  $cod_dependencia = $_GET["Gcod_dependencia"];  $p_letra=substr($cod_depe
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Dependencia)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Dependencia)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -58,7 +58,7 @@ MM_reloadPage(true);
 </script>
 
 </head>
-<?
+<?php 
 $cod_dependencia=""; $denominacion_dep=""; $cod_region=""; $cod_entidad=""; $cod_municipio=""; $cod_ciudad=""; $cod_parroquia=""; $direccion_dep=""; $cod_postal_dep=""; $telefonos_dep=""; 
 $ci_contacto=""; $nombre_contacto=""; $distrito=""; $cod_alterno=""; $saldo_inicial=""; $status1=""; $status2=""; $campo_str1=""; $campo_str2=""; $campo_num1=""; $campo_num2=""; $inf_usuario="";$nombre_region="";$estado="";$nombre_municipio="";$nombre_ciudad="";$nombre_parroquia="";
 $res=pg_query($sql);$filas=pg_num_rows($res);if ($filas==0){if ($p_letra=="S"){$sql="SELECT * From BIEN001 ORDER BY cod_dependencia";} if ($p_letra=="A"){$sql="SELECT * From BIEN001 ORDER BY cod_dependencia desc";} $res=pg_query($sql);$filas=pg_num_rows($res);}
@@ -91,17 +91,17 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
 <table width="977" height="391" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="385"><table width="92" height="417" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_dependencias_ar.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_dependencias_ar.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_dependencias_ar.php?Gcod_dependencia=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_dependencias_ar.php?Gcod_dependencia=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -122,12 +122,12 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_dependencias.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_dependencias.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -143,7 +143,7 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="821">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">C&Oacute;D. DEPENDENCIA :</span></div></td>
-                 <td width="685"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" class="Estilo5"  value="<?echo $cod_dependencia?>" readonly>      </span></div></td>
+                 <td width="685"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" class="Estilo5"  value="<?php echo $cod_dependencia?>" readonly>      </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -151,7 +151,7 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="815">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">DENOMINACI&Oacute;N :</span></div></td>
-                 <td width="685"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="80" maxlength="250" class="Estilo5" value="<?echo $denominacion_dep?>" readonly>     </span></div></td>
+                 <td width="685"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="80" maxlength="250" class="Estilo5" value="<?php echo $denominacion_dep?>" readonly>     </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -159,8 +159,8 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="817">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">REG&Iacute;ON :</span></div></td>
-                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" class="Estilo5" value="<?echo $cod_region?>" readonly > </span></div></td>
-                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_region" type="text" id="txtdenom_region" size="70" maxlength="250" class="Estilo5" readonly value="<?echo $nombre_region?>">    </span></div></td>
+                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" class="Estilo5" value="<?php echo $cod_region?>" readonly > </span></div></td>
+                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_region" type="text" id="txtdenom_region" size="70" maxlength="250" class="Estilo5" readonly value="<?php echo $nombre_region?>">    </span></div></td>
                  </tr>
              </table></td>
            </tr>
@@ -168,8 +168,8 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="827">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">ENTIDAD FEDERAL :</span></div></td>
-                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" class="Estilo5" value="<?echo $cod_entidad?>" readonly> </span></div></td>
-                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_entidad" type="text" id="txtdenom_entidad" size="70" maxlength="250" class="Estilo5"readonly value="<?echo $estado?>">  </span></div></td>
+                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" class="Estilo5" value="<?php echo $cod_entidad?>" readonly> </span></div></td>
+                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_entidad" type="text" id="txtdenom_entidad" size="70" maxlength="250" class="Estilo5"readonly value="<?php echo $estado?>">  </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -177,8 +177,8 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="812">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">MUNICIPIO :</span></div></td>
-                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_municipio?>" readonly> </span></div></td>
-                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_municipio" type="text" id="txtdenom_municipio" size="70" maxlength="250" class="Estilo5" readonly value="<?echo $nombre_municipio?>">   </span></div></td>
+                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_municipio?>" readonly> </span></div></td>
+                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_municipio" type="text" id="txtdenom_municipio" size="70" maxlength="250" class="Estilo5" readonly value="<?php echo $nombre_municipio?>">   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -186,8 +186,8 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="808">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">CIUDAD:</span></div></td>
-                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4" class="Estilo5" value="<?echo $cod_ciudad?>" readonly> </span></div></td>
-                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_ciudad" type="text" id="txtdenom_ciudad" size="70" maxlength="250" class="Estilo5" readonly value="<?echo $nombre_ciudad?>">   </span></div></td>
+                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4" class="Estilo5" value="<?php echo $cod_ciudad?>" readonly> </span></div></td>
+                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_ciudad" type="text" id="txtdenom_ciudad" size="70" maxlength="250" class="Estilo5" readonly value="<?php echo $nombre_ciudad?>">   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -195,8 +195,8 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="820">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">PARROQUIA :</span></div></td>
-                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" class="Estilo5" value="<?echo $cod_parroquia?>" readonly> </span></div></td>
-                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_parroquia" type="text" id="txtdenom_parroquia" size="70" maxlength="250" class="Estilo5" readonly value="<?echo $nombre_parroquia?>"> </span></div></td>
+                 <td width="40"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" class="Estilo5" value="<?php echo $cod_parroquia?>" readonly> </span></div></td>
+                 <td width="600"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenom_parroquia" type="text" id="txtdenom_parroquia" size="70" maxlength="250" class="Estilo5" readonly value="<?php echo $nombre_parroquia?>"> </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -204,7 +204,7 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="818">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">DIRECCI&Oacute;N :</span></div></td>
-                 <td width="640"><div align="left"><textarea name="txt_direccion_dep" cols="70" readonly class="headers" id="txt_direccion_dep"><?echo $direccion_dep?></textarea>    </div></td>
+                 <td width="640"><div align="left"><textarea name="txt_direccion_dep" cols="70" readonly class="headers" id="txt_direccion_dep"><?php echo $direccion_dep?></textarea>    </div></td>
                </tr>
              </table></td>
            </tr>
@@ -214,9 +214,9 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="814">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">C&Oacute;DIGO POSTAL :</span></div></td>
-                 <td width="50"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal_dep" type="text" id="txtcod_postal_dep" size="15" maxlength="10"  class="Estilo5" value="<?echo $cod_postal_dep?>" readonly>  </div></td>
+                 <td width="50"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal_dep" type="text" id="txtcod_postal_dep" size="15" maxlength="10"  class="Estilo5" value="<?php echo $cod_postal_dep?>" readonly>  </div></td>
                  <td width="83"><div align="left"><span class="Estilo5">TEL&Eacute;FONOS :</span></div></td>
-                 <td width="400"><div align="left"><span class="Estilo5"> <input class="Estilo10" name="txttelefonos_dep" type="text" id="txttelefonos_dep" size="35" maxlength="30" class="Estilo5" value="<?echo $telefonos_dep?>" readonly>   </div></td>
+                 <td width="400"><div align="left"><span class="Estilo5"> <input class="Estilo10" name="txttelefonos_dep" type="text" id="txttelefonos_dep" size="35" maxlength="30" class="Estilo5" value="<?php echo $telefonos_dep?>" readonly>   </div></td>
                </tr>
              </table></td>
            </tr>
@@ -224,9 +224,9 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="811">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">C.I. RESPONSABLE :</span></div></td>
-                 <td width="50"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtci_contacto" type="text" id="txtci_contacto" size="15" maxlength="12" class="Estilo5" value="<?echo $ci_contacto?>" readonly>
+                 <td width="50"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtci_contacto" type="text" id="txtci_contacto" size="15" maxlength="12" class="Estilo5" value="<?php echo $ci_contacto?>" readonly>
                  <td width="60"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
-                 <td width="400"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnombre_contacto" type="text" id="txtnombre_contacto" size="50" maxlength="100" class="Estilo5" value="<?echo $nombre_contacto?>" readonly>
+                 <td width="400"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnombre_contacto" type="text" id="txtnombre_contacto" size="50" maxlength="100" class="Estilo5" value="<?php echo $nombre_contacto?>" readonly>
                      </div></td>
                </tr>
              </table></td>
@@ -235,9 +235,9 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
              <td><table width="802">
                <tr>
                  <td width="124"><div align="left"><span class="Estilo5">DISTRITO :</span></div></td>
-                 <td width="80"><div align="left"><span class="Estilo5"> <input class="Estilo10" name="txtdistrito" type="text" id="txtdistrito" size="4" maxlength="2" class="Estilo5" value="<?echo $distrito?>" readonly>   </div></td>
+                 <td width="80"><div align="left"><span class="Estilo5"> <input class="Estilo10" name="txtdistrito" type="text" id="txtdistrito" size="4" maxlength="2" class="Estilo5" value="<?php echo $distrito?>" readonly>   </div></td>
                  <td width="120"><div align="left"><span class="Estilo5">C&Oacute;DIGO ALTERNO :</span></div></td>
-                 <td width="400"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_alterno" type="text" id="txtcod_alterno" size="35" maxlength="20" class="Estilo5"  value="<?echo $cod_alterno?>" readonly>  </div></td>
+                 <td width="400"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcod_alterno" type="text" id="txtcod_alterno" size="35" maxlength="20" class="Estilo5"  value="<?php echo $cod_alterno?>" readonly>  </div></td>
                </tr>
              </table></td>
            </tr>
@@ -250,4 +250,4 @@ $Ssql="SELECT * FROM pre096 where cod_parroquia='".$cod_parroquia."'"; $resultad
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

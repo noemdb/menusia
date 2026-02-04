@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Detalles C&oacute;digos del Pago)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Detalles C&oacute;digos del Pago)</title>
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>
@@ -31,7 +31,7 @@ $res=pg_query($sql);
            <td width="120" align="left" bgcolor="#99CCFF" ><strong>Tipo Imputacion</strong></td>
            <td width="100" align="left" bgcolor="#99CCFF" ><strong>Referencia Cred.</strong></td>
          </tr>
-         <? $total=0;$totaln=0;$totala=0;$totalr=0;
+         <?php  $total=0;$totaln=0;$totala=0;$totalr=0;
 while($registro=pg_fetch_array($res))
 { $monto=formato_monto($registro["monto"]);  $ajustado=formato_monto($registro["ajustado"]);
   $monto_credito=formato_monto($registro["monto_credito"]);
@@ -43,17 +43,17 @@ while($registro=pg_fetch_array($res))
   if($tipo_imput_presu=="P"){$tipo_imput_presu="PRESUPUESTO";}else{$tipo_imput_presu="CRED. ADICIONAL";}
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="222" align="left"><? echo $registro["cod_presup"]; ?></td>
-           <td width="47" align="left"><? echo $registro["fuente_financ"]; ?></td>
-           <td width="560" align="left"><? echo $registro["denominacion"]; ?></td>
-           <td width="120" align="right"><? echo $monto; ?></td>
-           <td width="120" align="right"><? echo $ajustado; ?></td>
-           <td width="120" align="right"><? echo $neto; ?></td>
-           <td width="120" align="right"><? echo $monto_credito; ?></td>
-           <td width="120" align="left"><? echo $tipo_imput_presu; ?></td>
-           <td width="100" align="left"><? echo $ref_imput_presu; ?></td>
+           <td width="222" align="left"><?php  echo $registro["cod_presup"]; ?></td>
+           <td width="47" align="left"><?php  echo $registro["fuente_financ"]; ?></td>
+           <td width="560" align="left"><?php  echo $registro["denominacion"]; ?></td>
+           <td width="120" align="right"><?php  echo $monto; ?></td>
+           <td width="120" align="right"><?php  echo $ajustado; ?></td>
+           <td width="120" align="right"><?php  echo $neto; ?></td>
+           <td width="120" align="right"><?php  echo $monto_credito; ?></td>
+           <td width="120" align="left"><?php  echo $tipo_imput_presu; ?></td>
+           <td width="100" align="left"><?php  echo $ref_imput_presu; ?></td>
          </tr>
-         <?}
+         <?php }
  $total=formato_monto($total);$totala=formato_monto($totala);$totalr=formato_monto($totalr);$totaln=formato_monto($totaln);
 ?>
        </table></td>
@@ -69,10 +69,10 @@ while($registro=pg_fetch_array($res))
          <td width="87" align="center"><span class="Estilo5">TOTALES :</span></td>
          <td width="506"><table width="485" border="1" cellspacing="0" cellpadding="0">
            <tr>
-             <td width="128" align="right" class="Estilo5"><? echo $total; ?></td>
-             <td width="125" align="right" class="Estilo5"><? echo $totala; ?></td>
-             <td width="125" align="right" class="Estilo5"><? echo $totaln; ?></td>
-             <td width="125" align="right" class="Estilo5"><? echo $totalr; ?></td>
+             <td width="128" align="right" class="Estilo5"><?php  echo $total; ?></td>
+             <td width="125" align="right" class="Estilo5"><?php  echo $totala; ?></td>
+             <td width="125" align="right" class="Estilo5"><?php  echo $totaln; ?></td>
+             <td width="125" align="right" class="Estilo5"><?php  echo $totalr; ?></td>
            </tr>
          </table></td>
        </tr>
@@ -83,7 +83,7 @@ while($registro=pg_fetch_array($res))
          <td width="506"><table width="488" border="0" cellspacing="0" cellpadding="0">
            <tr>
              <td width="128">&nbsp;</td>
-             <td width="125" align="center"><input name="btajustado" type="button" id="btajustado" value="Ajustes" onclick="javascrip:Ventana_002('Det_aju_pago.php?criterio=<? echo $criterio; ?>','SIA','','580','400','true')"></td>
+             <td width="125" align="center"><input name="btajustado" type="button" id="btajustado" value="Ajustes" onclick="javascrip:Ventana_002('Det_aju_pago.php?criterio=<?php  echo $criterio; ?>','SIPAP','','580','400','true')"></td>
              <td width="125">&nbsp;</td>
              <td width="125">&nbsp;</td>
            </tr>
@@ -95,4 +95,4 @@ while($registro=pg_fetch_array($res))
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

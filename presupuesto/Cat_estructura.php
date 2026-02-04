@@ -1,11 +1,11 @@
-<?include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
-$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA  CONTABILIDAD PRESUPUESTARIA  (Catalogo de Estrucutra de Orden)</title>
+<title>SIPAP  CONTABILIDAD PRESUPUESTARIA  (Catalogo de Estrucutra de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="javascript" src="ajax_pag.js" type="text/javascript"></script>
@@ -22,7 +22,7 @@ function cerrar_catalogo(codest,desest,ced,nomb,conc,tipo,doc,nrodoc,fechad,fech
  }
 </script></head>
 <body>
-<?      $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         if (!$_GET){$codigo_mov="";$ref_comp="N";}else{$codigo_mov=$_GET["codigo_mov"];$ref_comp=$_GET["ref_comp"];}
         $criterio = "";    $sql="SELECT * FROM ESTRUCTURA_ORD ".$criterio;        $res=pg_query($sql); $numeroRegistros=pg_num_rows($res);
         if($numeroRegistros<=0){echo "<font face='verdana' size='-2'>No se encontraron Compromisos</font>";$pagina=1; $inicio=1; $final=1; $numPags=1; 
@@ -42,16 +42,16 @@ function cerrar_catalogo(codest,desest,ced,nomb,conc,tipo,doc,nrodoc,fechad,fech
                 $descripcion=$registro["descripcion_est"]; $descripcion=substr($descripcion,0,150);
                 if ($linea>$limitInf+$tamPag){$Salir=true;}   if (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["cod_estructura"];?>','<? echo $descripcion;?>','<? echo $registro["ced_rif_est"];?>','<? echo $registro["nombre"];?>','<? echo $registro["concepto_est"];?>','<? echo $registro["cod_tipo_ord"];?>','<? echo $registro["tipo_documento"];?>','<? echo $registro["nro_documento"];?>','<? echo $registro["fecha_desde_est"];?>','<? echo $registro["fecha_hasta_est"];?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["cod_estructura"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["cod_estructura"];?>','<?php  echo $descripcion;?>','<?php  echo $registro["ced_rif_est"];?>','<?php  echo $registro["nombre"];?>','<?php  echo $registro["concepto_est"];?>','<?php  echo $registro["cod_tipo_ord"];?>','<?php  echo $registro["tipo_documento"];?>','<?php  echo $registro["nro_documento"];?>','<?php  echo $registro["fecha_desde_est"];?>','<?php  echo $registro["fecha_hasta_est"];?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["cod_estructura"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion; ?></b></font></td>
   </tr>
-<?}} echo "</table>"; }
+<?php } } echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    if($pagina>1){
+  <?php     if($pagina>1){
           echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
           echo "<font face='verdana' size='-2'>Principio</font>";
           echo "</a>&nbsp;";
@@ -74,4 +74,4 @@ function cerrar_catalogo(codest,desest,ced,nomb,conc,tipo,doc,nrodoc,fechad,fech
 <hr noshade style="color:CC6666;height:1px">
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

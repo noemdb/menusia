@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_ciudad='';} else {$cod_ciudad=$_GET["Gciudad"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminan Ciudades)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminan Ciudades)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -19,15 +19,15 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function LlamarURL(url){  document.location = url; }
 function revisar(){var f=document.form1; var Valido;
-    if(f.txtCodigo_Ciudad.value==""){alert("Código del Ciudad no puede estar Vacio");return false;}
+    if(f.txtCodigo_Ciudad.value==""){alert("Cï¿½digo del Ciudad no puede estar Vacio");return false;}
     if(f.txtNombre_Ciudad.value==""){alert("Nombre de la Ciudad no puede estar Vacia"); return false; }
        else{f.txtNombre_Ciudad.value=f.txtNombre_Ciudad.value.toUpperCase();}
     if(f.txtCodigo_Ciudad.value.length==4){f.txtCodigo_Ciudad.value=f.txtCodigo_Ciudad.value.toUpperCase();}
-       else{alert("Longitud Código de Ciudad Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de Ciudad Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_ciudad="";$sql="Select cod_ciudad,nombre_ciudad from PRE094 where cod_ciudad='$cod_ciudad'";
 $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$registro["cod_ciudad"];  $den_ciudad=$registro["nombre_ciudad"];}
@@ -68,7 +68,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Ciudad" type="text" id="txtCodigo_Ciudad" title="Registre el C&oacute;digo de la Ciudad" size="10" maxlength="4"  readonly value="<?ECHO $cod_ciudad?>">
+                      <input name="txtCodigo_Ciudad" type="text" id="txtCodigo_Ciudad" title="Registre el C&oacute;digo de la Ciudad" size="10" maxlength="4"  readonly value="<?php ECHO $cod_ciudad?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -81,7 +81,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Ciudad" type="text" id="txtNombre_Ciudad" title="Registre el Nombre de la Ciudad" size="100" maxlength="200"  value="<?ECHO $den_ciudad?>" readonly></td>
+                      <td width="720"><input name="txtNombre_Ciudad" type="text" id="txtNombre_Ciudad" title="Registre el Nombre de la Ciudad" size="100" maxlength="200"  value="<?php ECHO $den_ciudad?>" readonly></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -110,4 +110,4 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

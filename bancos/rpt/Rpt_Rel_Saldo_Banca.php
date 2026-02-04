@@ -1,6 +1,6 @@
-<?include ("../../class/seguridad.inc"); include ("../../class/conects.php"); include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php");   include ("../../class/configura.inc"); error_reporting(E_ALL ^ E_NOTICE); 
+<?php include ("../../class/seguridad.inc"); include ("../../class/conects.php"); include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php");   include ("../../class/configura.inc"); error_reporting(E_ALL ^ E_NOTICE); 
 $cod_banco_d=$_GET["cod_banco_d"];$cod_banco_h=$_GET["cod_banco_h"];$periodod=$_GET["periodod"]; $tipo_rep=$_GET["tipo_rep"];  $imprimir=$_GET["imprimir"]; $Sql="";$date = date("d-m-Y");$hora = date("H:i:s a");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 else{ $Nom_Emp=busca_conf();  $php_os=PHP_OS; $Nom_Emp=busca_conf(); if($utf_rpt=="SI"){  if($php_os=="WINNT"){ $php_os="LINUX"; } else{$php_os="WINNT";} }
 $cfecha=formato_ddmmaaaa($Fec_Ini_Ejer); $cfecha="01/".$periodod."/".substr($cfecha,6,4);  $fecha_d=$cfecha; $fecha_h=colocar_udiames($cfecha); $criterio1=$fecha_h;
 if($fecha_d==""){$sfecha_d="2010-01-01";}else{$sfecha_d=formato_aaaammdd($fecha_d);} if($fecha_h==""){$sfecha_h="2010-12-31";}else{$sfecha_h=formato_aaaammdd($fecha_h);}
@@ -73,7 +73,7 @@ if($fecha_d==""){$sfecha_d="2010-01-01";}else{$sfecha_d=formato_aaaammdd($fecha_
 		function Footer(){ $ffechar=date("d-m-Y");$fhorar=date("H:i:s a"); 
 			$this->SetY(-10);
 			$this->SetFont('Arial','I',5);
-			$this->Cell(100,5,'SIA Control Bancario ',0,0,'L');
+			$this->Cell(100,5,'SIPAP Control Bancario ',0,0,'L');
 			$this->Cell(60,5,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
 			$this->Cell(100,5,'Fecha: '.$ffechar.' Hora: '.$fhorar,0,0,'R');
 		}

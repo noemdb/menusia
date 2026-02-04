@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $nom_usuario="ADMNISTRADOR";$fecha_d="";$num_expediente_d="0000000000";$num_expediente_h="0000000000";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte )</title>
+<title>SIPAP CONTROL BANCARIO (Reporte )</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -76,7 +76,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="30"><table width="674" border="0">
             <tr>
               <td width="96" height="26">                 <div align="left">USUARIO : </div></td><td width="568"><span class="Estilo5">
-                <input name="txtnomusuario" type="text" id="txtnomusuario" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $nom_usuario?>" size="25" maxlength="25">
+                <input name="txtnomusuario" type="text" id="txtnomusuario" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $nom_usuario?>" size="25" maxlength="25">
               </span></td>
               </tr>
           </table></td>
@@ -114,10 +114,10 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="19"><table width="775" border="0">
             <tr>
               <td width="235" height="26">                <div align="left">NUMERO DEL EXPEDIENTE : </div></td><td width="245"><span class="Estilo5">
-                <input name="txtnumexpediented" type="text" id="txtnumexpediented" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_expediente_d?>" size="25" maxlength="25">
+                <input name="txtnumexpediented" type="text" id="txtnumexpediented" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_expediente_d?>" size="25" maxlength="25">
               </span></td>
               <td width="281"><span class="Estilo5">
-                <input name="txtnumexpedienteh" type="text" id="txtnumexpedienteh" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_expediente_h?>" size="25" maxlength="25">
+                <input name="txtnumexpedienteh" type="text" id="txtnumexpedienteh" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_expediente_h?>" size="25" maxlength="25">
               </span></td>
               </tr>
           </table></td>
@@ -150,4 +150,4 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

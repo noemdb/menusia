@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");  include ("../class/configura.inc"); $cod_modulo="13";
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");  include ("../class/configura.inc"); $cod_modulo="13";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -8,7 +8,7 @@ if (!$_GET){$cod_bien_mue='';}else {$cod_bien_mue=$_GET["Gcod_bien_mue"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Modificar Ficha de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Modificar Ficha de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
@@ -23,16 +23,16 @@ MM_reloadPage(true);
 </script>
 <script language="JavaScript" type="text/JavaScript">
 function llama_cat_decripciones(){ var mcod_c;  mcod_c=document.form1.txtcod_clasificacion.value; 
-  VentanaCentrada('Cat_descrip_bienes.php?codigo_c='+mcod_c+'&criterio=','SIA','','750','500','true')
+  VentanaCentrada('Cat_descrip_bienes.php?codigo_c='+mcod_c+'&criterio=','SIPAP','','750','500','true')
 }
 
 function llama_cat_dir(mform){  var mcod_dep; var murl; mcod_dep=mform.txtcod_dependencia.value;
-  murl='Cat_direcc_dep.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+  murl='Cat_direcc_dep.php?cod_dependen='+mcod_dep+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 
 function llama_cat_dep(mform){  var mcod_dep; var murl;  var mcod_dir;
    mcod_dep=mform.txtcod_dependencia.value; mcod_dir=mform.txtcod_direccion.value;
-   murl='Cat_departamentos.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIA','','750','500','true');
+   murl='Cat_departamentos.php?cod_dependen='+mcod_dep+'&cod_direccion='+mcod_dir+'&criterio=';   VentanaCentrada(murl,'SIPAP','','750','500','true');
 return true;}
 
 function chequea_fecha(mthis){var mref; var mfec;   mref=mthis.value; 
@@ -77,7 +77,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $cod_clasificacion=""; $num_bien="";$denominacion=""; $cod_dependencia=""; $cod_empresa=""; $cod_direccion=""; $cod_departamento=""; $ced_responsable=""; $fecha_actualizacion=""; $denomina_tipo="";
 $ced_responsable_uso="";$cod_metodo_rot="";$ced_rotulador=""; $fecha_rotulacion="";$direccion=""; $cod_region=""; $cod_entidad=""; $cod_municipio=""; $cod_ciudad=""; $cod_parroquia=""; $cod_postal="";$caracteristicas="";$marca="";  $modelo="";$color="";$matricula="";$serial1="";$serial2="";$tipo_clase="";$uso="";$dimension_tam="";$material="";$codigo_alterno="";$ano=""; $antiguedad="";$cod_contablea="";$cod_contabled="";$tipo_depreciacion="";$tasa_deprec=""; $vida_util=""; $valor_residual=""; $sit_contable="";$sit_legal=""; $edo_conservacion="";$ced_verificador=""; $fecha_verificacion=""; $tipo_incorporacion=""; $cod_imp_presup=""; $nom_imp_presup="";$des_imp_nopresup=""; $fecha_incorporacion=""; $valor_incorporacion="";$garantia="";$nro_oc=""; $fecha_oc=""; $nro_op=""; $fecha_op=""; $tipo_doc_cancela=""; $nro_doc_cancela=""; $fecha_doc_cancela="";$ced_rif_proveedor=""; $codigo_tipo_incorp=""; $nom_proveedor=""; $cod_presup_dep=""; $monto_depreciado=""; $nro_factura=""; $fecha_factura=""; $desincorporado=""; $fecha_desincorporado="";$des_desincorporado="";$bien_en_salida="";$status_bien_inm=""; $usuario_sia=""; $inf_usuario="";$accesorios="";  $descripcion_b="";  $denominacion_empresa=""; $denominacion_dependencia=""; $denominacion_dir="";$denominacion_dep="";  $nombre_res="";  $nombre_res_uso="";  $metodo_rotula="";  $nombre_res_rotu="";$nombre_region="";  $estado="";  $nombre_municipio=""; $nombre_ciudad="";  $nombre_parroquia=""; $tipo_situacion_cont="";  $tipo_situacion_legal=""; $edo_bien="";  $nombre_res_ver="";
 
@@ -184,8 +184,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
       <td width="86">
 		 <td width="92" height="1800"><table width="94" height="1800" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
 		   <tr>
-			<td width="89" height="27"  bgColor=#EAEAEA onClick="javascript:LlamarURL('Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?echo $cod_bien_mue;?>')" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'";o><A class=menu href="Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?echo $cod_bien_mue;?>">Atras</A></td>
+			<td width="89" height="27"  bgColor=#EAEAEA onClick="javascript:LlamarURL('Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?php echo $cod_bien_mue;?>')" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'";o><A class=menu href="Act_fichas_bienes_muebles_pro.php?Gcod_bien_mue=<?php echo $cod_bien_mue;?>">Atras</A></td>
 		   </tr>
 		   <tr>
 			 <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -207,8 +207,8 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="180"><span class="Estilo5">C&Oacute;DIGO DE CLASIFICACI&Oacute;N :</span></td>
-                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" value="<?echo $cod_clasificacion?>" readonly  size="10" maxlength="10"> </span></td>
-                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="80" maxlength="250" value="<?echo $descripcion_b?>" readonly></span></td>
+                 <td width="145"><span class="Estilo5"><input class="Estilo10" name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" value="<?php echo $cod_clasificacion?>" readonly  size="10" maxlength="10"> </span></td>
+                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="80" maxlength="250" value="<?php echo $descripcion_b?>" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -216,9 +216,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">N&Uacute;MERO DEL BIEN:</span></td>
-                 <td width="250"><span class="Estilo5"><div id="numbien"> <input class="Estilo10" name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20"  value="<?echo $num_bien?>" readonly></div></td>
+                 <td width="250"><span class="Estilo5"><div id="numbien"> <input class="Estilo10" name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20"  value="<?php echo $num_bien?>" readonly></div></td>
                  <td width="220"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="40"  value="<?echo $cod_bien_mue?>" readonly> </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="40"  value="<?php echo $cod_bien_mue?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -226,7 +226,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">DENOMINACI&Oacute;N DEL BIEN :</span></td>
-                 <td width="640"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text" id="txtdenominacion" size="110" maxlength="250" value="<?echo $denominacion?>"  onFocus="encender(this)" onBlur="apagar(this)"></div></td>
+                 <td width="640"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text" id="txtdenominacion" size="110" maxlength="250" value="<?php echo $denominacion?>"  onFocus="encender(this)" onBlur="apagar(this)"></div></td>
                  <td width="40"><span class="Estilo5"><input class="Estilo10" name="btclasif_bien" type="button" id="btclasif_bien" title="Abrir Catalogo Descripcion de Bienes" onClick="llama_cat_decripciones()" value="..." >  </span></td>
                </tr>
              </table></td>
@@ -235,9 +235,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="150"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></td>
-                 <td width="65"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
-                 <td width="60"><span class="Estilo5"> <input class="Estilo10" name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?echo $denominacion_dependencia?>" readonly>    </span></td>
+                 <td width="65"><span class="Estilo5"><input class="Estilo10" name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="60"><span class="Estilo5"> <input class="Estilo10" name="btdependencia" type="button" id="btdependencia" title="Abrir Catalogo de Dependencias" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="100" maxlength="250" value="<?php echo $denominacion_dependencia?>" readonly>    </span></td>
                </tr>
              </table></td>
            </tr>		   
@@ -245,9 +245,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="150"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></td>
-                 <td width="65"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $cod_direccion?>" >   </span></td>
+                 <td width="65"><span class="Estilo5"> <input class="Estilo10" name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $cod_direccion?>" >   </span></td>
                  <td width="60"><span class="Estilo5"> <input class="Estilo10" name="btdirecciones" type="button" id="btdirecciones" title="Abrir Catalogo de Direcciones" onClick="javascript:llama_cat_dir(this.form)" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?echo $denominacion_dir?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="100" maxlength="100" value="<?php echo $denominacion_dir?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -255,9 +255,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></td>
-                 <td width="70"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_departamento?>" >   </span></td>
+                 <td width="70"><span class="Estilo5"><input class="Estilo10" name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_departamento?>" >   </span></td>
                  <td width="40"><span class="Estilo5"> <input class="Estilo10" name="btdepartamento" type="button" id="btdepartamento" title="Abrir Catalogo de Departamentos" onClick="javascript:llama_cat_dep(this.form)" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_depart" type="text" id="txtdenominacion_depart" size="100" maxlength="100"  value="<?echo $denominacion_dep?>" readonly>   </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_depart" type="text" id="txtdenominacion_depart" size="100" maxlength="100"  value="<?php echo $denominacion_dep?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>        
@@ -265,9 +265,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="155"><span class="Estilo5">C&Oacute;DIGO EMPRESA :</span></td>
-				 <td width="60"><span class="Estilo5"><input class="Estilo10" name="txtcod_empresa" type="text" id="txtcod_empresa" size="5" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $cod_empresa?>" >   </span></td>
-                 <td width="60"><span class="Estilo5"><input class="Estilo10" name="btempresa" type="button" id="btempresa" title="Abrir Catalogo de Empresas" onClick="VentanaCentrada('Cat_empresas_ed.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_emp" type="text" id="txtdenominacion_emp" size="100" maxlength="100"  value="<? echo $denominacion_empresa?>" readonly >   </span></td>
+				 <td width="60"><span class="Estilo5"><input class="Estilo10" name="txtcod_empresa" type="text" id="txtcod_empresa" size="5" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $cod_empresa?>" >   </span></td>
+                 <td width="60"><span class="Estilo5"><input class="Estilo10" name="btempresa" type="button" id="btempresa" title="Abrir Catalogo de Empresas" onClick="VentanaCentrada('Cat_empresas_ed.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion_emp" type="text" id="txtdenominacion_emp" size="100" maxlength="100"  value="<?php  echo $denominacion_empresa?>" readonly >   </span></td>
                </tr>
              </table></td>
            </tr>  
@@ -275,9 +275,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="185"><span class="Estilo5">C.I. RESPONSABLE PRIMARIO :</span></td>
-                 <td width="95"><span class="Estilo5"><input class="Estilo10" name="txtced_responsable" type="text" id="txtced_responsable" size="14" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $ced_responsable?>"  >   </span></td>
-                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btresp_p" type="button" id="btresp_p" title="Abrir Catalogo Responsable Primario" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnombre_respp" type="text" id="txtnombre_respp" size="100" maxlength="250"  value="<?echo $nombre_res?>" readonly>  </span></td>
+                 <td width="95"><span class="Estilo5"><input class="Estilo10" name="txtced_responsable" type="text" id="txtced_responsable" size="14" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $ced_responsable?>"  >   </span></td>
+                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btresp_p" type="button" id="btresp_p" title="Abrir Catalogo Responsable Primario" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnombre_respp" type="text" id="txtnombre_respp" size="100" maxlength="250"  value="<?php echo $nombre_res?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -285,9 +285,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="185"><span class="Estilo5">C.I. RESPONSABLE DE USO :</span></td>
-                 <td width="95"><span class="Estilo5"> <input class="Estilo10" name="txtced_responsable_uso" type="text" id="txtced_responsable_uso" size="15" maxlength="12"  value="<?echo $ced_responsable_uso?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btresp_uso" type="button" id="btresp_uso" title="Abrir Catalogo Responsable Uso" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_uso" type="text" id="txtnombre_res_uso" size="100" maxlength="250"  value="<?echo $nombre_res_uso?>" readonly>    </span></td>
+                 <td width="95"><span class="Estilo5"> <input class="Estilo10" name="txtced_responsable_uso" type="text" id="txtced_responsable_uso" size="15" maxlength="12"  value="<?php echo $ced_responsable_uso?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btresp_uso" type="button" id="btresp_uso" title="Abrir Catalogo Responsable Uso" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="520"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_uso" type="text" id="txtnombre_res_uso" size="100" maxlength="250"  value="<?php echo $nombre_res_uso?>" readonly>    </span></td>
                </tr>
              </table></td>
            </tr>          
@@ -295,9 +295,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">METODO DE ROTULACI&Oacute;N :</span></td>
-                 <td width="55"><span class="Estilo5"><input class="Estilo10" name="txtcod_metodo_rot" type="text" id="txtcod_metodo_rot" size="4" maxlength="2" value="<?echo $cod_metodo_rot?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btmet_rot" type="button" id="btmet_rot" title="Abrir Catalogo Metodo de Rotulacion" onClick="VentanaCentrada('Cat_metodosrotulad.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtmetodo_rotula" type="text" id="txtmetodo_rotula" size="100" maxlength="250" value="<?echo $metodo_rotula?>" readonly>     </span></td>
+                 <td width="55"><span class="Estilo5"><input class="Estilo10" name="txtcod_metodo_rot" type="text" id="txtcod_metodo_rot" size="4" maxlength="2" value="<?php echo $cod_metodo_rot?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btmet_rot" type="button" id="btmet_rot" title="Abrir Catalogo Metodo de Rotulacion" onClick="VentanaCentrada('Cat_metodosrotulad.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtmetodo_rotula" type="text" id="txtmetodo_rotula" size="100" maxlength="250" value="<?php echo $metodo_rotula?>" readonly>     </span></td>
                </tr>
              </table></td>
            </tr>
@@ -305,9 +305,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="155"><span class="Estilo5">C&Eacute;DULA DE ROTULADOR :</span></td>
-                 <td width="95"><span class="Estilo5"><input class="Estilo10" name="txtced_rotulador" type="text" id="txtced_rotulador" size="15" maxlength="12"  value="<?echo $ced_rotulador?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btced_rot" type="button" id="btced_rot" title="Abrir Catalogo Cedula de Rotulador" onClick="VentanaCentrada('Cat_rotuladoresd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-                 <td width="550"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_rotu" type="text" id="txtnombre_res_rotu" size="100" maxlength="250"  value="<?echo $nombre_res_rotu?>" readonly>  </span></td>
+                 <td width="95"><span class="Estilo5"><input class="Estilo10" name="txtced_rotulador" type="text" id="txtced_rotulador" size="15" maxlength="12"  value="<?php echo $ced_rotulador?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="45"><span class="Estilo5"><input class="Estilo10" name="btced_rot" type="button" id="btced_rot" title="Abrir Catalogo Cedula de Rotulador" onClick="VentanaCentrada('Cat_rotuladoresd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+                 <td width="550"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_rotu" type="text" id="txtnombre_res_rotu" size="100" maxlength="250"  value="<?php echo $nombre_res_rotu?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -315,9 +315,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="155"><span class="Estilo5">FECHA DE ROTULACI&Oacute;N :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="20" maxlength="10" value="<?echo $fecha_rotulacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="20" maxlength="10" value="<?php echo $fecha_rotulacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                  <td width="200"><span class="Estilo5">FECHA ULTIMA ACTUALIZACI&Oacute;N :</span></td>
-                 <td width="290"><span class="Estilo5"><input class="Estilo10" name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="20" maxlength="10" value="<?echo $fecha_actualizacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="290"><span class="Estilo5"><input class="Estilo10" name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="20" maxlength="10" value="<?php echo $fecha_actualizacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                </tr>
              </table></td>
            </tr>		  
@@ -325,7 +325,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">DIRECCI&Oacute;N :</span></td>
-                 <td width="720"><div align="left"><textarea name="txtdireccion" onFocus="encender(this)" onBlur="apagar(this)" cols="70" onFocus="encender(this)" onBlur="apagar(this)"  class="headers" id="txtdireccion"><?echo $direccion?></textarea>  </div></td>
+                 <td width="720"><div align="left"><textarea name="txtdireccion" onFocus="encender(this)" onBlur="apagar(this)" cols="70" onFocus="encender(this)" onBlur="apagar(this)"  class="headers" id="txtdireccion"><?php echo $direccion?></textarea>  </div></td>
                </tr>
              </table></td>
            </tr>
@@ -333,9 +333,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">REGI&Oacute;N :</span></td>
-                 <td width="50"><span class="Estilo5"> <input class="Estilo10" name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" value="<?echo $cod_region?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                 <td width="50"><input class="Estilo10" name="btcat_reg" type="button" id="btcat_reg" title="Abrir Catalogo de Regiones" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-                 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_region" type="text" id="txtnombre_region" size="100" maxlength="250"  value="<?echo $nombre_region?>" readonly>   </span></td>
+                 <td width="50"><span class="Estilo5"> <input class="Estilo10" name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" value="<?php echo $cod_region?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="50"><input class="Estilo10" name="btcat_reg" type="button" id="btcat_reg" title="Abrir Catalogo de Regiones" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+                 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_region" type="text" id="txtnombre_region" size="100" maxlength="250"  value="<?php echo $nombre_region?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -343,9 +343,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">ENTIDAD FEDERAL :</span></td>
-                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" value="<?echo $cod_entidad?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                 <td width="50"><input class="Estilo10" name="btcat_ent" type="button" id="btcat_ent" title="Abrir Catalogo de Entidades Federal" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtestado" type="text" id="txtestado" size="100" maxlength="250"  value="<?echo $estado?>" readonly>  </span></td>
+                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" value="<?php echo $cod_entidad?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="50"><input class="Estilo10" name="btcat_ent" type="button" id="btcat_ent" title="Abrir Catalogo de Entidades Federal" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtestado" type="text" id="txtestado" size="100" maxlength="250"  value="<?php echo $estado?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -353,9 +353,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">MUNICIPIO :</span></td>
-                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" value="<?echo $cod_municipio?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                 <td width="50"><input class="Estilo10" name="btcat_mun" type="button" id="btcat_mun" title="Abrir Catalogo de Municipios" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="100" maxlength="250" value="<?echo $nombre_municipio?>" readonly>  </span></td>
+                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" value="<?php echo $cod_municipio?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="50"><input class="Estilo10" name="btcat_mun" type="button" id="btcat_mun" title="Abrir Catalogo de Municipios" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="100" maxlength="250" value="<?php echo $nombre_municipio?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -363,9 +363,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">CIUDAD :</span></td>
-                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  value="<?echo $cod_ciudad?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
-                 <td width="50"><input class="Estilo10" name="btcat_ciu" type="button" id="btcat_ciu" title="Abrir Catalogo de Ciudades" onClick="VentanaCentrada('Cat_ciudadesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="100" maxlength="250" value="<?echo $nombre_ciudad?>" readonly> </span></td>
+                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  value="<?php echo $cod_ciudad?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="50"><input class="Estilo10" name="btcat_ciu" type="button" id="btcat_ciu" title="Abrir Catalogo de Ciudades" onClick="VentanaCentrada('Cat_ciudadesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="100" maxlength="250" value="<?php echo $nombre_ciudad?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -373,9 +373,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">PARROQUIA :</span></td>
-                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" value="<?echo $cod_parroquia?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                 <td width="50"><input class="Estilo10" name="btcat_parr" type="button" id="btcat_parr" title="Abrir Catalogo de Parroquias" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="100" maxlength="250" value="<?echo $nombre_parroquia?>" readonly> </span></td>
+                 <td width="50"><span class="Estilo5"><input class="Estilo10" name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" value="<?php echo $cod_parroquia?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="50"><input class="Estilo10" name="btcat_parr" type="button" id="btcat_parr" title="Abrir Catalogo de Parroquias" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+				 <td width="620"><span class="Estilo5"><input class="Estilo10" name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="100" maxlength="250" value="<?php echo $nombre_parroquia?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -383,7 +383,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">C&Oacute;DIGO POSTAL :</span></td>
-                 <td width="720"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal" type="text" id="txtcod_postal" size="12" maxlength="10" value="<?echo $cod_postal?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                 <td width="720"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal" type="text" id="txtcod_postal" size="12" maxlength="10" value="<?php echo $cod_postal?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                </tr>
              </table></td>
            </tr>
@@ -394,7 +394,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">CARACTERISTICAS DEL BIEN MUEBLE :</span></td>
-                 <td width="720"><div align="left"><textarea name="textcaracteristicas" cols="70" onFocus="encender(this)" onBlur="apagar(this)"  class="headers" id="textcaracteristicas"><?echo $caracteristicas?></textarea> </div></td>
+                 <td width="720"><div align="left"><textarea name="textcaracteristicas" cols="70" onFocus="encender(this)" onBlur="apagar(this)"  class="headers" id="textcaracteristicas"><?php echo $caracteristicas?></textarea> </div></td>
                </tr>
              </table></td>
            </tr>
@@ -402,9 +402,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">MARCA :</span></td>
-                 <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtmarca" type="text" id="txtmarca" size="30" maxlength="30" value="<?echo $marca?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                 <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtmarca" type="text" id="txtmarca" size="30" maxlength="30" value="<?php echo $marca?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                  <td width="150"><span class="Estilo5">MODELO :</span></td>
-                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtmodelo" type="text" id="txtmodelo" size="30" maxlength="30" value="<?echo $modelo?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtmodelo" type="text" id="txtmodelo" size="30" maxlength="30" value="<?php echo $modelo?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                </tr>
              </table></td>
            </tr>
@@ -412,10 +412,10 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">COLOR :</span></td>
-                 <td width="150"><span class="Estilo5"> <input class="Estilo10" name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30"  value="<?echo $color?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
-                 <td width="100"><span class="Estilo5"> <input class="Estilo10" name="btcolor" type="button" id="btcolor" title="Abrir Catalogo de Colores" onClick="VentanaCentrada('Cat_colord.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
+                 <td width="150"><span class="Estilo5"> <input class="Estilo10" name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30"  value="<?php echo $color?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="100"><span class="Estilo5"> <input class="Estilo10" name="btcolor" type="button" id="btcolor" title="Abrir Catalogo de Colores" onClick="VentanaCentrada('Cat_colord.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
 				 <td width="150"><span class="Estilo5">MATRICULA :</span></td>
-                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtmatricula" type="text" id="txtmatricula" size="30" maxlength="30" value="<?echo $matricula?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtmatricula" type="text" id="txtmatricula" size="30" maxlength="30" value="<?php echo $matricula?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -423,9 +423,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">SERIAL :</span></td>
-                 <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtserial1" type="text" id="txtserial1" size="30" maxlength="30" value="<?echo $serial1?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="250"><span class="Estilo5"> <input class="Estilo10" name="txtserial1" type="text" id="txtserial1" size="30" maxlength="30" value="<?php echo $serial1?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                  <td width="150"><span class="Estilo5">SERIAL 2 :</span></td>
-                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtserial2" type="text" id="txtserial2" size="30" maxlength="30"  value="<?echo $serial2?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtserial2" type="text" id="txtserial2" size="30" maxlength="30"  value="<?php echo $serial2?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -433,9 +433,9 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">TIPO O CLASE :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txttipo_clase" type="text" id="txttipo_clase" size="30" maxlength="30" value="<?echo $tipo_clase?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txttipo_clase" type="text" id="txttipo_clase" size="30" maxlength="30" value="<?php echo $tipo_clase?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                  <td width="150"><span class="Estilo5">USO :</span></td>
-                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtuso" type="text" id="txtuso" size="30" maxlength="15" value="<?echo $uso?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtuso" type="text" id="txtuso" size="30" maxlength="15" value="<?php echo $uso?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -443,10 +443,10 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">DIMENSION O TAMA&Ntilde;O :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtdimension_tam" type="text" id="txtdimension_tam" size="30" maxlength="30"  value="<?echo $dimension_tam?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtdimension_tam" type="text" id="txtdimension_tam" size="30" maxlength="30"  value="<?php echo $dimension_tam?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  <td width="150"><span class="Estilo5">MATERIAL :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtmaterial" type="text" id="txtmaterial" size="30" maxlength="30" value="<?echo $material?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="btmaterial" type="button" id="btmaterial" title="Abrir Catalogo de Materiales" onClick="VentanaCentrada('Cat_materialesd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtmaterial" type="text" id="txtmaterial" size="30" maxlength="30" value="<?php echo $material?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="btmaterial" type="button" id="btmaterial" title="Abrir Catalogo de Materiales" onClick="VentanaCentrada('Cat_materialesd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
 			   </tr>
              </table></td>
            </tr>
@@ -454,11 +454,11 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">C&Oacute;DIGO ALTERNO :</span></td>
-                 <td width="240"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_alterno" type="text" id="txtcodigo_alterno" size="30" maxlength="30"  value="<?echo $codigo_alterno?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="240"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_alterno" type="text" id="txtcodigo_alterno" size="30" maxlength="30"  value="<?php echo $codigo_alterno?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  <td width="60"><span class="Estilo5">A&Ntilde;O :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtano" type="text" id="txtano" size="5" maxlength="4" value="<?echo $ano?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtano" type="text" id="txtano" size="5" maxlength="4" value="<?php echo $ano?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                  <td width="100"><span class="Estilo5">ANTIGUEDAD :</span></td>
-                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtantiguedad" type="text" id="txtantiguedad" size="10" maxlength="5" style="text-align:right" value="<?echo $antiguedad?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtantiguedad" type="text" id="txtantiguedad" size="10" maxlength="5" style="text-align:right" value="<?php echo $antiguedad?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -466,7 +466,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="125"><span class="Estilo5">ACCESORIOS :</span></td>
-                 <td width="720"><div align="left"><textarea name="txtaccesorios" cols="70" onFocus="encender(this)" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtaccesorios"><?echo $accesorios?></textarea>   </div></td>
+                 <td width="720"><div align="left"><textarea name="txtaccesorios" cols="70" onFocus="encender(this)" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtaccesorios"><?php echo $accesorios?></textarea>   </div></td>
                </tr>
              </table></td>
            </tr>
@@ -477,11 +477,11 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
              <td><table width="845">
                <tr>
                  <td width="200"><span class="Estilo5">C&Oacute;DIGO CONTABLE ASOCIADO :</span></td>
-                 <td width="225"><span class="Estilo5"><input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" size="25" maxlength="25" value="<?echo $cod_contablea?>" onFocus="encender(this)" onBlur="apagar(this)">   
-				  <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="225"><span class="Estilo5"><input class="Estilo10" name="txtcod_contablea" type="text" id="txtcod_contablea" size="25" maxlength="25" value="<?php echo $cod_contablea?>" onFocus="encender(this)" onBlur="apagar(this)">   
+				  <input class="Estilo10" name="btcod_contaba" type="button" id="btcod_contaba" title="Abrir Catalogo Codigo Contable" onClick="VentanaCentrada('Cat_codigoscontablesa.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  <td width="220"><span class="Estilo5">C&Oacute;DIGO CONTABLE DEPRECIACI&Oacute;N :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" size="25" maxlength="25" value="<?echo $cod_contabled?>" onFocus="encender(this)" onBlur="apagar(this)">  
-				   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtcod_contabled" type="text" id="txtcod_contabled" size="25" maxlength="25" value="<?php echo $cod_contabled?>" onFocus="encender(this)" onBlur="apagar(this)">  
+				   <input class="Estilo10" name="btcod_contabd" type="button" id="btcod_contabd" title="Abrir Catalogo Codigo Contable Depreciacion" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                </tr>
              </table></td>
            </tr>
@@ -491,7 +491,7 @@ $tasa_deprec=formato_monto($tasa_deprec);    $vida_util=formato_monto($vida_util
                  <td width="195"><span class="Estilo5">TIPO DE DEPRECIACI&Oacute;N :</span></td>
                  <td width="250"><span class="Estilo5">  <select name="txttipo_depreciacion" onFocus="encender(this)" onBlur="apagar(this)"> <option>NINGUNA</option>    <option>LINEA RECTA</option> </select> </span></td>
                  <td width="150"><span class="Estilo5">TASA DEPRECIACI&Oacute;N :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" size="10" maxlength="5" style="text-align:right" value="<?echo $tasa_deprec?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" size="10" maxlength="5" style="text-align:right" value="<?php echo $tasa_deprec?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -503,9 +503,9 @@ var mvalor='<?php echo $tipo_depreciacion ?>';
              <td><table width="845">
                <tr>
                  <td width="195"><span class="Estilo5">VIDA &Uacute;TIL EN A&Ntilde;OS :</span></td> 
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" size="10"  maxlength="5" style="text-align:right"  value="<?echo $vida_util?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" size="10"  maxlength="5" style="text-align:right"  value="<?php echo $vida_util?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
                  <td width="150"><span class="Estilo5">VALOR RESIDUAL :</span></td>
-                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtvalor_residual" type="text" id="txtvalor_residual" size="20"  maxlength="5" style="text-align:right"  value="<?echo $valor_residual?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                 <td width="250"><span class="Estilo5"><input class="Estilo10" name="txtvalor_residual" type="text" id="txtvalor_residual" size="20"  maxlength="5" style="text-align:right"  value="<?php echo $valor_residual?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -514,10 +514,10 @@ var mvalor='<?php echo $tipo_depreciacion ?>';
              <td><table width="845">
                <tr>
                  <td width="290"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO DE DEPRECIACI&Oacute;N :</span></td>
-                 <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="35" maxlength="32" value="<?echo $cod_presup_dep?>" onFocus="encender(this)" onBlur="apagar(this)">  
-				  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="35" maxlength="32" value="<?php echo $cod_presup_dep?>" onFocus="encender(this)" onBlur="apagar(this)">  
+				  <input class="Estilo10" name="btcod_presupd" type="button" id="btcod_presupd" title="Abrir Catalogo Codigo Presupuestario Depreciacion" onClick="VentanaCentrada('Cat_codigos_presup_dep.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  <td width="145"><span class="Estilo5">MONTO DEPRECIADO :</span></td>
-                 <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="15" maxlength="15" value="<?echo $monto_depreciado?>" style="text-align:right" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="130"><span class="Estilo5"><input class="Estilo10" name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="15" maxlength="15" value="<?php echo $monto_depreciado?>" style="text-align:right" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -540,9 +540,9 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="175"><span class="Estilo5">SITUACI&Oacute;N CONTABLE :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtsit_contable" type="text" id="txtsit_contable" size="4" maxlength="2" value="<?echo $sit_contable?>"  onFocus="encender(this)" onBlur="apagar(this)">   
-          			<input class="Estilo10" name="btsit_contab" type="button" id="btsit_contab" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacioncontabled.php?criterio=','SIA','','750','500','true')" value="...">     </span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txttipo_situacion_cont" type="text" id="txttipo_situacion_cont" size="100" maxlength="100" value="<?echo $tipo_situacion_cont?>" readonly>  </span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtsit_contable" type="text" id="txtsit_contable" size="4" maxlength="2" value="<?php echo $sit_contable?>"  onFocus="encender(this)" onBlur="apagar(this)">   
+          			<input class="Estilo10" name="btsit_contab" type="button" id="btsit_contab" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacioncontabled.php?criterio=','SIPAP','','750','500','true')" value="...">     </span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txttipo_situacion_cont" type="text" id="txttipo_situacion_cont" size="100" maxlength="100" value="<?php echo $tipo_situacion_cont?>" readonly>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -550,9 +550,9 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="175"><span class="Estilo5">SITUACI&Oacute;N LEGAL :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtsit_legal" type="text" id="txtsit_legal" size="4" maxlength="2" value="<?echo $sit_legal?>" onFocus="encender(this)" onBlur="apagar(this)">   
-				    <input class="Estilo10" name="btsit_legal" type="button" id="btsit_legal" title="Abrir Catalogo Situacion Legal del Bien" onClick="VentanaCentrada('Cat_situacionlegald.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txttipo_situacion_legal" type="text" id="txttipo_situacion_legal" size="100" maxlength="100" value="<?echo $tipo_situacion_legal?>" readonly>   </span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtsit_legal" type="text" id="txtsit_legal" size="4" maxlength="2" value="<?php echo $sit_legal?>" onFocus="encender(this)" onBlur="apagar(this)">   
+				    <input class="Estilo10" name="btsit_legal" type="button" id="btsit_legal" title="Abrir Catalogo Situacion Legal del Bien" onClick="VentanaCentrada('Cat_situacionlegald.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txttipo_situacion_legal" type="text" id="txttipo_situacion_legal" size="100" maxlength="100" value="<?php echo $tipo_situacion_legal?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -560,9 +560,9 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="175"><span class="Estilo5">ESTADO DE CONSERVACI&Oacute;N :</span></td>
-                 <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtedo_conservacion" type="text" id="txtedo_conservacion" size="5" maxlength="15" value="<?echo $edo_conservacion?>" onFocus="encender(this)" onBlur="apagar(this)">   
-				     <input class="Estilo10" name="btedo_cons" type="button" id="btedo_cons" title="Abrir Catalogo Estado de Conservacion" onClick="VentanaCentrada('Cat_estadoconservaciond.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
-                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtestado_bien" type="text" id="txtestado_bien" size="100" maxlength="100" value="<?echo $edo_bien?>" readonly> </span></td>
+                 <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtedo_conservacion" type="text" id="txtedo_conservacion" size="5" maxlength="15" value="<?php echo $edo_conservacion?>" onFocus="encender(this)" onBlur="apagar(this)">   
+				     <input class="Estilo10" name="btedo_cons" type="button" id="btedo_cons" title="Abrir Catalogo Estado de Conservacion" onClick="VentanaCentrada('Cat_estadoconservaciond.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
+                 <td width="570"><span class="Estilo5"><input class="Estilo10" name="txtestado_bien" type="text" id="txtestado_bien" size="100" maxlength="100" value="<?php echo $edo_bien?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -570,10 +570,10 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="200"><span class="Estilo5">C.I. RESPONSABLE VERIFICADOR :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtced_res_verificador" type="text" id="txtced_res_verificador" size="15" maxlength="12" value="<?echo $ced_verificador?>" onFocus="encender(this)" onBlur="apagar(this)">  
-				   <input class="Estilo10" name="btres_ver" type="button" id="btres_ver" title="Abrir Catalogo Responsable Verificador" onClick="VentanaCentrada('Cat_responsableverd.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtced_res_verificador" type="text" id="txtced_res_verificador" size="15" maxlength="12" value="<?php echo $ced_verificador?>" onFocus="encender(this)" onBlur="apagar(this)">  
+				   <input class="Estilo10" name="btres_ver" type="button" id="btres_ver" title="Abrir Catalogo Responsable Verificador" onClick="VentanaCentrada('Cat_responsableverd.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                  <td width="155"><span class="Estilo5">FECHA DE VERIFICACI&Oacute;N :</span></td>
-                 <td width="290"><span class="Estilo5"><input class="Estilo10" name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="20" maxlength="10" value="<?echo $fecha_verificacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="290"><span class="Estilo5"><input class="Estilo10" name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="20" maxlength="10" value="<?php echo $fecha_verificacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -581,7 +581,7 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="175"><span class="Estilo5">NOMBRE DEL VERIFICADOR :</span></td>
-                 <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="100" maxlength="250" value="<?echo $nombre_res_ver?>" readonly>
+                 <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="100" maxlength="250" value="<?php echo $nombre_res_ver?>" readonly>
                  </span></td>
                </tr>
              </table></td>
@@ -593,9 +593,9 @@ var mvalor='<?php echo $desincorporado ?>';
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">C&Oacute;DIGO MOVIMIENTO INCORPORACI&Oacute;N:</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txcodigo_tipo_incorp" type="text" id="txcodigo_tipo_incorp" size="5" maxlength="5" value="<?echo $codigo_tipo_incorp?>" onFocus="encender(this)" onBlur="apagar(this)">  
-				     <input class="Estilo10" name="btcod_mov" type="button" id="btcod_mov" title="Abrir Catalogo Tipo Incorporacion" onClick="VentanaCentrada('Cat_tipoincorpd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="450"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="90" maxlength="150" value="<?echo $denomina_tipo?>" readonly> </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txcodigo_tipo_incorp" type="text" id="txcodigo_tipo_incorp" size="5" maxlength="5" value="<?php echo $codigo_tipo_incorp?>" onFocus="encender(this)" onBlur="apagar(this)">  
+				     <input class="Estilo10" name="btcod_mov" type="button" id="btcod_mov" title="Abrir Catalogo Tipo Incorporacion" onClick="VentanaCentrada('Cat_tipoincorpd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="450"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="90" maxlength="150" value="<?php echo $denomina_tipo?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -615,8 +615,8 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">C&Oacute;D. IMPUTACI&Oacute;N PRESUPUESTARIA :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="40" maxlength="32"  value="<?echo $cod_imp_presup?>" onFocus="encender(this)" onBlur="apagar(this)"> 
-				   <input class="Estilo10" name="btcod_presupi" type="button" id="btcod_presupi" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('Cat_codigos_presup.php?criterio=','SIA','','750','500','true')" value="..."></span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="40" maxlength="32"  value="<?php echo $cod_imp_presup?>" onFocus="encender(this)" onBlur="apagar(this)"> 
+				   <input class="Estilo10" name="btcod_presupi" type="button" id="btcod_presupi" title="Abrir Catalogo Codigo Presupuestario" onClick="VentanaCentrada('Cat_codigos_presup.php?criterio=','SIPAP','','750','500','true')" value="..."></span></td>
                </tr>
              </table></td>
            </tr>
@@ -624,7 +624,7 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">NOMBRE IMPUTACI&Oacute;N PRESUPUESTARIA :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_presup" type="text" id="txtdenomina_presup" size="110" maxlength="150" value="<?echo $nom_imp_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_presup" type="text" id="txtdenomina_presup" size="110" maxlength="150" value="<?php echo $nom_imp_presup?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -632,7 +632,7 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
              <td><table width="845">
                <tr>
                  <td width="245"><span class="Estilo5">DESCRIPCI&Oacute;N DE INCORPORACI&Oacute;N NO PRESUPUESTARIA :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdes_imp_nopresup" type="text" id="txtdes_imp_nopresup" size="110" maxlength="150" value="<?echo $des_imp_nopresup?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtdes_imp_nopresup" type="text" id="txtdes_imp_nopresup" size="110" maxlength="150" value="<?php echo $des_imp_nopresup?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -640,30 +640,30 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
              <td><table width="845">
                <tr>
                  <td width="165"><span class="Estilo5">VALOR INCORPORACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" style="text-align:right"  value="<?echo $valor_incorporacion?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" style="text-align:right"  value="<?php echo $valor_incorporacion?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  <td width="150"><span class="Estilo5">FECHA INCORPORACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="15" maxlength="10" value="<?echo $fecha_incorporacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">   </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="15" maxlength="10" value="<?php echo $fecha_incorporacion?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">   </span></td>
                  <td width="90"><span class="Estilo5">GARANTIA :</span></td>
-                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtgarantia" type="text" id="txtgarantia" size="10" maxlength="10"  style="text-align:right" value="<?echo $garantia?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtgarantia" type="text" id="txtgarantia" size="10" maxlength="10"  style="text-align:right" value="<?php echo $garantia?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                </tr>
              </table></td>
            </tr>
-		   <?if ($Cod_Emp=="70"){?>
+		   <?php if ($Cod_Emp=="70"){?>
 		   <tr>
              <td><table width="845">
                <tr>
                  <td width="115"><span class="Estilo5">TASA IMPUESTO :</span></td>
-                 <td width="85"><span class="Estilo5"><input name="txttasa_impuesto" type="text" id="txttasa_impuesto" size="5" maxlength="5" style="text-align:right" value="<?echo $tasa_impuesto?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
+                 <td width="85"><span class="Estilo5"><input name="txttasa_impuesto" type="text" id="txttasa_impuesto" size="5" maxlength="5" style="text-align:right" value="<?php echo $tasa_impuesto?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
                  <td width="115"><span class="Estilo5">	MONTO IMPUESTO :</span></td>
-                 <td width="110"><span class="Estilo5"><input name="txtvalor_impuesto" type="text" id="txtvalor_impuesto" size="12" maxlength="14" style="text-align:right" value="<?echo $valor_impuesto?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
+                 <td width="110"><span class="Estilo5"><input name="txtvalor_impuesto" type="text" id="txtvalor_impuesto" size="12" maxlength="14" style="text-align:right" value="<?php echo $valor_impuesto?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
                  <td width="105"><span class="Estilo5">TASA PRORRATA :</span></td>
-                 <td width="85"><span class="Estilo5"><input name="txttasa_prorrata" type="text" id="txttasa_prorrata" size="5" maxlength="5"  style="text-align:right" value="<?echo $tasa_prorrata?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
+                 <td width="85"><span class="Estilo5"><input name="txttasa_prorrata" type="text" id="txttasa_prorrata" size="5" maxlength="5"  style="text-align:right" value="<?php echo $tasa_prorrata?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
                  <td width="115"><span class="Estilo5">MONTO PRORRATA :</span></td>
-                 <td width="115"><span class="Estilo5"><input name="txtvalor_prorrata" type="text" id="txtvalor_prorrata" size="12" maxlength="14"   style="text-align:right" value="<?echo $valor_prorrata?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
+                 <td width="115"><span class="Estilo5"><input name="txtvalor_prorrata" type="text" id="txtvalor_prorrata" size="12" maxlength="14"   style="text-align:right" value="<?php echo $valor_prorrata?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">   </span></td>
                </tr>
              </table></td>
            </tr>
-		   <?} else{?>
+		   <?php } else{?>
 		   <tr>
              <td><table width="845">
                <tr>
@@ -674,14 +674,14 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
                </tr>
              </table></td>
            </tr>
-		   <?}?>
+		   <?php }?>
            <tr>
              <td><table width="845">
                <tr>
                  <td width="185"><span class="Estilo5">N&Uacute;MERO ORDEN DE COMPRA :</span></td>
-                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtnro_oc" type="text" id="txtnro_oc" size="10" maxlength="8"  value="<?echo $nro_oc?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtnro_oc" type="text" id="txtnro_oc" size="10" maxlength="8"  value="<?php echo $nro_oc?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  <td width="170"><span class="Estilo5">FECHA ORDEN DE COMPRA :</span></td>
-                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtfecha_oc" type="text" id="txtfecha_oc" size="15" maxlength="10" value="<?echo $fecha_oc?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="320"><span class="Estilo5"><input class="Estilo10" name="txtfecha_oc" type="text" id="txtfecha_oc" size="15" maxlength="10" value="<?php echo $fecha_oc?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -689,9 +689,9 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
              <td><table width="845">
                <tr>
                  <td width="185"><span class="Estilo5">N&Uacute;MERO ORDEN DE PAGO :</span></td>
-                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtnro_op" type="text" id="txtnro_op" size="10" maxlength="8"  value="<?echo $nro_op?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                 <td width="170"><span class="Estilo5"><input class="Estilo10" name="txtnro_op" type="text" id="txtnro_op" size="10" maxlength="8"  value="<?php echo $nro_op?>" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  <td width="170"><span class="Estilo5">FECHA ORDEN DE COMPRA :</span></td>
-                 <td width="320"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_op" type="text" id="txtfecha_op" size="15" maxlength="10" value="<?echo $fecha_op?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">   </span></td>
+                 <td width="320"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_op" type="text" id="txtfecha_op" size="15" maxlength="10" value="<?php echo $fecha_op?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -701,9 +701,9 @@ var mvalor='<?php echo $tipo_incorporacion  ?>';
                  <td width="185"><span class="Estilo5">DOCUMENTO QUE CANCELA :</span></td>
                  <td width="120"><span class="Estilo5"> <select name="txttipo_doc_cancela"> <option>CHEQUE</option><option>NOTA DEBITO</option>  </select></span></td>
                  <td width="140"><span class="Estilo5">N&Uacute;MERO DOCUMENTO :</span></td>
-                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtnro_doc_cancela" type="text" id="txtnro_doc_cancela" size="10" maxlength="8"  value="<?echo $nro_doc_cancela?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                 <td width="120"><span class="Estilo5"><input class="Estilo10" name="txtnro_doc_cancela" type="text" id="txtnro_doc_cancela" size="10" maxlength="8"  value="<?php echo $nro_doc_cancela?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                  <td width="140"><span class="Estilo5">FECHA DOCUMENTO :</span></td>
-                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela" size="20"  maxlength="10" value="<?echo $fecha_doc_cancela?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
+                 <td width="140"><span class="Estilo5"><input class="Estilo10" name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela" size="20"  maxlength="10" value="<?php echo $fecha_doc_cancela?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -715,10 +715,10 @@ var mvalor='<?php echo $tipo_doc_cancela  ?>';
              <td><table width="845">
                <tr>
                  <td width="145"><span class="Estilo5">N&Uacute;MERO DE FACTURA :</span></td>
-                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtnro_factura" type="text" id="txtnro_factura" size="25" maxlength="20"   value="<?echo $nro_factura?>" onFocus="encender(this)" onBlur="apagar(this)">
+                 <td width="200"><span class="Estilo5"><input class="Estilo10" name="txtnro_factura" type="text" id="txtnro_factura" size="25" maxlength="20"   value="<?php echo $nro_factura?>" onFocus="encender(this)" onBlur="apagar(this)">
                      <span class="menu"><strong><strong> </strong></strong></span> </span></td>
                  <td width="180"><span class="Estilo5">FECHA DE FACTURA :</span></td>
-                 <td width="320"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_factura" type="text" id="txtfecha_factura" size="15" maxlength="10" value="<?echo $fecha_factura?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">
+                 <td width="320"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_factura" type="text" id="txtfecha_factura" size="15" maxlength="10" value="<?php echo $fecha_factura?>" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_fecha(this)" onkeyup="mascara(this,'/',patronfecha,true)">
                      </span></td>
                </tr>
              </table></td>
@@ -727,9 +727,9 @@ var mvalor='<?php echo $tipo_doc_cancela  ?>';
              <td><table width="845">
                <tr>
                  <td width="140"><span class="Estilo5">CI/RIF PROVEEDOR :</span></td>
-                 <td width="155"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12" value="<?echo $ced_rif_proveedor?>" onFocus="encender(this)" onBlur="apagar(this)">   
-				   <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo Proveedores" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
-                 <td width="550"><span class="Estilo5"><input class="Estilo10" name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" size="90" maxlength="100" value="<?echo $nom_proveedor?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                 <td width="155"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12" value="<?php echo $ced_rif_proveedor?>" onFocus="encender(this)" onBlur="apagar(this)">   
+				   <input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo Proveedores" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
+                 <td width="550"><span class="Estilo5"><input class="Estilo10" name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" size="90" maxlength="100" value="<?php echo $nom_proveedor?>" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
                </tr>
              </table></td>
            </tr>
@@ -752,4 +752,4 @@ var mvalor='<?php echo $tipo_doc_cancela  ?>';
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

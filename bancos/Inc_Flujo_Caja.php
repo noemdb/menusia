@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");include ("../class/ventana.php");?>
+<?php include ("../class/seguridad.inc");include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Definici&oacute;n Movimiento del Flujo de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Definici&oacute;n Movimiento del Flujo de Caja)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language=JavaScript src="../class/sia.js" type="text/javascript"></script>
@@ -48,7 +48,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $cod_movimiento="";$denominacion=""; $denominacion_titulo=""; $linea=""; $descripcion=""; $cod_grupo=""; $operacion=""; $tipo_operacion=""; 
 $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov=""; $monto=0; $acumulado=0; $cod_titulo=""; $cargable=""; 
 ?>
@@ -84,7 +84,7 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="140" height="24"><span class="Estilo5">C&Oacute;DIGO MOVIMIENTO :</span></td>
-                   <td width="670"><span class="Estilo5"><input name="txtcod_movimiento" type="text" class="Estilo5" id="txtcod_movimiento"  value="<?echo $cod_movimiento?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_codigo(this.form);">  </span></td>
+                   <td width="670"><span class="Estilo5"><input name="txtcod_movimiento" type="text" class="Estilo5" id="txtcod_movimiento"  value="<?php echo $cod_movimiento?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)" onchange="chequea_codigo(this.form);">  </span></td>
                    <td width="40"></td>
                  </tr>
              </table></td>
@@ -93,7 +93,7 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="1001"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                   <td width="750"><span class="Estilo5"><textarea name="txtdescripcion" cols="85" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdescripcion"><?echo $descripcion?></textarea>
+                   <td width="750"><span class="Estilo5"><textarea name="txtdescripcion" cols="85" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdescripcion"><?php echo $descripcion?></textarea>
                    </span></td>
                  </tr>
              </table></td>
@@ -102,10 +102,10 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="60"><span class="Estilo5">TITULO : </span></td>
-                   <td width="60"><span class="Estilo5"><input name="txtcod_titulo" type="text" class="Estilo5" id="txtcod_titulo"  value="<?echo $cod_titulo?>" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
-                   <td width="40"><span class="Estilo5"><input name="bttipo_titulo" type="button" class="Estilo5" id="bttipo_titulo" title="Abrir Catalogo Titulos" onclick="VentanaCentrada('Cat_titulos_pre_caja.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>                  
+                   <td width="60"><span class="Estilo5"><input name="txtcod_titulo" type="text" class="Estilo5" id="txtcod_titulo"  value="<?php echo $cod_titulo?>" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                   <td width="40"><span class="Estilo5"><input name="bttipo_titulo" type="button" class="Estilo5" id="bttipo_titulo" title="Abrir Catalogo Titulos" onclick="VentanaCentrada('Cat_titulos_pre_caja.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>                  
 				   <td width="100"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                   <td width="590"><span class="Estilo5"> <input name="txtdenominacion_titulo" type="text" class="Estilo5" id="txtdenominacion_titulo"  value="<?echo $denominacion_titulo?>" size="120" maxlength="200" readonly>   </span></td>
+                   <td width="590"><span class="Estilo5"> <input name="txtdenominacion_titulo" type="text" class="Estilo5" id="txtdenominacion_titulo"  value="<?php echo $denominacion_titulo?>" size="120" maxlength="200" readonly>   </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -113,10 +113,10 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="60"><span class="Estilo5">GRUPO : </span></td>
-                   <td width="60"><span class="Estilo5"><input name="txtcod_grupo" type="text" class="Estilo5" id="txtcod_grupo"  value="<?echo $cod_grupo?>" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
-                   <td width="40"><span class="Estilo5"><input name="bttipo_titulo" type="button" class="Estilo5" id="bttipo_titulo" title="Abrir Catalogo Grupos" onclick="VentanaCentrada('Cat_grupos_pre_caja.php?criterio=','SIA','','750','500','true')" value="...">    </span></td>                  
+                   <td width="60"><span class="Estilo5"><input name="txtcod_grupo" type="text" class="Estilo5" id="txtcod_grupo"  value="<?php echo $cod_grupo?>" size="5" maxlength="4" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                   <td width="40"><span class="Estilo5"><input name="bttipo_titulo" type="button" class="Estilo5" id="bttipo_titulo" title="Abrir Catalogo Grupos" onclick="VentanaCentrada('Cat_grupos_pre_caja.php?criterio=','SIPAP','','750','500','true')" value="...">    </span></td>                  
 				   <td width="100"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                   <td width="590"><span class="Estilo5"> <input name="txtdenominacion" type="text" class="Estilo5" id="txtdenominacion"  value="<?echo $denominacion?>" size="120" maxlength="200" readonly>  </span></td>
+                   <td width="590"><span class="Estilo5"> <input name="txtdenominacion" type="text" class="Estilo5" id="txtdenominacion"  value="<?php echo $denominacion?>" size="120" maxlength="200" readonly>  </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -151,11 +151,11 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="150" height="24"><span class="Estilo5">C&Oacute;DIGO OPERACI&Oacute;N :</span></td>
-				   <td width="200"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" class="Estilo5"  size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_contable?>"></span></td>
-                   <td width="200"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+				   <td width="200"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" class="Estilo5"  size="30" maxlength="32" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_contable?>"></span></td>
+                   <td width="200"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                    <td width="50"><input name="txtNombre_Cuenta" type="hidden" id="txtNombre_Cuenta" value="" ></td>
 				   <td width="150"><span class="Estilo5">TIPO MOVIMIENTO :</span></td>
-                   <td width="100"><span class="Estilo5"> <input name="txttipo_mov" type="text" class="Estilo5" id="txttipo_mov"  value="<?echo $tipo_mov?>" size="5" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                   <td width="100"><span class="Estilo5"> <input name="txttipo_mov" type="text" class="Estilo5" id="txttipo_mov"  value="<?php echo $tipo_mov?>" size="5" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -163,13 +163,13 @@ $activo=""; $modulo=""; $signo=""; $cod_contab=""; $cod_contable=""; $tipo_mov="
              <td><table width="850">
                  <tr>
                    <td width="150"><span class="Estilo5">C&Oacute;DIGO CONTABLE :</span></td>
-                   <td width="200"><span class="Estilo5"> <input name="txtcod_contab" type="text" class="Estilo5" id="txtcod_contab"  value="<?echo $cod_contab?>" size="30" maxlength="18" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                   <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('Cat_contab_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                   <td width="200"><span class="Estilo5"> <input name="txtcod_contab" type="text" class="Estilo5" id="txtcod_contab"  value="<?php echo $cod_contab?>" size="30" maxlength="18" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                   <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo Codigo de Cuentas"  onClick="VentanaCentrada('Cat_contab_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                    <td width="5"><input name="txtNombre_Contab" type="hidden" id="txtNombre_Contab" value="" ></td>
 				   <td width="60"><span class="Estilo5">MONTO : </span></td>
-                   <td width="150"><span class="Estilo5"><input name="txtmonto" type="text" class="Estilo5" id="txtmonto"  style="text-align:right" value="<?echo $monto?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                   <td width="150"><span class="Estilo5"><input name="txtmonto" type="text" class="Estilo5" id="txtmonto"  style="text-align:right" value="<?php echo $monto?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                    <td width="105"><span class="Estilo5">ACUMUMULADO :</span></td>
-                   <td width="150"><span class="Estilo5"><input name="txtacumulado" type="text" class="Estilo5" id="txtacumulado" style="text-align:right" value="<?echo $acumulado?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                   <td width="150"><span class="Estilo5"><input name="txtacumulado" type="text" class="Estilo5" id="txtacumulado" style="text-align:right" value="<?php echo $acumulado?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
                  </tr>
              </table></td>
            </tr>

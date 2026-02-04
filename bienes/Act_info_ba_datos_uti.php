@@ -1,6 +1,6 @@
-<?include ("../class/funciones.php");
+<?php include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){
   $ced_rif='';$p_letra="";
   $sql="SELECT * FROM PRE099 ORDER BY ced_rif";}
@@ -20,7 +20,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Actualiza Información De Base De Datos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Actualiza Informaciï¿½n De Base De Datos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -33,7 +33,7 @@ var murl;
     Gced_rif=document.form1.txtced_rif.value;
     murl=url+Gced_rif;
     if (Gced_rif=="")
-        {alert("Cédula/Rif debe ser Seleccionada");}
+        {alert("Cï¿½dula/Rif debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -86,7 +86,7 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $nombre="";$cedula="";
 $rif="";$nit="";
 $direccion="";$tipo_benef="";
@@ -355,4 +355,4 @@ if($filas>=1){
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

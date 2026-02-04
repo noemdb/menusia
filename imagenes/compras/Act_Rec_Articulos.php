@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS Y ALMAC&Eacute;N (Recepci&oacute;n de Art&iacute;culos)</title>
+<title>SIPAP COMPRAS Y ALMAC&Eacute;N (Recepci&oacute;n de Art&iacute;culos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -145,16 +145,16 @@ MM_reloadPage(true);
                     <tr>
                       <td width="165"><span class="Estilo5"><span class="Estilo11">N&Uacute;MERO DE RECEPCI&Oacute;N :</span></span></td>
                       <td width="173"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNro_Recepcion" type="text" class="Estilo5" id="txtNro_Recepcion"  value="<?echo $Nro_Recepcion ?>" size="8" maxlength="8" readonly>
+                      <input name="txtNro_Recepcion" type="text" class="Estilo5" id="txtNro_Recepcion"  value="<?php echo $Nro_Recepcion ?>" size="8" maxlength="8" readonly>
                       </span></span></td>
                       <td width="120"><span class="Estilo5"><span class="Estilo11">N&Uacute;MERO ORDEN : </span></span></td>
                       <td width="78"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNro_Orden" type="text" class="Estilo5" id="txtNro_Orden"  value="<?echo $Nro_Orden ?>" size="8" maxlength="8" readonly>
+                      <input name="txtNro_Orden" type="text" class="Estilo5" id="txtNro_Orden"  value="<?php echo $Nro_Orden ?>" size="8" maxlength="8" readonly>
                       </span></span></td>
                       <td width="115"><span class="Estilo5">                      </span></td>
                       <td width="54"><span class="Estilo5"><span class="Estilo11">FECHA :</span></span></td>
                       <td width="101"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtFecha" type="text" class="Estilo5" id="txtFecha"  value="<?echo $Fecha ?>" size="10" maxlength="10" readonly>
+                      <input name="txtFecha" type="text" class="Estilo5" id="txtFecha"  value="<?php echo $Fecha ?>" size="10" maxlength="10" readonly>
 </span></span></td>
                       <td width="50"><img src="../pagos/b_info.png" width="11" height="11"></td>
                     </tr>
@@ -165,10 +165,10 @@ MM_reloadPage(true);
                     <tr>
                       <td width="133"><span class="Estilo5"><span class="Estilo11">TIPO MOVIMIENTO  : </span></span></td>
                       <td width="106"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Tipo_Mov" type="text" class="Estilo5" id="txtCod_Tipo_Mov"  value="<?echo $Cod_Tipo_mov ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Tipo_Mov" type="text" class="Estilo5" id="txtCod_Tipo_Mov"  value="<?php echo $Cod_Tipo_mov ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="593"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtDes_Tipo_Mov" type="text" class="Estilo5" id="txtDes_Tipo_Mov"  value="<?echo $Des_Tipo_Mov ?>" size="103" maxlength="102" readonly>
+                      <input name="txtDes_Tipo_Mov" type="text" class="Estilo5" id="txtDes_Tipo_Mov"  value="<?php echo $Des_Tipo_Mov ?>" size="103" maxlength="102" readonly>
                       </span></span></td>
                       <td width="13">&nbsp;</td>
                     </tr>
@@ -179,10 +179,10 @@ MM_reloadPage(true);
                     <tr>
                       <td width="92"><span class="Estilo5"><span class="Estilo11">PROVEEDOR : </span></span></td>
                       <td width="112"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCed_Rif" type="text" class="Estilo5" id="txtCed_Rif"  value="<?echo $Ced_Rif ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCed_Rif" type="text" class="Estilo5" id="txtCed_Rif"  value="<?php echo $Ced_Rif ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="627"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNombre_Proveedor" type="text" class="Estilo5" id="txtNombre_Proveedor"  value="<?echo $Nombre_Proveedor ?>" size="110" maxlength="109" readonly>
+                      <input name="txtNombre_Proveedor" type="text" class="Estilo5" id="txtNombre_Proveedor"  value="<?php echo $Nombre_Proveedor ?>" size="110" maxlength="109" readonly>
                       </span></span></td>
                       <td width="14">&nbsp;</td>
                     </tr>
@@ -193,15 +193,15 @@ MM_reloadPage(true);
                     <tr>
                       <td width="142"><span class="Estilo5"><span class="Estilo11">TIPO DE RECEPCI&Oacute;N :</span></span></td>
                       <td width="174"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtTipo_Recepcion" type="text" class="Estilo5" id="txtNro_Orden4"  value="<?echo $Tipo_Recepcion ?>" size="28" maxlength="27" readonly>
+                      <input name="txtTipo_Recepcion" type="text" class="Estilo5" id="txtNro_Orden4"  value="<?php echo $Tipo_Recepcion ?>" size="28" maxlength="27" readonly>
                       </span></span></td>
                       <td width="149"><span class="Estilo5"><span class="Estilo11">N&Uacute;MERO DE FACTURA : </span></span></td>
                       <td width="71"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNro_Factura" type="text" class="Estilo5" id="txtNro_Orden3"  value="<?echo $Nro_Factura ?>" size="8" maxlength="8" readonly>
+                      <input name="txtNro_Factura" type="text" class="Estilo5" id="txtNro_Orden3"  value="<?php echo $Nro_Factura ?>" size="8" maxlength="8" readonly>
 </span></span></td>
                       <td width="168"><span class="Estilo5"><span class="Estilo11">N&Uacute;MERO NOTA ENTREGA :</span></span></td>
                       <td width="154"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNro_Nota_Entrega" type="text" class="Estilo5" id="txtNro_Orden5"  value="<?echo $Nro_Nota_Entrega ?>" size="10" maxlength="10" readonly>
+                      <input name="txtNro_Nota_Entrega" type="text" class="Estilo5" id="txtNro_Orden5"  value="<?php echo $Nro_Nota_Entrega ?>" size="10" maxlength="10" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -211,14 +211,14 @@ MM_reloadPage(true);
                     <tr>
                       <td width="134"><span class="Estilo5"><span class="Estilo11">C&Oacute;DIGO ALMAC&Eacute;N :</span></span></td>
                       <td width="72"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCod_Almacen" type="text" class="Estilo5" id="txtCod_Almacen"  value="<?echo $Cod_Almacen ?>" size="8" maxlength="8" readonly>
+                      <input name="txtCod_Almacen" type="text" class="Estilo5" id="txtCod_Almacen"  value="<?php echo $Cod_Almacen ?>" size="8" maxlength="8" readonly>
 </span></span></td>
                       <td width="383"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtDes_Almacen" type="text" class="Estilo5" id="txtNro_Requisicion14"  value="<?echo $Des_Almacen ?>" size="67" maxlength="67" readonly>
+                      <input name="txtDes_Almacen" type="text" class="Estilo5" id="txtNro_Requisicion14"  value="<?php echo $Des_Almacen ?>" size="67" maxlength="67" readonly>
 </span></span></td>
                       <td width="112"><span class="Estilo5"><span class="Estilo11">COMPROBANTE :</span></span></td>
                       <td width="129"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtNro_Comprobante" type="text" class="Estilo5" id="txtNro_Requisicion15"  value="<?echo $Nro_Comprobante ?>" size="10" maxlength="10" readonly>
+                      <input name="txtNro_Comprobante" type="text" class="Estilo5" id="txtNro_Requisicion15"  value="<?php echo $Nro_Comprobante ?>" size="10" maxlength="10" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -293,7 +293,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="121"><span class="Estilo5"><span class="Estilo11">OBSERVACIONES  :</span></span></td>
                       <td width="725"><span class="Estilo5"><span class="Estilo11">
-                      <textarea name="txtObservaciones" cols="105" readonly="readonly" class="Estilo5" id="txtNro_Requisicion16"><?echo $Observaciones ?></textarea>
+                      <textarea name="txtObservaciones" cols="105" readonly="readonly" class="Estilo5" id="txtNro_Requisicion16"><?php echo $Observaciones ?></textarea>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -303,7 +303,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="108"><span class="Estilo5"><span class="Estilo11">RECIBIDO POR  :</span></span></td>
                       <td width="739"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtRecibido_Por" type="text" class="Estilo5" id="txtNro_Requisicion17"  value="<?echo $Recibido_Por ?>" size="129" maxlength="129" readonly>
+                      <input name="txtRecibido_Por" type="text" class="Estilo5" id="txtNro_Requisicion17"  value="<?php echo $Recibido_Por ?>" size="129" maxlength="129" readonly>
 </span></span></td>
                     </tr>
                   </table></td>
@@ -313,7 +313,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="61"><span class="Estilo5"><span class="Estilo11">CARGO :</span></span></td>
                       <td width="710"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtCargo_Recibe" type="text" class="Estilo5" id="txtNro_Requisicion18"  value="<?echo $Cargo_Recibe ?>" size="76" maxlength="75" readonly>
+                      <input name="txtCargo_Recibe" type="text" class="Estilo5" id="txtNro_Requisicion18"  value="<?php echo $Cargo_Recibe ?>" size="76" maxlength="75" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -323,7 +323,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="114"><span class="Estilo5"><span class="Estilo11">DEPARTAMENTO :</span></span></td>
                       <td width="673"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtDepart_Recibe" type="text" class="Estilo5" id="txtNro_Requisicion19"  value="<?echo $Depart_Recibe ?>" size="65" maxlength="65" readonly>
+                      <input name="txtDepart_Recibe" type="text" class="Estilo5" id="txtNro_Requisicion19"  value="<?php echo $Depart_Recibe ?>" size="65" maxlength="65" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -333,7 +333,7 @@ MM_reloadPage(true);
                     <tr>
                       <td width="140"><span class="Estilo5"><span class="Estilo11">OTRA INFORMACI&Oacute;N  :</span></span></td>
                       <td width="651"><span class="Estilo5"><span class="Estilo11">
-                      <input name="txtOtra_informacion" type="text" class="Estilo5" id="txtNro_Requisicion20"  value="<?echo $Otra_Informacion ?>" size="60" maxlength="60" readonly>
+                      <input name="txtOtra_informacion" type="text" class="Estilo5" id="txtNro_Requisicion20"  value="<?php echo $Otra_Informacion ?>" size="60" maxlength="60" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -349,4 +349,4 @@ MM_reloadPage(true);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

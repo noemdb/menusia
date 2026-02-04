@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_entidad='';} else {$cod_entidad=$_GET["Gentidad"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Entidad)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Entidad)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../class/sia.css" type=text/css
@@ -25,11 +25,11 @@ function LlamarURL(url){  document.location = url; }
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Entidad.value==""){alert("Código de la Entidad no puede estar Vacio");return false;}
+    if(f.txtCodigo_Entidad.value==""){alert("Cï¿½digo de la Entidad no puede estar Vacio");return false;}
     if(f.txtNombre_Entidad.value==""){alert("Nombre de la Entidad no puede estar Vacia"); return false; }
        else{f.txtNombre_Entidad.value=f.txtNombre_Entidad.value.toUpperCase();}
     if(f.txtCodigo_Entidad.value.length==2){f.txtCodigo_Entidad.value=f.txtCodigo_Entidad.value.toUpperCase();}
-       else{alert("Longitud Código de la Entidad Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de la Entidad Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -38,7 +38,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_estado="";
 $sql="Select cod_estado,estado from pre091 where cod_estado='$cod_entidad'";$res=pg_query($sql);
@@ -80,7 +80,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Entidad" type="text" id="txtCodigo_Entidad" title="Registre el C&oacute;digo de la Entidad" size="10" maxlength="2"  readonly value="<?ECHO $cod_entidad?>">
+                      <input name="txtCodigo_Entidad" type="text" id="txtCodigo_Entidad" title="Registre el C&oacute;digo de la Entidad" size="10" maxlength="2"  readonly value="<?php ECHO $cod_entidad?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -91,7 +91,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Entidad" type="text" id="txtNombre_Entidad" title="Registre el Nombre de la Entidad" size="100" maxlength="200"  value="<?ECHO $den_estado?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
+                      <td width="720"><input name="txtNombre_Entidad" type="text" id="txtNombre_Entidad" title="Registre el Nombre de la Entidad" size="100" maxlength="200"  value="<?php ECHO $den_estado?>" onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -120,4 +120,4 @@ if ($registro=pg_fetch_array($res,0)){  $cod_estado=$registro["cod_estado"];   $
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

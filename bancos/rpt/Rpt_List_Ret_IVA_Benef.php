@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $periodod='01';
  $periodoh='01';
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);
@@ -20,7 +20,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Listado Retenci&oacute;n IVA por Beneficiario)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Listado Retenci&oacute;n IVA por Beneficiario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -115,17 +115,17 @@ var url;
               <td width="188" height="26">
                 <div align="left">C&Eacute;DULA /RIF DESDE : </div></td>
               <td width="109"><span class="Estilo5">
-                <input name="txtced_rif_benef_d" type="text" id="txtCodigo_Cuenta_D6" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_d?>" size="15" maxlength="15">
+                <input name="txtced_rif_benef_d" type="text" id="txtCodigo_Cuenta_D6" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_d?>" size="15" maxlength="15">
               </span></td>
               <td width="118"><span class="Estilo5">
-                <input name="Catalogo32" type="button" id="Catalogo36" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo32" type="button" id="Catalogo36" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="74">HASTA :</td>
               <td width="107"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtced_rif_benef_h" type="text" id="txtCodigo_Cuenta_D26" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $ced_rif_benef_h?>" size="15" maxlength="15">
+                <input name="txtced_rif_benef_h" type="text" id="txtCodigo_Cuenta_D26" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $ced_rif_benef_h?>" size="15" maxlength="15">
               </span></span></td>
               <td width="162"><span class="Estilo5">
-                <input name="Catalogo342" type="button" id="Catalogo342" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo342" type="button" id="Catalogo342" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
             </tr>
           </table></td>
@@ -141,13 +141,13 @@ var url;
               </div></td>
               <td width="298" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtfecha_d" type="text" id="txtfecha_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtfecha_d" type="text" id="txtfecha_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="75" align="center"><div align="left">HASTA :</div></td>
               <td width="276" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtfecha_h" type="text" id="txtfecha_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtfecha_h" type="text" id="txtfecha_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -161,11 +161,11 @@ var url;
             <tr>
               <td width="188" height="26"><p align="left">Nro. COMPROBANTE :</p></td>
               <td width="235"><span class="Estilo5">
-                <input name="txtnum_comprobante_d" type="text" id="txtnum_comprobante_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_comprobante_d?>" size="15" maxlength="15">
+                <input name="txtnum_comprobante_d" type="text" id="txtnum_comprobante_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_comprobante_d?>" size="15" maxlength="15">
               </span></td>
               <td width="73">HASTA :</td>
               <td width="268"><span class="Estilo5">
-                <input name="txtnum_comprobante_h" type="text" id="txtnum_comprobante_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $num_comprobante_h?>" size="15" maxlength="15">
+                <input name="txtnum_comprobante_h" type="text" id="txtnum_comprobante_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $num_comprobante_h?>" size="15" maxlength="15">
               </span></td>
             </tr>
           </table></td>
@@ -197,4 +197,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,11 +1,11 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php");include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="03-0000130"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);  $fecha_hoy=asigna_fecha_hoy(); $fecha_h=formato_aaaammdd($fecha_hoy); if($fecha_h>$Fec_Fin_Ejer){$fecha_d=formato_ddmmaaaa($Fec_Fin_Ejer);}else{$fecha_d=$fecha_hoy;} ;$imprimir="N";
 $cod_partida_d=""; $cod_partida_h="";
 $sql="SELECT MAX(cod_partida) As Max_partida, MIN(cod_partida) As Min_partida FROM ban021 where cod_partida<>''"; $res=pg_query($sql);
@@ -16,7 +16,7 @@ if ($registro=pg_fetch_array($res,0)){$cod_partida_d=$registro["min_partida"]; $
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Comparacion Presupuestaria Flujo de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Comparacion Presupuestaria Flujo de Caja)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="javascript" src="../../class/sia.js" type="text/javascript"></SCRIPT>
@@ -75,9 +75,9 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
           <td height="19"><table width="776" border="0">
             <tr>
               <td width="179" height="26"><div align="left"><span class="Estilo5">CODIGO PARTIDA : </span></div></td>
-              <td width="253"><span class="Estilo5"><input name="txtcod_partida_d" type="text" id="txtcod_partida_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_partida_d?>" size="30" maxlength="25" class="Estilo5"> </span></td>
+              <td width="253"><span class="Estilo5"><input name="txtcod_partida_d" type="text" id="txtcod_partida_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_partida_d?>" size="30" maxlength="25" class="Estilo5"> </span></td>
               <td width="43"></td>
-              <td width="235"><span class="Estilo5"><input name="txtcod_partida_h" type="text" id="txtcod_partida_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cod_partida_h?>" size="30" maxlength="25" class="Estilo5"> </span></td>
+              <td width="235"><span class="Estilo5"><input name="txtcod_partida_h" type="text" id="txtcod_partida_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cod_partida_h?>" size="30" maxlength="25" class="Estilo5"> </span></td>
               <td width="44"></td>
             </tr>
           </table></td>
@@ -100,4 +100,4 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

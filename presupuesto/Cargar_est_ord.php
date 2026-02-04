@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$mcod_m="PRE006".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);$ref_comp="N";$desest="";$codest="";}
 else{$codigo_mov=$_GET["codigo_mov"];$ref_comp=$_GET["ref_comp"];$desest="";$codest="";}
 ?>
@@ -7,7 +7,7 @@ else{$codigo_mov=$_GET["codigo_mov"];$ref_comp=$_GET["ref_comp"];$desest="";$cod
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Cargar Estructura de Orden)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Cargar Estructura de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -43,8 +43,8 @@ return true;}
           <td><table width="614" border="0">
               <tr>
                 <td width="99"><span class="Estilo5">C&Oacute;DIGO  : </span></td>
-                <td width="69"><span class="Estilo5"> <input class="Estilo10" name="txtcod_est" type="text" id="txtcod_est" title="Registre el C&oacute;digo de la Estructura"  size="10" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $codest?>">    </span></td>
-                <td width="432"><input class="Estilo10" name="btCatest" type="button" id="btCatest" title="Abrir Catalogo C&oacute;digo de Estructuras"  onclick="VentanaCentrada('Cat_estructura.php?codigo_mov=<?echo $codigo_mov?>&ref_comp=<?echo $ref_comp?>','SIA','','750','500','true')" value="..."></td>
+                <td width="69"><span class="Estilo5"> <input class="Estilo10" name="txtcod_est" type="text" id="txtcod_est" title="Registre el C&oacute;digo de la Estructura"  size="10" maxlength="10" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $codest?>">    </span></td>
+                <td width="432"><input class="Estilo10" name="btCatest" type="button" id="btCatest" title="Abrir Catalogo C&oacute;digo de Estructuras"  onclick="VentanaCentrada('Cat_estructura.php?codigo_mov=<?php echo $codigo_mov?>&ref_comp=<?php echo $ref_comp?>','SIPAP','','750','500','true')" value="..."></td>
               </tr>
           </table></td>
         </tr>
@@ -53,7 +53,7 @@ return true;}
             <table width="740" border="0">
               <tr>
                 <td width="92"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                <td width="589"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_est" type="text" id="txtdescripcion_est" size="95" maxlength="250" readonly value="<?echo $desest?>">   </span></td>
+                <td width="589"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_est" type="text" id="txtdescripcion_est" size="95" maxlength="250" readonly value="<?php echo $desest?>">   </span></td>
               </tr>
             </table> </td>
         </tr>
@@ -79,8 +79,8 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="32"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-            <td width="80"><input name="txtref_comp" type="hidden" id="txtref_comp" value="<?echo $ref_comp?>"></td>
+            <td width="32"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+            <td width="80"><input name="txtref_comp" type="hidden" id="txtref_comp" value="<?php echo $ref_comp?>"></td>
             <td width="97" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="94" align="center">&nbsp;</td>
             <td width="96" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>

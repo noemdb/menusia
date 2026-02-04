@@ -1,5 +1,5 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_dependen='';$cod_direcci='';}else{$cod_dependen=$_GET["cod_dependen"];$cod_direcci=$_GET["cod_direcci"];} $tcod_dir=substr($cod_direcci,2,2); 
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000007"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
@@ -9,7 +9,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Departamentos)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Departamentos)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -17,9 +17,9 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="
    <tr>
       <td align="left"><table width="840" border="0" align="left" cellpadding="0" cellspacing="0">
           <tr>
-		    <?if ($Mcamino{0}=="S"){?>
-            <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar planilla de retención" onclick="javascript:Llama_Agragar('<?echo $cod_dependen?>','<?echo $cod_direcci?>')">   </td>
-            <?}?>
+		    <?php if ($Mcamino{0}=="S"){?>
+            <td width="222" align="center" valign="middle"> <input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar planilla de retenciï¿½n" onclick="javascript:Llama_Agragar('<?php echo $cod_dependen?>','<?php echo $cod_direcci?>')">   </td>
+            <?php }?>
 			<td width="255" align="center">&nbsp;</td>
             <td width="215" align="center">&nbsp;</td>
             <td width="215" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar Codigos de Sub-Departamentos"></td>
@@ -32,7 +32,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="
     </tr>
    <tr>
      <td>
-<?
+<?php 
 $sql="SELECT * FROM BIEN006 where cod_dependencia='$cod_dependen' and cod_direccion='$cod_direcci' order by cod_departamento"; $resultado=pg_query($sql);
 ?>
  <table width="1010" border="0" cellspacing="0" cellpadding="0">
@@ -44,21 +44,21 @@ $sql="SELECT * FROM BIEN006 where cod_dependencia='$cod_dependen' and cod_direcc
            <td width="400" align="left" bgcolor="#99CCFF"><strong>Nombre Departamento</strong></td>
 	   <td width="400" align="left" bgcolor="#99CCFF"><strong>Direccion</strong></td>
          </tr>
-         <?$ult_cod=""; $des_cod=""; $filas=pg_num_rows($resultado);  
+         <?php $ult_cod=""; $des_cod=""; $filas=pg_num_rows($resultado);  
 		 while($registro=pg_fetch_array($resultado)){ $ult_cod=$registro["cod_departamento"];  if(is_numeric($ult_cod)){$ult_cod=$ult_cod+1;} ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<? echo $cod_dependen; ?>','<? echo $cod_direcci; ?>','<? echo $registro["cod_departamento"]; ?>');">
-           <td width="100" align="left"><? echo $registro["cod_departamento"]; ?></td>
-           <td width="400" align="left"><? echo $registro["denominacion_dep"]; ?></td>
-           <td width="400" align="left"><? echo $registro["direccion_dep"]; ?></td>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<?php  echo $cod_dependen; ?>','<?php  echo $cod_direcci; ?>','<?php  echo $registro["cod_departamento"]; ?>');">
+           <td width="100" align="left"><?php  echo $registro["cod_departamento"]; ?></td>
+           <td width="400" align="left"><?php  echo $registro["denominacion_dep"]; ?></td>
+           <td width="400" align="left"><?php  echo $registro["direccion_dep"]; ?></td>
          </tr>
-         <?}  ?>
+         <?php }  ?>
        </table></td>
    </tr>
  </table>
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
 var mult_cod='<?php echo $ult_cod ?>';

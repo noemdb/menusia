@@ -1,4 +1,4 @@
-<?include ("../../class/conect.php");  include ("../../class/funciones.php");
+<?php include ("../../class/conect.php");  include ("../../class/funciones.php");
 $cod_banco=$_GET["cod_banco"]; $tipo_mov=$_GET["tipo_mov"]; $referencia=$_GET["referencia"];  $tipo_planilla=$_GET["tipo"];
 $fecha_hoy=asigna_fecha_hoy(); $nombre_planilla="COMPROBANTE DE RETENCION DE IMPUESTO SOBRE LA RENTA";
 if($tipo_planilla=="02"){$nombre_planilla="COMPROBANTE DE RETENCION RESPONSABILIDAD SOCIAL"; }
@@ -7,7 +7,7 @@ if($tipo_planilla=="02"){$nombre_planilla="COMPROBANTE DE RETENCION RESPONSABILI
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Comprobante Retencion)</title>
+<title>SIPAP CONTROL BANCARIO (Comprobante Retencion)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
@@ -30,9 +30,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $direccion="CALLE 48 CON CARRERA 13 EDIF HIDROLARA, PISO 2, LOCAL S/N, SECTOR VICENTE-CAJA DE AGUA"; $nombre_emp="HIDROLARA C.A."; $ced_rif_emp="G-20009014-6";
 $nro_comp=""; $sustraendo=0; $descripcion_ret=""; $fechae=""; $tipo_en=""; $tipo_documento=""; $nro_documento=""; $nro_con_factura=""; $fecha=""; $descripcion=""; $tipo_operacion="A";
 $ced_rif="";  $nombre_benef=""; $monto_r=0; $monto_o=0; $tasa=0; $error=0;
@@ -46,7 +46,7 @@ if ($registro=pg_fetch_array($res,0)){
   $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
   $nro_comp=$nro_planilla; $ced_rif=$registro["ced_rif"];  $nombre_benef=$registro["nombre"];
   $sustraendo=$registro["sustraendo"];
-} else{echo $sql;  $error=1; ?> <script language="JavaScript">muestra('COMPROBANTE  NO LOCALIZADO');</script><?}
+} else{echo $sql;  $error=1; ?> <script language="JavaScript">muestra('COMPROBANTE  NO LOCALIZADO');</script><?php }
 
 ?>
 <body>
@@ -70,14 +70,14 @@ if ($registro=pg_fetch_array($res,0)){
                                   <td><span class="Estilo22"> 0.- NRO. DE COMPROBANTE</span></td>
                                 </tr>
                                 <tr>
-                                  <td align="center"><span class="Estilo20"><?echo $nro_comp?></span></td>
+                                  <td align="center"><span class="Estilo20"><?php echo $nro_comp?></span></td>
                                 </tr>
                             </table></td>
                           </tr>
                         </table></td>
                       </tr>
                       <tr>
-                        <td width="537" height="38" align="center"><span class="Estilo21"><?echo $nombre_planilla?></span></td>
+                        <td width="537" height="38" align="center"><span class="Estilo21"><?php echo $nombre_planilla?></span></td>
                         <td width="208"><table width="180" height="47" border="1" align="center" cellpadding="0" cellspacing="0">
                             <tr>
                               <td><table width="175" height="45" border="0" cellpadding="4" cellspacing="2">
@@ -85,7 +85,7 @@ if ($registro=pg_fetch_array($res,0)){
                                     <td><span class="Estilo19">1.- FECHA </span></td>
                                   </tr>
                                   <tr>
-                                    <td align="center"><span class="Estilo20"><?echo $fechae?></span></td>
+                                    <td align="center"><span class="Estilo20"><?php echo $fechae?></span></td>
                                   </tr>
                               </table></td>
                             </tr>
@@ -114,7 +114,7 @@ if ($registro=pg_fetch_array($res,0)){
                      <td><span class="Estilo19"> 2.- NOMBRE O RAZ&Oacute;N SOCIAL DEL AGENTE DE RETENCI&Oacute;N</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $nombre_emp?></span></td>
+                     <td><span class="Estilo20"><?php echo $nombre_emp?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -126,7 +126,7 @@ if ($registro=pg_fetch_array($res,0)){
                      <td><span class="Estilo19"> 3.- REGISTRO DE INFORMACI&Oacute;N FISCAL DEL AGENTE DE RETENCI&Oacute;N</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $ced_rif_emp?></span></td>
+                     <td><span class="Estilo20"><?php echo $ced_rif_emp?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -145,7 +145,7 @@ if ($registro=pg_fetch_array($res,0)){
                <td width="911"><span class="Estilo19">5.- DIRECCI&Oacute;N FISCAL DEL AGENTE DE RETENCI&Oacute;N </span></td>
              </tr>
              <tr>
-               <td><span class="Estilo20"><?echo $direccion?></span></td>
+               <td><span class="Estilo20"><?php echo $direccion?></span></td>
              </tr>
            </table></td>
          </tr>
@@ -165,7 +165,7 @@ if ($registro=pg_fetch_array($res,0)){
                      <td><span class="Estilo19"> 2.- NOMBRE O RAZ&Oacute;N SOCIAL DEL SUJETO RETENIDO</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $nombre_benef?></span></td>
+                     <td><span class="Estilo20"><?php echo $nombre_benef?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -177,7 +177,7 @@ if ($registro=pg_fetch_array($res,0)){
                      <td><span class="Estilo19"> 3.- REGISTRO DE INFORMACI&Oacute;N FISCAL DEL SUJETO RETENIDO</span></td>
                    </tr>
                    <tr>
-                     <td><span class="Estilo20"><?echo $ced_rif?></span></td>
+                     <td><span class="Estilo20"><?php echo $ced_rif?></span></td>
                    </tr>
                </table></td>
              </tr>
@@ -190,7 +190,7 @@ if ($registro=pg_fetch_array($res,0)){
 
   <tr><td><div id="Layer3" style="position:absolute; width:897px; height:97px; z-index:2; top: 350px; left: 21px;">
   <table width="889" height="80" border="0"  cellpadding="0" cellspacing="0">
-<?if($tipo_documento=="FACTURA"){ ?>
+<?php if($tipo_documento=="FACTURA"){ ?>
     <tr><td><table width="865" border="1"  height="30" cellpadding="2" cellspacing="0">
        <tr>
           <td width="40" align="center"><span class="Estilo19">OPER. N.</span></td>
@@ -202,7 +202,7 @@ if ($registro=pg_fetch_array($res,0)){
           <td width="30" align="center"><span class="Estilo19">% ALIC.</span></td>
           <td width="70" align="center"><span class="Estilo19">RETENIDO</span></td>
                 </tr>
-<? $total_d=0;  $total_s=0;  $total_b=0;  $total_iva=0;  $total_ret=0; $aplica_sust=1;
+<?php  $total_d=0;  $total_s=0;  $total_b=0;  $total_iva=0;  $total_ret=0; $aplica_sust=1;
 $monto_r="";$monto_o=""; $monto1=0; $monto2=0;  $nro_op=0;
 if($tipo_planilla=="01"){$sql="SELECT * FROM PAG016  where nro_orden='$orden' order by nro_factura";}
 else{$sql="SELECT * FROM PAG016  where nro_orden='$orden'  and status_2='N' order by nro_factura";}
@@ -219,22 +219,22 @@ $total_ret=$montor+$total_ret; $montor=formato_monto($montor);
 
 ?>
         <tr>
-           <td width="40" align="center"><span class="Estilo19"><? echo $nro_op; ?></span></td>
-           <td width="55" align="center"><span class="Estilo19"><? echo $fecha; ?></span></td>
-           <td width="90" align="left"><span class="Estilo19"><? echo $nro_fact; ?></span></td>
-           <td width="80" align="left"><span class="Estilo19"><? echo $nro_control; ?></span></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $monto; ?></span></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $montob; ?></span></td>
-           <td width="30" align="right"><span class="Estilo19"><? echo $tasa; ?></span></td>
-           <td width="70" align="right"><span class="Estilo19"><? echo $montor; ?></span></td>
+           <td width="40" align="center"><span class="Estilo19"><?php  echo $nro_op; ?></span></td>
+           <td width="55" align="center"><span class="Estilo19"><?php  echo $fecha; ?></span></td>
+           <td width="90" align="left"><span class="Estilo19"><?php  echo $nro_fact; ?></span></td>
+           <td width="80" align="left"><span class="Estilo19"><?php  echo $nro_control; ?></span></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $monto; ?></span></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $montob; ?></span></td>
+           <td width="30" align="right"><span class="Estilo19"><?php  echo $tasa; ?></span></td>
+           <td width="70" align="right"><span class="Estilo19"><?php  echo $montor; ?></span></td>
                 </tr>
-<? }
+<?php }
  $total_d=formato_monto($total_d); $total_s=formato_monto($total_s); $total_b=formato_monto($total_b);
  $prev_ret=$total_ret; $total_ret=formato_monto($total_ret); $total_iva=formato_monto($total_iva);
 ?>
        </table></td>
       </tr>
-<? }else { $total_d=$monto_o;  $total_s=0;  $total_b=$monto_o;  $total_iva=0;  $total_ret=$monto_r; $prev_ret=$total_ret;  $nro_op=1; ?>
+<?php }else { $total_d=$monto_o;  $total_s=0;  $total_b=$monto_o;  $total_iva=0;  $total_ret=$monto_r; $prev_ret=$total_ret;  $nro_op=1; ?>
     <tr><td><table width="865" border="1"  height="30" cellpadding="2" cellspacing="0">
        <tr>
           <td width="40" align="center"><span class="Estilo19">OPER. N.</span></td>
@@ -247,27 +247,27 @@ $total_ret=$montor+$total_ret; $montor=formato_monto($montor);
           <td width="70" align="center"><span class="Estilo19">RETENIDO</span></td>
       </tr>
       <tr>
-                   <td width="40" align="center"><span class="Estilo19"><? echo $nro_op; ?></span></td>
-           <td width="55" align="center"><span class="Estilo19"><? echo $fechae; ?></span></td>
-           <td width="90" align="left"><span class="Estilo19"><? echo $nro_documento; ?></span></td>
-           <td width="80" align="left"><span class="Estilo19"><? echo  $nro_con_factura; ?></span></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $monto_o; ?></span></td>
-           <td width="77" align="right"><span class="Estilo19"><? echo $monto_o; ?></span></td>
-           <td width="30" align="right"><span class="Estilo19"><? echo $tasa; ?></span></td>
-           <td width="70" align="right"><span class="Estilo19"><? echo $monto_r; ?></span></td>
+                   <td width="40" align="center"><span class="Estilo19"><?php  echo $nro_op; ?></span></td>
+           <td width="55" align="center"><span class="Estilo19"><?php  echo $fechae; ?></span></td>
+           <td width="90" align="left"><span class="Estilo19"><?php  echo $nro_documento; ?></span></td>
+           <td width="80" align="left"><span class="Estilo19"><?php  echo  $nro_con_factura; ?></span></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $monto_o; ?></span></td>
+           <td width="77" align="right"><span class="Estilo19"><?php  echo $monto_o; ?></span></td>
+           <td width="30" align="right"><span class="Estilo19"><?php  echo $tasa; ?></span></td>
+           <td width="70" align="right"><span class="Estilo19"><?php  echo $monto_r; ?></span></td>
                 </tr>
    </table></td>
       </tr>
-<? }?>
+<?php }?>
           <tr>
           <td><table width="865" border="1"  height="30" cellpadding="2" cellspacing="0">
             <tr>
             <td width="433" align="right"><span class="Estilo19">TOTALES </span></td>
-            <td width="120" align="right"><span class="Estilo19"><? echo $total_d; ?></span></td>
-            <td width="122" align="right"><span class="Estilo19"><? echo $total_b; ?></span></td>
+            <td width="120" align="right"><span class="Estilo19"><?php  echo $total_d; ?></span></td>
+            <td width="122" align="right"><span class="Estilo19"><?php  echo $total_b; ?></span></td>
             <td width="46" align="center"><span class="Estilo19">&nbsp;</span></td>
-            <td width="112" align="right"><span class="Estilo19"><? echo $total_ret; ?></span></td>
-<?if($sustraendo>0){ $total_sut=formato_monto($sustraendo); $prev_ret=$prev_ret-$sustraendo; $prev_ret=formato_monto($prev_ret);  ?>	
+            <td width="112" align="right"><span class="Estilo19"><?php  echo $total_ret; ?></span></td>
+<?php if($sustraendo>0){ $total_sut=formato_monto($sustraendo); $prev_ret=$prev_ret-$sustraendo; $prev_ret=formato_monto($prev_ret);  ?>	
             <tr>
             <td width="433" align="right"><span class="Estilo19"></span></td>
             <td width="120" align="right"><span class="Estilo19"></span></td>
@@ -276,7 +276,7 @@ $total_ret=$montor+$total_ret; $montor=formato_monto($montor);
             <td width="112" align="right"><table width="110" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="60" align="left"><span class="Estilo19">Sustraendo:</span></td>
-                <td width="50" align="right"><span class="Estilo19"><? echo $total_sut; ?></span></td>
+                <td width="50" align="right"><span class="Estilo19"><?php  echo $total_sut; ?></span></td>
               </tr>
             </table></td>
             </tr>
@@ -285,9 +285,9 @@ $total_ret=$montor+$total_ret; $montor=formato_monto($montor);
             <td width="120" align="right"><span class="Estilo19"></span></td>
             <td width="122" align="right"><span class="Estilo19"></span></td>
             <td width="46" align="center"><span class="Estilo19"></span></td>
-            <td width="112" align="right"><span class="Estilo19"><? echo $prev_ret; ?></span></td>
+            <td width="112" align="right"><span class="Estilo19"><?php  echo $prev_ret; ?></span></td>
             </tr>
-<? }?>					
+<?php }?>					
             </tr>
           </table></td>
           </tr>

@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $Formato_Cuenta="X-X-XXX-XX-XX-XXXX";
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else { $Nom_Emp=busca_conf(); }
 $sql="Select * from SIA005 where campo501='06'";  $resultado=pg_query($sql);  if ($registro=pg_fetch_array($resultado,0)){$Formato_Cuenta=$registro["campo504"];}
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="01-0000005"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$codigo_cuenta='';$p_letra=''; $sql="SELECT * FROM CON001 ORDER BY codigo_cuenta";
 } else { $codigo_cuenta = $_GET["Gcodigo_cuenta"];$p_letra=substr($codigo_cuenta, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="C")||($p_letra=="S")||($p_letra=="A")){$codigo_cuenta=substr($codigo_cuenta,1,20);}
@@ -22,7 +22,7 @@ if (!$_GET){$codigo_cuenta='';$p_letra=''; $sql="SELECT * FROM CON001 ORDER BY c
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL (Cuentas Contables)</title>
+<title>SIPAP CONTABILIDAD FISCAL (Cuentas Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -62,7 +62,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $nombre_cuenta="";$cargable=""; $clasificacion="";$tSaldo="";  $saldo_anterior=0;  $fecha_creado="";
 $debito01=0;$credito01=0;$saldop01=0;$saldo01=0;$debito02=0;$credito02=0;$saldop02=0;$saldo02=0;
 $debito03=0;$credito03=0;$saldop03=0;$saldo03=0;$debito04=0;$credito04=0;$saldop04=0;$saldo04=0;
@@ -147,17 +147,17 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
 <table width="977" height="507" border="1" id="tablacuerpo">
   <tr>
     <td><table width="92" height="502" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-    <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+    <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_comprob()";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_comprob()">Incluir</A></td>
       </tr>
-	  <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_cuentas.php?Gcodigo_cuenta=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Ventana('Mod_cuentas.php?Gcodigo_cuenta=');">Modificar</A></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?>
+	  <?php } if ($Mcamino{2}=="S"){?>
 	  <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cons_cuentas.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cons_cuentas.php" class="menu">Consultar</a></td>
@@ -180,15 +180,15 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_cuentas.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_cuentas.php" class="menu">Catalogo</a></td>
   </tr>
-  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></td>
   </tr>
-  <?} ?>
+  <?php } ?>
   <tr>
-    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_cuentas_con.htm','Ayuda SIA','','1000','1000','true');";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_cuentas_con.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_cuentas_con.htm','Ayuda SIPAP','','1000','1000','true');";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_cuentas_con.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -207,10 +207,10 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
                 <tr>
                   <td width="669"><blockquote>
                     <p><span class="Estilo5">C&Oacute;DIGO DE CUENTA :
-                            <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" value="<?echo $codigo_cuenta?>" size="30" readonly>
+                            <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" value="<?php echo $codigo_cuenta?>" size="30" readonly>
                         </span></p>
                   </blockquote></td>
-                  <td width="157"><input name=txtCargable class="Estilo5" id="txtCargable" value="<?echo $cargable?>" readonly></td>
+                  <td width="157"><input name=txtCargable class="Estilo5" id="txtCargable" value="<?php echo $cargable?>" readonly></td>
                 </tr>
               </table></td>
             </tr>
@@ -218,7 +218,7 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
               <td><table width="849" border="0">
                 <tr>
                   <td width="162"><blockquote><span class="Estilo5">NOMBRE DE LA CUENTA :</span></blockquote></td>
-                  <td width="677"><textarea name="txtNombre_Cuenta" cols="80" readonly="readonly" class="headers" id="txtNombre_Cuenta"><?echo $nombre_cuenta?></textarea></td>
+                  <td width="677"><textarea name="txtNombre_Cuenta" cols="80" readonly="readonly" class="headers" id="txtNombre_Cuenta"><?php echo $nombre_cuenta?></textarea></td>
                 </tr>
               </table>                </td>
             </tr>
@@ -226,12 +226,12 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
               <td height="34"><table width="863" border="0">
                 <tr>
                   <td width="260"><blockquote><span class="Estilo5">TIPO DE SALDO :
-                      <input readonly name="txtTSaldo" type="text" id="txtTSaldo" value="<?echo $tSaldo?>" size="10">
+                      <input readonly name="txtTSaldo" type="text" id="txtTSaldo" value="<?php echo $tSaldo?>" size="10">
                   </span> </blockquote></td>
                   <td width="260" class="Estilo5"><span class="Estilo5">CLASIFICACI&Oacute;N :</span>
-                  <input readonly name="txtclasificacion" type="text" id="txtclasificacion" value="<?echo $clasificacion?>" size="15"></td>
+                  <input readonly name="txtclasificacion" type="text" id="txtclasificacion" value="<?php echo $clasificacion?>" size="15"></td>
                   <td width="295" class="Estilo5"><span class="Estilo5">SALDO ANTERIOR  :</span>
-                  <input readonly name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?echo $saldo_anterior?>" size="25" style="text-align:right"></td>
+                  <input readonly name="txtsaldo_anterior" type="text" id="txtsaldo_anterior" value="<?php echo $saldo_anterior?>" size="25" style="text-align:right"></td>
                 </tr>
               </table>                </td>
             </tr>
@@ -246,87 +246,87 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
           </tr>
           <tr class="Estilo5">
             <td height="20" class="Estilo5">ENERO</td>
-            <td align="right"><? echo $debito01; ?></td>
-            <td align="right"><? echo $credito01; ?></td>
-            <td align="right"><? echo $saldop01; ?></td>
-            <td align="right"><? echo $saldo01; ?></td>
+            <td align="right"><?php  echo $debito01; ?></td>
+            <td align="right"><?php  echo $credito01; ?></td>
+            <td align="right"><?php  echo $saldop01; ?></td>
+            <td align="right"><?php  echo $saldo01; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20" class="Estilo5">FEBRERO</td>
-            <td align="right"><? echo $debito02; ?></td>
-            <td align="right"><? echo $credito02; ?></td>
-            <td align="right"><? echo $saldop02; ?></td>
-            <td align="right"><? echo $saldo02; ?></td>
+            <td align="right"><?php  echo $debito02; ?></td>
+            <td align="right"><?php  echo $credito02; ?></td>
+            <td align="right"><?php  echo $saldop02; ?></td>
+            <td align="right"><?php  echo $saldo02; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">MARZO</td>
-            <td align="right"><? echo $debito03; ?></td>
-            <td align="right"><? echo $credito03; ?></td>
-            <td align="right"><? echo $saldop03; ?></td>
-            <td align="right"><? echo $saldo03; ?></td>
+            <td align="right"><?php  echo $debito03; ?></td>
+            <td align="right"><?php  echo $credito03; ?></td>
+            <td align="right"><?php  echo $saldop03; ?></td>
+            <td align="right"><?php  echo $saldo03; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">ABRIL</td>
-            <td align="right"><? echo $debito04; ?></td>
-            <td align="right"><? echo $credito04; ?></td>
-            <td align="right"><? echo $saldop04; ?></td>
-            <td align="right"><? echo $saldo04; ?></td>
+            <td align="right"><?php  echo $debito04; ?></td>
+            <td align="right"><?php  echo $credito04; ?></td>
+            <td align="right"><?php  echo $saldop04; ?></td>
+            <td align="right"><?php  echo $saldo04; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">MAYO</td>
-            <td align="right"><? echo $debito05; ?></td>
-            <td align="right"><? echo $credito05; ?></td>
-            <td align="right"><? echo $saldop05; ?></td>
-            <td align="right"><? echo $saldo05; ?></td>
+            <td align="right"><?php  echo $debito05; ?></td>
+            <td align="right"><?php  echo $credito05; ?></td>
+            <td align="right"><?php  echo $saldop05; ?></td>
+            <td align="right"><?php  echo $saldo05; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">JUNIO</td>
-            <td align="right"><? echo $debito06; ?></td>
-            <td align="right"><? echo $credito06; ?></td>
-            <td align="right"><? echo $saldop06; ?></td>
-            <td align="right"><? echo $saldo06; ?></td>
+            <td align="right"><?php  echo $debito06; ?></td>
+            <td align="right"><?php  echo $credito06; ?></td>
+            <td align="right"><?php  echo $saldop06; ?></td>
+            <td align="right"><?php  echo $saldo06; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">JULIO</td>
-            <td align="right"><? echo $debito07; ?></td>
-            <td align="right"><? echo $credito07; ?></td>
-            <td align="right"><? echo $saldop07; ?></td>
-            <td align="right"><? echo $saldo07; ?></td>
+            <td align="right"><?php  echo $debito07; ?></td>
+            <td align="right"><?php  echo $credito07; ?></td>
+            <td align="right"><?php  echo $saldop07; ?></td>
+            <td align="right"><?php  echo $saldo07; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">AGOSTO</td>
-            <td align="right"><? echo $debito08; ?></td>
-            <td align="right"><? echo $credito08; ?></td>
-            <td align="right"><? echo $saldop08; ?></td>
-            <td align="right"><? echo $saldo08; ?></td>
+            <td align="right"><?php  echo $debito08; ?></td>
+            <td align="right"><?php  echo $credito08; ?></td>
+            <td align="right"><?php  echo $saldop08; ?></td>
+            <td align="right"><?php  echo $saldo08; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">SEPTIEMBRE</td>
-            <td align="right"><? echo $debito09; ?></td>
-            <td align="right"><? echo $credito09; ?></td>
-            <td align="right"><? echo $saldop09; ?></td>
-            <td align="right"><? echo $saldo09; ?></td>
+            <td align="right"><?php  echo $debito09; ?></td>
+            <td align="right"><?php  echo $credito09; ?></td>
+            <td align="right"><?php  echo $saldop09; ?></td>
+            <td align="right"><?php  echo $saldo09; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">OCTUBRE</td>
-            <td align="right"><? echo $debito10; ?></td>
-            <td align="right"><? echo $credito10; ?></td>
-            <td align="right"><? echo $saldop10; ?></td>
-            <td align="right"><? echo $saldo10; ?></td>
+            <td align="right"><?php  echo $debito10; ?></td>
+            <td align="right"><?php  echo $credito10; ?></td>
+            <td align="right"><?php  echo $saldop10; ?></td>
+            <td align="right"><?php  echo $saldo10; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">NOVIEMBRE</td>
-            <td align="right"><? echo $debito11; ?></td>
-            <td align="right"><? echo $credito11; ?></td>
-            <td align="right"><? echo $saldop11; ?></td>
-            <td align="right"><? echo $saldo11; ?></td>
+            <td align="right"><?php  echo $debito11; ?></td>
+            <td align="right"><?php  echo $credito11; ?></td>
+            <td align="right"><?php  echo $saldop11; ?></td>
+            <td align="right"><?php  echo $saldo11; ?></td>
           </tr>
           <tr class="Estilo5">
             <td height="20">DICIEMBRE</td>
-            <td align="right"><? echo $debito12; ?></td>
-            <td align="right"><? echo $credito12; ?></td>
-            <td align="right"><? echo $saldop12; ?></td>
-            <td align="right"><? echo $saldo12; ?></td>
+            <td align="right"><?php  echo $debito12; ?></td>
+            <td align="right"><?php  echo $credito12; ?></td>
+            <td align="right"><?php  echo $saldop12; ?></td>
+            <td align="right"><?php  echo $saldo12; ?></td>
           </tr>
         </table>
         <table width="868" border="0">
@@ -334,7 +334,7 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
               <td><table width="848" border="0">
                 <tr>
                   <td width="769"><blockquote>
-                    <p><span class="Estilo5">FECHA REGISTRO :<input name="txtFecha_Creado" type="text" id="txtFecha_Creado" value="<?echo $fecha_creado?>" size="10" readonly>
+                    <p><span class="Estilo5">FECHA REGISTRO :<input name="txtFecha_Creado" type="text" id="txtFecha_Creado" value="<?php echo $fecha_creado?>" size="10" readonly>
                         </span></p>
                   </blockquote></td>
                  </tr>
@@ -350,17 +350,17 @@ if ($MClasif_Fiscal=="99") {$clasificacion="No Clasificada";}
 <form name="form2" method="post" action="Inc_cuentas.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input name="txtSIA_Definicion" type="hidden" id="txtSIA_Definicion" value="<?echo $SIA_Definicion?>" ></td>
-	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?echo $Rif_Emp?>"></td>
-     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?echo $Nom_Emp?>"></td>
-	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
-	 <td width="5"><input name="txtformato" type="hidden" id="txtformato" value="<?echo $Formato_Cuenta?>"></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input name="txtSIA_Definicion" type="hidden" id="txtSIA_Definicion" value="<?php echo $SIA_Definicion?>" ></td>
+	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?php echo $Rif_Emp?>"></td>
+     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?php echo $Nom_Emp?>"></td>
+	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
+	 <td width="5"><input name="txtformato" type="hidden" id="txtformato" value="<?php echo $Formato_Cuenta?>"></td>
   </tr>
 </table>
 </form>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

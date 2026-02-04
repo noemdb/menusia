@@ -1,4 +1,4 @@
-<? include ("../class/conect.php"); include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");
+<?php  include ("../class/conect.php"); include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$mcod_m="PAG001".$usuario_sia.$equipo;$codigo_mov=substr($mcod_m,0,49);}
 else{$codigo_mov=$_GET["codigo_mov"];$user=$_GET["user"];$password=$_GET["password"];$dbname=$_GET["dbname"];}
 ?>
@@ -6,7 +6,7 @@ else{$codigo_mov=$_GET["codigo_mov"];$user=$_GET["user"];$password=$_GET["passwo
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Retencion en la orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Retencion en la orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
@@ -28,7 +28,7 @@ function daformatomonto (monto){var i;var str2 ="";
 function eliminapunto (monto){var i;var str2 =""; 
    for (i = 0; i < monto.length; i++){if((monto.charAt(i) == '.')){str2 = str2;} else{str2 = str2 + monto.charAt(i);}  }
 return str2;} 
-function llamar_anterior(){ document.location ='Det_inc_ret_orden.php?codigo_mov=<?echo $codigo_mov?>&bloqueada=N'; }
+function llamar_anterior(){ document.location ='Det_inc_ret_orden.php?codigo_mov=<?php echo $codigo_mov?>&bloqueada=N'; }
 function chequea_tipo(mform){var mref;
    mref=mform.txttipo_retencion.value;  mref=Rellenarizq(mref,"0",3);   mform.txttipo_retencion.value=mref;
 return true;}
@@ -124,7 +124,7 @@ return true;}
 -->
 </style>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $cod_part_iva="403-18-01";
 $tipo_retencion="";$descripcion_ret="";$tasa=0;$ced_rif="";$nombre="";  $sustraendo=0; $monto_ret=0; $monto_objeto=0;
 $sql="select * from RETENCIONES where ret_grupo='I' order by tipo_retencion";$res=pg_query($sql);
@@ -157,9 +157,9 @@ $monto_objeto=formato_monto($monto_objeto);
           <td><table width="737">
             <tr>
               <td width="112"><span class="Estilo5">TIPO RETENCI&Oacute;N:</span></td>
-              <td width="46"><span class="Estilo5"><input class="Estilo10" name="txttipo_retencion" type="text" id="txttipo_retencion" size="4" maxlength="3"  onFocus="encender(this)" onBlur="apaga_tipo(this)"  onchange="chequea_tipo(this.form);" value="<?echo $tipo_retencion?>">  </span></td>
-              <td width="43"><input class="Estilo10" name="bttiporet" type="button" id="bttiporet" title="Abrir Catalogo Tipos de Retencion" onclick="VentanaCentrada('Cat_tipo_ret_islr.php?criterio=','SIA','','750','500','true')" value="..."></td>
-              <td width="497"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_ret" type="text" id="txtdescripcion_ret"  value="<?echo $descripcion_ret?>"  readonly  size="77"> </span></td>
+              <td width="46"><span class="Estilo5"><input class="Estilo10" name="txttipo_retencion" type="text" id="txttipo_retencion" size="4" maxlength="3"  onFocus="encender(this)" onBlur="apaga_tipo(this)"  onchange="chequea_tipo(this.form);" value="<?php echo $tipo_retencion?>">  </span></td>
+              <td width="43"><input class="Estilo10" name="bttiporet" type="button" id="bttiporet" title="Abrir Catalogo Tipos de Retencion" onclick="VentanaCentrada('Cat_tipo_ret_islr.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
+              <td width="497"><span class="Estilo5"><input class="Estilo10" name="txtdescripcion_ret" type="text" id="txtdescripcion_ret"  value="<?php echo $descripcion_ret?>"  readonly  size="77"> </span></td>
             </tr>
           </table></td>
         </tr>
@@ -176,10 +176,10 @@ $monto_objeto=formato_monto($monto_objeto);
                     //ajaxSenddoc('GET','cargacodret.php?codigo_mov='+mcodigo_mov+'&password='+mpassword+'&user='+muser+'&dbname='+mdbname, 'codigop', 'innerHTML');	
                </script>              
 			  <td width="538"><span class="Estilo5">
-			    <?$sql="select * from pre026 where (codigo_mov='$codigo_mov') and (monto>0)  and (cod_presup not in (select cod_presup from pre026 where (cod_presup LIKE '%$cod_part_iva%')))order by tipo_compromiso,referencia_comp,cod_presup,fuente_financ"; $res=pg_query($sql);
-?><select name="txtcod_ret" size="1" id="txtcod_ret" onFocus="encender(this)" onBlur="apaga_cod_ret(this)" onchange="chequea_cod_ret(this.form);"><?
+			    <?php $sql="select * from pre026 where (codigo_mov='$codigo_mov') and (monto>0)  and (cod_presup not in (select cod_presup from pre026 where (cod_presup LIKE '%$cod_part_iva%')))order by tipo_compromiso,referencia_comp,cod_presup,fuente_financ"; $res=pg_query($sql);
+?><select name="txtcod_ret" size="1" id="txtcod_ret" onFocus="encender(this)" onBlur="apaga_cod_ret(this)" onchange="chequea_cod_ret(this.form);"><?php 
 while($registro=pg_fetch_array($res)){$codigo=$registro["tipo_compromiso"]." ".$registro["referencia_comp"]." ".$registro["fuente_financ"]." ".$registro["cod_presup"];
-?><option value="<? echo $codigo;?>"><? echo $codigo;?></option><?}?>  </select>              </span></td>
+?><option value="<?php  echo $codigo;?>"><?php  echo $codigo;?></option><?php }?>  </select>              </span></td>
             </tr>
           </table></td>
         </tr>
@@ -187,13 +187,13 @@ while($registro=pg_fetch_array($res)){$codigo=$registro["tipo_compromiso"]." ".$
           <td><table width="733" border="0">
             <tr>
               <td width="42"><span class="Estilo5">TASA:</span></td>
-              <td width="57"><span class="Estilo5"><input class="Estilo10" name="txttasa" type="text" id="txttasa" size="5" maxlength="5"  onFocus="encender(this)" onBlur="apaga_tasa(this)" onchange="chequea_tasa(this.form);" value="<?echo $tasa?>" onKeypress="return validarNum(event)"> </span></td>
+              <td width="57"><span class="Estilo5"><input class="Estilo10" name="txttasa" type="text" id="txttasa" size="5" maxlength="5"  onFocus="encender(this)" onBlur="apaga_tasa(this)" onchange="chequea_tasa(this.form);" value="<?php echo $tasa?>" onKeypress="return validarNum(event)"> </span></td>
               <td width="90"><span class="Estilo5">SUSTRAENDO:</span></td>
-              <td width="75"><span class="Estilo5"><input class="Estilo10" name="txtsustraendo" type="text" id="txtsustraendo" size="6" maxlength="5"  readonly			  onchange="chequea_tasa(this.form);"  value="<?echo $sustraendo?>" onKeypress="return validarNum(event)"> </span></td>
+              <td width="75"><span class="Estilo5"><input class="Estilo10" name="txtsustraendo" type="text" id="txtsustraendo" size="6" maxlength="5"  readonly			  onchange="chequea_tasa(this.form);"  value="<?php echo $sustraendo?>" onKeypress="return validarNum(event)"> </span></td>
               <td width="111"><span class="Estilo5">MONTO OBJETO: </span></td>
-              <td width="135"><span class="Estilo5"><div id="montOb"> <input class="Estilo10" name="txtmonto_objeto" type="text" id="txtmonto_objeto" size="15" style="text-align:right" maxlength="22" value="<?echo $monto_objeto?>" onFocus="encende_objeto(this)" onBlur="apaga_objeto(this)"  onchange="chequea_objeto(this.form);" onKeypress="return validarNum(event)"> </div></span></td>
+              <td width="135"><span class="Estilo5"><div id="montOb"> <input class="Estilo10" name="txtmonto_objeto" type="text" id="txtmonto_objeto" size="15" style="text-align:right" maxlength="22" value="<?php echo $monto_objeto?>" onFocus="encende_objeto(this)" onBlur="apaga_objeto(this)"  onchange="chequea_objeto(this.form);" onKeypress="return validarNum(event)"> </div></span></td>
               <td width="83"><span class="Estilo5">RETENCI&Oacute;N:</span></td>
-              <td width="114"><span class="Estilo5"><input class="Estilo10" name="txtmonto_retencion" type="text" id="txtmonto_retencion" size="14" style="text-align:right" maxlength="22" onFocus="encender(this)" onBlur="apaga_monto_ret(this)" value="<?echo $monto_ret?>" onKeypress="return validarNum(event)">
+              <td width="114"><span class="Estilo5"><input class="Estilo10" name="txtmonto_retencion" type="text" id="txtmonto_retencion" size="14" style="text-align:right" maxlength="22" onFocus="encender(this)" onBlur="apaga_monto_ret(this)" value="<?php echo $monto_ret?>" onKeypress="return validarNum(event)">
               </span></td>
             </tr>
           </table></td>
@@ -202,9 +202,9 @@ while($registro=pg_fetch_array($res)){$codigo=$registro["tipo_compromiso"]." ".$
           <td><table width="737" border="0">
             <tr>
               <td width="145"><span class="Estilo5">CED/RIF BENEFICIARIO:</span></td>
-              <td width="153"><span class="Estilo5">  <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $ced_rif?>" > </span> </td>
-              <td width="40"><span class="Estilo5"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../presupuesto/Cat_beneficiarios.php?criterio=','SIA','','750','500','true')" value="...">  </span></td>
-              <td width="375"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre" size="60" value="<?echo $nombre?>" readonly>  </span> </td>
+              <td width="153"><span class="Estilo5">  <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $ced_rif?>" > </span> </td>
+              <td width="40"><span class="Estilo5"><input class="Estilo10" name="btced_rif" type="button" id="btced_rif" title="Abrir Catalogo de Beneficiarios" onClick="VentanaCentrada('../presupuesto/Cat_beneficiarios.php?criterio=','SIPAP','','750','500','true')" value="...">  </span></td>
+              <td width="375"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre" size="60" value="<?php echo $nombre?>" readonly>  </span> </td>
             </tr>
           </table></td>
         </tr>
@@ -217,7 +217,7 @@ while($registro=pg_fetch_array($res)){$codigo=$registro["tipo_compromiso"]." ".$
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="20"><input name="txtdes_orden_ret" type="hidden" id="txtdes_orden_ret" ></td>
             <td width="80">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>

@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");?>
+<?php include ("../class/seguridad.inc");?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Emisi&oacute;n Notas de D&eacute;bitos a Orden)</title>
+<title>SIPAP CONTROL BANCARIO (Emisi&oacute;n Notas de D&eacute;bitos a Orden)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -16,7 +16,7 @@ var murl;
 var Gcodigo_cuenta=document.form1.txtCodigo_Cuenta.value;
     murl=url+Gcodigo_cuenta;
     if (Gcodigo_cuenta=="")
-        {alert("Código de Cuenta debe ser Seleccionada");}
+        {alert("Cï¿½digo de Cuenta debe ser Seleccionada");}
         else {document.location = murl;}
 }
 function Mover_Registro(MPos)
@@ -111,17 +111,17 @@ MM_reloadPage(true);
               <tr>
                 <td width="123"><span class="Estilo12"><span class="Estilo5">DOCUMENTO PAGO </span> :</span></td>
                 <td width="70"><span class="Estilo12"> <span class="Estilo5">
-                  <input name="txtcod_titulo" type="text" id="txtcod_titulo2" size="5" maxlength="4"  value="<?echo $cod_pago?>" readonly>
+                  <input name="txtcod_titulo" type="text" id="txtcod_titulo2" size="5" maxlength="4"  value="<?php echo $cod_pago?>" readonly>
                 </span></span></td>
-                <td width="49"><input name="bttipo_orden22" type="button" id="bttipo_orden2" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="49"><input name="bttipo_orden22" type="button" id="bttipo_orden2" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                 <td width="299"><span class="Estilo12"><span class="Estilo5">
-                  <input name="txtcod_titulo2" type="text" id="txtcod_titulo22" size="10" maxlength="10"  value="<?echo $doc_pago?>" readonly>
+                  <input name="txtcod_titulo2" type="text" id="txtcod_titulo22" size="10" maxlength="10"  value="<?php echo $doc_pago?>" readonly>
                 </span><span class="Estilo5"> </span> </span></td>
                 <td width="108"><span class="Estilo12"><span class="Estilo5">C&Oacute;DIGO BANCO</span> :</span></td>
                 <td width="120"><div align="left"><span class="Estilo12"> <span class="Estilo5">
                     <input name="txtced_rif3" type="text" id="txtced_rif33" size="13" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)">
                 </span> </span></div></td>
-                <td width="40"><input name="bttipo_orden2" type="button" id="bttipo_orden3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                <td width="40"><input name="bttipo_orden2" type="button" id="bttipo_orden3" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                 <td width="37"><img src="../pagos/b_info.png" width="11" height="11"></td>
               </tr>
             </table></td>
@@ -131,7 +131,7 @@ MM_reloadPage(true);
                 <tr>
                   <td width="134"><span class="Estilo5">N&Uacute;MERO DE CUENTA :</span></td>
                   <td width="706"><div align="left"><span class="Estilo5"> <span class="Estilo12">
-                      <input name="txttipo_benef2" type="text" class="Estilo5" id="txttipo_benef24"  value="<?ECHO $num_cuenta?>" size="25" maxlength="24" readonly>
+                      <input name="txttipo_benef2" type="text" class="Estilo5" id="txttipo_benef24"  value="<?php ECHO $num_cuenta?>" size="25" maxlength="24" readonly>
                   </span> </span></div></td>
                 </tr>
             </table></td>
@@ -141,7 +141,7 @@ MM_reloadPage(true);
                 <tr>
                   <td width="132"><span class="Estilo5">NOMBRE DEL BANCO : </span></td>
                   <td width="709"><span class="Estilo5"> <span class="Estilo12">
-                    <input name="txttipo_benef" type="text" class="Estilo5" id="txttipo_benef"  value="<?ECHO $nom_banco?>" size="121" maxlength="102" readonly>
+                    <input name="txttipo_benef" type="text" class="Estilo5" id="txttipo_benef"  value="<?php ECHO $nom_banco?>" size="121" maxlength="102" readonly>
                   </span> </span></td>
                 </tr>
             </table></td>
@@ -190,7 +190,7 @@ MM_reloadPage(true);
                 <tr>
                   <td width="88"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
                   <td width="115"><span class="Estilo5"> <span class="Estilo12">
-                    <input name="txttipo_benef3333" type="text" class="Estilo5" id="txttipo_benef3334"  value="<?ECHO $ced_rif?>" size="15" maxlength="14" readonly>
+                    <input name="txttipo_benef3333" type="text" class="Estilo5" id="txttipo_benef3334"  value="<?php ECHO $ced_rif?>" size="15" maxlength="14" readonly>
                   </span></span></td>
                 </tr>
             </table></td>
@@ -200,7 +200,7 @@ MM_reloadPage(true);
                 <tr>
                   <td width="95"><span class="Estilo5">BENEFICIARIO : </span></td>
                   <td width="735"><span class="Estilo5"> <span class="Estilo12">
-                    <input name="txttipo_benef33422" type="text" class="Estilo5" id="txttipo_benef33422"  value="<?ECHO $nom_benf?>" size="128" maxlength="116" readonly>
+                    <input name="txttipo_benef33422" type="text" class="Estilo5" id="txttipo_benef33422"  value="<?php ECHO $nom_benf?>" size="128" maxlength="116" readonly>
                   </span> </span></td>
                 </tr>
             </table></td>

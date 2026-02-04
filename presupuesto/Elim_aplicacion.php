@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_aplicacion='';} else {$cod_aplicacion=$_GET["Gaplicacion"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Aplicaciones)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Aplicaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -23,15 +23,15 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Aplicacion.value==""){alert("Código de Aplicación no puede estar Vacio");return false;}
-    if(f.txtNombre_Aplicacion.value==""){alert("Denominación de Aplicación no puede estar Vacia"); return false; }
+    if(f.txtCodigo_Aplicacion.value==""){alert("Cï¿½digo de Aplicaciï¿½n no puede estar Vacio");return false;}
+    if(f.txtNombre_Aplicacion.value==""){alert("Denominaciï¿½n de Aplicaciï¿½n no puede estar Vacia"); return false; }
        else{f.txtNombre_Aplicacion.value=f.txtNombre_Aplicacion.value.toUpperCase();} 
     if(f.txtCodigo_Aplicacion.value.length==1){f.txtCodigo_Aplicacion.value=f.txtCodigo_Aplicacion.value.toUpperCase();}
-       else{alert("Longitud Código de Aplicación Invalida");return false;}      
+       else{alert("Longitud Cï¿½digo de Aplicaciï¿½n Invalida");return false;}      
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_aplicacion="";$sql="Select * from PRE025 WHERE cod_aplicacion='$cod_aplicacion'";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$cod_aplicacion=$registro["cod_aplicacion"];
@@ -77,7 +77,7 @@ if ($registro=pg_fetch_array($res,0)){$cod_aplicacion=$registro["cod_aplicacion"
                   <tr>
                     <td width="148"><span class="Estilo5">C&Oacute;DIGO APLICACI&Oacute;N :</span></td>
                     <td width="650"><span class="Estilo5">
-                      <input name="txtCodigo_Aplicacion" type="text" id="txtCodigo_Aplicacion" title="Registre el C&oacute;digo de la Fuente" value="<?ECHO $cod_aplicacion?>" size="10" maxlength="1"  readonly>
+                      <input name="txtCodigo_Aplicacion" type="text" id="txtCodigo_Aplicacion" title="Registre el C&oacute;digo de la Fuente" value="<?php ECHO $cod_aplicacion?>" size="10" maxlength="1"  readonly>
                     </span></td>
                   </tr>
                 </table></td>
@@ -90,7 +90,7 @@ if ($registro=pg_fetch_array($res,0)){$cod_aplicacion=$registro["cod_aplicacion"
                   <table width="816" border="0">
                     <tr>
                       <td width="148"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                      <td width="666"><input name="txtNombre_Aplicacion" type="text" id="txtNombre_Aplicacion" title="Registre la denominaci&oacute;n de la Fuente"  readonly value="<?ECHO $den_aplicacion?>" size="100" maxlength="200"></td>
+                      <td width="666"><input name="txtNombre_Aplicacion" type="text" id="txtNombre_Aplicacion" title="Registre la denominaci&oacute;n de la Fuente"  readonly value="<?php ECHO $den_aplicacion?>" size="100" maxlength="200"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -129,4 +129,4 @@ if ($registro=pg_fetch_array($res,0)){$cod_aplicacion=$registro["cod_aplicacion"
 </table>
 </body>
 </html>
-<? pg_close();?> 
+<?php  pg_close($conn);?> 

@@ -1,5 +1,5 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){  $cod_presup=''; $cod_fuente='00'; $SIA_Definicion="N";  $sql="SELECT * FROM codigos ORDER BY cod_presup,cod_fuente";}
 else { $codigo=$_GET["Gcodigo"]; $SIA_Definicion=substr($codigo,0,1); $cod_fuente=substr($codigo,1,2);$cod_presup=substr($codigo,3,32);
   $sql="Select * from codigos where cod_presup='$cod_presup' and cod_fuente='$cod_fuente'";}
@@ -10,7 +10,7 @@ $codigo=$SIA_Definicion.$cod_fuente.$cod_presup;
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -27,15 +27,15 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function llamar_Borrar(){
 var r=confirm("Esta seguro en Borrar los Codigos Presupuestario de la Carga ?");
-  if (r==true) { document.location ='Borrar_cod_carga.php?codigo=<?echo $codigo?>'; }
+  if (r==true) { document.location ='Borrar_cod_carga.php?codigo=<?php echo $codigo?>'; }
 }
 function llamar_Grabar(){
 var r=confirm("Desea Guardar los Codigos Presupuestario de la Carga ?");
-  if (r==true) { document.location ='Grabar_cod_carga.php?codigo=<?echo $codigo?>'; }
+  if (r==true) { document.location ='Grabar_cod_carga.php?codigo=<?php echo $codigo?>'; }
 }
 </script>
 </head>
-<?$denominacion="";$des_fuente="";$res=pg_query($sql);
+<?php $denominacion="";$des_fuente="";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod_fuente=$registro["cod_fuente"]; $denominacion=$registro["denominacion"]; $des_fuente=$registro["des_fuente_financ"];}
 ?>
 <body>
@@ -54,8 +54,8 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_codigos.php?Gcodigo=U">Atras</A></td>
       </tr>
 	  <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cambia_carga_codigos.php?Gcodigo=<?echo $codigo?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Cambia_carga_codigos.php?Gcodigo=<?echo $codigo?>')">Cambiar</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cambia_carga_codigos.php?Gcodigo=<?php echo $codigo?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Cambia_carga_codigos.php?Gcodigo=<?php echo $codigo?>')">Cambiar</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -72,8 +72,8 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
               <td><table width="840" border="0">
                 <tr>
                   <td width="146"><span class="Estilo5">C&Oacute;DIGO CATEGORIA :</span></td>
-                  <td width="136"><span class="Estilo5"><input name="txtcod_cat" type="text" id="txtcod_cat" size="20" maxlength="20" value="<?echo $cod_presup?>" readonly>   </span></td>
-                  <td width="544"><span class="Estilo5"><input name="txtdes_cat" type="text" id="txtdes_cat" size="84" readonly value="<?echo $denominacion?>" >    </span></td>
+                  <td width="136"><span class="Estilo5"><input name="txtcod_cat" type="text" id="txtcod_cat" size="20" maxlength="20" value="<?php echo $cod_presup?>" readonly>   </span></td>
+                  <td width="544"><span class="Estilo5"><input name="txtdes_cat" type="text" id="txtdes_cat" size="84" readonly value="<?php echo $denominacion?>" >    </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -81,15 +81,15 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
               <td><table width="843" border="0">
                 <tr>
                   <td width="180"><span class="Estilo5">FUENTE DE FINANCIAMIENTO :</span></td>
-                  <td width="35"><span class="Estilo5"><input name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" value="<?echo $cod_fuente?>" readonly >    </span></td>
-                  <td width="614"><span class="Estilo5"><input name="txtdes_fuente" type="text" id="txtdes_fuente" size="95" value="<?echo $des_fuente?>" readonly>   </span></td>
+                  <td width="35"><span class="Estilo5"><input name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" value="<?php echo $cod_fuente?>" readonly >    </span></td>
+                  <td width="614"><span class="Estilo5"><input name="txtdes_fuente" type="text" id="txtdes_fuente" size="95" value="<?php echo $des_fuente?>" readonly>   </span></td>
                 </tr>
               </table></td>
             </tr>
            </table>
            <table width="868" height="410" align="center" border="0" cellpadding="3" cellspacing="1">
             <tr><td ><div id="Layer1" style="position:absolute; width:860px; height:406px; z-index:1; top: 70px; left: 5px;">
-                     <iframe src="Det_carga_codigos.php?Gcodigo=<?echo $codigo?>"  width="858" height="400" scrolling="auto" frameborder="1"></iframe>
+                     <iframe src="Det_carga_codigos.php?Gcodigo=<?php echo $codigo?>"  width="858" height="400" scrolling="auto" frameborder="1"></iframe>
                      </div></td>
             </tr>
         </table>
@@ -107,4 +107,4 @@ if ($registro=pg_fetch_array($res,0)){ $cod_presup=$registro["cod_presup"]; $cod
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

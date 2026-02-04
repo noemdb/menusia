@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="01-0000010"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
 }$posicion=strpos($Mcamino,'S');
-if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){ $tipo_orden=''; $p_letra='';$sql="SELECT * FROM TIPOS_ORDEN ORDER BY tipo_orden";
 } else {$tipo_orden = $_GET["Gtipo_orden"]; $p_letra=substr($tipo_orden, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$tipo_orden=substr($tipo_orden,1,4);}
@@ -22,7 +22,7 @@ if (!$_GET){ $tipo_orden=''; $p_letra='';$sql="SELECT * FROM TIPOS_ORDEN ORDER B
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Tipos de Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Tipos de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -59,7 +59,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?$nombre_cuenta="";$cargable=""; $des_tipo_orden="";$cod_contable="";$gen_tributo="";$cod_banco="";
+<?php $nombre_cuenta="";$cargable=""; $des_tipo_orden="";$cod_contable="";$gen_tributo="";$cod_banco="";
 $res=pg_query($sql);if ($registro=pg_fetch_array($res,0)){$encontro=true;}
 else{$encontro=false;  if ($p_letra=="A"){  $sql="SELECT * From TIPOS_ORDEN Order by tipo_orden"; $res=pg_query($sql);  if ($registro=pg_fetch_array($res,0)){$encontro=true;}}}
 if($encontro=true){  $tipo_orden=$registro["tipo_orden"];  $des_tipo_orden=$registro["des_tipo_orden"];
@@ -79,17 +79,17 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
 <table width="979" height="376" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="367" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-        <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+        <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_tipos_orden.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_tipos_orden.php">Incluir</A></td>
       </tr>
-          <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+          <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_tipos_orden.php?Gtipo_orden=')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_tipos_orden.php?Gtipo_orden=');">Modificar</A></td>
       </tr>
-          <?} if ($Mcamino{2}=="S"){?>
+          <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -108,15 +108,15 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_tipos_orden.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_tipos_orden.php" class="menu">Catalogo</a></td>
   </tr>
-  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar();" class="menu">Eliminar</a></td>
   </tr>
-  <?} ?>
+  <?php } ?>
   <tr>
-    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_ordenes.htm','Ayuda SIA','','1000','1000','true');";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_ordenes.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_ordenes.htm','Ayuda SIPAP','','1000','1000','true');";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_ordenes.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -138,7 +138,7 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
                     <tr>
                       <td width="163"><span class="Estilo5">C&Oacute;DIGO TIPO DE ORDEN:</span></td>
                       <td width="121"><div align="left"><span class="Estilo5">
-                      <input class="Estilo10" name="txttipo_orden" type="text" id="txttipo_orden" size="8" maxlength="4"   value="<?echo $tipo_orden?>" readonly>
+                      <input class="Estilo10" name="txttipo_orden" type="text" id="txttipo_orden" size="8" maxlength="4"   value="<?php echo $tipo_orden?>" readonly>
 </span></div></td>
                       <td width="204">&nbsp;</td>
                       <td width="356"><span class="Estilo5">
@@ -154,7 +154,7 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
                     <tr>
                       <td width="190"><span class="Estilo5">DESCRIPCI&Oacute;N TIPO DE ORDEN:</span></td>
                       <td width="634"><span class="Estilo5">
-                        <input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden"  readonly value="<?echo $des_tipo_orden?>" size="95">
+                        <input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden"  readonly value="<?php echo $des_tipo_orden?>" size="95">
                       </span></td>
                     </tr>
                   </table></td>
@@ -167,10 +167,10 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
                     <tr>
                       <td width="135"><span class="Estilo5">C&Oacute;DIGO CONTABLE  :</span></td>
                       <td width="188"><div align="left"><span class="Estilo5">
-                          <input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable"  readonly value="<?echo $cod_contable?>" size="25">
+                          <input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable"  readonly value="<?php echo $cod_contable?>" size="25">
                       </span></div></td>
                       <td width="520"><span class="Estilo5">
-                        <input class="Estilo10" name="txtnombre_cuenta" type="text" id="txtnombre_cuenta"  readonly value="<?echo $nombre_cuenta?>" size="75">
+                        <input class="Estilo10" name="txtnombre_cuenta" type="text" id="txtnombre_cuenta"  readonly value="<?php echo $nombre_cuenta?>" size="75">
                       </span></td>
                     </tr>
                   </table></td>
@@ -183,10 +183,10 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
                     <tr>
                       <td width="135"><span class="Estilo5">C&Oacute;DIGO DE BANCO :</span></td>
                       <td width="88"><div align="left"><span class="Estilo5">
-                          <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco"  readonly value="<?echo $cod_banco?>" size="8" maxlength="15">
+                          <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco"  readonly value="<?php echo $cod_banco?>" size="8" maxlength="15">
                       </span></div></td>
                       <td width="620"><span class="Estilo5">
-                        <input class="Estilo10" name="txtnombre_banco" type="text" id="txtnombre_banco"  readonly value="<?echo $nombre_banco?>" size="90">
+                        <input class="Estilo10" name="txtnombre_banco" type="text" id="txtnombre_banco"  readonly value="<?php echo $nombre_banco?>" size="90">
                       </span></td>
                     </tr>
                   </table></td>
@@ -199,7 +199,7 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
                     <tr>
                       <td width="135" height="22"><span class="Estilo5">GENERA TRIBUTO :</span></td>
                       <td width="708"><span class="Estilo5">
-                        <input class="Estilo10" name="txtgen_tributo" type="text" id="txtgen_tributo"  readonly value="<?echo $gen_tributo?>" size="8" maxlength="2">
+                        <input class="Estilo10" name="txtgen_tributo" type="text" id="txtgen_tributo"  readonly value="<?php echo $gen_tributo?>" size="8" maxlength="2">
 </span></td>
                     </tr>
                   </table></td>
@@ -216,4 +216,4 @@ if($gen_tributo=="S"){$gen_tributo="SI";}else{$gen_tributo="NO";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

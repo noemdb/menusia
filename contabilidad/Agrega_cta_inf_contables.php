@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc"); if (!$_GET){  $cod_informe='';} else {  $cod_informe = $_GET["Gcodigo"]; }
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc"); if (!$_GET){  $cod_informe='';} else {  $cod_informe = $_GET["Gcodigo"]; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA</title>
+<title>SIPAP CONTABILIDAD FINANCIERA</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/JavaScript"></script>
@@ -27,9 +27,9 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<? $nombre_informe=""; $arch_informe="";
+<?php  $nombre_informe=""; $arch_informe="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="Javascript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{ $Nom_Emp=busca_conf();  $sql="Select * from con005 where cod_informe='$cod_informe'";   $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){ $cod_informe=$registro["cod_informe"];  $nombre_informe=$registro["nombre_informe"];     $arch_informe=$registro["arch_informe"]; }
 }
@@ -46,8 +46,8 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
   <tr>
     <td width="92"><table width="92" height="548" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_inf_contab.php?Gcriterio=<?echo $cod_informe?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_inf_contab.php?Gcriterio=<?echo $cod_informe?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_inf_contab.php?Gcriterio=<?php echo $cod_informe?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_inf_contab.php?Gcriterio=<?php echo $cod_informe?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -63,8 +63,8 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
              <td><table width="876">
                <tr>
                  <td width="126"><span class="Estilo5">C&Oacute;DIGO INFORME :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" size="3" maxlength="2"  value="<?echo $cod_informe?>" readonly></span></td>
-                 <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_informe" type="text" id="txtnombre_informe" size="100" maxlength="100"  value="<?echo $nombre_informe?>" readonly></span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" size="3" maxlength="2"  value="<?php echo $cod_informe?>" readonly></span></td>
+                 <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_informe" type="text" id="txtnombre_informe" size="100" maxlength="100"  value="<?php echo $nombre_informe?>" readonly></span></td>
                  
                </tr>
              </table></td>
@@ -73,12 +73,12 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
              <td><table width="876">
                <tr>
                  <td width="226"><span class="Estilo5">NOMBRE DEL ARCHIVO REPORTES  :</span></td>
-                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" size="100" maxlength="100"  value="<?echo $arch_informe?>" readonly> </span></td>                 
+                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" size="100" maxlength="100"  value="<?php echo $arch_informe?>" readonly> </span></td>                 
                </tr>
              </table></td>
            </tr>
           </table>
-          <iframe src="Det_inc_inf_contables.php?criterio=<?echo $cod_informe?>"  width="850" height="420" scrolling="auto" frameborder="1">
+          <iframe src="Det_inc_inf_contables.php?criterio=<?php echo $cod_informe?>"  width="850" height="420" scrolling="auto" frameborder="1">
           </iframe>
          </div>
          </form>
@@ -87,4 +87,4 @@ if (pg_ErrorMessage($conn)){ ?><script language="Javascript">muestra('OCURRIO UN
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

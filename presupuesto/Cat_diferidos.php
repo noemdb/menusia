@@ -1,10 +1,10 @@
-<?include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
-$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE);
+$conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo de Compromisos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo de Compromisos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -18,7 +18,7 @@ function cerrar_catalogo(mtipo_comp,mref_comp,mnomb_abrev,mdescrip){
 }
 </script></head>
 <body>
-<?      $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         $criterio = "where (anulado='N') and (tipo_diferido<>'0001') and (tipo_diferido<>'A001')";
         if ($_GET){if ($_GET["criterio"]!=""){$txt_criterio = $_GET["criterio"];$txt_criterio = strtoupper ($txt_criterio);
         $criterio = $criterio . " and (tipo_diferido like '%" . $txt_criterio . "%' or referencia_dife like '%" . $txt_criterio . "%' or descripcion_dife like '%" . $txt_criterio . "%')";}}
@@ -39,24 +39,24 @@ function cerrar_catalogo(mtipo_comp,mref_comp,mnomb_abrev,mdescrip){
                 echo "<th bgcolor='#99CCFF'><a class='ord' href='".$_SERVER["PHP_SELF"]."?pagina=".$pagina."&orden=descripcion_dife&criterio=".$txt_criterio."'>Descripci&oacute;n</a></th>";
                 $linea=0;   $Salir=false;
                 while($registro=pg_fetch_array($res)) {    $linea=$linea+1;
-                $descripcion=$registro["descripcion_dife"];  $descripcion=str_replace("�","N",$descripcion);  $descripcion=str_replace("Ñ","N",$descripcion);
+                $descripcion=$registro["descripcion_dife"];  $descripcion=str_replace("�","N",$descripcion);  $descripcion=str_replace("Ñ","N",$descripcion);
                 $sfecha=$registro["fecha_diferido"];     $descripcion2=substr($descripcion,0,200);  $descripcion1=substr($descripcion,0,100);     $descripcion=str_replace('"',' ',$descripcion);  
                 $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["tipo_diferido"];?>','<? echo $registro["referencia_dife"];?>','<? echo $registro["nombre_abrev_dife"];?>','<? echo $descripcion; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_diferido"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["referencia_dife"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $descripcion1; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["tipo_diferido"];?>','<?php  echo $registro["referencia_dife"];?>','<?php  echo $registro["nombre_abrev_dife"];?>','<?php  echo $descripcion; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_diferido"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["referencia_dife"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $descripcion1; ?></b></font></td>
   </tr>
-<?}} echo "</table>"; }
+<?php } } echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    if($pagina>1){
+  <?php     if($pagina>1){
           echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
           echo "<font face='verdana' size='-2'>Principio</font>";
           echo "</a>&nbsp;";
@@ -84,4 +84,4 @@ Criterio de b&uacute;squeda:
 </form>
 </body>
 </html>
-<?  pg_close(); ?>
+<?php   pg_close($conn); ?>

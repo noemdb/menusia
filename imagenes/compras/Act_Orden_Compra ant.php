@@ -1,4 +1,4 @@
-<? include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php");
+<?php  include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "COMP008".$usuario_sia.$equipo;
 if (!$_GET){ $p_letra='';$criterio=''; $tipo_compromiso=''; $nro_orden=''; $sql="SELECT * FROM ORD_COMPRA ORDER BY nro_orden desc,tipo_compromiso desc";  $codigo_mov=substr($mcod_m,0,49);}
  else {   $codigo_mov="";  $criterio = $_GET["Gcriterio"];   $p_letra=substr($criterio, 0, 1);
@@ -17,7 +17,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_compromiso=''; $nro_orden=''; $sql=
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS Y ALMAC&Eacute;N (Ordenes de Compras)</title>
+<title>SIPAP COMPRAS Y ALMAC&Eacute;N (Ordenes de Compras)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -57,12 +57,12 @@ MM_reloadPage(true);
 
 </style>
 </head>
-<? $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php  $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if ($codigo_mov==""){$codigo_mov="";}
 else{
- $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $res=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+ $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $res=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 }
 ?>
 <body>
@@ -127,18 +127,18 @@ else{
                     <tr>
                       <td width="137"><span class="Estilo5">N&Uacute;MERO DE ORDEN  :</span></span></td>
                       <td width="168"><span class="Estilo5">
-                      <input name="txtnro_orden" type="text" class="Estilo5" id="txtnro_orden"  value="<?echo $nro_orden ?>" size="15" maxlength="15" readonly>
+                      <input name="txtnro_orden" type="text" class="Estilo5" id="txtnro_orden"  value="<?php echo $nro_orden ?>" size="15" maxlength="15" readonly>
 </span></span></td>
                       <td width="188"><span class="Estilo5">DOCUMENTO COMPROMISO  :</span></span></td>
                       <td width="67"><span class="Estilo5">
-                      <input name="txttipo_compromiso" type="text" class="Estilo5" id="txttipo_compromiso"  value="<?echo $tipo_compromiso ?>" size="6" maxlength="6" readonly>
+                      <input name="txttipo_compromiso" type="text" class="Estilo5" id="txttipo_compromiso"  value="<?php echo $tipo_compromiso ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                       <td width="117"><span class="Estilo5">
-                      <input name="txtNombre_Abrev" type="text" class="Estilo5" id="txtCod_Articulo2"  value="<?echo $Nombre_Abrev ?>" size="6" maxlength="6" readonly>
+                      <input name="txtNombre_Abrev" type="text" class="Estilo5" id="txtCod_Articulo2"  value="<?php echo $Nombre_Abrev ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                       <td width="54"><span class="Estilo5">FECHA    :</span></span></td>
                       <td width="88"><span class="Estilo5">
-                      <input name="txtFecha" type="text" class="Estilo5" id="txtCod_Articulo3"  value="<?echo $Fecha ?>" size="10" maxlength="10" readonly>
+                      <input name="txtFecha" type="text" class="Estilo5" id="txtCod_Articulo3"  value="<?php echo $Fecha ?>" size="10" maxlength="10" readonly>
                       </span></span></td>
                       <td width="26"><img src="../imagenes/b_info.png" width="11" height="11"></td>
                     </tr>
@@ -158,10 +158,10 @@ else{
                     <tr>
                       <td width="137"><span class="Estilo5">TIPO COMPROMISO  : </span></span></td>
                       <td width="109"><span class="Estilo5">
-                      <input name="txtCod_Tipo_Comp" type="text" class="Estilo5" id="txtCod_Tipo_Comp"  value="<?echo $Cod_Tipo_Comp ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Tipo_Comp" type="text" class="Estilo5" id="txtCod_Tipo_Comp"  value="<?php echo $Cod_Tipo_Comp ?>" size="15" maxlength="15" readonly>
 </span></span></td>
                       <td width="599"><span class="Estilo5">
-                      <input name="txtDes_Tipo_Comp" type="text" class="Estilo5" id="txtDes_Tipo_Comp"  value="<?echo $Des_Tipo_Comp ?>" size="106" readonly>
+                      <input name="txtDes_Tipo_Comp" type="text" class="Estilo5" id="txtDes_Tipo_Comp"  value="<?php echo $Des_Tipo_Comp ?>" size="106" readonly>
 </span></span></td>
                     </tr>
                   </table></td>
@@ -171,19 +171,19 @@ else{
                     <tr>
                       <td width="131"><span class="Estilo5">REQUISICI&Oacute;N NRO. :</span></span></td>
                       <td width="84"><span class="Estilo5">
-                      <input name="txtNro_Requisicion" type="text" class="Estilo5" id="txtnro_requisicion"  value="<?echo $Nro_Requisicion ?>" size="8" maxlength="8" readonly>
+                      <input name="txtNro_Requisicion" type="text" class="Estilo5" id="txtnro_requisicion"  value="<?php echo $Nro_Requisicion ?>" size="8" maxlength="8" readonly>
                       </span></span></td>
                       <td width="148"><span class="Estilo5">FECHA REQUISICI&Oacute;N :</span></span></td>
                       <td width="98"><span class="Estilo5">
-                      <input name="txtFecha_Requisicion" type="text" class="Estilo5" id="txtFecha_Requisicion"  value="<?echo $Fecha_Requisicion ?>" size="6" maxlength="6" readonly>
+                      <input name="txtFecha_Requisicion" type="text" class="Estilo5" id="txtFecha_Requisicion"  value="<?php echo $Fecha_Requisicion ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                       <td width="125"><span class="Estilo5">TIPO OPERACI&Oacute;N :</span></span></td>
                       <td width="110"><span class="Estilo5">
-                      <input name="txtTipo_Operacion" type="text" class="Estilo5" id="txtTipo_Operacion"  value="<?echo $Tipo_Operacion ?>" size="6" maxlength="6" readonly>
+                      <input name="txtTipo_Operacion" type="text" class="Estilo5" id="txtTipo_Operacion"  value="<?php echo $Tipo_Operacion ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                       <td width="47"><span class="Estilo5">DIAS : </span></span></td>
                       <td width="101"><span class="Estilo5">
-                      <input name="txtDias_Credito" type="text" class="Estilo5" id="txtDias_Credito"  value="<?echo $Dias_Credito ?>" size="6" maxlength="6" readonly>
+                      <input name="txtDias_Credito" type="text" class="Estilo5" id="txtDias_Credito"  value="<?php echo $Dias_Credito ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -193,7 +193,7 @@ else{
                     <tr>
                       <td width="123"><span class="Estilo5"> TIEMPO ENTREGA : </span></span></td>
                       <td width="42"><span class="Estilo5">
-                      <input name="txtTiempo_Entrega" type="text" class="Estilo5" id="txtCod_Articulo12"  value="<?echo $Tiempo_Entrega ?>" size="6" maxlength="6" readonly>
+                      <input name="txtTiempo_Entrega" type="text" class="Estilo5" id="txtCod_Articulo12"  value="<?php echo $Tiempo_Entrega ?>" size="6" maxlength="6" readonly>
                       </span></span></td>
                       <td width="681">&nbsp;</td>
                     </tr>
@@ -204,7 +204,7 @@ else{
                     <tr>
                       <td width="189"><span class="Estilo5">CATEGOR&Iacute;A PROGRAMATICA : </span></span></td>
                       <td width="109"><span class="Estilo5">
-                      <input name="txtUnidad" type="text" class="Estilo5" id="txtCod_Articulo14"  value="<?echo $Unidad ?>" size="15" maxlength="15" readonly>
+                      <input name="txtUnidad" type="text" class="Estilo5" id="txtCod_Articulo14"  value="<?php echo $Unidad ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="546"><span class="Estilo5">
                       <input name="txtNombre_Unidad" type="text" class="Estilo5" id="txtCod_Articulo15"  value="echo $Nombre_Unidad ?&gt;" size="95" maxlength="94" readonly>
@@ -217,7 +217,7 @@ else{
                     <tr>
                       <td width="151"><span class="Estilo5">UNIDAD SOLICITANTE : </span></span></td>
                       <td width="658"><span class="Estilo5">
-                      <input name="txtLugar_Entrega" type="text" class="Estilo5" id="txtCod_Articulo16"  value="<?echo $Lugar_Entrega ?>" size="124" maxlength="124" readonly>
+                      <input name="txtLugar_Entrega" type="text" class="Estilo5" id="txtCod_Articulo16"  value="<?php echo $Lugar_Entrega ?>" size="124" maxlength="124" readonly>
                       </span></span></td>
                       <td width="39"><span class="Estilo5">
                       </span></td>
@@ -229,7 +229,7 @@ else{
                     <tr>
                       <td width="150"><span class="Estilo5">DIRECCI&Oacute;N ENTREGA  : </span></span></td>
                       <td width="696"><span class="Estilo5">
-                      <input name="txtDireccion_Entrega" type="text" class="Estilo5" id="txtCod_Articulo17"  value="<?echo $Direccion_Entrega ?>" size="124" maxlength="124" readonly>
+                      <input name="txtDireccion_Entrega" type="text" class="Estilo5" id="txtCod_Articulo17"  value="<?php echo $Direccion_Entrega ?>" size="124" maxlength="124" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -239,10 +239,10 @@ else{
                     <tr>
                       <td width="90"><span class="Estilo5">PROVEEDOR : </span></span></td>
                       <td width="109"><span class="Estilo5">
-                      <input name="txtCed_Rif" type="text" class="Estilo5" id="txtCod_Articulo18"  value="<?echo $Ced_Rif ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCed_Rif" type="text" class="Estilo5" id="txtCod_Articulo18"  value="<?php echo $Ced_Rif ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="632"><span class="Estilo5">
-                      <input name="txtNombre" type="text" class="Estilo5" id="txtCod_Articulo19"  value="<?echo $Nombre ?>" size="114" maxlength="112" readonly>
+                      <input name="txtNombre" type="text" class="Estilo5" id="txtCod_Articulo19"  value="<?php echo $Nombre ?>" size="114" maxlength="112" readonly>
                       </span></span></td>
                       <td width="14">&nbsp;</td>
                     </tr>
@@ -253,7 +253,7 @@ else{
                     <tr>
                       <td width="82"><span class="Estilo5">CONCEPTO : </span></span></td>
                       <td width="763"><span class="Estilo5">
-                      <textarea name="txtDescripcion" cols="114" readonly="readonly" class="Estilo5" id="txtCod_Articulo21"><?echo $Descripcion ?></textarea>
+                      <textarea name="txtDescripcion" cols="114" readonly="readonly" class="Estilo5" id="txtCod_Articulo21"><?php echo $Descripcion ?></textarea>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -263,10 +263,10 @@ else{
                     <tr>
                       <td width="160"><span class="Estilo5">N&Uacute;MERO DE PROYECTO  : </span></span></td>
                       <td width="110"><span class="Estilo5">
-                      <input name="txtNum_Proyecto" type="text" class="Estilo5" id="txtCod_Articulo20"  value="<?echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
+                      <input name="txtNum_Proyecto" type="text" class="Estilo5" id="txtCod_Articulo20"  value="<?php echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="576"><span class="Estilo5">
-                      <input name="txtDes_Proyecto" type="text" class="Estilo5" id="txtCod_Articulo22"  value="<?echo $Des_Proyecto ?>" size="99" maxlength="98" readonly>
+                      <input name="txtDes_Proyecto" type="text" class="Estilo5" id="txtCod_Articulo22"  value="<?php echo $Des_Proyecto ?>" size="99" maxlength="98" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -276,10 +276,10 @@ else{
                     <tr>
                       <td width="176"><span class="Estilo5">FUENTE FINANCIAMIENTO  : </span></span></td>
                       <td width="108"><span class="Estilo5">
-                      <input name="txtFuente_Financ" type="text" class="Estilo5" id="txtCod_Articulo26"  value="<?echo $Fuente_Financ ?>" size="15" maxlength="15" readonly>
+                      <input name="txtFuente_Financ" type="text" class="Estilo5" id="txtCod_Articulo26"  value="<?php echo $Fuente_Financ ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="562"><span class="Estilo5">
-                      <input name="txtDes_Fuente" type="text" class="Estilo5" id="txtCod_Articulo24"  value="<?echo $Des_Fuente ?>" size="96" maxlength="95" readonly>
+                      <input name="txtDes_Fuente" type="text" class="Estilo5" id="txtCod_Articulo24"  value="<?php echo $Des_Fuente ?>" size="96" maxlength="95" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -289,11 +289,11 @@ else{
                     <tr>
                       <td width="146"><span class="Estilo5">FECHA VENCIMIENTO :</span></span></td>
                       <td width="461"><span class="Estilo5">
-                      <input name="txtFecha_Vencim" type="text" class="Estilo5" id="txtFecha_Vencim"  value="<?echo $Fecha_Vencim ?>" size="8" maxlength="8" readonly>
+                      <input name="txtFecha_Vencim" type="text" class="Estilo5" id="txtFecha_Vencim"  value="<?php echo $Fecha_Vencim ?>" size="8" maxlength="8" readonly>
                       </span></span></td>
                       <td width="133"><span class="Estilo5">APLICA IMPUESTO :</span></span></td>
                       <td width="100"><span class="Estilo5">
-                      <input name="txtAplica_Impuesto" type="text" class="Estilo5" id="txtAplica_Impuesto"  value="<?echo $Aplica_Impuesto ?>" size="5" maxlength="4" readonly>
+                      <input name="txtAplica_Impuesto" type="text" class="Estilo5" id="txtAplica_Impuesto"  value="<?php echo $Aplica_Impuesto ?>" size="5" maxlength="4" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -303,7 +303,7 @@ else{
                     <tr>
                       <td width="251"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO IMPUESTO :</span></span></td>
                       <td width="549"><span class="Estilo5">
-                      <input name="txtCod_Pre_Impuesto" type="text" class="Estilo5" id="txtCod_Pre_Impuesto"  value="<?echo $Cod_Pre_Impuesto ?>" size="103" maxlength="101" readonly>
+                      <input name="txtCod_Pre_Impuesto" type="text" class="Estilo5" id="txtCod_Pre_Impuesto"  value="<?php echo $Cod_Pre_Impuesto ?>" size="103" maxlength="101" readonly>
                       </span></span></td>
                       <td width="44"><span class="Estilo5">
                       </span></td>
@@ -315,11 +315,11 @@ else{
                     <tr>
                       <td width="108"><span class="Estilo5">TIPO DE GASTO :</span></span></td>
                       <td width="330"><span class="Estilo5">
-                      <input name="txtTipo_Gasto" type="text" class="Estilo5" id="txtTipo_Gasto"  value="<?echo $Tipo_Gasto ?>" size="24" maxlength="23" readonly>
+                      <input name="txtTipo_Gasto" type="text" class="Estilo5" id="txtTipo_Gasto"  value="<?php echo $Tipo_Gasto ?>" size="24" maxlength="23" readonly>
                       </span></span></td>
                       <td width="208"><span class="Estilo5">IMPUTACI&Oacute;N PRESUPUESTARIA :</span></span></td>
                       <td width="196"><span class="Estilo5">
-                      <input name="txtTipo_Imputacion" type="text" class="Estilo5" id="txtTipo_Imputacion"  value="<?echo $Tipo_Imputacion ?>" size="24" maxlength="23" readonly>
+                      <input name="txtTipo_Imputacion" type="text" class="Estilo5" id="txtTipo_Imputacion"  value="<?php echo $Tipo_Imputacion ?>" size="24" maxlength="23" readonly>
                       </span></span></td>
                     </tr>
                   </table></td>
@@ -329,7 +329,7 @@ else{
                     <tr>
                       <td width="229"><span class="Estilo5">REFERENCIA CR&Eacute;DITO ADICIONAL :</span></span></td>
                       <td width="108"><span class="Estilo5">
-                      <input name="txtRef_Imput_Presu" type="text" class="Estilo5" id="txtCod_Articulo28"  value="<?echo $Ref_Imput_Presu ?>" size="15" maxlength="15" readonly>
+                      <input name="txtRef_Imput_Presu" type="text" class="Estilo5" id="txtCod_Articulo28"  value="<?php echo $Ref_Imput_Presu ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="510"><span class="Estilo5">
                       </span></td>
@@ -411,15 +411,15 @@ else{
                     <tr>
                       <td width="131"><span class="Estilo5">TIENE LICITACI&Oacute;N  :</span></span></td>
                       <td width="78"><span class="Estilo5">
-                      <input name="txtCod_Articulo284" type="text" class="Estilo5" id="txtCod_Articulo284"  value="<?echo $Cod_Articulo ?>" size="8" maxlength="8" readonly>
+                      <input name="txtCod_Articulo284" type="text" class="Estilo5" id="txtCod_Articulo284"  value="<?php echo $Cod_Articulo ?>" size="8" maxlength="8" readonly>
 </span></span></td>
                       <td width="127"><span class="Estilo5">Nro. DOCUMENTO  :</span></span></td>
                       <td width="238"><span class="Estilo5">
-                      <input name="txtCod_Articulo26" type="text" class="Estilo5" id="txtCod_Articulo30"  value="<?echo $Cod_Articulo ?>" size="40" maxlength="40" readonly>
+                      <input name="txtCod_Articulo26" type="text" class="Estilo5" id="txtCod_Articulo30"  value="<?php echo $Cod_Articulo ?>" size="40" maxlength="40" readonly>
 </span></span></td>
                       <td width="120"><span class="Estilo5">FORMA DE PAGO :</span></span></td>
                       <td width="149"><span class="Estilo5">
-                      <input name="txtCod_Articulo282" type="text" class="Estilo5" id="txtCod_Articulo282"  value="<?echo $Cod_Articulo ?>" size="12" maxlength="12" readonly>
+                      <input name="txtCod_Articulo282" type="text" class="Estilo5" id="txtCod_Articulo282"  value="<?php echo $Cod_Articulo ?>" size="12" maxlength="12" readonly>
 </span></span></td>
                     </tr>
                   </table></td>
@@ -429,15 +429,15 @@ else{
                     <tr>
                       <td width="148"><span class="Estilo5">TIENE ANTICIPACI&Oacute;N :</span></span></td>
                       <td width="110"><span class="Estilo5">
-                      <input name="txtCod_Articulo283" type="text" class="Estilo5" id="txtCod_Articulo283"  value="<?echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Articulo283" type="text" class="Estilo5" id="txtCod_Articulo283"  value="<?php echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
                       </span></span></td>
                       <td width="205"><span class="Estilo5">PORCENTAJE DE ANTICIPO (%) :</span></span></td>
                       <td width="85"><span class="Estilo5">
-                      <input name="txtCod_Articulo27" type="text" class="Estilo5" id="txtCod_Articulo31"  value="<?echo $Cod_Articulo ?>" size="5" maxlength="5" readonly>
+                      <input name="txtCod_Articulo27" type="text" class="Estilo5" id="txtCod_Articulo31"  value="<?php echo $Cod_Articulo ?>" size="5" maxlength="5" readonly>
                       </span></span></td>
                       <td width="132"><span class="Estilo5">CUENTA ANTICIPO  :</span></span></td>
                       <td width="161"><span class="Estilo5">
-                      <input name="txtCod_Articulo28" type="text" class="Estilo5" id="txtCod_Articulo32"  value="<?echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
+                      <input name="txtCod_Articulo28" type="text" class="Estilo5" id="txtCod_Articulo32"  value="<?php echo $Cod_Articulo ?>" size="15" maxlength="15" readonly>
 </span></span></td>
                     </tr>
                   </table></td>
@@ -521,4 +521,4 @@ else{
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

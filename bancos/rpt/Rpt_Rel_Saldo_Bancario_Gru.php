@@ -1,4 +1,4 @@
-<?include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../../class/phpreports/PHPReportMaker.php"); error_reporting(E_ALL ^ E_NOTICE);
 include ("../../class/conect.php");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "PAG001".$usuario_sia.$equipo;
 if (!$_GET){ $p_letra='';$criterio=''; $num_cheque='';$cod_banco=''; $sql="SELECT * FROM BAN002, BAN001 WHERE BAN002.Tipo_Cuenta = BAN001.Tipo_Cuenta  ORDER BY Cod_Banco, Num_Cheque";}
@@ -18,7 +18,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $num_cheque='';$cod_banco=''; $sql="SELEC
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (NOTAS DE DEBITO)</title>
+<title>SIPAP CONTROL BANCARIO (NOTAS DE DEBITO)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -67,9 +67,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 else
 {
 }
@@ -119,7 +119,7 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
     <td width="74" rowspan="2"><div align="center" class="Estilo2 Estilo4"><img src="../../imagenes/Logo_sia.gif" width="72" height="91"></div></td>
     <td height="35"><div align="center" class="Estilo2 Estilo6">
       <div align="left"><p align="left" class="Estilo14">
-                  <? echo $nombre_empresa; ?>
+                  <?php  echo $nombre_empresa; ?>
         </p></div>
     </div>    </td>
   </tr>
@@ -149,11 +149,11 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                 <td height="44" colspan="3"><table width="970">
                     <tr>
                         <td width="226"  bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-                      <p align="center" class="Estilo14"><? echo $nombre_banco; ?></p></td>
-                        <td width="240" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"></div><p align="center" class="Estilo14"><? echo $nro_cuenta; ?></p></td>
-						<td width="247" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div><p align="center" class="Estilo14"><? echo $descripcion_banco; ?></p></td>
+                      <p align="center" class="Estilo14"><?php  echo $nombre_banco; ?></p></td>
+                        <td width="240" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"></div><p align="center" class="Estilo14"><?php  echo $nro_cuenta; ?></p></td>
+						<td width="247" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div><p align="center" class="Estilo14"><?php  echo $descripcion_banco; ?></p></td>
 						<td width="237" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-					    <p align="center" class="Estilo14"><? echo $s_inic_libro; ?></p></td>
+					    <p align="center" class="Estilo14"><?php  echo $s_inic_libro; ?></p></td>
                   </tr>
                 </table></td>
              </tr>
@@ -162,13 +162,13 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                     <tr>
                         <td width="226" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
                       <p align="center" class="Estilo14">&nbsp;</p></td>
-                      <td width="240" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"><input name="textnum_cheque" style="visibility:hidden;"  type="text" id="textnum_cheque" value="<?echo $num_cheque?>" size="1" readonly>
-                                <input name="textcod_banco" style="visibility:hidden;"  type="text" id="textcod_banco" value="<?echo $cod_banco?>" size="1" readonly>
+                      <td width="240" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"><input name="textnum_cheque" style="visibility:hidden;"  type="text" id="textnum_cheque" value="<?php echo $num_cheque?>" size="1" readonly>
+                                <input name="textcod_banco" style="visibility:hidden;"  type="text" id="textcod_banco" value="<?php echo $cod_banco?>" size="1" readonly>
                       </div></td>
 						<td width="250" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
 					  <p align="right" class="Estilo14"><strong>TOTAL BANCO : </strong></p></td>
 						<td width="234" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-					    <p align="center" class="Estilo14"><? echo $total; ?></p></td>
+					    <p align="center" class="Estilo14"><?php  echo $total; ?></p></td>
                   </tr>
                 </table></td>
             </tr>
@@ -180,9 +180,9 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
                       <td width="250" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
 					  <p align="right" class="Estilo14"><strong>TOTAL : </strong></p></td>
 					<td width="250" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-					  <p align="center" class="Estilo14"><? echo $des_tipo_bco; ?></p></td>
+					  <p align="center" class="Estilo14"><?php  echo $des_tipo_bco; ?></p></td>
 						<td width="234" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-					    <p align="center" class="Estilo14"><? echo $total; ?></p></td>
+					    <p align="center" class="Estilo14"><?php  echo $total; ?></p></td>
                   </tr>
               </table></td>
             </tr>
@@ -196,7 +196,7 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
 					<td width="250" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
 					  <p align="center" class="Estilo14">&nbsp;</p></td>
 						<td width="234" bordercolor="#000000" bgcolor="#FFFFFF"><div align="left"> </div>
-					    <p align="center" class="Estilo14"><? echo $total; ?></p></td>
+					    <p align="center" class="Estilo14"><?php  echo $total; ?></p></td>
                   </tr>
               </table></td>
             </tr>
@@ -225,4 +225,4 @@ $nombre_empresa="GOBERNACION DEL ESTADO YARACUY";
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

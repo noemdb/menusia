@@ -1,8 +1,8 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $periodod='01';
  $periodoh='01';
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);
@@ -20,7 +20,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Listado Relaci&oacute;n Impuesto Retenido)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Listado Relaci&oacute;n Impuesto Retenido)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -115,7 +115,7 @@ var url;
               <td width="144" height="26">
                 <div align="left">TIPO PLANILLA : </div></td>
               <td width="363"><span class="Estilo5">
-                <input name="txttipo_planilla_ret_d" type="text" id="txtCodigo_Cuenta_D6" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_planilla_ret_d?>" size="3" maxlength="3">
+                <input name="txttipo_planilla_ret_d" type="text" id="txtCodigo_Cuenta_D6" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_planilla_ret_d?>" size="3" maxlength="3">
               </span></td>
               <td width="153"><span class="Estilo5">
               </span></td>
@@ -131,12 +131,12 @@ var url;
             <tr>
               <td width="205" height="26"> <div align="left">PERIODO FISCAL A&Ntilde;O : </div></td>
               <td width="216"><span class="Estilo5">
-                <input name="txtperiodo" type="text" id="txtperiodo" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $periodo?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                <input name="txtperiodo" type="text" id="txtperiodo" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $periodo?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                 <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /> </span></td>
               <td width="52">MES : </td>
               <td width="285"><span class="Estilo12"><span class="Estilo5">
-                <input name="txtmes" type="text" id="txtmes" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $mes?>" size="3" maxlength="3">
+                <input name="txtmes" type="text" id="txtmes" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $mes?>" size="3" maxlength="3">
               </span></span></td>
             </tr>
           </table></td>
@@ -152,13 +152,13 @@ var url;
               </div></td>
               <td width="295" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtfecha_d" type="text" id="txtfecha_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtfecha_d" type="text" id="txtfecha_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="70" align="center"><div align="left">HASTA :</div></td>
               <td width="281" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtfecha_h" type="text" id="txtfecha_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtfecha_h" type="text" id="txtfecha_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -191,4 +191,4 @@ var url;
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,9 +1,9 @@
-<?include ("../class/ventana.php");?>
+<?php include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Bienes Inmuebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -88,7 +88,7 @@ return true;}
                 <td width="839" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
                     <input name="txtperio_mora2233222" type="text" id="txtperio_mora22332222" size="20" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <strong><strong>
-                    <input name="bttipo_codeingre2242222224326" type="button" id="bttipo_codeingre2242222224326" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="bttipo_codeingre2242222224326" type="button" id="bttipo_codeingre2242222224326" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -98,7 +98,7 @@ return true;}
               <tr>
                 <td width="103" scope="col"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
                 <td width="847" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <textarea name="textarea2" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea9"><?echo $direccion?></textarea>
+                    <textarea name="textarea2" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea9"><?php echo $direccion?></textarea>
                     <strong><strong> </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -108,7 +108,7 @@ return true;}
               <tr>
                 <td width="78" scope="col"><span class="Estilo5">DIRECCI&Oacute;N :</span></td>
                 <td width="872" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <textarea name="textarea3" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea10"><?echo $direccion?></textarea>
+                    <textarea name="textarea3" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea10"><?php echo $direccion?></textarea>
                     <strong><strong> </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -120,7 +120,7 @@ return true;}
                 <td width="820" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
                     <input name="txtperio_mora22332223" type="text" id="txtperio_mora223322233" size="20" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <strong><strong>
-                    <input name="bttipo_codeingre22422222243262" type="button" id="bttipo_codeingre224222222432623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="bttipo_codeingre22422222243262" type="button" id="bttipo_codeingre224222222432623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -188,7 +188,7 @@ return true;}
               <tr>
                 <td width="95" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
                 <td width="855" scope="col"><div align="left">
-                    <textarea name="textarea" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea11"><?echo $direccion?></textarea>
+                    <textarea name="textarea" cols="70" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" class="headers" id="textarea11"><?php echo $direccion?></textarea>
                 </div></td>
               </tr>
             </table></td>

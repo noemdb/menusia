@@ -1,4 +1,4 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "PAG001".$usuario_sia.$equipo;
@@ -24,7 +24,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_causado=''; $nro_orden=''; $sql="SE
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -69,18 +69,18 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if ($codigo_mov==""){$codigo_mov="";}
 else{
- $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $res=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $resultado=pg_exec($conn,"SELECT ELIMINA_CON008('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG029(4,'$codigo_mov','','','','','2007-01-01',0,0,0,0,0,0,0,0,0,0,0,0,0,0)");$error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG030 (4,'$codigo_mov','','',0)");  $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
- $resultado=pg_exec($conn,"SELECT BORRAR_PAG038 ('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+ $res=pg_exec($conn,"SELECT BORRAR_PRE026('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $res=pg_exec($conn,"SELECT BORRAR_PAG028('$codigo_mov')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $resultado=pg_exec($conn,"SELECT ELIMINA_CON008('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG029(4,'$codigo_mov','','','','','2007-01-01',0,0,0,0,0,0,0,0,0,0,0,0,0,0)");$error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG036(3,'$codigo_mov','00000000','0000','','','','NO')");  $error=pg_errormessage($conn); $error=substr($error, 0, 61);  if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PAG030 (4,'$codigo_mov','','',0)");  $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+ $resultado=pg_exec($conn,"SELECT BORRAR_PAG038 ('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 }
 $mconf="";$tipo_causd="0002";$tipo_causc="0001";$tipo_causf="0003";
 $Ssql="Select * from SIA005 where campo501='01'"; $resultado=pg_query($Ssql);
@@ -141,7 +141,7 @@ if(substr($tipo_causado,0,1)=='A'){$criterio=$sfecha.'A'.substr($nro_orden,1,7).
   <tr>
     <td width="72" height="44"><div align="center" class="Estilo2 Estilo4"><img src="../../imagenes/Logo_sia.gif" width="72" height="42"></div></td>
     <td width="471"><div align="center" class="Estilo2 Estilo6"><div align="left">ORDENES DE PAGO </div></div></td>
-    <td width="390"><div align="right"><b>ORDEN DE PAGO NRO.<b> <? echo $nro_orden; ?></b></b></div></td>
+    <td width="390"><div align="right"><b>ORDEN DE PAGO NRO.<b> <?php  echo $nro_orden; ?></b></b></div></td>
   </tr>
 </table>
 <table width="1024" height="543" border="0" id="tablacuerpo">
@@ -152,38 +152,38 @@ if(substr($tipo_causado,0,1)=='A'){$criterio=$sfecha.'A'.substr($nro_orden,1,7).
           <table width="869" border="0">
             <tr>
               <td width="777"><b>
-                <input name="txttipo_causado" type="text"  style="visibility:hidden;"  id="txttipo_causado3" value="<?echo $tipo_causado?>" size="12" readonly>
+                <input name="txttipo_causado" type="text"  style="visibility:hidden;"  id="txttipo_causado3" value="<?php echo $tipo_causado?>" size="12" readonly>
               </b></td>
               <td width="229"><div align="right"><b><b>
-                  <input name="txtnro_orden" type="text"  style="visibility:hidden;"  id="txtnro_orden" value="<?echo $nro_orden?>" size="12" readonly>
+                  <input name="txtnro_orden" type="text"  style="visibility:hidden;"  id="txtnro_orden" value="<?php echo $nro_orden?>" size="12" readonly>
               </b></b></div></td>
             </tr>
             <tr>
               <td><p>
-                  <input type="checkbox" name="txt_con_imp" value="checkbox" <? echo $nchk; ?> >
+                  <input type="checkbox" name="txt_con_imp" value="checkbox" <?php  echo $nchk; ?> >
         Con Imputacion Presupuestaria
-        <input type="checkbox" name="txt_sin_imp" value="checkbox" <? echo $nchks; ?> >
+        <input type="checkbox" name="txt_sin_imp" value="checkbox" <?php  echo $nchks; ?> >
         Sin Imputacion Presupuestaria</p></td>
               <td><div align="right"><b>
-                Fecha:</b><? echo $fecha; ?>
+                Fecha:</b><?php  echo $fecha; ?>
               </div></td>
             </tr>
             <tr>
-              <td><p><b>Beneficiario : </b><? echo $beneficiario; ?></p>
-                  <p><b>Cheque a Favor : </b><? echo $nombre_ces; ?></p></td>
-              <td><p align="right"><b>Cedula/Rif : </b><? echo $cedula; ?></p>
-                  <p align="right"><b>Cedula/Rif : </b><? echo $cedula_ces; ?></p></td>
+              <td><p><b>Beneficiario : </b><?php  echo $beneficiario; ?></p>
+                  <p><b>Cheque a Favor : </b><?php  echo $nombre_ces; ?></p></td>
+              <td><p align="right"><b>Cedula/Rif : </b><?php  echo $cedula; ?></p>
+                  <p align="right"><b>Cedula/Rif : </b><?php  echo $cedula_ces; ?></p></td>
             </tr>
            <tr>
               <td colspan="2"><p><b>Por la Cantidad de:</b>
                   </p>                <div align="right"></div></td>
             </tr>
                         <tr>
-              <td colspan="2"><p><b>Por Concepto de : </b><? echo $concepto; ?></p>                <div align="right"></div></td>
+              <td colspan="2"><p><b>Por Concepto de : </b><?php  echo $concepto; ?></p>                <div align="right"></div></td>
             </tr>
                         <tr>
               <td colspan="2"><p align="right"><b>
-                Monto Orden Bs. </b><b><? echo $total_orden_neto; ?></b></p>
+                Monto Orden Bs. </b><b><?php  echo $total_orden_neto; ?></b></p>
               <div align="right"></div></td>
             </tr>
             <tr>
@@ -191,7 +191,7 @@ if(substr($tipo_causado,0,1)=='A'){$criterio=$sfecha.'A'.substr($nro_orden,1,7).
                 <tr>
                   <td height="21">
                     <div id="T11" class="tab-body">
-                      <iframe src="Det_cons_ret_orden.php?clave=<?echo $nro_orden?>"  width="1020" height="170" scrolling="auto" frameborder="0"> </iframe>
+                      <iframe src="Det_cons_ret_orden.php?clave=<?php echo $nro_orden?>"  width="1020" height="170" scrolling="auto" frameborder="0"> </iframe>
                   </div></td>
                 </tr>
               </table></td>
@@ -204,13 +204,13 @@ if(substr($tipo_causado,0,1)=='A'){$criterio=$sfecha.'A'.substr($nro_orden,1,7).
                       <tr>
                         <td>
                          <div id="T11" class="tab-body">
-                                        <iframe src="Det_cons_cod_orden_presu.php?clave=<?echo $clave?>"  width="1020" height="300" scrolling="auto" frameborder="0"> </iframe>
+                                        <iframe src="Det_cons_cod_orden_presu.php?clave=<?php echo $clave?>"  width="1020" height="300" scrolling="auto" frameborder="0"> </iframe>
                                       </div></td>
                       </tr>
                                         <tr>
                         <td>
                          <div id="T11" class="tab-body">
-                                        <iframe src="Det_cons_cod_orden_finan.php?clave=<?echo $clave?>"  width="1020" height="300" scrolling="auto" frameborder="0"> </iframe>
+                                        <iframe src="Det_cons_cod_orden_finan.php?clave=<?php echo $clave?>"  width="1020" height="300" scrolling="auto" frameborder="0"> </iframe>
                                       </div></td>
                    </tr>
               </table></td>
@@ -239,4 +239,4 @@ if(substr($tipo_causado,0,1)=='A'){$criterio=$sfecha.'A'.substr($nro_orden,1,7).
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

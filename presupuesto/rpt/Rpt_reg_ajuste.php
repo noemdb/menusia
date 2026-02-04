@@ -1,10 +1,10 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS; error_reporting(E_ALL ^ E_NOTICE); 
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS; error_reporting(E_ALL ^ E_NOTICE); 
 if (!$_GET){ $referencia_ajuste=''; $tipo_ajuste=''; $tipo_pago=''; $referencia_pago='';} else{$referencia_ajuste=$_GET["txtreferencia_ajuste"]; $tipo_ajuste=$_GET["txttipo_ajuste"]; $tipo_pago=$_GET["txttipo_pago"]; $referencia_pago=$_GET["txtreferencia_pago"];
 $referencia_caus=$_GET["txtreferencia_caus"];$tipo_causado=$_GET["txttipo_causado"];$referencia_comp = $_GET["txtreferencia_comp"];$tipo_compromiso = $_GET["txttipo_compromiso"];}
 $sql="Select * from AJUSTES where tipo_ajuste='$tipo_ajuste' and referencia_ajuste='$referencia_ajuste' and tipo_pago='$tipo_pago' and referencia_pago='$referencia_pago' and referencia_caus='$referencia_caus' and tipo_causado='$tipo_causado' and tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp'";
 $rif_emp=""; $total_comp=0;
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
 $descripcion="";$fecha="";$nombre_abrev_ajuste="";$inf_usuario=""; $nombre_refiere_a=""; $tpo_ajuste="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>0){  $registro=pg_fetch_array($res);
@@ -100,7 +100,7 @@ class PDF extends FPDF{
 		$this->SetFillColor(255,0,0);
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
-		$this->Cell(100,3,'SIA CONTABILIDAD PRESUPUESTARIA',0,0,'L');
+		$this->Cell(100,3,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,0,'L');
 		$this->Cell(100,3,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
 	}
 }  
@@ -122,5 +122,5 @@ class PDF extends FPDF{
 	$total_comp=$total_comp+$registro["monto"];
   }	
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?> 

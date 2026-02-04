@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $cedula_d="";$cedula_h="";$tipo_planilla_d="01";$tipo_planilla_h="99";$fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$clasificacion_d="";$clasificacion_h="";$tipo_bene_d="";$tipo_bene_h="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Listado Planillas de Retencion)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Listado Planillas de Retencion)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -49,7 +49,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 -->
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Ced_Rif) As Max_Ced_Rif, MIN(Ced_Rif) As Min_Ced_Rif FROM PRE099";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}else{$encontro=false;}
@@ -87,10 +87,10 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
         <tr>
           <td width="241" height="9" align="center" class="Estilo16"><div align="left">CEDULA/RIF BENEFICIARIO: </div></td>
            <td width="102"><span class="Estilo5">
-                <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_d?>" size="15" maxlength="15">
+                <input name="txtcedula_d" type="text" id="txtcedula_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_d?>" size="15" maxlength="15">
               </span></td>
               <td width="49"><span class="Estilo5">
-                <input name="Catalogo322" type="button" id="Catalogo3225" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo322" type="button" id="Catalogo3225" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Beneficiariosd.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="303"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesccedrifbenefd" type="text" id="txtdesc_ced_rif_benef_d" size="41" maxlength="15"   readonly>
@@ -102,10 +102,10 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
         <tr>
           <td height="19" align="center" class="Estilo16"><div align="left">CEDULA/RIF BENEFICIARIO:</div></td>
            <td width="103"><span class="Estilo5">
-                <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $cedula_h?>" size="15" maxlength="15">
+                <input name="txtcedula_h" type="text" id="txtcedula_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $cedula_h?>" size="15" maxlength="15">
               </span></td>
               <td width="49"><span class="Estilo5">
-                <input name="Catalogo3222" type="button" id="Catalogo3222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="Catalogo3222" type="button" id="Catalogo3222" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_Beneficiariosh.php?criterio=','SIPAP','','750','500','true')" value="...">
               </span></td>
               <td width="302"><span class="Estilo12"><span class="Estilo5">
                 <input name="txtdesccedrifbenefh" type="text" id="txtdesccedrifbenefh" size="41" maxlength="41"  readonly>
@@ -121,11 +121,11 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
               <td width="233" height="26">
                 <div align="left">TIPO PLANILLA: </div></td>
               <td width="200"><span class="Estilo5"> <span class="Estilo12">
-                <input name="txttipo_planilla_ret_d" type="text" id="txttipo_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_planilla_d?>" size="15" maxlength="15">
+                <input name="txttipo_planilla_ret_d" type="text" id="txttipo_planilla_ret_d" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_planilla_d?>" size="15" maxlength="15">
               </span> </span></td>
               <td width="48">&nbsp;</td>
               <td width="277"><span class="Estilo12"><span class="Estilo5">
-                <input name="txttipo_planilla_ret_h" type="text" id="txttipo_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $tipo_planilla_h?>" size="15" maxlength="15">
+                <input name="txttipo_planilla_ret_h" type="text" id="txttipo_planilla_ret_h" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $tipo_planilla_h?>" size="15" maxlength="15">
               </span></span></td>
             </tr>
           </table></td>
@@ -141,12 +141,12 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
               </div></td>
               <td width="253" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="286" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -246,4 +246,4 @@ if($encontro=true){$cedula_d=$registro["min_ced_rif"];$cedula_h=$registro["max_c
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

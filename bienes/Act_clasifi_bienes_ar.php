@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000027"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){  $grupo_c='';$p_letra="";  $sql="SELECT * FROM BIEN008 ORDER BY grupo_c,codigo_c";}
 else {  $Ggrupo= $_GET["Ggrupo_c"];  $p_letra=substr($Ggrupo, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$Ggrupo=substr($Ggrupo,1,12);}  else{$Ggrupo=substr($Ggrupo,0,12);}   
@@ -22,7 +22,7 @@ else {  $Ggrupo= $_GET["Ggrupo_c"];  $p_letra=substr($Ggrupo, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Clasificacion de Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Clasificacion de Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -62,7 +62,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $grupo_c=""; $codigo_c="";$denominacion_c=""; $especificaciones=""; $cod_presup="";$cod_contable=""; $cod_contable_c=""; $tipo_depreciacion="";   $tasa_deprec="0";    $vida_util="0"; 
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){  if ($p_letra=="S"){$sql="SELECT * From BIEN008 ORDER BY grupo_c,codigo_c";}  if ($p_letra=="A"){$sql="SELECT * From BIEN008 ORDER BY grupo_c desc,codigo_c desc";}  $res=pg_query($sql);  $filas=pg_num_rows($res);}
@@ -81,17 +81,17 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 <table width="977" height="385" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="385"><table width="92" height="385" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_clasifi_bienes_ar.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_clasifi_bienes_ar.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_clasifi_bienes_ar.php?Ggrupo_c=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_clasifi_bienes_ar.php?Ggrupo_c=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -112,7 +112,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_Act_clasifi_bienes_ar.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_Act_clasifi_bienes_ar.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
@@ -121,7 +121,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Act_codigos();">Actualiza Codigos en Ficha de Bienes</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -139,9 +139,9 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
                <table width="850">
                  <tr>
                    <td width="120"><span class="Estilo5">GRUPO :</span></td>
-                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtgrupo_c" type="text" id="txtgrupo_c" size="4" maxlength="1"  value="<?echo $grupo_c?>" readonly> </span></td>
+                   <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtgrupo_c" type="text" id="txtgrupo_c" size="4" maxlength="1"  value="<?php echo $grupo_c?>" readonly> </span></td>
                    <td width="100"><span class="Estilo5">C&Oacute;DIGO :</span></td>
-                   <td width="330"><span class="Estilo5"> <input class="Estilo10" name="txtcodigo_c" type="text" id="txtcodigo_c" size="12" maxlength="10"   value="<?echo $codigo_c?>" readonly> </span></td>
+                   <td width="330"><span class="Estilo5"> <input class="Estilo10" name="txtcodigo_c" type="text" id="txtcodigo_c" size="12" maxlength="10"   value="<?php echo $codigo_c?>" readonly> </span></td>
 				 </tr>
                </table>
              </div></td>
@@ -151,7 +151,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="850">
                <tr>
                  <td width="120"><span class="Estilo5">DESCRIPCI&Oacute;N :</span></td>
-                 <td width="730"><span class="Estilo5"><textarea name="txtdenominacion_c" cols="80" readonly class="headers" id="txtdenominacion_c"><?echo $denominacion_c?></textarea>  </span></td>
+                 <td width="730"><span class="Estilo5"><textarea name="txtdenominacion_c" cols="80" readonly class="headers" id="txtdenominacion_c"><?php echo $denominacion_c?></textarea>  </span></td>
                </tr>
              </table></td>
            </tr>
@@ -160,9 +160,9 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="850">
                <tr>
                  <td width="120"><span class="Estilo5">CODIGO CONTABLE :</span></td>
-                 <td width="270"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" size="30" maxlength="32" value="<?echo $cod_contable?>" readonly>  </span></td>
+                 <td width="270"><span class="Estilo5"> <input class="Estilo10" name="txtcod_contable" type="text" id="txtcod_contable" size="30" maxlength="32" value="<?php echo $cod_contable?>" readonly>  </span></td>
                  <td width="200"><span class="Estilo5">CODIGO COTAB. DEPRECIACION :</span></td>
-				 <td width="260"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable_c" type="text" id="txtcod_contable_c" size="30" maxlength="32" value="<?echo $cod_contable_c?>" readonly>  </span></td>
+				 <td width="260"><span class="Estilo5"><input class="Estilo10" name="txtcod_contable_c" type="text" id="txtcod_contable_c" size="30" maxlength="32" value="<?php echo $cod_contable_c?>" readonly>  </span></td>
               </tr>
              </table></td>
            </tr>		   
@@ -171,7 +171,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="850">
                <tr>
                  <td width="250"><span class="Estilo5">CODIGO PRESUPUESTARIO DEPRECIACION :</span></td>
-                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="35" maxlength="32" value="<?echo $cod_presup?>" readonly>   </span></td>
+                 <td width="600"><span class="Estilo5"><input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="35" maxlength="32" value="<?php echo $cod_presup?>" readonly>   </span></td>
                </tr>
              </table></td>
            </tr>
@@ -180,11 +180,11 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="850">
                <tr>
                  <td width="150"><span class="Estilo5">TIPO DE DEPRECIACI&Oacute;N :</span></td>
-				 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttipo_depreciacion" type="text" id="txttipo_depreciacion" size="15" maxlength="15" value="<?echo $tipo_depreciacion ?>" readonly></span></td>
+				 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttipo_depreciacion" type="text" id="txttipo_depreciacion" size="15" maxlength="15" value="<?php echo $tipo_depreciacion ?>" readonly></span></td>
                  <td width="150"><span class="Estilo5">TASA DEPRECIACI&Oacute;N :</span></td>
-                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" style="text-align:right"  size="10" maxlength="15" value="<?echo $tasa_deprec?>" readonly>    </span></td>
+                 <td width="150"><span class="Estilo5"><input class="Estilo10" name="txttasa_deprec" type="text" id="txttasa_deprec" style="text-align:right"  size="10" maxlength="15" value="<?php echo $tasa_deprec?>" readonly>    </span></td>
                   <td width="150"><span class="Estilo5">VIDA &Uacute;TIL :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" style="text-align:right"  size="10" maxlength="15" value="<?echo $vida_util?>" readonly>    </span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtvida_util" type="text" id="txtvida_util" style="text-align:right"  size="10" maxlength="15" value="<?php echo $vida_util?>" readonly>    </span></td>
                                 
 			  </tr>
              </table></td>
@@ -199,4 +199,4 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

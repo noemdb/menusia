@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  include ("../class/fun_numeros.php");  error_reporting(E_ALL ^ E_NOTICE);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  include ("../class/fun_numeros.php");  error_reporting(E_ALL ^ E_NOTICE);
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function cerrar_catalogo(mtipo_retencion,mdescrip,mtasa,mced_rif,mnombre,msustraendo){
@@ -15,12 +15,12 @@ function cerrar_catalogo(mtipo_retencion,mdescrip,mtasa,mced_rif,mnombre,msustra
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Catalogo de Retenciones)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Catalogo de Retenciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?      $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $numPags=1;
+<?php       $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $numPags=1;
         if ($_GET){if ($_GET["criterio"]!=""){  $txt_criterio=$_GET["criterio"];  $txt_criterio=strtoupper ($txt_criterio);
         $criterio=" where tipo_retencion like '%" . $txt_criterio . "%' or descripcion_ret like '%" . $txt_criterio . "%'";}}
         $sql="SELECT * FROM RETENCIONES ".$criterio;$res=pg_query($sql); $numeroRegistros=pg_num_rows($res);
@@ -40,16 +40,16 @@ function cerrar_catalogo(mtipo_retencion,mdescrip,mtasa,mced_rif,mnombre,msustra
                 $linea=$linea+1; $tasa_retencion=$registro["tasa"]; $tasa_retencion=formato_monto($tasa_retencion); $sust=$registro["sustraendo"]; $sust=formato_monto($sust);
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["tipo_retencion"]; ?>','<? echo $registro["descripcion_ret"]; ?>','<? echo $tasa_retencion; ?>','<? echo $registro["ced_rif_ret"]; ?>','<? echo $registro["nombre"]; ?>','<? echo $sust; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_retencion"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["descripcion_ret"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tasa"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["tipo_retencion"]; ?>','<?php  echo $registro["descripcion_ret"]; ?>','<?php  echo $tasa_retencion; ?>','<?php  echo $registro["ced_rif_ret"]; ?>','<?php  echo $registro["nombre"]; ?>','<?php  echo $sust; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_retencion"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["descripcion_ret"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tasa"]; ?></b></font></td>
      </tr>
-<?}}echo "</table>"; }?>
+<?php } }echo "</table>"; }?>
 <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
            echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
            echo "<font face='verdana' size='-2'>Principio</font>";
            echo "</a>&nbsp;";
@@ -81,6 +81,6 @@ Criterio de b&uacute;squeda:
 
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

@@ -1,9 +1,9 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); $php_os=PHP_OS; $php_os="WINNT";
 if (!$_GET){$cod_banco='';$num_cheque=''; }  else{$cod_banco=$_GET["cod_banco"];$num_cheque=$_GET["num_cheque"];}
 $sql="Select * from EDO_CHEQUES where cod_banco='$cod_banco' and num_cheque='$num_cheque'";
 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $nombre_banco="";$nro_cuenta="";$concepto="";$num_cheque=""; $nro_orden=""; $nombre_benef=""; $ced_rif=""; $concepto=""; $monto_cheque=0; $fecha=""; $mes=""; $inf_usuario=""; $anulado="N";  $fecha_anulado="";  $tipo_pago=""; $edo_cheque=""; $entregado="N";$fecha_entregado="";$ced_rif_recib="";$nombre_recib="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0);
@@ -113,7 +113,7 @@ class PDF extends FPDF{
 		$this->MultiCell(200,4,'POR CONCEPTO DE: '.$concepto,0);
 		// B
 		$this->SetFont('lucon','',10);
-		$this->Cell(25,4,'S/OP Nº: ',0,0,'L');
+		$this->Cell(25,4,'S/OP Nï¿½: ',0,0,'L');
 		$this->SetFont('lucon','',10);
 		$this->Cell(175,4,$nro_orden,0,1,'L');
 		$this->Cell(200,4,'',0,1,'L');
@@ -168,7 +168,7 @@ class PDF extends FPDF{
 		$this->Cell(40,8,'',0,1,'C');		
 		$this->Ln(2);
 		$this->SetFont('lucon','',6);
-		$this->Cell(200,4,'SIA Control Bancario',0,1,'R');
+		$this->Cell(200,4,'SIPAP Control Bancario',0,1,'R');
 	}
   
 }  
@@ -192,5 +192,5 @@ class PDF extends FPDF{
   }}
 
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?>

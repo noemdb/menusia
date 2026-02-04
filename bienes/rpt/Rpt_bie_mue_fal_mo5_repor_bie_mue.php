@@ -1,12 +1,12 @@
-<?include ("../../class/funciones.php");
+<?php include ("../../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Reportes Bienes Muebles Faltante (Modelo 5))</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Reportes Bienes Muebles Faltante (Modelo 5))</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>
@@ -82,12 +82,12 @@ var url;
                  <td width="258" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                    <input name="txtcode_ingre_mora22222" type="text" id="txtcode_ingre_mora22222" size="30" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                    <span class="menu"><strong><strong>
-                   <input name="bttipo_codeingre22422222" type="button" id="bttipo_codeingre22422225" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                   <input name="bttipo_codeingre22422222" type="button" id="bttipo_codeingre22422225" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                    </strong></strong></span> </span></span></div></td>
                  <td width="460" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"><span class="menu"><strong><strong>
                    <input name="txtcode_ingre_mora222222" type="text" id="txtcode_ingre_mora2222222" size="30" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                    <strong><strong><strong><strong>
-                   <input name="bttipo_codeingre224222222" type="button" id="bttipo_codeingre224222222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                   <input name="bttipo_codeingre224222222" type="button" id="bttipo_codeingre224222222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                    </strong></strong></strong></strong> </strong></strong></span></span></span></div></td>
                  </tr>
              </table></td>
@@ -99,12 +99,12 @@ var url;
                  <td width="220" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcode_ingre_mora22222322" type="text" id="txtcode_ingre_mora2222232" size="10" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222322" type="button" id="bttipo_codeingre2242222232" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="bttipo_codeingre22422222322" type="button" id="bttipo_codeingre2242222232" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> </span></span></div></td>
                  <td width="419" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"><span class="menu"><strong><strong>
                      <input name="txtcode_ingre_mora222222222" type="text" id="txtcode_ingre_mora22222222" size="10" maxlength="15"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <strong><strong><strong><strong>
-                     <input name="bttipo_codeingre224222222222" type="button" id="bttipo_codeingre22422222222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="bttipo_codeingre224222222222" type="button" id="bttipo_codeingre22422222222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></strong></strong> </strong></strong></span></span></span></div></td>
                </tr>
              </table></td>
@@ -149,4 +149,4 @@ var url;
 <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

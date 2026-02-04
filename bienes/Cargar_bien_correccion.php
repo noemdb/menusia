@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");  $fecha_hoy=asigna_fecha_hoy();
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");  $fecha_hoy=asigna_fecha_hoy();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Ficha de Bienes Muebles Desincorporado por Correcion)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Ficha de Bienes Muebles Desincorporado por Correcion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@ return true;}
 -->
 </style>
 </head>
-<? $dia=substr($fecha_hoy,0,2); $error=0; $fecha_hasta=$fecha_hoy; $denominacion=""; $cod_bien_mue=""; ?>
+<?php  $dia=substr($fecha_hoy,0,2); $error=0; $fecha_hasta=$fecha_hoy; $denominacion=""; $cod_bien_mue=""; ?>
 <body>
 <form name="form1" method="post" action="carga_bien_desin.php" onSubmit="return revisar()">
   <table width="751" height="70" border="1" align="center" cellpadding="0" cellspacing="0">
@@ -41,7 +41,7 @@ return true;}
                  <tr>
 				   <td width="220"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></td>
                    <td width="250"><span class="Estilo5"><input name="txtcod_bien_mue" type="text" id="txtcod_bien_mue"  size="40" maxlength="40" value="" readonly class="Estilo10"> </span></td>
-                   <td width="375"><input class="Estilo10" name="btbienes" type="button" id="btbienes" title="Abrir Catalogo Bienes"  onClick="VentanaCentrada('Cat_bienes_muebles.php?criterio=','SIA','','750','500','true')" value="..."> </span></td>
+                   <td width="375"><input class="Estilo10" name="btbienes" type="button" id="btbienes" title="Abrir Catalogo Bienes"  onClick="VentanaCentrada('Cat_bienes_muebles.php?criterio=','SIPAP','','750','500','true')" value="..."> </span></td>
                  </tr>
              </table></td>
         </tr>        
@@ -49,7 +49,7 @@ return true;}
              <td><table width="845">
                <tr>
                  <td width="175"><span class="Estilo5">DENOMINACI&Oacute;N DEL BIEN :</span></td>
-                 <td width="670"><span class="Estilo5"><input name="txtdenominacion" type="text" id="txtdenominacion" size="100" maxlength="250" value="<?echo $denominacion?>" readonly class="Estilo10"></div></td>
+                 <td width="670"><span class="Estilo5"><input name="txtdenominacion" type="text" id="txtdenominacion" size="100" maxlength="250" value="<?php echo $denominacion?>" readonly class="Estilo10"></div></td>
                </tr>
              </table></td>
            </tr>
@@ -60,9 +60,9 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>            
-			<?if($error==0){?>
+			<?php if($error==0){?>
             <td width="97" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
-			<?}?>
+			<?php }?>
             <td width="94" align="center">&nbsp;</td>
             <td width="96" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>
             <td width="113">&nbsp;</td>

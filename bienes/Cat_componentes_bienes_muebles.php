@@ -1,6 +1,6 @@
-<?include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE); include ("../class/fun_numeros.php");
+<?php include ("../class/conect.php"); error_reporting(E_ALL ^ E_NOTICE); include ("../class/fun_numeros.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function cerrar_catalogo(mcodigo,mdes_componente,mmarca,mmodelo,mserial){
@@ -17,12 +17,12 @@ function cerrar_catalogo(mcodigo,mdes_componente,mmarca,mmodelo,mserial){
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Catalogo de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Catalogo de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?
+<?php 
         $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $cod_bien_mue="";
         if ($_GET){ $cod_bien_mue = $_GET["cod_bien_mue"];}		
 		$sql="SELECT cod_componente,des_componente,marca,modelo,serial1 FROM BIEN053 where (cod_bien_mue='$cod_bien_mue') ".$criterio;$res=pg_query($sql);$numeroRegistros=pg_num_rows($res);
@@ -46,19 +46,19 @@ function cerrar_catalogo(mcodigo,mdes_componente,mmarca,mmodelo,mserial){
 				if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["cod_componente"]; ?>','<? echo $des_componente; ?>','<? echo $registro["marca"]; ?>','<? echo $registro["modelo"]; ?>','<? echo $registro["serial1"]; ?>')" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["cod_componente"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["des_componente"]; ?></b></font></td>
-	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["marca"]; ?></b></font></td>
-	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["modelo"]; ?></b></font></td>
-	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["serial1"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["cod_componente"]; ?>','<?php  echo $des_componente; ?>','<?php  echo $registro["marca"]; ?>','<?php  echo $registro["modelo"]; ?>','<?php  echo $registro["serial1"]; ?>')" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["cod_componente"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["des_componente"]; ?></b></font></td>
+	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["marca"]; ?></b></font></td>
+	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["modelo"]; ?></b></font></td>
+	<td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["serial1"]; ?></b></font></td>
   </tr>
-<?}}echo "</table>"; }
+<?php } }echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
            echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."&cod_bien_mue=".$cod_bien_mue."'>";
            echo "<font face='verdana' size='-2'>Principio</font>";
            echo "</a>&nbsp;";
@@ -83,6 +83,6 @@ function cerrar_catalogo(mcodigo,mdes_componente,mmarca,mmodelo,mserial){
 
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

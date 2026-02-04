@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); 
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Detalles Comprobante Retencion IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Detalles Comprobante Retencion IVA)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +38,7 @@ $sql="SELECT * FROM BAN027 where ano_fiscal='$ano_fiscal' and  mes_fiscal='$mes_
            <td width="40" align="center" bgcolor="#99CCFF" ><strong>Mov.</strong></td>
            <td width="80" align="center" bgcolor="#99CCFF" ><strong>Referencia</strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 while($registro=pg_fetch_array($res)){ $sfecha=$registro["fecha_documento"]; $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
 $monto=formato_monto($registro["monto_documento"]); $montob=formato_monto($registro["base_imponible"]);  $montos=formato_monto($registro["monto_exento_iva"]);
 $retenc=formato_monto($registro["tasa_retencion"]); $montoi=formato_monto($registro["monto_iva"]); $tasa=formato_monto($registro["tasa_iva"]); $montor=formato_monto($registro["monto_iva_retenido"]);
@@ -46,39 +46,39 @@ $total=$total+$registro["monto_iva_retenido"]; $nro_fact=""; $nro_ndb=""; $nro_n
 if($registro["tipo_documento"]=="02"){$nro_ndb=$registro["nro_documento"];} if($registro["tipo_documento"]=="02"){$nro_ncr=$registro["nro_documento"];}
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="40" align="left"><? echo $registro["nro_operacion"]; ?></td>
-           <td width="40" align="left"><? echo $registro["tipo_documento"]; ?></td>
-           <td width="100" align="left"><? echo $fecha; ?></td>
-           <td width="100" align="left"><? echo $nro_fact; ?></td>
-           <td width="100" align="left"><? echo $registro["nro_con_documento"]; ?></td>
-           <? if ($nro_ndb=="") {?>
+           <td width="40" align="left"><?php  echo $registro["nro_operacion"]; ?></td>
+           <td width="40" align="left"><?php  echo $registro["tipo_documento"]; ?></td>
+           <td width="100" align="left"><?php  echo $fecha; ?></td>
+           <td width="100" align="left"><?php  echo $nro_fact; ?></td>
+           <td width="100" align="left"><?php  echo $registro["nro_con_documento"]; ?></td>
+           <?php  if ($nro_ndb=="") {?>
            <td width="100" align="left">&nbsp;</td>
-           <?}else{?>
-           <td width="100" align="left"><? echo $nro_ndb; ?></td>
-           <?}?>
-           <? if ($nro_ncr=="") {?>
+           <?php }else{?>
+           <td width="100" align="left"><?php  echo $nro_ndb; ?></td>
+           <?php }?>
+           <?php  if ($nro_ncr=="") {?>
            <td width="100" align="left">&nbsp;</td>
-           <?}else{?>
-           <td width="100" align="left"><? echo $nro_ncr; ?></td>
-           <?}?>
-           <td width="60" align="left"><? echo $registro["tipo_transaccion"]; ?></td>
-           <? if ($registro["nro_doc_afectado"]=="") {?>
+           <?php }else{?>
+           <td width="100" align="left"><?php  echo $nro_ncr; ?></td>
+           <?php }?>
+           <td width="60" align="left"><?php  echo $registro["tipo_transaccion"]; ?></td>
+           <?php  if ($registro["nro_doc_afectado"]=="") {?>
            <td width="100" align="left">&nbsp;</td>
-           <?}else{?>
-           <td width="100" align="left"><? echo $registro["nro_doc_afectado"]; ?></td>
-           <?}?>
-           <td width="120" align="right"><? echo $monto; ?></td>
-           <td width="120" align="right"><? echo $montos; ?></td>
-           <td width="120" align="right"><? echo $montob; ?></td>
-           <td width="50" align="right"><? echo $tasa; ?></td>
-           <td width="120" align="right"><? echo $montoi; ?></td>
-           <td width="50" align="right"><? echo $retenc; ?></td>
-           <td width="120" align="right"><? echo $montor; ?></td>
-           <td width="50" align="center"><? echo $registro["cod_banco"]; ?></td>
-           <td width="40" align="center"><? echo $registro["tipo_mov"]; ?></td>
-           <td width="80" align="center"><? echo $registro["referencia"]; ?></td>
+           <?php }else{?>
+           <td width="100" align="left"><?php  echo $registro["nro_doc_afectado"]; ?></td>
+           <?php }?>
+           <td width="120" align="right"><?php  echo $monto; ?></td>
+           <td width="120" align="right"><?php  echo $montos; ?></td>
+           <td width="120" align="right"><?php  echo $montob; ?></td>
+           <td width="50" align="right"><?php  echo $tasa; ?></td>
+           <td width="120" align="right"><?php  echo $montoi; ?></td>
+           <td width="50" align="right"><?php  echo $retenc; ?></td>
+           <td width="120" align="right"><?php  echo $montor; ?></td>
+           <td width="50" align="center"><?php  echo $registro["cod_banco"]; ?></td>
+           <td width="40" align="center"><?php  echo $registro["tipo_mov"]; ?></td>
+           <td width="80" align="center"><?php  echo $registro["referencia"]; ?></td>
          </tr>
-         <?}
+         <?php }
  $total=formato_monto($total);
 ?>
        </table></td>
@@ -94,7 +94,7 @@ if($registro["tipo_documento"]=="02"){$nro_ndb=$registro["nro_documento"];} if($
          <td width="102"><span class="Estilo5">TOTAL PLANILLA :</span></td>
          <td width="160"><table width="151" border="1" cellspacing="0" cellpadding="0">
            <tr>
-             <td align="right" class="Estilo5"><? echo $total; ?></td>
+             <td align="right" class="Estilo5"><?php  echo $total; ?></td>
            </tr>
          </table></td>
        </tr>
@@ -104,4 +104,4 @@ if($registro["tipo_documento"]=="02"){$nro_ndb=$registro["nro_documento"];} if($
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

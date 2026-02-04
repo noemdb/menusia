@@ -43,12 +43,12 @@
                       <TR>
                         <TD CLASS="TITLE" ALIGN="LEFT" VALIGN="TOP" COLSPAN="2">
                            Republica Bolivariana de Venezuela
-						   SIA Contablidad Presupuestaria
+						   SIPAP Contablidad Presupuestaria
                         </TD>
 				      </TR>
 					  <TR>		
    				        <TD CLASS="TITLE" ALIGN="LEFT" VALIGN="TOP" COLSPAN="2">
-						   SIA Contablidad Presupuestaria							   
+						   SIPAP Contablidad Presupuestaria							   
                         </TD>
 					  </TR>	
 					  <TR>
@@ -81,7 +81,7 @@
 			<COL ALIGN="LEFT" COLSPAN="5" TYPE="EXPRESSION">insert_Nom_Emp()</COL>			
 			</ROW>
 			<ROW BORDER="0">
-			<COL ALIGN="LEFT" COLSPAN="3" TYPE="REGULAR">SIA Contablidad Presupuestaria</COL>
+			<COL ALIGN="LEFT" COLSPAN="3" TYPE="REGULAR">SIPAP Contablidad Presupuestaria</COL>
 			</ROW>
 			<ROW BORDER="0">
 			<COL CLASS="TITLE" ALIGN="CENTER" VALIGN="TOP" ROWSPAN="2" COLSPAN="3" TYPE="REGULAR">Catalogo de Documentos Compromisos</COL>

@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $equipo=getenv("COMPUTERNAME");
 if (!$_GET){ $cod_bien=""; 
   $mcod_m="PRE023".$equipo;$codigo_mov=substr($mcod_m,0,49);}
@@ -8,19 +8,19 @@ if (!$_GET){ $cod_bien="";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Modificar Transferencias Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Modificar Transferencias Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet> 
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){document.location ='Det_inc_bienes.php?codigo_mov=<?echo $codigo_mov?>';}
+function llamar_anterior(){document.location ='Det_inc_bienes.php?codigo_mov=<?php echo $codigo_mov?>';}
 function revisar(){
 var f=document.form1;
 var Valido=true;
-   if(f.txtcod_bien_mue.value==""){alert("Código del Inmueble no puede estar Vacio");return false;}
+   if(f.txtcod_bien_mue.value==""){alert("Cï¿½digo del Inmueble no puede estar Vacio");return false;}
    if(f.txtmonto.value==""){alert("Monto no puede estar Vacio");return false;}
    if(MontoValido(f.txtmonto.value)) {Valido=true;}
-      else{alert("monto debe tener valores numéricos.");return false;}
+      else{alert("monto debe tener valores numï¿½ricos.");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -31,7 +31,7 @@ return true;}
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
 $denominacion="";
 $monto=0;
@@ -58,9 +58,9 @@ $monto=formato_monto($monto);
               <tr>
                 <td width="111" scope="col"><span class="Estilo5">C&Oacute;DIGO DE L BIEN MUEBLES :</span></td>
                 <td width="839" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <input name="txtcod_bien_mue" type="text" class="Estilo5" id="txtcod_bien_mue" size="30" maxlength="30" readonly value="<? echo $cod_bien ?>">
+                    <input name="txtcod_bien_mue" type="text" class="Estilo5" id="txtcod_bien_mue" size="30" maxlength="30" readonly value="<?php  echo $cod_bien ?>">
                     <strong><strong>
-                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_trans_bienes_mueblesd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo de Bienes Inmuebles" onClick="VentanaCentrada('Cat_trans_bienes_mueblesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -70,7 +70,7 @@ $monto=formato_monto($monto);
               <tr>
                 <td width="103" scope="col"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
                 <td width="847" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10"> <span class="menu"><strong><strong><strong><strong><strong><strong><strong><strong> <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>
-                    <input name="txtdenominacion" type="text" class="Estilo5" id="txtdenominacion" size="85" maxlength="100"  readonly value="<? echo $denominacion ?>">
+                    <input name="txtdenominacion" type="text" class="Estilo5" id="txtdenominacion" size="85" maxlength="100"  readonly value="<?php  echo $denominacion ?>">
                 </strong></strong></strong></strong></strong></strong></strong></strong> </strong></strong></strong></strong></strong></strong> </strong></strong> </strong></strong></span> </span></span></div></td>
               </tr>
             </table></td>
@@ -81,7 +81,7 @@ $monto=formato_monto($monto);
                 <tr>
                   <td width="108"><span class="Estilo5">MONTO </span>:</td>
                   <td width="496"><span class="Estilo5">
-                    <input name="txtmonto" type="text" class="Estilo5" id="txtmonto" onFocus="encender(this)" onBlur="apagar(this)" value="<? echo $monto_c ?>" size="25" maxlength="22" align="right">
+                    <input name="txtmonto" type="text" class="Estilo5" id="txtmonto" onFocus="encender(this)" onBlur="apagar(this)" value="<?php  echo $monto_c ?>" size="25" maxlength="22" align="right">
                   </span></td>
                 </tr>
             </table></td>
@@ -93,7 +93,7 @@ $monto=formato_monto($monto);
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="120">&nbsp;</td>
             <td width="87" align="center" valign="middle"><input name="Submit" type="submit" id="Submit"  value="Aceptar"></td>
             <td width="99" align="center"><input name="button" type="button" id="button4" value="Atras" onClick="JavaScript:llamar_anterior()"></td>

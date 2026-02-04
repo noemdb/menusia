@@ -1,13 +1,13 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $date = date("d/m/Y");
 $num="01";
 ?>
   
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALESA (Incluir Ficha de Semovientes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALESA (Incluir Ficha de Semovientes)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -137,7 +137,7 @@ return true;}
                 <td width="150" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="8"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_clasificaciond.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_clasificaciond.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="719" scope="col"><div align="left"><span class="Estilo5">
                     <input name="txtnom_clasificacion" type="text" id="txtnom_clasificacion" size="70" maxlength="250" readonly class="Estilo5">
@@ -181,7 +181,7 @@ return true;}
                  <td width="90" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_empresa" type="text" id="txtcod_empresa" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_empresa" type="text" id="txtnombre_empresa" size="73" maxlength="250" readonly class="Estilo5">
@@ -196,7 +196,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" size="5" maxlength="4">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_dependenciasd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="575" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtdenominacion_dependencia" type="text" id="txtdenominacion_dependencia" size="68" maxlength="250" readonly class="Estilo5">
@@ -211,7 +211,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_direccion" type="text" id="txtcod_direccion" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" size="5" maxlength="4">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_direccionesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="575" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="68" maxlength="250" readonly class="Estilo5">
@@ -226,7 +226,7 @@ return true;}
                  <td width="180" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_departamento" type="text" id="txtcod_departamento" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" size="10" maxlength="8">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_departamentosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Direcciones" onClick="VentanaCentrada('Cat_departamentosd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="575" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_dep" type="text" id="txtnombre_dep" size="65" maxlength="250" readonly class="Estilo5">
@@ -241,11 +241,11 @@ return true;}
                 <td width="200" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                               <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                               <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="98" scope="col"><div align="left"><span class="Estilo5">FECHA DE ACTUALIZACION:</span></div></td>
                 <td width="555" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -269,7 +269,7 @@ return true;}
                 <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtced_res_uso" type="text" id="txtced_res_uso" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesusod.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="60" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                 <td width="432" scope="col"><div align="left"><span class="Estilo5">
@@ -285,7 +285,7 @@ return true;}
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcodigo_rotula" type="text" id="txtcodigo_rotula" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" size="4" maxlength="2">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Metodo de Rotulacion" onClick="VentanaCentrada('Cat_metodosrotulad.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Metodo de Rotulacion" onClick="VentanaCentrada('Cat_metodosrotulad.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="575" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtmetodo_rotula" type="text" id="txtmetodo_rotula" size="70" maxlength="250" readonly class="Estilo5">
@@ -300,11 +300,11 @@ return true;}
                 <td width="200" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                    <input name="txtced_res_rotu" type="text" id="txtced_res_rotu" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_rotuladoresd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_rotuladoresd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="126" scope="col"><div align="left"><span class="Estilo5">FECHA ROTULACI&Oacute;N : </span></div></td>
                 <td width="616" scope="col"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="15" maxlength="10"  value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" >
+                    <input name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="15" maxlength="10"  value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" >
                 </span></span></td>
               </tr>
             </table></td>
@@ -339,7 +339,7 @@ return true;}
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_region" type="text" id="txtnombre_region" size="70" maxlength="250" readonly class="Estilo5">
@@ -354,7 +354,7 @@ return true;}
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtestado" type="text" id="txtestado" size="70" maxlength="250" readonly class="Estilo5">
@@ -369,7 +369,7 @@ return true;}
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_municipio" type="text" id="txtcod_municipio" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="70" maxlength="250" readonly class="Estilo5">
@@ -384,7 +384,7 @@ return true;}
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_cuidadesd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_cuidadesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="70" maxlength="250" readonly class="Estilo5">
@@ -399,7 +399,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="68" maxlength="250" readonly class="Estilo5">
@@ -456,7 +456,7 @@ return true;}
                 </strong></strong></span></span> </span></div></td>
                 <td width="141" scope="col"><div align="left"><span class="Estilo5">FECHA DE NACIMIENTO :</span></div></td>
                 <td width="542" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_nacimiento" type="text" id="txtfecha_nacimiento" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_nacimiento" type="text" id="txtfecha_nacimiento" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -466,7 +466,7 @@ return true;}
               <tr>
                 <td width="120" scope="col"><div align="left"><span class="Estilo5">EDAD (MESES) :</span></div></td>
                 <td width="116" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtedad" type="text" id="txtedad" size="4" maxlength="2"  value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtedad" type="text" id="txtedad" size="4" maxlength="2"  value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="94" scope="col"><div align="left"><span class="Estilo5">TAMA&Ntilde;O/PESO :</span></div></td>
                 <td width="639" scope="col"><div align="left"><span class="Estilo5">
@@ -495,13 +495,13 @@ return true;}
                 <td width="300" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtcod_contablea" type="text" id="txtcod_contablea" size="30" maxlength="25"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                    <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_codigoscontablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="115" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO CONTABLE DEPRECIACI&Oacute;N :</span></div></td>
                 <td width="400" scope="col"><div align="left"><span class="Estilo5">
                     <input name="txtcod_contabled" type="text" id="txtcod_contabled" size="30" maxlength="25"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong>
-                    <input name="bttipo_codeingre22422222243623" type="button" id="bttipo_codeingre22422222243623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="bttipo_codeingre22422222243623" type="button" id="bttipo_codeingre22422222243623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -518,7 +518,7 @@ return true;}
                 </strong></strong></span></span> </span></div></td>
                 <td width="100" scope="col"><div align="left"><span class="Estilo5">TASA DEPRECIACI&Oacute;N :</span></div></td>
                 <td width="604" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txttasa_deprec" type="text" id="txttasa_deprec" size="25" maxlength="15" value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txttasa_deprec" type="text" id="txttasa_deprec" size="25" maxlength="15" value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong>
                 </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
@@ -529,11 +529,11 @@ return true;}
               <tr>
                 <td width="120" scope="col"><div align="left"><span class="Estilo5">VIDA &Uacute;TIL EN A&Ntilde;OS :</span></div></td>
                 <td width="107" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtvida_util" type="text" id="txtvida_util" size="10" maxlength="15" value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtvida_util" type="text" id="txtvida_util" size="10" maxlength="15" value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="71" scope="col"><div align="left"><span class="Estilo5">VALOR RESIDUAL :</span></div></td>
                 <td width="701" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtvalor_residual" type="text" id="txtvalor_residual" size="20" maxlength="15" value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtvalor_residual" type="text" id="txtvalor_residual" size="20" maxlength="15" value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -545,11 +545,11 @@ return true;}
                 <td width="400" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="40" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                    <input name="bttipo_codeingre224222222436222" type="button" id="bttipo_codeingre2242222224362222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="bttipo_codeingre224222222436222" type="button" id="bttipo_codeingre2242222224362222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="133" scope="col"><div align="left"><span class="Estilo5">MONTO DEPRECIADO :</span></div></td>
                 <td width="300" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="15" maxlength="15" value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="15" maxlength="15" value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -571,7 +571,7 @@ return true;}
                 </strong></strong></span></span> </span></div></td>
                 <td width="164" scope="col"><span class="Estilo5">FECHA DESINCORPORCI&Oacute;N :</span></td>
                 <td width="578" scope="col"><span class="Estilo5">
-                 <input name="txtfecha_desincorporado" type="text" id="txtfecha_desincorporado" size="15" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?echo $date?>">
+                 <input name="txtfecha_desincorporado" type="text" id="txtfecha_desincorporado" size="15" maxlength="10"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" value="<?php echo $date?>">
                 </span></td>
               </tr>
             </table></td>
@@ -583,7 +583,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcodigo_situacont" type="text" id="txtcodigo_situacont" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacioncontabled.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacioncontabled.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txttipo_situacion" type="text" id="txttipo_situacion" size="68" maxlength="50" readonly class="Estilo5">
@@ -598,7 +598,7 @@ return true;}
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                      <input name="txtcodigo_situalegal" type="text" id="txtcodigo_situalegal" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                      <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacionlegald.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Situacion Contable" onClick="VentanaCentrada('Cat_situacionlegald.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
                      <input name="txttipo_situacion_legal" type="text" id="txttipo_situacion_legal" size="68" maxlength="50" readonly class="Estilo5">
@@ -613,11 +613,11 @@ return true;}
                 <td width="200" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtced_res_verificador" type="text" id="txtced_res_verificador" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsableverd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsableverd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="98" scope="col"><div align="left"><span class="Estilo5">FECHA DE VERIFICACI&Oacute;N :</span></div></td>
                 <td width="555" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -642,7 +642,7 @@ return true;}
                 <td width="81" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtcodigo" type="text" id="txtcodigo" size="5" maxlength="3"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                  <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Tipo Incorporacion" onClick="VentanaCentrada('Cat_tipoincorpd.php?criterio=','SIA','','750','500','true')" value="...">
+                  <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Tipo Incorporacion" onClick="VentanaCentrada('Cat_tipoincorpd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="733" scope="col"><div align="left"><span class="Estilo5">
                     <input name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="75" maxlength="100"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
@@ -668,7 +668,7 @@ return true;}
                 <td width="829" scope="col"><div align="left"><span class="Estilo5">
                     <input name="txtcod_imp_presup" type="text" id="txtcod_imp_presup" size="35" maxlength="32"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong>
-                    <input name="bttipo_codeingre2242222224362522" type="button" id="bttipo_codeingre22422222243625222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="bttipo_codeingre2242222224362522" type="button" id="bttipo_codeingre22422222243625222" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -698,11 +698,11 @@ return true;}
               <tr>
                 <td width="112" scope="col"><div align="left"><span class="Estilo5">VALOR INCORPORACI&Oacute;N :</span></div></td>
                 <td width="164" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                    <input name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?php echo $num?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="112" scope="col"><div align="left"><span class="Estilo5">FECHA INCORPORACI&Oacute;N :</span></div></td>
                 <td width="167" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="20" maxlength="15" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="20" maxlength="15" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               
                 
@@ -718,7 +718,7 @@ return true;}
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="89" scope="col"><div align="left"><span class="Estilo5">FECHA ORDEN DE COMPRA :</span></div></td>
                 <td width="620" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_oc" type="text" id="txtfecha_oc" size="20" maxlength="15" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_oc" type="text" id="txtfecha_oc" size="20" maxlength="15" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -732,7 +732,7 @@ return true;}
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="85" scope="col"><div align="left"><span class="Estilo5">FECHA ORDEN DE PAGO :</span></div></td>
                 <td width="615" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_op" type="text" id="txtfecha_op" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_op" type="text" id="txtfecha_op" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -753,7 +753,7 @@ return true;}
                 </span></div></td>
                 <td width="89" scope="col"><div align="left"><span class="Estilo5">FECHA DOCUMENTO :</span></div></td>
                 <td width="389" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                 </span></div></td>
               </tr>
             </table></td>
@@ -767,7 +767,7 @@ return true;}
                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="66" scope="col"><div align="left"><span class="Estilo5">FECHA DE FACTURA :</span></div></td>
                 <td width="676" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtfecha_factura" type="text" id="txtfecha_factura" size="15" maxlength="10" value="<?echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
+                    <input name="txtfecha_factura" type="text" id="txtfecha_factura" size="15" maxlength="10" value="<?php echo $date?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
               </tr>
             </table></td>
@@ -779,7 +779,7 @@ return true;}
                 <td width="200" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
                     <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5">
                     <span class="menu"><strong><strong>
-                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIA','','750','500','true')" value="...">
+                <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_proveedoresd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                 <td width="702" scope="col"><div align="left"><span class="Estilo5">
                     <input name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" size="65" maxlength="150"  readonly class="Estilo5">

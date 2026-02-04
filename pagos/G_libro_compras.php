@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");?>
-<?include ("../class/conects.php");  include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");?>
+<?php include ("../class/conects.php");  include ("../class/funciones.php");
 if (!$_GET){ $mes_libro='';  $p_letra='';  $sql="SELECT * FROM PAG032 ORDER BY mes_libro";}
 else {  $mes_libro = $_GET["Gmes_libro"];  $p_letra=substr($mes_libro, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$mes_libro=substr($mes_libro,1,20);}
@@ -14,7 +14,7 @@ else {  $mes_libro = $_GET["Gmes_libro"];  $p_letra=substr($mes_libro, 0, 1);
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Generar Libros de Compras)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Generar Libros de Compras)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -58,9 +58,9 @@ MM_reloadPage(true);
 -->
 </style>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $nombre_mes="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){
   if ($p_letra=="A"){$sql="SELECT * FROM PAG032 ORDER BY mes_libro";}
@@ -169,7 +169,7 @@ if($fecha==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha);}
 
               </table>
               <div id="T11" class="tab-body">
-              <iframe src="Det_cons_comp_iva.php?criterio=<?echo $clave?>" width="870" height="370" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_cons_comp_iva.php?criterio=<?php echo $clave?>" width="870" height="370" scrolling="auto" frameborder="1"></iframe>
               </div>
         </form>
       </div>
@@ -178,4 +178,4 @@ if($fecha==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

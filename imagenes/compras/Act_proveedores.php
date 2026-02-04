@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103, campo104 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U"; $modulo="09";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $Nom_usuario=$registro["campo104"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="09"; $opcion="01-0000045"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){ $ced_rif=''; $sql="SELECT * FROM COMP005 ORDER BY ced_rif"; $p_letra="";}
 else {$ced_rif = $_GET["Gced_rif"];$p_letra=substr($ced_rif, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")||($p_letra=="C")){$ced_rif=substr($ced_rif,1,12);} else{$ced_rif=substr($ced_rif,0,12);}
@@ -21,7 +21,7 @@ else {$ced_rif = $_GET["Gced_rif"];$p_letra=substr($ced_rif, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Actualiza Proveedores)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Actualiza Proveedores)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -29,7 +29,7 @@ var Gced_rif = "";
 function Llamar_Incluir(mop){ document.form2.submit(); }
 function Llamar_Ventana(url){var murl;
     Gced_rif=document.form1.txtced_rif.value;murl=url+Gced_rif;
-    if (Gced_rif==""){alert("Cédula/Rif debe ser Seleccionada");}else {document.location = murl;}
+    if (Gced_rif==""){alert("Cï¿½dula/Rif debe ser Seleccionada");}else {document.location = murl;}
 }
 function Mover_Registro(MPos){var murl;
    murl="Act_proveedores.php";
@@ -58,7 +58,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $nombre_proveedor="";$rif_proveedor="";$nit_proveedo="";$nit=""; $direccion="";$tipo_benef=""; $ci_rep_legal=""; $nom_rep_legal="";
 $persona_contacto="";  $telefono=""; $fax=""; $tlf_movil=""; $email_proveed=""; $observacion="";  $web_site_proveed=""; $ramo_venta="";
 $cod_pos_proveedor=""; $aptd_pos_proveedor=""; $nro_sso="";$nro_ince="";$inf_usuario=""; $tiene_alcaldia=""; $nro_alcaldia="";
@@ -100,12 +100,12 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
 <table width="977" height="785" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="780" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-      <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+      <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
 	  <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Incluir()";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Incluir()">Incluir</A></td>
       </tr>
-	  <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_proveedor.php?Gced_rif=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_proveedor.php?Gced_rif=');">Modificar</A></td>
@@ -114,7 +114,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Req_proveedor.php?Gced_rif=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Req_proveedor.php?Gced_rif=');">Requi/Solven</A></td>
       </tr>
-	  <?} if ($Mcamino{2}=="S"){?>
+	  <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -135,12 +135,12 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_proveedores.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_proveedores.php" class="menu">Catalogo</a></td>
       </tr>
-	  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+	  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-	  <? }?>
+	  <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -155,12 +155,12 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="85"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                 <td width="220"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?echo $ced_rif?>" readonly> </span></td>
+                 <td width="220"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?php echo $ced_rif?>" readonly> </span></td>
                  <td width="55"><span class="Estilo5">RIF :</span></td>
-                 <td width="220"><span class="Estilo5"><input name="txtrif_proveedor" type="text" id="txtrif_proveedor" size="20" maxlength="15"  value="<?echo $rif_proveedor?>" readonly> </span></td>
+                 <td width="220"><span class="Estilo5"><input name="txtrif_proveedor" type="text" id="txtrif_proveedor" size="20" maxlength="15"  value="<?php echo $rif_proveedor?>" readonly> </span></td>
                  <td width="55"><span class="Estilo5">NIT :</span></td>
-                 <td width="200"><span class="Estilo5"><input name="txtnit_proveedor" type="text" id="txtnit_proveedor" size="20" maxlength="15"  value="<?echo $nit_proveedor?>" readonly>  </span></td>
-                 <td width="50"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>');"></td>
+                 <td width="200"><span class="Estilo5"><input name="txtnit_proveedor" type="text" id="txtnit_proveedor" size="20" maxlength="15"  value="<?php echo $nit_proveedor?>" readonly>  </span></td>
+                 <td width="50"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>');"></td>
                </tr>
              </table></td>
            </tr>
@@ -168,7 +168,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="85"><span class="Estilo5">NOMBRE  :</span></td>
-                 <td width="780"><span class="Estilo5"><input name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" value="<?echo $nombre_proveedor?>" size="100" readonly></span></td>
+                 <td width="780"><span class="Estilo5"><input name="txtnombre_proveedor" type="text" id="txtnombre_proveedor" value="<?php echo $nombre_proveedor?>" size="100" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -176,7 +176,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="85"><span class="Estilo5">DIRECCI&Oacute;N :</span></td>
-                 <td width="780"><textarea name="txtdireccion" cols="85" readonly="readonly" class="headers" id="txtdireccion"><?echo $direccion?></textarea></td>
+                 <td width="780"><textarea name="txtdireccion" cols="85" readonly="readonly" class="headers" id="txtdireccion"><?php echo $direccion?></textarea></td>
                </tr>
              </table></td>
            </tr>
@@ -185,11 +185,11 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="85"><span class="Estilo5">TELEFONOS:</span></td>
-                   <td width="240"><span class="Estilo5"><input name="txttelefono" type="text" id="txttelefono" size="25" maxlength="25"  value="<?echo $telefono?>" readonly> </span></td>
+                   <td width="240"><span class="Estilo5"><input name="txttelefono" type="text" id="txttelefono" size="25" maxlength="25"  value="<?php echo $telefono?>" readonly> </span></td>
                    <td width="55"><span class="Estilo5">FAX :</span></td>
-                   <td width="230"><span class="Estilo5"><input name="txtfax" type="text" id="txtfax" size="20" maxlength="20"  value="<?echo $fax?>" readonly></span></td>
+                   <td width="230"><span class="Estilo5"><input name="txtfax" type="text" id="txtfax" size="20" maxlength="20"  value="<?php echo $fax?>" readonly></span></td>
                    <td width="110"><span class="Estilo5">COD. POSTAL :</span></td>
-                   <td width="160"><span class="Estilo5"><input name="txtcod_pos_proveedor" type="text" id="txtcod_pos_proveedor" size="20" maxlength="10"  value="<?echo $cod_pos_proveedor?>" readonly></span></td>
+                   <td width="160"><span class="Estilo5"><input name="txtcod_pos_proveedor" type="text" id="txtcod_pos_proveedor" size="20" maxlength="10"  value="<?php echo $cod_pos_proveedor?>" readonly></span></td>
                  </tr>
              </table></td>
            </tr>
@@ -197,9 +197,9 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="130"><span class="Estilo5">APARTADO POSTAL:</span></td>
-                   <td width="300"><span class="Estilo5"><input name="txtaptd_pos_proveedor" type="text" id="txtaptd_pos_proveedor" size="25" maxlength="10"  value="<?echo $aptd_pos_proveedor?>" readonly></span></td>
+                   <td width="300"><span class="Estilo5"><input name="txtaptd_pos_proveedor" type="text" id="txtaptd_pos_proveedor" size="25" maxlength="10"  value="<?php echo $aptd_pos_proveedor?>" readonly></span></td>
                     <td width="145"><span class="Estilo5">TIPO DE PROVEEDOR :</span></td>
-                   <td width="290"><span class="Estilo5"><input name="txttipo_benef" type="text" id="txttipo_benef" size="30"  value="<?echo $tipo_benef?>" readonly></span></td>
+                   <td width="290"><span class="Estilo5"><input name="txttipo_benef" type="text" id="txttipo_benef" size="30"  value="<?php echo $tipo_benef?>" readonly></span></td>
                  </tr>
              </table></td>
            </tr>
@@ -207,9 +207,9 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="160"><span class="Estilo5">CORREO ELECTRONICO :</span></td>
-                   <td width="305"><span class="Estilo5"><input name="txtemail_proveed" type="text" id="txtemail_proveed" size="40" maxlength="50"  value="<?echo $email_proveed?>" readonly></span></td>
+                   <td width="305"><span class="Estilo5"><input name="txtemail_proveed" type="text" id="txtemail_proveed" size="40" maxlength="50"  value="<?php echo $email_proveed?>" readonly></span></td>
                    <td width="120"><span class="Estilo5">PAGINA WEB:</span></td>
-                   <td width="280"><span class="Estilo5"><input name="txtweb_site_proveed" type="text" id="txtweb_site_proveed" size="35" maxlength="50"  value="<?echo $web_site_proveed?>" readonly> </span></td>
+                   <td width="280"><span class="Estilo5"><input name="txtweb_site_proveed" type="text" id="txtweb_site_proveed" size="35" maxlength="50"  value="<?php echo $web_site_proveed?>" readonly> </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -217,7 +217,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="165"><span class="Estilo5">PRESONA CONTACTO:</span></td>
-                 <td width="700"><span class="Estilo5"><input name="txtpersona_contacto" type="text" id="txtpersona_contacto" value="<?echo $persona_contacto?>" size="95" readonly></span></td>
+                 <td width="700"><span class="Estilo5"><input name="txtpersona_contacto" type="text" id="txtpersona_contacto" value="<?php echo $persona_contacto?>" size="95" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -225,9 +225,9 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="105"><span class="Estilo5">TIPO EMPRESA :</span></td>
-                 <td width="335"><span class="Estilo5"><input name="txttipo_empresa" type="text" id="txttipo_empresa" size="50"  value="<?echo $tipo_empresa?>" readonly> </span></td>
+                 <td width="335"><span class="Estilo5"><input name="txttipo_empresa" type="text" id="txttipo_empresa" size="50"  value="<?php echo $tipo_empresa?>" readonly> </span></td>
                  <td width="165"><span class="Estilo5">NRO. CTA. BANCARIA :</span></td>
-                 <td width="260"><span class="Estilo5"><input name="txtcta_banco_empresa" type="text" id="txtcta_banco_empresa" size="25"  value="<?echo $cta_banco_empresa?>" readonly> </span></td>
+                 <td width="260"><span class="Estilo5"><input name="txtcta_banco_empresa" type="text" id="txtcta_banco_empresa" size="25"  value="<?php echo $cta_banco_empresa?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
@@ -235,9 +235,9 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="165"><span class="Estilo5">C&Eacute;DULA/RIF REP. LEGAL :</span></td>
-                 <td width="290"><span class="Estilo5"><input name="txtci_rep_legal" type="text" id="txtci_rep_legal" size="20" maxlength="12"  value="<?echo $ci_rep_legal?>" readonly> </span></td>
+                 <td width="290"><span class="Estilo5"><input name="txtci_rep_legal" type="text" id="txtci_rep_legal" size="20" maxlength="12"  value="<?php echo $ci_rep_legal?>" readonly> </span></td>
                  <td width="120"><span class="Estilo5">TELEFONO MOVIL :</span></td>
-                 <td width="290"><span class="Estilo5"><input name="txttlf_movil" type="text" id="txttlf_movil" size="20" maxlength="20"  value="<?echo $tlf_movil?>" readonly> </span></td>
+                 <td width="290"><span class="Estilo5"><input name="txttlf_movil" type="text" id="txttlf_movil" size="20" maxlength="20"  value="<?php echo $tlf_movil?>" readonly> </span></td>
                 </tr>
              </table></td>
            </tr>
@@ -245,7 +245,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="155"><span class="Estilo5">NOMBRE REP. LEGAL :</span></td>
-                 <td width="710"><span class="Estilo5"><input name="txtnom_rep_legal" type="text" id="txtnom_rep_legal" value="<?echo $nom_rep_legal?>" size="80" readonly></span></td>
+                 <td width="710"><span class="Estilo5"><input name="txtnom_rep_legal" type="text" id="txtnom_rep_legal" value="<?php echo $nom_rep_legal?>" size="80" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -253,11 +253,11 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="130"><span class="Estilo5">CAPITAL INICIAL:</span></td>
-                   <td width="180"><span class="Estilo5"><input name="txtcapital_suscripto" type="text" id="txtcapital_suscripto" size="16" align="right" maxlength="16"  value="<?echo $capital_suscripto?>" readonly> </span></td>
+                   <td width="180"><span class="Estilo5"><input name="txtcapital_suscripto" type="text" id="txtcapital_suscripto" size="16" align="right" maxlength="16"  value="<?php echo $capital_suscripto?>" readonly> </span></td>
                    <td width="130"><span class="Estilo5">CAPITAL ACTUAL :</span></td>
-                   <td width="180"><span class="Estilo5"><input name="txtcapital_pagado" type="text" id="txtcapital_pagado" size="16" maxlength="16" align="right" value="<?echo $capital_pagado?>" readonly>  </span></td>
+                   <td width="180"><span class="Estilo5"><input name="txtcapital_pagado" type="text" id="txtcapital_pagado" size="16" maxlength="16" align="right" value="<?php echo $capital_pagado?>" readonly>  </span></td>
                    <td width="120"><span class="Estilo5">FECHA REGISTRO :</span></td>
-                   <td width="125"><span class="Estilo5"><input name="txtfecha_registro" type="text" id="txtfecha_registro" size="10" maxlength="10"  value="<?echo $fecha_registro?>" readonly> </span></td>
+                   <td width="125"><span class="Estilo5"><input name="txtfecha_registro" type="text" id="txtfecha_registro" size="10" maxlength="10"  value="<?php echo $fecha_registro?>" readonly> </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -265,18 +265,18 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="120"><span class="Estilo5">CIRCUSCRIPCION :</span></td>
-                 <td width="520"><span class="Estilo5"><input name="txtcircunscripcion_j" type="text" id="txtcircunscripcion_j" value="<?echo $circunscripcion_j?>" size="60" readonly></span></td>
+                 <td width="520"><span class="Estilo5"><input name="txtcircunscripcion_j" type="text" id="txtcircunscripcion_j" value="<?php echo $circunscripcion_j?>" size="60" readonly></span></td>
                   <td width="110"><span class="Estilo5">NRO. REGISTRO :</span></td>
-                 <td width="115"><span class="Estilo5"><input name="txtnro_registro" type="text" id="txtnro_registro" size="10" maxlength="10"  value="<?echo $nro_registro?>" readonly> </span></td>
+                 <td width="115"><span class="Estilo5"><input name="txtnro_registro" type="text" id="txtnro_registro" size="10" maxlength="10"  value="<?php echo $nro_registro?>" readonly> </span></td>
                </tr>
              </table></td>
            </tr>
                    <td><table width="865">
                <tr>
                  <td width="115"><span class="Estilo5">TOMO NUMERO :</span></td>
-                 <td width="450"><span class="Estilo5"><input name="txttomo_registro" type="text" id="txttomo_registro" size="20" maxlength="20"  value="<?echo $tomo_registro?>" readonly> </span></td>
+                 <td width="450"><span class="Estilo5"><input name="txttomo_registro" type="text" id="txttomo_registro" size="20" maxlength="20"  value="<?php echo $tomo_registro?>" readonly> </span></td>
                  <td width="100"><span class="Estilo5">FOLIO :</span></td>
-                 <td width="200"><span class="Estilo5"><input name="txtfolio_registro" type="text" id="txtfolio_registro" size="20" maxlength="20"  value="<?echo $folio_registro?>" readonly> </span></td>
+                 <td width="200"><span class="Estilo5"><input name="txtfolio_registro" type="text" id="txtfolio_registro" size="20" maxlength="20"  value="<?php echo $folio_registro?>" readonly> </span></td>
                 </tr>
              </table></td>
            </tr>
@@ -284,25 +284,25 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="115"><span class="Estilo5">OBSERVACION :</span></td>
-                 <td width="750"><span class="Estilo5"><input name="txtobservacion" type="text" id="txtobservacion" value="<?echo $observacion?>" size="100" readonly></span></td>
+                 <td width="750"><span class="Estilo5"><input name="txtobservacion" type="text" id="txtobservacion" value="<?php echo $observacion?>" size="100" readonly></span></td>
                </tr>
              </table></td>
            </tr>
                    <td><table width="865">
                <tr>
                  <td width="165"><span class="Estilo5">NRO. INSCRIPCION IVSS :</span></td>
-                 <td width="280"><span class="Estilo5"><input name="txtnro_sso" type="text" id="txtnro_sso" size="20" maxlength="20"  value="<?echo $nro_sso?>" readonly> </span></td>
+                 <td width="280"><span class="Estilo5"><input name="txtnro_sso" type="text" id="txtnro_sso" size="20" maxlength="20"  value="<?php echo $nro_sso?>" readonly> </span></td>
                  <td width="170"><span class="Estilo5">NRO. INSCRIPCION INCE :</span></td>
-                 <td width="250"><span class="Estilo5"><input name="txtnro_ince" type="text" id="txtnro_ince" size="20" maxlength="20"  value="<?echo $nro_ince?>" readonly> </span></td>
+                 <td width="250"><span class="Estilo5"><input name="txtnro_ince" type="text" id="txtnro_ince" size="20" maxlength="20"  value="<?php echo $nro_ince?>" readonly> </span></td>
                 </tr>
              </table></td>
            </tr>
                    <td><table width="865">
                <tr>
                  <td width="195"><span class="Estilo5">NRO. INSCRIPCION LABORAL :</span></td>
-                 <td width="250"><span class="Estilo5"><input name="txtnro_otro1" type="text" id="txtnro_otro1" size="20" maxlength="20"  value="<?echo $nro_otro1?>" readonly> </span></td>
+                 <td width="250"><span class="Estilo5"><input name="txtnro_otro1" type="text" id="txtnro_otro1" size="20" maxlength="20"  value="<?php echo $nro_otro1?>" readonly> </span></td>
                  <td width="200"><span class="Estilo5">NRO. INSCRIPCION SUNACOP :</span></td>
-                 <td width="220"><span class="Estilo5"><input name="txtnro_otro2" type="text" id="txtnro_otro2" size="20" maxlength="20"  value="<?echo $nro_otro2?>" readonly> </span></td>
+                 <td width="220"><span class="Estilo5"><input name="txtnro_otro2" type="text" id="txtnro_otro2" size="20" maxlength="20"  value="<?php echo $nro_otro2?>" readonly> </span></td>
                 </tr>
              </table></td>
            </tr>
@@ -310,11 +310,11 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="85"><span class="Estilo5">TIENE SNC:</span></td>
-                   <td width="150"><span class="Estilo5"><input name="txttiene_ocei" type="text" id="txttiene_ocei" size="3" maxlength="2"  value="<?echo $tiene_ocei?>" readonly>  </span></td>
+                   <td width="150"><span class="Estilo5"><input name="txttiene_ocei" type="text" id="txttiene_ocei" size="3" maxlength="2"  value="<?php echo $tiene_ocei?>" readonly>  </span></td>
                    <td width="80"><span class="Estilo5">NUMERO:</span></td>
-                   <td width="200"><span class="Estilo5"><input name="txtnro_ocei" type="text" id="txtnro_ocei" size="20" maxlength="20"  value="<?echo $nro_ocei?>" readonly> </span></td>
+                   <td width="200"><span class="Estilo5"><input name="txtnro_ocei" type="text" id="txtnro_ocei" size="20" maxlength="20"  value="<?php echo $nro_ocei?>" readonly> </span></td>
                    <td width="160"><span class="Estilo5">MONTO FINANCIERO INE:</span></td>
-                   <td width="210"><span class="Estilo5"><input name="txtmonto_ocei" type="text" id="txtmonto_ocei" size="20" maxlength="20" align="right"  value="<?echo $monto_ocei?>" readonly></span></td>
+                   <td width="210"><span class="Estilo5"><input name="txtmonto_ocei" type="text" id="txtmonto_ocei" size="20" maxlength="20" align="right"  value="<?php echo $monto_ocei?>" readonly></span></td>
                  </tr>
              </table></td>
            </tr>
@@ -323,11 +323,11 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="240"><span class="Estilo5">TIENE INSCRIPCION GOBERNACION :</span></td>
-                 <td width="100"><span class="Estilo5"> <input name="txttiene_gobernacion" type="text" id="txttiene_gobernacion" size="3"  value="<?echo $tiene_gobernacion?>" readonly></span></td>
+                 <td width="100"><span class="Estilo5"> <input name="txttiene_gobernacion" type="text" id="txttiene_gobernacion" size="3"  value="<?php echo $tiene_gobernacion?>" readonly></span></td>
                  <td width="75"><span class="Estilo5">NUMERO:</span></td>
-                 <td width="200"><span class="Estilo5"><input name="txtnro_gobernacion" type="text" id="txtnro_gobernacion" size="25"  value="<?echo $nro_gobernacion?>" readonly></span></td>
+                 <td width="200"><span class="Estilo5"><input name="txtnro_gobernacion" type="text" id="txtnro_gobernacion" size="25"  value="<?php echo $nro_gobernacion?>" readonly></span></td>
                  <td width="75"><span class="Estilo5">FECHA  :</span></td>
-                 <td width="160"><span class="Estilo5"><input name="txtfecha_reg_gob" type="text" id="txtfecha_reg_gob" size="10" maxlength="10"  value="<?echo $fecha_reg_gob?>" readonly> </span></td>
+                 <td width="160"><span class="Estilo5"><input name="txtfecha_reg_gob" type="text" id="txtfecha_reg_gob" size="10" maxlength="10"  value="<?php echo $fecha_reg_gob?>" readonly> </span></td>
 
                  </tr>
              </table></td>
@@ -336,9 +336,9 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="225"><span class="Estilo5">TIENE INSCRIPCION ALCALDIA :</span></td>
-                 <td width="130"><span class="Estilo5"><input name="txttiene_alcaldia" type="text" id="txttiene_alcaldia" size="3"  value="<?echo $tiene_alcaldia?>" readonly></span></td>
+                 <td width="130"><span class="Estilo5"><input name="txttiene_alcaldia" type="text" id="txttiene_alcaldia" size="3"  value="<?php echo $tiene_alcaldia?>" readonly></span></td>
                  <td width="75"><span class="Estilo5">NUMERO:</span></td>
-                 <td width="435"><span class="Estilo5"><input name="txtnro_alcaldia" type="text" id="txtnro_alcaldia" size="25"  value="<?echo $nro_alcaldia?>" readonly></span></td>
+                 <td width="435"><span class="Estilo5"><input name="txtnro_alcaldia" type="text" id="txtnro_alcaldia" size="25"  value="<?php echo $nro_alcaldia?>" readonly></span></td>
                </tr>
              </table></td>
            </tr>
@@ -346,11 +346,11 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                  <tr>
                    <td width="185"><span class="Estilo5">INSCRIPCION EXONERADA :</span></td>
-                   <td width="115"><span class="Estilo5"><input name="txtexon_inscripcion" type="text" id="txtexon_inscripcion" size="3" maxlength="1"  value="<?echo $exon_inscripcion?>" readonly></span></td>
+                   <td width="115"><span class="Estilo5"><input name="txtexon_inscripcion" type="text" id="txtexon_inscripcion" size="3" maxlength="1"  value="<?php echo $exon_inscripcion?>" readonly></span></td>
                    <td width="170"><span class="Estilo5">LICITACION EXONERADA :</span></td>
-                   <td width="125"><span class="Estilo5"> <input name="txtexon_licitacion" type="text" id="txtexon_licitacion" size="3" maxlength="3"  value="<?echo $exon_licitacion?>" readonly></span></td>
+                   <td width="125"><span class="Estilo5"> <input name="txtexon_licitacion" type="text" id="txtexon_licitacion" size="3" maxlength="3"  value="<?php echo $exon_licitacion?>" readonly></span></td>
                    <td width="140"><span class="Estilo5">EXONERADO IVA:</span></td>
-                   <td width="130"><span class="Estilo5"><input name="txtexon_iva" type="text" id="txtexon_iva" size="3"  value="<?echo $exon_iva?>" readonly> </span></td>
+                   <td width="130"><span class="Estilo5"><input name="txtexon_iva" type="text" id="txtexon_iva" size="3"  value="<?php echo $exon_iva?>" readonly> </span></td>
                  </tr>
              </table></td>
            </tr>
@@ -358,7 +358,7 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
              <td><table width="865">
                <tr>
                  <td width="200"><span class="Estilo5">RAMO DE VENTA:</span></td>
-                 <td width="665"><span class="Estilo5"><input readonly name="txtramo_venta" type="text" id="txtramo_venta" value="<?echo $ramo_venta?>" size="70"> </span></td>
+                 <td width="665"><span class="Estilo5"><input readonly name="txtramo_venta" type="text" id="txtramo_venta" value="<?php echo $ramo_venta?>" size="70"> </span></td>
                </tr>
              </table></td>
                         </tr>
@@ -371,13 +371,13 @@ $cod_e="00"; $Ssql="SELECT * FROM pre091 where nro_gobernacion='".$edo_e."'"; $r
 <form name="form2" method="post" action="Inc_proveedor.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
   </tr>
 </table>
 </form>
 
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

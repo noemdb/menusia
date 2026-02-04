@@ -179,7 +179,7 @@ INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, 
 VALUES ('02', '02-0000021', 'PROCESOS - EMISION NOTAS DE DEBITO DIRECTA', 561, 580, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
-VALUES ('02', '02-0000022', 'PROCESOS - EMISION NOTAS DE DEBITO AÑOS ANTERIORES', 781, 800, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
+VALUES ('02', '02-0000022', 'PROCESOS - EMISION NOTAS DE DEBITO Aï¿½OS ANTERIORES', 781, 800, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
 VALUES ('02', '02-0000025', 'PROCESOS - DEPOSITOS FONDOS DE TERCERO', 581, 600, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
@@ -455,7 +455,7 @@ INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, 
 VALUES ('03', '04-0000055', 'UTILIDADES - PERIODO DE TRABAJO CONTABILIDAD', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
-VALUES ('03', '04-0000060', 'UTILIDADES - PERIODO DE TRABAJO SIA', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
+VALUES ('03', '04-0000060', 'UTILIDADES - PERIODO DE TRABAJO SIPAP', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
@@ -973,10 +973,10 @@ INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, 
 VALUES ('05', '03-0000215', 'REPORTES - DEUDA PRESUPUESTARIA', 1043, 1043, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
-VALUES ('05', '03-0000220', 'REPORTES - EGRESOS DEL AÑO', 1044, 1044, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
+VALUES ('05', '03-0000220', 'REPORTES - EGRESOS DEL Aï¿½O', 1044, 1044, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
-VALUES ('05', '03-0000225', 'REPORTES - EGRESOS DEL AÑO POR PARTIDA', 1045, 1045, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
+VALUES ('05', '03-0000225', 'REPORTES - EGRESOS DEL Aï¿½O POR PARTIDA', 1045, 1045, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
 VALUES ('05', '03-0000230', 'REPORTES - EGRESOS MUNICIPALES', 1046, 1046, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
@@ -1113,7 +1113,7 @@ INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, 
 VALUES ('06', '04-0000055', 'UTILIDADES - PERIODO DE TRABAJO CONTABILIDAD', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)
-VALUES ('06', '04-0000060', 'UTILIDADES - PERIODO DE TRABAJO SIA', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
+VALUES ('06', '04-0000060', 'UTILIDADES - PERIODO DE TRABAJO SIPAP', 1304, 1304, '', '', '', '', '', '', '', '', '', '', '', 'AUTORIZADO', '', '', '', '', '', '', '', '');
 
 
 INSERT INTO sia007 (campo701, campo702, campo703, campo704, campo705, campo706, campo707, campo708, campo709, campo710, campo711, campo712, campo713, campo714, campo715, campo716, campo717, campo718, campo719, campo720, campo721, campo722, campo723, campo724, campo725)

@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){
   $Doc_pago='';
 } else {
@@ -9,7 +9,7 @@ if (!$_GET){
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Documentos Pagos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Documentos Pagos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -28,7 +28,7 @@ function Llamar_Ventana(nombre){var f=document.form1;var url;
     url="Delete_doc_pago.php?txtdoc_pago="+f.txtdoc_pago.value;    document.location = url;}
 </script>
 
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre004 where tipo_pago='$Doc_pago'"; $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $Doc_pago=$registro["tipo_pago"]; $Nombre_doc_pago=$registro["nombre_tipo_pago"];
@@ -65,28 +65,28 @@ if ($registro=pg_fetch_array($res,0)){ $Doc_pago=$registro["tipo_pago"]; $Nombre
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p class="Estilo5">C&Oacute;DIGO :
-                                <input name="txtdoc_pago" id="txtdoc_pago" value="<?ECHO $Doc_pago?>" size="10" readOnly>
+                                <input name="txtdoc_pago" id="txtdoc_pago" value="<?php ECHO $Doc_pago?>" size="10" readOnly>
                   </p>
                           </blockquote></td>
           </tr>
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p align="left"><span class="Estilo5">NOMBRE DEL DOCUMENTO :</span>
-                <input readOnly name="txtnombre_doc_pago" id="txtnombre_doc_pago" value="<?ECHO $Nombre_doc_pago?>" size="80">
+                <input readOnly name="txtnombre_doc_pago" id="txtnombre_doc_pago" value="<?php ECHO $Nombre_doc_pago?>" size="80">
 </p>
             </blockquote></td>
           </tr>
           <tr>
             <td width="380" height="43" valign="middle"><blockquote>
               <p><span class="Estilo5">NOMBRE ABREVIADO DOCUMENTO :</span>
-                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?ECHO $Nombre_Abrev?>" size="6">
+                    <input readOnly name="txtnombre_abrev" id="txtnombre_abrev" value="<?php ECHO $Nombre_Abrev?>" size="6">
               </p>
             </blockquote></td>
             <td width="226" valign="middle"><span class="Estilo5">REFIERE A :
-                <input readOnly name="txtRefierea" id="txtRefierea" value="<?ECHO $Refiera_a?>" size="12">
+                <input readOnly name="txtRefierea" id="txtRefierea" value="<?php ECHO $Refiera_a?>" size="12">
             </span></td>
             <td width="239" valign="middle"><span class="Estilo5">AFECTA PRESUPUESTO:</span><span class="Estilo5">
-              <input readOnly name="TxtAfecta" id="TxtAfecta" value="<?ECHO $Afecta_Presup?>" size="4">
+              <input readOnly name="TxtAfecta" id="TxtAfecta" value="<?php ECHO $Afecta_Presup?>" size="4">
             </span> </td>
           </tr>
           <tr>
@@ -113,4 +113,4 @@ if ($registro=pg_fetch_array($res,0)){ $Doc_pago=$registro["tipo_pago"]; $Nombre
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

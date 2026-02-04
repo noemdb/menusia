@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$codigo='';}else {$codigo=$_GET["Gcodigo"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$codigo='';}else {$codigo=$_GET["Gcodigo"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Estado del Conservacion del Bien)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Estado del Conservacion del Bien)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -32,7 +32,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN004 where codigo='$codigo'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo_bien=$registro["edo_bien"];$descripcion=$registro["descripcion"]; }
 ?>
@@ -48,8 +48,8 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo
   <tr>
    <td width="92" height="245"><table width="92" height="240" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_edo_conservacion_ar.php?Gcodigo=<?echo $codigo;?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_edo_conservacion_ar.php?Gcodigo=<?echo $codigo;?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_edo_conservacion_ar.php?Gcodigo=<?php echo $codigo;?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_edo_conservacion_ar.php?Gcodigo=<?php echo $codigo;?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -67,7 +67,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">CODIGO:</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcodigo" class="Estilo10" type="text" id="txtcodigo" size="4" maxlength="2" readonly value="<?echo $codigo?>" >
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcodigo" class="Estilo10" type="text" id="txtcodigo" size="4" maxlength="2" readonly value="<?php echo $codigo?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -76,7 +76,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">ESTADO :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtedo_bien" class="Estilo10" type="text" id="txtedo_bien" size="50" maxlength="50" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $edo_bien?>" >
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtedo_bien" class="Estilo10" type="text" id="txtedo_bien" size="50" maxlength="50" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $edo_bien?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -85,7 +85,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">DENOMINACION :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><textarea name="txtdescripcion" cols="80" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10"  id="txtdescripcion"><?echo $descripcion?></textarea>
+                 <td width="700" scope="col"><div align="left"><textarea name="txtdescripcion" cols="80" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10"  id="txtdescripcion"><?php echo $descripcion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -109,4 +109,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo=$registro["codigo"];$edo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

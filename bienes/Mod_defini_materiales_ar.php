@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_material='';}else {$cod_material=$_GET["Gcod_material"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_material='';}else {$cod_material=$_GET["Gcod_material"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Materiales)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Materiales)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN035 where cod_material='$cod_material'"; {$res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); $cod_material=$registro["cod_material"]; $des_material=$registro["des_material"];}
 ?>
@@ -67,7 +67,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_material=$registro["cod_mat
               <table width="820">
                 <tr>
                   <td width="120" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
-                  <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcod_material" type="text" id="txtcod_material" size="5" maxlength="4"  value="<?echo $cod_material?>" readonly class="Estilo10">
+                  <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcod_material" type="text" id="txtcod_material" size="5" maxlength="4"  value="<?php echo $cod_material?>" readonly class="Estilo10">
                   </span></div></td>
                 </tr>
               </table></td>
@@ -77,7 +77,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_material=$registro["cod_mat
             <td><table width="820">
               <tr>
                 <td width="200" scope="col"><div align="left"><span class="Estilo5">DENOMINACI&Oacute;N DE MATERIALES :</span></div></td>
-                <td width="620" scope="col"><div align="left"><span class="Estilo5"><input name="txtdes_material" type="text" id="txtdes_material" size="80" maxlength="60"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $des_material?>" class="Estilo10">
+                <td width="620" scope="col"><div align="left"><span class="Estilo5"><input name="txtdes_material" type="text" id="txtdes_material" size="80" maxlength="60"  onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $des_material?>" class="Estilo10">
                 </span></div></td>
               </tr>
             </table></td>
@@ -99,4 +99,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_material=$registro["cod_mat
 </body>
 </html>
 
-<? pg_close();?>
+<?php  pg_close($conn);?>

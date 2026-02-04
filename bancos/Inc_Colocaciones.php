@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");?>
-<?include ("../class/ventana.php");?>
+<?php include ("../class/seguridad.inc");?>
+<?php include ("../class/ventana.php");?>
 <?php include ("../class/fun_fechas.php"); $fecha_hoy=asigna_fecha_hoy(); $fecha=$fecha_hoy;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipos de Cuentas)</title>
+<title>SIPAP CONTROL BANCARIO (Tipos de Cuentas)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>
@@ -28,8 +28,8 @@ return true;}
 function revisar(){
 var f=document.form1;
   if(f.txtreferencia.value==""){alert("Referencia no puede estar Vacio");return false;}else{f.txtreferencia.value=f.txtreferencia.value.toUpperCase();}
-  if(f.txtdescripcion.value==""){alert("Descripción no puede estar Vacia"); return false; } else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
-  if(f.txtCodigo_Cuenta.value==""){alert("Còdigo de Cuenta no puede estar Vacio");return false;}
+  if(f.txtdescripcion.value==""){alert("Descripciï¿½n no puede estar Vacia"); return false; } else{f.txtdescripcion.value=f.txtdescripcion.value.toUpperCase();}
+  if(f.txtCodigo_Cuenta.value==""){alert("Cï¿½digo de Cuenta no puede estar Vacio");return false;}
   document.form1.submit;
 return true;}
 </script>
@@ -88,7 +88,7 @@ return true;}
                     <tr>
                       <td width="180"><span class="Estilo5">C&Oacute;DIGO CONTABLE :</span></td>
                       <td width="250"><span class="Estilo5"> <input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta"  size="30" maxlength="30" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
-                      <td width="420"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="420"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onClick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -106,11 +106,11 @@ return true;}
                   <td width="855"><table width="854" border="0" cellspacing="1" cellpadding="1">
                     <tr>
                       <td width="120"><span class="Estilo5">FECHA DE INICIO :</span></td>
-                      <td width="180"><span class="Estilo5"><input name="txtfecha_inicio" type="text" id="txtfecha_inicio"  value="<?echo $fecha?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                      <td width="180"><span class="Estilo5"><input name="txtfecha_inicio" type="text" id="txtfecha_inicio"  value="<?php echo $fecha?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                       <td width="100"><span class="Estilo5">PLAZO D&Iacute;AS :</span></td>
                       <td width="150"><span class="Estilo5"><input name="txtdias_inv" type="text" id="txtdias_inv"  value="0" size="10" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                       <td width="150"><span class="Estilo5">FECHA DE VENCIMIENTO :</span></td>
-                      <td width="150"><span class="Estilo5"><input name="txtfecha_vencimiento" type="text" id="txtfecha_vencimiento"  value="<?echo $fecha?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                      <td width="150"><span class="Estilo5"><input name="txtfecha_vencimiento" type="text" id="txtfecha_vencimiento"  value="<?php echo $fecha?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                     </tr>
                   </table></td>
                 </tr>

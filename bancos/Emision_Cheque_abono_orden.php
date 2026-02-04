@@ -1,17 +1,17 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");  include ("../class/funciones.php");include ("../class/configura.inc");
 if (!$_GET){$continua="N";}else{$continua=$_GET["continua"];}  $fecha_hoy=asigna_fecha_hoy();
 $equipo = getenv("COMPUTERNAME"); $mcod_m = "BAN0064".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);  
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else{ $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="02-0000020"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
 }$posicion=strpos($Mcamino,'S'); 
-if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
-if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
+if($SIA_Cierre=="N"){$error=0;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $fecha_fin=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;}
-if ($SIA_Definicion=="N"){$error=1;?><script language="JavaScript">muestra('ETAPA DE DEFINICION ABIERTA'); document.location='menu.php';</script><?}
+if ($SIA_Definicion=="N"){$error=1;?><script language="JavaScript">muestra('ETAPA DE DEFINICION ABIERTA'); document.location='menu.php';</script><?php }
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -19,7 +19,7 @@ if ($SIA_Definicion=="N"){$error=1;?><script language="JavaScript">muestra('ETAP
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Emision de Cheques a Orden Nomina)</title>
+<title>SIPAP CONTROL BANCARIO (Emision de Cheques a Orden Nomina)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -115,7 +115,7 @@ function asigna_monto_chq(){var mref; var mmonto; var mcuen; var morden; var mre
 }
 </script>
 </head>
-<?
+<?php 
 $nombre_benef="";  $ced_rif=""; $nro_orden=""; $tipo_caus=""; $fecha_ord=""; $total_orden=0; $total_abono=0; $total_pasivos=0; $resta=0; $cod_contable_o="";  $concepto=""; $dispo_ord=0;
 $tipo_pago="0001"; $nombre_abrev="CHQ"; $cod_banco="0001"; $nro_cuenta=""; $nombre_banco=""; $nro_cheque="00000000"; $fecha=$fecha_hoy; $fecha_hasta=nextDate($fecha,30); $fecha_desde=prevDate($fecha,30);
 $mconf="";  $Ssql="Select * from SIA005 where campo501='02'"; $resultado=pg_query($Ssql);if ($registro=pg_fetch_array($resultado,0)){$mconf=$registro["campo502"]; $tipo_pago=$registro["campo504"];}
@@ -134,21 +134,21 @@ if($filas>=1){ $registro=pg_fetch_array($res,0);   $tipo_caus=$registro["tipo_ca
   $total_orden=$registro["total_causado"]-$registro["total_ajuste"]-$registro["total_retencion"]-$registro["monto_am_ant"]+$registro["total_pasivos"];  $total_abono=$registro["total_pagado"]; 
   $total_neto = $registro["total_causado"]-$registro["total_ajuste"]-$registro["total_retencion"]-$registro["monto_am_ant"]+$registro["total_pasivos"]-$registro["total_pagado"] ; $total_pasivos=$registro["total_pasivos"];
   $dispo_ord=$total_neto; 	$resta=$total_neto;  $total_neto=0;  $error=0;  if($total_abono==0){$total_retencion=$registro["total_retencion"]; $nro_orden_ret=$nro_orden;}else{$total_retencion=0;$nro_orden_ret="";}
-  if($anulado=="S"){ $error=1; ?><script language="JavaScript">muestra('ORDEN DE PAGO ESTA ANULADA');</script><? }
-  if($mstatus_ord=="I"){ $error=1; ?><script language="JavaScript">muestra('ORDEN DE PAGO ESTA CANCELADA');</script><? }
+  if($anulado=="S"){ $error=1; ?><script language="JavaScript">muestra('ORDEN DE PAGO ESTA ANULADA');</script><?php }
+  if($mstatus_ord=="I"){ $error=1; ?><script language="JavaScript">muestra('ORDEN DE PAGO ESTA CANCELADA');</script><?php }
   /*
-  if(($tipo_orden=="0003")or($tipo_orden=="0015")or($tipo_orden=="0029")){}else{ $error=1; ?><script language="JavaScript">muestra('TIPO DE ORDEN NO ES VALIDO');</script><? }  
+  if(($tipo_orden=="0003")or($tipo_orden=="0015")or($tipo_orden=="0029")){}else{ $error=1; ?><script language="JavaScript">muestra('TIPO DE ORDEN NO ES VALIDO');</script><?php }  
   */
   if($error==1){ $tipo_caus=""; $fecha_ord=""; $total_orden=0; $total_abono=0; $resta=0;  $concepto=""; $dispo_ord=0; }
   if($error==0){ $sql="select pre037.referencia_caus,pre037.tipo_causado,pre037.referencia_comp,pre037.tipo_compromiso,pre037.cod_presup,pre037.fuente_financ,pre037.monto,pre037.ajustado,pre037.tipo_imput_presu,pre037.ref_imput_presu,pre037.monto_credito,pre037.pagado,pre037.amort_anticipo,pre007.ref_aep,pre007.num_proyecto,pre007.fecha_aep,pre007.func_inv,pre003.ref_compromiso from pre037,pre007 Left Join pre003 On (pre003.tipo_causado=pre007.tipo_causado) where (pre037.referencia_caus=pre007.referencia_caus) and (pre037.tipo_causado=pre007.tipo_causado) and (pre037.referencia_comp=pre007.referencia_comp) and (pre037.tipo_compromiso=pre007.tipo_compromiso) and (pre007.referencia_caus='$nro_orden') and (pre007.tipo_causado='$tipo_caus') order by cod_presup,fuente_financ"; $res=pg_query($sql);
     while($reg=pg_fetch_array($res)){ $monto_c=$reg["monto"]-$reg["ajustado"]; $pagado=$reg["pagado"]; $cod_presup=$reg["cod_presup"]; $fuente_financ=$reg["fuente_financ"];  $referencia_comp=$reg["referencia_comp"]; $tipo_compromiso=$reg["tipo_compromiso"]; $tipo_imput_presu=$reg["tipo_imput_presu"];  $ref_imput_presu=$reg["ref_imput_presu"]; $monto_credito=$reg["monto_credito"]; $func_inv=$reg["func_inv"];  $fecha_aep=$reg["fecha_aep"]; $ref_aep=$reg["ref_aep"]; $num_proyecto=$reg["num_proyecto"];  $operacion="N";  if($reg["ref_compromiso"]="SI"){$operacion="C";}
 		$monto_c=cambia_coma_numero($monto_c); $pagado=cambia_coma_numero($pagado); 
-		$resultado=pg_exec($conn,"SELECT INCLUYE_PRE026('$codigo_mov','$cod_presup','$fuente_financ','$referencia_comp','$tipo_compromiso','$nro_orden','$tipo_caus','','0000','','0000','$operacion','','','','$ref_aep','$num_proyecto','$fecha_aep','$func_inv','$tipo_imput_presu','$ref_imput_presu','$fecha_ord',0,$monto_c,0,$pagado)"); $error=pg_errormessage($conn);   $error="ERROR GRABANDO: ".substr($error, 0, 61);  if(!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><? $error=1; }
+		$resultado=pg_exec($conn,"SELECT INCLUYE_PRE026('$codigo_mov','$cod_presup','$fuente_financ','$referencia_comp','$tipo_compromiso','$nro_orden','$tipo_caus','','0000','','0000','$operacion','','','','$ref_aep','$num_proyecto','$fecha_aep','$func_inv','$tipo_imput_presu','$ref_imput_presu','$fecha_ord',0,$monto_c,0,$pagado)"); $error=pg_errormessage($conn);   $error="ERROR GRABANDO: ".substr($error, 0, 61);  if(!$resultado){?><script language="JavaScript">muestra('<?php  echo $error; ?>');</script><?php  $error=1; }
     }
   }
   if($error==0){ $monto_asiento=0;
-    $resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','D','$cod_contable_o','00000','',$monto_asiento,'D','B','N','02','0','$concepto')"); $error=pg_errormessage($conn);  $error="ERROR GRABANDO: ".substr($error, 0, 61); if(!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><? $error=1; }
-    $resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','C','$codc_banco','00000','',$monto_asiento,'D','B','N','02','0','$concepto')"); $error=pg_errormessage($conn);  $error="ERROR GRABANDO: ".substr($error, 0, 61); if(!$resultado){?><script language="JavaScript">muestra('<? echo $error; ?>');</script><? $error=1; }
+    $resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','D','$cod_contable_o','00000','',$monto_asiento,'D','B','N','02','0','$concepto')"); $error=pg_errormessage($conn);  $error="ERROR GRABANDO: ".substr($error, 0, 61); if(!$resultado){?><script language="JavaScript">muestra('<?php  echo $error; ?>');</script><?php  $error=1; }
+    $resultado=pg_exec($conn,"SELECT INCLUYE_CON010('$codigo_mov','$nro_orden','C','$codc_banco','00000','',$monto_asiento,'D','B','N','02','0','$concepto')"); $error=pg_errormessage($conn);  $error="ERROR GRABANDO: ".substr($error, 0, 61); if(!$resultado){?><script language="JavaScript">muestra('<?php  echo $error; ?>');</script><?php  $error=1; }
   }	   
  }
 }
@@ -158,7 +158,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_banco=$registro["cod_banco"
 $resultado=pg_exec($conn,"SELECT INCLUYE_BAN030 (1,'$codigo_mov','$cod_banco','$nro_cheque','$tipo_pago','$fecha','$fecha_desde','$fecha_hasta','N','N','$ced_rif','$nro_orden',0,0,'')"); }
 $total_orden=formato_monto($total_orden); $total_abono=formato_monto($total_abono); $resta=formato_monto($resta);
 if($fecha_ord==""){$fecha_ord="";}else{$fecha_ord=formato_ddmmaaaa($fecha_ord);}
-pg_close();
+pg_close($conn);
 ?>
 <body>
 <table width="978" height="38" border="0" bgcolor="#000066">
@@ -178,13 +178,13 @@ pg_close();
                   <td><table width="945">
                     <tr>
                       <td width="125"><span class="Estilo5">DOCUMENTO PAGO: </span></td>
-                      <td width="30"><span class="Estilo5"><input class="Estilo10" name="txttipo_pago" type="text" id="txttipo_pago" readonly  value="<?echo $tipo_pago?>" size="4" maxlength="4"> </span></td>
-                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" size="5" maxlength="5"  value="<?echo $nombre_abrev?>" readonly>  </span> </td>
+                      <td width="30"><span class="Estilo5"><input class="Estilo10" name="txttipo_pago" type="text" id="txttipo_pago" readonly  value="<?php echo $tipo_pago?>" size="4" maxlength="4"> </span></td>
+                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnombre_abrev" type="text" id="txtnombre_abrev" size="5" maxlength="5"  value="<?php echo $nombre_abrev?>" readonly>  </span> </td>
                       <td width="118"><span class="Estilo5">C&Oacute;DIGO BANCO:</span></td>
-                      <td width="53"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  value="<?echo $cod_banco?>" onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);">  </span> </td>
-                      <td width="119"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                      <td width="53"><span class="Estilo5"> <input class="Estilo10" name="txtcod_banco" type="text" id="txtcod_banco" size="5" maxlength="4"  value="<?php echo $cod_banco?>" onFocus="encender(this)" onBlur="apaga_banco(this)" onchange="chequea_banco(this.form);">  </span> </td>
+                      <td width="119"><input class="Estilo10" name="btcod_banco" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_bancos.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                       <td width="135"><span class="Estilo5">N&Uacute;MERO DE CUENTA :</span></td>
-                      <td width="249"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?echo $nro_cuenta?>"  size="30" maxlength="25" readonly> </span></td>
+                      <td width="249"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta" value="<?php echo $nro_cuenta?>"  size="30" maxlength="25" readonly> </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -192,31 +192,31 @@ pg_close();
                   <td><table width="949" >
                     <tr>
                       <td width="115"><span class="Estilo5"> NOMBRE BANCO :</span></span></td>
-                      <td width="561"><span class="Estilo5"><input class="Estilo10" name="txtnombre_banco" type="text" id="txtnombre_banco" value="<?echo $nombre_banco?>" size="80" maxlength="80" readonly> </span></td>
+                      <td width="561"><span class="Estilo5"><input class="Estilo10" name="txtnombre_banco" type="text" id="txtnombre_banco" value="<?php echo $nombre_banco?>" size="80" maxlength="80" readonly> </span></td>
                       <td width="138"><span class="Estilo5"><div id="ncheque">N&Uacute;MERO DE CHEQUE: </div></span></td>
-                      <td width="115"><span class="Estilo5"><div id="nrochq"><input class="Estilo10" name="txtnro_cheque" type="text" id="txtnro_cheque" size="10" maxlength="8"  value="<?echo $nro_cheque?>" onFocus="encender(this)" onBlur="apaga_numchq(this)" onchange="chequea_numchq(this.form);">  </div> </span></td>
+                      <td width="115"><span class="Estilo5"><div id="nrochq"><input class="Estilo10" name="txtnro_cheque" type="text" id="txtnro_cheque" size="10" maxlength="8"  value="<?php echo $nro_cheque?>" onFocus="encender(this)" onBlur="apaga_numchq(this)" onchange="chequea_numchq(this.form);">  </div> </span></td>
                     </tr>
                   </table></td>
                 </tr>
 				<tr> <td><table width="952" >
                   <tr>
                     <td width="125"><span class="Estilo5">FECHA DE EMISI&Oacute;N :  </span></td>
-                    <td width="140"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha"  value="<?echo $fecha?>" size="10" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
+                    <td width="140"><span class="Estilo5"> <input class="Estilo10" name="txtfecha" type="text" id="txtfecha"  value="<?php echo $fecha?>" size="10" maxlength="10" onFocus="encender(this)" onBlur="apagar(this)"> </span></td>
                     <td width="106"><p><span class="Estilo5">N&Uacute;MERO ORDEN:</span></p></td>
-                    <td width="98"><div id="nrorden"><input class="Estilo10" name="txtnro_orden" type="text"  id="txtnro_orden" size="12" maxlength="8" onFocus="encender(this); " onBlur="apaga_orden(this);"  value="<?echo $nro_orden?>"  onchange="checkreferencia(this.form);"></div></td>
-                    <td width="73"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado" type="text"  id="txttipo_causado" size="4" maxlength="4"  value="<?echo $tipo_caus?>"  readonly></span></td>
+                    <td width="98"><div id="nrorden"><input class="Estilo10" name="txtnro_orden" type="text"  id="txtnro_orden" size="12" maxlength="8" onFocus="encender(this); " onBlur="apaga_orden(this);"  value="<?php echo $nro_orden?>"  onchange="checkreferencia(this.form);"></div></td>
+                    <td width="73"><span class="Estilo5"><input class="Estilo10" name="txttipo_causado" type="text"  id="txttipo_causado" size="4" maxlength="4"  value="<?php echo $tipo_caus?>"  readonly></span></td>
 					<td width="110"><span class="Estilo5">FECHA ORDEN :  </span></td>
-                    <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtfecha_ord" type="text" id="txtfecha_ord" value="<?echo $fecha_ord?>" size="12" readonly> </span></td>                        
+                    <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtfecha_ord" type="text" id="txtfecha_ord" value="<?php echo $fecha_ord?>" size="12" readonly> </span></td>                        
 					<td width="200" align="center" ><span class="Estilo5"> <input type="button" name="btcarga_ord" value="Cargar Orden" title="Cargar Informacion de la Orden de pago" onClick="javascript:LlamarURL('Emision_Cheque_abono_orden.php?continua=S'); " > </span></td>                   	  
 				 </tr>
                 </table></td> </tr>
                 <tr> <td><table width="860">
                   <tr>
                     <td width="100"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                    <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text"  id="txtced_rif"  value="<?echo $ced_rif?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
-                    <td width="45"><input class="Estilo10" name="btced_rif" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                    <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text"  id="txtced_rif"  value="<?php echo $ced_rif?>" size="12" maxlength="12" onFocus="encender(this)" onBlur="apagar(this)"> </span> </td>
+                    <td width="45"><input class="Estilo10" name="btced_rif" type="button" id="btcod_banco" title="Abrir Catalogo de Bancos" onclick="VentanaCentrada('Cat_benef_chq.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                     <td width="100"><span class="Estilo5">BENEFICIARIO : </span></td>
-                    <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef"  value="<?echo $nombre_benef?>" size="80" maxlength="80" readonly> </span></td>
+                    <td width="500"><span class="Estilo5"><input class="Estilo10" name="txtnombre_benef" type="text" id="txtnombre_benef"  value="<?php echo $nombre_benef?>" size="80" maxlength="80" readonly> </span></td>
                   </tr>
                  </table></td>
                 </tr>
@@ -224,18 +224,18 @@ pg_close();
                   <td><table width="860">
                     <tr>
                       <td width="90"><span class="Estilo5">CONCEPTO :</span></td>
-                      <td width="760"><span class="Estilo5">  <textarea name="txtconcepto" cols="93" onFocus="encender(this); " onBlur="apagar(this);" id="txtconcepto"><?echo $concepto?></textarea></span></td>
+                      <td width="760"><span class="Estilo5">  <textarea name="txtconcepto" cols="93" onFocus="encender(this); " onBlur="apagar(this);" id="txtconcepto"><?php echo $concepto?></textarea></span></td>
                     </tr>
                   </table></td>
                 </tr>
                 <tr> <td><table width="952" >
                   <tr>
                     <td width="100"><span class="Estilo5">TOTAL ORDEN : </span></td>	
-                    <td width="120"><span class="Estilo5"> <input class="Estilo10" name="txttotal_orden" type="text" id="txttotal_orden"  readonly value="<?echo $total_orden?>" size="12" maxlength="12"  style="text-align:right"></span></td>
+                    <td width="120"><span class="Estilo5"> <input class="Estilo10" name="txttotal_orden" type="text" id="txttotal_orden"  readonly value="<?php echo $total_orden?>" size="12" maxlength="12"  style="text-align:right"></span></td>
 					<td width="80"><span class="Estilo5">ABONADO :  </span></td>
-					<td width="120"><span class="Estilo5"> <input class="Estilo10" name="txttotal_abono" type="text" id="txttotal_abono"  readonly value="<?echo $total_abono?>" size="12" maxlength="12"  style="text-align:right"></span></td>
+					<td width="120"><span class="Estilo5"> <input class="Estilo10" name="txttotal_abono" type="text" id="txttotal_abono"  readonly value="<?php echo $total_abono?>" size="12" maxlength="12"  style="text-align:right"></span></td>
 					<td width="62"><span class="Estilo5">RESTA :  </span></td>
-					<td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtresta" type="text" id="txtresta"  readonly value="<?echo $resta?>" size="12" maxlength="12"  style="text-align:right"></span></td>
+					<td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtresta" type="text" id="txtresta"  readonly value="<?php echo $resta?>" size="12" maxlength="12"  style="text-align:right"></span></td>
 					<td width="60" align="center" ><span class="Estilo5"> <input type="button" name="btcarga_abono" value="..." title="Coloca Abono del Periodo" onClick="javascript:Cargar_abono(this.form)" > </span></td>
                     <td width="175"  align="right" ><span class="Estilo5">MONTO BRUTO DEL ABONO:</span></td>					
                     <td width="125"><span class="Estilo5"><input class="Estilo10" name="txtmonto_cheque" type="text" id="txtmonto_cheque" size="12" maxlength="12"   style="text-align:right" onFocus="encender(this)" onBlur="apaga_monto(this)" onKeypress="return validarNum(event)"> </span></td>
@@ -257,19 +257,19 @@ pg_close();
    rows[1][3] = "Comprobantes";
    
             </script>
-              <?include ("../class/class_tab.php");?>
+              <?php include ("../class/class_tab.php");?>
               <script type="text/javascript" language="javascript"> DrawTabs(); </script>
               <!-- PESTA&Ntilde;A 1 -->
               <div id="T11" class="tab-body">
-                <iframe src="Det_inc_cod_chqp.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_cod_chqp.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
               <!--PESTA&Ntilde;A 2 -->
               <div id="T12" class="tab-body" >
-                <iframe src="Det_inc_ret_ndbp.php?clave=<?echo $nro_orden_ret?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_ret_ndbp.php?clave=<?php echo $nro_orden_ret?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
 			  <!--PESTA&Ntilde;A 3 -->
               <div id="T13" class="tab-body" >
-                <iframe src="Det_inc_comp_chqp.php?codigo_mov=<?echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
+                <iframe src="Det_inc_comp_chqp.php?codigo_mov=<?php echo $codigo_mov?>"  width="846" height="290" scrolling="auto" frameborder="0"> </iframe>
               </div>
             </div></td>
          </tr>
@@ -279,12 +279,12 @@ pg_close();
         <table width="957">
          <tr> <td>&nbsp;</td> </tr>
           <tr><td><table width="923">
-            <td width="129"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
-			<td width="100"><input name="txtcod_contable_o" type="hidden" id="txtcod_contable_o" value="<?echo $cod_contable_o?>"></td>
-			<td width="100"><input name="txtnro_periodos" type="hidden" id="txnro_periodos"  readonly value="<?echo $nro_periodos?>" size="2" maxlength="2"> </td>                      
-		    <td width="50"><input name="txtdispo_ord" type="hidden" id="txtdispo_ord" value="<?echo $dispo_ord?>"></td>
-			<td width="50"><input name="txttotal_retencion" type="hidden" id="txttotal_retencion" value="<?echo $total_retencion?>"></td>
-			<td width="20"><input name="txttotal_pasivos" type="hidden" id="txttotal_pasivos" value="<?echo $total_pasivos?>"></td>
+            <td width="129"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
+			<td width="100"><input name="txtcod_contable_o" type="hidden" id="txtcod_contable_o" value="<?php echo $cod_contable_o?>"></td>
+			<td width="100"><input name="txtnro_periodos" type="hidden" id="txnro_periodos"  readonly value="<?php echo $nro_periodos?>" size="2" maxlength="2"> </td>                      
+		    <td width="50"><input name="txtdispo_ord" type="hidden" id="txtdispo_ord" value="<?php echo $dispo_ord?>"></td>
+			<td width="50"><input name="txttotal_retencion" type="hidden" id="txttotal_retencion" value="<?php echo $total_retencion?>"></td>
+			<td width="20"><input name="txttotal_pasivos" type="hidden" id="txttotal_pasivos" value="<?php echo $total_pasivos?>"></td>
             <td width="193"><input name="Grabar" type="submit" id="Grabar" title="Emitir el Cheque" value="Grabar Cheques"></td>
             <td width="138"><input name="Submit" type="reset" value="Blanquear"></td>
             <td width="143" valign="middle"><input name="button" type="button" id="button" title="Retornar al menu principal" onclick="javascript:LlamarURL('menu.php')" value="Menu Principal"></td>

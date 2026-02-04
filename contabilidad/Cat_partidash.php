@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $formato_presup="XX-XX-XX-XXX-XX-XX-XX";  $formato_categoria="XX-XX-XX";  $formato_partida="XXX-XX-XX-XX";
 $sql="Select * from SIA005 where campo501='05'";  $resultado=pg_query($sql); if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_categoria=$registro["campo526"];$formato_partida=$registro["campo527"];}
 $long_c=strlen($formato_presup); $c=strlen($formato_categoria)+2; $p=strlen($formato_partida);
@@ -15,12 +15,12 @@ function cerrar_catalogo(cod_presup,denominacion){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Catalogo Partidas Presupuestarios)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Catalogo Partidas Presupuestarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?
+<?php 
         $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $numPags=1;
 		$criterio = "where (length(cod_presup)=".$long_c.")"; $txt_criterio = "";
         //echo $criterio,"<br>";
@@ -45,12 +45,12 @@ function cerrar_catalogo(cod_presup,denominacion){
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
 <!-- tabla de resultados -->
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["cod_part"]; ?>','<? echo $registro["denominacion"]; ?>')" >
-   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["cod_part"]; ?></b></font></td>
-   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["denominacion"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["cod_part"]; ?>','<?php  echo $registro["denominacion"]; ?>')" >
+   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["cod_part"]; ?></b></font></td>
+   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["denominacion"]; ?></b></font></td>
    </tr>
 <!-- fin tabla resultados -->
-<?}
+<?php }
                 }//fin while
                 echo "</table>";
         }//fin if
@@ -59,7 +59,7 @@ function cerrar_catalogo(cod_presup,denominacion){
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
                 echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=".($pagina-1)."&orden=".$orden."&criterio=".$txt_criterio."'>";
                 echo "<font face='verdana' size='-2'>anterior</font>";
                 echo "</a>&nbsp;"; }
@@ -84,6 +84,6 @@ Criterio de b&uacute;squeda:
 
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

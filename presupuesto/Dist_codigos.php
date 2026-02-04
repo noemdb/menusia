@@ -1,6 +1,6 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?} else{$Nom_Emp=busca_conf();}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php } else{$Nom_Emp=busca_conf();}
 if (!$_GET){  $cod_presup=''; $cod_fuente='00'; $p_letra='';  $sql="SELECT * FROM codigos ORDER BY cod_presup,cod_fuente";}
 else {$codigo=$_GET["Gcodigo"]; $cod_fuente=substr($codigo,0,2);$cod_presup=substr($codigo,2,32);
   $codigo=$cod_fuente.$cod_presup;  $sql="Select * from codigos where cod_presup='$cod_presup' and cod_fuente='$cod_fuente'";}
@@ -10,7 +10,7 @@ else {$codigo=$_GET["Gcodigo"]; $cod_fuente=substr($codigo,0,2);$cod_presup=subs
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;digos/Asignaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <SCRIPT language=JavaScript src="../class/sia.js" type="text/javascript"></SCRIPT>
@@ -106,7 +106,7 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $denominacion="";$des_fuente="";$cod_contable="";$nombre_cuenta="";$status_dist="";$func_inv="";$aplicacion="";$distribucion="ANUAL";
 $asignado=0;$disponible=0;$diferido=0;$disp_diferida=0;$montod=0; $asignado01=0;$asignado02=0;$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$asignado01=0;
@@ -156,8 +156,8 @@ function asig_dist(mvalor){ var f=document.form1;
   <tr>
     <td width="92"><table width="92" height="410" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<? echo $codigo; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<? echo $codigo; ?>')">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<?php  echo $codigo; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<?php  echo $codigo; ?>')">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -174,10 +174,10 @@ function asig_dist(mvalor){ var f=document.form1;
               <td><table width="860" border="0">
                 <tr>
                   <td width="175"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
-                  <td width="227"><span class="Estilo5"><input name="txtcod_presup" type="text" id="txtcod_presup" value="<?echo $cod_presup?>" size="33" maxlength="33" readonly> </span></td>
+                  <td width="227"><span class="Estilo5"><input name="txtcod_presup" type="text" id="txtcod_presup" value="<?php echo $cod_presup?>" size="33" maxlength="33" readonly> </span></td>
                   <td width="115"><span class="Estilo5">FUENTE FINANC. :</span></td>
-                  <td width="33"><span class="Estilo5"><input name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?echo $cod_fuente?>" size="3" maxlength="2" readonly>   </span></td>
-                  <td width="282"><span class="Estilo5"><input name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?echo $des_fuente?>" size="38" readonly> </span></td>
+                  <td width="33"><span class="Estilo5"><input name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?php echo $cod_fuente?>" size="3" maxlength="2" readonly>   </span></td>
+                  <td width="282"><span class="Estilo5"><input name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?php echo $des_fuente?>" size="38" readonly> </span></td>
                 </tr>
               </table></td>
             </tr>
@@ -185,7 +185,7 @@ function asig_dist(mvalor){ var f=document.form1;
               <td><table width="860" border="0">
                 <tr>
                   <td width="109"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                  <td width="730"><textarea name="txtdenominacion" cols="84" readonly="readonly" class="headers" id="txtdenominacion"><?echo $denominacion?></textarea></td>
+                  <td width="730"><textarea name="txtdenominacion" cols="84" readonly="readonly" class="headers" id="txtdenominacion"><?php echo $denominacion?></textarea></td>
                 </tr>
               </table>  </td>
             </tr>
@@ -193,11 +193,11 @@ function asig_dist(mvalor){ var f=document.form1;
               <td><table width="860" border="0">
                 <tr>
                   <td width="100" class="Estilo5">ASIGNACI&Oacute;N :</td>
-                  <td width="200" class="Estilo5"> <input name="txtasignado" type="text" id="txtasignado" size="20" style="text-align:right" maxlength="20" readonly value="<?echo $asignado?>">  </td>
+                  <td width="200" class="Estilo5"> <input name="txtasignado" type="text" id="txtasignado" size="20" style="text-align:right" maxlength="20" readonly value="<?php echo $asignado?>">  </td>
                   <td width="100" class="Estilo5">DISTRIBUCI&Oacute;N :</td>
 				   <td width="260"><span class="Estilo5"><select name="txtdistribucion" size="1" id="select" onFocus="encender(this)" onBlur="apagar(this)">
                       <option selected>ANUAL</option> <option>MENSUAL POR MONTO</option> <option>TRIMESTRAL (%)</option> </select></span></td>
-				  <script language="JavaScript" type="text/JavaScript"> asig_dist('<?echo $status_dist;?>');</script> 
+				  <script language="JavaScript" type="text/JavaScript"> asig_dist('<?php echo $status_dist;?>');</script> 
 				   <td width="200"><span class="Estilo5"> <input type="button" name="btaplica_dist" value="Aplica Distribucion" title="Aplica Distribucion Seleccionada" onClick="javascript:Aplicar_Dist()" > </span></td>
 				</tr>
               </table></td>
@@ -206,10 +206,10 @@ function asig_dist(mvalor){ var f=document.form1;
 			<tr>
               <td><table width="850" border="1" cellspacing='0' cellpadding='0' align="center">
 			     <td width="90" class="Estilo5">PORCENTAJES</td>
-				 <td width="190" class="Estilo5">1ER TRIM.  <input name="txttrim1" type="text" id="txttrim1" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $trim1?>"> </td>
-				 <td width="190" class="Estilo5">2DO TRIM.  <input name="txttrim2" type="text" id="txttrim2" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $trim2?>"></td>
-				 <td width="190" class="Estilo5">3ER TRIM.  <input name="txttrim3" type="text" id="txttrim3" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $trim3?>"></td>
-				 <td width="190" class="Estilo5">4TO TRIM.  <input name="txttrim4" type="text" id="txttrim4" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $trim4?>"></td>
+				 <td width="190" class="Estilo5">1ER TRIM.  <input name="txttrim1" type="text" id="txttrim1" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $trim1?>"> </td>
+				 <td width="190" class="Estilo5">2DO TRIM.  <input name="txttrim2" type="text" id="txttrim2" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $trim2?>"></td>
+				 <td width="190" class="Estilo5">3ER TRIM.  <input name="txttrim3" type="text" id="txttrim3" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $trim3?>"></td>
+				 <td width="190" class="Estilo5">4TO TRIM.  <input name="txttrim4" type="text" id="txttrim4" size="8" style="text-align:right" maxlength="5" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $trim4?>"></td>
 			  </table></td>
             </tr>
 			<tr><td >&nbsp;</td></tr>
@@ -219,33 +219,33 @@ function asig_dist(mvalor){ var f=document.form1;
                   <td><table width="840" border="0" cellspacing='1' cellpadding='2'>
                     <tr>
                       <td width="90" class="Estilo5">ENERO :  </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado01" type="text" id="txtasignado01" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado01?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado01" type="text" id="txtasignado01" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado01?>">  </td>
 					  <td width="90" class="Estilo5">FEBRERO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado02" type="text" id="txtasignado02" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado02?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado02" type="text" id="txtasignado02" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado02?>">  </td>
 					  <td width="90" class="Estilo5">MARZO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado03" type="text" id="txtasignado03" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado03?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado03" type="text" id="txtasignado03" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado03?>">  </td>
 					  <td width="90" class="Estilo5">ABRIL : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado04" type="text" id="txtasignado04" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado04?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado04" type="text" id="txtasignado04" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado04?>">  </td>
 					</tr>
 					<tr>
                       <td width="90" class="Estilo5">MAYO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado05" type="text" id="txtasignado05" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado05?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado05" type="text" id="txtasignado05" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado05?>">  </td>
 					  <td width="90" class="Estilo5">JUNIO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado06" type="text" id="txtasignado06" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado06?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado06" type="text" id="txtasignado06" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado06?>">  </td>
 					  <td width="90" class="Estilo5">JULIO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado07" type="text" id="txtasignado07" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado07?>">  </td>
+					  <td width="120" class="Estilo5"><input name="txtasignado07" type="text" id="txtasignado07" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado07?>">  </td>
 					  <td width="90" class="Estilo5">AGOSTO : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado08" type="text" id="txtasignado08" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado08?>">  </td>					  
+					  <td width="120" class="Estilo5"><input name="txtasignado08" type="text" id="txtasignado08" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado08?>">  </td>					  
 					</tr>
 					<tr>
                       <td width="90" class="Estilo5">SEPTIEMBRE : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado09" type="text" id="txtasignado09" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado09?>">  </td>					  
+					  <td width="120" class="Estilo5"><input name="txtasignado09" type="text" id="txtasignado09" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado09?>">  </td>					  
 					  <td width="90" class="Estilo5">OCTUBRE : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado10" type="text" id="txtasignado10" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado10?>">  </td>					  
+					  <td width="120" class="Estilo5"><input name="txtasignado10" type="text" id="txtasignado10" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado10?>">  </td>					  
 					  <td width="90" class="Estilo5">NOVIEMBRE : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado11" type="text" id="txtasignado11" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado11?>">  </td>					  
+					  <td width="120" class="Estilo5"><input name="txtasignado11" type="text" id="txtasignado11" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado11?>">  </td>					  
 					  <td width="90" class="Estilo5">DICIEMBRE : </td>
-					  <td width="120" class="Estilo5"><input name="txtasignado12" type="text" id="txtasignado12" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?echo $asignado12?>">  </td>					  
+					  <td width="120" class="Estilo5"><input name="txtasignado12" type="text" id="txtasignado12" size="13" style="text-align:right" maxlength="13" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return validarNum(event)" value="<?php echo $asignado12?>">  </td>					  
 					</tr>
                    </table></td>  
 				</tr>   
@@ -256,7 +256,7 @@ function asig_dist(mvalor){ var f=document.form1;
               <td><table width="850" border="0">
                 <tr>
                   <td width="650" align="right" class="Estilo5">TOTAL DISTRIBUCI&Oacute;N :</td>
-                  <td width="200" align="right"  class="Estilo5"> <input name="txttotal_dist" type="text" id="txttotal_dist" size="20" style="text-align:right" maxlength="20" readonly value="<?echo $total_dist?>">  </td>
+                  <td width="200" align="right"  class="Estilo5"> <input name="txttotal_dist" type="text" id="txttotal_dist" size="20" style="text-align:right" maxlength="20" readonly value="<?php echo $total_dist?>">  </td>
                   </tr>
               </table></td>
             </tr>
@@ -276,4 +276,4 @@ function asig_dist(mvalor){ var f=document.form1;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

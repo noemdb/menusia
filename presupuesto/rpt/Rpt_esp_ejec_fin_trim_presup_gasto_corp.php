@@ -1,25 +1,25 @@
-<?include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
+<?php include ("../../class/seguridad.inc");include ("../../class/conects.php");  include ("../../class/funciones.php"); include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="03-0000250"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='../menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Especial Ejecucion Financiera Trimestral del Presupuesto de Gastos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Especial Ejecucion Financiera Trimestral del Presupuesto de Gastos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>
 <script language="javascript" src="../../class/cal2.js"></script>
 <script language="javascript" src="../../class/cal_conf2.js"></script>
 </head>
-<?$sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX"; $formato_categoria="XX-XX-XX"; $formato_partida="XXX-XX-XX-XX";
+<?php $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); $formato_presup="XX-XX-XX-XXX-XX-XX-XX"; $formato_categoria="XX-XX-XX"; $formato_partida="XXX-XX-XX-XX";
 if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$titulo=$registro["campo525"];$formato_categoria=$registro["campo526"];$formato_partida=$registro["campo527"];$cant_cat=$registro["campo550"]; } 
 $l=strlen($formato_presup); $c=strlen($formato_categoria); $p=strlen($formato_partida); $cant_cat=1; 
 $sql="Select max(cod_presup) As max_cod_presup, min(cod_presup) As min_cod_presup from pre001 where (length(cod_presup)=".$l.")"; $resultado=pg_query($sql);
@@ -49,9 +49,9 @@ echo $Cod_Emp;
 		<td height="19"><table width="830">
 		<tr>
 		  <td width="221" align="right"><p><span class="Estilo5">CATEGORIA PRESUPUESTARIA:</span></p></td>
-		  <td width="124"><input class="Estilo10" name="txtunidad_sol" type="text"  id="txtunidad_sol" size="15" readonly value="<?echo $cod_cat?>" ></td>
-		  <td width="40"><span class="Estilo5"><input class="Estilo10" name="btcat_prog" type="button" id="btcat_prog" title="Abrir Catalogo de Categorias Programaticas" onClick="VentanaCentrada('../Cat_codigos_proy_acc.php?criterio=','SIA','','750','500','true')" value="...">   </span></td>
-		  <td width="445"><input class="Estilo10" name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="75" readonly   value="<?echo $nomb_cat?>" ></td>
+		  <td width="124"><input class="Estilo10" name="txtunidad_sol" type="text"  id="txtunidad_sol" size="15" readonly value="<?php echo $cod_cat?>" ></td>
+		  <td width="40"><span class="Estilo5"><input class="Estilo10" name="btcat_prog" type="button" id="btcat_prog" title="Abrir Catalogo de Categorias Programaticas" onClick="VentanaCentrada('../Cat_codigos_proy_acc.php?criterio=','SIPAP','','750','500','true')" value="...">   </span></td>
+		  <td width="445"><input class="Estilo10" name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="75" readonly   value="<?php echo $nomb_cat?>" ></td>
 		</tr>
 		</table></td>  
         </tr>		
@@ -61,10 +61,10 @@ echo $Cod_Emp;
 		<td height="19"><table width="830">
 		<tr>
 		  <td width="221" align="right"><p><span class="Estilo5">PARTIDA PRESUPUESTARIA DESDE :</span></p></td>
-		  <td width="250"><input class="Estilo10" name="txtpart_d" type="text"  id="txtpart_d" size="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $part_d?>" ></td>
+		  <td width="250"><input class="Estilo10" name="txtpart_d" type="text"  id="txtpart_d" size="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $part_d?>" ></td>
 		  
 		  <td width="109" align="right"><span class="Estilo5">HASTA : </span></td>
-		  <td width="250"><input class="Estilo10" name="txtpart_h" type="text"  id="txtpart_h" size="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?echo $part_d?>" ></td>
+		  <td width="250"><input class="Estilo10" name="txtpart_h" type="text"  id="txtpart_h" size="15" onFocus="encender(this); " onBlur="apagar(this);" value="<?php echo $part_d?>" ></td>
 		  
 		  
 		</tr>
@@ -79,11 +79,11 @@ echo $Cod_Emp;
             
 			
 			<td width="100" align="right"><span class="Estilo5">MOSTRAR : </span></td>
-			 <?if($Cod_Emp=="A2"){?>
+			 <?php if($Cod_Emp=="A2"){?>
             <td width="170"><select name="txtsolo_part" size="1" id="txtsolo_part"><option value='SI' selected>EJECUCION</option> <option value='CONS'>CONSOLIDADO</option> <option value='NO'>TODOS</option>  </select></td> 
-            <?}else{?>
+            <?php }else{?>
 			<td width="170"><select name="txtsolo_part" size="1" id="txtsolo_part"><option value='SI' >SOLO PARTIDAS</option> <option value='NO' selected>TODOS</option>  </select></td> 
-            <?}?>
+            <?php }?>
 			
 			 <td width="125" class="Estilo5"> TIPO DE REPORTE :</td>
 			 <td width="165"><span class="Estilo5"> <select name="txttipo_rep" id="txttipo_rep"> <option value='PDF'>FORMATO PDF</option><option value='EXCEL'>FORMATO EXCEL</option> </select>	</span></td>
@@ -126,4 +126,4 @@ function Llama_Rpt_esp_ejec_fin_pre_gasto(murl){var url;var r; var s;  var mcod_
 }
 function Llama_Menu_Rpt(murl){var url;   url="../"+murl; LlamarURL(url);}
 </script>
-<? pg_close();?>
+<?php  pg_close($conn);?>

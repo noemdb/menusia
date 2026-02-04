@@ -1,6 +1,6 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php"); error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../class/conect.php"); include ("../class/funciones.php"); error_reporting(E_ALL ^ E_NOTICE);
 if (!$_GET){$cod_presup=''; $cod_fuente='00'; }else {$cod_presup=$_GET["cod_presup"]; $cod_fuente=$_GET["cod_fuente"]; } $codigo=$cod_fuente.$cod_presup;
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql); if ($registro=pg_fetch_array($resultado,0)){$formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"];$formato_par=$registro["campo527"];}else{$formato_presup="XX-XX-XX-XXX-XX-XX-XX";$formato_cat="XX-XX-XX";$formato_par="XXX-XX-XX-XX";}
 $mpatron="Array(1,1,3,2,2,4,0,0,0,0)";  $mpatron=arma_patron($formato_presup);$mpatronp="Array(1,1,3,2,2,4,0,0,0,0)";  $mpatronp=arma_patron($formato_par);
 ?>
@@ -9,7 +9,7 @@ $mpatron="Array(1,1,3,2,2,4,0,0,0,0)";  $mpatron=arma_patron($formato_presup);$m
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (C&oacute;ndigos/Asignaci&oacute;nn)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -48,8 +48,8 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
       <td>
       <table width="92" height="305" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<? echo $codigo; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<? echo $codigo; ?>')">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:CargarUrl('<?php  echo $codigo; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:CargarUrl('<?php  echo $codigo; ?>')">Atras</A></td>
       </tr>  
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -69,7 +69,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
               <td><table width="840" border="0">
                 <tr>
                   <td width="175"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO :</span></td>
-                  <td width="227"><span class="Estilo5"> <input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="40" maxlength="40" onFocus="encender(this);" onBlur="apagar(this);"  value="<?echo $cod_presup?>" onKeypress="return stabular(event,this)" onkeyup="mascara(this,'-',patroncodigo,true)" >    </span></td>
+                  <td width="227"><span class="Estilo5"> <input class="Estilo10" name="txtcod_presup" type="text" id="txtcod_presup" size="40" maxlength="40" onFocus="encender(this);" onBlur="apagar(this);"  value="<?php echo $cod_presup?>" onKeypress="return stabular(event,this)" onkeyup="mascara(this,'-',patroncodigo,true)" >    </span></td>
                   <td width="109">&nbsp;</td>
                   <td width="33"></td>
                   <td width="288"></td>
@@ -80,8 +80,8 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
               <td><table width="843" border="0">
                 <tr>
                   <td width="198"><span class="Estilo5">FUENTE DE FINANCIAMIENTO :</span></td>
-                  <td width="21"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);"  value="<?echo $cod_fuente?>" onkeypress="return stabular(event,this)">  </span></td>
-                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIA','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
+                  <td width="21"><span class="Estilo5"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente" size="3" maxlength="2" onFocus="encender(this); " onBlur="apagar(this);"  value="<?php echo $cod_fuente?>" onkeypress="return stabular(event,this)">  </span></td>
+                  <td width="45"><input class="Estilo10" name="btfuente" type="button" id="btfuente" title="Abrir Catalogo Fuentes de Financiamiento" onclick="VentanaCentrada('Cat_fuentes.php?criterio=','SIPAP','','750','500','true')" value="..." onkeypress="return stabular(event,this)"></td>
                   <td width="569"><span class="Estilo5"> <input class="Estilo10" name="txtdes_fuente" type="text" id="txtdes_fuente" size="75" readonly onkeypress="return stabular(event,this)"> </span></td>
                 </tr>
               </table></td>

@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$codigo='';}else {$codigo=$_GET["Gcodigo"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Tipo de Movimientos)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Tipo de Movimientos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN003 where codigo='$codigo'"; {$res=pg_query($sql);$filas=pg_num_rows($res);} if($filas>=1){$registro=pg_fetch_array($res,0); 
 $codigo=$registro["codigo"]; $denomina_tipo=$registro["denomina_tipo"];$tipo=$registro["tipo"];$gen_comprobante=$registro["gen_comprobante"];}
 ?>
@@ -47,8 +47,8 @@ $codigo=$registro["codigo"]; $denomina_tipo=$registro["denomina_tipo"];$tipo=$re
   <tr>
    <td width="92" height="270"><table width="92" height="268" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_tipos_movimi_ar.php?Gcodigo=<?echo $codigo;?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_tipos_movimi_ar.php?Gcodigo=<?echo $codigo;?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_tipos_movimi_ar.php?Gcodigo=<?php echo $codigo;?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_tipos_movimi_ar.php?Gcodigo=<?php echo $codigo;?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -66,7 +66,7 @@ $codigo=$registro["codigo"]; $denomina_tipo=$registro["denomina_tipo"];$tipo=$re
              <td><table width="820">
                  <tr>
                    <td width="120" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
-                   <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcodigo" type="text" class="Estilo10" id="txtcodigo" size="5" maxlength="3" readonly  value="<?echo $codigo?>"> </span></div></td>
+                   <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtcodigo" type="text" class="Estilo10" id="txtcodigo" size="5" maxlength="3" readonly  value="<?php echo $codigo?>"> </span></div></td>
                  </tr>
                </table>
              </div></td>
@@ -75,7 +75,7 @@ $codigo=$registro["codigo"]; $denomina_tipo=$registro["denomina_tipo"];$tipo=$re
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">CONCEPTO :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtdenomina_tipo" type="text" class="Estilo10" id="txtdenomina_tipo" size="100" maxlength="100"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $denomina_tipo?>" >
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input name="txtdenomina_tipo" type="text" class="Estilo10" id="txtdenomina_tipo" size="100" maxlength="100"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $denomina_tipo?>" >
                  </span></div></td>
                </tr>
              </table></td>
@@ -103,7 +103,7 @@ $codigo=$registro["codigo"]; $denomina_tipo=$registro["denomina_tipo"];$tipo=$re
           </tr>
 		  <tr><td height="10">&nbsp;</td></tr>
 <script language="JavaScript" type="text/JavaScript">
-var f=document.form1; var mvalor='<?echo $tipo;?>'; var mvalor2='<?echo $gen_comprobante;?>';
+var f=document.form1; var mvalor='<?php echo $tipo;?>'; var mvalor2='<?php echo $gen_comprobante;?>';
     if(mvalor=="I"){document.form1.txttipo.options[0].selected = true;}
     if(mvalor=="D"){document.form1.txttipo.options[1].selected = true;}
     if(mvalor=="R"){document.form1.txttipo.options[2].selected = true;}
@@ -131,4 +131,4 @@ var f=document.form1; var mvalor='<?echo $tipo;?>'; var mvalor2='<?echo $gen_com
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

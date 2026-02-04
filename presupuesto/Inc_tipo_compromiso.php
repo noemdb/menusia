@@ -1,10 +1,10 @@
-<?include ("../class/ventana.php");?>
+<?php include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Incluir Tipos de Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Incluir Tipos de Compromiso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css  rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js"  type=text/javascript></SCRIPT>
@@ -18,12 +18,12 @@ MM_reloadPage(true);
 </script>
 <script language="JavaScript" type="text/JavaScript">
 function revisar(){var f=document.form1;
-    if(f.txttipo_comp.value==""){alert("Código de Documento Compromiso no puede estar Vacio");return false;}
+    if(f.txttipo_comp.value==""){alert("Cï¿½digo de Documento Compromiso no puede estar Vacio");return false;}
         if(f.txttipo_comp.value.charAt(0)=='A'){alert("Documento de Compromiso no valido");return false;}
-    if(f.txtdes_tipo_comp.value==""){alert("denominación del Tipo Compromiso no puede estar Vacia");return false; }
+    if(f.txtdes_tipo_comp.value==""){alert("denominaciï¿½n del Tipo Compromiso no puede estar Vacia");return false; }
        else{f.txtdes_tipo_comp.value=f.txtdes_tipo_comp.value.toUpperCase();}
     if(f.txttipo_comp.value.length==6){f.txttipo_comp.value=f.txttipo_comp.value.toUpperCase();}
-       else{alert("Longitud Código Tipo de Compromiso Invalida");return false;}
+       else{alert("Longitud Cï¿½digo Tipo de Compromiso Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -97,7 +97,7 @@ return true;}
                     <td width="280"><span class="Estilo5"><input name="txtcod_part_iva" type="text" id="txttipo_comp3" title="Registre el c&oacute;digo del Tipo de compromiso" onFocus="encender(this); " onBlur="apagar(this);" onChange="chequea_tipo(this.form);"  size="30" maxlength="24"></span></td>
 					<td width="150"><span class="Estilo5">C&Oacute;DIGO CONTABLES :</span></td>
 					<td width="160"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="25" maxlength="30" onFocus="encender(this); " onBlur="apagar(this);">   </span></td>
-                    <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+                    <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                      <td width="5"><input name="txtNombre_Cuenta" type="hidden" id="txtNombre_Cuenta"  ></td>
 				  </tr>
                 </table></td>

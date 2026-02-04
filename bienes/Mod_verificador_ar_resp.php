@@ -1,5 +1,5 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
-$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+$conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$ced_res_verificador='';}else {$ced_res_verificador=$_GET["Gced_res_verificador"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$ced_res_verificador='';}else {$ced_res_verificador=$_GET["Gced_res_
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Verificador)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Verificador)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ return true;}
 <style type="text/css">
 </style>
 </head>
-<?
+<?php 
 $sql="SELECT * From BIEN030 where ced_res_verificador='$ced_res_verificador'"; {$res=pg_query($sql);$filas=pg_num_rows($res);} if($filas>=1){$registro=pg_fetch_array($res,0); 
 $ced_res_verificador=$registro["ced_res_verificador"]; $nombre_res_ver=$registro["nombre_res_ver"]; $observaciones_ver=$registro["observaciones_ver"]; }
 ?>
@@ -66,7 +66,7 @@ $ced_res_verificador=$registro["ced_res_verificador"]; $nombre_res_ver=$registro
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">C&Eacute;DULA DE IDENTIDAD:</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtced_res_verificador" type="text" class="Estilo10" id="txtced_res_verificador" size="15" maxlength="12"  value="<?echo $ced_res_verificador?>" readonly >   </span></div></td>
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtced_res_verificador" type="text" class="Estilo10" id="txtced_res_verificador" size="15" maxlength="12"  value="<?php echo $ced_res_verificador?>" readonly >   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -75,7 +75,7 @@ $ced_res_verificador=$registro["ced_res_verificador"]; $nombre_res_ver=$registro
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtnombre_res_ver" type="text" class="Estilo10" id="txtnombre_res_ver" size="100" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)"   value="<?echo $nombre_res_ver?>" >  </span></div></td>
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input name="txtnombre_res_ver" type="text" class="Estilo10" id="txtnombre_res_ver" size="100" maxlength="100" onFocus="encender(this)" onBlur="apagar(this)"   value="<?php echo $nombre_res_ver?>" >  </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -84,7 +84,7 @@ $ced_res_verificador=$registro["ced_res_verificador"]; $nombre_res_ver=$registro
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><textarea name="txtobservaciones_ver" cols="80" onFocus="encender(this)" onBlur="apagar(this)"  class="Estilo10" id="txtobservaciones_ver"><?echo $observaciones_ver?></textarea>    </div></td>
+                 <td width="680" scope="col"><div align="left"><textarea name="txtobservaciones_ver" cols="80" onFocus="encender(this)" onBlur="apagar(this)"  class="Estilo10" id="txtobservaciones_ver"><?php echo $observaciones_ver?></textarea>    </div></td>
                </tr>
              </table></td>
 			</tr>
@@ -105,4 +105,4 @@ $ced_res_verificador=$registro["ced_res_verificador"]; $nombre_res_ver=$registro
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

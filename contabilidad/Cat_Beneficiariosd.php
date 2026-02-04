@@ -1,6 +1,6 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);include ("../class/ventana.php");
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);include ("../class/ventana.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function Llamar_cat(){var murl;
@@ -17,12 +17,12 @@ function cerrar_catalogo(mcodigo,mnombre){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Catalogo de Beneficiarios)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Catalogo de Beneficiarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?   $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $numPags=1;
+<?php    $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $numPags=1;
      if ($_GET["criterio"]!=""){$txt_criterio = $_GET["criterio"]; $txt_criterio = strtoupper ($txt_criterio);
         $criterio = " where ced_rif like '%" . $txt_criterio . "%' or nombre like '%" . $txt_criterio . "%'";  }
         $sql="SELECT * FROM PRE099".$criterio; $res=pg_query($sql); $numeroRegistros=pg_num_rows($res);
@@ -39,16 +39,16 @@ function cerrar_catalogo(mcodigo,mnombre){
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["ced_rif"]?>','<? echo $registro["nombre"]; ?>')" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["ced_rif"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["ced_rif"]?>','<?php  echo $registro["nombre"]; ?>')" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["ced_rif"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre"]; ?></b></font></td>
   </tr>
-<?}} echo "</table>"; }
+<?php } } echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
+<?php       echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
         echo "<font face='verdana' size='-2'>Principio</font>";
         echo "</a>&nbsp;";
         if($pagina>1){
@@ -71,11 +71,11 @@ function cerrar_catalogo(mcodigo,mnombre){
         </table>
 <hr noshade style="color:CC6666;height:1px">
 <form name="form1" method="post">
-Criterio de búsqueda:
+Criterio de bï¿½squeda:
 <input type="text" name="criterio" size="22" maxlength="150">
 <td width="268"><input name="button" type="button" id="button" value="Buscar" onClick="javascript:Llamar_cat()"></td>
 </div>
 </form>
 </body>
 </html>
-<?   pg_close(); ?>
+<?php    pg_close($conn); ?>

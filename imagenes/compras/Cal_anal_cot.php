@@ -1,7 +1,7 @@
-<? include ("../class/conect.php"); include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME"); $mcod_m="COMP017".$usuario_sia.$equipo;
+<?php  include ("../class/conect.php"); include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME"); $mcod_m="COMP017".$usuario_sia.$equipo;
 if (!$_GET){$codigo_mov=substr($mcod_m,0,49); }else{$codigo_mov=$_GET["codigo_mov"]; } 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname.""); 
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $rif_proveedor=""; $nombre=""; $p_precio=100; $p_dias_credito=0; $p_tiempo=0; $p_garantia=0;
 
 ?>
@@ -9,12 +9,12 @@ $rif_proveedor=""; $nombre=""; $p_precio=100; $p_dias_credito=0; $p_tiempo=0; $p
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Cotizacion al Analisis)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Cotizacion al Analisis)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="../class/sia.js" type=text/javascript></script>
 <script language="javascript" src="ajax_comp.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_res_anal.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_res_anal.php?codigo_mov=<?php echo $codigo_mov?>'; }
 function revisar(){var f=document.form1;var Valido=true;
    if(f.txtp_precio.value==""){alert("Porcentaje no puede estar Vacio");return false;}
    if(f.txtp_dias_credito.value==""){alert("Porcentaje no puede estar Vacio");return false;}
@@ -45,9 +45,9 @@ return true;}
           <td><table width="800">
             <tr>
               <td width="300"><span class="Estilo5">PORCENTAJE (%) PARA EVALUAR PRECIO:</span></td>
-              <td width="100"><input name="txtp_precio" type="text"  id="txtp_precio" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $p_precio?>" class="Estilo5" ></td>
+              <td width="100"><input name="txtp_precio" type="text"  id="txtp_precio" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $p_precio?>" class="Estilo5" ></td>
               <td width="300"><span class="Estilo5">PORCENTAJE (%) PARA DIAS CREDITO:</span></td>
-              <td width="100"><input name="txtp_dias_credito" type="text"  id="txtp_dias_credito" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $p_dias_credito?>" class="Estilo5" ></td>
+              <td width="100"><input name="txtp_dias_credito" type="text"  id="txtp_dias_credito" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $p_dias_credito?>" class="Estilo5" ></td>
                                   
 			</tr>
           </table></td>
@@ -56,9 +56,9 @@ return true;}
           <td><table width="800">
             <tr>
               <td width="300"><span class="Estilo5">PORCENTAJE (%) PARA EVALUAR TIEMPO DE ENTREGA:</span></td>
-              <td width="100"><input name="txtp_tiempo" type="text"  id="txtp_tiempo" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $p_tiempo?>" class="Estilo5" ></td>
+              <td width="100"><input name="txtp_tiempo" type="text"  id="txtp_tiempo" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $p_tiempo?>" class="Estilo5" ></td>
               <td width="300"><span class="Estilo5">PORCENTAJE (%) PARA EVALUAR GARANTIA:</span></td>
-              <td width="100"><input name="txtp_garantia" type="text"  id="txtp_garantia" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?echo $p_garantia?>" class="Estilo5" ></td>
+              <td width="100"><input name="txtp_garantia" type="text"  id="txtp_garantia" size="6" maxlength="6" onFocus="encender(this)" onBlur="apagar(this)"  value="<?php echo $p_garantia?>" class="Estilo5" ></td>
                                   
 			</tr>
           </table></td>
@@ -69,7 +69,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="57"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="57"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="30">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="110" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

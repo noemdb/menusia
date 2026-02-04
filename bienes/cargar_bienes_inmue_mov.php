@@ -1,22 +1,22 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");  $fecha_hoy=asigna_fecha_hoy(); $cod_dependencia="";
+<?php include ("../class/conect.php");  include ("../class/funciones.php");  $fecha_hoy=asigna_fecha_hoy(); $cod_dependencia="";
 if (!$_GET){$codigo_mov="";}else{$codigo_mov=$_GET["codigo_mov"];}
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sSQL="Select * from PAG036 WHERE codigo_mov='$codigo_mov'";$resultado=pg_exec($conn,$sSQL); $filas=pg_numrows($resultado);
   if ($filas>0) { $registro=pg_fetch_array($resultado); $cod_dependencia=$registro["nro_orden"];}
-pg_close(); 
+pg_close($conn); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Cargar Movimiento Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Cargar Movimiento Bienes Muebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
 
-function llamar_anterior(){ document.location ='Det_inc_bienes_mue_movimientos.php?codigo_mov=<?echo $codigo_mov?>'; }
+function llamar_anterior(){ document.location ='Det_inc_bienes_mue_movimientos.php?codigo_mov=<?php echo $codigo_mov?>'; }
 
 
 </script>
@@ -53,9 +53,9 @@ function llamar_anterior(){ document.location ='Det_inc_bienes_mue_movimientos.p
                 <tr>
 				  <td width="50"><span class="Estilo5"></span></td>
                   <td width="230"><span class="Estilo5">FECHA MOVIMIENTOS DESDE: </span></td>
-				  <td width="150"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"  value="<?echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" onchange="chequea_fecha(this)" >  </span></td>
+				  <td width="150"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="15" maxlength="15"  value="<?php echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" onchange="chequea_fecha(this)" >  </span></td>
 				  <td width="50"><span class="Estilo5">HASTA: </span></td>
-				  <td width="150"><span class="Estilo5"><input name="txtfechah" type="text" id="txtfechah" size="15" maxlength="15"  value="<?echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" onchange="chequea_fecha(this)" >  </span></td>
+				  <td width="150"><span class="Estilo5"><input name="txtfechah" type="text" id="txtfechah" size="15" maxlength="15"  value="<?php echo $fecha_hoy?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5" onchange="chequea_fecha(this)" >  </span></td>
 				  
                  </span></td>
                 </tr>
@@ -66,8 +66,8 @@ function llamar_anterior(){ document.location ='Det_inc_bienes_mue_movimientos.p
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td> 
-            <td width="100"><input name="txtcod_dependencia" type="hidden" id="txtcod_dependencia" value="<?echo $cod_dependencia?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td> 
+            <td width="100"><input name="txtcod_dependencia" type="hidden" id="txtcod_dependencia" value="<?php echo $cod_dependencia?>"></td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="110" align="center"></td>
             <td width="96" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>

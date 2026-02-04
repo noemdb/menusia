@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");?>
-<?include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
+<?php include ("../../class/seguridad.inc");?>
+<?php include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
 <?php include ("../../class/configura.inc");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
 $codigocuentad="";$codigocuentah="9-9-999-99-99-9999";$periodo="";$nivel="";$vimprimir="S";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD (Reporte Balance de Comprobacion (Detalle))</title>
+<title>SIPAP CONTABILIDAD (Reporte Balance de Comprobacion (Detalle))</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -31,7 +31,7 @@ function Llama_Rpt_Balance_Comprobacion_Deta(murl){var url;var r;var st;
 function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </script>
 </head>
-<?
+<?php 
 $sql="SELECT MAX(Referencia) As Max_Referencia, MIN(Referencia) As Min_Referencia,MAX(Tipo_Asiento) As Max_Tipo,MIN(Tipo_Asiento) As Min_Tipo FROM CON002";
 $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){$encontro=true;}
@@ -80,11 +80,11 @@ if($encontro=true){$referencia_d=$registro["min_referencia"];$referencia_h=$regi
                   </td>
           <td><span class="Estilo5">
           <input name="txtCodigo_Cuenta_D" type="text" id="txtCodigo_Cuenta_D" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32">
-          <input name="Catalogo1" type="button" id="Catalogo223" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIA','','750','500','true')" value="...">
+          <input name="Catalogo1" type="button" id="Catalogo223" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
           </span></td>
           <td><span class="Estilo5">
-            <input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?echo $codigocuentah?>">
-            <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIA','','750','500','true')" value="...">
+            <input name="txtCodigo_Cuenta_H" type="text" id="txtCodigo_Cuenta_H" onFocus="encender(this)" onBlur="apagar(this)" size="20" maxlength="32" value="<?php echo $codigocuentah?>">
+            <input name="Catalogo2" type="button" id="Catalogo2" title="Abrir Catalogo de Cuentas" onClick="VentanaCentrada('../Cat_cuentas_cargablesh.php?criterio=','SIPAP','','750','500','true')" value="...">
                   </span></td>
         </tr>
         <tr>
@@ -183,4 +183,4 @@ if($encontro=true){$referencia_d=$registro["min_referencia"];$referencia_h=$regi
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close();?>

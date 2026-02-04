@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); 
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/funciones.php"); 
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="01-0000020"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'"; $res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$cod_informe=''; $p_letra='';  $criterio='';  $clave=''; $sql="SELECT * FROM CON005 ORDER BY cod_informe";
 } else {$criterio=$_GET["Gcriterio"];$p_letra=substr($criterio, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")||($p_letra=="C")){ $cod_informe=substr($criterio,1,2);} else{$cod_informe=substr($criterio,0,2);}
@@ -20,7 +20,7 @@ if (!$_GET){$cod_informe=''; $p_letra='';  $criterio='';  $clave=''; $sql="SELEC
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Definir Informes Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Definir Informes Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -57,7 +57,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $res=pg_query($sql);$filas=pg_num_rows($res);  $nombre_informe=""; $arch_informe=""; $inf_usuario="";
 if ($filas==0){if ($p_letra=="S"){$sql="SELECT * FROM CON005 Order by cod_informe";}if ($p_letra=="A"){$sql="SELECT * FROM CON005  Order by cod_informe desc";}  $res=pg_query($sql);$filas=pg_num_rows($res);}
 if($filas>=1){$registro=pg_fetch_array($res,0); $cod_informe=$registro["cod_informe"]; $nombre_informe=$registro["nombre_informe"]; $arch_informe=$registro["arch_informe"]; } $criterio=$cod_informe;
@@ -98,7 +98,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_informe=$registro["cod_info
              onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Mover_Registro('S');" class="menu">Siguiente</a></td>
       </tr>
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('U',<?echo $criterio?>)";
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('U',<?php echo $criterio?>)";
              onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Mover_Registro('U');" class="menu">Ultimo</a></td>
       </tr>
       <tr>
@@ -123,8 +123,8 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_informe=$registro["cod_info
              <td><table width="876">
                <tr>
                  <td width="126"><span class="Estilo5">C&Oacute;DIGO INFORME :</span></td>
-                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" size="3" maxlength="2"  value="<?echo $cod_informe?>" readonly></span></td>
-                 <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_informe" type="text" id="txtnombre_informe" size="100" maxlength="100"  value="<?echo $nombre_informe?>" readonly></span></td>
+                 <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtcod_informe" type="text" id="txtcod_informe" size="3" maxlength="2"  value="<?php echo $cod_informe?>" readonly></span></td>
+                 <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtnombre_informe" type="text" id="txtnombre_informe" size="100" maxlength="100"  value="<?php echo $nombre_informe?>" readonly></span></td>
                  
                </tr>
              </table></td>
@@ -133,12 +133,12 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_informe=$registro["cod_info
              <td><table width="876">
                <tr>
                  <td width="226"><span class="Estilo5">NOMBRE DEL ARCHIVO REPORTES  :</span></td>
-                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" size="100" maxlength="100"  value="<?echo $arch_informe?>" readonly> </span></td>                 
+                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtarch_informe" type="text" id="txtarch_informe" size="100" maxlength="100"  value="<?php echo $arch_informe?>" readonly> </span></td>                 
                </tr>
              </table></td>
            </tr>
           </table>
-          <iframe src="Det_inf_contables.php?criterio=<?echo $cod_informe?>"  width="850" height="420" scrolling="auto" frameborder="1">
+          <iframe src="Det_inf_contables.php?criterio=<?php echo $cod_informe?>"  width="850" height="420" scrolling="auto" frameborder="1">
           </iframe>
          </div>
          </form>
@@ -147,4 +147,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_informe=$registro["cod_info
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

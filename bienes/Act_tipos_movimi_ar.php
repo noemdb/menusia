@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000030"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$codigo='';$p_letra="";   $sql="SELECT * FROM BIEN003 ORDER BY codigo";}
 else {  $codigo = $_GET["Gcodigo"];  $p_letra=substr($codigo, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$codigo=substr($codigo,1,3);}   else{$codigo=substr($codigo,0,3);}
@@ -21,7 +21,7 @@ else {  $codigo = $_GET["Gcodigo"];  $p_letra=substr($codigo, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Tipos de Movimientos)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Tipos de Movimientos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -57,7 +57,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $codigo=""; $denomina_tipo=""; $tipo=""; $status_tipo=""; $gen_comprobante="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){ if ($p_letra=="S"){$sql="SELECT * From BIEN003 ORDER BY codigo";}  if ($p_letra=="A"){$sql="SELECT * From BIEN003 ORDER BY codigo desc";}  $res=pg_query($sql);  $filas=pg_num_rows($res);}
 if($filas>=1){  $registro=pg_fetch_array($res,0);  $codigo=$registro["codigo"];  $denomina_tipo=$registro["denomina_tipo"];    $tipo=$registro["tipo"];   $status_tipo=$registro["status_tipo"];   $gen_comprobante=$registro["gen_comprobante"];} 
@@ -76,17 +76,17 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
 <table width="977" height="335" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="329"><table width="92" height="325" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_tipos_movimi_ar.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_tipos_movimi_ar.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_tipos_movimi_ar.php?Gcodigo=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_tipos_movimi_ar.php?Gcodigo=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -107,12 +107,12 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_tipos_movimi_ar.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_tipos_movimi_ar.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -126,7 +126,7 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
              <td><table width="820">
                  <tr>
                    <td width="120" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO :</span></div></td>
-                   <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcodigo" type="text" id="txtcodigo" size="5" maxlength="3"   value="<?echo $codigo?>" readonly>
+                   <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtcodigo" type="text" id="txtcodigo" size="5" maxlength="3"   value="<?php echo $codigo?>" readonly>
                    </span></div></td>
                  </tr>
                </table>
@@ -137,7 +137,7 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">CONCEPTO :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="100" maxlength="100"   value="<?echo $denomina_tipo?>" readonly>
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtdenomina_tipo" type="text" id="txtdenomina_tipo" size="100" maxlength="100"   value="<?php echo $denomina_tipo?>" readonly>
                  </span></div></td>
                </tr>
              </table></td>
@@ -147,7 +147,7 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
              <td><table width="820">
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">TIPO :</span></div></td>
-                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttipo" type="text" id="txttipo" size="25"   value="<?echo $des_tipo?>" readonly>
+                 <td width="700" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttipo" type="text" id="txttipo" size="25"   value="<?php echo $des_tipo?>" readonly>
                  </span></div></td>
                </tr>
              </table></td>
@@ -157,7 +157,7 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
              <td><table width="820">
                <tr>
                  <td width="170" scope="col"><div align="left"><span class="Estilo5">GENERA COMPROBANTE :</span></div></td>
-                 <td width="650" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtgen_comprobante" type="text" id="txtgen_comprobante" size="3" maxlength="2"   value="<?echo $gen_comp?>" readonly>
+                 <td width="650" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtgen_comprobante" type="text" id="txtgen_comprobante" size="3" maxlength="2"   value="<?php echo $gen_comp?>" readonly>
                  </span></div></td>
                </tr>
              </table></td>
@@ -174,4 +174,4 @@ if($gen_comprobante=="S"){$gen_comp="SI";}else{$gen_comp="NO";}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $Doc_causado='';} else {  $Doc_causado = $_GET["GDoc_causado"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modifica Documentos Causados)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modifica Documentos Causados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
@@ -20,7 +20,7 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function revisar(){
 var f=document.form1;
-    if(f.txtdoc_causado.value==""){alert("Código de Documento Causado no puede estar Vacio");return false;}
+    if(f.txtdoc_causado.value==""){alert("Cï¿½digo de Documento Causado no puede estar Vacio");return false;}
         if(f.txtdoc_causado.value.charAt(0)=='A'){alert("Documento de Causado no valido");return false;}
     if(f.txtnombre_doc_causado.value==""){alert("Nombre del Documento Causado no puede estar Vacio");return false; }
        else{f.txtnombre_doc_causado.value=f.txtnombre_doc_causado.value.toUpperCase();}
@@ -31,14 +31,14 @@ var f=document.form1;
         if(f.TxtAfecta.value=="SI" || f.TxtAfecta.value=="NO") {Valido=true;}
         else{alert("Valor de Afecta Presupuesto no valido");return false; }
     if(f.txtdoc_causado.value.length==4){f.txtdoc_causado.value=f.txtdoc_causado.value.toUpperCase();}
-       else{alert("Longitud Código de Documento Causado Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de Documento Causado Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
 <script language="JavaScript" type="text/JavaScript">
 function chequea_tipo()
 var f=document.form1;
-    if(f.txtdoc_causado.value==""){alert("Código de Documento Causado no puede estar Vacio");return false;}
+    if(f.txtdoc_causado.value==""){alert("Cï¿½digo de Documento Causado no puede estar Vacio");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -47,7 +47,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre003 where tipo_causado='$Doc_causado'";
 $res=pg_query($sql);
@@ -97,21 +97,21 @@ var f=document.form1;
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p class="Estilo5">C&Oacute;DIGO :
-                                <input name="txtdoc_causado" id="txtdoc_causado" value="<?ECHO $Doc_causado?>" size="10" readOnly>
+                                <input name="txtdoc_causado" id="txtdoc_causado" value="<?php ECHO $Doc_causado?>" size="10" readOnly>
                   </p>
                           </blockquote></td>
           </tr>
           <tr>
             <td height="49" colspan="3" valign="middle"><blockquote>
               <p align="left"><span class="Estilo5">NOMBRE DEL DOCUMENTO :</span>
-                <input name="txtnombre_doc_causado" type="text" id="txtnombre_doc_causado" title="Registre el Nombre del Documento Causado"  onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $Nombre_doc_causado?>" size="80" maxlength="70">
+                <input name="txtnombre_doc_causado" type="text" id="txtnombre_doc_causado" title="Registre el Nombre del Documento Causado"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $Nombre_doc_causado?>" size="80" maxlength="70">
 </p>
             </blockquote></td>
           </tr>
           <tr>
             <td width="387" height="43" valign="middle"><blockquote>
               <p><span class="Estilo5">NOMBRE ABREVIADO  DOCUMENTO :</span>
-                    <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el Nombre Abreviado del Documento Causado"  onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $Nombre_Abrev?>" size="8" maxlength="4">
+                    <input name="txtnombre_abrev" type="text" id="txtnombre_abrev" title="Registre el Nombre Abreviado del Documento Causado"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $Nombre_Abrev?>" size="8" maxlength="4">
               </p>
             </blockquote></td>
             <td width="230" valign="middle"><span class="Estilo5">REFIERE A COMPROMISO :
@@ -119,7 +119,7 @@ var f=document.form1;
                   <option>SI</option>
                   <option>NO</option>
                 </select>
-                                <script language="JavaScript"> Asigna_RefComp('<?ECHO $Refiera_a_Comp?>');</script>
+                                <script language="JavaScript"> Asigna_RefComp('<?php ECHO $Refiera_a_Comp?>');</script>
             </span></td>
             <td width="228" valign="middle"><span class="Estilo5">AFECTA PRESUPUESTO :
                 <select name="TxtAfecta" size="1" id="TxtAfecta" onFocus="encender(this)" onBlur="apagar(this)">
@@ -127,7 +127,7 @@ var f=document.form1;
                   <option>NO</option>
                 </select></td>
                                 <script language="JavaScript" type="text/JavaScript">
-                var valor='<?ECHO $Afecta_Presup?>';
+                var valor='<?php ECHO $Afecta_Presup?>';
              if(valor=="SI"){document.form1.TxtAfecta.options[0].selected = true;}
              if(valor=="NO"){document.form1.TxtAfecta.options[1].selected = true;}
                          </script>
@@ -153,4 +153,4 @@ var f=document.form1;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

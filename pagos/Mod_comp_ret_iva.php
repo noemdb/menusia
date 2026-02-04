@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); ?>
-<? $equipo = getenv("COMPUTERNAME"); $mcod_m = "BAN027".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); ?>
+<?php  $equipo = getenv("COMPUTERNAME"); $mcod_m = "BAN027".$usuario_sia.$equipo; $codigo_mov=substr($mcod_m,0,49);
 if (!$_GET){$ano_fiscal=""; $mes_fiscal=""; $nro_comprobante=""; $criterio="";} else{$criterio=$_GET["criterio"]; $nro_comprobante=substr($criterio,6,8);  $ano_fiscal=substr($criterio,0,4);  $mes_fiscal=substr($criterio,4,2);}
 $fecha_hoy=asigna_fecha_hoy();  $clave=$ano_fiscal.$mes_fiscal.$nro_comprobante;
 ?>
@@ -8,7 +8,7 @@ $fecha_hoy=asigna_fecha_hoy();  $clave=$ano_fiscal.$mes_fiscal.$nro_comprobante;
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Comprobante Retenciones IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Comprobante Retenciones IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -24,14 +24,14 @@ MM_reloadPage(true);
 function revisar(){var f=document.form1; var Valido=true;
     if(f.txtfecha.value==""){alert("Fecha no puede estar Vacia");return false;}
 	if(f.txtced_rif.value==""){alert("Cedula/Rif no puede estar Vacio");return false;}    
-    if(f.txtnro_comprobante.value==""){alert("Número de Comprobante no puede estar Vacio");return false;}
+    if(f.txtnro_comprobante.value==""){alert("Nï¿½mero de Comprobante no puede estar Vacio");return false;}
       else{f.txtnro_orden.value=f.txtnro_orden.value;}
   document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $resultado=pg_exec($conn,"SELECT BORRAR_BAN029('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61); $fecha_e=""; $ced_rif=""; $nombre_benef="";  $referencia=""; $nro_orden="";
 $sql="Select * from COMP_IVA where ano_fiscal='$ano_fiscal' and  mes_fiscal='$mes_fiscal' and nro_comprobante='$nro_comprobante'"; $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $fecha_e=$registro["fecha_emision"];  $ced_rif=$registro["ced_rif"];  $nombre_benef=$registro["nombre"]; $referencia=$registro["referencia"];  $inf_usuario=$registro["inf_usuario"];}
@@ -57,8 +57,8 @@ while($registro=pg_fetch_array($res))
   <tr>
     <td width="92"><table width="92" height="525" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_comp_ret_iva.php?Gcriterio=C<?echo $criterio?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_comp_ret_iva.php?Gcriterio=C<?echo $criterio?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_comp_ret_iva.php?Gcriterio=C<?php echo $criterio?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_comp_ret_iva.php?Gcriterio=C<?php echo $criterio?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -77,13 +77,13 @@ while($registro=pg_fetch_array($res))
                   <td height="14"><table width="861" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="155"><span class="Estilo5">PERIODO FISCAL A&Ntilde;O  : </span></td>
-                      <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtano_fiscal" type="text" id="txtano_fiscal" size="5" maxlength="5"  readonly value="<?echo $ano_fiscal?>" ></span></td>
+                      <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtano_fiscal" type="text" id="txtano_fiscal" size="5" maxlength="5"  readonly value="<?php echo $ano_fiscal?>" ></span></td>
                       <td width="45"><span class="Estilo5">MES :</span></td>
-                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtmes_fiscal" type="text" id="txtmes_fiscal" size="2" maxlength="2"  readonly value="<?echo $mes_fiscal?>" ></span></td>
+                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtmes_fiscal" type="text" id="txtmes_fiscal" size="2" maxlength="2"  readonly value="<?php echo $mes_fiscal?>" ></span></td>
                       <td width="170"><span class="Estilo5">N&Uacute;MERO COMPROBANTE  :</span></td>
-                      <td width="120"><span class="Estilo5"><div id="nrocomp"> <input class="Estilo10" name="txtnro_comprobante" type="text" id="txtnro_comprobante" size="10" maxlength="10"  readonly value="<?echo $nro_comprobante?>" > </div></span></td>
+                      <td width="120"><span class="Estilo5"><div id="nrocomp"> <input class="Estilo10" name="txtnro_comprobante" type="text" id="txtnro_comprobante" size="10" maxlength="10"  readonly value="<?php echo $nro_comprobante?>" > </div></span></td>
                       <td width="120"><span class="Estilo5">FECHA EMISI&Oacute;N  : </span></td>
-                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  readonly  value="<?echo $fecha?>" > </span></td>
+                      <td width="100"><span class="Estilo5"> <input class="Estilo10" name="txtfecha_e" type="text" id="txtfecha_e" size="10" maxlength="10"  readonly  value="<?php echo $fecha?>" > </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -93,9 +93,9 @@ while($registro=pg_fetch_array($res))
                   <td width="883"><table width="861" >
                     <tr>
                       <td width="95" height="24"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                      <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="14" maxlength="12"  value="<?echo $ced_rif?>" readonly > </span></td>
+                      <td width="115"><span class="Estilo5"> <input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" size="14" maxlength="12"  value="<?php echo $ced_rif?>" readonly > </span></td>
                       <td width="75"><span class="Estilo5"> NOMBRE :</span></td>
-                      <td width="550"><span class="Estilo5">  <input class="Estilo10" name="txtnombre" type="text" id="txtnombre" size="95"  readonly value="<?echo $nombre_benef?>" >  </span></td>
+                      <td width="550"><span class="Estilo5">  <input class="Estilo10" name="txtnombre" type="text" id="txtnombre" size="95"  readonly value="<?php echo $nombre_benef?>" >  </span></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -105,7 +105,7 @@ while($registro=pg_fetch_array($res))
                   <td width="883" height="14"><table width="861">
                     <tr>
                       <td width="150"><span class="Estilo5">N&Uacute;MERO DE ORDEN : </span></td>
-                      <td width="83"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden" type="text" id="txtnro_orden" size="10" maxlength="8"  readonly value="<?echo $referencia?>" > </span></td>
+                      <td width="83"><span class="Estilo5"><input class="Estilo10" name="txtnro_orden" type="text" id="txtnro_orden" size="10" maxlength="8"  readonly value="<?php echo $referencia?>" > </span></td>
                       <td width="649">&nbsp;</td>
                     </tr>
                   </table></td>
@@ -113,13 +113,13 @@ while($registro=pg_fetch_array($res))
                 <tr> <td>&nbsp;</td> </tr>
           </table>
               <div id="T11" class="tab-body">
-              <iframe src="Det_inc_comp_iva.php?codigo_mov=<?echo $codigo_mov?>&agregar=N" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
+              <iframe src="Det_inc_comp_iva.php?codigo_mov=<?php echo $codigo_mov?>&agregar=N" width="870" height="310" scrolling="auto" frameborder="1"></iframe>
               </div>
          <table width="863" border="0"> <tr> <td height="5">&nbsp;</td> </tr> </table>
          <table width="812">
           <tr>
             <td width="654">&nbsp;</td>
-            <td width="10"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="10"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="88"><input name="Grabar" type="submit" id="Grabar"  value="Grabar"></td>
             <td width="88"><input name="Blanquear" type="reset" value="Blanquear"></td>
           </tr>

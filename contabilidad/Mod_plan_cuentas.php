@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$codigo_cuenta='';
 } else {$codigo_cuenta = $_GET["Gcodigo_cuenta"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Modificar Plan de Cuentas)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Modificar Plan de Cuentas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -31,7 +31,7 @@ var Valido;
 document.form1.submit;
 return true;}
 </script>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $nombre_cuenta="";$clasificacion="";$tSaldo="";
 $sql="Select * from con098 where codigo_cuenta='$codigo_cuenta'";$res=pg_query($sql);
@@ -77,13 +77,13 @@ var f=document.form1;
               <blockquote>
                 <p></p>
                 <p class="Estilo5">C&Oacute;DIGO DE CUENTA :
-                    <input readonly  name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el C&oacute;digo de la Cuenta"  value="<?ECHO $codigo_cuenta?>" size="30" maxlength="30">
+                    <input readonly  name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" title="Registre el C&oacute;digo de la Cuenta"  value="<?php ECHO $codigo_cuenta?>" size="30" maxlength="30">
                 </blockquote></td>
           </tr>
           <tr>
             <td><blockquote>
                 <p align="left"><span class="Estilo5">DENOMINACI&Oacute;N :</span>
-                    <input name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" title="Registre la denominaci&oacute;n de la Cuenta"   onFocus="encender(this)" onBlur="apagar(this)" value="<?ECHO $nombre_cuenta?>" size="105" maxlength="200">
+                    <input name="txtNombre_Cuenta" type="text" id="txtNombre_Cuenta" title="Registre la denominaci&oacute;n de la Cuenta"   onFocus="encender(this)" onBlur="apagar(this)" value="<?php ECHO $nombre_cuenta?>" size="105" maxlength="200">
                 </p>
             </blockquote></td>
           </tr>
@@ -97,7 +97,7 @@ var f=document.form1;
                       <option>Valoracion</option>
                     </select>
                     <script language="JavaScript" type="text/JavaScript">
-var valor='<?ECHO $clasificacion;?>';
+var valor='<?php ECHO $clasificacion;?>';
         if(valor=="Nominal"){document.form1.txtClasificacion.options[0].selected = true;}
         if(valor=="Orden"){document.form1.txtClasificacion.options[1].selected = true;}
         if(valor=="Real"){document.form1.txtClasificacion.options[2].selected = true;}
@@ -112,7 +112,7 @@ var valor='<?ECHO $clasificacion;?>';
                         <option>Deudor</option>
                         <option>Acreedor</option>
                       </select>
-                      <script language="JavaScript"> Asigna_TSaldo('<?ECHO $tSaldo;?>');</script>
+                      <script language="JavaScript"> Asigna_TSaldo('<?php ECHO $tSaldo;?>');</script>
                 </span> </p>
             </blockquote></td>
           </tr>
@@ -133,4 +133,4 @@ var valor='<?ECHO $clasificacion;?>';
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

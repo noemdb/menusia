@@ -1,6 +1,6 @@
 <?php include ("../class/conect.php");  include ("../class/funciones.php"); $equipo=getenv("COMPUTERNAME");  $fecha_hoy=asigna_fecha_hoy();  
 if (!$_GET){$tipo_informe="";$linea="00000000";$codigo="";}else{$tipo_informe=$_GET["tipo_informe"];$linea=$_GET["linea"];$codigo=$_GET["codigo"];}
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT * FROM CON006 where (tipo_informe='$tipo_informe') and (linea='$linea')";  $res=pg_query($sql);$filas=pg_num_rows($res);
 $codigo_cuenta=""; $nombre_cuenta=""; 
 if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_c=$registro["codigo_cuenta"]; $nombre_c=$registro["nombre_cuenta"]; }
@@ -9,17 +9,17 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $codigo_c=$registro["codigo_cuen
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Modificar Cuenta Informes Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Modificar Cuenta Informes Contables)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_inc_cal_informes.php?linea=<?echo $linea?>&cod_informe=<?echo $tipo_informe?>'; }
+function llamar_anterior(){ document.location ='Det_inc_cal_informes.php?linea=<?php echo $linea?>&cod_informe=<?php echo $tipo_informe?>'; }
 
 function llamar_eliminar(){var murl; var r;
   murl="Esta seguro en Eliminar la Cuenta del Calculo del Informe ?"; r=confirm(murl);
   if(r==true){r=confirm("Esta Realmente seguro en Eliminar la Cuenta del Calculo del Informe ?");
-    if(r==true){murl="Delete_cal_inf_contab.php?tipo_informe=<?echo $tipo_informe?>&linea=<?echo $linea?>&codigo=<?echo $codigo?>"; document.location=murl;}}  else{url="Cancelado, no elimino";}
+    if(r==true){murl="Delete_cal_inf_contab.php?tipo_informe=<?php echo $tipo_informe?>&linea=<?php echo $linea?>&codigo=<?php echo $codigo?>"; document.location=murl;}}  else{url="Cancelado, no elimino";}
 }
 
 function revisar(){var f=document.form1; var Valido=true;
@@ -36,11 +36,11 @@ return true;}
 -->
 </style>
 </head>
-<?
+<?php 
 $nombre_cuenta="";  $codigo_cuenta=""; $status_c=""; $operacion="";
 $sql="SELECT con007.codigo_cuenta,con007.operacion,con007.status_c,con001.nombre_cuenta FROM con007 left join con001 on (con007.codigo_cuenta=con001.codigo_cuenta) WHERE con007.tipo_informe='$tipo_informe' and con007.linea='$linea' and con007.codigo_cuenta='$codigo'"; $res=pg_query($sql);
 if($registro=pg_fetch_array($res,0)){ $codigo_cuenta=$registro["codigo_cuenta"]; $nombre_cuenta=$registro["nombre_cuenta"]; $status_c=$registro["status_c"]; $operacion=$registro["operacion"]; }
-pg_close();
+pg_close($conn);
 ?>
 <body>
 <form name="form1" method="post" action="Update_cal_inf_contab.php" onSubmit="return revisar()">
@@ -55,9 +55,9 @@ pg_close();
 		   <td><table width="840">
 		      <tr>
 			    <td width="70"><span class="Estilo5">LINEA :</span></td>
-			    <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtlinea" type="text" id="txtlinea" size="10" maxlength="10"  value="<?echo $linea?>" readonly></span></td>
-			    <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtcod_cuenta" type="text" id="txtcod_cuenta" size="20" maxlength="30"  value="<?echo $codigo_c?>" readonly></span></td>
-			    <td width="510"><span class="Estilo5"> <input class="Estilo10" name="txtnom_cuenta" type="text" id="txtnom_cuenta" size="80" maxlength="100"  value="<?echo $nombre_c?>" readonly></span></td>
+			    <td width="100"><span class="Estilo5"><input class="Estilo10" name="txtlinea" type="text" id="txtlinea" size="10" maxlength="10"  value="<?php echo $linea?>" readonly></span></td>
+			    <td width="160"><span class="Estilo5"><input class="Estilo10" name="txtcod_cuenta" type="text" id="txtcod_cuenta" size="20" maxlength="30"  value="<?php echo $codigo_c?>" readonly></span></td>
+			    <td width="510"><span class="Estilo5"> <input class="Estilo10" name="txtnom_cuenta" type="text" id="txtnom_cuenta" size="80" maxlength="100"  value="<?php echo $nombre_c?>" readonly></span></td>
 		      </tr>
 		   </table></td>
         </tr>
@@ -66,8 +66,8 @@ pg_close();
           <td><table width="830" border="0">
               <tr>
                 <td width="80"><span class="Estilo5">CUENTA :</span> </td>
-				<td width="200"><span class="Estilo5"><input  class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" class="Estilo5"  value="<?echo $codigo_cuenta?>" size="30" maxlength="30" readonly ></span></td>
-                <td width="550"><span class="Estilo5"> <input  class="Estilo10" name="txtNombre_Cuenta" type="text" class="Estilo5" id="txtNombre_Cuenta"  value="<?echo $nombre_cuenta?>"  size="70" maxlength="200" readonly>   </span></td>
+				<td width="200"><span class="Estilo5"><input  class="Estilo10" name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" class="Estilo5"  value="<?php echo $codigo_cuenta?>" size="30" maxlength="30" readonly ></span></td>
+                <td width="550"><span class="Estilo5"> <input  class="Estilo10" name="txtNombre_Cuenta" type="text" class="Estilo5" id="txtNombre_Cuenta"  value="<?php echo $nombre_cuenta?>"  size="70" maxlength="200" readonly>   </span></td>
 			 </tr>
           </table></td>
         </tr>
@@ -84,10 +84,10 @@ pg_close();
            </table></td>
         </tr>	
 <script language="JavaScript" type="text/JavaScript"> 
-var mstatus_linea='<?echo $status_c;?>';  
+var mstatus_linea='<?php echo $status_c;?>';  
 if(mstatus_linea=="S"){document.form1.txtstatus_c.options[0].selected=true;} if(mstatus_linea=="D"){document.form1.txtstatus_c.options[1].selected=true;}
 if(mstatus_linea=="C"){document.form1.txtstatus_c.options[2].selected=true;} 
-var moperacion='<?echo $operacion;?>';
+var moperacion='<?php echo $operacion;?>';
 if(moperacion=="+"){document.form1.txtoperacion.options[0].selected=true;}else{document.form1.txtoperacion.options[1].selected=true;}
 
 </script>				
@@ -95,7 +95,7 @@ if(moperacion=="+"){document.form1.txtoperacion.options[0].selected=true;}else{d
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="20"><input name="txttipo_informe" type="hidden" id="txttipo_informe" value="<?echo $tipo_informe?>"></td>
+            <td width="20"><input name="txttipo_informe" type="hidden" id="txttipo_informe" value="<?php echo $tipo_informe?>"></td>
             <td width="80">&nbsp;</td>
             <td width="100" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="100" align="center"><input name="Atras" type="button" id="Atras" value="Atras" onClick="JavaScript:llamar_anterior()"></td>

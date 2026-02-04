@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){  $ced_rif='';  $sql="SELECT * FROM PRE099 ORDER BY ced_rif";} else {$ced_rif=$_GET["Gced_rif"];  $sql="Select * from PRE099 where ced_rif='$ced_rif' ";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -7,7 +7,7 @@ if (!$_GET){  $ced_rif='';  $sql="SELECT * FROM PRE099 ORDER BY ced_rif";} else 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Beneficiarios)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Beneficiarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $nombre="";$cedula="";$rif="";$nit="";$direccion="";$tipo_benef="";$campo_str1=""; $campo_str2=""; $nombre_grupob="";$res=pg_query($sql); $filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0);  $ced_rif=$registro["ced_rif"]; $nombre=$registro["nombre"];$cedula=$registro["cedula"];  $rif=$registro["rif"];$nit=$registro["nit"];$direccion=$registro["direccion"];$tipo_benef=$registro["tipo_benef"];
   $ced_rif_aut=$registro["ced_rif_autorizado"];$nombre_auto=$registro["nombre_autorizado"];   $ciudad=$registro["ciudad"];$municipio=$registro["municipio"];  $region=$registro["region"];$estado=$registro["estado"];   $pais=$registro["pais"];$telefono=$registro["telefono"];
@@ -37,8 +37,8 @@ $Ssql="Select * from ban022 where cod_grupob='$campo_str1'"; $resultado=pg_exec(
 ?>
 <script language="JavaScript" type="text/JavaScript">
 function chequea_estado(mform){ var cod_edo="00"; cod_edo=mform.txtestado.value;
-ajaxSenddoc('GET', 'cargamunicipio.php?municipio=<? echo $municipio;?>&cod_estado='+cod_edo, 'municipio', 'innerHTML');
-ajaxSenddoc('GET', 'cargaciudad.php?ciudad=<? echo $ciudad;?>&cod_estado='+cod_edo, 'ciudad', 'innerHTML');
+ajaxSenddoc('GET', 'cargamunicipio.php?municipio=<?php  echo $municipio;?>&cod_estado='+cod_edo, 'municipio', 'innerHTML');
+ajaxSenddoc('GET', 'cargaciudad.php?ciudad=<?php  echo $ciudad;?>&cod_estado='+cod_edo, 'ciudad', 'innerHTML');
 return true;}
 function revisar(){var f=document.form1;
     if(f.txtced_rif.value==""){alert("Cedula/Rif del beneficiario no puede estar Vacio"); f.txtced_rif.focus(); return false;}else{f.txtced_rif.value=f.txtced_rif.value.toUpperCase();}
@@ -59,8 +59,8 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
   <tr>
     <td width="92"><table width="92" height="555" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_beneficiarios.php?Gced_rif=<?echo $ced_rif?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_beneficiarios.php?Gced_rif=<?echo $ced_rif?>">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('Act_beneficiarios.php?Gced_rif=<?php echo $ced_rif?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Act_beneficiarios.php?Gced_rif=<?php echo $ced_rif?>">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -78,11 +78,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800" >
                 <tr>
                   <td width="85"><span class="Estilo5">C&Eacute;DULA/RIF :</span></td>
-                  <td width="346"><span class="Estilo5"><input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" value="<?echo $ced_rif?>" size="20" readonly maxlength="12" onKeypress="return stabular(event,this)">    </span></td>
+                  <td width="346"><span class="Estilo5"><input class="Estilo10" name="txtced_rif" type="text" id="txtced_rif" value="<?php echo $ced_rif?>" size="20" readonly maxlength="12" onKeypress="return stabular(event,this)">    </span></td>
 <script language="JavaScript" type="text/JavaScript"> function asig_tipo_benef(mvalor){var f=document.form1;  if(mvalor=="J"){document.form1.txttipo_benef.options[0].selected=true;}else{document.form1.txttipo_benef.options[1].selected=true;}} </script>
                   <td width="165"><span class="Estilo5">TIPO DE BENEFICIARIO :</span></td>
                   <td width="184"><span class="Estilo5"> <select  class="Estilo10" name="txttipo_benef" size="1" id="txttipo_benef" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" ><option>Juridico</option>  <option>Natural</option> </select> </span></td>
-<script language="JavaScript" type="text/JavaScript"> asig_tipo_benef('<?echo substr($tipo_benef,0,1);?>');</script>
+<script language="JavaScript" type="text/JavaScript"> asig_tipo_benef('<?php echo substr($tipo_benef,0,1);?>');</script>
                 </tr>
             </table></td>
           </tr>
@@ -90,7 +90,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="85"><span class="Estilo5">NOMBRE :</span></td>
-                  <td width="705"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre" value="<?echo $nombre?>" size="107" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
+                  <td width="705"><span class="Estilo5"><input class="Estilo10" name="txtnombre" type="text" id="txtnombre" value="<?php echo $nombre?>" size="107" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -98,11 +98,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="85"><span class="Estilo5">C&Eacute;DULA :</span></td>
-                  <td width="190"><span class="Estilo5"><input class="Estilo10" name="txtcedula" type="text" id="txtcedula" size="20" maxlength="9"  value="<?echo $cedula?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
+                  <td width="190"><span class="Estilo5"><input class="Estilo10" name="txtcedula" type="text" id="txtcedula" size="20" maxlength="9"  value="<?php echo $cedula?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
                   <td width="52"><span class="Estilo5">RIF :</span></td>
-                  <td width="207"><span class="Estilo5"><input class="Estilo10" name="txtrif" type="text" id="txtrif" size="20" maxlength="12"  value="<?echo $rif?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
+                  <td width="207"><span class="Estilo5"><input class="Estilo10" name="txtrif" type="text" id="txtrif" size="20" maxlength="12"  value="<?php echo $rif?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
                   <td width="57"><span class="Estilo5">NIT :</span></td>
-                  <td width="181"><span class="Estilo5"><input class="Estilo10" name="txtnit" type="text" id="txtnit" size="20" maxlength="12"  value="<?echo $nit?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
+                  <td width="181"><span class="Estilo5"><input class="Estilo10" name="txtnit" type="text" id="txtnit" size="20" maxlength="12"  value="<?php echo $nit?>" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -110,7 +110,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="85"><span class="Estilo5">DIRECCI&Oacute;N :</span></td>
-                  <td width="705"><textarea name="txtdireccion" cols="84" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdireccion" onKeypress="return stabular(event,this)"><?echo $direccion?></textarea></td>
+                  <td width="705"><textarea name="txtdireccion" cols="84" onFocus="encender(this)" onBlur="apagar(this)" class="headers" id="txtdireccion" onKeypress="return stabular(event,this)"><?php echo $direccion?></textarea></td>
                 </tr>
             </table></td>
           </tr>
@@ -119,13 +119,13 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                 <tr>
                   <td width="82"><span class="Estilo5">REGION :</span></td>
                   <td width="308"><span class="Estilo5"><div id="region"><select  class="Estilo10" name="txtregion" id="txtregion" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return stabular(event,this)" >
-                  <option><? echo $region;?></option> </div> </span></td>
-                  <script language="JavaScript" type="text/JavaScript">ajaxSenddoc('GET', 'cargaregiones.php?mregion=<? echo $region;?>', 'region', 'innerHTML'); </script>
+                  <option><?php  echo $region;?></option> </div> </span></td>
+                  <script language="JavaScript" type="text/JavaScript">ajaxSenddoc('GET', 'cargaregiones.php?mregion=<?php  echo $region;?>', 'region', 'innerHTML'); </script>
                   <td width="87"><span class="Estilo5">ESTADO :</span></td>
                   <td width="303"><span class="Estilo5"><div id="estado"><select  class="Estilo10" name="txtestado" id="txtestado" onFocus="encender(this)" onBlur="apagar(this)" onKeypress="return stabular(event,this)"  onchange="chequea_estado(this.form)">
-                  <option value="<? echo $cod_estado;?>"><? echo $estado;?></option>
+                  <option value="<?php  echo $cod_estado;?>"><?php  echo $estado;?></option>
                   </div></span></td>
-                  <script language="JavaScript" type="text/JavaScript">ajaxSenddoc('GET', 'cargaentidades.php?mestado=<? echo $estado;?>', 'estado', 'innerHTML'); </script>
+                  <script language="JavaScript" type="text/JavaScript">ajaxSenddoc('GET', 'cargaentidades.php?mestado=<?php  echo $estado;?>', 'estado', 'innerHTML'); </script>
                 </tr>
             </table></td>
           </tr>
@@ -134,12 +134,12 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                 <tr>
                   <td width="82"><span class="Estilo5">MUNICIPIO :</span></td>
                   <td width="308"><span class="Estilo5"><div id="municipio"><select  class="Estilo10" name="txtmunicipio" id="txtmunicipio" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >
-                  <option><? echo $municipio;?></option> </div></span></td>
-                  <script language="JavaScript" type="text/JavaScript">var cod_e='01'; cod_e=document.form1.txtestado.value; ajaxSenddoc('GET', 'cargamunicipio.php?municipio=<? echo $municipio;?>&cod_estado='+cod_e, 'municipio', 'innerHTML'); </script>
+                  <option><?php  echo $municipio;?></option> </div></span></td>
+                  <script language="JavaScript" type="text/JavaScript">var cod_e='01'; cod_e=document.form1.txtestado.value; ajaxSenddoc('GET', 'cargamunicipio.php?municipio=<?php  echo $municipio;?>&cod_estado='+cod_e, 'municipio', 'innerHTML'); </script>
                   <td width="87"><span class="Estilo5">CIUDAD :</span></td>
                   <td width="303"><span class="Estilo5"><div id="ciudad"><select  class="Estilo10" name="txtciudad" id="txtciudad" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >
-                  <option><? echo $ciudad;?></option> </div></span></td>
-                  <script language="JavaScript" type="text/JavaScript">var cod_e='01'; cod_e=document.form1.txtestado.value; ajaxSenddoc('GET', 'cargaciudad.php?ciudad=<? echo $ciudad;?>&cod_estado='+cod_e, 'ciudad', 'innerHTML'); </script>
+                  <option><?php  echo $ciudad;?></option> </div></span></td>
+                  <script language="JavaScript" type="text/JavaScript">var cod_e='01'; cod_e=document.form1.txtestado.value; ajaxSenddoc('GET', 'cargaciudad.php?ciudad=<?php  echo $ciudad;?>&cod_estado='+cod_e, 'ciudad', 'innerHTML'); </script>
 
                 </tr>
             </table></td>
@@ -148,7 +148,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="164"><span class="Estilo5">C&Eacute;DULA/RIF AUTORIZADO :</span></td>
-                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_aut" type="text" id="txtced_rif_aut" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $ced_rif_aut?>" size="20" maxlength="12">  </span></td>
+                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtced_rif_aut" type="text" id="txtced_rif_aut" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $ced_rif_aut?>" size="20" maxlength="12">  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -156,7 +156,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="164"><span class="Estilo5">NOMBRE DE AUTORIZADO:</span></td>
-                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtnomb_auto" type="text" id="txtnomb_auto" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $nombre_auto?>" size="95" maxlength="100">   </span></td>
+                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtnomb_auto" type="text" id="txtnomb_auto" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $nombre_auto?>" size="95" maxlength="100">   </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -166,11 +166,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="84"><span class="Estilo5">TELEFONOS:</span></td>
-                  <td width="204"><span class="Estilo5"><input class="Estilo10" name="txttelefono" type="text" id="txttelefono"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $telefono?>" size="25" maxlength="25">  </span></td>
+                  <td width="204"><span class="Estilo5"><input class="Estilo10" name="txttelefono" type="text" id="txttelefono"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $telefono?>" size="25" maxlength="25">  </span></td>
                   <td width="38"><span class="Estilo5">FAX :</span></td>
-                  <td width="162"><span class="Estilo5"><input class="Estilo10" name="txtfax" type="text" id="txtfax"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $fax?>" size="20" maxlength="20">   </span></td>
+                  <td width="162"><span class="Estilo5"><input class="Estilo10" name="txtfax" type="text" id="txtfax"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $fax?>" size="20" maxlength="20">   </span></td>
                   <td width="75"><span class="Estilo5">TLF. MOVIL:</span></td>
-                  <td width="209"><span class="Estilo5"><input class="Estilo10" name="txttlf_movil" type="text" id="txttlf_movil"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $tlf_movil?>" size="25" maxlength="25">  </span></td>
+                  <td width="209"><span class="Estilo5"><input class="Estilo10" name="txttlf_movil" type="text" id="txttlf_movil"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $tlf_movil?>" size="25" maxlength="25">  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -178,11 +178,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="95"><span class="Estilo5">COD. POSTAL :</span></td>
-                  <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal" type="text" id="txtcod_postal"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $cod_postal?>" size="20" maxlength="10">  </span></td>
+                  <td width="150"><span class="Estilo5"><input class="Estilo10" name="txtcod_postal" type="text" id="txtcod_postal"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $cod_postal?>" size="20" maxlength="10">  </span></td>
                   <td width="81"><span class="Estilo5">APARTADO :</span></td>
-                  <td width="162"><span class="Estilo5"><input class="Estilo10" name="txtaptd_postal" type="text" id="txtaptd_postal"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $aptd_postal?>" size="20" maxlength="10">  </span></td>
+                  <td width="162"><span class="Estilo5"><input class="Estilo10" name="txtaptd_postal" type="text" id="txtaptd_postal"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $aptd_postal?>" size="20" maxlength="10">  </span></td>
                   <td width="106"><span class="Estilo5">NRO. PASAPORTE:</span></td>
-                  <td width="178"><span class="Estilo5"><input class="Estilo10" name="txtpasaporte" type="text" id="txtpasaporte"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $pasaporte?>" size="20" maxlength="15">  </span></td>
+                  <td width="178"><span class="Estilo5"><input class="Estilo10" name="txtpasaporte" type="text" id="txtpasaporte"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $pasaporte?>" size="20" maxlength="15">  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -193,7 +193,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                   <td width="74"><span class="Estilo5">RESIDENTE :</span></td>
                   <td width="53"><span class="Estilo5"><span class="Estilo10"><select  class="Estilo10" name="txtresidente" size="1" id="txtresidente" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >
                     <option>SI</option> <option>NO</option>   </select>
-<script language="JavaScript" type="text/JavaScript"> asig_residente('<?echo $residente;?>');</script>
+<script language="JavaScript" type="text/JavaScript"> asig_residente('<?php echo $residente;?>');</script>
                   </span>
                   </span></td>
 <script language="JavaScript" type="text/JavaScript">function asig_naciocalidad(mvalor){var f=document.form1; if(mvalor=="VENEZOLANO"){document.form1.txtnacionalidad.options[0].selected=true;}else{document.form1.txtnacionalidad.options[1].selected=true;}}</script>
@@ -202,11 +202,11 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
                     <select  class="Estilo10" name="txtnacionalidad" size="1" id="txtnacionalidad" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >
                       <option>VENEZOLANO</option>   <option>EXTRANJERO</option>
                     </select>
-                  <script language="JavaScript" type="text/JavaScript"> asig_naciocalidad('<?echo $nacionalidad;?>');</script>
+                  <script language="JavaScript" type="text/JavaScript"> asig_naciocalidad('<?php echo $nacionalidad;?>');</script>
                   </span>
                   </span></td>
                   <td width="39"><span class="Estilo5">PAIS:</span></td>
-                  <td width="353"><span class="Estilo5"><input class="Estilo10" name="txtpais" type="text" id="txtpasaporte22"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $pais?>" size="53">  </span></td>
+                  <td width="353"><span class="Estilo5"><input class="Estilo10" name="txtpais" type="text" id="txtpasaporte22"  onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $pais?>" size="53">  </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -214,7 +214,7 @@ function stabular(e,obj) {tecla=(document.all) ? e.keyCode : e.which;   if(tecla
             <td><table width="800">
                 <tr>
                   <td width="164"><span class="Estilo5">REPRESENTANTE LEGAL:</span></td>
-                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtrep_legal" type="text" id="txtrep_legal" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $rep_legal?>" size="93" >    </span></td>
+                  <td width="624"><span class="Estilo5"><input class="Estilo10" name="txtrep_legal" type="text" id="txtrep_legal" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $rep_legal?>" size="93" >    </span></td>
                 </tr>
             </table></td>
           </tr>
@@ -235,7 +235,7 @@ function asig_tipo_clasif(mvalor){var f=document.form1;
                   <td width="572"><span class="Estilo5"> <select  class="Estilo10" name="txtclasificacion" size="1" id="txtclasificacion" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" >
                       <option>PROVEEDOR</option>  <option>CONTRATISTA</option> <option>MICROEMPRESAS</option>  <option>COLABORACIONES</option> <option>EMPLEADO</option> <option>PASANTES</option> <option>OTROS</option>
                     </select>
- <script language="JavaScript" type="text/JavaScript"> asig_tipo_clasif('<?echo $clasificacion;?>');</script>
+ <script language="JavaScript" type="text/JavaScript"> asig_tipo_clasif('<?php echo $clasificacion;?>');</script>
                     </span></td>
                 </tr>
             </table></td>
@@ -244,9 +244,9 @@ function asig_tipo_clasif(mvalor){var f=document.form1;
             <td><table width="800">
               <tr>
                 <td width="103"><span class="Estilo5">TIPO DE ORDEN:</span></td>
-                <td width="76"><span class="Estilo5"><input class="Estilo10" name="txttipo_orden" type="text" id="txttipo_orden" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?echo $tipo_orden?>" size="10" maxlength="4">  </span></td>
-                <td width="35"><input class="Estilo10" name="bttipo_orden" type="button" id="bttipo_orden" title="Abrir Catalogo Tipos de Orden" onclick="VentanaCentrada('../pagos/Cat_tipo_orden.php?criterio=','SIA','','750','500','true')" value="..." onKeypress="return stabular(event,this)"></td>
-                <td width="566"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden" value="<?echo $des_tipo_orden?>" size="85" readonly onKeypress="return stabular(event,this)">   </span></td>
+                <td width="76"><span class="Estilo5"><input class="Estilo10" name="txttipo_orden" type="text" id="txttipo_orden" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" value="<?php echo $tipo_orden?>" size="10" maxlength="4">  </span></td>
+                <td width="35"><input class="Estilo10" name="bttipo_orden" type="button" id="bttipo_orden" title="Abrir Catalogo Tipos de Orden" onclick="VentanaCentrada('../pagos/Cat_tipo_orden.php?criterio=','SIPAP','','750','500','true')" value="..." onKeypress="return stabular(event,this)"></td>
+                <td width="566"><span class="Estilo5"><input class="Estilo10" name="txtdes_tipo_orden" type="text" id="txtdes_tipo_orden" value="<?php echo $des_tipo_orden?>" size="85" readonly onKeypress="return stabular(event,this)">   </span></td>
               </tr>
             </table></td>
           </tr>
@@ -254,9 +254,9 @@ function asig_tipo_clasif(mvalor){var f=document.form1;
              <td><table width="800">
                <tr>
                  <td width="70"><span class="Estilo5">BANCO :</span></td>
-                 <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtgrupo_banco" type="text" id="txtgrupo_banco"  value="<?echo $campo_str1?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)" readonly onKeypress="return stabular(event,this)">   </span></td>
-				 <td width="50"><input class="Estilo10" name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('../bancos/Cat_grupo_banco.php?criterio=','SIA','','750','500','true')" value="..." onKeypress="return stabular(event,this)"></td>
-                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtnombre_grupob" type="text" id="txtnombre_grupob"  value="<?echo $nombre_grupob?>" size="100" maxlength="100" readonly onKeypress="return stabular(event,this)">  </span></td>
+                 <td width="80"><span class="Estilo5"> <input class="Estilo10" name="txtgrupo_banco" type="text" id="txtgrupo_banco"  value="<?php echo $campo_str1?>" size="4" maxlength="3" onFocus="encender(this)" onBlur="apagar(this)" readonly onKeypress="return stabular(event,this)">   </span></td>
+				 <td width="50"><input class="Estilo10" name="btgrupo_banco" type="button" id="btgrupo_banco" title="Abrir Catalogo Grupo de Banco" onclick="VentanaCentrada('../bancos/Cat_grupo_banco.php?criterio=','SIPAP','','750','500','true')" value="..." onKeypress="return stabular(event,this)"></td>
+                 <td width="650"><span class="Estilo5"><input class="Estilo10" name="txtnombre_grupob" type="text" id="txtnombre_grupob"  value="<?php echo $nombre_grupob?>" size="100" maxlength="100" readonly onKeypress="return stabular(event,this)">  </span></td>
                 </tr>
              </table></td>
            </tr>		   
@@ -264,7 +264,7 @@ function asig_tipo_clasif(mvalor){var f=document.form1;
              <td><table width="800">
                <tr>
 			     <td width="150"><span class="Estilo5">N&Uacute;MERO DE CUENTA :</span></td>
-                 <td width="300"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta"  value="<?echo $campo_str2?>" size="30" maxlength="30" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" > </span></td>
+                 <td width="300"><span class="Estilo5"> <input class="Estilo10" name="txtnro_cuenta" type="text" id="txtnro_cuenta"  value="<?php echo $campo_str2?>" size="30" maxlength="30" onFocus="encender(this)" onBlur="apagar(this)"  onKeypress="return stabular(event,this)" > </span></td>
                  <td width="350"><span class="Estilo5"></span></td>
                </tr>
              </table></td>

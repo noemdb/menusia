@@ -1,15 +1,15 @@
-<?include ("../../class/seguridad.inc");
+<?php include ("../../class/seguridad.inc");
 include ("../../class/conects.php");  include ("../../class/funciones.php");
 include ("../../class/configura.inc");
 $conn = pg_connect("host=".$host." port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <? } else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)){ ?> <script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script> <?php } else { $Nom_Emp=busca_conf(); }
  $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);$fecha_h=formato_ddmmaaaa($Fec_Fin_Ejer);$codigo_partida_iva="403-18-01-00-00";$codigo_contable="3-1-300-01-03";$tipo="";$vurl;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Reporte Relacion Orden de Pago / Asociacion Contable)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Reporte Relacion Orden de Pago / Asociacion Contable)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../../class/sia.css" type=text/css
@@ -94,12 +94,12 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
               <td width="264" align="center"><div align="left">FECHA ORDENES: </div></td>
               <td width="155" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
+                  <input name="txtFechad" type="text" id="txtFechad" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_d?>" size="12" maxlength="10" onChange="checkrefechad(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario1" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario1')"  /></span></div></td>
               <td width="352" align="center">
                 <div align="left"><span class="Estilo5">
-                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
+                  <input name="txtFechah" type="text" id="txtFechah" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $fecha_h?>" size="12" maxlength="10" onChange="checkrefechah(this.form)">
                   <img src="../../imagenes/img_cal.png" width="20" height="14" id="calendario2" style="cursor: pointer; border: 1px solid blue;" title="Seleccionar Fecha"
                 onMouseOver="this.style.background='blue';" onMouseOut="this.style.background=''"  onClick="javascript:showCal('Calendario2')"  /> </span></div></td>
             </tr>
@@ -114,7 +114,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
               <td width="266" height="26">
                 <div align="left">CODIGO PARTIDA IVA: </div></td>
               <td width="245"><span class="Estilo5">
-                <input name="txtcod_partida" type="text" id="txtcod_partida" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $codigo_partida_iva?>" size="30" maxlength="15" readonly>
+                <input name="txtcod_partida" type="text" id="txtcod_partida" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $codigo_partida_iva?>" size="30" maxlength="15" readonly>
               </span></td>
               <td width="64"><span class="Estilo5">
               </span></td>
@@ -134,7 +134,7 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
               <td width="269" height="26">
                 <div align="left">CODIGO CONTABLE ASOCIADO: </div></td>
               <td width="228"><span class="Estilo5">
-                <input name="txtcod_contable" type="text" id="txtcod_contable" onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $codigo_contable?>" size="30" maxlength="15" readonly>
+                <input name="txtcod_contable" type="text" id="txtcod_contable" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $codigo_contable?>" size="30" maxlength="15" readonly>
               </span></td>
               <td width="9"><span class="Estilo5"> </span></td>
               <td width="77"><span class="Estilo5">
@@ -196,4 +196,4 @@ function Llama_Menu_Rpt(murl){var url;url="../"+murl;LlamarURL(url);}
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

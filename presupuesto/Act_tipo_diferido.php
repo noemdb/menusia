@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="05"; $opcion="01-0000037"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 $sql="Select campo502,campo503,campo504,campo526,campo572 from SIA005 where campo501='05'";    $resultado=pg_query($sql);  $campo572="";
 if ($registro=pg_fetch_array($resultado,0)){ $formato_presup=$registro["campo504"];$formato_cat=$registro["campo526"]; $campo502=$registro["campo502"]; $campo572=$registro["campo572"]; }
 if($campo572==""){$campo572="0001";}
@@ -14,7 +14,7 @@ if($campo572==""){$campo572="0001";}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Actualiza Tipos de Diferidos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Actualiza Tipos de Diferidos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -56,21 +56,21 @@ function LlamarURL(url){  document.location = url; }
   <tr>
     <td width="92"><table width="92" height="350" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
      <tr>
-	 <?if ($Mcamino{0}=="S"){?>
+	 <?php if ($Mcamino{0}=="S"){?>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_tipo_diferido.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_tipo_diferido.php">Incluir</A></td>
         </tr>
-		<?} if ($Mcamino{1}=="S"){?>
+		<?php } if ($Mcamino{1}=="S"){?>
           <tr>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="Llamar_Ventana('Mod_tipo_diferido.php?Gtipo_diferido=');";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Ventana('Mod_tipo_diferido.php?Gtipo_diferido=');">Modificar</A></td>
         </tr>
-		<?} if ($Mcamino{6}=="S"){?>
+		<?php } if ($Mcamino{6}=="S"){?>
      <tr>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="Llamar_Ventana('Elim_tipo_diferido.php?Gtipo_diferido=');";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Elim_tipo_diferido.php?Gtipo_diferido=');">Eliminar</A></td>
         </tr>
-		<?} ?>
+		<?php } ?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"onClick="javascript:LlamarURL('menu.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu </A></td>
@@ -81,11 +81,11 @@ function LlamarURL(url){  document.location = url; }
     <td width="869">       <font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b>
           </b></font>
       <div id="Layer1" style="position:absolute; width:842px; height:348px; z-index:1; top: 67px; left: 132px;">
-       <? $criterio=""; $txt_criterio=""; $pagina=1; $inicio=1; $final=1; if ($_GET){$orden=$_GET["orden"]; $pagina=$_GET["pagina"];}else{$orden=""; $pagina="";} 
+       <?php  $criterio=""; $txt_criterio=""; $pagina=1; $inicio=1; $final=1; if ($_GET){$orden=$_GET["orden"]; $pagina=$_GET["pagina"];}else{$orden=""; $pagina="";} 
         $sSQL="Select * from pre024 WHERE tipo_diferido='$campo572'";  $resultado=pg_exec($conn,$sSQL);  $filas=pg_numrows($resultado);
         if ($filas==0){ $resultado=pg_exec($conn,"SELECT ACTUALIZA_PRE024(1,'$campo572','MODIFICACIONES','MODI')");$error=pg_errormessage($conn);  $error=substr($error,0,91);
-          if (!$resultado){?> <script language="JavaScript"> muestra('<? echo $error; ?>'); </script> <? }
-          else{ $tipoa="A".substr($campo572,1,3); $resultado=pg_exec($conn,"SELECT ACTUALIZA_PRE024(1,'$tipoa','MODIFICACIONES (ANULADO) ','MODI')");$error=pg_errormessage($conn);  $error=substr($error,0,91);if (!$resultado){?>   <script language="JavaScript"> muestra('<? echo $error; ?>'); </script> <? }
+          if (!$resultado){?> <script language="JavaScript"> muestra('<?php  echo $error; ?>'); </script> <?php }
+          else{ $tipoa="A".substr($campo572,1,3); $resultado=pg_exec($conn,"SELECT ACTUALIZA_PRE024(1,'$tipoa','MODIFICACIONES (ANULADO) ','MODI')");$error=pg_errormessage($conn);  $error=substr($error,0,91);if (!$resultado){?>   <script language="JavaScript"> muestra('<?php  echo $error; ?>'); </script> <?php }
           }
         }
         $sql="SELECT * FROM PRE024"; $res=pg_query($sql);    $numeroRegistros=pg_num_rows($res);
@@ -104,16 +104,16 @@ function LlamarURL(url){  document.location = url; }
                 while($registro=pg_fetch_array($res)){ $linea=$linea+1;
                 if  ($linea>$limitInf+$tamPag){$Salir=true;} if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:enviar('<? echo $registro["tipo_diferido"]; ?>');" >
-   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_diferido"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre_tipo_dife"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre_abrev_dife"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:enviar('<?php  echo $registro["tipo_diferido"]; ?>');" >
+   <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_diferido"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre_tipo_dife"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre_abrev_dife"]; ?></b></font></td>
      </tr>
-<?}}echo "</table>";}?>
+<?php } }echo "</table>";}?>
 <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
                 echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=".($pagina-1)."&orden=".$orden."'>";
                 echo "<font face='verdana' size='-2'>anterior</font>";
                 echo "</a>&nbsp;"; }
@@ -135,4 +135,4 @@ function LlamarURL(url){  document.location = url; }
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

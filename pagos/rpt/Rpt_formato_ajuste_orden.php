@@ -1,10 +1,10 @@
-<?include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS;  error_reporting(E_ALL ^ E_NOTICE); 
+<?php include ("../../class/conect.php");  include("../../class/fun_fechas.php"); include("../../class/fun_numeros.php"); include ("../../class/configura.inc"); $php_os=PHP_OS;  error_reporting(E_ALL ^ E_NOTICE); 
 
 if (!$_GET){ $referencia_ajuste=''; $tipo_ajuste=''; } else{$referencia_ajuste=$_GET["txtreferencia_aju"]; $tipo_ajuste=$_GET["txttipo_ajuste"]; $fecha=$_GET["txtfecha"]; }
    $sql="Select * from AJUSTE_ORD where referencia_aju_ord='$referencia_ajuste' and tipo_aju_ord='$tipo_ajuste'";
 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }  else { $Nom_Emp=busca_conf(); }
 
 $tipo_pago="0000"; $referencia_pago="00000000"; $sfecha=""; $fecha=""; $nombre_tipo_aju=""; $nombre_refiere_a="";
 $tipo_ajuste=""; $nro_orden="";  $tipo_causado=""; $fecha=""; $concepto=""; $nombre_abrev_caus=""; $nombre_abrev_aju=""; $inf_usuario=""; $total_ajuste=0; $anulado="N"; $fecha_anu=""; $descripcion="";
@@ -130,7 +130,7 @@ class PDF extends FPDF{
 		$this->SetFillColor(255,0,0);
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
-		$this->Cell(100,3,'SIA ORDENAMIENTO DE PAGO',0,0,'L');
+		$this->Cell(100,3,'SIPAP ORDENAMIENTO DE PAGO',0,0,'L');
 		$this->Cell(100,3,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
 	}
 }  
@@ -152,5 +152,5 @@ class PDF extends FPDF{
 	$total_comp=$total_comp+$registro["monto"];
   }	
  $pdf->Output();
- pg_close();
+ pg_close($conn);
 ?> 

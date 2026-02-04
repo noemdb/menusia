@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); 
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Detalles Planillas de Retencion)</title>
+<title>SIPAP CONTROL BANCARIO (Detalles Planillas de Retencion)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +40,7 @@ $sql="SELECT * FROM PAG016  where ".$criterio." order by nro_factura"; $res=pg_q
            <td width="50" align="right" bgcolor="#99CCFF"><strong>% Retenc.</strong></td>
            <td width="100" align="right" bgcolor="#99CCFF"><strong>Retenido</strong></td>
          </tr>
-         <? $total=0; $subtotal=0; $total_ret=0;
+         <?php  $total=0; $subtotal=0; $total_ret=0;
 while($registro=pg_fetch_array($res))
 {  $sfecha=$registro["fecha_factura"]; $fecha = substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
 $monto=$registro["monto_factura"]; $total=$total+$monto; $monto=formato_monto($monto);
@@ -52,18 +52,18 @@ if(($tipo_mov=='000')and($cod_banco=='0000')and($referencia=='00000000')){ $mont
 $monto_r=formato_monto($montor); $montoor=formato_monto($montoor);
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="150" align="left"><? echo $registro["nro_factura"]; ?></td>
-           <td width="80" align="left"><? echo $fecha; ?></td>
-           <td width="170" align="left"><? echo $registro["nro_con_factura"]; ?></td>
-           <td width="100" align="right"><? echo $montos; ?></td>
-           <td width="60" align="right"><? echo $tasa; ?></td>
-           <td width="100" align="right"><? echo $montoo; ?></td>
-           <td width="100" align="right"><? echo $monto; ?></td>
-		   <td width="100" align="right"><? echo $montoor; ?></td>
-           <td width="50" align="right"><? echo $tasa_ret; ?></td>
-           <td width="100" align="right"><? echo $monto_r; ?></td>
+           <td width="150" align="left"><?php  echo $registro["nro_factura"]; ?></td>
+           <td width="80" align="left"><?php  echo $fecha; ?></td>
+           <td width="170" align="left"><?php  echo $registro["nro_con_factura"]; ?></td>
+           <td width="100" align="right"><?php  echo $montos; ?></td>
+           <td width="60" align="right"><?php  echo $tasa; ?></td>
+           <td width="100" align="right"><?php  echo $montoo; ?></td>
+           <td width="100" align="right"><?php  echo $monto; ?></td>
+		   <td width="100" align="right"><?php  echo $montoor; ?></td>
+           <td width="50" align="right"><?php  echo $tasa_ret; ?></td>
+           <td width="100" align="right"><?php  echo $monto_r; ?></td>
          </tr>
-         <?}
+         <?php }
  $tiva=$total-$subtotal; $total=formato_monto($total); $subtotal=formato_monto($subtotal); $tiva=formato_monto($tiva);  $total_ret=formato_monto($total_ret);
 ?>
        </table></td>
@@ -79,7 +79,7 @@ $monto_r=formato_monto($montor); $montoor=formato_monto($montoor);
          <td width="120"><span class="Estilo5">TOTAL RETENCION :</span></td>
          <td width="160"><table width="151" border="1" cellspacing="0" cellpadding="0">
            <tr>
-             <td align="right" class="Estilo5"><? echo $total_ret; ?></td>
+             <td align="right" class="Estilo5"><?php  echo $total_ret; ?></td>
            </tr>
          </table></td>
        </tr>
@@ -89,4 +89,4 @@ $monto_r=formato_monto($montor); $montoor=formato_monto($montoor);
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

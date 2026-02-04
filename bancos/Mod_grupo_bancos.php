@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 if (!$_GET){$cod_grupob=''; $sql="SELECT * FROM ban022 ORDER BY cod_grupob";} else{$cod_grupob=$_GET["Gcod_grupob"]; $sql="Select * from ban022 where cod_grupob='$cod_grupob'";}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -7,7 +7,7 @@ if (!$_GET){$cod_grupob=''; $sql="SELECT * FROM ban022 ORDER BY cod_grupob";} el
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Grupos de Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Grupos de Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -30,7 +30,7 @@ return true;}
 </script>
 
 </head>
-<?
+<?php 
 $des_cod_grupob="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if($filas>=1){$registro=pg_fetch_array($res,0); $cod_grupob=$registro["cod_grupob"]; $nombre_grupob=$registro["nombre_grupob"];}
 ?>
@@ -63,7 +63,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_grupob=$registro["cod_grupo
                   <td><table width="850" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="180"><span class="Estilo5">C&Oacute;DIGO DE GRUPO :</span></td>
-                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_grupo" type="text"  id="txtcodigo_grupo"  value="<?echo $cod_grupob?>"  size="5" maxlength="3" readonly>
+                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtcodigo_grupo" type="text"  id="txtcodigo_grupo"  value="<?php echo $cod_grupob?>"  size="5" maxlength="3" readonly>
                       </span></td>
                     </tr>
                   </table></td>
@@ -73,7 +73,7 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_grupob=$registro["cod_grupo
                   <td><table width="850" border="0" cellpadding="0" cellspacing="0" dwcopytype="CopyTableColumn">
                     <tr>
                       <td width="180"><span class="Estilo5">DENOMINACI&Oacute;N DEL GRUPO : </span></td>
-                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text"  id="txtdenominacion"  onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="150" value="<?echo $nombre_grupob?>" >
+                      <td width="670"><span class="Estilo5"><input class="Estilo10" name="txtdenominacion" type="text"  id="txtdenominacion"  onFocus="encender(this)" onBlur="apagar(this)" size="100" maxlength="150" value="<?php echo $nombre_grupob?>" >
                       </span></td>
                     </tr>
                   </table></td>
@@ -98,4 +98,4 @@ if($filas>=1){$registro=pg_fetch_array($res,0); $cod_grupob=$registro["cod_grupo
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

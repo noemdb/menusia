@@ -1,5 +1,5 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE); include ("../class/ventana.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE); include ("../class/ventana.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <script language="JavaScript">
 function Llamar_cat(){var murl;
@@ -17,12 +17,12 @@ function cerrar_catalogo(mcuenta,mnombre){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Catalogo de Cuentas Dolares)</title>
+<title>SIPAP CONTROL BANCARIO (Catalogo de Cuentas Dolares)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head><body>
-<?      $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $criterio="where (cargable='C')"; $txt_criterio="";
+<?php       $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; $criterio="where (cargable='C')"; $txt_criterio="";
         if ($_GET){if ($_GET["criterio"]!=""){$txt_criterio=$_GET["criterio"];$txt_criterio=strtoupper ($txt_criterio);
         $criterio=" where (codigo_cuenta like '%" . $txt_criterio . "%' or descripcion_cuenta like '%" . $txt_criterio . "%') And (Cargable='C')";
         }}$sql="SELECT * FROM BAN043 ".$criterio; $res=pg_query($sql); $numeroRegistros=pg_num_rows($res);
@@ -40,16 +40,16 @@ function cerrar_catalogo(mcuenta,mnombre){
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}
                 if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<? echo $registro["codigo_cuenta"]?>','<? echo $registro["descripcion_cuenta"]; ?>')" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["codigo_cuenta"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["descripcion_cuenta"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:cerrar_catalogo('<?php  echo $registro["codigo_cuenta"]?>','<?php  echo $registro["descripcion_cuenta"]; ?>')" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["codigo_cuenta"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["descripcion_cuenta"]; ?></b></font></td>
   </tr>
-<?}} echo "</table>"; }
+<?php } } echo "</table>"; }
 ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
+<?php       echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
         echo "<font face='verdana' size='-2'>Principio</font>";
         echo "</a>&nbsp;";
         if($pagina>1){
@@ -77,4 +77,4 @@ function cerrar_catalogo(mcuenta,mnombre){
 </form>
 </body>
 </html>
-<?  pg_close();?>
+<?php   pg_close($conn);?>

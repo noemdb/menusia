@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$cod_aplicacion='';} else {$cod_aplicacion=$_GET["Gaplicacion"];}?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">  
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Aplicaciones)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Aplicaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>
@@ -29,7 +29,7 @@ document.form1.submit;
 return true;}
 </script>
 </head>
-<?
+<?php 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $den_aplicacion="";$sql="Select * from PRE025 WHERE cod_aplicacion='$cod_aplicacion'";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $cod_aplicacion=$registro["cod_aplicacion"];  $den_aplicacion=$registro["des_aplicacion"];}
@@ -71,7 +71,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_aplicacion=$registro["cod_aplicacio
                 <td><table width="800" border="0">
                   <tr>
                     <td width="148"><span class="Estilo5">C&Oacute;DIGO APLICACI&Oacute;N :</span></td>
-                    <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtCodigo_Aplicacion" type="text" id="txtCodigo_Aplicacion" title="Registre el Codigo de la Aplicacion" value="<?echo $cod_aplicacion?>" size="10" maxlength="1"  readonly>  </span></td>
+                    <td width="650"><span class="Estilo5"> <input class="Estilo10" name="txtCodigo_Aplicacion" type="text" id="txtCodigo_Aplicacion" title="Registre el Codigo de la Aplicacion" value="<?php echo $cod_aplicacion?>" size="10" maxlength="1"  readonly>  </span></td>
                   </tr>
                 </table></td>
               </tr>
@@ -83,7 +83,7 @@ if ($registro=pg_fetch_array($res,0)){  $cod_aplicacion=$registro["cod_aplicacio
                   <table width="816" border="0">
                     <tr>
                       <td width="148"><span class="Estilo5">DENOMINACI&Oacute;N :</span></td>
-                      <td width="666"><input class="Estilo10" name="txtNombre_Aplicacion" type="text" id="txtNombre_Aplicacion" title="Registre la denominacion de la Aplicacion"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $den_aplicacion?>" size="100" maxlength="200"></td>
+                      <td width="666"><input class="Estilo10" name="txtNombre_Aplicacion" type="text" id="txtNombre_Aplicacion" title="Registre la denominacion de la Aplicacion"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $den_aplicacion?>" size="100" maxlength="200"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -119,4 +119,4 @@ if ($registro=pg_fetch_array($res,0)){  $cod_aplicacion=$registro["cod_aplicacio
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

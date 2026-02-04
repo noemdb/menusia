@@ -1,12 +1,12 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$codigo_mov='';}else{$codigo_mov=$_GET["codigo_mov"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Detalles Codigos Cheques permanente)</title>
+<title>SIPAP CONTROL BANCARIO (Detalles Codigos Cheques permanente)</title>
 
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
@@ -34,26 +34,26 @@ $sql="SELECT * FROM CODIGOS_PRE026 where codigo_mov='$codigo_mov' order by cod_p
            <td width="120" align="left" bgcolor="#99CCFF" ><strong>Tipo Imputacion</strong></td>           
            <td width="110" align="left" bgcolor="#99CCFF" ><strong>Ref. Credito </strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]); $monto_presup=formato_monto($registro["monto_presup"]);
   $monto_credito=formato_monto($registro["monto_credito"]);   $amort_anticipo=formato_monto($registro["amort_anticipo"]); 
   $total=$total+$registro["monto"];  $referencia_comp=$registro["referencia_comp"]; $tipo_compromiso=$registro["tipo_compromiso"];
   $tipo_imput_presu=$registro["tipo_imput_presu"];  $ref_imput_presu=$registro["ref_imput_presu"];
   if($tipo_imput_presu=="P"){$tipo_imput_presu="PRESUPUESTO";}else{$tipo_imput_presu="CRED. ADICIONAL";}
 ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<? echo $codigo_mov; ?>','<? echo $registro["cod_presup"]; ?>','<? echo $registro["fuente_financ"]; ?>','<? echo $registro["ref_imput_presu"]; ?>','<? echo $registro["referencia_comp"]; ?>','<? echo $registro["tipo_compromiso"]; ?>');">
-           <td width="190" align="left"><? echo $registro["cod_presup"]; ?></td>
-           <td width="40" align="left"><? echo $registro["fuente_financ"]; ?></td>
-		   <td width="110" align="right"><? echo $monto_presup; ?></td>
-		   <td width="110" align="right"><? echo $amort_anticipo; ?></td>
-		   <td width="110" align="right"><? echo $monto; ?></td>		   
-           <td width="500" align="left"><? echo $registro["denominacion"]; ?></td>
-           <td width="100" align="left"><? echo $registro["referencia_comp"]; ?></td>
-           <td width="60" align="left"><? echo $registro["tipo_compromiso"]; ?></td>
-           <td width="120" align="left"><? echo $tipo_imput_presu; ?></td>
-           <td width="110" align="left"><? echo $ref_imput_presu; ?></td>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama_Modificar('<?php  echo $codigo_mov; ?>','<?php  echo $registro["cod_presup"]; ?>','<?php  echo $registro["fuente_financ"]; ?>','<?php  echo $registro["ref_imput_presu"]; ?>','<?php  echo $registro["referencia_comp"]; ?>','<?php  echo $registro["tipo_compromiso"]; ?>');">
+           <td width="190" align="left"><?php  echo $registro["cod_presup"]; ?></td>
+           <td width="40" align="left"><?php  echo $registro["fuente_financ"]; ?></td>
+		   <td width="110" align="right"><?php  echo $monto_presup; ?></td>
+		   <td width="110" align="right"><?php  echo $amort_anticipo; ?></td>
+		   <td width="110" align="right"><?php  echo $monto; ?></td>		   
+           <td width="500" align="left"><?php  echo $registro["denominacion"]; ?></td>
+           <td width="100" align="left"><?php  echo $registro["referencia_comp"]; ?></td>
+           <td width="60" align="left"><?php  echo $registro["tipo_compromiso"]; ?></td>
+           <td width="120" align="left"><?php  echo $tipo_imput_presu; ?></td>
+           <td width="110" align="left"><?php  echo $ref_imput_presu; ?></td>
          </tr>
-         <?} $total=formato_monto($total);?>
+         <?php } $total=formato_monto($total);?>
        </table></td>
    </tr>
    <tr>
@@ -65,7 +65,7 @@ while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);
          <td width="530">&nbsp;</td>
          <td width="150" align="center"><span class="Estilo5">TOTAL ABONO :</span></td>
          <td><table width="125" border="1" cellspacing="0" cellpadding="0">
-           <tr><td width="123" align="right" class="Estilo5"><? echo $total; ?></td></tr>
+           <tr><td width="123" align="right" class="Estilo5"><?php  echo $total; ?></td></tr>
          </table></td>
        </tr>
      </table></td>
@@ -74,4 +74,4 @@ while($registro=pg_fetch_array($res)){ $monto=formato_monto($registro["monto"]);
  <p>&nbsp;</p>
 </body>
 </html>
-<? pg_close(); ?>
+<?php  pg_close($conn); ?>

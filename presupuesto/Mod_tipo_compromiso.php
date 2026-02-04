@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){$tipo_comp='';} else {$tipo_comp = $_GET["Gtipo_comp"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -6,7 +6,7 @@ if (!$_GET){$tipo_comp='';} else {$tipo_comp = $_GET["Gtipo_comp"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Tipos de Compromiso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language=JavaScript src="../class/sia.js" type="text/javascript"></script>
@@ -21,18 +21,18 @@ MM_reloadPage(true);
 <script language="JavaScript" type="text/JavaScript">
 function revisar(){
 var f=document.form1;
-    if(f.txttipo_comp.value==""){alert("Código de Documento Compromiso no puede estar Vacio");return false;}
+    if(f.txttipo_comp.value==""){alert("Cï¿½digo de Documento Compromiso no puede estar Vacio");return false;}
         if(f.txttipo_comp.value.charAt(0)=='A'){alert("Documento de Compromiso no valido");return false;}
-    if(f.txtdes_tipo_comp.value==""){alert("denominación del Tipo Compromiso no puede estar Vacia");return false; }
+    if(f.txtdes_tipo_comp.value==""){alert("denominaciï¿½n del Tipo Compromiso no puede estar Vacia");return false; }
        else{f.txtdes_tipo_comp.value=f.txtdes_tipo_comp.value.toUpperCase();}
     if(f.txttipo_comp.value.length==6){f.txttipo_comp.value=f.txttipo_comp.value.toUpperCase();}
-       else{alert("Longitud Código Tipo de Compromiso Invalida");return false;}
+       else{alert("Longitud Cï¿½digo Tipo de Compromiso Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
 </style>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $sql="Select * from pre016 where tipo_comp='$tipo_comp'";$res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){  $des_tipo_comp=$registro["des_tipo_comp"]; $cod_contable=$registro["cod_contable"]; 
@@ -81,7 +81,7 @@ function asig_iunico(mvalor){var f=document.form1;
                 <td><table width="800">
                   <tr>
                     <td width="197"><span class="Estilo5">C&Oacute;DIGO TIPO DE COMPROMISO :</span></td>
-                    <td width="591"><span class="Estilo5"><input name="txttipo_comp" type="text" id="txttipo_comp" readonly  value="<?echo $tipo_comp?>" size="12" maxlength="6">
+                    <td width="591"><span class="Estilo5"><input name="txttipo_comp" type="text" id="txttipo_comp" readonly  value="<?php echo $tipo_comp?>" size="12" maxlength="6">
                     </span></td>
                   </tr>
                 </table></td>
@@ -93,7 +93,7 @@ function asig_iunico(mvalor){var f=document.form1;
                 <td><table width="800">
                   <tr>
                     <td width="226"><span class="Estilo5">DENOMINACI&Oacute;N TIPO  COMPROMISO :</span></td>
-                    <td width="562"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" title="Registre el c&oacute;digo del Tipo de compromiso" onFocus="encender(this); " onBlur="apagar(this);" onChange="chequea_tipo(this.form);" value="<?echo $des_tipo_comp?>" size="80" maxlength="100">
+                    <td width="562"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" title="Registre el c&oacute;digo del Tipo de compromiso" onFocus="encender(this); " onBlur="apagar(this);" onChange="chequea_tipo(this.form);" value="<?php echo $des_tipo_comp?>" size="80" maxlength="100">
                     </span></td>
                   </tr>
                 </table></td>
@@ -105,10 +105,10 @@ function asig_iunico(mvalor){var f=document.form1;
                 <td><table width="800">
                   <tr>
                     <td width="160"><span class="Estilo5">C&Oacute;DIGO PARTIDA IVA:</span></td>
-                    <td width="280"><span class="Estilo5"><input name="txtcod_part_iva" type="text" id="txttipo_comp3" title="Registre el c&oacute;digo del Tipo de compromiso" onFocus="encender(this); " onBlur="apagar(this);" onChange="chequea_tipo(this.form);" value="<?echo $cod_part_iva?>" size="30" maxlength="24"></span></td>
+                    <td width="280"><span class="Estilo5"><input name="txtcod_part_iva" type="text" id="txttipo_comp3" title="Registre el c&oacute;digo del Tipo de compromiso" onFocus="encender(this); " onBlur="apagar(this);" onChange="chequea_tipo(this.form);" value="<?php echo $cod_part_iva?>" size="30" maxlength="24"></span></td>
 					<td width="150"><span class="Estilo5">C&Oacute;DIGO CONTABLES :</span></td>
-					<td width="160"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="25" maxlength="30" value="<?echo $cod_contable?>" onFocus="encender(this); " onBlur="apagar(this);">   </span></td>
-                    <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIA','','750','500','true')" value="..."></td>
+					<td width="160"><span class="Estilo5"><input name="txtCodigo_Cuenta" type="text" id="txtCodigo_Cuenta" size="25" maxlength="30" value="<?php echo $cod_contable?>" onFocus="encender(this); " onBlur="apagar(this);">   </span></td>
+                    <td width="40"><input name="btcuentas" type="button" id="btcuentas" title="Abrir Catalogo C&oacute;digo de Cuentas"  onclick="VentanaCentrada('../contabilidad/Cat_cuentas_cargables.php?criterio=','SIPAP','','750','500','true')" value="..."></td>
                      <td width="5"><input name="txtNombre_Cuenta" type="hidden" id="txtNombre_Cuenta"  ></td>
 				  </tr>
                 </table></td>
@@ -122,12 +122,12 @@ function asig_iunico(mvalor){var f=document.form1;
                     <td width="141"><span class="Estilo5">TIPO DE GASTO :</span> </td>
                     <td width="276"><span class="Estilo5"><select name="txtTipo_Gasto" size="1" id="txtTipo_Gasto" onFocus="encender(this)" onBlur="apagar(this)">
                         <option selected>CORRIENTE</option> <option>INVERSION</option>  </select> </span></td>
-                        <script language="JavaScript" type="text/JavaScript"> asig_tgasto('<?echo $func_inv;?>');</script>                    
+                        <script language="JavaScript" type="text/JavaScript"> asig_tgasto('<?php echo $func_inv;?>');</script>                    
                     <td width="147" class="Estilo5">PARTIDA DE IVA FIJA : </td>
                     <td width="266" class="Estilo5">
                       <select name="txtc_imp_unico" size="1" id="txtc_imp_unico" onFocus="encender(this)" onBlur="apagar(this)">
                         <option>SI</option> <option>NO</option> </select> </span></td>
-                    <script language="JavaScript" type="text/JavaScript"> asig_iunico('<?echo $c_imp_unico;?>');</script>
+                    <script language="JavaScript" type="text/JavaScript"> asig_iunico('<?php echo $c_imp_unico;?>');</script>
                   </tr>
                 </table></td>
               </tr>

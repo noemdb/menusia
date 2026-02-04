@@ -1,6 +1,6 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$cod_ciudad='';}else {$cod_ciudad=$_GET["Gcod_ciudad"];}
 ?>
 
@@ -8,7 +8,7 @@ if (!$_GET){$cod_ciudad='';}else {$cod_ciudad=$_GET["Gcod_ciudad"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Ciudades)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Ciudades)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css
@@ -29,11 +29,11 @@ function LlamarURL(url){  document.location = url; }
 function revisar(){
 var f=document.form1;
 var Valido;
-    if(f.txtCodigo_Ciudad.value==""){alert("Código del Ciudad no puede estar Vacio");return false;}
+    if(f.txtCodigo_Ciudad.value==""){alert("Cï¿½digo del Ciudad no puede estar Vacio");return false;}
     if(f.txtNombre_Ciudad.value==""){alert("Nombre de la Ciudad no puede estar Vacia"); return false; }
        else{f.txtNombre_Ciudad.value=f.txtNombre_Ciudad.value.toUpperCase();}
     if(f.txtCodigo_Ciudad.value.length==4){f.txtCodigo_Ciudad.value=f.txtCodigo_Ciudad.value.toUpperCase();}
-       else{alert("Longitud Código de Ciudad Invalida");return false;}
+       else{alert("Longitud Cï¿½digo de Ciudad Invalida");return false;}
 document.form1.submit;
 return true;}
 </script>
@@ -42,7 +42,7 @@ return true;}
 .Estilo5 {font-size: 12px}
 -->
 </style>
-<?
+<?php 
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
 $den_ciudad="";$sql="Select cod_ciudad,nombre_ciudad from PRE094 where cod_ciudad='$cod_ciudad'";
 $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$registro["cod_ciudad"];  $den_ciudad=$registro["nombre_ciudad"];}
@@ -83,7 +83,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
                   <tr>
                     <td width="96"><span class="Estilo5">C&Oacute;DIGO :</span></td>
                     <td width="720"><span class="Estilo5">
-                      <input name="txtCodigo_Ciudad" type="text" id="txtCodigo_Ciudad" title="Registre el C&oacute;digo de la Ciudad" size="10" maxlength="4"  readonly class="Estilo5" value="<?ECHO $cod_ciudad?>">
+                      <input name="txtCodigo_Ciudad" type="text" id="txtCodigo_Ciudad" title="Registre el C&oacute;digo de la Ciudad" size="10" maxlength="4"  readonly class="Estilo5" value="<?php ECHO $cod_ciudad?>">
                     </span></td>
                   </tr>
                 </table></td>
@@ -96,7 +96,7 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
                   <table width="816" border="0">
                     <tr>
                       <td width="96"><span class="Estilo5">NOMBRE :</span></td>
-                      <td width="720"><input name="txtNombre_Ciudad" type="text" id="txtNombre_Ciudad" title="Registre el Nombre de la Ciudad" size="80" maxlength="200" value="<?ECHO $den_ciudad?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"></td>
+                      <td width="720"><input name="txtNombre_Ciudad" type="text" id="txtNombre_Ciudad" title="Registre el Nombre de la Ciudad" size="80" maxlength="200" value="<?php ECHO $den_ciudad?>" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo5"></td>
                     </tr>
                   </table>                  </td>
               </tr>
@@ -125,4 +125,4 @@ $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){  $cod_ciudad=$regist
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

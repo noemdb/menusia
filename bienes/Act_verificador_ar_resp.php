@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="01-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){  $ced_res_verificador='';$p_letra="";  $sql="SELECT * FROM BIEN030 ORDER BY ced_res_verificador";}
 else {  $ced_res_verificador = $_GET["Gced_res_verificador"];  $p_letra=substr($ced_res_verificador, 0, 1);
   if(($p_letra=="P")||($p_letra=="U")||($p_letra=="S")||($p_letra=="A")){$ced_res_verificador=substr($ced_res_verificador,1,12);}
@@ -22,7 +22,7 @@ else {  $ced_res_verificador = $_GET["Gced_res_verificador"];  $p_letra=substr($
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Responsables Verificador)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Responsables Verificador)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -57,7 +57,7 @@ function MM_reloadPage(init) {  //reloads the window if Nav4 resized
 MM_reloadPage(true);
 </script>
 </head>
-<?
+<?php 
 $ced_res_verificador=""; $nombre_res_ver=""; $observaciones_ver="";$res=pg_query($sql);$filas=pg_num_rows($res);
 if ($filas==0){ if ($p_letra=="S"){$sql="SELECT * From BIEN030 ORDER BY ced_res_verificador";}
   if ($p_letra=="A"){$sql="SELECT * From BIEN030 ORDER BY ced_res_verificador desc";}  $res=pg_query($sql);  $filas=pg_num_rows($res);}
@@ -75,17 +75,17 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 <table width="977" height="335" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="329"><table width="92" height="325" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_verificador_ar_resp.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_verificador_ar_resp.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_verificador_ar_resp.php?Gced_res_verificador=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_verificador_ar_resp.php?Gced_res_verificador=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -106,12 +106,12 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_verificador_ar_resp.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_verificador_ar_resp.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{6}=="S"){?>
+     <?php } if ($Mcamino{6}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu</A></td>
@@ -125,7 +125,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">C&Eacute;DULA DE IDENTIDAD:</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtced_res_verificador" type="text" id="txtced_res_verificador" size="15" maxlength="12"  value="<?echo $ced_res_verificador?>" readonly>   </span></div></td>
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtced_res_verificador" type="text" id="txtced_res_verificador" size="15" maxlength="12"  value="<?php echo $ced_res_verificador?>" readonly>   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -134,7 +134,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="100" maxlength="250"  value="<?echo $nombre_res_ver?>" readonly>   </span></div></td>
+                 <td width="680" scope="col"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="100" maxlength="250"  value="<?php echo $nombre_res_ver?>" readonly>   </span></div></td>
                </tr>
              </table></td>
            </tr>
@@ -143,7 +143,7 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
              <td><table width="820">
                <tr>
                  <td width="140" scope="col"><div align="left"><span class="Estilo5">OBSERVACI&Oacute;N :</span></div></td>
-                 <td width="680" scope="col"><div align="left"><textarea name="textobservaciones_ver" cols="70" readonly class="headers" id="txttextobservaciones_ver"><?echo $observaciones_ver?></textarea>   </div></td>
+                 <td width="680" scope="col"><div align="left"><textarea name="textobservaciones_ver" cols="70" readonly class="headers" id="txttextobservaciones_ver"><?php echo $observaciones_ver?></textarea>   </div></td>
                </tr>
              </table></td>
            </tr>
@@ -156,4 +156,4 @@ if($filas>=1){  $registro=pg_fetch_array($res,0);
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

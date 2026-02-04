@@ -1,10 +1,10 @@
-<?include ("../class/ventana.php");?>
+<?php include ("../class/ventana.php");?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Dependencia)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Dependencia)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript">
@@ -94,7 +94,7 @@ return true;}
                  <tr>
                  <td width="130"><div align="left"><span class="Estilo5">REG&Iacute;ON :</span></div></td>
                  <td width="100"><div align="left"><span class="Estilo5"><input name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">                     
-                     <input name="btcat_reg" type="button" id="btcat_reg" title="Abrir Catalogo de Regiones" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btcat_reg" type="button" id="btcat_reg" title="Abrir Catalogo de Regiones" onClick="VentanaCentrada('Cat_regionesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </span></div></td>
                  <td width="620"><div align="left"><span class="Estilo5"><input name="txtnombre_region" type="text" id="txtnombre_region" size="70" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>
                  </span></div></td>
@@ -106,7 +106,7 @@ return true;}
                 <tr>
                  <td width="130"><div align="left"><span class="Estilo5">ENTIDAD FEDERAL :</span></div></td>
                  <td width="100"><div align="left"><span class="Estilo5"><input name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">
-                     <input name="btcat_ent" type="button" id="btcat_ent" title="Abrir Catalogo de Entidades Federal" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btcat_ent" type="button" id="btcat_ent" title="Abrir Catalogo de Entidades Federal" onClick="VentanaCentrada('Cat_entidadfederald.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </span></div></td>
                  <td width="620"><div align="left"><span class="Estilo5"><input name="txtestado" type="text" id="txtestado" size="70" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>
                  </span></div></td>
@@ -118,7 +118,7 @@ return true;}
                  <tr>
                  <td width="130"><div align="left"><span class="Estilo5">MUNICIPIO :</span></div></td>
                  <td width="100"><div align="left"><span class="Estilo5"><input name="txtcod_municipio" type="text" id="txtcod_municipio" size="4" maxlength="2"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">
-                     <input name="btcat_mun" type="button" id="btcat_mun" title="Abrir Catalogo de Municipios" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btcat_mun" type="button" id="btcat_mun" title="Abrir Catalogo de Municipios" onClick="VentanaCentrada('Cat_municipiosd.php?criterio=','SIPAP','','750','500','true')" value="...">
                   </span></div></td>
                  <td width="620"><div align="left"><span class="Estilo5"><input name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="70" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>
                  </span></div></td>
@@ -130,7 +130,7 @@ return true;}
                  <tr>
                  <td width="130"><div align="left"><span class="Estilo5">CIUDAD :</span></div></td>
                  <td width="100"><div align="left"><span class="Estilo5"><input name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">
-                   <input name="btcat_ciu" type="button" id="btcat_ciu" title="Abrir Catalogo de Ciudades" onClick="VentanaCentrada('Cat_ciudadesd.php?criterio=','SIA','','750','500','true')" value="...">
+                   <input name="btcat_ciu" type="button" id="btcat_ciu" title="Abrir Catalogo de Ciudades" onClick="VentanaCentrada('Cat_ciudadesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                   </span></div></td>
                  <td width="620"><div align="left"><span class="Estilo5">  <input name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="70" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>
                  </span></div></td>
@@ -142,7 +142,7 @@ return true;}
                         <tr>
                  <td width="130"><div align="left"><span class="Estilo5">PARROQUIA :</span></div></td>
                  <td width="120"><div align="left"><span class="Estilo5"> <input name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">
-                     <input name="btcat_parr" type="button" id="btcat_parr" title="Abrir Catalogo de Parroquias" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btcat_parr" type="button" id="btcat_parr" title="Abrir Catalogo de Parroquias" onClick="VentanaCentrada('Cat_parroquiasd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </span></div></td>
                  <td width="600"><div align="left"><span class="Estilo5">  <input name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="68" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>
                  </span></div></td>
@@ -175,7 +175,7 @@ return true;}
               <tr>
                 <td width="130"><div align="left"><span class="Estilo5">C.I. RESPONSABLE :</span></div></td>
                 <td width="200"><div align="left"><span class="Estilo5"><input name= "txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10">
-                    <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIA','','750','500','true')" value="...">
+                    <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Fuentes de Financiamiento" onClick="VentanaCentrada('Cat_responsablesd.php?criterio=','SIPAP','','750','500','true')" value="...">
                 </span></div></td>
                 <td width="70"><div align="left"><span class="Estilo5">NOMBRE :</span></div></td>
                 <td width="450"><div align="left"><span class="Estilo5"><input name="txtnombre_respp" type="text" id="txtnombre_respp" size="50" maxlength="250" onFocus="encender(this)" onBlur="apagar(this)" class="Estilo10" readonly>

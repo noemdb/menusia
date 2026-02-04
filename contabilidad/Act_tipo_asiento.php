@@ -1,10 +1,10 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/ventana.php");
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } 
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php"); include ("../class/ventana.php");
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; } 
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="01-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -12,7 +12,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Actualiza Tipos de Asientos)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Actualiza Tipos de Asientos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -50,25 +50,25 @@ function CargarUrl(url) {var murl;   murl=url+GTipo_asiento;
 <table width="977" height="134" border="1" id="tablacuerpo">
   <tr>
     <td width="92"><table width="92" height="350" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-    <?if ($Mcamino{0}=="S"){?>
+    <?php if ($Mcamino{0}=="S"){?>
 	  <tr>
          <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_tipo_asiento.php')";
           onMouseOut="this.style.backgroundColor='#EEEEEE'"o"];" height="35"  bgColor=#EEEEEE><A class=menu href="Inc_tipo_asiento.php">Incluir</A></td>
      </tr>
-	<?} if ($Mcamino{1}=="S"){?>	
+	<?php } if ($Mcamino{1}=="S"){?>	
      <tr>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:Llamar_Ventana('Mod_tipo_asiento.php?GTipo_Asiento=');";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Ventana('Mod_tipo_asiento.php?GTipo_Asiento=');">Modificar</A></td>
      </tr>
-	<?} if ($Mcamino{6}=="S"){?> 
+	<?php } if ($Mcamino{6}=="S"){?> 
      <tr>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:Llamar_Ventana('Elim_tipo_asiento.php?GTipo_Asiento=');";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu   href="javascript:Llamar_Ventana('Elim_tipo_asiento.php?GTipo_Asiento=');">Eliminar</A></td>
         </tr>
-	<?} ?>	
+	<?php } ?>	
 	<tr>
-    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_tipos_asi.htm','Ayuda SIA','','900','600','true');";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_tipos_asi.htm','Ayuda SIA','','900','600','true');" class="menu">Ayuda </a></td>
+    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_tipos_asi.htm','Ayuda SIPAP','','900','600','true');";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_tipos_asi.htm','Ayuda SIPAP','','900','600','true');" class="menu">Ayuda </a></td>
     </tr>
      <tr>
              <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -80,7 +80,7 @@ function CargarUrl(url) {var murl;   murl=url+GTipo_asiento;
     <td width="869" >       <font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b>
           </b></font>
       <div id="Layer1" style="position:absolute; width:846px; height:348px; z-index:1; top: 67px; left: 128px;">
-          <?$criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; if ($_GET){$orden=$_GET["orden"]; $pagina=$_GET["pagina"];}else{ $orden=""; $pagina="";}
+          <?php $criterio=""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1; if ($_GET){$orden=$_GET["orden"]; $pagina=$_GET["pagina"];}else{ $orden=""; $pagina="";}
 		  $sql="SELECT * FROM CON009 "; $res=pg_query($sql);    $numeroRegistros=pg_num_rows($res);
         if($numeroRegistros<=0){echo "<font face='verdana' size='-2'>No se encontraron Tipos de Asientos</font>"; $pagina=1; $inicio=1; $final=1; $numPags=1;
         }else{
@@ -97,12 +97,12 @@ function CargarUrl(url) {var murl;   murl=url+GTipo_asiento;
                 if  ($linea>$limitInf+$tamPag){$Salir=true;}  if  (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
 <!-- tabla de resultados -->
-   <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:enviar('<? echo $registro["tipo_asiento"]; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_asiento"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["descrip_tipo_asiento"]; ?></b></font></td>
+   <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:enviar('<?php  echo $registro["tipo_asiento"]; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_asiento"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["descrip_tipo_asiento"]; ?></b></font></td>
      </tr>
 <!-- fin tabla resultados -->
-<?}
+<?php }
                 }//fin while
                 echo "</table>";
         }//fin if
@@ -110,7 +110,7 @@ function CargarUrl(url) {var murl;   murl=url+GTipo_asiento;
 <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-<?      if($pagina>1){
+<?php       if($pagina>1){
                 echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=".($pagina-1)."&orden=".$orden."&criterio=".$txt_criterio."'>";
                 echo "<font face='verdana' size='-2'>anterior</font>";
                 echo "</a>&nbsp;"; }
@@ -132,4 +132,4 @@ function CargarUrl(url) {var murl;   murl=url+GTipo_asiento;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

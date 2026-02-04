@@ -1,11 +1,11 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Pasivos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Pasivos de la Orden)</title>
 <LINK
 href="../class/sia.css" type=text/css
 rel=stylesheet>
@@ -26,19 +26,19 @@ $sql="SELECT * FROM PASIVO_ORD  where nro_orden='$nro_orden' order by cod_cuenta
            <td width="35" align="center" bgcolor="#99CCFF"><strong>D/C</strong></td>
            <td width="100" align="right" bgcolor="#99CCFF" ><strong>Monto </strong></td>
          </tr>
-         <? $total=0;
+         <?php  $total=0;
 while($registro=pg_fetch_array($res))
 { $monto=$registro["monto_pasivo"]; $tipo_DC="C";  $tipo_DC=$registro["debito_credito"];
 $total=$total+$monto;
 $monto=formato_monto($monto);
 ?>
          <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" >
-           <td width="180" align="left"><? echo $registro["cod_cuenta"]; ?></td>
-           <td width="500" align="left"><? echo $registro["nombre_cuenta"]; ?></td>
-           <td width="35" align="center"><? echo $tipo_DC; ?></td>
-           <td width="100" align="right"><? echo $monto; ?></td>
+           <td width="180" align="left"><?php  echo $registro["cod_cuenta"]; ?></td>
+           <td width="500" align="left"><?php  echo $registro["nombre_cuenta"]; ?></td>
+           <td width="35" align="center"><?php  echo $tipo_DC; ?></td>
+           <td width="100" align="right"><?php  echo $monto; ?></td>
          </tr>
-         <?}
+         <?php }
  $total=formato_monto($total);
 ?>
        </table></td>
@@ -53,7 +53,7 @@ $monto=formato_monto($monto);
          <td width="100"><span class="Estilo5">TOTAL PASIVOS :</span></td>
          <td width="160"><table width="151" border="1" cellspacing="0" cellpadding="0">
              <tr>
-               <td align="right" class="Estilo5"><? echo $total; ?></td>
+               <td align="right" class="Estilo5"><?php  echo $total; ?></td>
              </tr>
          </table></td>
        </tr>
@@ -63,6 +63,6 @@ $monto=formato_monto($monto);
  <p>&nbsp;</p>
 </body>
 </html>
-<?
-  pg_close();
+<?php 
+  pg_close($conn);
 ?>

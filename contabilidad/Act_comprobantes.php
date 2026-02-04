@@ -1,12 +1,12 @@
-<?include ("../class/seguridad.inc"); include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/seguridad.inc"); include ("../class/conects.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 $equipo = getenv("COMPUTERNAME"); $mcod_m="CON02".$usuario_sia.$equipo;
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else { $Nom_Emp=busca_conf(); }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }else { $Nom_Emp=busca_conf(); }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="03"; $opcion="02-0000005"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S');if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 
 if (!$_GET){$p_letra='';  $criterio='';  $referencia='';  $fecha=''; $tipo_comp='';
   $sql="SELECT * FROM COMPROBANTES ORDER BY fecha,referencia,tipo_comp";   $codigo_mov=substr($mcod_m,0,49);
@@ -27,7 +27,7 @@ if($pdf_rpt=="SI"){$tipo_rpt='PDF';}else{$tipo_rpt='HTML';}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL (Comprobantes Contables)</title>
+<title>SIPAP CONTABILIDAD FISCAL (Comprobantes Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -83,10 +83,10 @@ MM_reloadPage(true);
 </script>
 
 </head>
-<?
-$res=pg_exec($conn,"SELECT ELIMINA_CON008('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
-$res=pg_exec($conn,"SELECT ELIMINA_CON017('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
-$res=pg_exec($conn,"SELECT ELIMINA_CON010('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+<?php 
+$res=pg_exec($conn,"SELECT ELIMINA_CON008('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+$res=pg_exec($conn,"SELECT ELIMINA_CON017('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
+$res=pg_exec($conn,"SELECT ELIMINA_CON010('$codigo_mov')"); $error=pg_errormessage($conn); $error=substr($error, 0, 61);if (!$res){ ?> <script language="JavaScript">  muestra('<?php  echo $error; ?>'); </script> <?php }
 $descripcion="";$tipo_asiento=""; $status=""; $ced_rif="";  $nombre=""; $modulo=""; $inf_usuario=""; $nro_expediente=""; $res=pg_query($sql); $filas=pg_num_rows($res);
 if ($filas==0){if ($p_letra=="A"){$sql="SELECT * From COMPROBANTES Order by fecha,referencia,tipo_comp";}  if ($p_letra=="S"){$sql="SELECT * From COMPROBANTES Order by fecha desc,referencia desc,tipo_comp desc";} $res=pg_query($sql); $filas=pg_num_rows($res);}
 if($filas>0){ $registro=pg_fetch_array($res); $referencia=$registro["referencia"]; $fecha=$registro["fecha"]; $ced_rif=$registro["ced_rif"]; $nombre=$registro["nombre"]; $modulo=$registro["modulo"];  $nro_expediente=$registro["nro_expediente"];
@@ -106,18 +106,18 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
 <table width="977" height="528" border="1" id="tablacuerpo">
   <tr>
     <td><table width="92" height="520" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-    <?if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
+    <?php if (($Mcamino{0}=="S")and($SIA_Cierre=="N")){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Inc_comprob('C');"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Inc_comprob('C')">Incluir</A></td>
       </tr>
 	
-    <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
+    <?php } if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Modificar('<?echo $modulo?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Modificar('<?echo $modulo?>');">Modificar</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Modificar('<?php echo $modulo?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Modificar('<?php echo $modulo?>');">Modificar</A></td>
       </tr>
-    <?} if ($Mcamino{2}=="S"){?>
+    <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Mover_Registro('P')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Mover_Registro('P');">Primero</A></td>
@@ -136,20 +136,20 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_comprobantes.php')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_comprobantes.php" class="menu">Catalogo</a></td>
   </tr>
-  <?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+  <?php } if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?echo $modulo?>');" class="menu">Eliminar</a></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?php echo $modulo?>');" class="menu">Eliminar</a></td>
   </tr>
-  <?} if ($Mcamino{3}=="S"){?>
+  <?php } if ($Mcamino{3}=="S"){?>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Rpt_Formato('rpt/Rpt_Formato_Comp.php');" class="menu">Formato</a></td>
   </tr>
-  <?} ?>
+  <?php } ?>
   <tr>
-    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_compro_con.htm','Ayuda SIA','','900','600','true');";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_compro_con.htm','Ayuda SIA','','900','600','true');" class="menu">Ayuda </a></td>
+    <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_compro_con.htm','Ayuda SIPAP','','900','600','true');";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/contabilidad/ayuda/ayuda_compro_con.htm','Ayuda SIPAP','','900','600','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -165,18 +165,18 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
         <table width="868" border="0">
             <tr>
               <td width="680">&nbsp;</td>
-              <? if ($status=="D"){ if ($Mcamino{10}=="S"){?>
+              <?php  if ($status=="D"){ if ($Mcamino{10}=="S"){?>
               <td width="78" align="center" bgcolor="#0033FF"><A href="javascript:Llama_Act_Diferido();" class="Estilo2"><strong>DIFERIDO</strong></A></td>
-              <? } else{?><td width="78" align="center" bgcolor="#0033FF"> <strong>DIFERIDO</strong></A></td> <? }}?>
+              <?php } else{?><td width="78" align="center" bgcolor="#0033FF"> <strong>DIFERIDO</strong></A></td> <?php } }?>
             </tr>
             <tr>
               <td colspan="3"><table width="853" border="0">
                 <tr>
-                  <td width="276"><span class="Estilo5">FECHA : <input name="txtFecha" type="text" id="txtFecha" value="<?echo $fecha?>" size="12" readonly></span></td>
-                  <td width="314"><span class="Estilo5">REFERENCIA :</span> <input name="txtReferencia" type="text"  id="txtReferencia" value="<?echo $referencia?>" size="12" readonly> </td>
-                  <td width="204"><span class="Estilo5">TIPO ASIENTO:</span> <input name="txttipo_asiento" id="txttipo_asiento" value="<?echo $tipo_asiento?>" size="4" readonly></td>
-				  <td width="20"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?echo $inf_usuario?>, \n <?echo $mactualizado?>');"></td>
-                 <? if ($tipo_asiento=="O/P"){ ?> <td width="20"><img src="../imagenes/s_tbl.png" width="16" height="16" title="Mostrar Cheques de la Orden" onclick="javascript:Ventana_002('../pagos/Cons_pago_ord.php?clave=<?echo $referencia?>','SIA','','650','300','true');"></td>  <? }?>
+                  <td width="276"><span class="Estilo5">FECHA : <input name="txtFecha" type="text" id="txtFecha" value="<?php echo $fecha?>" size="12" readonly></span></td>
+                  <td width="314"><span class="Estilo5">REFERENCIA :</span> <input name="txtReferencia" type="text"  id="txtReferencia" value="<?php echo $referencia?>" size="12" readonly> </td>
+                  <td width="204"><span class="Estilo5">TIPO ASIENTO:</span> <input name="txttipo_asiento" id="txttipo_asiento" value="<?php echo $tipo_asiento?>" size="4" readonly></td>
+				  <td width="20"><img src="../imagenes/b_info.png" width="11" height="11" onclick="javascript:alert('<?php echo $inf_usuario?>, \n <?php echo $mactualizado?>');"></td>
+                 <?php  if ($tipo_asiento=="O/P"){ ?> <td width="20"><img src="../imagenes/s_tbl.png" width="16" height="16" title="Mostrar Cheques de la Orden" onclick="javascript:Ventana_002('../pagos/Cons_pago_ord.php?clave=<?php echo $referencia?>','SIPAP','','650','300','true');"></td>  <?php }?>
                 </tr>
               </table></td>
             </tr>
@@ -185,10 +185,10 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
                     <tr>
                       <td width="160"><span class="Estilo5">CED./RIF BENEFICIARIO:</span></td>
                       <td width="110"><span class="Estilo5">
-                        <input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="12"  value="<?echo $ced_rif?>" readonly>
+                        <input name="txtced_rif" type="text" id="txtced_rif" size="15" maxlength="12"  value="<?php echo $ced_rif?>" readonly>
                       </span></td>
                       <td width="580"><span class="Estilo5">
-                        <input name="txtnombre" type="text" id="txtnombre" value="<?echo $nombre?>" size="80" readonly>
+                        <input name="txtnombre" type="text" id="txtnombre" value="<?php echo $nombre?>" size="80" readonly>
                       </span></td>
                     </tr>
                   </table></td>
@@ -197,8 +197,8 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
               <td colspan="3"><table width="857" border="0">
                 <tr>
                   <td width="150"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                  <td width="647"><textarea name="txtDescripcion" cols="80" readonly="readonly" class="headers" id="txtDescripcion"><?echo $descripcion?></textarea></td>
-                  <td width="29"><input name="txttipo_Comp" type="hidden" id="txttipo_Comp" value="<?echo $tipo_comp?>"></td>
+                  <td width="647"><textarea name="txtDescripcion" cols="80" readonly="readonly" class="headers" id="txtDescripcion"><?php echo $descripcion?></textarea></td>
+                  <td width="29"><input name="txttipo_Comp" type="hidden" id="txttipo_Comp" value="<?php echo $tipo_comp?>"></td>
                 </tr>
               </table>                </td>
             </tr>
@@ -206,7 +206,7 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
               <td height="14" colspan="3">&nbsp;</td>
             </tr>
         </table>
-        <iframe src="Det_cons_comprobantes.php?criterio=<?echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_cons_comprobantes.php?criterio=<?php echo $clave?>"  width="850" height="300" scrolling="auto" frameborder="1">
         </iframe>
         </form>
       </div>
@@ -215,30 +215,30 @@ $mactualizado=""; if(($status=="A")and($nro_expediente<>"")){ $mactualizado="Act
 <form name="form2" method="post" action="Inc_comprobantes.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?echo $Rif_Emp?>"></td>
-     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?echo $Nom_Emp?>"></td>
-	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
+     <td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input name="txtced_r" type="hidden" id="txtced_r" value="<?php echo $Rif_Emp?>"></td>
+     <td width="5"><input name="txtnomb" type="hidden" id="txtnomb" value="<?php echo $Nom_Emp?>"></td>
+	 <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
   </tr>
 </table>
 </form>
 <form name="form3" method="post" action="Inc_comprob_multiple.php">
 <table width="10">
   <tr>
-     <td width="5"><input name="txtuser2" type="hidden" id="txtuser2" value="<?echo $user?>" ></td>
-     <td width="5"><input name="txtpassword2" type="hidden" id="txtpassword2" value="<?echo $password?>" ></td>
-     <td width="5"><input name="txtdbname2" type="hidden" id="txtdbname2" value="<?echo $dbname?>" ></td>
-     <td width="5"><input name="txtcodigo_mov2" type="hidden" id="txtcodigo_mov2" value="<?echo $codigo_mov?>" ></td>
-	 <td width="5"><input name="txtced_r2" type="hidden" id="txtced_r2" value="<?echo $Rif_Emp?>"></td>
-     <td width="5"><input name="txtnomb2" type="hidden" id="txtnomb2" value="<?echo $Nom_Emp?>"></td>
-	  <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?echo $Fec_Fin_Ejer?>"></td>
+     <td width="5"><input name="txtuser2" type="hidden" id="txtuser2" value="<?php echo $user?>" ></td>
+     <td width="5"><input name="txtpassword2" type="hidden" id="txtpassword2" value="<?php echo $password?>" ></td>
+     <td width="5"><input name="txtdbname2" type="hidden" id="txtdbname2" value="<?php echo $dbname?>" ></td>
+     <td width="5"><input name="txtcodigo_mov2" type="hidden" id="txtcodigo_mov2" value="<?php echo $codigo_mov?>" ></td>
+	 <td width="5"><input name="txtced_r2" type="hidden" id="txtced_r2" value="<?php echo $Rif_Emp?>"></td>
+     <td width="5"><input name="txtnomb2" type="hidden" id="txtnomb2" value="<?php echo $Nom_Emp?>"></td>
+	  <td width="5"><input name="txtfecha_fin" type="hidden" id="txtfecha_fin" value="<?php echo $Fec_Fin_Ejer?>"></td>
   </tr>
 </table>
 </form>
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

@@ -1,12 +1,12 @@
-<?include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
+<?php include ("../class/conect.php");  error_reporting(E_ALL ^ E_NOTICE);
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Catalogo Comprobantes de IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Catalogo Comprobantes de IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -21,7 +21,7 @@ function CargarUrl(mclave) {var murl;   murl="Act_planillas_ret.php?Gcriterio=C"
   </tr>
 </table>
 <div id="Layer1" style="position:absolute; width:978px; height:448px; z-index:1; top: 70px; left: 1px;">
-<?      $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
+<?php       $criterio = ""; $txt_criterio=""; $pagina=1;$inicio=1;$final=1;
         if ($_GET){if ($_GET["criterio"]!=""){ $txt_criterio=$_GET["criterio"];  $txt_criterio=strtoupper ($txt_criterio);
         $criterio=" where tipo_planilla like '%" . $txt_criterio . "%' or nro_planilla like '%" . $txt_criterio . "%' or nombre like '%" . $txt_criterio . "%'";}}
         $sql="SELECT * FROM PLANILLAS_RET ".$criterio; $res=pg_query($sql); $numeroRegistros=pg_num_rows($res); 
@@ -42,20 +42,20 @@ function CargarUrl(mclave) {var murl;   murl="Act_planillas_ret.php?Gcriterio=C"
                 $sfecha=$registro["fecha_emision"]; $fecha=substr($sfecha,8,2)."/".substr($sfecha,5,2)."/".substr($sfecha,0,4);
                 if ($linea>$limitInf+$tamPag){$Salir=true;}  if (($linea>=$limitInf) and ($linea<=$limitInf+$tamPag)){
 ?>
-  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:CargarUrl('<? echo $registro["tipo_planilla"].$registro["nro_planilla"]; ?>');" >
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["tipo_planilla"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["descripcion"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nro_planilla"];; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $fecha; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["ced_rif"]; ?></b></font></td>
-    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><? echo $registro["nombre"]; ?></b></font></td>
+  <tr bgcolor='#FFFFFF' bordercolor='#000000' onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:CargarUrl('<?php  echo $registro["tipo_planilla"].$registro["nro_planilla"]; ?>');" >
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["tipo_planilla"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["descripcion"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nro_planilla"];; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $fecha; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["ced_rif"]; ?></b></font></td>
+    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif" color="#000033"><b><?php  echo $registro["nombre"]; ?></b></font></td>
 
   </tr>
-<?}} echo "</table>"; }  ?>
+<?php } } echo "</table>"; }  ?>
         <br>
         <table border="0" cellspacing="0" cellpadding="0" align="center"  bordercolor='#000033'>
         <tr><td align="center" valign="top">
-  <?    if($pagina>1){
+  <?php     if($pagina>1){
           echo "<a class='p' href='".$_SERVER["PHP_SELF"]."?pagina=1&orden=".$orden."&criterio=".$txt_criterio."'>";
           echo "<font face='verdana' size='-2'>Principio</font>";
           echo "</a>&nbsp;";
@@ -78,4 +78,4 @@ function CargarUrl(mclave) {var murl;   murl="Act_planillas_ret.php?Gcriterio=C"
 <hr noshade style="color:CC6666;height:1px">
 <form action="Cat_planillas_ret.php" method="get">
 Criterio de b&uacute;squeda: <input type="text" name="criterio" size="22" maxlength="150"> <input type="submit" class="button" value="Buscar">
-</div> </form>  </body>  </html>  <? pg_close(); ?>
+</div> </form>  </body>  </html>  <?php  pg_close($conn); ?>

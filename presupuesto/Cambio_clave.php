@@ -1,7 +1,7 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $nombre="";$cargo=""; $departamento="";$cat_prog="";$cod_almacen="";$unidad_sol="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_last_error($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{ $sql="Select * from sia001 WHERE campo101='$usuario_sia'";  $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){ $nombre=$registro["campo104"];$cargo=$registro["campo105"]; $departamento=$registro["campo106"];  $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=$registro["campo111"];}}
 ?>
@@ -10,7 +10,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA  (Cambio de Clave)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA  (Cambio de Clave)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -43,7 +43,7 @@ return true;}
             <tr>
               <td width="20">&nbsp;</td>
               <td width="200"><span class="Estilo5">NOMBRE USUARIO:</span></td>
-              <td width="300"><input class="Estilo10" name="txtnombre_usuario" type="text"  id="txtnombre_usuario" size="20" maxlength="20" readonly value="<? echo $usuario_sia ?>"></td>
+              <td width="300"><input class="Estilo10" name="txtnombre_usuario" type="text"  id="txtnombre_usuario" size="20" maxlength="20" readonly value="<?php  echo $usuario_sia ?>"></td>
                </tr>
           </table></td>
         </tr>

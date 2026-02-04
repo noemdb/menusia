@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $referencia_comp=''; $tipo_compromiso=''; $cod_comp='';}else { $referencia_comp = $_GET["txtreferencia_comp"]; $tipo_compromiso = $_GET["txttipo_compromiso"]; $cod_comp = $_GET["txtcod_comp"];}
 $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and referencia_comp='$referencia_comp' and cod_comp='$cod_comp'" ;  
 ?>
@@ -7,7 +7,7 @@ $sql="Select * from COMPROMISOS where tipo_compromiso='$tipo_compromiso' and ref
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Compromisos Presupuestario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -38,9 +38,9 @@ function modificar_ref_comp(){var f=document.form1; var mref;  mref=f.txtreferen
 }
 </script>
 </head>
-<?
+<?php 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $descripcion="";$fecha="";$unidad_sol="";$des_unidad_sol="";$nombre_abrev_comp="";$cod_tipo_comp="";$des_tipo_comp=""; $ced_rif="";$nombre="";$fecha_vencim="";
 $nro_documento="";$num_proyecto="";$des_proyecto="";$func_inv="";$tiene_anticipo="";$tasa_anticipo="";$cod_con_anticipo="";$inf_usuario="";$anulado="";$modulo="";
 $res=pg_query($sql);$filas=pg_num_rows($res);
@@ -73,8 +73,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
       <td>
       <table width="92" height="423" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
-        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<? echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<? echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')">Atras</A></td>
+        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<?php  echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')";
+          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:LlamarURL('Act_compromisos.php?Gcriterio=<?php  echo $tipo_compromiso.$referencia_comp.$cod_comp; ?>')">Atras</A></td>
       </tr>
      <tr>
        <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
@@ -97,12 +97,12 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                         <tr>
                           <td width="168">
                           <p><span class="Estilo5">DOCUMENTO COMPROMISO:</span></p>                          </td>
-                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?echo $tipo_compromiso?>" size="6" readonly></td>
-                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" value="<?echo $nombre_abrev_comp?>" readonly>   </span></td>
+                          <td width="43"><input name="txttipo_compromiso" type="text"  id="txttipo_compromiso" value="<?php echo $tipo_compromiso?>" size="6" readonly></td>
+                          <td width="93"><span class="Estilo5"><input name="txtnombre_abrev_comp" type="text" id="txtnombre_abrev_comp" size="6" value="<?php echo $nombre_abrev_comp?>" readonly>   </span></td>
                           <td width="87"><span class="Estilo5">REFERENCIA :</span> </td>
-                          <td width="170"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp"  value="<?echo $referencia_comp?>" readonly ></td>
+                          <td width="170"><input name="txtreferencia_comp" type="text" id="txtreferencia_comp"  value="<?php echo $referencia_comp?>" readonly ></td>
                           <td width="63"><span class="Estilo5">FECHA :</span> </td>
-                          <td width="114"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" value="<?echo $fecha?>" readonly ></span></td>
+                          <td width="114"><span class="Estilo5"><input name="txtfecha" type="text" id="txtfecha" size="12" maxlength="10" value="<?php echo $fecha?>" readonly ></span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -110,8 +110,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="830">
                         <tr>
                           <td width="177"><p><span class="Estilo5">CATEGORIA PROGRAMATICA:</span></p></td>
-                          <td width="125"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?echo $unidad_sol?>" size="20" readonly></td>
-                          <td width="453"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="70" value="<?echo $des_unidad_sol?>" readonly></td>
+                          <td width="125"><input name="txtunidad_sol" type="text"  id="txtunidad_sol" value="<?php echo $unidad_sol?>" size="20" readonly></td>
+                          <td width="453"><input name="txtdes_unidad_sol" type="text"  id="txtdes_unidad_sol" size="70" value="<?php echo $des_unidad_sol?>" readonly></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -119,9 +119,9 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="829">
                         <tr>
                           <td width="162"><span class="Estilo5">TIPO DE COMPROMISO:</span></td>
-                          <td width="50"><input name="txtcod_tipo_comp" type="text"  id="txtcod_tipo_comp" size="8" readonly value="<?echo $cod_tipo_comp?>"></td>
+                          <td width="50"><input name="txtcod_tipo_comp" type="text"  id="txtcod_tipo_comp" size="8" readonly value="<?php echo $cod_tipo_comp?>"></td>
                           <td width="40"></td>
-                          <td width="542"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" size="83" value="<?echo $des_tipo_comp?>" readonly> </span></td>
+                          <td width="542"><span class="Estilo5"><input name="txtdes_tipo_comp" type="text" id="txtdes_tipo_comp" size="83" value="<?php echo $des_tipo_comp?>" readonly> </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -129,8 +129,8 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="814">
                         <tr>
                           <td width="166"><span class="Estilo5">CED./RIF BENEFICIARIO:</span></td>
-                          <td width="150"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?echo $ced_rif?>" readonly>  </span></td>
-                          <td width="482"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" value="<?echo $nombre?>" size="70" readonly>   </span></td>
+                          <td width="150"><span class="Estilo5"><input name="txtced_rif" type="text" id="txtced_rif" size="20" maxlength="15"  value="<?php echo $ced_rif?>" readonly>  </span></td>
+                          <td width="482"><span class="Estilo5"><input name="txtnombre" type="text" id="txtnombre" value="<?php echo $nombre?>" size="70" readonly>   </span></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -138,7 +138,7 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
                       <td><table width="810" border="0">
                         <tr>
                           <td width="106"><span class="Estilo5">DESCRIPCI&Oacute;N:</span></td>
-                          <td width="694"><textarea name="txtDescripcion" cols="85" readonly="readonly" class="headers" id="texDescripcion"><?echo $descripcion?></textarea></td>
+                          <td width="694"><textarea name="txtDescripcion" cols="85" readonly="readonly" class="headers" id="texDescripcion"><?php echo $descripcion?></textarea></td>
                         </tr>
                       </table></td>
                     </tr>                   
@@ -149,7 +149,7 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
 						<td><table width="810" border="0">
 						  <tr>
 							<td width="260"><span class="Estilo5">REFERENCIA DE COMPROMISO NUEVO :</span></span></td>
-							<td width="250"><input class="Estilo10" name="txtreferencia_comp_new" type="text" class="Estilo5"  id="txtreferencia_comp_new" size="10" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);" value="<?echo $referencia_comp?>" >   </td>		
+							<td width="250"><input class="Estilo10" name="txtreferencia_comp_new" type="text" class="Estilo5"  id="txtreferencia_comp_new" size="10" maxlength="8" onFocus="encender(this);" onBlur="apagar(this);" value="<?php echo $referencia_comp?>" >   </td>		
 							<td width="300"><span class="Estilo5">                </span></td>
 						  </tr>
 						</table></td>
@@ -163,7 +163,7 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
 		  <table width="768">
           <tr>
 		    <td width="300">&nbsp;</td>
-			<td width="268"><input name="txtcod_comp" type="hidden" id="txtcod_comp" value="<?echo $cod_comp?>"></td>
+			<td width="268"><input name="txtcod_comp" type="hidden" id="txtcod_comp" value="<?php echo $cod_comp?>"></td>
             <td width="100" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="100"><input name="Submit2" type="reset" value="Blanquear"></td>
           </tr>
@@ -175,4 +175,4 @@ $clave=$tipo_compromiso.$referencia_comp.$cod_comp;
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>

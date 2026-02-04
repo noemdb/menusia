@@ -1,11 +1,11 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn = pg_connect("host=localhost port=5432 password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
+if (pg_last_error($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
 if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="13"; $opcion="02-0000015"; $sql="select * from sia006 where campo601='$usuario_sia' and campo602='$modulo' and campo603='$opcion'";$res=pg_exec($conn,$sql);$filas=pg_numrows($res);
  if ($filas>0){$reg=pg_fetch_array($res); $Mcamino=$reg["campo607"].$reg["campo608"].$reg["campo609"].$reg["campo610"].$reg["campo611"].$reg["campo612"].$reg["campo613"].$reg["campo614"].$reg["campo615"].$reg["campo616"].$reg["campo617"].$reg["campo618"].$reg["campo619"].$reg["campo620"].$reg["campo621"].$reg["campo622"].$reg["campo623"].$reg["campo624"].$reg["campo625"].$reg["campo626"]; }
-}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+}$posicion=strpos($Mcamino,'S'); if(is_numeric($posicion)){$Mcamino=$Mcamino;}else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 if (!$_GET){$cod_bien_sem='';$p_letra="";
   $sql="SELECT * FROM BIEN016 ORDER BY cod_bien_sem";}
 else {
@@ -24,7 +24,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Inmuebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -63,7 +63,7 @@ MM_reloadPage(true);
 //-->
 </script>
 </head>
-<?
+<?php 
 $cod_bien_sem=""; $cod_clasificacion=""; $num_bien="";$denominacion=""; $cod_dependencia=""; $cod_empresa=""; $cod_direccion=""; $cod_departamento=""; $ced_responsable=""; $fecha_actualizacion="";
 $ced_responsable_uso="";$cod_metodo_rot="";$ced_rotulador=""; $fecha_rotulacion="";$direccion=""; $cod_region=""; $cod_entidad=""; $cod_municipio=""; $cod_ciudad=""; $cod_parroquia=""; $cod_postal="";$caracteristicas="";$raza=""; $color=""; $sexo=""; $uso=""; $tam_peso=""; $fecha_nacimiento=""; $edad=""; $cod_contablea="";$cod_contabled="";$tipo_depreciacion="";$tasa_deprec=""; $vida_util=""; $valor_residual=""; $sit_contable="";$sit_legal=""; $edo_conservacion="";$ced_verificador=""; $fecha_verificacion=""; $tipo_incorporacion=""; $cod_imp_presup=""; $nom_imp_presup="";$des_imp_nopresup=""; $fecha_incorporacion=""; $valor_incorporacion="";$nro_oc=""; $fecha_oc=""; $nro_op=""; $fecha_op=""; $tipo_doc_cancela=""; $nro_doc_cancela=""; $fecha_doc_cancela="";$ced_rif_proveedor=""; $codigo_tipo_incorp=""; $nom_proveedor=""; $cod_presup_dep=""; $monto_depreciado=""; $nro_factura=""; $fecha_factura=""; $desincorporado=""; $fecha_desincorporado="";$des_desincorporado="";$descripcion_b="";  $denominacion_empresa=""; $denominacion_dependencia=""; $denominacion_dir="";$denominacion_dep="";  $nombre_res="";  $nombre_res_uso="";  $metodo_rotula="";  $nombre_res_rotu="";$nombre_region="";  $estado="";  $nombre_municipio=""; $nombre_ciudad="";  $nombre_parroquia=""; $tipo_situacion_cont="";  $tipo_situacion_legal=""; $edo_bien="";  $nombre_res_ver="";$status_bien_sem=""; $usuario_sia=""; $inf_usuario="";    
 $res=pg_query($sql);
@@ -93,7 +93,7 @@ if($fecha_actualizacion==""){$fecha_actualizacion="";}else{$fecha_actualizacion=
   $ced_rotulador=$registro["ced_rotulador"];
   $fecha_rotulacion=$registro["fecha_rotulaciÃ³n"];
 if($fecha_rotulacion==""){$fecha_rotulacion="";}else{$fecha_rotulacion=formato_ddmmaaaa($fecha_rotulacion);}
-  //$fecha_rotulacion=$registro["fecha_rotulación"];
+  //$fecha_rotulacion=$registro["fecha_rotulaciï¿½n"];
   $direccion=$registro["direccion"]; 
   $cod_region=$registro["cod_region"]; 
   $cod_entidad=$registro["cod_entidad"];
@@ -203,17 +203,17 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
 <table width="977" height="1702" border="1" id="tablacuerpo">
   <tr>
    <td width="92" height="1696"><table width="92" height="1699" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
-     <?if ($Mcamino{0}=="S"){?>
+     <?php if ($Mcamino{0}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Inc_ficha_semovientes_pro.php')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="Inc_ficha_semovientes_pro.php">Incluir</A></td>
       </tr>
-     <?} if ($Mcamino{1}=="S"){?>
+     <?php } if ($Mcamino{1}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Ventana('Mod_fichas_semovientes_pro.php?Gcod_bien_sem=')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llamar_Ventana('Mod_fichas_semovientes_pro.php?Gcod_bien_sem=');">Modificar</A></td>
       </tr>
-     <?} if ($Mcamino{2}=="S"){?>
+     <?php } if ($Mcamino{2}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu_a.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_a.php">Consultar</A></td>
@@ -238,22 +238,22 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cat_act_fichas_semovientes_pro.php')";
                           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cat_act_fichas_semovientes_pro.php" class="menu">Catalogo</a></td>
       </tr>
-     <?} if ($Mcamino{3}=="S"){?>
+     <?php } if ($Mcamino{3}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" ;
                onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu  href="javascript:Llama_Eliminar();">Eliminar</A></td>
       </tr>
-     <?} if ($Mcamino{4}=="S"){?>
+     <?php } if ($Mcamino{4}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu_a.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_a.php">Imprimir</A></td>
       </tr>
-     <?} if ($Mcamino{5}=="S"){?>
+     <?php } if ($Mcamino{5}=="S"){?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu_a.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_a.php">Formato</A></td>
       </tr>
-     <? }?>
+     <?php }?>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu_a.php')";
               onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_a.php">Utilidades</A></td>
@@ -279,12 +279,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DE CLACIFICACI&Oacute;N:</span></div></td>
                  <td width="200" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="10"  value="<?echo $cod_clasificacion?>" readonly class="Estilo5">
+                     <input name="txtcod_clasificacion" type="text" id="txtcod_clasificacion" size="10" maxlength="10"  value="<?php echo $cod_clasificacion?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre2242222224" type="button" id="bttipo_codeingre22422222244" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre2242222224" type="button" id="bttipo_codeingre22422222244" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="725" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion" type="text" id="txtdenominacion" size="70" maxlength="250" value="<?echo $denominacion?>" readonly class="Estilo5">
+                     <input name="txtdenominacion" type="text" id="txtdenominacion" size="70" maxlength="250" value="<?php echo $denominacion?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -294,13 +294,13 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO DEL BIEN:</span></div></td>
                  <td width="300" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20" value="<?echo $num_bien?>" readonly class="Estilo5">
+                     <input name="txtnum_bien" type="text" id="txtnum_bien" size="20" maxlength="20" value="<?php echo $num_bien?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222242" type="button" id="bttipo_codeingre224222222422" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="123...">
+                     <input name="bttipo_codeingre22422222242" type="button" id="bttipo_codeingre224222222422" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="123...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="108" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEL BIEN INMUEBLE :</span></div></td>
                  <td width="582" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_bien_sem" type="text" id="txtcod_bien_sem" size="40" maxlength="30" value="<?echo $cod_bien_sem?>" readonly class="Estilo5">
+                     <input name="txtcod_bien_sem" type="text" id="txtcod_bien_sem" size="40" maxlength="30" value="<?php echo $cod_bien_sem?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -310,7 +310,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DENOMINACI&Oacute;N DEL BIEN :</span></div></td>
                  <td width="855" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdescripcion" type="text" id="txtdescripcion" size="90" maxlength="250" value="<?echo $denominacion?>" readonly class="Estilo5">
+                     <input name="txtdescripcion" type="text" id="txtdescripcion" size="90" maxlength="250" value="<?php echo $denominacion?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -323,12 +323,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DE EMPRESA :</span></div></td>
                  <td width="114" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_empresa" type="text" id="txtcod_empresa" size="4" maxlength="3" value="<?echo $cod_empresa?>" readonly class="Estilo5">
+                     <input name="txtcod_empresa" type="text" id="txtcod_empresa" size="4" maxlength="3" value="<?php echo $cod_empresa?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIA','','750','500','true')" value="...">
+                     <input name="btfuente" type="button" id="btfuente6" title="Abrir Catalogo Empresas" onClick="VentanaCentrada('Cat_empresasd.php?criterio=','SIPAP','','750','500','true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="762" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_empresa" type="text" id="txtnombre_empresa" size="75" maxlength="100" value="<?echo $denominacion_empresa?>" readonly class="Estilo5">
+                     <input name="txtnombre_empresa" type="text" id="txtnombre_empresa" size="75" maxlength="100" value="<?php echo $denominacion_empresa?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -338,12 +338,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DIRECCI&Oacute;N :</span></div></td>
                  <td width="109" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?echo $cod_direccion?>" readonly class="Estilo5">
+                     <input name="txtcod_direccion" type="text" id="txtcod_direccion" size="5" maxlength="4" value="<?php echo $cod_direccion?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222245" type="button" id="bttipo_codeingre22422222247" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222245" type="button" id="bttipo_codeingre22422222247" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="758" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="75" maxlength="100" value="<?echo $denominacion_dir?>" readonly class="Estilo5">
+                     <input name="txtdenominacion_dir" type="text" id="txtdenominacion_dir" size="75" maxlength="100" value="<?php echo $denominacion_dir?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -353,12 +353,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPARTAMENTO :</span></div></td>
                  <td width="160" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?echo $cod_departamento?>" readonly class="Estilo5">
+                     <input name="txtcod_departamento" type="text" id="txtcod_departamento" size="10" maxlength="8" value="<?php echo $cod_departamento?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="714" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="70" maxlength="100"  value="<?echo $denominacion_dep?>" readonly class="Estilo5">
+                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="70" maxlength="100"  value="<?php echo $denominacion_dep?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -368,12 +368,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO DEPENDENCIA :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?echo $cod_dependencia?>" readonly class="Estilo5">
+                     <input name="txtcod_dependencia" type="text" id="txtcod_dependencia" size="5" maxlength="4" value="<?php echo $cod_dependencia?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222244" type="button" id="bttipo_codeingre22422222246" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222244" type="button" id="bttipo_codeingre22422222246" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="747" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="74" maxlength="250" value="<?echo $denominacion_dependencia?>" readonly class="Estilo5">
+                     <input name="txtdenominacion_dep" type="text" id="txtdenominacion_dep" size="74" maxlength="250" value="<?php echo $denominacion_dependencia?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -386,12 +386,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">C.I. RESPONSABLE PRIMARIO :</span></div></td>
                  <td width="230" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  value="<?echo $ced_responsable?>" readonly class="Estilo5">
+                     <input name="txtced_responsable" type="text" id="txtced_responsable" size="15" maxlength="12"  value="<?php echo $ced_responsable?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?echo $nombre_res?>" readonly class="Estilo5">
+                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?php echo $nombre_res?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -401,12 +401,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">C.I. RESPONSABLE DE USO :</span></div></td>
                  <td width="230" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_responsable_uso" type="text" id="txtced_responsable_uso" size="15" maxlength="12"  value="<?echo $ced_responsable_uso?>" readonly class="Estilo5">
+                     <input name="txtced_responsable_uso" type="text" id="txtced_responsable_uso" size="15" maxlength="12"  value="<?php echo $ced_responsable_uso?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?echo $nombre_res_uso?>" readonly class="Estilo5">
+                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?php echo $nombre_res_uso?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -416,12 +416,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">METODO DE ROTULACI&Oacute;N :</span></div></td>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_metodo_rot" type="text" id="txtcod_metodo_rot" size="4" maxlength="2" value="<?echo $cod_metodo_rot?>" readonly class="Estilo5">
+                     <input name="txtcod_metodo_rot" type="text" id="txtcod_metodo_rot" size="4" maxlength="2" value="<?php echo $cod_metodo_rot?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="767" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnom_metodo_rot" type="text" id="txtnom_metodo_rot" size="75" maxlength="250" value="<?echo $metodo_rotula?>" readonly class="Estilo5">
+                     <input name="txtnom_metodo_rot" type="text" id="txtnom_metodo_rot" size="75" maxlength="250" value="<?php echo $metodo_rotula?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -431,12 +431,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">C&Eacute;DULA DE ROTULADOR :</span></div></td>
                  <td width="230" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_rotulador" type="text" id="txtced_rotulador" size="15" maxlength="12"  value="<?echo $ced_rotulador?>" readonly class="Estilo5">
+                     <input name="txtced_rotulador" type="text" id="txtced_rotulador" size="15" maxlength="12"  value="<?php echo $ced_rotulador?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222246" type="button" id="bttipo_codeingre22422222248" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?echo $nombre_res_rotu?>" readonly class="Estilo5">
+                    <input name="txtnombre_res" type="text" id="txtnombre_res" size="65" maxlength="250"  value="<?php echo $nombre_res_rotu?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -446,11 +446,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="92" scope="col"><div align="left"><span class="Estilo5">FECHA ROTULACI&Oacute;N :</span></div></td>
                  <td width="132" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="20" maxlength="15" value="<?echo $fecha_rotulacion?>" readonly class="Estilo5">
+                     <input name="txtfecha_rotulacion" type="text" id="txtfecha_rotulacion" size="20" maxlength="15" value="<?php echo $fecha_rotulacion?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="105" scope="col"><div align="left"><span class="Estilo5">FECHA ULTIMA ACTUALIZACI&Oacute;N :</span></div></td>
                  <td width="614" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="20" maxlength="15" value="<?echo $fecha_actualizacion?>" readonly class="Estilo5">
+                     <input name="txtfecha_actualizacion" type="text" id="txtfecha_actualizacion" size="20" maxlength="15" value="<?php echo $fecha_actualizacion?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -463,7 +463,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">DIRECCI&Oacute;N :</span></div></td>
                  <td width="869" scope="col"><div align="left">
-                     <textarea name="textcod_direccion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly class="Estilo5" class="headers" id="textcod_direccion"><?echo $direccion?></textarea>
+                     <textarea name="textcod_direccion" cols="70" onFocus="encender(this)" onBlur="apagar(this)" readonly class="Estilo5" class="headers" id="textcod_direccion"><?php echo $direccion?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -473,12 +473,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">REGI&Oacute;N :</span></div></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" value="<?echo $cod_region?>" readonly class="Estilo5">
+                     <input name="txtcod_region" type="text" id="txtcod_region" size="4" maxlength="2" value="<?php echo $cod_region?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222432" type="button" id="bttipo_codeingre224222222432" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222432" type="button" id="bttipo_codeingre224222222432" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="798" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_region" type="text" id="txtnombre_region" size="75" maxlength="250"  value="<?echo $nombre_region?>" readonly class="Estilo5">
+                     <input name="txtnombre_region" type="text" id="txtnombre_region" size="75" maxlength="250"  value="<?php echo $nombre_region?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -488,12 +488,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">ENTIDAD FEDERAL :</span></div></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" value="<?echo $cod_entidad?>" readonly class="Estilo5">
+                     <input name="txtcod_entidad" type="text" id="txtcod_entidad" size="4" maxlength="2" value="<?php echo $cod_entidad?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222433" type="button" id="bttipo_codeingre224222222433" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222433" type="button" id="bttipo_codeingre224222222433" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="798" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_entidad" type="text" id="txtnombre_entidad" size="75" maxlength="250"  value="<?echo $estado?>" readonly class="Estilo5">
+                     <input name="txtnombre_entidad" type="text" id="txtnombre_entidad" size="75" maxlength="250"  value="<?php echo $estado?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -503,12 +503,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">MUNICIPIO :</span></div></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" value="<?echo $cod_municipio?>" readonly class="Estilo5">
+                     <input name="txtcod_municipio" type="text" id="txtcod_municipio" size="5" maxlength="4" value="<?php echo $cod_municipio?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222434" type="button" id="bttipo_codeingre224222222434" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222434" type="button" id="bttipo_codeingre224222222434" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="750" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="75" maxlength="250" value="<?echo $nombre_municipio?>" readonly class="Estilo5">
+                     <input name="txtnombre_municipio" type="text" id="txtnombre_municipio" size="75" maxlength="250" value="<?php echo $nombre_municipio?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -518,12 +518,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">CIUDAD :</span></div></td>
                  <td width="105" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  value="<?echo $cod_ciudad?>" readonly class="Estilo5">
+                     <input name="txtcod_ciudad" type="text" id="txtcod_ciudad" size="5" maxlength="4"  value="<?php echo $cod_ciudad?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222435" type="button" id="bttipo_codeingre224222222435" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222435" type="button" id="bttipo_codeingre224222222435" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="784" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="75" maxlength="250" value="<?echo $nombre_ciudad?>" readonly class="Estilo5">
+                     <input name="txtnombre_ciudad" type="text" id="txtnombre_ciudad" size="75" maxlength="250" value="<?php echo $nombre_ciudad?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -533,12 +533,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">PARROQUIA :</span></div></td>
                  <td width="121" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" value="<?echo $cod_parroquia?>" readonly class="Estilo5">
+                     <input name="txtcod_parroquia" type="text" id="txtcod_parroquia" size="7" maxlength="6" value="<?php echo $cod_parroquia?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222436" type="button" id="bttipo_codeingre224222222436" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222436" type="button" id="bttipo_codeingre224222222436" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="70" maxlength="250" value="<?echo $nombre_parroquia?>" readonly class="Estilo5">
+                     <input name="txtnombre_parroquia" type="text" id="txtnombre_parroquia" size="70" maxlength="250" value="<?php echo $nombre_parroquia?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -548,7 +548,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO POSTAL :</span></div></td>
                  <td width="891" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_postal" type="text" id="txtcod_postal" size="12" maxlength="10" value="<?echo $cod_postal?>" readonly class="Estilo5"> 
+                     <input name="txtcod_postal" type="text" id="txtcod_postal" size="12" maxlength="10" value="<?php echo $cod_postal?>" readonly class="Estilo5"> 
                  </span></div></td>
                </tr>
              </table></td>
@@ -561,7 +561,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="118" scope="col"><div align="left"><span class="Estilo5">CARACTERISTICAS DEL SEMOVIENTE:</span></div></td>
                  <td width="832" scope="col"><div align="left">
-                     <textarea name="textcaracteristicas" cols="70" readonly class="Estilo5" class="headers" id="textcaracteristicas"><?echo $caracteristicas?></textarea>
+                     <textarea name="textcaracteristicas" cols="70" readonly class="Estilo5" class="headers" id="textcaracteristicas"><?php echo $caracteristicas?></textarea>
                  </div></td>
                </tr>
              </table></td>
@@ -571,11 +571,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">RAZA:</span></div></td>
                  <td width="203" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtraza" type="text" id="txtraza" size="60" maxlength="60" value="<?echo $raza?>" readonly class="Estilo5">
+                     <input name="txtraza" type="text" id="txtraza" size="60" maxlength="60" value="<?php echo $raza?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="60" scope="col"><div align="left"><span class="Estilo5">COLOR :</span></div></td>
                  <td width="626" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30" value="<?echo $color?>" readonly class="Estilo5">
+                     <input name="txtcolor" type="text" id="txtcolor" size="30" maxlength="30" value="<?php echo $color?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -585,12 +585,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">SEXO :</span></div></td>
                  <td width="350" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtsexo" type="text" id="txtsexo" size="30" maxlength="30" value="<?echo $sexo?>" readonly class="Estilo5">
+                     <input name="txtsexo" type="text" id="txtsexo" size="30" maxlength="30" value="<?php echo $sexo?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
                      </strong></strong></span>                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">USO :</span></div></td>
                  <td width="600" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtuso" type="text" id="txtuso" size="30" maxlength="30" value="<?echo $uso?>" readonly class="Estilo5">
+                     <input name="txtuso" type="text" id="txtuso" size="30" maxlength="30" value="<?php echo $uso?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -598,17 +598,17 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
            <tr>
              <td><table width="963">
                <tr>
-                 <td width="100" scope="col"><div align="left"><span class="Estilo5">TAMAÑO PESO :</span></div></td>
+                 <td width="100" scope="col"><div align="left"><span class="Estilo5">TAMAï¿½O PESO :</span></div></td>
                  <td width="204" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txttam_peso" type="text" id="txttam_peso" size="30" maxlength="30" value="<?echo $tam_peso?>" readonly class="Estilo5">
+                     <input name="txttam_peso" type="text" id="txttam_peso" size="30" maxlength="30" value="<?php echo $tam_peso?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">FECHA NACIMIENTO :</span></div></td>
                  <td width="700" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_nacimiento" type="text" id="txtfecha_nacimiento" size="15" maxlength="15"  value="<?echo $fecha_nacimiento?>" readonly class="Estilo5">
+                     <input name="txtfecha_nacimiento" type="text" id="txtfecha_nacimiento" size="15" maxlength="15"  value="<?php echo $fecha_nacimiento?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">EDAD:</span></div></td>
                  <td width="621" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtedad" type="text" id="txtedad" size="4" maxlength="4"  value="<?echo $edad?>" readonly class="Estilo5">
+                     <input name="txtedad" type="text" id="txtedad" size="4" maxlength="4"  value="<?php echo $edad?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -621,15 +621,15 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="113" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO CONTABLE ASOCIADO :</span></div></td>
                  <td width="400" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_contablea" type="text" id="txtcod_contablea" size="30" maxlength="25" value="<?echo $cod_contablea?>" readonly class="Estilo5">
+                     <input name="txtcod_contablea" type="text" id="txtcod_contablea" size="30" maxlength="25" value="<?php echo $cod_contablea?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222243622" type="button" id="bttipo_codeingre22422222243622" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222243622" type="button" id="bttipo_codeingre22422222243622" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                      </strong></strong></span>                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="117" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO CONTABLE DEPRECIACI&Oacute;N :</span></div></td>
                  <td width="600" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_contabled" type="text" id="txtcod_contabled" size="30" maxlength="25" value="<?echo $cod_contabled?>" readonly class="Estilo5">
+                     <input name="txtcod_contabled" type="text" id="txtcod_contabled" size="30" maxlength="25" value="<?php echo $cod_contabled?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222243623" type="button" id="bttipo_codeingre22422222243623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222243623" type="button" id="bttipo_codeingre22422222243623" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                      </strong></strong></span></span>                     <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -646,7 +646,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                    </strong></strong></span></span> </span></div></td>
                  <td width="103" scope="col"><div align="left"><span class="Estilo5">TASA DEPRECIACI&Oacute;N :</span></div></td>
                  <td width="596" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txttasa_deprec" type="text" id="txttasa_deprec" size="10" maxlength="15" value="<?echo $tasa_deprec?>" readonly class="Estilo5">
+                     <input name="txttasa_deprec" type="text" id="txttasa_deprec" size="10" maxlength="15" value="<?php echo $tasa_deprec?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong>
                  </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
@@ -657,11 +657,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">VIDA &Uacute;TIL EN A&Ntilde;OS :</span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtvida_util" type="text" id="txtvida_util" size="10" maxlength="15" value="<?echo $vida_util?>" readonly class="Estilo5">
+                     <input name="txtvida_util" type="text" id="txtvida_util" size="10" maxlength="15" value="<?php echo $vida_util?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="71" scope="col"><div align="left"><span class="Estilo5">VALOR RESIDUAL :</span></div></td>
                  <td width="699" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtvalor_residual" type="text" id="txtvalor_residual" size="20" maxlength="15" value="<?echo $valor_residual?>" readonly class="Estilo5">
+                     <input name="txtvalor_residual" type="text" id="txtvalor_residual" size="20" maxlength="15" value="<?php echo $valor_residual?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong>                 </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -671,13 +671,13 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="164" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO PRESUPUESTARIO DE DEPRECIACI&Oacute;N :</span></div></td>
                  <td width="370" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="35" maxlength="32" value="<?echo $cod_presup_dep?>" readonly class="Estilo5">
+                     <input name="txtcod_presup_dep" type="text" id="txtcod_presup_dep" size="35" maxlength="32" value="<?php echo $cod_presup_dep?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222436222" type="button" id="bttipo_codeingre224222222436224" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222436222" type="button" id="bttipo_codeingre224222222436224" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                      </strong></strong></span>                     <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="85" scope="col"><div align="left"><span class="Estilo5">MONTO DEPRECIADO :</span></div></td>
                  <td width="362" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="20" maxlength="15" value="<?echo $monto_depreciado?>" readonly class="Estilo5">
+                     <input name="txtmonto_depreciado" type="text" id="txtmonto_depreciado" size="20" maxlength="15" value="<?php echo $monto_depreciado?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -699,12 +699,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" height="27" scope="col"><div align="left"><span class="Estilo5">SITUACI&Oacute;N CONTABLE :</span></div></td>
                  <td width="97" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtsit_contable" type="text" id="txtsit_contable" size="4" maxlength="2" value="<?echo $sit_contable?>" readonly class="Estilo5">
+                     <input name="txtsit_contable" type="text" id="txtsit_contable" size="4" maxlength="2" value="<?php echo $sit_contable?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222243624" type="button" id="bttipo_codeingre22422222243624" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222243624" type="button" id="bttipo_codeingre22422222243624" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="777" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txttipo_situacion_cont" type="text" id="txttipo_situacion_cont" size="75" maxlength="100" value="<?echo $tipo_situacion_cont?>" readonly class="Estilo5">
+                     <input name="txttipo_situacion_cont" type="text" id="txttipo_situacion_cont" size="75" maxlength="100" value="<?php echo $tipo_situacion_cont?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -714,12 +714,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" height="27" scope="col"><div align="left"><span class="Estilo5">SITUACI&Oacute;N LEGAL :</span></div></td>
                  <td width="97" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtsit_legal" type="text" id="txtsit_legal" size="4" maxlength="2" value="<?echo $sit_legal?>" readonly class="Estilo5">
+                     <input name="txtsit_legal" type="text" id="txtsit_legal" size="4" maxlength="2" value="<?php echo $sit_legal?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre22422222243624" type="button" id="bttipo_codeingre22422222243624" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre22422222243624" type="button" id="bttipo_codeingre22422222243624" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="777" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txttipo_situacion_legal" type="text" id="txttipo_situacion_legal" size="75" maxlength="100" value="<?echo $tipo_situacion_legal?>" readonly class="Estilo5">
+                     <input name="txttipo_situacion_legal" type="text" id="txttipo_situacion_legal" size="75" maxlength="100" value="<?php echo $tipo_situacion_legal?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -729,13 +729,13 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="113" scope="col"><div align="left"><span class="Estilo5">C.I. RESPONSABLE VERIFICADOR :</span></div></td>
                  <td width="177" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_verificador " type="text" id="txtced_verificador " size="15" maxlength="12" value="<?echo $ced_verificador?>" readonly class="Estilo5">
+                     <input name="txtced_verificador " type="text" id="txtced_verificador " size="15" maxlength="12" value="<?php echo $ced_verificador?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222436223" type="button" id="bttipo_codeingre224222222436225" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222436223" type="button" id="bttipo_codeingre224222222436225" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="94" scope="col"><div align="left"><span class="Estilo5">FECHA DE VERIFICACI&Oacute;N :</span></div></td>
                  <td width="559" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="20" maxlength="15"  value="<?echo $fecha_verificacion?>" readonly class="Estilo5">
+                     <input name="txtfecha_verificacion" type="text" id="txtfecha_verificacion" size="20" maxlength="15"  value="<?php echo $fecha_verificacion?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong>                 </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -745,7 +745,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="93" scope="col"><div align="left"><span class="Estilo5">NOMBRE DEL VERIFICADOR :</span></div></td>
                  <td width="856" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="85" maxlength="250" value="<?echo $nombre_res_ver?>" readonly class="Estilo5">
+                     <input name="txtnombre_res_ver" type="text" id="txtnombre_res_ver" size="85" maxlength="250" value="<?php echo $nombre_res_ver?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -758,12 +758,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="100" scope="col"><div align="left"><span class="Estilo5">C&Oacute;DIGO MOVIMIENTO INCORPORACI&Oacute;N:</span></div></td>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtcodigo_tipo_incorp" type="text" id="txtcodigo_tipo_incorp" size="5" maxlength="15" value="<?echo $codigo_tipo_incorp?>" readonly class="Estilo5">
+                     <input name="txtcodigo_tipo_incorp" type="text" id="txtcodigo_tipo_incorp" size="5" maxlength="15" value="<?php echo $codigo_tipo_incorp?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222436252" type="button" id="bttipo_codeingre224222222436252" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222436252" type="button" id="bttipo_codeingre224222222436252" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="739" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcode_ingre_mora2222322426232" type="text" id="txtcode_ingre_mora2222322426232" size="75" maxlength="15" value="<?echo $tipo_incorporacion?>" readonly class="Estilo5">
+                     <input name="txtcode_ingre_mora2222322426232" type="text" id="txtcode_ingre_mora2222322426232" size="75" maxlength="15" value="<?php echo $tipo_incorporacion?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -786,9 +786,9 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="120" scope="col"><div align="left"><span class="Estilo5">C&Oacute;D. IMPUTACI&Oacute;N PRESUPUESTARIA :</span></div></td>
                  <td width="829" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtcod_imp_presup" type="text" id="txtcod_imp_presup" size="35" maxlength="32"  value="<?echo $cod_imp_presup?>" readonly class="Estilo5">
+                     <input name="txtcod_imp_presup" type="text" id="txtcod_imp_presup" size="35" maxlength="32"  value="<?php echo $cod_imp_presup?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre2242222224362522" type="button" id="bttipo_codeingre2242222224362522" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre2242222224362522" type="button" id="bttipo_codeingre2242222224362522" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                      </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -798,7 +798,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="129" scope="col"><div align="left"><span class="Estilo5">NOMBRE IMPUTACI&Oacute;N PRESUPUESTARIA :</span></div></td>
                  <td width="820" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnom_imp_presup" type="text" id="txtnom_imp_presup" size="75" maxlength="100" value="<?echo $nom_imp_presup?>" readonly class="Estilo5">
+                     <input name="txtnom_imp_presup" type="text" id="txtnom_imp_presup" size="75" maxlength="100" value="<?php echo $nom_imp_presup?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -808,7 +808,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="205" scope="col"><div align="left"><span class="Estilo5">DESCRIPCI&Oacute;N DE INCORPORACI&Oacute;N NO PRESUPUESTARIA :</span></div></td>
                  <td width="744" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtdes_imp_nopresup" type="text" id="txtdes_imp_nopresup" size="75" maxlength="100" value="<?echo $des_imp_nopresup?>" readonly class="Estilo5">
+                     <input name="txtdes_imp_nopresup" type="text" id="txtdes_imp_nopresup" size="75" maxlength="100" value="<?php echo $des_imp_nopresup?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -818,11 +818,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="111" scope="col"><div align="left"><span class="Estilo5">VALOR INCORPORACI&Oacute;N :</span></div></td>
                  <td width="159" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?echo $valor_incorporacion?>" readonly class="Estilo5">
+                     <input name="txtvalor_incorporacion" type="text" id="txtvalor_incorporacion" size="20" maxlength="15" value="<?php echo $valor_incorporacion?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="110" scope="col"><div align="left"><span class="Estilo5">FECHA INCORPORACI&Oacute;N :</span></div></td>
                  <td width="300" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="20" maxlength="15"  value="<?echo $fecha_incorporacion?>" readonly class="Estilo5">
+                     <input name="txtfecha_incorporacion" type="text" id="txtfecha_incorporacion" size="20" maxlength="15"  value="<?php echo $fecha_incorporacion?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="69" scope="col"><span class="Estilo5"></span></td>
                  <td width="311" scope="col"><span class="Estilo5">
@@ -836,11 +836,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="96" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO ORDEN DE COMPRA :</span></div></td>
                  <td width="134" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnro_oc" type="text" id="txtnro_oc" size="10" maxlength="8"  value="<?echo $nro_oc?>" readonly class="Estilo5">
+                     <input name="txtnro_oc" type="text" id="txtnro_oc" size="10" maxlength="8"  value="<?php echo $nro_oc?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>                 </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="87" scope="col"><div align="left"><span class="Estilo5">FECHA ORDEN DE COMPRA :</span></div></td>
                  <td width="626" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_oc" type="text" id="txtfecha_oc" size="20" maxlength="15" value="<?echo $fecha_oc?>" readonly class="Estilo5">
+                     <input name="txtfecha_oc" type="text" id="txtfecha_oc" size="20" maxlength="15" value="<?php echo $fecha_oc?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -859,7 +859,7 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                  <td width="129" scope="col"><div align="left"></div></td>
                  <td width="85" scope="col"><div align="left"><span class="Estilo5">FECHA DOCUMENTO :</span></div></td>
                  <td width="398" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela size="20" maxlength="15" value="<?echo $fecha_doc_cancela?>" readonly class="Estilo5">
+                     <input name="txtfecha_doc_cancela" type="text" id="txtfecha_doc_cancela size="20" maxlength="15" value="<?php echo $fecha_doc_cancela?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -869,11 +869,11 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="73" scope="col"><div align="left"><span class="Estilo5">N&Uacute;MERO DE FACTURA :</span></div></td>
                  <td width="136" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtnro_factura" type="text" id="txtnro_factura" size="25" maxlength="20"   value="<?echo $nro_factura?>" readonly class="Estilo5">
+                     <input name="txtnro_factura" type="text" id="txtnro_factura" size="25" maxlength="20"   value="<?php echo $nro_factura?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="64" scope="col"><div align="left"><span class="Estilo5">FECHA DE FACTURA :</span></div></td>
                  <td width="670" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtfecha_factura" type="text" id="txtfecha_factura" size="20" maxlength="15"   value="<?echo $fecha_factura?>" readonly class="Estilo5">
+                     <input name="txtfecha_factura" type="text" id="txtfecha_factura" size="20" maxlength="15"   value="<?php echo $fecha_factura?>" readonly class="Estilo5">
                      <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> <span class="Estilo10"><span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                </tr>
              </table></td>
@@ -883,12 +883,12 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
                <tr>
                  <td width="86" scope="col"><div align="left"><span class="Estilo5">CI/RIF PROVEEDOR :</span></div></td>
                  <td width="250" scope="col"><div align="left"><span class="Estilo5"><span class="Estilo10">
-                     <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?echo $ced_rif_proveedor?>" readonly class="Estilo5">
+                     <input name="txtced_rif_proveedor" type="text" id="txtced_rif_proveedor" size="15" maxlength="12"  value="<?php echo $ced_rif_proveedor?>" readonly class="Estilo5">
                      <span class="menu"><strong><strong>
-                     <input name="bttipo_codeingre224222222436253" type="button" id="bttipo_codeingre224222222436253" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIA'="";''="";'750'="";'500'="";'true')" value="...">
+                     <input name="bttipo_codeingre224222222436253" type="button" id="bttipo_codeingre224222222436253" title="Abrir Catalogo Tipos de Orden" onClick="VentanaCentrada('Cat_fuentes.php?criterio='="";'SIPAP'="";''="";'750'="";'500'="";'true')" value="...">
                  </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span> <span class="menu"><strong><strong> </strong></strong></span></span> </span></div></td>
                  <td width="696" scope="col"><div align="left"><span class="Estilo5">
-                     <input name="txtnom_proveedor" type="text" id="txtnom_proveedor" size="60" maxlength="100"   value="<?echo $nom_proveedor?>" readonly class="Estilo5">
+                     <input name="txtnom_proveedor" type="text" id="txtnom_proveedor" size="60" maxlength="100"   value="<?php echo $nom_proveedor?>" readonly class="Estilo5">
                  </span></div></td>
                </tr>
              </table></td>
@@ -902,4 +902,4 @@ $Ssql="SELECT * FROM bien030 where ced_res_verificador='".$ced_verificador."'"; 
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php  pg_close($conn);?>
