@@ -21,7 +21,7 @@ if (!$_GET){$cod_empleado=''; $p_letra='';  $criterio='';  $cod_empleado='';  $s
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Saldo de Vacaciones)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Saldo de Vacaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css  rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

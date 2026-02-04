@@ -5,7 +5,7 @@ if (!$_GET){$nro_orden="";  $mcod_m="BAN027".$equipo;$codigo_mov=substr($mcod_m,
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Comprobante IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Comprobante IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type=text/javascript></script>
 <script language="javascript" src="ajax_pag.js" type="text/javascript"></script>

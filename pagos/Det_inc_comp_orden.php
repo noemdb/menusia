@@ -6,7 +6,7 @@ if ($monto_am_ant==0) {$amort_ant="NO";} else {$amort_ant="SI";}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Comprobante de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Comprobante de la Orden)</title>
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
 function Llama_Cargar_Codigos(mcodigo_mov){var murl;

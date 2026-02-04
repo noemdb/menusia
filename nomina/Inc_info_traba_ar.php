@@ -5,7 +5,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../class/imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Informaci&oacute;n del Trabajador)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Informaci&oacute;n del Trabajador)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

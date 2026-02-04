@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>SIA ORDENAMIENTO DE PAGO</title>
+  <title>SIPAP ORDENAMIENTO DE PAGO</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
   <style type="text/css">

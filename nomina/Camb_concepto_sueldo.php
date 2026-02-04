@@ -5,7 +5,7 @@ if (!$_GET){$tipo_nomina="";$cod_sueldo=""; $cod_ret="";} else{$tipo_nomina=$_GE
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Cambiar Sueldo de Trabjadores)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Cambiar Sueldo de Trabjadores)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -8,7 +8,7 @@ $monto=0;$montob=0; $montoi=0; $montos=0; $montor=0; $tasa=0; $monto1=0; $monto2
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Documento Libro de Compra)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Documento Libro de Compra)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="../class/sia.js" type=text/javascript></script>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

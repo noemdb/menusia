@@ -13,7 +13,7 @@ if (pg_ErrorMessage($conn)) { ?>
 <html>
 
 <head>
-  <title>SIA ORDENAMIENTO DE PAGOS</title>
+  <title>SIPAP ORDENAMIENTO DE PAGOS</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <LINK href="../class/sia.css" type=text/css rel=stylesheet>
   <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

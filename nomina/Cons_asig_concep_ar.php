@@ -20,7 +20,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Consulta Asignaci&oacute;n De Conceptos)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Consulta Asignaci&oacute;n De Conceptos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../class/sia.css" type=text/css

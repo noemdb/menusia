@@ -5,7 +5,7 @@ if (!$_GET){$cod_cuenta=""; $debito_credito="D";$mcod_m="PAG001".$equipo;$codigo
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Incluir Cuentas Otros Pasivos)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Incluir Cuentas Otros Pasivos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>

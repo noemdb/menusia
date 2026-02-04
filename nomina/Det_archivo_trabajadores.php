@@ -4,7 +4,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA NÓMINA Y PERSONAL (Detalles del Archivo de Trabajadores)</title>
+<title>SIPAP NÓMINA Y PERSONAL (Detalles del Archivo de Trabajadores)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>

@@ -13,7 +13,7 @@ function cerrar_catalogo(mtipo_retencion,mdescrip,mtasa,mced_rif,mnombre){
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Catalogo Tipo de Retenciones)</title>
+<title>SIPAP NOMINA Y PERSONAL (Catalogo Tipo de Retenciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">

@@ -4,7 +4,7 @@ $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Detalles Codigos de la Estructura)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Detalles Codigos de la Estructura)</title>
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 <body>

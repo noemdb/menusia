@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>SIA CONTROL BANCARIO</title>
+  <title>SIPAP CONTROL BANCARIO</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
   <style type="text/css">

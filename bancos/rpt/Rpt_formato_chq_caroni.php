@@ -155,7 +155,7 @@ class PDF extends FPDF{
 		$this->Cell(40,8,'',0,1,'C');		
 		$this->Ln(2);
 		$this->SetFont('Arial','',6);
-		$this->Cell(200,4,'SIA Control Bancario',0,1,'R');
+		$this->Cell(200,4,'SIPAP Control Bancario',0,1,'R');
 	}
   
 }  

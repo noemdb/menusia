@@ -5,7 +5,7 @@ if (!$_GET){$tipo_ret="";  $mcod_m="BAN027".$equipo;$codigo_mov=substr($mcod_m,0
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Modificar Comprobante IVA)</title>
+<title>SIPAP CONTROL BANCARIO (Modificar Comprobante IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

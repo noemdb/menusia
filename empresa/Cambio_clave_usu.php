@@ -10,7 +10,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO  (Cambio de Clave)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO  (Cambio de Clave)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

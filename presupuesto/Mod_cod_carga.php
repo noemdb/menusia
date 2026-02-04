@@ -5,7 +5,7 @@ $cod_presup=$_GET["cod_presup"];$codigo=$_GET["codigo"];$SIA_Definicion=substr($
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Cargar Partidas)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Cargar Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

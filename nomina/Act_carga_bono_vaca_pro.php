@@ -21,7 +21,7 @@ if (substr($campo502,15,1)=="N"){$error=0;} else{?><script language="JavaScript"
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Actualiza Carga Bono Vacacional)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Actualiza Carga Bono Vacacional)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -16,7 +16,7 @@ if ($filas>=1){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL  (Reporte de Consolidado de Ejecucion)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL  (Reporte de Consolidado de Ejecucion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

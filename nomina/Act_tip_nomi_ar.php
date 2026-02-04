@@ -21,7 +21,7 @@ if (!$_GET){$tipo_nomina=''; $p_letra='';$sql="SELECT * FROM NOM001 ".$criterion
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Tipos de Nomina)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Tipos de Nomina)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

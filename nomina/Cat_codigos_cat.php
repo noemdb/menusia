@@ -13,7 +13,7 @@ function cerrar_catalogo(mcodigo,denominacion){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Catalogo de C&oacute;digos Categorias)</title>
+<title>SIPAP NOMINA Y PERSONAL (Catalogo de C&oacute;digos Categorias)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">

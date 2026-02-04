@@ -7,7 +7,7 @@ else {$cod_documento = $_GET["Gdocumento"];  $sql="Select * from PAG017 where co
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Tipos Documento)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Tipos Documento)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

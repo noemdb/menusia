@@ -2,7 +2,7 @@
 <?include ("../../class/conects.php");  include ("../../class/funciones.php"); ?>
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Reporte Definido por el Usuario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Reporte Definido por el Usuario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

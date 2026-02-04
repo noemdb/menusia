@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>SIA CONTABILIDAD PRESUPUESTARIA</title>
+  <title>SIPAP CONTABILIDAD PRESUPUESTARIA</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>
   <style type="text/css">

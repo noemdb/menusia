@@ -18,7 +18,7 @@ if ($dbname <> "DATOS") {
 <html>
 
 <head>
-  <title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO</title>
+  <title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
   <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

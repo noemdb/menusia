@@ -5,7 +5,7 @@ if (!$_GET){$usuario="";}else{$usuario=$_GET["usuario"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO (Incluir Asignar Partidas)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO (Incluir Asignar Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

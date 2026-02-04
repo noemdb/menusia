@@ -5,7 +5,7 @@ $cod_cuenta=$_GET["cod_cuenta"];$codigo_mov=$_GET["codigo_mov"];$debito_credito=
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -6,7 +6,7 @@ setlocale( LC_TIME, 'spanish' );
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Detalles calendario)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Detalles calendario)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <style type="text/css">

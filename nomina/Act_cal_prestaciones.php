@@ -21,7 +21,7 @@ if (!$_GET){$cod_empleado=''; $p_letra='';$sql="SELECT * FROM CAL_PRESTA ORDER B
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Actualiza Calculo de Prestaciones)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Actualiza Calculo de Prestaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" type="text/Javascript">

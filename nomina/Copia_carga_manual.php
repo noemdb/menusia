@@ -7,7 +7,7 @@ if (!$_GET){$criterio='';}else{$criterio=$_GET["criterio"];}  $tipo_nomina=subst
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Copiar Carga Manual)</title>
+<title>SIPAP NOMINA Y PERSONAL (Copiar Carga Manual)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -9,7 +9,7 @@ $cedula_d="";$cedula_h="";$fecha_d="01/01/1900";$fecha_h="31/12/9999";$sexo="";$
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reportes Inf&oacute;rmacion Personal de Elegibles)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reportes Inf&oacute;rmacion Personal de Elegibles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

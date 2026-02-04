@@ -7,7 +7,7 @@ if(FDate($fecha_hoy)>FDate($fecha_fin)){$fecha_hoy=$fecha_fin;}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Anular Modificacion)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Anular Modificacion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript">

@@ -17,7 +17,7 @@ function cerrar_catalogo(mcod_presup,mdenominacion,mcod_contable){
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL DE PAGOS(Catalogo de Codigos Partidas)</title>
+<title>SIPAP CONTROL DE PAGOS(Catalogo de Codigos Partidas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

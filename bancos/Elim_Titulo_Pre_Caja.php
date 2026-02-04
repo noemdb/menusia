@@ -5,7 +5,7 @@ if (!$_GET){$codigo_titulo='';} else {$codigo_titulo=$_GET["Gcodigo_titulo"];}?>
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (TITULO FLUJO DE CAJA)</title>
+<title>SIPAP CONTROL BANCARIO (TITULO FLUJO DE CAJA)</title>
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type="text/javascript"></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

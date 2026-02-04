@@ -17,7 +17,7 @@ $fecha_fin=formato_ddmmaaaa($Fec_Fin_Ejer);  if(FDate($fecha_hoy)>FDate($fecha_f
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Emision de Cheques a Orden Permanente)</title>
+<title>SIPAP CONTROL BANCARIO (Emision de Cheques a Orden Permanente)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

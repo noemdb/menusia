@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SIA CONFIGURACIÓN Y MANTENIMIENTO</title>
+  <title>SIPAP CONFIGURACIÓN Y MANTENIMIENTO</title>
   <link rel="SHORTCUT ICON" href="../imagenes/sia.ico">
 
   <!-- Modern UI Styles -->

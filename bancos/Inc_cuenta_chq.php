@@ -7,7 +7,7 @@ $monto=cambia_punto_comas($monto);
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Incluir Cuentas al cheque)</title>
+<title>SIPAP CONTROL BANCARIO (Incluir Cuentas al cheque)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

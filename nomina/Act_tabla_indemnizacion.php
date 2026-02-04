@@ -21,7 +21,7 @@ if (!$_GET){$tipo_nomina=''; $consecutivo=''; $p_letra='';$sql="SELECT * FROM ta
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Actualiza Tabla de Indemnizaci&oacute;n)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Actualiza Tabla de Indemnizaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

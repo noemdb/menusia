@@ -6,7 +6,7 @@ if (!$_GET){$cod_banco='';}  else{$cod_banco=$_GET["txtcod_banco"];} $fecha_hoy=
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (DESCATIVA CUENTA BANCARIA)</title>
+<title>SIPAP CONTROL BANCARIO (DESCATIVA CUENTA BANCARIA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

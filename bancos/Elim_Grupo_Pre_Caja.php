@@ -5,7 +5,7 @@ if (!$_GET){$codigo_grupo='';} else {$codigo_grupo=$_GET["Gcodigo_grupo"];}?>
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Grupos de Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Grupos de Bancos)</title>
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type="text/javascript"></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

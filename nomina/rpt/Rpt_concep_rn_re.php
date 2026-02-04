@@ -9,7 +9,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 <html>
 <head>
 
-<title>SIA N&Oacute;MINA Y PERSONAL (Reportes De Relaci&oacute;n De Conceptos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reportes De Relaci&oacute;n De Conceptos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

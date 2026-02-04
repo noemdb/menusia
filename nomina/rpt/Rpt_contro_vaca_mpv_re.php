@@ -13,7 +13,7 @@ $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer);  $fecha_h=formato_ddmmaaaa($Fec_Fin_Ej
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reportes Control Individual de Vacaciones)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reportes Control Individual de Vacaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

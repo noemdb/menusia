@@ -21,7 +21,7 @@ else {$cedula = $_GET["Gcedula"];$p_letra=substr($cedula, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Informaci&oacute;n Elegibles)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Informaci&oacute;n Elegibles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

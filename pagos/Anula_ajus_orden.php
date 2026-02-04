@@ -6,7 +6,7 @@ $fecha_hoy=asigna_fecha_hoy();
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (ANULAR AJUSTE ORDENES DE PAGO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (ANULAR AJUSTE ORDENES DE PAGO)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">

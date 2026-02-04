@@ -9,7 +9,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 <script language="JavaScript" type="text/JavaScript">
 function Llama(mcodigo,modu,dopcion){ url="Act_opcion.php?opcion="+mcodigo+"&modulo="+modu+"&des_opcion="+dopcion; document.location = url;}
  </script>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO (Detalles Accesos)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO (Detalles Accesos)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>

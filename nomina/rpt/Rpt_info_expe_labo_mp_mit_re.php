@@ -18,7 +18,7 @@ if ($gnomina=="00"){ $criterion=""; $criterioc=""; $temp_nomina="";}else{ $temp_
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reportes Maestro de Trabajadores)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reportes Maestro de Trabajadores)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

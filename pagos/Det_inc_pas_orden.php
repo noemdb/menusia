@@ -4,7 +4,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Incluir Pasivos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Incluir Pasivos de la Orden)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="javascript" src="ajax_pag.js" type="text/javascript"></script>

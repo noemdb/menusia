@@ -6,7 +6,7 @@ if (!$_GET){$cod_estructura='';}else{$cod_estructura=$_GET["cod_estructura"];}  
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Asignacion Compromisos Estructura)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Asignacion Compromisos Estructura)</title>
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>

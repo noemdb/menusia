@@ -6,7 +6,7 @@ $sql="Select * from SIA005 where campo501='05'"; $resultado=pg_query($sql);if ($
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Incluir Codigos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Incluir Codigos de la Orden)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

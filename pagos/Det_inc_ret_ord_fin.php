@@ -9,7 +9,7 @@ if ($filas>0){ $registro=pg_fetch_array($resultado); $monto_t=$registro["total_c
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Detalles Incluir Retencion a la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Detalles Incluir Retencion a la Orden)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

@@ -14,7 +14,7 @@ $des_tipo_d="";$des_tipo_h=""; $nombre_banco_d="";  $nombre_banco_h="";
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
- <title>SIA CONTROL BANCARIO (Reporte Relaci&oacute;n de Movimientos)</title>
+ <title>SIPAP CONTROL BANCARIO (Reporte Relaci&oacute;n de Movimientos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

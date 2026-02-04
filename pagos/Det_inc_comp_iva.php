@@ -7,7 +7,7 @@ $ivag=0;$sql="Select * from SIA000"; $res=pg_query($sql); if ($registro=pg_fetch
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Detalles Comprobante Retencion IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Detalles Comprobante Retencion IVA)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

@@ -5,7 +5,7 @@ if (!$_GET){$tipo_nomina="";} else{$tipo_nomina=$_GET["Gtipo_nomina"]; $cod_conc
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Actualizar Codigos presupuestario de Concepto)</title>
+<title>SIPAP NOMINA Y PERSONAL (Actualizar Codigos presupuestario de Concepto)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -13,7 +13,7 @@ $codigo_departamento_d=""; $codigo_departamento_h=""; $codigo_cargo_d=""; $codig
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte Catalago Cargos por Departamentos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte Catalago Cargos por Departamentos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../../class/sia.js" type=text/javascript></SCRIPT>

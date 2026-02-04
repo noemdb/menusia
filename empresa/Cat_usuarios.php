@@ -13,7 +13,7 @@ function cerrar_catalogo(mcodigo,mnombre){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO (Catalogo de Usuarios)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO (Catalogo de Usuarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

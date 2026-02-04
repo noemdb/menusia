@@ -8,7 +8,7 @@ $tasa_iva=formato_monto($ivag);$fecha_hoy=asigna_fecha_hoy();
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Factura en la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Factura en la Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

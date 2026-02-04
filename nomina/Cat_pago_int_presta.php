@@ -5,7 +5,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Catalogo Pago de Intereses Prestaciones)</title>
+<title>SIPAP NOMINA Y PERSONAL (Catalogo Pago de Intereses Prestaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

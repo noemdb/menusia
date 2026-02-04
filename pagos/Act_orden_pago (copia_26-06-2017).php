@@ -29,7 +29,7 @@ $StrSQL="select* from ban011 where codigo='03'"; $resultado=pg_query($StrSQL);$f
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
 <!-- <meta http-equiv="Content-type" content="text/html;charset=UTF-8"> -->
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
@@ -352,8 +352,8 @@ if($inic_pant=="N"){ $tced_r=$ced_rif; $tnomb_r=$nombre; $tcon_est=$concepto; $t
         </tr>
 		<?}?>	
         <tr>
-			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_registro_orden.htm','Ayuda SIA','','1000','1000','true');";
-				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_registro_orden.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_registro_orden.htm','Ayuda SIPAP','','1000','1000','true');";
+				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_registro_orden.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
         </tr>
 
         <?if($Cod_Emp=="02"){?>

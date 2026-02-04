@@ -12,7 +12,7 @@ if (!$_GET){ $cod_empleado_d=''; $cod_empleado_h='';} else {  $cod_empleado_d= $
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Formato Hoja de Vida)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Formato Hoja de Vida)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

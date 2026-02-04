@@ -12,7 +12,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="09"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y AMAC&Eacute;N(Ramos)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y AMAC&Eacute;N(Ramos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>

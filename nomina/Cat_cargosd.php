@@ -13,7 +13,7 @@ function cerrar_catalogo(codigo_cargo,den_cargo){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Catalogo de Cargos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Catalogo de Cargos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">

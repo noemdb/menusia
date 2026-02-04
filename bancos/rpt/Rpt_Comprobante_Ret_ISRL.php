@@ -13,7 +13,7 @@ $cedula_d=""; $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer); $fecha_h=formato_ddmmaaa
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Comprobante Retenciones ISRL)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Comprobante Retenciones ISRL)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

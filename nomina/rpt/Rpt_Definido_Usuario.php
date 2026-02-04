@@ -2,7 +2,7 @@
 <?include ("../../class/funciones.php");?>
 <html>
 <head>
-<title>SIA CONTROL NÓMINA Y PERSONAL (Reporte Definido por el Usuario)</title>
+<title>SIPAP CONTROL NÓMINA Y PERSONAL (Reporte Definido por el Usuario)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css

@@ -23,7 +23,7 @@ if (!$_GET){$criterio='';$p_letra=''; $nro_comprobante='';  $ano_fiscal='';  $me
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Comprobante Retenciones IVA)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Comprobante Retenciones IVA)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -144,8 +144,8 @@ if($anulada=='S'){ $etiq_anu="ANULADA";} else { $etiq_anu="";}
       </tr>
   <?} ?>
   <tr>
-	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_compro_iva.htm','Ayuda SIA','','1000','1000','true');";
-		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_compro_iva.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_compro_iva.htm','Ayuda SIPAP','','1000','1000','true');";
+		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_compro_iva.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";

@@ -18,7 +18,7 @@ function cerrar_catalogo(mtipo_retencion,mdescrip,mtasa,mced_rif,mnombre,msustra
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Catalogo de Retenciones)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Catalogo de Retenciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

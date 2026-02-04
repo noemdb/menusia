@@ -4,7 +4,7 @@ else{$cod_dependen=$_GET["cod_dependen"]; $cod_direcci=$_GET["cod_direcci"]; $de
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y AMAC&Eacute;N(Unidad Solicitante)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y AMAC&Eacute;N(Unidad Solicitante)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

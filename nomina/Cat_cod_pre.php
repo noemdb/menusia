@@ -15,7 +15,7 @@ function cerrar_catalogo(mcodigo,mfuente,mdenominacion,mdes_fuente,mcod_conta,mn
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo de C&oacute;digos Presupuestarios)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo de C&oacute;digos Presupuestarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">
 <meta http-equiv="Pragma" content="no-cache" />

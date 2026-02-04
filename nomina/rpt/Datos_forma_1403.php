@@ -11,7 +11,7 @@ $fecha_egreso=$_POST["txtfecha_egreso"];
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (CARGAR FORMA 1403)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (CARGAR FORMA 1403)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

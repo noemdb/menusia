@@ -6,7 +6,7 @@ if (!$_GET){$cod_cuenta=""; $debito_credito="D";$mcod_m="BAN0062".$equipo;$codig
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Modificar Cuenta del Movimiento Libro)</title>
+<title>SIPAP CONTROL BANCARIO (Modificar Cuenta del Movimiento Libro)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>

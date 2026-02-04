@@ -23,7 +23,7 @@ $inic_pantalla=0; if($Cod_Emp=="32"){ $inic_pantalla=1;}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Ficha de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

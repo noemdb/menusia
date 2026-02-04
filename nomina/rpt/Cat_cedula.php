@@ -15,7 +15,7 @@ function cerrar_catalogo(cedula,nomb){
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Catalogo de C&eacute;dula)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Catalogo de C&eacute;dula)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK

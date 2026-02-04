@@ -18,7 +18,7 @@ if ($dbname <> "DATOS") {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SIA CONFIGURACIÓN Y MANTENIMIENTO</title>
+  <title>SIPAP CONFIGURACIÓN Y MANTENIMIENTO</title>
   <link rel="SHORTCUT ICON" href="../imagenes/sia.ico">
 
   <!-- Modern UI Styles -->
@@ -89,10 +89,10 @@ $var_so = $var_so . " Sistema Operativo Servidor : " . $PHP_OS . " " . $nombre_s
       <p class="lead mb-4"><?php echo $var_so ?></p>
 
       <div class="module-grid">
-        <!-- Configuracion SIA -->
+        <!-- Configuracion SIPAP -->
         <a href="menu_conf.php" class="glass-card">
           <i class="fas fa-cogs"></i>
-          <div class="module-title">Configuración SIA</div>
+          <div class="module-title">Configuración SIPAP</div>
           <div class="module-desc">Parámetros generales del sistema</div>
         </a>
 

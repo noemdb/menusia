@@ -6,7 +6,7 @@ if (!$_GET){$mes='01'; $ano='2013'; $ini='N'; $fecha_c='2013-01-01'; } else{$fec
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Modificar Calendario)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Modificar Calendario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

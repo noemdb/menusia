@@ -11,7 +11,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Actualiza Tipo de Documento)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Actualiza Tipo de Documento)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -74,8 +74,8 @@ function enviar(seleccion){Gdocumento=seleccion;}
           </tr>
 		  <?} ?>
 		  <tr>
-			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_docu.htm','Ayuda SIA','','1000','1000','true');";
-				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_docu.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+			<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_docu.htm','Ayuda SIPAP','','1000','1000','true');";
+				  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Ventana_002('/sia/pagos/ayuda/ayuda_tipos_docu.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
 		  </tr>
           <tr>
             <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";

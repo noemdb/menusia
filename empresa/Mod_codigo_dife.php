@@ -8,7 +8,7 @@ if (!$_GET){ $cod_presup=""; $cod_fuente="00";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Modificar Códigos en el Diferido)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Modificar Códigos en el Diferido)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet> 
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>

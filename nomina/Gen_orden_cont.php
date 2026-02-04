@@ -12,7 +12,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{$modulo="04"; $opcion=
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Generar Informacion Orden de Pago - Nominas con Contratos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Generar Informacion Orden de Pago - Nominas con Contratos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

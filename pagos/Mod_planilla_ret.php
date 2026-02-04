@@ -12,7 +12,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Retenciones de Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Retenciones de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

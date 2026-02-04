@@ -4,7 +4,7 @@ if (!$_GET){$codigo_mov="";$cedula="";} else{$cedula=$_GET["cedula"];$codigo_mov
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Modificar Informaci&oacute;n Familiar)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Modificar Informaci&oacute;n Familiar)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

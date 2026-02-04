@@ -11,7 +11,7 @@ $fecha_fin=formato_ddmmaaaa($fec_fin_e);  if(FDate($fecha_hoy)>FDate($fecha_fin)
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Depreciacion Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Depreciacion Bienes Inmuebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

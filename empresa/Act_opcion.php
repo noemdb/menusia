@@ -52,7 +52,7 @@ if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO (Cuentas de Usuarios)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO (Cuentas de Usuarios)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

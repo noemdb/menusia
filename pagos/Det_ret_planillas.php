@@ -9,7 +9,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="01"; $opcion="
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Planillas de Retencion)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Planillas de Retencion)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

@@ -15,7 +15,7 @@ function cerrar_catalogo(tipo_nomina,des_nomina,fecha_p_d,fecha_p_h,num_per){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Nominas Calculadas)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Nominas Calculadas)</title>
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 <body>

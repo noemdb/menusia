@@ -18,7 +18,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_nomina=''; $cod_empleado=''; $cod_c
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (ORDENES DE PAGO)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

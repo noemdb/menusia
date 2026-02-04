@@ -4,7 +4,7 @@
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Responsables Verificador)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Responsables Verificador)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../class/sia.js" type="text/javascript"></script>

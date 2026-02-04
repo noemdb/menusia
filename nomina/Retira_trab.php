@@ -6,7 +6,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Retira Codigo de Trabajador)</title>
+<title>SIPAP NOMINA Y PERSONAL (Retira Codigo de Trabajador)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">

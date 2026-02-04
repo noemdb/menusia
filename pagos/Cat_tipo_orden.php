@@ -13,7 +13,7 @@ function cerrar_catalogo(mtipo_orden,mdescrip,mcod_contable_t){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Catalogo Tipos de Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Catalogo Tipos de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

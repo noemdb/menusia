@@ -5,7 +5,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Detalles Sueldo Dias Adicionales)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Detalles Sueldo Dias Adicionales)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>

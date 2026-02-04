@@ -7,7 +7,7 @@ $monto_r="";$monto_o=""; $monto1=0; $monto2=0; $tasa=0; $descripcion_ret=""; $ti
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Planilla de Retencion)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Planilla de Retencion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

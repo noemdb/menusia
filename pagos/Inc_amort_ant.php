@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Registrar Amortización de Anticipo)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Registrar Amortización de Anticipo)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="javascript" src="ajax_pag.js" type="text/javascript"></script>

@@ -6,7 +6,7 @@ $sql="Select * from EDO_CHEQUES where cod_banco='$cod_banco' and num_cheque='$nu
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Formato Cheque)</title>
+<title>SIPAP CONTROL BANCARIO (Formato Cheque)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

@@ -19,7 +19,7 @@ if (!$_GET){ $ced_rif=''; $sql="SELECT * FROM PRE099 ORDER BY ced_rif"; $p_letra
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Actualiza Beneficiario)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Actualiza Beneficiario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -27,7 +27,7 @@ var Gced_rif = "";
 function Llamar_Incluir(mop){ document.form2.submit(); }
 function Llamar_Ventana(url){var murl;
     Gced_rif=document.form1.txtced_rif.value;murl=url+Gced_rif;
-    if (Gced_rif==""){alert("Cédula/Rif debe ser Seleccionada");}else {document.location = murl;}
+    if (Gced_rif==""){alert("Cï¿½dula/Rif debe ser Seleccionada");}else {document.location = murl;}
 }
 function Mover_Registro(MPos){var murl;
    murl="Act_codigos.php";
@@ -125,8 +125,8 @@ $Ssql="Select * from ban022 where cod_grupob='$campo_str1'"; $resultado=pg_query
       </tr>
       <?} ?>
 	  <tr>
-		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_beneficiarios.htm','Ayuda SIA','','1000','1000','true');";
-			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_beneficiarios.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+		<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_beneficiarios.htm','Ayuda SIPAP','','1000','1000','true');";
+			  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_beneficiarios.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
 	  </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";

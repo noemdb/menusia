@@ -7,7 +7,7 @@ else{ $planilla=$_GET["planilla"]; $nro_planilla=$_GET["nro_planilla"]; $pdesde=
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Modificar Retenciones de Orden)</title>
+<title>SIPAP CONTROL BANCARIO (Modificar Retenciones de Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type=text/javascript></script>
 <script language="javascript" src="ajax_ban.js" type="text/javascript"></script>

@@ -27,7 +27,7 @@ if (($Cod_Emp == "32") or ($Cod_Emp == "A1")) {
 <html>
 
 <head>
-  <title>SIA ORDENAMIENTO DE PAGO</title>
+  <title>SIPAP ORDENAMIENTO DE PAGO</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
   <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

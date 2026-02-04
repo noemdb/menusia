@@ -6,7 +6,7 @@ $fecha_hoy=asigna_fecha_hoy(); $fecha_fin=formato_ddmmaaaa($fecha_fin); if(FDate
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Anular Movimientos en Bancos)</title>
+<title>SIPAP CONTROL BANCARIO (Anular Movimientos en Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -8,7 +8,7 @@ if($filas>0){$registro=pg_fetch_array($resultado); $cod_tipo_orden=$registro["ti
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Codigos de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Codigos de la Orden)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

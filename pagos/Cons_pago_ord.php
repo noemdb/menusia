@@ -6,7 +6,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Cheques de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Cheques de la Orden)</title>
 <LINK  href="../class/sia.css" type=text/css  rel=stylesheet>
 </head>
 <body>

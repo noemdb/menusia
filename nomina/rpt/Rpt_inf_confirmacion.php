@@ -27,7 +27,7 @@ class PDF extends FPDF{
 		$this->Cell(150,4,$Nom_Emp,0,1,'L');
 		$this->SetFont('Arial','',7);
 		$this->Cell(20,4,'',0,0,'L');
-		$this->Cell(90,4,'SIA Nómina y Personal',0,1,'L'); 
+		$this->Cell(90,4,'SIPAP Nómina y Personal',0,1,'L'); 
 		$this->Ln(5);
 		$this->SetFont('Arial','B',12);
 		$this->Cell(25);

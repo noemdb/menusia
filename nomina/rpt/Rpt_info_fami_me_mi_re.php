@@ -12,7 +12,7 @@ if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">muestra('OCURRIO U
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reportes Informaci&oacute;n Familiar de Elegibles)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reportes Informaci&oacute;n Familiar de Elegibles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

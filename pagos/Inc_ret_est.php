@@ -6,7 +6,7 @@ else{$codigo_mov=$_GET["codigo_mov"];$user=$_GET["user"];$password=$_GET["passwo
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Retencion en la Estructura)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Retencion en la Estructura)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

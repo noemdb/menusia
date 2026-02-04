@@ -8,7 +8,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FISCAL (Modifica Coprobantes Contables)</title>
+<title>SIPAP CONTABILIDAD FISCAL (Modifica Coprobantes Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

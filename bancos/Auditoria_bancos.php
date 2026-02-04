@@ -9,7 +9,7 @@ else{ $Nom_Emp=busca_conf();  $sql="SELECT campo103 FROM sia001 where campo101='
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (AUDITORIA DE BANCOS)</title>
+<title>SIPAP CONTROL BANCARIO (AUDITORIA DE BANCOS)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

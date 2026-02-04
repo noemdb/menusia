@@ -24,7 +24,7 @@ $codigo_mov=substr($mcod_m,0,49);
 <LINK REL="SHORTCUT ICON" HREF="../class/imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Definci&oacute;n Estructura de Ordenes)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Definci&oacute;n Estructura de Ordenes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <link rel="stylesheet" type="text/css" href="../class/ajaxtabs.css" />

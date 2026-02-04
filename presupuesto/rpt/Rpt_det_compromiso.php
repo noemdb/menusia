@@ -108,7 +108,7 @@ class PDF extends FPDF{
 		$this->Ln(5);
 		$this->SetFont('Arial','B',5);
 		$this->Cell(100,4,'',0,0,'L');
-		$this->Cell(100,4,'SIA CONTABILIDAD PRESUPUESTARIA',0,1,'R');
+		$this->Cell(100,4,'SIPAP CONTABILIDAD PRESUPUESTARIA',0,1,'R');
 	}
 }  
   $pdf=new PDF('P', 'mm', Letter);

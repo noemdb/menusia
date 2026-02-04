@@ -7,7 +7,7 @@ if (!$_GET){  $referencia_caus='';$tipo_causado='';$tipo_pago=''; $referencia_pa
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Anular Pagos)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Anular Pagos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript>
 </script>

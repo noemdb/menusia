@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Incluir Codigos en la Estructura)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Incluir Codigos en la Estructura)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>

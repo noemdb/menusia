@@ -16,7 +16,7 @@ if (mcodigo=="") {alert("Codigo debe ser Seleccionado");}
   }  
 }
  </script>
-<title>SIA CONFIGURACI&Oacute;N Y MANTENIMIENTO (Detalles Asignar Partidas)</title>
+<title>SIPAP CONFIGURACI&Oacute;N Y MANTENIMIENTO (Detalles Asignar Partidas)</title>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 </head>
 <body>

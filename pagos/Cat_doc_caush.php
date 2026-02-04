@@ -12,7 +12,7 @@ function cerrar_catalogo(mtipo,mabrev){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo Documentos de Causados)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo Documentos de Causados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">

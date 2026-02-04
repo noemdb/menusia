@@ -6,7 +6,7 @@ else{ $cod_banco=$_GET["cod_banco"];$referencia=$_GET["referencia"];$tipo_mov=$_
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Modificar Gasto del Flujo)</title>
+<title>SIPAP CONTROL BANCARIO (Modificar Gasto del Flujo)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <SCRIPT language="JavaScript" src="../class/sia.js" type="text/javascript"></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

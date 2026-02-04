@@ -14,7 +14,7 @@ $fecha_d=formato_ddmmaaaa($Fec_Ini_Ejer); $fecha_d="01/01/1900";  $fecha_h=forma
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Reportes Listado Compronentes de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Reportes Listado Compronentes de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="Javascript" src="../../class/sia.js" type="text/javascript"></script>

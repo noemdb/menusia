@@ -5,7 +5,7 @@ if(!$_GET){$mcod_m="ENOM017".$usuario_sia.$equipo;$codigo_mov=substr($mcod_m,0,4
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Incluir Conceptos N&oacute;mina Extraordinaria)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Incluir Conceptos N&oacute;mina Extraordinaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

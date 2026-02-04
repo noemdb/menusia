@@ -18,7 +18,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_nomina=''; $cod_empleado='';$sql="S
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte Deglose de N&oacute;mina)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte Deglose de N&oacute;mina)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

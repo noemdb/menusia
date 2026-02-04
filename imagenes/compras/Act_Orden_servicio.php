@@ -24,7 +24,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $tipo_compromiso=''; $nro_orden=''; $sql=
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Ordenes de Servicio)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Ordenes de Servicio)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

@@ -16,7 +16,7 @@ if ($filas==0){$error=1;  }
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Consulta Disponibilidad Presupuestaria)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Consulta Disponibilidad Presupuestaria)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>

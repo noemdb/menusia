@@ -7,7 +7,7 @@ $codigo_cargo_d="";$codigo_cargo_h="zzzzzzzzzzz";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Cambiar Carga Manual)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Cambiar Carga Manual)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -24,7 +24,7 @@ if (!$_GET){ $p_letra='';$criterio=''; $nro_requisicion=''; $sql="SELECT * FROM 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Requisici&oacute;n de Art&iacute;culos)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (Requisici&oacute;n de Art&iacute;culos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">

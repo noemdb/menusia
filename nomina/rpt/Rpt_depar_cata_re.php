@@ -13,7 +13,7 @@ $codigo_departamento_d=""; $codigo_departamento_h="";
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte catalogo de Departamentos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte catalogo de Departamentos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../../class/sia.js" type=text/javascript></SCRIPT>

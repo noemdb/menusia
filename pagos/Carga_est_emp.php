@@ -6,7 +6,7 @@ else{$codigo_mov=$_GET["codigo_mov"]; $ced_emp=$_GET["ced_emp"]; $user=$_GET["us
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Cargar Estructura Empleado)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Cargar Estructura Empleado)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

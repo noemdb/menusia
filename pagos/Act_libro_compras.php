@@ -22,7 +22,7 @@ else {  $mes_libro = $_GET["Gmes_libro"];  $p_letra=substr($mes_libro, 0, 1);
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Generar Libro de Compras)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Generar Libro de Compras)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/JavaScript">
@@ -114,8 +114,8 @@ $clave=$mes_libro; if($fecha==""){$fecha="";}else{$fecha=formato_ddmmaaaa($fecha
   </tr>
   <?} ?>
   <tr>
-	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_libro_com.htm','Ayuda SIA','','1000','1000','true');";
-		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_libro_com.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_libro_com.htm','Ayuda SIPAP','','1000','1000','true');";
+		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_generar_libro_com.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";

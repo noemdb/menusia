@@ -26,7 +26,7 @@ if ($Cod_Emp == "88") {
 <html>
 
 <head>
-  <title>SIA CONTABILIDAD PRESUPUESTARIA</title>
+  <title>SIPAP CONTABILIDAD PRESUPUESTARIA</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
   <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

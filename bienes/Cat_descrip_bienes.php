@@ -13,7 +13,7 @@ function cerrar_catalogo(mcodigo,mdenominacion){
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Catalogo de Descripcion de Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Catalogo de Descripcion de Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

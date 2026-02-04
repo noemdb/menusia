@@ -8,7 +8,7 @@ if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base 
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA FORMULACIÓN DE PRESUPUESTO (Reportes Catalogos De Cargos Por Departamentos)</title>
+<title>SIPAP FORMULACIÓN DE PRESUPUESTO (Reportes Catalogos De Cargos Por Departamentos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

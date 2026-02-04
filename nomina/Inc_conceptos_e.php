@@ -5,7 +5,7 @@ if(!$_GET){$cod_arch_banco=""; $cod_concepto=""; $denominacion="";}else{$cod_arc
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Incluir Conceptos Lista de Seleccion)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Incluir Conceptos Lista de Seleccion)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

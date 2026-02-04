@@ -8,7 +8,7 @@ if (!$_GET){$tipo_nomina='';} else{$tipo_nomina=$_GET["tipo_nomina"];$tp_calculo
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Tipos de Nomina Cerradas)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Tipos de Nomina Cerradas)</title>
 <LINK  href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 

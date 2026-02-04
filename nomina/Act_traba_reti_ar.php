@@ -21,7 +21,7 @@ else {$cedula = $_GET["Gcedula"];$p_letra=substr($cedula, 0, 1);
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Trabajadores Retirados)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Trabajadores Retirados)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

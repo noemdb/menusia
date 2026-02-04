@@ -7,7 +7,7 @@ else{ $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resulta
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (AUDITORIA NOMINA Y PERSONAL)</title>
+<title>SIPAP NOMINA Y PERSONAL (AUDITORIA NOMINA Y PERSONAL)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

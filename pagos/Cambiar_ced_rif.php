@@ -4,7 +4,7 @@ if (!$_GET){$ced_rif=''; $nombre='';}  else {$ced_rif=$_GET["Gced_rif"]; $nombre
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (CAMBIAR CEDULA/RIF BENEFICIARIO)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (CAMBIAR CEDULA/RIF BENEFICIARIO)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

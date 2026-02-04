@@ -5,7 +5,7 @@ else{$cod_dependen=$_GET["cod_dependen"]; $cod_direcci=$_GET["cod_direcci"]; $co
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Direcciones)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Direcciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
@@ -20,7 +20,8 @@ MM_reloadPage(true);
 //-->
 </script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependen=<?echo $cod_dependen?>&cod_direcci=<?echo $cod_direcci?>'; }
+function llamar_anterior(){ document.location ='Det_departamentos.php?cod_dependen=<?echo $cod_dependen?>&cod_direcci=<?echo $cod_direcci?>'; }
+
 function chequea_unidad_sol(mform){ var mref;
  mref=mform.txtcod_departamento.value;  mref=Rellenarizq(mref,"0",10);   mform.txtcod_departamento.value=mref;
 }

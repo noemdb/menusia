@@ -8,7 +8,7 @@ if($filas>0){$registro=pg_fetch_array($resultado); $cod_cat=$registro["cod_conta
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Detalles Incluir Codigos del Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Detalles Incluir Codigos del Compromiso)</title>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 
 </head>

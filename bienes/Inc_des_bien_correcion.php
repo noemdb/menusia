@@ -14,7 +14,7 @@ $valor_incorporacion=$_POST["txtvalor_incorporacion"];$fecha_incorporacion=$_POS
 ?>  
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Incluir Ficha de Bienes Muebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Incluir Ficha de Bienes Muebles)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

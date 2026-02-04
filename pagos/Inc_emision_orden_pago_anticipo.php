@@ -19,7 +19,7 @@ if (!$_GET){
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Emisi&oacute;n Ordenes de Pagos Financiera (Anticipo) )</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Emisi&oacute;n Ordenes de Pagos Financiera (Anticipo) )</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css

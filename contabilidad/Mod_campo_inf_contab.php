@@ -5,7 +5,7 @@ if (!$_GET){$tipo_informe="";$linea="00000001";}else{$tipo_informe=$_GET["tipo_i
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Modificar Linea Informes Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Modificar Linea Informes Contables)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

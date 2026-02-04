@@ -6,7 +6,7 @@ if (!$_GET){  $Tipo_Asiento='';} else {  $Tipo_Asiento = $_GET["GTipo_Asiento"];
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Eliminar Tipos de Asientos)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Eliminar Tipos de Asientos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css"   rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

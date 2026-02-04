@@ -5,7 +5,7 @@ if (!$_GET){  $codigo_cuenta='';} else {$codigo_cuenta = $_GET["Gcodigo_cuenta"]
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Eliminar Plan de Cuentas)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Eliminar Plan de Cuentas)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css rel=stylesheet>

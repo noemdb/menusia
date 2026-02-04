@@ -5,7 +5,7 @@ if (!$_GET){ $referencia_aju=""; $mcod_m="PAG019".$equipo;$codigo_mov=substr($mc
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Ajuste Ordenes de Pagos)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Ajuste Ordenes de Pagos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <script language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

@@ -21,7 +21,7 @@ if (!$_GET){$tipo_nomina=''; $cod_concepto=''; $consecutivo=''; $p_letra='';$sql
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Formula Conceptos de Nomina)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Formula Conceptos de Nomina)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

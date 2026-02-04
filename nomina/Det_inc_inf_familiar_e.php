@@ -3,7 +3,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Detalles Informaci&oacute;n Familiar)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Detalles Informaci&oacute;n Familiar)</title>
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 </head>
 <script language="JavaScript" type="text/JavaScript">

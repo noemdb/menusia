@@ -6,7 +6,7 @@ if (!$_GET){  $cod_presup='';} else {  $cod_presup = $_GET["Gcod_presup"];}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Eliminar Asociacion Contables)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Eliminar Asociacion Contables)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

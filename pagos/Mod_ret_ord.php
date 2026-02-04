@@ -6,7 +6,7 @@ if (!$_GET){ $referencia="";$tipo=""; $cod_presup="";$cod_fuente="00"; $mcod_m="
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Retención de la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Retención de la Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

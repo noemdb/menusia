@@ -32,7 +32,7 @@ if ($Cod_Emp == "34") {
 <html>
 
 <head>
-  <title>SIA N&Oacute;MINA Y PERSONAL</title>
+  <title>SIPAP N&Oacute;MINA Y PERSONAL</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
   <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

@@ -6,7 +6,7 @@ if (!$_GET){$codigo_mov="";$nro_factura="";$ref_comp="N";$ced_rif="";}else{$codi
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Factura en la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Factura en la Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">

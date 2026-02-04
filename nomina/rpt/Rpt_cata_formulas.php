@@ -14,7 +14,7 @@ if ($gnomina=="00"){ $criterion=""; $criterioc=""; $temp_nomina="";}else{ $temp_
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte catalogo de Formulas)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte catalogo de Formulas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language="JavaScript" src="../../class/sia.js" type=text/javascript></SCRIPT>

@@ -13,7 +13,7 @@ $fecha_hoy=asigna_fecha_hoy(); $fecha_h=$fecha_hoy;  if ($gnomina=="00"){ $crite
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte Control General de Prestaciones)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte Control General de Prestaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

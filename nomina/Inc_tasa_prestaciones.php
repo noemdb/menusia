@@ -7,7 +7,7 @@ $fecha_desde=nextDate($fecha_desde,1); $fecha_hasta=colocar_udiames($fecha_desde
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Incluir Tasa Interes Prestaciones)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Incluir Tasa Interes Prestaciones)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

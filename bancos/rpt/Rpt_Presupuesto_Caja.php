@@ -13,7 +13,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{$modulo="02"; $opcion="
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Reporte Presupuesto de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Reporte Presupuesto de Caja)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <SCRIPT language="javascript" src="../../class/sia.js" type="text/javascript"></SCRIPT>

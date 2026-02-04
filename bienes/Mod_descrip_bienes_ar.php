@@ -9,7 +9,7 @@ $num_descrip=substr($Gcodigo_c,0,8); $codigo_c=substr($Gcodigo_c,8,10); $clave=$
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Actualiza Descripcion de Bienes)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Actualiza Descripcion de Bienes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

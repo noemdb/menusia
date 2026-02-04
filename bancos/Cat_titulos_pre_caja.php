@@ -15,7 +15,7 @@ function cerrar_catalogo(mcodigo_titulo,mdescrip){
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Catalogo Titulos Flujo de Caja)</title>
+<title>SIPAP CONTROL BANCARIO (Catalogo Titulos Flujo de Caja)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

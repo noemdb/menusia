@@ -22,7 +22,7 @@ return true;}
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Catalogo de Cuentas)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Catalogo de Cuentas)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache" />
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">

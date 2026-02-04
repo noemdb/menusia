@@ -6,7 +6,7 @@ if (!$_GET){$cod_tipo_personal='';}else{$cod_tipo_personal=$_GET["cod_tipo_perso
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Modificar Grado y Paso)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Modificar Grado y Paso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

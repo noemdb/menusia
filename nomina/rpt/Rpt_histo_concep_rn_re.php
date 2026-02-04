@@ -14,7 +14,7 @@ $fecha_d="01/01/1990"; $fecha_h=asigna_fecha_hoy();
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte Historico de Conceptos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte Historico de Conceptos)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

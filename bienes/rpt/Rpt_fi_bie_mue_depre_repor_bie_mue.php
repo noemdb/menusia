@@ -15,7 +15,7 @@ $cod_bien_mued=""; $cod_bien_mueh="";   $cod_empresad=""; $cod_empresah=""; $cod
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL DE BIENES NACIONALES (Reportes Listado De Bienes Inmuebles)</title>
+<title>SIPAP CONTROL DE BIENES NACIONALES (Reportes Listado De Bienes Inmuebles)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK href="../../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../../class/sia.js" type=text/javascript></SCRIPT>

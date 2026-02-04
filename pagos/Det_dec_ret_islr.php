@@ -6,7 +6,7 @@ if (!$_GET){$codigo_mov='';}else{$codigo_mov=$_GET["codigo_mov"];}  $fecha_hoy=a
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Detalles Planillas Retencion ISLR)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Detalles Planillas Retencion ISLR)</title>
 <LINK  href="../class/sia.css" type=text/css rel=stylesheet>
 </head>
 <body>

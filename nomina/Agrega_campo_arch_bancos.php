@@ -6,7 +6,7 @@ if (!$_GET){$codigo="";} else{$codigo=$_GET["Gcodigo"];} $tipo_arch_banco=substr
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Agregar Campos Archivo de Bancos)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Agregar Campos Archivo de Bancos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

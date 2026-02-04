@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Tipo de Enriquecimiento)</title>
+<title>SIPAP CONTROL BANCARIO (Tipo de Enriquecimiento)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet>
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>

@@ -8,7 +8,7 @@ $fecha_d=substr($criterio,10,10); $fecha_h=substr($criterio,20,10); $cod_concept
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA NOMINA Y PERSONAL (Informacion Orden de Pago - Aportes)</title>
+<title>SIPAP NOMINA Y PERSONAL (Informacion Orden de Pago - Aportes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

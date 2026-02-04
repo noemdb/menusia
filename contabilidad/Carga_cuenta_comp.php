@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Cargar Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Cargar Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">

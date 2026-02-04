@@ -7,7 +7,7 @@ if (!$_GET){  $ced_rif='';  $sql="SELECT * FROM PRE099 ORDER BY ced_rif";} else 
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGO (Modificar Beneficiarios)</title>
+<title>SIPAP ORDENAMIENTO DE PAGO (Modificar Beneficiarios)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

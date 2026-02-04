@@ -14,7 +14,7 @@ $periodod='2012';$periodoh='01'; $fecha_hoy=asigna_fecha_hoy(); $periodod=substr
 <LINK REL="SHORTCUT ICON" HREF="../../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Reporte Ralaci&oacute;n de Dias de Sueldo a Depositar)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Reporte Ralaci&oacute;n de Dias de Sueldo a Depositar)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../../class/sia.js" type="text/javascript"></script>

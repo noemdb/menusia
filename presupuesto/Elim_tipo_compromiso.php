@@ -5,7 +5,7 @@ if (!$_GET){$tipo_comp='';} else {$tipo_comp = $_GET["Gtipo_comp"];}
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Compromiso)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Eliminar Tipos de Compromiso)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type=text/css rel=stylesheet>
 <SCRIPT language=JavaScript src="../class/sia.js" type=text/javascript></SCRIPT>

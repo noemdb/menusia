@@ -5,7 +5,7 @@ if (!$_GET){$codigo_mov="";$nro_factura="";$ced_rif="";}else{$codigo_mov=$_GET["
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Modificar Factura en la Orden)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Modificar Factura en la Orden)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

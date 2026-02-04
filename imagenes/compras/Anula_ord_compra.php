@@ -6,7 +6,7 @@ $fecha_hoy=asigna_fecha_hoy();
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y ALMAC&Eacute;N (ANULAR ORDENES DE COMPRA)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y ALMAC&Eacute;N (ANULAR ORDENES DE COMPRA)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">

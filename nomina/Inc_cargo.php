@@ -6,7 +6,7 @@ $formato_cargo=$_POST["txtformato_cargo"];  $mpatron=arma_patron($formato_cargo)
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Definicion de Cargos)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Definicion de Cargos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

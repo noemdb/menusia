@@ -5,7 +5,7 @@ if (!$_GET){$cod_empleado="";} else{$cod_empleado=$_GET["Gcod_empleado"]; } $con
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA N&Oacute;MINA Y PERSONAL (Cambiar C&oacute;digo de Trabajador)</title>
+<title>SIPAP N&Oacute;MINA Y PERSONAL (Cambiar C&oacute;digo de Trabajador)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

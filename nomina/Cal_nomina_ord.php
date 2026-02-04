@@ -14,7 +14,7 @@ if ($gnomina=="00"){ $criterion=""; $criterioc=""; $temp_nomina="00";}else{$temp
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTROL N&Oacute;MINA Y PERSONAL (Calculo de Nomina)</title>
+<title>SIPAP CONTROL N&Oacute;MINA Y PERSONAL (Calculo de Nomina)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>

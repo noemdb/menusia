@@ -6,7 +6,7 @@ $Gtipo_pago="0005";
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
+<title>SIPAP CONTABILIDAD FINANCIERA (Incluir Cuentas en el Comprobante)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <SCRIPT language="JavaScript" src="../class/sia.js"  type=text/javascript></SCRIPT>
 <script language="javascript" src="ajax_comp.js" type="text/javascript"></script>

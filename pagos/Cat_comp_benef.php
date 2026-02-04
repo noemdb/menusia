@@ -8,7 +8,7 @@ $campo502=""; $sql="Select * from SIA005 where campo501='05'";  $resultado=pg_qu
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo de Compromisos por beneficiario)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo de Compromisos por beneficiario)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="javascript" src="ajax_pag.js" type="text/javascript"></script>

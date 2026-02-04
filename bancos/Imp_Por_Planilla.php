@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA CONTROL BANCARIO (Actualiza Impuesto Enterado por Planillas)</title>
+<title>SIPAP CONTROL BANCARIO (Actualiza Impuesto Enterado por Planillas)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK
 href="../class/sia.css" type=text/css

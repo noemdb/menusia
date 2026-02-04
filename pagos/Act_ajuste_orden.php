@@ -22,7 +22,7 @@ if (!$_GET){ $criterio= ''; $referencia_aju=''; $tipo_aju_ord=''; $p_letra='';  
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA ORDENAMIENTO DE PAGOS (Ajuste Ordenes de Pagos)</title>
+<title>SIPAP ORDENAMIENTO DE PAGOS (Ajuste Ordenes de Pagos)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK  href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">
@@ -169,8 +169,8 @@ if(substr($tipo_ajuste,0,1)=='A'){$criterio=$sfecha.'A'.substr($referencia_aju,1
 	</tr>
   <?} ?>
   <tr>
-	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_ajuste_orden.htm','Ayuda SIA','','1000','1000','true');";
-		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_ajuste_orden.htm','Ayuda SIA','','1000','1000','true');" class="menu">Ayuda </a></td>
+	<td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_ajuste_orden.htm','Ayuda SIPAP','','1000','1000','true');";
+		  onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:VentanaCentrada('/sia/pagos/ayuda/ayuda_ajuste_orden.htm','Ayuda SIPAP','','1000','1000','true');" class="menu">Ayuda </a></td>
   </tr>
   <tr>
     <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";

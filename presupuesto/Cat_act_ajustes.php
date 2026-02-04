@@ -5,7 +5,7 @@ $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$u
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONTABILIDAD PRESUPUESTARIA (Catalogo de Ajustes)</title>
+<title>SIPAP CONTABILIDAD PRESUPUESTARIA (Catalogo de Ajustes)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css"  rel="stylesheet">
 <script language="JavaScript" type="text/JavaScript">

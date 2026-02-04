@@ -20,7 +20,7 @@ else {
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA FORMULACI&Oacute;N DE PRESUPUESTO (Consulta Tasa De Indemnizaci&oacute;n)</title>
+<title>SIPAP FORMULACI&Oacute;N DE PRESUPUESTO (Consulta Tasa De Indemnizaci&oacute;n)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK
 href="../class/sia.css" type=text/css

@@ -10,7 +10,7 @@ if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="Ja
 <LINK REL="SHORTCUT ICON" HREF="../imagenes/sia.ico">
 <html>
 <head>
-<title>SIA CONFIGURACI&Oacute;N GENERAR ARCHIVOS</title>
+<title>SIPAP CONFIGURACI&Oacute;N GENERAR ARCHIVOS</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language=JavaScript src="../class/sia.js"  type="text/javascript"></script>

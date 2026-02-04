@@ -4,7 +4,7 @@ else{$cod_bien_mue=$_GET["cod_bien_mue"]; $cod_bien_aso=$_GET["cod_bien_aso"];}?
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SIA COMPRAS,SERVICIOS Y AMAC&Eacute;N( Reparaciones y Mejoras)</title>
+<title>SIPAP COMPRAS,SERVICIOS Y AMAC&Eacute;N( Reparaciones y Mejoras)</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
