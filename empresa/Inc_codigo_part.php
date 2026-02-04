@@ -1,4 +1,4 @@
-<?include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
+<?php include ("../class/ventana.php"); $equipo=getenv("COMPUTERNAME");
 if (!$_GET){$usuario="";}else{$usuario=$_GET["usuario"];}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -10,7 +10,7 @@ if (!$_GET){$usuario="";}else{$usuario=$_GET["usuario"];}
 <LINK href="../class/sia.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../class/sia.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){ document.location ='Det_asig_part.php?musuario=<?echo $usuario?>'; }
+function llamar_anterior(){ document.location ='Det_asig_part.php?musuario=<?php echo $usuario?>'; }
 function revisar(){var f=document.form1; var Valido=true;
    if(f.txtcod_presup.value==""){alert("Codigo Presupuestario no puede estar Vacio");return false;}
    if(f.txtcod_fuente.value==""){alert("Codigo de Fuente no puede estar Vacio"); return false; }   
@@ -67,7 +67,7 @@ return true;}
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtusuario" type="hidden" id="txtusuario" value="<?echo $usuario?>"></td>
+            <td width="17"><input name="txtusuario" type="hidden" id="txtusuario" value="<?php echo $usuario?>"></td>
             <td width="100">&nbsp;</td>
             <td width="90" align="center" valign="middle"><input name="Aceptar" type="submit" id="Aceptar"  value="Aceptar"></td>
             <td width="110" align="center"><input name="Blanquear" type="reset" value="Blanquear"></td>

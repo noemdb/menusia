@@ -1,7 +1,7 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
 $opcion=$_GET["opcion"]; $criterio=$_GET["modulo"]; $modulo=substr($criterio, 0, 2); $des_modulo=$_GET["des_modulo"]; $des_opcion=$_GET["des_opcion"];
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { ?> <script language="JavaScript"> muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS'); </script> <?}
+if (pg_ErrorMessage($conn)) { ?> <script language="JavaScript"> muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS'); </script> <?php }
 else{ 
  echo "MODULO: ".$des_modulo,"<br>";
  echo "OPCION: ".$des_opcion,"<br>";

@@ -1,9 +1,9 @@
 <?php include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $cod_modulo="06";
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -51,11 +51,11 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
     <td width="92"><table width="92" height="487" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('menu_conf.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -71,7 +71,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                     <tr>
                       <td width="269"><span class="Estilo5">FORMATO DE CUENTA CONTABLE  :</span></td>
                       <td width="243"><span class="Estilo5">
-                          <input class="Estilo10" name="txtformato" type="text" id="txtformato"  size="40" maxlength="32" value="<?echo $formato?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtformato" type="text" id="txtformato"  size="40" maxlength="32" value="<?php echo $formato?>"  onFocus="encender(this)" onBlur="apagar(this)">
                       </span></td>
                     </tr>
                 </table></td>
@@ -94,7 +94,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE ACTIVO:</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                      <input class="Estilo10" name="txtactivo" type="text" id="txtactivo" size="25" maxlength="25" value="<?echo $activo?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                      <input class="Estilo10" name="txtactivo" type="text" id="txtactivo" size="25" maxlength="25" value="<?php echo $activo?>"  onFocus="encender(this)" onBlur="apagar(this)">
                      </span></div></td>
                   </tr>
                 </table></td>
@@ -102,7 +102,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE PASIVO :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtpasivo" type="text" id="txtpasivo"  size="25" maxlength="25" value="<?echo $pasivo?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtpasivo" type="text" id="txtpasivo"  size="25" maxlength="25" value="<?php echo $pasivo?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -112,7 +112,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE INGRESO:</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtingreso" type="text" id="txtingreso" size="25" maxlength="25" value="<?echo $ingreso?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtingreso" type="text" id="txtingreso" size="25" maxlength="25" value="<?php echo $ingreso?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -120,7 +120,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE EGRESO :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtegreso" type="text" id="txtegreso" size="25" maxlength="25" value="<?echo $egreso?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtegreso" type="text" id="txtegreso" size="25" maxlength="25" value="<?php echo $egreso?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -130,7 +130,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE RESULTADO :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtresultado" type="text" id="txtresultado" size="25" maxlength="25"  value="<?echo $resultado?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtresultado" type="text" id="txtresultado" size="25" maxlength="25"  value="<?php echo $resultado?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -138,7 +138,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE CAPITAL :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtcapital" type="text" id="txtcapital" size="25" maxlength="25" value="<?echo $capital?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtcapital" type="text" id="txtcapital" size="25" maxlength="25" value="<?php echo $capital?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -148,7 +148,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE ORDEN :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtorden" type="text" id="txtorden" size="25" maxlength="25" value="<?echo $orden?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtorden" type="text" id="txtorden" size="25" maxlength="25" value="<?php echo $orden?>"  onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -156,7 +156,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">RESULTADO DEL EJERCICIO :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtresultadoe" type="text" id="txtresultadoe"  size="25" maxlength="25" value="<?echo $resultadoe?>" onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtresultadoe" type="text" id="txtresultadoe"  size="25" maxlength="25" value="<?php echo $resultadoe?>" onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -166,7 +166,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">RESULTADO EJERC. ANTERIOR :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtresul_ant" type="text" id="txtresul_ant" size="25" maxlength="25"  value="<?echo $resu_ant?>" onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtresul_ant" type="text" id="txtresul_ant" size="25" maxlength="25"  value="<?php echo $resu_ant?>" onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -174,7 +174,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA CAJA CHICA :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtcaja" type="text" id="txtcaja" size="25" maxlength="25"  value="<?echo $caja?>" onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtcaja" type="text" id="txtcaja" size="25" maxlength="25"  value="<?php echo $caja?>" onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -184,7 +184,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">COSTO DE VENTA :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtcosto" type="text" id="txtcosto" size="25" maxlength="25"  value="<?echo $venta?>" onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtcosto" type="text" id="txtcosto" size="25" maxlength="25"  value="<?php echo $venta?>" onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -192,7 +192,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                   <tr>
                     <td width="221"><span class="Estilo5">CUENTA DE ANTICIPO :</span></td>
                     <td width="149"><div align="left"><span class="Estilo5">
-                        <input class="Estilo10" name="txtanticipo" type="text" id="txtanticipo" size="25" maxlength="25" value="<?echo $anticipo?>" onFocus="encender(this)" onBlur="apagar(this)">
+                        <input class="Estilo10" name="txtanticipo" type="text" id="txtanticipo" size="25" maxlength="25" value="<?php echo $anticipo?>" onFocus="encender(this)" onBlur="apagar(this)">
                     </span></div></td>
                   </tr>
                 </table></td>
@@ -209,7 +209,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                     <tr>
                       <td width="415"><span class="Estilo5"> N&Uacute;MERO DE REFRENCIA COMPROBANTE AUTOMATICO:</span></td>
                       <td width="90"><div align="center"><span class="Estilo5">
-                        <select name="txtnro_aut" size="1"> <?if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <select name="txtnro_aut" size="1"> <?php if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                     </tr>
                 </table></td>
@@ -226,7 +226,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                     <tr>
                       <td width="415"><span class="Estilo5"> COMPROBANTE GENERADOS POR CONTABILIDAD DIFERIDOS:</span></td>
                       <td width="90"><div align="center"><span class="Estilo5">
-                        <select name="txtcomp_dif" size="1"> <?if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <select name="txtcomp_dif" size="1"> <?php if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                     </tr>
                 </table></td>
@@ -243,7 +243,7 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
                     <tr>
                       <td width="415"><span class="Estilo5">PARA ELIMINAR MOVIMIENTOS EL COMPROBANTE DEBE ESTAR EN DIFERIDOS:</span></td>
                       <td width="90"><div align="center"><span class="Estilo5">
-                        <select name="txtrevisa_dif" size="1"> <?if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <select name="txtrevisa_dif" size="1"> <?php if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                     </tr>
                 </table></td>
@@ -257,8 +257,8 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
         <table width="768">
           <tr>
             <td width="600">&nbsp;</td>
-            <td width="50"><input name="txtperiodo" type="hidden" id="txtperiodo" value="<?echo $periodo?>" ></td>
-            <td width="50"><input name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?echo $cod_modulo?>" ></td>
+            <td width="50"><input name="txtperiodo" type="hidden" id="txtperiodo" value="<?php echo $periodo?>" ></td>
+            <td width="50"><input name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?php echo $cod_modulo?>" ></td>
             <td width="68" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
           </tr>
         </table>
@@ -270,4 +270,4 @@ $activo=$registro["campo505"]; $pasivo=$registro["campo506"]; $ingreso=$registro
 </table>
 </body>
 </html>
-<?pg_close();?>
+<?php pg_close();?>

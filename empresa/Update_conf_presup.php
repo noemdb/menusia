@@ -1,4 +1,4 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");
+<?php include ("../class/conect.php"); include ("../class/funciones.php");
 $MControl = array (0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 $campo501=$_POST["txtcod_modulo"]; $campo502=""; $campo503=$_POST["txtperiodo"];  $campo503=$_POST["txtperiodo"]; $campo504=$_POST["txtformato_pre"]; $campo525=$_POST["txttitulo"]; $campo550=$_POST["txtlong_cat"]; $campo552=$_POST["txtnivel"];  $campo534=$_POST["txtporc_traspaso"]; $campo553=$_POST["txtnivel_traspaso"];
 $campo=$_POST["txtsolo_num"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtref_comp"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtfecha_comp"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtgen_comp"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtref_caus"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtfecha_caus"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtref_pago"];$campo=substr($campo,0,1);$campo502=$campo502.$campo; $campo=$_POST["txtfecha_pago"];$campo=substr($campo,0,1);$campo502=$campo502.$campo;
@@ -13,14 +13,14 @@ $cat=$MControl[$campo550-1]; $par=strlen($campo504)-$cat; $campo526=substr($camp
 $fecha=asigna_fecha_hoy(); if($fecha==""){$sfecha="2007-01-01";}else{$sfecha=formato_aaaammdd($fecha);} $monto=formato_numero($campo550); if(is_numeric($monto)){$campo550=$monto;} else{$campo550=0;} $monto=formato_numero($campo552); if(is_numeric($monto)){$campo552=$monto;} else{$campo552=0;} $monto=formato_numero($campo534); if(is_numeric($monto)){$campo534=$monto;}else{$campo534=0;} $monto=formato_numero($campo553); if(is_numeric($monto)){$campo553=$monto;} else{$campo553=0;}
 $url="Act_Conf_Contab_Presup.php"; echo "ESPERE POR FAVOR MODIFICANDO....","<br>"; $error=0;
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)) { ?> <script language="JavaScript">   muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');  </script> <?}
+if (pg_ErrorMessage($conn)) { ?> <script language="JavaScript">   muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');  </script> <?php }
  else{ $error=0;
-  if($campo550==0){$error=1; ?> <script language="JavaScript"> muestra('LONGITUD DE CATEGORIA INVALIDA');</script> <? }
-  if($campo551==0){$error=1; ?> <script language="JavaScript"> muestra('LONGITUD DE PARTIDAS INVALIDA');</script> <? }
-  if(strlen($campo525)==strlen($campo504)){$error=$error;}else{echo $campo525.' '.$campo504; $error=1; ?> <script language="JavaScript"> muestra('DEFINCION DE NIVELES NO VALIDA');</script> <? }
+  if($campo550==0){$error=1; ?> <script language="JavaScript"> muestra('LONGITUD DE CATEGORIA INVALIDA');</script> <?php }
+  if($campo551==0){$error=1; ?> <script language="JavaScript"> muestra('LONGITUD DE PARTIDAS INVALIDA');</script> <?php }
+  if(strlen($campo525)==strlen($campo504)){$error=$error;}else{echo $campo525.' '.$campo504; $error=1; ?> <script language="JavaScript"> muestra('DEFINCION DE NIVELES NO VALIDA');</script> <?php }
   if($error==0){$sSQL="Select * from SIA005 where campo501='$campo501'";  $resultado=pg_exec($conn,$sSQL);  $filas=pg_numrows($resultado);
-  if($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CONFIGURACIÓN NO EXISTE');</script> <? }
+  if($filas==0){$error=1; ?> <script language="JavaScript"> muestra('CONFIGURACIÓN NO EXISTE');</script> <?php }
    else{$error=0;$sql="SELECT MODIFICA_SIA005('$campo501','$campo502','$campo503','$campo504','$campo505','$campo506','$campo507','$campo508','$campo509','$campo510','$campo511','$campo512','$campo513','$campo514','$campo515','$campo516','$campo517','$campo518','$campo519','$campo520','$campo521','$campo522','$campo523','$campo524','$campo525','$campo526','$campo527','','','','','','',$campo534,0,0,0,0,0,0,0,0,0,0,0,0,0,0,$campo549,$campo550,$campo551,$campo552,$campo553,0,0,0,0,0,'$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','$sfecha','A','','','$campo572','')"; $resultado=pg_exec($conn,$sql);$error=pg_errormessage($conn); $error=substr($error, 0, 61);
-     if (!$resultado){?> <script language="JavaScript"> muestra('<? echo $error; ?>'); </script> <? } else{ ?> <script language="JavaScript"> muestra('MODIFICO EXITOSAMENTE'); </script><? $error=0; }
+     if (!$resultado){?> <script language="JavaScript"> muestra('<?php echo $error; ?>'); </script> <?php } else{ ?> <script language="JavaScript"> muestra('MODIFICO EXITOSAMENTE'); </script><?php $error=0; }
   }}
-}pg_close();?> <script language="JavaScript"> LlamarURL('<?echo $url;?>'); </script>
+}pg_close();?> <script language="JavaScript"> LlamarURL('<?php echo $url;?>'); </script>

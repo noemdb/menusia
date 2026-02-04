@@ -200,7 +200,7 @@ function conv_cadenas($cadena,$tp){ $valor=$cadena;
    }
 return $valor;}
 ?>
-<?include ("fun_fechas.php");
+<?php include ("fun_fechas.php");
 //error_reporting(0);
 error_reporting(E_ALL ^ E_WARNING);
 ?>

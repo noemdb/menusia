@@ -1,9 +1,9 @@
 <?php include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $cod_modulo="07";
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,11 +52,11 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
     <td width="92"><table width="92" height="595" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('menu_conf.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -70,11 +70,11 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
                 <td width="600"><table width="600" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="300"><span class="Estilo5">FORMATO C&Oacute;DIGO INGRESOS:</span></td>
-                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtformato" type="text" id="txtformato" size="20" maxlength="20" value="<?echo $formato?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtformato" type="text" id="txtformato" size="20" maxlength="20" value="<?php echo $formato?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">TITULOS C&Oacute;DIGO INGRESOS:</span></td>
-					  <td width="300"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttitulo" type="text" id="txttitulo" readonly value="<?echo $titulo?>" size="32" maxlength="32"></span></div></td>
+					  <td width="300"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttitulo" type="text" id="txttitulo" readonly value="<?php echo $titulo?>" size="32" maxlength="32"></span></div></td>
                     </tr>
                 </table></td>
               </tr>
@@ -104,14 +104,14 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
               <tr>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"> <input class="Estilo10" name="txtnomb1" type="text" id="txtnomb1" value="<?echo $nomb1?>" size="20" maxlength="20"  onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev1" type="text" id="txtabrev1" value="<?echo $abrev1?>" size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)"> </span></div></td>
+                      <td width="280"><span class="Estilo5"> <input class="Estilo10" name="txtnomb1" type="text" id="txtnomb1" value="<?php echo $nomb1?>" size="20" maxlength="20"  onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev1" type="text" id="txtabrev1" value="<?php echo $abrev1?>" size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)"> </span></div></td>
                     </tr>
                 </table></td>
 				<td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"> <input class="Estilo10" name="txtnomb5" type="text" id="txtnomb5"   value="<?echo $nomb5?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev5" type="text" id="txtabrev5"  value="<?echo $abrev5?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">  </span></div></td>
+                      <td width="280"><span class="Estilo5"> <input class="Estilo10" name="txtnomb5" type="text" id="txtnomb5"   value="<?php echo $nomb5?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev5" type="text" id="txtabrev5"  value="<?php echo $abrev5?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">  </span></div></td>
                     </tr>
                 </table></td>
 			   </tr>
@@ -119,14 +119,14 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
 			   <tr>	
                 <td width="330"><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb2" type="text" id="txtnomb2"  value="<?echo $nomb2?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">     </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev2" type="text" id="txtabrev2"  value="<?echo $abrev2?>"   size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">   </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb2" type="text" id="txtnomb2"  value="<?php echo $nomb2?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">     </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev2" type="text" id="txtabrev2"  value="<?php echo $abrev2?>"   size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">   </span></div></td>
                     </tr>
                 </table></td>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb6" type="text" id="txtnomb6"   value="<?echo $nomb6?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">     </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev6" type="text" id="txtabrev6"  value="<?echo $abrev6?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb6" type="text" id="txtnomb6"   value="<?php echo $nomb6?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">     </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev6" type="text" id="txtabrev6"  value="<?php echo $abrev6?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
                     </tr>
                 </table></td> 
               </tr>
@@ -134,28 +134,28 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
               <tr>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb3" type="text" id="txtnomb3"   value="<?echo $nomb3?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev3" type="text" id="txtabrev3"  value="<?echo $abrev3?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb3" type="text" id="txtnomb3"   value="<?php echo $nomb3?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev3" type="text" id="txtabrev3"  value="<?php echo $abrev3?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
                     </tr>
                 </table></td>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb7" type="text" id="txtnomb7"   value="<?echo $nomb7?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev7" type="text" id="txtabrev7"  value="<?echo $abrev7?>" size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb7" type="text" id="txtnomb7"   value="<?php echo $nomb7?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev7" type="text" id="txtabrev7"  value="<?php echo $abrev7?>" size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">    </span></div></td>
                     </tr>
                 </table></td>
               </tr>
               <tr>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb4" type="text" id="txtnomb4"   value="<?echo $nomb4?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev4" type="text" id="txtabrev4"  value="<?echo $abrev4?>"   size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">     </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb4" type="text" id="txtnomb4"   value="<?php echo $nomb4?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">    </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev4" type="text" id="txtabrev4"  value="<?php echo $abrev4?>"   size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">     </span></div></td>
                     </tr>
                 </table></td>
                 <td><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
-                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb8" type="text" id="txtnomb8"  value="<?echo $nomb8?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev8" type="text" id="txtabrev8"  value="<?echo $abrev8?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">   </span></div></td>
+                      <td width="280"><span class="Estilo5"><input class="Estilo10" name="txtnomb8" type="text" id="txtnomb8"  value="<?php echo $nomb8?>" size="20" maxlength="20" onFocus="encender(this)" onBlur="apagar(this)">   </span></td>
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtabrev8" type="text" id="txtabrev8"  value="<?php echo $abrev8?>"  size="4" maxlength="4"  onFocus="encender(this)" onBlur="apagar(this)">   </span></div></td>
                     </tr>
                 </table></td>
               </tr>
@@ -169,31 +169,31 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
                 <td width="600"><table width="600" height="19" border="0" cellpadding="0">   
                     <tr>
                       <td width="300"><span class="Estilo5">CUENTA DE INGRESOS POR DEPOSITAR :</span></td>
-                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_ing_dep" type="text" id="txtcta_ing_dep" size="20" maxlength="20" value="<?echo $cta_ing_dep?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_ing_dep" type="text" id="txtcta_ing_dep" size="20" maxlength="20" value="<?php echo $cta_ing_dep?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">CUENTA INGRESO DEPOSITO NO IDENTIFICADO :</span></td>
-					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_dep_noiden" type="text" id="txtcta_dep_noiden"  value="<?echo $cta_dep_noiden?>" size="20" maxlength="20"></span></td>
+					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_dep_noiden" type="text" id="txtcta_dep_noiden"  value="<?php echo $cta_dep_noiden?>" size="20" maxlength="20"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">CUENTA INGRESO ADELANTADO POR CLIENTE :</span></td>
-                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_dep_ingade" type="text" id="txtcta_dep_ingade" size="20" maxlength="20" value="<?echo $cta_dep_ingade?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_dep_ingade" type="text" id="txtcta_dep_ingade" size="20" maxlength="20" value="<?php echo $cta_dep_ingade?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">CUENTA DE IMPUESTO RETENIDO :</span></td>
-					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_imp_ret" type="text" id="txtcta_imp_ret"  value="<?echo $cta_imp_ret?>" size="20" maxlength="20"></span></td>
+					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_imp_ret" type="text" id="txtcta_imp_ret"  value="<?php echo $cta_imp_ret?>" size="20" maxlength="20"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">C&Oacute;DIGO PARTIDA DE INGRESOS IVA :</span></td>
-					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_imp_iva" type="text" id="txtcta_imp_iva"  value="<?echo $cta_imp_iva?>" size="20" maxlength="20"></span></td>
+					  <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_imp_iva" type="text" id="txtcta_imp_iva"  value="<?php echo $cta_imp_iva?>" size="20" maxlength="20"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">CUENTA FONDO DE GARANTIA :</span></td>
-                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_fond_gar" type="text" id="txtcta_fond_gar" size="20" maxlength="20" value="<?echo $cta_fond_gar?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_fond_gar" type="text" id="txtcta_fond_gar" size="20" maxlength="20" value="<?php echo $cta_fond_gar?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                     </tr>
 					<tr>
                       <td width="300"><span class="Estilo5">CUENTA FONDO DE RESCATE :</span></td>
-                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_fond_res" type="text" id="txtcta_fond_res" size="20" maxlength="20" value="<?echo $cta_fond_res?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
+                      <td width="300"><span class="Estilo5"><input class="Estilo10" name="txtcta_fond_res" type="text" id="txtcta_fond_res" size="20" maxlength="20" value="<?php echo $cta_fond_res?>" onFocus="encender(this)" onBlur="apagar(this)"></span></td>
                     </tr>
                 </table></td>
               </tr>
@@ -206,14 +206,14 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
                   <td width="330"><table width="330" border="0" cellspacing="1" cellpadding="0">
                     <tr>
                       <td width="280" height="22"><span class="Estilo5">REGISTRA DEPOSITO EN LIBRO: </span></td>
-                      <td width="50"><div align="center"><span class="Estilo5"><select name="txtreg_mov" size="1"> <?if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                      <td width="50"><div align="center"><span class="Estilo5"><select name="txtreg_mov" size="1"> <?php if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                     </tr>
                   </table><span class="Estilo5"> </span></td>
                   <td width="330"><table width="330" border="0" cellspacing="1" cellpadding="0">
                       <tr>
                         <td width="280"><span class="Estilo5">GENERA COMPROBANTE POR MOVIMIENTO:</span></td>
-                        <td width="50"><div align="center"><span class="Estilo5"><select name="txtgen_comp" size="1"> <?if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <td width="50"><div align="center"><span class="Estilo5"><select name="txtgen_comp" size="1"> <?php if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -227,7 +227,7 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
                 <td width="330"><table width="330" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="280"><span class="Estilo5">PERIODO TRABAJO DESDE DEL M&Oacute;DULO:</span></td>
-                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo" size="3" maxlength="2" value="<?echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                      <td width="50"><div align="right"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo" size="3" maxlength="2" value="<?php echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">
                       </span></div></td>
                     </tr>
                 </table></td>
@@ -239,7 +239,7 @@ $cta_imp_iva=$registro["campo525"]; $cta_fond_gar=$registro["campo527"]; $cta_fo
         <table width="768">
           <tr>
             <td width="614">&nbsp;</td>
-			<td width="50"><input class="Estilo10" name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?echo $cod_modulo?>" ></td>
+			<td width="50"><input class="Estilo10" name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?php echo $cod_modulo?>" ></td>
             <td width="88" valign="middle"><input  name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88">&nbsp;</td>
           </tr>

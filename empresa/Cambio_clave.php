@@ -1,7 +1,7 @@
 <?php include ("../class/conect.php");  include ("../class/funciones.php");
 if(!$_GET){ $login='';}else {$login=$_GET["GUsuario"];}$nombre="";$cargo=""; $departamento="";$cat_prog="";$cod_almacen="";$unidad_sol="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{ $sql="Select * from sia001 WHERE campo101='$login'";  $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){ $nombre=$registro["campo104"];$cargo=$registro["campo105"]; $departamento=$registro["campo106"];  $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=$registro["campo111"];}}
 ?>
@@ -42,7 +42,7 @@ return true;}
             <tr>
               <td width="20">&nbsp;</td>
               <td width="200"><span class="Estilo5">NOMBRE USUARIO:</span></td>
-              <td width="300"><input class="Estilo10" name="txtnombre_u" type="text"  id="txtnombre_u" size="20" maxlength="20" readonly value="<? echo $login ?>"></td>
+              <td width="300"><input class="Estilo10" name="txtnombre_u" type="text"  id="txtnombre_u" size="20" maxlength="20" readonly value="<?php echo $login ?>"></td>
                </tr>
           </table></td>
         </tr>

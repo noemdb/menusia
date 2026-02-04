@@ -1,8 +1,8 @@
 <?php include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");  if(!$_GET){ $login='';}else {$login=$_GET["GUsuario"];}
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if ($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,7 +34,7 @@ function revisar(){var f=document.form1; var r; var mmensaje;
 return true;}
 </script>
 </head>
-<?$nombre=""; $cargo=""; $departamento=""; $cat_prog=""; $cod_almacen="";$unidad_sol="";
+<?php $nombre=""; $cargo=""; $departamento=""; $cat_prog=""; $cod_almacen="";$unidad_sol="";
 $sql="Select * from SIA001 WHERE campo101='$login'";  $res=pg_query($sql);
 if ($registro=pg_fetch_array($res,0)){ $nombre=$registro["campo104"]; $cargo=$registro["campo105"];   $departamento=$registro["campo106"];
 $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=$registro["campo111"];}
@@ -52,11 +52,11 @@ $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=
     <td width="92"><table width="92" height="350" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick="javascript:LlamarURL('usuarios.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="usuarios.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="usuarios.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -69,7 +69,7 @@ $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=
           <tr>
             <td><table width="775" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="360"><span class="Estilo5">LOGIN : <input class="Estilo5" name="txtLogin" type="text" id="txtLogin" size="12" maxlength="8" readonly  value="<?echo $login?>">
+                <td width="360"><span class="Estilo5">LOGIN : <input class="Estilo5" name="txtLogin" type="text" id="txtLogin" size="12" maxlength="8" readonly  value="<?php echo $login?>">
                 </span></td>
                 <td width="415">&nbsp;</td>
               </tr>
@@ -77,7 +77,7 @@ $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=
           </tr>
           <tr><td>&nbsp;</td> </tr>
           <tr>
-            <td><span class="Estilo5">NOMBRE DEL USUARIO : </span><input class="Estilo5" name="txtNombre" type="text" id="txtNombre" value="<?echo $nombre?>" title="Registre Nombre del Usuario" size="100" maxlength="200"  readonly></td>
+            <td><span class="Estilo5">NOMBRE DEL USUARIO : </span><input class="Estilo5" name="txtNombre" type="text" id="txtNombre" value="<?php echo $nombre?>" title="Registre Nombre del Usuario" size="100" maxlength="200"  readonly></td>
           </tr>
           <tr><td>&nbsp;</td> </tr>
           <tr>
@@ -113,4 +113,4 @@ $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"];$unidad_sol=
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php pg_close();?>

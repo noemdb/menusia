@@ -14,7 +14,7 @@ $nombre="";$nder1="";$der1="";$nder2="";$der2="";$nder3="";$der3="";$nder4="";$d
 $nder5="";$der5=""; $nder6="";$der6="";$nder7=""; $der7="";$nder8="";$der8="";
 $nder9="";$der9="";$nder10="";$der10="";$nder11="";$der11="";$nder12="";$der12=""; $disponible="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
  else{$sql="Select * from sia001 WHERE campo101='$login'";  $res=pg_query($sql);
   if ($registro=pg_fetch_array($res,0)){$nombre=$registro["campo104"];}
   $sql="SELECT campo701,campo702,campo703,campo704,campo705,campo706,campo707,campo708,campo709,campo710,campo711,campo712,campo713,campo714,campo715,campo716,campo717,campo718,campo719,campo720,campo721,campo722,campo723,campo724,campo725,campo607,campo608,campo609,campo610,campo611,campo612,campo613,campo614,campo615,campo616,campo617,campo618,campo619,campo620,campo621,campo622,campo623,campo624,campo625,campo626,campo706,campo707,campo708,campo709,campo710,campo711,campo712,campo713,campo714,campo715,campo716,campo717,campo718,campo719,campo720,campo721,campo722,campo723,campo724,campo725  FROM sia007 LEFT JOIN sia006 ON (sia006.campo602=sia007.campo701) And (sia006.campo603=sia007.campo702)  And (sia006.campo601 ='$login') Where (sia007.campo701='$modulo') And (sia007.campo702 ='$opcion') Order By sia007.campo702";   $res=pg_query($sql);
@@ -86,7 +86,7 @@ function llama_grabar(mcodigo,modu,disponible){var url;var derecho;
  url="Update_Opcion.php?opcion="+mcodigo+"&modulo="+modu+"&derecho="+derecho;
  document.location = url;
 }
-function llamar_anterior(){ document.location ='Det_acceso.php?modulo=<?echo $criterio?>'; }
+function llamar_anterior(){ document.location ='Det_acceso.php?modulo=<?php echo $criterio?>'; }
 function asigna_todos(disponible){
  if(disponible.charAt(0)=="S"){document.form1.checkbox1.checked=true;}
  if(disponible.charAt(1)=="S"){document.form1.checkbox2.checked=true;}
@@ -136,7 +136,7 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
           <td><table width="739" border="0">
               <tr>
                 <td width="708"><span class="Estilo5">NOMBRE USUARIO  :
-                      <input name="txtNombre" type="text" id="txtNombre" value="<?echo $nombre?>" class="Estilo5" size="71" readonly>
+                      <input name="txtNombre" type="text" id="txtNombre" value="<?php echo $nombre?>" class="Estilo5" size="71" readonly>
                 </span></td>
                 </tr>
           </table></td>
@@ -146,7 +146,7 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
             <table width="739" border="0">
               <tr>
                 <td width="708"><span class="Estilo5">MODULO :
-                    <input name="txtModulo" type="text" id="txtModulo" value="<?echo $cmodulo?>" class="Estilo5" size="80" maxlength="250" readonly>
+                    <input name="txtModulo" type="text" id="txtModulo" value="<?php echo $cmodulo?>" class="Estilo5" size="80" maxlength="250" readonly>
                 </span></td>
               </tr>
             </table>            </td>
@@ -156,7 +156,7 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
               <table width="739" border="0">
                 <tr>
                   <td width="708"><span class="Estilo5">OPCION :
-                      <input name="txtopcion" type="text" id="txtopcion" value="<?echo $copcion?>" class="Estilo5" size="82" readonly>
+                      <input name="txtopcion" type="text" id="txtopcion" value="<?php echo $copcion?>" class="Estilo5" size="82" readonly>
                   </span></td>
                 </tr>
             </table></td>
@@ -167,70 +167,70 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
         <tr>
           <td align="center"><table width="733" border="1" cellspacing="0" cellpadding="0">
             <tr>
-               <? if($nder1==""){ ?> <td width="180">&nbsp;</td>
-               <? } else{ if($der1=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox1" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder1; ?></span> </td>
-                <? } ?>
-                        <? if($nder4==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der4=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox4" type="checkbox" id="checkbox4" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder4; ?></span> </td>
-                <? } ?>
-                        <? if($nder7==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der7=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox7" type="checkbox" id="checkbox7" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder7; ?></span> </td>
-                <? } ?>
-                        <? if($nder10==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der10=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox10" type="checkbox" id="checkbox10" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder10; ?></span> </td>
-                <? } ?>
+               <?php if($nder1==""){ ?> <td width="180">&nbsp;</td>
+               <?php } else{ if($der1=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox1" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder1; ?></span> </td>
+                <?php } ?>
+                        <?php if($nder4==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der4=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox4" type="checkbox" id="checkbox4" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder4; ?></span> </td>
+                <?php } ?>
+                        <?php if($nder7==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der7=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox7" type="checkbox" id="checkbox7" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder7; ?></span> </td>
+                <?php } ?>
+                        <?php if($nder10==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der10=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox10" type="checkbox" id="checkbox10" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder10; ?></span> </td>
+                <?php } ?>
             </tr>
             <tr>
-            <? if($nder2==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der2=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox2" type="checkbox" id="checkbox2" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder2; ?></span> </td>
-                <? } ?>
-             <? if($nder5==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der5=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox5" type="checkbox" id="checkbox5" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder5; ?></span> </td>
-                <? } ?>
-                        <? if($nder8==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der8=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox8" type="checkbox" id="checkbox8" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder8; ?></span> </td>
-                <? } ?>
-             <? if($nder11==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der11=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox11" type="checkbox" id="checkbox11" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder11; ?></span> </td>
-                <? } ?>
+            <?php if($nder2==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der2=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox2" type="checkbox" id="checkbox2" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder2; ?></span> </td>
+                <?php } ?>
+             <?php if($nder5==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der5=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox5" type="checkbox" id="checkbox5" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder5; ?></span> </td>
+                <?php } ?>
+                        <?php if($nder8==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der8=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox8" type="checkbox" id="checkbox8" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder8; ?></span> </td>
+                <?php } ?>
+             <?php if($nder11==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der11=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox11" type="checkbox" id="checkbox11" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder11; ?></span> </td>
+                <?php } ?>
             </tr>
             <tr>
-            <? if($nder3==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der3=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox3" type="checkbox" id="checkbox3" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder3; ?></span> </td>
-                <? } ?>
-            <? if($nder6==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der6=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox6" type="checkbox" id="checkbox6" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder6; ?></span> </td>
-                <? } ?>
-                    <? if($nder9==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der9=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox9" type="checkbox" id="checkbox9" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder9; ?></span> </td>
-                <? } ?>
-                        <? if($nder12==""){ ?> <td width="180">&nbsp;</td>
-                        <? } else{ if($der12=="S"){$nchk='checked';}else{$nchk='';} ?>
-              <td width="180"><input class="Estilo5" name="checkbox12" type="checkbox" id="checkbox12" value="checkbox" <? echo $nchk; ?>>
-                <span class="Estilo5"><? echo $nder12; ?></span> </td>
-                <? } ?>
+            <?php if($nder3==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der3=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox3" type="checkbox" id="checkbox3" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder3; ?></span> </td>
+                <?php } ?>
+            <?php if($nder6==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der6=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox6" type="checkbox" id="checkbox6" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder6; ?></span> </td>
+                <?php } ?>
+                    <?php if($nder9==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der9=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox9" type="checkbox" id="checkbox9" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder9; ?></span> </td>
+                <?php } ?>
+                        <?php if($nder12==""){ ?> <td width="180">&nbsp;</td>
+                        <?php } else{ if($der12=="S"){$nchk='checked';}else{$nchk='';} ?>
+              <td width="180"><input class="Estilo5" name="checkbox12" type="checkbox" id="checkbox12" value="checkbox" <?php echo $nchk; ?>>
+                <span class="Estilo5"><?php echo $nder12; ?></span> </td>
+                <?php } ?>
           </table>          </td>
         </tr>
                 <tr>
@@ -239,11 +239,11 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="110" align="center"><input name="btgrabar" type="button" id="btgrabar"  value="Grabar" onClick="JavaScript:llama_grabar('<? echo $opcion;?>','<? echo $criterio;?>','<? echo $disponible ?>')"></td>
+            <td width="110" align="center"><input name="btgrabar" type="button" id="btgrabar"  value="Grabar" onClick="JavaScript:llama_grabar('<?php echo $opcion;?>','<?php echo $criterio;?>','<?php echo $disponible ?>')"></td>
             <td width="110" align="center"><input name="btcancelar" type="button" id="btcancelar" value="Cancelar" onClick="JavaScript:llamar_anterior()"></td>
-            <td width="110" align="center"><input name="bttodos" type="button" id="bttodos" value="Todos" onClick="JavaScript:asigna_todos('<? echo $disponible ?>')"></td>
-            <td width="110" align="center"><input name="btquitar" type="button" id="btquitar" value="Quitar" onClick="JavaScript:quita_todos('<? echo $disponible ?>')"></td>
-			<td width="100" align="center"><input name="btgrabar" type="button" id="btgrabar"  value="Mostrar Usuarios" onClick="JavaScript:llama_mostrar('<? echo $opcion;?>','<? echo $criterio;?>')"></td>
+            <td width="110" align="center"><input name="bttodos" type="button" id="bttodos" value="Todos" onClick="JavaScript:asigna_todos('<?php echo $disponible ?>')"></td>
+            <td width="110" align="center"><input name="btquitar" type="button" id="btquitar" value="Quitar" onClick="JavaScript:quita_todos('<?php echo $disponible ?>')"></td>
+			<td width="100" align="center"><input name="btgrabar" type="button" id="btgrabar"  value="Mostrar Usuarios" onClick="JavaScript:llama_mostrar('<?php echo $opcion;?>','<?php echo $criterio;?>')"></td>
             
           </tr>
         </table>      </td>
@@ -253,6 +253,6 @@ function llama_mostrar(mcodigo,modu){var url; var mdes_modulo; var mdes_opcion;
 </form>
 </body>
 </html>
-<?
+<?php
   pg_close();
 ?>

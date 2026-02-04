@@ -1,9 +1,9 @@
-<?include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");
+<?php include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); 
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -59,11 +59,11 @@ $nchk='checked';
     <td width="92"><table width="92" height="287" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('menu_u.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_u.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu_u.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -93,25 +93,25 @@ $nchk='checked';
           <tr>
             <td width="800"><table width="800" height="19" border="1" cellspacing="1" cellpadding="1">
 				<tr>
-				  <td width="160"><input class="Estilo5" name="checkbox1" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox1" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">PRESUPUESTO </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox2" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox2" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">CONTABILIDAD </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox3" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox3" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">BANCOS </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox4" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox4" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">ORDEN PAGOS </span> </td>	
-                  <td width="160"><input class="Estilo5" name="checkbox5" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+                  <td width="160"><input class="Estilo5" name="checkbox5" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">COMPRAS </span> </td>						  
 				</tr>
 				<tr>
-				  <td width="160"><input class="Estilo5" name="checkbox6" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox6" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">INGRESOS </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox7" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox7" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">BIENES </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox8" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox8" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">NOMINA </span> </td>
-				  <td width="160"><input class="Estilo5" name="checkbox9" type="checkbox" id="1" value="checkbox" <? echo $nchk; ?>>
+				  <td width="160"><input class="Estilo5" name="checkbox9" type="checkbox" id="1" value="checkbox" <?php echo $nchk; ?>>
                       <span class="Estilo5">EMPRESA</span> </td>	
                   <td width="160"> <span class="Estilo5"> </span> </td>						  
 				</tr>
@@ -125,11 +125,11 @@ $nchk='checked';
         <table width="768">
           <tr>
             <td width="600">&nbsp;</td>
-			<td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?echo $user?>" ></td>
-			 <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?echo $password?>" ></td>
-			 <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?echo $dbname?>" ></td>
-			 <td width="5"><input name="txtport" type="hidden" id="txtport" value="<?echo $port?>" ></td>	 
-			 <td width="5"><input name="txthost" type="hidden" id="txthost" value="<?echo $host?>" ></td>
+			<td width="5"><input name="txtuser" type="hidden" id="txtuser" value="<?php echo $user?>" ></td>
+			 <td width="5"><input name="txtpassword" type="hidden" id="txtpassword" value="<?php echo $password?>" ></td>
+			 <td width="5"><input name="txtdbname" type="hidden" id="txtdbname" value="<?php echo $dbname?>" ></td>
+			 <td width="5"><input name="txtport" type="hidden" id="txtport" value="<?php echo $port?>" ></td>	 
+			 <td width="5"><input name="txthost" type="hidden" id="txthost" value="<?php echo $host?>" ></td>
 			<td width="5"><input name="txtmodulos" type="hidden" id="txtmodulos" value="NNNNNNNNNN" ></td>
              <td width="68" valign="middle"><input name="button" type="submit" id="button"  value="GENERAR RESPALDO"></td>
           </tr>
@@ -141,4 +141,4 @@ $nchk='checked';
 </table>
 </body>
 </html>
-<?pg_close();?>
+<?php pg_close();?>

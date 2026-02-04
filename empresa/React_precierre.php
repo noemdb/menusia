@@ -1,20 +1,20 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php");$dbdatos="DATOS"; $act_trans=$_GET["act_trans"]; $act_ord=$_GET["act_ordenes"]; $act_almacen=$_GET["act_almacen"]; 
+<?php include ("../class/conect.php"); include ("../class/funciones.php");$dbdatos="DATOS"; $act_trans=$_GET["act_trans"]; $act_ord=$_GET["act_ordenes"]; $act_almacen=$_GET["act_almacen"]; 
 $temp=substr($dbname,0,6);if($temp=="PPADRE"){$dbdatos="PPADRE";}if($temp=="CPDVSA"){$dbdatos="CPDVSA";}  $dbdatos="DATOS"; 
 $conn2=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbdatos."");
 $sql="Select * from SIA000 order by campo001";$resultado=pg_query($sql);if ($registro=pg_fetch_array($resultado,0)){$SIA_Integrado=$registro["campo036"];$Fec_Ini_Ejer_new=$registro["campo031"];$Fec_Fin_Ejer_new=$registro["campo032"]; }
 echo $dbdatos." ".$Fec_Ini_Ejer_new,"<br>";
-$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">  muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS'); window.close(); </script> <?}
+$conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");if (pg_ErrorMessage($conn)){ ?> <script language="JavaScript">  muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS'); window.close(); </script> <?php }
 else{ $SIA_Cierre="N"; $SIA_Precierre="N"; $cod_modulo="06";$sql="Select * from SIA000 order by campo001";$resultado=pg_query($sql);
-if ($registro=pg_fetch_array($resultado,0)){$SIA_Integrado=$registro["campo036"];$Fec_Ini_Ejer=$registro["campo031"];$Fec_Fin_Ejer=$registro["campo032"];$SIA_Precierre=substr($SIA_Integrado,16,1); $SIA_Cierre=substr($SIA_Integrado,17,1);} else{ ?><script language="JavaScript">muestra('INFORMACION DE EMPRESA NO LOCALIZADA'); window.close(); </script><? }
-if($SIA_Precierre=="S"){$SIA_Precierre="S";}else{ ?><script language="JavaScript">muestra('PRE-CIERRE DEL EJERCICIO NO EJECUTADO'); window.close(); </script><?} 
-if($SIA_Cierre=="S"){ ?><script language="JavaScript">muestra('EJERCICIO YA CERRADO'); window.close(); </script><?} 
+if ($registro=pg_fetch_array($resultado,0)){$SIA_Integrado=$registro["campo036"];$Fec_Ini_Ejer=$registro["campo031"];$Fec_Fin_Ejer=$registro["campo032"];$SIA_Precierre=substr($SIA_Integrado,16,1); $SIA_Cierre=substr($SIA_Integrado,17,1);} else{ ?><script language="JavaScript">muestra('INFORMACION DE EMPRESA NO LOCALIZADA'); window.close(); </script><?php }
+if($SIA_Precierre=="S"){$SIA_Precierre="S";}else{ ?><script language="JavaScript">muestra('PRE-CIERRE DEL EJERCICIO NO EJECUTADO'); window.close(); </script><?php } 
+if($SIA_Cierre=="S"){ ?><script language="JavaScript">muestra('EJERCICIO YA CERRADO'); window.close(); </script><?php } 
 if(substr($SIA_Integrado,2,1)=="S"){ $contab_fiscal=1; $cod_modulo="03"; } else { $contab_fiscal=0; }
 echo "ESPERE ACTUALIZANDO SALDOS BANCOS....","<br>";
-$resultado=pg_exec($conn,"SELECT INCIALIZA_TABLAS(11,1,1,'')"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT INCIALIZA_TABLAS(11,1,1,'')"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 echo "ESPERE ACTUALIZANDO LIBROS....","<br>";
-$resultado=pg_exec($conn,"SELECT ACTUALIZA_libro()"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_libro()"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 echo "ESPERE ACTUALIZANDO BANCOS....","<br>";
-$resultado=pg_exec($conn,"SELECT ACTUALIZA_banco()"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn,"SELECT ACTUALIZA_banco()"); $error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 $sql="select * from bancos order by cod_banco"; $res=pg_query($sql);
 while($registro=pg_fetch_array($res)){ $cod_banco=$registro["cod_banco"]; $nombre_banco=$registro["nombre_banco"]; $nro_cuenta=$registro["nro_cuenta"]; $descripcion_banco=$registro["descripcion_banco"];  $cod_contable=$registro["cod_contable"]; $inf_usuario=$registro["inf_usuario"]; $des_tipo_cuenta=$registro["descripcion_tipo"]; $activa=$registro["activa"]; $campo_str1=$registro["campo_str1"];$campo_str2=$registro["campo_str2"];
  $tipo_cuenta=$registro["tipo_cuenta"]; $tipo_bco=$registro["tipo_bco"]; $activa=$registro["activa"]; $formato_cheque=$registro["formato_cheque"]; $fecha_activa=$registro["fecha_activa"]; $fecha_desactiva=$registro["fecha_desactiva"]; $nombre_cuenta=$registro["nombre_cuenta"]; $saldo_ant_libro=$registro["s_inic_libro"]; $saldo_ant_banco=$registro["s_inic_banco"]; $campo_num1=$registro["campo_num1"];$nombre_grupob=$registro["nombre_grupob"];
@@ -27,7 +27,7 @@ while($registro=pg_fetch_array($res)){ $cod_banco=$registro["cod_banco"]; $nombr
  $saldo_libro=cambia_coma_numero($saldo_libro);
  $saldo_banco=cambia_coma_numero($saldo_banco);
  $SSQL="UPDATE BAN002 SET s_inic_libro=".$saldo_libro.",s_inic_banco=".$saldo_banco." where cod_banco='".$cod_banco."'";
- $resultado=pg_exec($conn2,$SSQL); $merror=pg_errormessage($conn2); $merror=substr($merror,0,91);if (!$resultado){ echo $SSQL,"<br>"; ?> <script language="JavaScript">  muestra('<? echo $merror; ?>'); </script> <? }
+ $resultado=pg_exec($conn2,$SSQL); $merror=pg_errormessage($conn2); $merror=substr($merror,0,91);if (!$resultado){ echo $SSQL,"<br>"; ?> <script language="JavaScript">  muestra('<?php echo $merror; ?>'); </script> <?php }
 }
 echo "ESPERE ACTUALIZANDO SALDOS CONTABILIDAD....","<br>";
 $MControl = array (0,0,0,0,0,0,0,0,0,0);
@@ -37,7 +37,7 @@ function BUSCAR_ACTUAL($Clave,$Formato){  global $MControl;  $j=0;
   for ($i=1; $i<10; $i++) {if ($MControl[$i] == 0) {$MControl[$i]=0;} else { $j=$MControl[$i]+$k; $MControl[$i]=$j+1; $k=$MControl[$i];} }
   for ($i=1; $i<10; $i++) {if ($MControl[$i] < 0) {$MControl[$i]=0;}}  $actual=-1;
   for ($i=0; $i<10; $i++) {if (strlen($Clave) == $MControl[$i]){$actual=$i; $i=10;}}
-  if ($actual==-1){?><script language="JavaScript">muestra('ERROR Longitud de la Cuenta Invalida');</script><? }
+  if ($actual==-1){?><script language="JavaScript">muestra('ERROR Longitud de la Cuenta Invalida');</script><?php }
   return $actual;
 }
 $Cta_Activo="1";$Cta_Pasivo="2";$Cta_Ingreso="5";$Cta_Egreso="6"; $Cta_Resultado="7";$Cta_Capital="3"; $Cta_Orden="4";$Cta_Result_Eje="3-1-5-02";$Cta_Result_Ant="3-1-5-01"; $Cta_Costo_Venta=""; $r=0; $Formato_Cuenta="X-X-X-XX-XX-XX-XX";
@@ -56,23 +56,23 @@ $Cta_Ingreso=trim($Cta_Ingreso); $Cta_Egreso=trim($Cta_Egreso); $li=strlen($Cta_
 $error=0;
 if($error==0){
 $resultado=pg_exec($conn,"SELECT ACTUALIZA_MAES_CONTAB('$Cta_Result_Eje')"); $error=pg_errormessage($conn); $error=substr($error,0,91);
-if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 echo "ESPERE ACTUALIZANDO SALDOS....","<br>"; $r=0; $a=BUSCAR_ACTUAL($Formato_Cuenta,$Formato_Cuenta);
 if($a>0){
   for ($i=$a-1; $i>=0; $i--) {
 	$str_C = $MControl[$i]; $str_L = $MControl[$i+1];if (strlen($Cta_Result_Eje)==$MControl[$i]){$r = $i;}
 	$resultado=pg_exec($conn,"SELECT ACTUALIZA_SALDO_CONTAB($str_C,$str_L)"); 
-	$error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+	$error=pg_errormessage($conn); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
   }
 }
 if($contab_fiscal==0){
 echo "ESPERE ACTUALIZANDO CUENTA DE RESULTADOS....","<br>";
 $resultado=pg_exec($conn,"SELECT ACTUALIZA_RESULTADO('$Cta_Ingreso','$Cta_Egreso','$Cta_Costo_Venta','$Cta_Result_Eje')");  $error=pg_errormessage($conn); $error=substr($error,0,91);
-if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 if($r>0){ $str_C = $MControl[$r-1];  $str_L = $MControl[$r]; $cuenta=substr($Cta_Result_Eje,0,$str_L);
   for ($i=$r-1; $i>=0; $i--) { $str_C = $MControl[$i];  $str_L = $MControl[$i+1]; 
 	$resultado=pg_exec($conn,"SELECT ACTUALIZA_SALDO_RESULT('$cuenta',$str_C,$str_L)");   $error=pg_errormessage($conn); $error=substr($error,0,91);
-	if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+	if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
   }
 }  
 }
@@ -136,11 +136,11 @@ while($registro=pg_fetch_array($res)){ $codigo_cuenta=$registro["codigo_cuenta"]
   if((substr($codigo_cuenta,0,$li)==substr($Cta_Ingreso,0,$li))or(substr($codigo_cuenta,0,$le)==substr($Cta_Egreso,0,$le))){$saldo12=0;}
   $saldo12=cambia_coma_numero($saldo12);
   $SSQL="UPDATE CON001 SET saldo_anterior=".$saldo12." where codigo_cuenta='".$codigo_cuenta."'";
-  $resultado=pg_exec($conn2,$SSQL); $error=pg_errormessage($conn2); $error=substr($error,0,91);if (!$resultado){ echo $SSQL,"<br>"; ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+  $resultado=pg_exec($conn2,$SSQL); $error=pg_errormessage($conn2); $error=substr($error,0,91);if (!$resultado){ echo $SSQL,"<br>"; ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 }
 $monto_resultado=cambia_coma_numero($monto_resultado);
 $SSQL="UPDATE CON001 SET saldo_anterior=saldo_anterior+$monto_resultado where codigo_cuenta='".$Cta_Result_Ant."'";
-$resultado=pg_exec($conn2,$SSQL); $error=pg_errormessage($conn2); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $error; ?>'); </script> <? }
+$resultado=pg_exec($conn2,$SSQL); $error=pg_errormessage($conn2); $error=substr($error,0,91);if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $error; ?>'); </script> <?php }
 echo substr($Cta_Ingreso,0,$li)." ".substr($Cta_Egreso,0,$le)." ".$Cta_Result_Eje." ".$monto_resultado,"<br>";
 if($act_trans=="SI"){
   echo "ESPERE ACTUALIZANDO MOVIMIENTOS TRANSITO....","<br>";  
@@ -244,17 +244,17 @@ if($act_almacen=="SI"){
     if($cod_almacen<>$prev_almacen){ $num_ref=$num_ref+1; $len=strlen($num_ref); $nro_ajuste=substr("00000000",0,8-$len).$num_ref;
        $sSQL="INSERT INTO COMP014 (nro_ajuste,tipo_ajuste,fecha_ajuste,Autorizado_Por,fecha_Autorizacion,Codigo_Almacen,Cod_Tipo_Mov,nro_comprobante_a,Procesa_Almacen,Procesado_Por,Usuario_SIA,Inf_Usuario,Descripcion) ";
        $sSQL=$sSQL." VALUES ('$nro_ajuste','$tipo_ajuste','$fecha','','$fecha','$cod_almacen','01','$nro_ajuste','N','','PRE-CIERRE','','$concepto')";
-	   $resultado=pg_exec($conn2,$sSQL);  $merror=pg_errormessage($conn2);  $merror=substr($merror,0,91); if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $merror; ?>'); </script> <? }
+	   $resultado=pg_exec($conn2,$sSQL);  $merror=pg_errormessage($conn2);  $merror=substr($merror,0,91); if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $merror; ?>'); </script> <?php }
        $prev_almacen=$cod_almacen;
      // echo $sSQL,"<br>";
     }	
 	$sqld="INSERT INTO comp045(nro_ajuste,codigo_articulo,unidad_medida,cantidad_ajuste,costo_actual,tasa_impuesto,existencia_actual,monto_iva,total_iva,unidad_p_a,relacion,descripcion_articulo)";
 	$sqld=$sqld." VALUES ('$nro_ajuste','$cod_articulo','$unidad_medida',$existencia,$ultimo_costo,$impuesto,0,$monto_iva,$total_iva,'P',1,'$des_articulo')";
-	$resultado=pg_exec($conn2,$sqld);  $merror=pg_errormessage($conn2);  $merror=substr($merror,0,91);	if (!$resultado){ ?> <script language="JavaScript">  muestra('<? echo $merror; ?>'); </script> <? }
+	$resultado=pg_exec($conn2,$sqld);  $merror=pg_errormessage($conn2);  $merror=substr($merror,0,91);	if (!$resultado){ ?> <script language="JavaScript">  muestra('<?php echo $merror; ?>'); </script> <?php }
 	//echo $sqld,"<br>";  
   }   
 }
 }
-?> <script language="JavaScript">  muestra('PROCESO FINALIZADO'); </script> <? pg_close();?>  <script language="JavaScript"> window.close();  </script>
+?> <script language="JavaScript">  muestra('PROCESO FINALIZADO'); </script> <?php pg_close();?>  <script language="JavaScript"> window.close();  </script>
 
 

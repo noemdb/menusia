@@ -1,3 +1,12 @@
+<?php
+ /*echo 'hola LARGO';
+ phpinfo();
+?>
+
+<?
+ echo 'hola CORTO';*/
+?>
+
 <? $tempresa=$_POST["txtempresa"]; $tclave=$_POST["txtclave"]; $tusuario=$_POST["txtusuario"];  $tusuario=str_replace("-","",$tusuario); $tusuario=str_replace("'","",$tusuario); $tusuario=str_replace(";","",$tusuario);  $tusuario=str_replace("*","",$tusuario);  $tusuario=str_replace("%","",$tusuario); $tusuario=str_replace("[","",$tusuario); $tusuario=str_replace("#","",$tusuario);  $tusuario=str_replace("/","",$tusuario);  $tusuario=str_replace("=","",$tusuario); $tclave=str_replace("/","",$tclave); $tclave=str_replace("-","",$tclave); $tclave=str_replace("'","",$tclave);   $tclave=str_replace(";","",$tclave);  $tclave=str_replace("=","",$tclave);   
 $port=5432;$host="localhost";$existdb="N";$user="invsia";$key="0agi6s";$conn = pg_connect("host=".$host." port=".$port." password=".$key." user=".$user." dbname=".$tempresa."");
 if (!$conn) { echo "OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS 1","<br>"; }else{ $sql="Select * from SIA000";  $res=pg_query($sql); if ($registro=pg_fetch_array($res,0)){$user=$registro["campo038"];$key=$registro["campo039"];$existdb="S";} pg_close(); }

@@ -1,9 +1,9 @@
 <?php include ("../class/seguridad.inc");include ("../class/conects.php");include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $cod_modulo="13";
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -51,11 +51,11 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
     <td width="92"><table width="92" height="489" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('menu_conf.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -70,9 +70,9 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td width="800" height="24"><table width="800" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="150"><span class="Estilo5">FORMATO DEL BIEN:</span></td>
-                    <td width="300"><input class="Estilo10" name="txtformato_bien" type="text" id="txtformato_bien" title="Formato del Bien" size="25" maxlength="30" value="<?echo $formato_bien ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+                    <td width="300"><input class="Estilo10" name="txtformato_bien" type="text" id="txtformato_bien" title="Formato del Bien" size="25" maxlength="30" value="<?php echo $formato_bien ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                     <td width="230"><span class="Estilo5">LONGUITUD N&Uacute;MERO DEL BIEN:</span></td>
-                    <td width="120"> <div align="left"><input class="Estilo10" name="txtlong_num_bien" type="text" id="txtlong_num_bien" title="Longitud Numero del Bien" size="4" maxlength="2" value="<?echo $long_num_bien ?>" onFocus="encender(this)" onBlur="apagar(this)"></div></td></tr>
+                    <td width="120"> <div align="left"><input class="Estilo10" name="txtlong_num_bien" type="text" id="txtlong_num_bien" title="Longitud Numero del Bien" size="4" maxlength="2" value="<?php echo $long_num_bien ?>" onFocus="encender(this)" onBlur="apagar(this)"></div></td></tr>
                 </table></td>
               </tr>
             </table></td>
@@ -84,7 +84,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="436" border="0" cellspacing="0" cellpadding="0">
 				  <tr>
 					 <td width="356"><span class="Estilo5">GENERA CAUSADO PRESUPUESTARIO:</span></td>
-					 <td width="70"><div align="center"><span class="Estilo5"><select name="txtgencaus_p" size="1"> <?if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?> </span></div></td>
+					 <td width="70"><div align="center"><span class="Estilo5"><select name="txtgencaus_p" size="1"> <?php if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?> </span></div></td>
 				 </tr>
                 </table></td>
               </tr>
@@ -92,7 +92,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="512" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="379"><span class="Estilo5"> DOCUMENTO CAUSADO BIEN INMUEBLE:</span></td>
-                    <td width="132"><input class="Estilo10" name="txtdoc_caus_inm" type="text" id="txtdoc_caus_inm"  size="6" maxlength="4" value="<?echo $doc_caus_inm ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+                    <td width="132"><input class="Estilo10" name="txtdoc_caus_inm" type="text" id="txtdoc_caus_inm"  size="6" maxlength="4" value="<?php echo $doc_caus_inm ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                     </tr>
                 </table></td>
               </tr>
@@ -100,7 +100,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="511" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="379"><span class="Estilo5"> DOCUMENTO CAUSADO BIEN MUEBLE:</span></td>
-					<td width="132"><input class="Estilo10" name="txtdoc_caus_mue" type="text" id="txtdoc_caus_mue"  size="6" maxlength="4" value="<?echo $doc_caus_mue ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+					<td width="132"><input class="Estilo10" name="txtdoc_caus_mue" type="text" id="txtdoc_caus_mue"  size="6" maxlength="4" value="<?php echo $doc_caus_mue ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                   </tr>
                 </table></td>
               </tr>
@@ -108,7 +108,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="510" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="378"><span class="Estilo5"> DOCUMENTO CAUSADO BIEN SEMOVIENTE:</span></td>
-					<td width="132"><input class="Estilo10" name="txtdoc_caus_sem" type="text" id="txtdoc_caus_sem"  size="6" maxlength="4" value="<?echo $doc_caus_sem ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+					<td width="132"><input class="Estilo10" name="txtdoc_caus_sem" type="text" id="txtdoc_caus_sem"  size="6" maxlength="4" value="<?php echo $doc_caus_sem ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                   </tr>
                 </table></td>
               </tr>
@@ -116,7 +116,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="511" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="379"><span class="Estilo5"> FUENTE DE FINANCIAMIENTO DEL CAUSADO:</span></td>
-					<td width="132"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente"  size="4" maxlength="2" value="<?echo $cod_fuente ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+					<td width="132"><input class="Estilo10" name="txtcod_fuente" type="text" id="txtcod_fuente"  size="4" maxlength="2" value="<?php echo $cod_fuente ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                   </tr>
                 </table></td>
               </tr>
@@ -124,9 +124,9 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="511" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="211"><span class="Estilo5"> DOCUMENTO COMPROMISO :</span></td>
-					<td width="100"><input class="Estilo10" name="txtdoc_comp" type="text" id="txtdoc_comp"  size="6" maxlength="4" value="<?echo $doc_comp ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+					<td width="100"><input class="Estilo10" name="txtdoc_comp" type="text" id="txtdoc_comp"  size="6" maxlength="4" value="<?php echo $doc_comp ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
 					<td width="200"><span class="Estilo5"> REFERENCIA COMPROMISO :</span></td>
-					<td width="100"><input class="Estilo10" name="txtref_comp" type="text" id="txtref_comp"  size="10" maxlength="8" value="<?echo $ref_comp ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
+					<td width="100"><input class="Estilo10" name="txtref_comp" type="text" id="txtref_comp"  size="10" maxlength="8" value="<?php echo $ref_comp ?>"  onFocus="encender(this)" onBlur="apagar(this)"></td>
                   </tr>
                 </table></td>
               </tr>
@@ -140,7 +140,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="436" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="356"><span class="Estilo5"> N&Uacute;MERO DEL BIEN UNICO :</span></td>
-					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtnumbien_unico" size="1"> <?if(substr($campo502,3,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?> </span></div></td>
+					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtnumbien_unico" size="1"> <?php if(substr($campo502,3,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?> </span></div></td>
 					 </tr>
                 </table></td>
               </tr>
@@ -153,7 +153,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="436" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="356"><span class="Estilo5"> VALIDAR DESCRIPCI&Oacute;N DEL BIEN :</span></td>
-					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtvalida_des" size="1"> <?if(substr($campo502,4,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?> </span></div></td>
+					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtvalida_des" size="1"> <?php if(substr($campo502,4,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?> </span></div></td>
 					 </tr>
                 </table></td>
               </tr>
@@ -166,7 +166,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td><table width="436" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="356"><span class="Estilo5"> MODIFICAR DEPENDENCIA SOLO TRANSFERENCIA:</span></td>
-					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtmod_dep" size="1"> <?if(substr($campo502,6,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?> </span></div></td>
+					  <td width="70"><div align="center"><span class="Estilo5"><select name="txtmod_dep" size="1"> <?php if(substr($campo502,6,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?> </span></div></td>
 					 </tr>
                 </table></td>
               </tr>
@@ -179,7 +179,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
                 <td ><table width="436" height="19" border="0" cellpadding="0">
                     <tr>
                       <td width="356"><span class="Estilo5">PERIODO TRABAJO DESDE DEL M&Oacute;DULO:</span></td>
-                      <td width="70"><div align="center"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="04" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)" value="<?echo $periodo ?>">   </span></div></td>
+                      <td width="70"><div align="center"><span class="Estilo5"><input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="04" maxlength="200"  onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $periodo ?>">   </span></div></td>
                     </tr>
                 </table></td>
               </tr>
@@ -191,7 +191,7 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
         <table width="768">
           <tr>
             <td width="614">&nbsp;</td>
-			<td width="50"><input  name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?echo $cod_modulo?>" ></td>
+			<td width="50"><input  name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?php echo $cod_modulo?>" ></td>
             <td width="88" valign="middle"><input  name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="88"></td>
           </tr>
@@ -204,4 +204,4 @@ $doc_caus_inm=$registro["campo509"]; $doc_caus_mue=$registro["campo510"]; $doc_c
 </table>
 </body>
 </html>
-<? pg_close(); ?>
+<?php pg_close(); ?>

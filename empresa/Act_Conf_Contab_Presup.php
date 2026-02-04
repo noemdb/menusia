@@ -1,9 +1,9 @@
 <?php include ("../class/seguridad.inc");include ("../class/conects.php"); include ("../class/funciones.php");
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); $cod_modulo="05";
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }
 $sql="SELECT campo103 FROM sia001 where campo101='$usuario_sia'"; $resultado=pg_exec($conn,$sql);$filas=pg_numrows($resultado);  $tipo_u="U";
 if($filas>0){$registro=pg_fetch_array($resultado); $tipo_u=$registro["campo103"]; $tiene_acceso="S";} $Mcamino="NNNNNNNNNNNNNNNNNNNNN";
-if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?}
+if($tipo_u=="A"){$Mcamino="SSSSSSSSSSSSSSSSSSSSS";}  else{?><script language="JavaScript"> document.location='menu.php';</script><?php }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,11 +52,11 @@ $campo572=$registro["campo572"];
     <td width="92" height="881"><table width="92" height="874" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('menu_conf.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu_conf.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -70,14 +70,14 @@ $campo572=$registro["campo572"];
                   <td width="539"><table width="531" border="0" cellpadding="0">
                       <tr>
                         <td width="250"><span class="Estilo5">FORMATO C&Oacute;DIGO PRESUPUESTARIO:</span></td>
-                        <td width="275"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtformato_pre" type="text" id="txtformato_pre" size="40" maxlength="32" value="<?echo $formato_pre?>" onFocus="encender(this)" onBlur="apagar(this)"></span></div></td>
+                        <td width="275"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtformato_pre" type="text" id="txtformato_pre" size="40" maxlength="32" value="<?php echo $formato_pre?>" onFocus="encender(this)" onBlur="apagar(this)"></span></div></td>
                       </tr>
                   </table></td>
 
                   <td width="347"><table width="333" border="0" cellpadding="0">
                       <tr>
                         <td width="289"><span class="Estilo5">NIVEL A CONTROLAR LA DISPONIBILIDAD:</span></td>
-                        <td width="38"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnivel" type="text" id="txtnivel"  size="3" maxlength="2" value="<?echo $nivel?>" onFocus="encender(this)" onBlur="apagar(this)"></span></div></td>
+                        <td width="38"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtnivel" type="text" id="txtnivel"  size="3" maxlength="2" value="<?php echo $nivel?>" onFocus="encender(this)" onBlur="apagar(this)"></span></div></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -85,14 +85,14 @@ $campo572=$registro["campo572"];
                   <td><table width="530" border="0" cellpadding="0">
                       <tr>
                         <td width="249"><span class="Estilo5">TITULO C&Oacute;DIGO PRESUPUESTARIO:</span></td>
-                        <td width="275"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttitulo" type="text" id="txttitulo" readonly value="<?echo $titulo?>" size="40" maxlength="32"></span></div></td>
+                        <td width="275"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txttitulo" type="text" id="txttitulo" readonly value="<?php echo $titulo?>" size="40" maxlength="32"></span></div></td>
                       </tr>
                   </table></td>
 
                   <td><table width="333" border="0" cellpadding="0">
                       <tr>
                         <td width="289"><span class="Estilo5">LONGITUD DE CATEGORIAS PROGRAMATICAS:</span></td>
-                        <td width="38"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtlong_cat" type="text" id="txtlong_cat" size="3" maxlength="2"  value="<?echo $long_cat?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></div></td>
+                        <td width="38"><div align="left"><span class="Estilo5"><input class="Estilo10" name="txtlong_cat" type="text" id="txtlong_cat" size="3" maxlength="2"  value="<?php echo $long_cat?>" onFocus="encender(this)" onBlur="apagar(this)"> </span></div></td>
                       </tr>
                   </table></td>
                 </tr>
@@ -122,20 +122,20 @@ $campo572=$registro["campo572"];
                   <td width="430"><table width="420"  border="0" cellpadding="0">
                       <tr>
                         <td width="344" valign="middle"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombcat1" type="text" id="txtnombcat1" size="40" maxlength="50"  value="<?echo $nombcat1?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombcat1" type="text" id="txtnombcat1" size="40" maxlength="50"  value="<?php echo $nombcat1?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70" valign="middle"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevcat1" type="text" id="txtabrevcat1" size="4" maxlength="4" value="<?echo $abrevcat1?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevcat1" type="text" id="txtabrevcat1" size="4" maxlength="4" value="<?php echo $abrevcat1?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
                   <td width="430"><table width="420" border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombpar1" type="text" id="txtnombpar1" size="40" maxlength="50" value="<?echo $nombpar1?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombpar1" type="text" id="txtnombpar1" size="40" maxlength="50" value="<?php echo $nombpar1?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevpar1" type="text" id="txtabrevpar1" size="4" maxlength="4" value="<?echo $abrevpar1?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevpar1" type="text" id="txtabrevpar1" size="4" maxlength="4" value="<?php echo $abrevpar1?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -144,20 +144,20 @@ $campo572=$registro["campo572"];
                   <td><table width="420" border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombcat2" type="text" id="txtnombcat2" size="40" maxlength="50" value="<?echo $nombcat2?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombcat2" type="text" id="txtnombcat2" size="40" maxlength="50" value="<?php echo $nombcat2?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70" valign="middle"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevcat2" type="text" id="txtabrevcat2" size="4" maxlength="4" value="<?echo $abrevcat2?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevcat2" type="text" id="txtabrevcat2" size="4" maxlength="4" value="<?php echo $abrevcat2?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
                   <td><table width="420"  border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombpar2" type="text" id="txtnombpar2" size="40" maxlength="50" value="<?echo $nombpar2?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombpar2" type="text" id="txtnombpar2" size="40" maxlength="50" value="<?php echo $nombpar2?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevpar2" type="text" id="txtabrevpar2" size="4" maxlength="4"  value="<?echo $abrevpar2?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevpar2" type="text" id="txtabrevpar2" size="4" maxlength="4"  value="<?php echo $abrevpar2?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -166,20 +166,20 @@ $campo572=$registro["campo572"];
                   <td><table width="420" border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombcat3" type="text" id="txtnombcat3"  size="40" maxlength="50"  value="<?echo $nombcat3?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombcat3" type="text" id="txtnombcat3"  size="40" maxlength="50"  value="<?php echo $nombcat3?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70" valign="middle"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevcat3" type="text" id="txtabrevcat3" size="4" maxlength="4" value="<?echo $abrevcat3?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevcat3" type="text" id="txtabrevcat3" size="4" maxlength="4" value="<?php echo $abrevcat3?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
                   <td><table width="420" border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombpar3" type="text" id="txtnombpar3" size="40" maxlength="50" value="<?echo $nombpar3?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombpar3" type="text" id="txtnombpar3" size="40" maxlength="50" value="<?php echo $nombpar3?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevpar3" type="text" id="txtabrevpar3"size="4" maxlength="4" value="<?echo $abrevpar3?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevpar3" type="text" id="txtabrevpar3"size="4" maxlength="4" value="<?php echo $abrevpar3?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -188,20 +188,20 @@ $campo572=$registro["campo572"];
                   <td><table width="420"  border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombcat4" type="text" id="txtnombcat4"  size="40" maxlength="50"  value="<?echo $nombcat4?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombcat4" type="text" id="txtnombcat4"  size="40" maxlength="50"  value="<?php echo $nombcat4?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70" valign="middle"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevcat4" type="text" id="txtabrevcat4" size="4" maxlength="4" value="<?echo $abrevcat4?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevcat4" type="text" id="txtabrevcat4" size="4" maxlength="4" value="<?php echo $abrevcat4?>"  onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
                   <td><table width="420"  border="0" cellpadding="0">
                       <tr>
                         <td width="342"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombpar4" type="text" id="txtnombpar4"  size="40" maxlength="50" value="<?echo $nombpar4?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombpar4" type="text" id="txtnombpar4"  size="40" maxlength="50" value="<?php echo $nombpar4?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevpar4" type="text" id="txtabrevpar4" size="4" maxlength="4" value="<?echo $abrevpar4?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevpar4" type="text" id="txtabrevpar4" size="4" maxlength="4" value="<?php echo $abrevpar4?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -210,20 +210,20 @@ $campo572=$registro["campo572"];
                   <td><table width="420" border="0" cellpadding="0">
                       <tr>
                         <td width="344"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombcat5" type="text" id="txtnombcat5" size="40" maxlength="50"  value="<?echo $nombcat5?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombcat5" type="text" id="txtnombcat5" size="40" maxlength="50"  value="<?php echo $nombcat5?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70" valign="middle"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevcat5" type="text" id="txtabrevcat5" size="4" maxlength="4" value="<?echo $abrevcat5?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevcat5" type="text" id="txtabrevcat5" size="4" maxlength="4" value="<?php echo $abrevcat5?>"  onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
                   <td><table width="420"  border="0" cellpadding="0">
                       <tr>
                         <td width="343"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtnombpar5" type="text" id="txtnombpar5" size="40" maxlength="50" value="<?echo $nombpar5?>" onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtnombpar5" type="text" id="txtnombpar5" size="40" maxlength="50" value="<?php echo $nombpar5?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                         <td width="70"><div align="center"><span class="Estilo5">
-                            <input class="Estilo10" name="txtabrevpar5" type="text" id="txtabrevpar5" size="4" maxlength="4" value="<?echo $abrevpar5?>" onFocus="encender(this)" onBlur="apagar(this)">
+                            <input class="Estilo10" name="txtabrevpar5" type="text" id="txtabrevpar5" size="4" maxlength="4" value="<?php echo $abrevpar5?>" onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -237,7 +237,7 @@ $campo572=$registro["campo572"];
                     <tr>
                       <td width="338" height="22"><span class="Estilo5">REFERENCIA SOLO N&Uacute;MERO :</span></td>
                       <td width="76"><div align="center"><span class="Estilo5">
-                        <select name="txtsolo_num" size="1"> <?if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <select name="txtsolo_num" size="1"> <?php if(substr($campo502,0,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></div></td>
                     </tr>
                   </table><span class="Estilo5"> </span></td>
@@ -245,7 +245,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="299"><span class="Estilo5">PERIODO TRABAJO DESDE DEL MODULO :</span></td>
                         <td width="112"><div align="center"><span class="Estilo5">
-                          <input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="3" maxlength="2" value="<?echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                          <input class="Estilo10" name="txtperiodo" type="text" id="txtperiodo"  size="3" maxlength="2" value="<?php echo $periodo ?>"  onFocus="encender(this)" onBlur="apagar(this)">
                         </span></div></td>
                       </tr>
                   </table></td>
@@ -267,7 +267,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="335"><span class="Estilo5">REFERENCIA DE COMPROMISO AUTOMATICA : </span></td>
                         <td width="78" align="center"><span class="Estilo5">
-                          <select name="txtref_comp" size="1" id="txtref_comp"><?if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtref_comp" size="1" id="txtref_comp"><?php if(substr($campo502,1,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -275,7 +275,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="302"><span class="Estilo5">FECHA COMPROMISO AUTOMATICA :</span></td>
                         <td width="110" align="center"><span class="Estilo5">
-                          <select name="txtfecha_comp" size="1" id="txtfecha_comp"><?if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtfecha_comp" size="1" id="txtfecha_comp"><?php if(substr($campo502,2,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                       </tr>
                   </table></td>
@@ -289,7 +289,7 @@ $campo572=$registro["campo572"];
                     <tr>
                       <td width="353"><span class="Estilo5"> APROBAR COMPROMISOS: </span></td>
                       <td width="60"><span class="Estilo5">
-                        <select name="txtaprob_comp" size="1" id="txtaprob_comp"><?if (substr($campo502,15,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                        <select name="txtaprob_comp" size="1" id="txtaprob_comp"><?php if (substr($campo502,15,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                       </span></td>
                       </tr>
                 </table></td>
@@ -297,7 +297,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="302"><span class="Estilo5">GENERAR COMPROBANTE DE COMPROMISO :</span></td>
                         <td width="110" align="center"><span class="Estilo5">
-                          <select name="txtgen_comp" size="1" id="txtgen_comp"><?if(substr($campo502,3,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtgen_comp" size="1" id="txtgen_comp"><?php if(substr($campo502,3,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                       </tr>
                   </table></td>
@@ -319,7 +319,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="336"><span class="Estilo5">REFERENCIA DE CAUSADO AUTOMATICA: </span></td>
                         <td width="71" align="center"><span class="Estilo5">
-                          <select name="txtref_caus" size="1" id="txtref_caus"><?if (substr($campo502,4,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtref_caus" size="1" id="txtref_caus"><?php if (substr($campo502,4,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                       </tr>
                   </table></td>
@@ -327,7 +327,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="305"><span class="Estilo5">FECHA CAUSADO AUTOMATICA: </span></td>
                         <td width="106" align="center"><span class="Estilo5">
-                          <select name="txtfecha_caus" size="1" id="txtfecha_caus"><?if (substr($campo502,5,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtfecha_caus" size="1" id="txtfecha_caus"><?php if (substr($campo502,5,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -349,7 +349,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="336"><span class="Estilo5">REFERENCIA DE PAGO AUTOMATICA: </span></td>
                         <td width="69" align="center"><span class="Estilo5">
-                          <select name="txtref_pago" size="1" id="txtref_pago"><?if (substr($campo502,6,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtref_pago" size="1" id="txtref_pago"><?php if (substr($campo502,6,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -357,7 +357,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="307"><span class="Estilo5">FECHA PAGO AUTOMATICA: </span></td>
                         <td width="107" align="center"><span class="Estilo5">
-                          <select name="txtfecha_pago" size="1" id="txtfecha_pago"><?if (substr($campo502,7,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtfecha_pago" size="1" id="txtfecha_pago"><?php if (substr($campo502,7,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -379,7 +379,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="334"><span class="Estilo5">REFERENCIA DE AJUSTE AUTOMATICA: </span></td>
                         <td width="72" align="center"><span class="Estilo5">
-                          <select name="txtref_ajuste" size="1" id="txtref_ajuste"><?if (substr($campo502,8,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtref_ajuste" size="1" id="txtref_ajuste"><?php if (substr($campo502,8,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -387,7 +387,7 @@ $campo572=$registro["campo572"];
                       <tr>
                         <td width="308"><span class="Estilo5">FECHA AJUSTE AUTOMATICA: </span></td>
                         <td width="103" align="center"><span class="Estilo5">
-                          <select name="txtfecha_ajuste" size="1" id="txtfecha_ajuste"><?if (substr($campo502,9,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                          <select name="txtfecha_ajuste" size="1" id="txtfecha_ajuste"><?php if (substr($campo502,9,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                         </span></td>
                         </tr>
                   </table></td>
@@ -410,14 +410,14 @@ $campo572=$registro["campo572"];
                 <td width="437"><table width="425" border="0" cellpadding="0" >
                     <tr>
                       <td width="364"><span class="Estilo5">REFERENCIA DE MODIFICACIONES AUTOMATICA: </span></td>
-                      <td width="61"><span class="Estilo5"> <select name="txtref_mod" size="1" id="txtref_mod"><?if (substr($campo502,10,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                      <td width="61"><span class="Estilo5"> <select name="txtref_mod" size="1" id="txtref_mod"><?php if (substr($campo502,10,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                       </span></td>
                       </tr>
                 </table></td>
                 <td width="414"><table width="411"  border="0" cellpadding="0" >
                     <tr>
                       <td width="331"><span class="Estilo5">FECHA MODIFICACIONES AUTOMATICA: </span></td>
-                      <td width="80"><span class="Estilo5"><select name="txtfecha_mod" size="1" id="txtfecha_mod"><?if (substr($campo502,11,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                      <td width="80"><span class="Estilo5"><select name="txtfecha_mod" size="1" id="txtfecha_mod"><?php if (substr($campo502,11,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                       </span></td>
                       </tr>
                 </table></td>
@@ -430,14 +430,14 @@ $campo572=$registro["campo572"];
                 <td width="439" ><table width="429"  border="0" cellpadding="0">
                     <tr>
                       <td width="363"><span class="Estilo5"> MODIFICAR O ELIMINAR MODIFICACIONES APROBADAS :</span></td>
-                      <td width="60"><span class="Estilo5"><select name="txtmodif_aprob" size="1" id="txtmodif_aprob"><?if (substr($campo502,14,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                      <td width="60"><span class="Estilo5"><select name="txtmodif_aprob" size="1" id="txtmodif_aprob"><?php if (substr($campo502,14,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                       </span></td>
                       </tr>
                 </table></td>
                 <td width="421" ><table width="396" border="0" cellpadding="0">
                   <tr>
                     <td width="320"><span class="Estilo5"> CORRELATIVO POR TIPO DE MODIFICACI&Oacute;N :</span></td>
-                    <td width="59"><span class="Estilo5"> <select name="txtcorr_modif" size="1" id="txtcorr_modif"><?if (substr($campo502,13,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?>
+                    <td width="59"><span class="Estilo5"> <select name="txtcorr_modif" size="1" id="txtcorr_modif"><?php if (substr($campo502,13,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?>
                     </span></td>
                   </tr>
                 </table></td>
@@ -451,13 +451,13 @@ $campo572=$registro["campo572"];
                 <td width="439" ><table width="429"  border="0" cellpadding="0">
                     <tr>
                       <td width="363"><span class="Estilo5"> PREGUNTAR SI HAY TRASPASOS (+/-) DEL MISMO C&Oacute;DIGO:</span></td>
-                      <td width="60"><span class="Estilo5"><select name="txtpreg_cod" size="1" id="txtpreg_cod"><?if (substr($campo502,12,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?}else{?><option>SI</option> <option selected>NO</option> </select> <?}?> </span></td>
+                      <td width="60"><span class="Estilo5"><select name="txtpreg_cod" size="1" id="txtpreg_cod"><?php if (substr($campo502,12,1)=="S"){ ?><option selected>SI</option> <option>NO</option> </select><?php }else{?><option>SI</option> <option selected>NO</option> </select> <?php }?> </span></td>
                       </tr>
                 </table></td>
                 <td width="421" ><table width="396" border="0" cellpadding="0">
                   <tr>
                     <td width="320"><span class="Estilo5">TIPO DIFERIDO PARA MODIFICACI&Oacute;N :</span></td>
-                    <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtdoc_dif" type="text" id="txtdoc_dif"  size="4" maxlength="4" value="<?echo $campo572 ?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
+                    <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtdoc_dif" type="text" id="txtdoc_dif"  size="4" maxlength="4" value="<?php echo $campo572 ?>" onFocus="encender(this)" onBlur="apagar(this)">  </span></td>
                   </tr>
                 </table></td>
               </tr>
@@ -471,14 +471,14 @@ $campo572=$registro["campo572"];
                 <td width="430" ><table width="426"  border="0" cellpadding="0">
                     <tr>
                       <td width="345"><span class="Estilo5"> PORCENTAJE DE CONTROL DE TRASPASOS :</span></td>
-                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtporc_traspaso" type="text" id="txtporc_traspaso"  size="5" maxlength="5" value="<?echo $porc_traspaso ?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                      <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtporc_traspaso" type="text" id="txtporc_traspaso"  size="5" maxlength="5" value="<?php echo $porc_traspaso ?>"  onFocus="encender(this)" onBlur="apagar(this)">
                      </span></td>
                       </tr>
                 </table></td>
                 <td width="430" ><table width="425"  border="0" cellpadding="0">
                   <tr>
                     <td width="345"><span class="Estilo5"> NIVEL A CONTROLAR PORCENTAJE DE TRASPASO :</span></td>
-                     <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnivel_traspaso" type="text" id="txtnivel_traspaso"  size="5" maxlength="5"  value="<?echo $nivel_traspaso ?>"  onFocus="encender(this)" onBlur="apagar(this)">
+                     <td width="80"><span class="Estilo5"><input class="Estilo10" name="txtnivel_traspaso" type="text" id="txtnivel_traspaso"  size="5" maxlength="5"  value="<?php echo $nivel_traspaso ?>"  onFocus="encender(this)" onBlur="apagar(this)">
                      </span></td>
                   </tr>
                 </table></td>
@@ -491,7 +491,7 @@ $campo572=$registro["campo572"];
         <table width="848">
           <tr>
             <td width="506">&nbsp;</td>
-            <td width="50"><input name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?echo $cod_modulo?>" ></td>
+            <td width="50"><input name="txtcod_modulo" type="hidden" id="txtcod_modulo" value="<?php echo $cod_modulo?>" ></td>
             <td width="70" valign="middle"><input name="button" type="submit" id="button"  value="Grabar"></td>
             <td width="26">&nbsp;</td>
           </tr>
@@ -502,4 +502,4 @@ $campo572=$registro["campo572"];
 </table>
 </body>
 </html>
-<? pg_close();?>
+<?php pg_close();?>

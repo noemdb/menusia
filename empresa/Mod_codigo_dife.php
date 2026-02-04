@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");?
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 $equipo=getenv("COMPUTERNAME");
 if (!$_GET){ $cod_presup=""; $cod_fuente="00";
   $mcod_m="PRE023".$equipo;$codigo_mov=substr($mcod_m,0,49);}
@@ -13,7 +13,7 @@ if (!$_GET){ $cod_presup=""; $cod_fuente="00";
 <LINK href="../class/sia.css" type="text/css" rel=stylesheet> 
 <SCRIPT language="JavaScript" src="../class/sia.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" type="text/JavaScript">
-function llamar_anterior(){document.location ='Det_inc_diferidos.php?codigo_mov=<?echo $codigo_mov?>';}
+function llamar_anterior(){document.location ='Det_inc_diferidos.php?codigo_mov=<?php echo $codigo_mov?>';}
 function revisar(){
 var f=document.form1;
 var Valido=true;
@@ -27,7 +27,7 @@ return true;}
 </script>
 
 </head>
-<?
+<?php
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 $denominacion="";$des_fuente="";
 $monto=0;
@@ -55,7 +55,7 @@ $monto=formato_monto($monto);
 
                 </span></td>
                 <td width="217"><span class="Estilo5">
-                  <input name="txtcod_presup" type="text" id="txtcod_presup2" title="Registre el C&oacute;digo de la Cuenta" value="<? echo $cod_presup ?>"  size="30" maxlength="30" readonly>
+                  <input name="txtcod_presup" type="text" id="txtcod_presup2" title="Registre el C&oacute;digo de la Cuenta" value="<?php echo $cod_presup ?>"  size="30" maxlength="30" readonly>
                 </span></td>
                 <td width="103">&nbsp;</td>
                 <td width="51">&nbsp;</td>
@@ -68,11 +68,11 @@ $monto=formato_monto($monto);
             <tr>
               <td width="215"><span class="Estilo5">FUENTE DE FINANCIAMIENTO : </span></td>
               <td width="22"><span class="Estilo10">
-                <input name="txtcod_fuente" type="text" id="txtcod_fuente" value="<? echo $cod_fuente ?>" size="3" maxlength="2" readonly>
+                <input name="txtcod_fuente" type="text" id="txtcod_fuente" value="<?php echo $cod_fuente ?>" size="3" maxlength="2" readonly>
               </span></td>
               <td width="17">&nbsp;</td>
               <td width="351"><span class="Estilo10">
-                <input name="txtdes_fuente" type="text" id="txtdes_fuente" value="<? echo $des_fuente ?>" size="50" readonly>
+                <input name="txtdes_fuente" type="text" id="txtdes_fuente" value="<?php echo $des_fuente ?>" size="50" readonly>
               </span></td>
             </tr>
           </table></td>
@@ -85,7 +85,7 @@ $monto=formato_monto($monto);
 
                 </span></td>
                 <td width="494"><span class="Estilo5">
-                  <textarea name="txtdenominacion" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><? echo $denominacion ?></textarea>
+                  <textarea name="txtdenominacion" cols="58" rows="2" readonly="readonly" id="txtdenominacion"><?php echo $denominacion ?></textarea>
                 </span></td>
               </tr>
             </table>            </td>
@@ -96,7 +96,7 @@ $monto=formato_monto($monto);
                 <tr>
                   <td width="108"><span class="Estilo5">MONTO </span>:</td>
                   <td width="496"><span class="Estilo5">
-                    <input name="txtmonto" type="text" id="txtmonto" onFocus="encender(this)" onBlur="apagar(this)" value="<? echo $monto ?>" size="25" maxlength="22" align="right">
+                    <input name="txtmonto" type="text" id="txtmonto" onFocus="encender(this)" onBlur="apagar(this)" value="<?php echo $monto ?>" size="25" maxlength="22" align="right">
                   </span></td>
                 </tr>
             </table></td>
@@ -108,7 +108,7 @@ $monto=formato_monto($monto);
       </table>
         <table width="540" align="center">
           <tr>
-            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?echo $codigo_mov?>"></td>
+            <td width="17"><input name="txtcodigo_mov" type="hidden" id="txtcodigo_mov" value="<?php echo $codigo_mov?>"></td>
             <td width="120">&nbsp;</td>
             <td width="87" align="center" valign="middle"><input name="Submit" type="submit" id="Submit"  value="Aceptar"></td>
             <td width="99" align="center"><input name="button" type="button" id="button4" value="Atras" onClick="JavaScript:llamar_anterior()"></td>

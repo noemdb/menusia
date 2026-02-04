@@ -1,4 +1,4 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php"); 
+<?php include ("../class/conect.php"); include ("../class/funciones.php"); 
 $conn = pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname.""); if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 if (!$_GET){$criterio=''; } else{$criterio=$_GET["musuario"]; }
 ?>
@@ -24,7 +24,7 @@ if (mcodigo=="") {alert("Codigo debe ser Seleccionado");}
     <tr>
       <td align="left"><table width="840" border="0" align="left">
           <tr>
-            <td width="215" align="center" valign="middle"><input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar Codigo al Usuario" onclick="javascript:LlamarURL('Inc_codigo_part.php?usuario=<?echo $criterio?>')"></td>
+            <td width="215" align="center" valign="middle"><input name="btAgregar" type="button" id="btAgregar" value="Agregar" title="Agregar Codigo al Usuario" onclick="javascript:LlamarURL('Inc_codigo_part.php?usuario=<?php echo $criterio?>')"></td>
             <td width="200" align="center"></td>
             <td width="200" align="center"></td>
             <td width="215" align="center"><input name="btRefrescar" type="button" id="btRefrescar" onClick="JavaScript:self.location.reload();" value="Refrescar" title="Refrescar los Codigos del Usuario"></td>
@@ -47,16 +47,16 @@ $sql="SELECT sia008.cod_presup,sia008.cod_fuente,pre001.denominacion  FROM sia00
            <td width="40" align="left" bgcolor="#99CCFF"><strong>Fuente</strong></td>
            <td width="550" align="center" bgcolor="#99CCFF"><strong>Denominaci&oacute;n</strong></td>
          </tr>
-<? while($registro=pg_fetch_array($res)){ ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama('<? echo $criterio; ?>','<? echo $registro["cod_presup"]; ?>','<? echo $registro["cod_fuente"]; ?>');">
-           <td width="250" align="left"><? echo $registro["cod_presup"]; ?></td>
-           <td width="40" align="left"><? echo $registro["cod_fuente"]; ?></td>
-           <td width="550" align="left"><? echo $registro["denominacion"]; ?></td>
+<?php while($registro=pg_fetch_array($res)){ ?>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama('<?php echo $criterio; ?>','<?php echo $registro["cod_presup"]; ?>','<?php echo $registro["cod_fuente"]; ?>');">
+           <td width="250" align="left"><?php echo $registro["cod_presup"]; ?></td>
+           <td width="40" align="left"><?php echo $registro["cod_fuente"]; ?></td>
+           <td width="550" align="left"><?php echo $registro["denominacion"]; ?></td>
          </tr>
-         <?}?>
+         <?php }?>
        </table></td>
    </tr>
  </table>
 </body>
 </html>
-<? pg_close(); ?>
+<?php pg_close(); ?>

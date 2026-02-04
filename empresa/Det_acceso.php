@@ -1,4 +1,4 @@
-<?include ("../class/conect.php"); include ("../class/funciones.php"); 
+<?php include ("../class/conect.php"); include ("../class/funciones.php"); 
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 if (pg_ErrorMessage($conn)) { echo "<p><b>Ocurrio un error conectando a la base de datos: .</b></p>"; exit; }
 ?>
@@ -28,7 +28,7 @@ $res=pg_query($sql); //echo $sql;
            <td width="340" align="left" bgcolor="#99CCFF"><strong>Derechos</strong></td>
                    <td width="80" align="left" bgcolor="#99CCFF"><strong>Codigo</strong></td>
          </tr>
-         <? $t_debe=0; $t_haber=0;
+         <?php $t_debe=0; $t_haber=0;
 while($registro=pg_fetch_array($res))
 { $derechos="";
   if(($registro["campo607"]=="S")and($registro["campo706"]!="")) {$derechos=$derechos."-".$registro["campo706"];}
@@ -48,18 +48,18 @@ while($registro=pg_fetch_array($res))
   if($derechos==""){$derechos="-";}
     else $derechos=substr($derechos, 1, 150);
 ?>
-         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama('<? echo $registro["campo702"]; ?>','<? echo $criterio;?>','<? echo $registro["campo703"]; ?>');" >
-           <td width="500" align="left"><? echo $registro["campo703"]; ?></td>
-           <td width="320" align="center"><? echo $derechos; ?></td>
-                   <td width="80" align="left"><? echo $registro["campo702"]; ?></td>
+         <tr bgcolor='#FFFFFF' bordercolor='#000000' height="20" class="Estilo5" onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='#FFFFFF'"o"];" onDblClick="javascript:Llama('<?php echo $registro["campo702"]; ?>','<?php echo $criterio;?>','<?php echo $registro["campo703"]; ?>');" >
+           <td width="500" align="left"><?php echo $registro["campo703"]; ?></td>
+           <td width="320" align="center"><?php echo $derechos; ?></td>
+                   <td width="80" align="left"><?php echo $registro["campo702"]; ?></td>
          </tr>
-         <?}
+         <?php }
 ?>
        </table></td>
    </tr>
  </table>
 </body>
 </html>
-<?
+<?php
   pg_close();
 ?>

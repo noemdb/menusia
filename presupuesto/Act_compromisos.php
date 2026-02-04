@@ -178,7 +178,8 @@ if($anulado=='S'){$msta="ANULADO"; $inf_sta="ANULADO CON FECHA:".$fecha_anu; }
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('Cons_compromisos.php?referencia_comp=<?echo $referencia_comp?>&tipo_compromiso=<?echo $tipo_compromiso?>&nombre_abrev_comp=<?echo $nombre_abrev_comp?>')";
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="Cons_compromisos.php?referencia_comp=<?echo $referencia_comp?>&tipo_compromiso=<?echo $tipo_compromiso?>&nombre_abrev_comp=<?echo $nombre_abrev_comp?>" class="menu">Consultar</a></td>
         </tr>	
-       <?} if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>		
+       <?//} //if (($Mcamino{1}=="S")and($SIA_Cierre=="N")){?>	
+       <?} if (true){?>	
           <tr>
             <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:Llamar_Modificar('<?echo $modulo ?>','<?echo $anulado ?>')";
                 onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="javascript:Llamar_Modificar('<?echo $modulo?>','<?echo $anulado ?>');">Modificar</A></td>
@@ -212,7 +213,8 @@ if($anulado=='S'){$msta="ANULADO"; $inf_sta="ANULADO CON FECHA:".$fecha_anu; }
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Anular('<?echo $modulo?>','<?echo $anulado?>','<?echo $Fec_Fin_Ejer?>');" class="menu">Anular</a></td>
         </tr>
-		<?} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+		<?//} if (($Mcamino{6}=="S")and($SIA_Cierre=="N")){?>
+		<?} if (true){?>
         <tr>
           <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';"
           onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><a href="javascript:Llama_Eliminar('<?echo $modulo?>','<?echo $anulado?>');" class="menu">Eliminar</a></td>

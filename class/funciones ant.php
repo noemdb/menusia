@@ -1,4 +1,4 @@
-<?include ("conect.php"); include ("ventana.php");
+<?php include ("conect.php"); include ("ventana.php");
 function Rellenarcerosizq($str,$n){$numeroarellenar=$n-strlen($str); $texto="";
  for ($i=0; $i < $numeroarellenar; $i++){$texto=$texto."0";}
  $texto=$texto.$str; return $texto;}
@@ -66,7 +66,7 @@ Function RDB($monto){$valor=NRD($monto);  $st=$valor; $l=strlen($st);
   $d=substr($st,$l-1,1); $d=$d/100; $valor=$valor-$d;   $d=$d*10;
   if($d<5){$d=0;}else{$d=1;}$valor=$valor+$d; return $valor;}
 ?>
-<?include ("fun_fechas.php");
+<?php include ("fun_fechas.php");
 //error_reporting(0);
 error_reporting(E_ALL ^ E_WARNING);
 ?>

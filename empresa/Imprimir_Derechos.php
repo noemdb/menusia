@@ -1,4 +1,4 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php");
+<?php include ("../class/conect.php");  include ("../class/funciones.php");
 if (!$_GET){ $temp_usuario='';} else {$temp_usuario=$_GET["GUsuario"];}  $prev_modulo="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
 

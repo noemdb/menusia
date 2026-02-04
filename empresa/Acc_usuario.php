@@ -1,10 +1,10 @@
-<?include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
+<?php include ("../class/conect.php");  include ("../class/funciones.php"); include ("../class/configura.inc");
 if ($_GET["GUsuario"]!=""){$login=$_GET["GUsuario"];} else{$login='';}
 if ($_GET["Gmodulo"]!=""){$gmodulo=$_GET["Gmodulo"];} else{$gmodulo='00';}
 $modulo=$gmodulo.$login;
 $nombre=""; $cargo=""; $departamento=""; $cat_prog="";$cod_almacen=""; $unidad_sol="";
 $conn=pg_connect("host=".$host." port=".$port." password=".$password." user=".$user." dbname=".$dbname."");
-if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?}else{  $Nom_Emp=busca_conf(); }
+if (pg_ErrorMessage($conn)){ ?><script language="JavaScript">muestra('OCURRIO UN ERROR CONECTANDO LA BASE DE DATOS');</script><?php }else{  $Nom_Emp=busca_conf(); }
 $sql="Select * from SIA001 WHERE campo101='$login'";   $res=pg_query($sql);
 if($registro=pg_fetch_array($res,0)){ $nombre=$registro["campo104"];  $cargo=$registro["campo105"]; $departamento=$registro["campo106"];  $cat_prog=$registro["campo107"]; $cod_almacen=$registro["campo108"]; $unidad_sol=$registro["campo111"];} 
 ?>
@@ -61,7 +61,7 @@ function Asigna_modulo(nmod){var f=document.form1;     f.cmbmodulo.options[nmod]
 function Llama_Lote(nopcion,modu){var url; url="Act_acc_lote.php?opcion="+nopcion+"&modulo="+modu;  document.location = url; }
 </script>
 </head>
-<?
+<?php
 $cmodulo=""; $nmodulo=0;
 if($gmodulo=='01'){$cmodulo="ORDENAMINETO DE PAGOS";$nmodulo=2;}
 if($gmodulo=='02'){$cmodulo="CONTROL BANCARIO";$nmodulo=3;}
@@ -89,11 +89,11 @@ if($gmodulo=='11'){$cmodulo="REGISTRO PRESUPUESTARIO";$nmodulo=11;}
     <td width="92"><table width="93" height="463" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF" id="tablamenu">
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onclick=javascript:LlamarURL('usuarios.php');
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="usuarios.php">Atras</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="usuarios.php">Atras</A></td>
       </tr>
       <tr>
         <td onMouseOver="this.style.backgroundColor='#CCCCCC';this.style.cursor='hand';" onClick="javascript:LlamarURL('menu.php')";
-          onMouseOut="this.style.backgroundColor='#EAEAEA'"o"];" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
+          onMouseOut="this.style.backgroundColor='#EAEAEA';" height="35"  bgColor=#EAEAEA><A class=menu href="menu.php">Menu Principal</A></td>
       </tr>
   <td>&nbsp;</td>
   </tr>
@@ -105,9 +105,9 @@ if($gmodulo=='11'){$cmodulo="REGISTRO PRESUPUESTARIO";$nmodulo=11;}
             <td><table width="811" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="200"><span class="Estilo5">LOGIN :
-                 <input class="Estilo10" name="txtLogin" type="text" id="txtLogin" size="12" maxlength="8" readonly  value="<?echo $login?>"> </span></td>
+                 <input class="Estilo10" name="txtLogin" type="text" id="txtLogin" size="12" maxlength="8" readonly  value="<?php echo $login?>"> </span></td>
                 <td width="565"><span class="Estilo5">NOMBRE USUARIO:</span>
-                  <input class="Estilo10" name="txtNombre" type="text" id="txtNombre" value="<?echo $nombre?>" readonly size="60" maxlength="200" ></td>
+                  <input class="Estilo10" name="txtNombre" type="text" id="txtNombre" value="<?php echo $nombre?>" readonly size="60" maxlength="200" ></td>
               </tr>
             </table></td>
           </tr>
@@ -125,19 +125,19 @@ if($gmodulo=='11'){$cmodulo="REGISTRO PRESUPUESTARIO";$nmodulo=11;}
                       <option>PRESUPUESTO DE INGRESO</option>
                       <option>NOMINA Y PERSONAL</option>
                       <option>CONTROL DE BIENES NACIONALES</option>
-					  <? if($Cod_Emp=="58"){ ?>
+					  <?php if($Cod_Emp=="58"){ ?>
 					  <option>BIENESTAR SOCIAL</option> 
-					  <? } ?>
-					  <? if($Cod_Emp=="71"){ ?>
+					  <?php } ?>
+					  <?php if($Cod_Emp=="71"){ ?>
 					  <option>CONTROL DE HORARIOS</option> 
-					  <? } ?>
-					   <? if($Cod_Emp=="89"){ ?>
+					  <?php } ?>
+					   <?php if($Cod_Emp=="89"){ ?>
 					  <option>REGISTRO PRESUPUESTARIO</option> 
-					  <? } ?>
+					  <?php } ?>
                     </select>
-                 <script language="JavaScript"> Asigna_modulo(<?echo $nmodulo;?>);</script>
+                 <script language="JavaScript"> Asigna_modulo(<?php echo $nmodulo;?>);</script>
                 </span></td>
-                <td width="60"><input name="txtmodulo" type="text" id="txtmodulo" size="3" maxlength="2"  value="<?echo $gmodulo?>"></td>
+                <td width="60"><input name="txtmodulo" type="text" id="txtmodulo" size="3" maxlength="2"  value="<?php echo $gmodulo?>"></td>
                 <td><input name="btcarga" type="button" id="btcarga" value="Cargar" onClick="JavaScript:Cargar_Cell();"></td>
               </tr>
             </table>              <span class="Estilo5">            </span></td>
@@ -149,10 +149,10 @@ if($gmodulo=='11'){$cmodulo="REGISTRO PRESUPUESTARIO";$nmodulo=11;}
             <td align="center"><table width="700" border="1" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="240" align="center"><span class="Estilo5"> ASIGNAR DERECHOS DEL M&Oacute;DULO :</span></td>
-                <td width="110" align="center"><input name="btconsulta" type="button" id="btconsulta" value="Consulta" onClick="JavaScript:Llama_Lote('1','<?echo $modulo?>');"></td>
-                <td width="110" align="center"><input name="btimpresion" type="button" id="btimpresion" value="Impresion" onClick="JavaScript:Llama_Lote('2','<?echo $modulo?>');"></td>
-                <td width="110" align="center"><input name="btEliminar" type="button" id="btEliminar" value="Eliminar" onClick="JavaScript:Llama_Lote('3','<?echo $modulo?>');"></td>
-                <td width="110" align="center"><input name="btTotal" type="button" id="btTotal" value="Total" onClick="JavaScript:Llama_Lote('4','<?echo $modulo?>');"></td>
+                <td width="110" align="center"><input name="btconsulta" type="button" id="btconsulta" value="Consulta" onClick="JavaScript:Llama_Lote('1','<?php echo $modulo?>');"></td>
+                <td width="110" align="center"><input name="btimpresion" type="button" id="btimpresion" value="Impresion" onClick="JavaScript:Llama_Lote('2','<?php echo $modulo?>');"></td>
+                <td width="110" align="center"><input name="btEliminar" type="button" id="btEliminar" value="Eliminar" onClick="JavaScript:Llama_Lote('3','<?php echo $modulo?>');"></td>
+                <td width="110" align="center"><input name="btTotal" type="button" id="btTotal" value="Total" onClick="JavaScript:Llama_Lote('4','<?php echo $modulo?>');"></td>
               </tr>
             </table>              </td>
           </tr>
@@ -160,7 +160,7 @@ if($gmodulo=='11'){$cmodulo="REGISTRO PRESUPUESTARIO";$nmodulo=11;}
             <td>&nbsp;</td>
           </tr>
         </table>
-        <iframe src="Det_acceso.php?modulo=<?echo $modulo?>"  width="860" height="300" scrolling="auto" frameborder="1">
+        <iframe src="Det_acceso.php?modulo=<?php echo $modulo?>"  width="860" height="300" scrolling="auto" frameborder="1">
         </iframe>
         </form>
     </div>
