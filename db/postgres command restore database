@@ -1,22 +1,83 @@
-backup
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/respdatos22-1.sql" DATOS19
+## 🧭 Guía Completa: Configuración de PostgreSQL en Sistema PHP
 
+---
 
-restore
-pg_restore -h localhost -p 5432 -U postgres -d DATOS19 -v "/home/nuser/Escritorio/sia_db_bck/06/DATOS19_JR.sql"
+### 🔧 Paso 1: Actualizar e Instalar PostgreSQL
 
-sudo -u postgres psql -c "CREATE DATABASE DATOS WITH TEMPLATE template0 ENCODING 'SQL_ASCII' LC_COLLATE 'es_VE.UTF-8' LC_CTYPE 'es_VE.UTF-8';"
+```bash
+# Actualizar paquetes e instalar PostgreSQL
+sudo apt update && sudo apt upgrade -y
+sudo apt install postgresql postgresql-contrib -y
 
-sudo -u postgres psql -c "ALTER DATABASE datos RENAME TO DATOS;"
+# Verificar estado del servicio
+sudo systemctl status postgresql
 
-pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/home/nuser/code/sia/db/DATOS22.sql"
+# Iniciar y habilitar PostgreSQL
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
 
-pg_restore -h localhost -p 5432 -U postgres -d datos -v "/home/nuser/code/sia/db/DATOS22.sql"
+---
 
+### 🔐 Paso 2: Configurar Usuario `postgres`
+
+```bash
+# Acceder a la consola de PostgreSQL como usuario postgres
+sudo -u postgres psql
+
+# Opcional: Cambiar contraseña del usuario postgres
+\password postgres
+
+# Salir de la consola
+\q
+```
+
+---
+
+### 💾 Paso 3: Backup y Restauración de Base de Datos
+
+#### Crear Backup
+
+```bash
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/ruta/al/backup/NombreBaseDatos.sql" NOMBRE_BASE_DATOS
+```
+
+#### Crear Nueva Base de Datos
+
+```bash
+sudo -u postgres psql
+
+-- Crear base de datos con configuración específica
+CREATE DATABASE "DATOS"
+    WITH 
+    OWNER = postgres
+    TEMPLATE = template0
+    ENCODING = 'SQL_ASCII'
+    LC_COLLATE = 'C'
+    LC_CTYPE = 'C';
+
+\q
+```
+
+#### Restaurar Base de Datos
+
+```bash
+pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/ruta/al/respaldo/DATOS.sql"
+```
+
+> ⚠️ Nota: Si el archivo `.sql` es plano (no binario ni comprimido), puedes usar `psql` en lugar de `pg_restore`.
+
+---
+
+### 👤 Paso 4: Crear Usuario Específico para la Aplicación PHP
+
+#### Script de creación (`crear_usuario_phpapp.sh`)
+
+```bash
 #!/bin/bash
-# crear_usuario_invsia.sh
 
-DB_NAME="datos"  # Cambia esto si la BD tiene otro nombre
+# Variables
+DB_NAME="DATOS"
 USER="invsia"
 PASSWORD="0agi6s"
 
@@ -28,98 +89,75 @@ sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD '$PASSWORD';"
 # Otorgar permisos en la base de datos
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $USER;"
 
-# Otorgar permisos en las tablas
-sudo -u postgres psql -d $DB_NAME << EOF
+# Otorgar permisos en esquema, tablas, secuencias y funciones
+sudo -u postgres psql -d "$DB_NAME" << EOF
 GRANT ALL ON SCHEMA public TO $USER;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $USER;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $USER;
 GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO $USER;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+-- Establecer permisos por defecto para objetos nuevos
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
     GRANT ALL ON TABLES TO $USER;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
     GRANT ALL ON SEQUENCES TO $USER;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
     GRANT ALL ON FUNCTIONS TO $USER;
 EOF
 
 echo "Usuario $USER creado exitosamente."
 echo "Verificando creación:"
 sudo -u postgres psql -c "\du $USER"
+```
 
------------------------------------
+#### Ejecutar el script
 
-# Ver información del usuario
-sudo -u postgres psql -c "\du invsia"
+```bash
+chmod +x crear_usuario_phpapp.sh
+./crear_usuario_phpapp.sh
+```
 
-# Ver permisos en bases de datos
+---
+
+### ✅ Paso 5: Verificaciones Post-Instalación
+
+```bash
+# Verificar usuarios existentes
+sudo -u postgres psql -c "\du"
+
+# Verificar bases de datos
 sudo -u postgres psql -c "\l"
 
 # Probar conexión con el nuevo usuario
-psql -h localhost -U invsia -d datos -c "SELECT current_user;"
+psql -h localhost -U invsia -d DATOS -c "SELECT current_user;"
+```
 
-----------------------------------------------------
-sudo -u postgres psql -c "DROP USER IF EXISTS usia; CREATE USER usia WITH PASSWORD 'super';"
+---
+
+### 📂 Paso 6: Actualizar Configuración PHP
+
+Asegúrate de actualizar el archivo de configuración de la aplicación PHP con los siguientes valores:
+
+```php
+'db_host' => 'localhost',
+'db_port' => '5432',
+'db_name' => 'DATOS',
+'db_user' => 'invsia',
+'db_pass' => '0agi6s',
+```
+
+---
+
+### 🔄 Comandos Adicionales Útiles
+
+```bash
+# Crear usuario (con un solo comando)
+sudo -u postgres psql -c "CREATE USER usia WITH PASSWORD 'super';"
 sudo -u postgres psql -c 'GRANT ALL PRIVILEGES ON DATABASE "DATOS" TO usia;'
-
-# Conceder permisos en el esquema público de DATOS
-sudo -u postgres psql -d "DATOS" -c '
+sudo -u postgres psql -d "DATOS" -c "
 GRANT ALL ON SCHEMA public TO usia;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO usia;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO usia;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO usia;
-'
-
-
-
----------------------------------------------------
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS21-2022-06-21.sql" DATOS21
-pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2022-04-25.sql"
-
-psql -U postgres -d DATOS21 < /var/www/html/sia/db/DATOS21-2022-04-25.sql
-
-
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/DATOS19.sql" DATOS19
-
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/home/nuser/Escritorio/bck/DATOS19.sql" DATOS19
-
-
-
-sudo -i -u postgres
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS16-2023-10-14.sql" DATOS16
-pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2022-04-25.sql"
-
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS17-2023-10-14.sql" DATOS17
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS18-2023-10-14.sql" DATOS18
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS19-2023-10-14.sql" DATOS19
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS20-2023-10-14.sql" DATOS20
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS21-2023-10-14.sql" DATOS21
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS22-2023-10-14.sql" DATOS22
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS-2023-10-14.sql" DATOS
-
-pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/var/www/html/sia/db/DATOS-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS22 -v "/var/www/html/sia/db/DATOS22-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS20 -v "/var/www/html/sia/db/DATOS20-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS19 -v "/var/www/html/sia/db/DATOS19-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS18 -v "/var/www/html/sia/db/DATOS18-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS17 -v "/var/www/html/sia/db/DATOS17-2023-10-14.sql"
-pg_restore -h localhost -p 5432 -U postgres -d DATOS16 -v "/var/www/html/sia/db/DATOS16-2023-10-14.sql"
-
-pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/var/www/html/sia/db/DATOS-2024-03-15.sql" DATOS
-
-Procedimieto SIPAP
-sudo -i -u postgres
-psql -h localhost -U postgres -p 5432 -d DATOS23A < "/var/www/html/sia/db/DATOS23_2024-03-15.sql"
-psql -h localhost -U postgres -p 5432 -d DATOS < "/var/www/html/sia/db/DATOS-2024-04-15.sql"
-
-psql -h localhost -U postgres -p 5432 -d DATOS21 < "/var/www/html/sia/db/DATOS21.sql"
-
-pg_restore -h localhost -p 5432 -U postgres -d DATOS21 -v "/var/www/html/sia/db/DATOS21.sql"
-
-
-
-pg_restore -h localhost -p 5432 -U postgres -d DATOS -v "/var/www/html/sia/db/DATOS-2024-04-15.sql"
-
-
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO usia;"
+```
 
